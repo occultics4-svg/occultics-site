@@ -7,6 +7,7 @@ exports.handler = async function(event, context) {
 
   try {
     const { prompt, systemPrompt } = JSON.parse(event.body);
+
     const apiKey = process.env.ANTHROPIC_API_KEY;
 
     if (!apiKey) {
@@ -18,7 +19,7 @@ exports.handler = async function(event, context) {
     }
 
     const requestBody = JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 1000,
       system: systemPrompt,
       messages: [{ role: 'user', content: prompt }]
@@ -43,9 +44,11 @@ exports.handler = async function(event, context) {
         res.on('end', () => {
           try {
             const parsed = JSON.parse(data);
-            const text = parsed.content?.[0]?.text || 'Unable to generate reading.';
+            const text = parsed.content?.[0]?.text || 'Unable to generate reading at this time.';
             resolve(text);
-          } catch(e) { reject(new Error('Parse error')); }
+          } catch(e) {
+            reject(new Error('Parse error'));
+          }
         });
       });
 
@@ -67,7 +70,7 @@ exports.handler = async function(event, context) {
     return {
       statusCode: 500,
       headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ error: 'Failed: ' + error.message })
+      body: JSON.stringify({ error: 'Reading generation failed: ' + error.message })
     };
   }
 };
