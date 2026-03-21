@@ -6,3 +6,14 @@
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
+    Access-Control-Allow-Origin = "*"
+
+[[redirects]]
+  from = "/success"
+  to = "/success.html"
+  status = 200
+
+[[redirects]]
+  from = "/.netlify/functions/stripe-webhook"
+  to = "/.netlify/functions/stripe-webhook"
+  status = 200
