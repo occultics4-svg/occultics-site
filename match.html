@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Occultics Match — Find the People Written in Your Numbers</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray:#8892a4;--dark:#0d1117;--mid:#3d4a5c;--gold:#f0c75e;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Montserrat',sans-serif;background:var(--navy);color:white;min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(26,42,255,0.12) 0%,transparent 70%);pointer-events:none;}
+
+  /* Stars */
+  .star{position:fixed;color:rgba(77,184,255,0.2);animation:twinkle 4s ease-in-out infinite;pointer-events:none;font-size:6px;}
+  @keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:0.8}}
+  .s1{top:8%;left:5%;animation-delay:0s;} .s2{top:15%;right:8%;animation-delay:1.2s;} .s3{top:45%;left:3%;animation-delay:0.6s;font-size:8px;} .s4{top:70%;right:5%;animation-delay:2s;} .s5{top:85%;left:12%;animation-delay:0.3s;} .s6{top:30%;right:15%;animation-delay:1.8s;font-size:9px;}
+
+  /* Header */
+  header{padding:18px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .logo-name{font-weight:700;font-size:15px;letter-spacing:4px;color:white;}
+  .logo-sub{font-size:7px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:1px;}
+  .back-link{font-size:10px;color:var(--gray);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
+  .back-link:hover{color:var(--crystal);}
+
+  /* Hero */
+  .hero{text-align:center;padding:60px 20px 40px;position:relative;}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .hero-gem{width:56px;margin:0 auto 24px;display:block;animation:float 4s ease-in-out infinite;}
+  .hero-badge{display:inline-block;background:rgba(26,42,255,0.15);border:1px solid rgba(26,42,255,0.3);border-radius:100px;padding:6px 18px;font-size:9px;letter-spacing:2px;color:var(--crystal);font-weight:600;text-transform:uppercase;margin-bottom:20px;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,56px);font-weight:300;line-height:1.15;margin-bottom:16px;letter-spacing:-0.5px;}
+  .hero-title em{font-style:italic;color:var(--crystal);}
+  .hero-sub{font-size:13px;color:var(--gray);max-width:480px;margin:0 auto 8px;line-height:1.7;font-weight:300;}
+  .hero-count{font-size:11px;color:var(--crystal);margin-top:16px;font-weight:500;letter-spacing:0.5px;}
+  .hero-count span{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;vertical-align:-2px;margin:0 3px;}
+
+  /* Mode selector */
+  .modes{display:flex;justify-content:center;gap:12px;padding:0 20px;margin:32px auto;max-width:520px;}
+  .mode-btn{flex:1;padding:16px 12px;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;cursor:pointer;transition:all 0.3s;text-align:center;}
+  .mode-btn:hover{border-color:rgba(77,184,255,0.3);background:rgba(26,42,255,0.06);}
+  .mode-btn.active{border-color:var(--royal);background:rgba(26,42,255,0.1);}
+  .mode-icon{font-size:24px;margin-bottom:6px;}
+  .mode-label{font-size:10px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;color:var(--gray);}
+  .mode-btn.active .mode-label{color:var(--crystal);}
+
+  /* Form */
+  .form-wrap{max-width:440px;margin:0 auto;padding:0 20px;}
+  .form-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;margin-bottom:20px;}
+  .form-title{font-size:9px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;font-weight:600;margin-bottom:16px;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+  .form-group{display:flex;flex-direction:column;gap:4px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-group label{font-size:10px;font-weight:500;color:var(--gray);letter-spacing:0.5px;}
+  .form-group input,.form-group select{padding:11px 13px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;color:white;font-size:13px;font-family:'Montserrat',sans-serif;outline:none;transition:border-color 0.2s;}
+  .form-group input:focus,.form-group select:focus{border-color:var(--royal);}
+  .form-group input::placeholder{color:rgba(255,255,255,0.25);font-size:12px;}
+  .form-group select{-webkit-appearance:none;appearance:none;}
+  .form-group select option{background:var(--navy);color:white;}
+  .submit-btn{width:100%;padding:16px;background:var(--royal);color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;text-transform:uppercase;margin-top:6px;}
+  .submit-btn:hover{background:#0d1aff;transform:translateY(-1px);box-shadow:0 8px 32px rgba(26,42,255,0.3);}
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
+
+  /* Loading */
+  .loading-state{display:none;text-align:center;padding:40px 20px;}
+  .loading-state.active{display:block;}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.92)}}
+  .loading-gem{width:40px;margin:0 auto 16px;animation:pulse 1.5s ease-in-out infinite;}
+  .loading-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--crystal);font-style:italic;}
+
+  /* Result - Identity Card */
+  .result-wrap{display:none;max-width:520px;margin:0 auto;padding:0 20px 40px;}
+  .result-wrap.active{display:block;}
+  .id-card{background:linear-gradient(135deg,rgba(26,42,255,0.08) 0%,rgba(77,184,255,0.04) 100%);border:1.5px solid rgba(77,184,255,0.2);border-radius:20px;overflow:hidden;margin-bottom:24px;}
+  .id-card-header{background:rgba(26,42,255,0.12);padding:20px 24px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.15);}
+  .id-card-eyebrow{font-size:8px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+  .id-card-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:white;}
+  .id-card-dob{font-size:10px;color:var(--gray);margin-top:4px;letter-spacing:1px;}
+  .id-card-body{padding:24px;}
+  .id-card-codes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;}
+  .code-block{text-align:center;padding:14px 8px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.06);}
+  .code-label{font-size:8px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+  .code-value{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal);font-weight:300;}
+  .id-card-traits{margin-bottom:20px;}
+  .trait-section{margin-bottom:14px;}
+  .trait-title{font-size:9px;letter-spacing:1.5px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+  .trait-text{font-size:12px;color:var(--gray);line-height:1.7;font-weight:300;}
+  .id-card-seeking{background:rgba(26,42,255,0.08);border-radius:12px;padding:16px 18px;}
+  .seeking-title{font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
+  .seeking-text{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300;}
+
+  /* Waitlist */
+  .waitlist-card{background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;text-align:center;margin-bottom:20px;}
+  .waitlist-pos{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--crystal);font-weight:300;line-height:1;}
+  .waitlist-label{font-size:10px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;margin-bottom:16px;}
+  .waitlist-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:12px;overflow:hidden;}
+  .waitlist-fill{height:100%;background:linear-gradient(90deg,var(--royal),var(--crystal));border-radius:2px;transition:width 1s ease;}
+  .waitlist-info{font-size:11px;color:var(--gray);line-height:1.6;}
+  .waitlist-info strong{color:white;}
+
+  /* Referral */
+  .referral-card{background:rgba(240,199,94,0.06);border:1.5px solid rgba(240,199,94,0.2);border-radius:16px;padding:24px;text-align:center;margin-bottom:20px;}
+  .referral-title{font-size:10px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+  .referral-sub{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:16px;font-weight:300;}
+  .referral-link-wrap{display:flex;gap:8px;}
+  .referral-input{flex:1;padding:11px 13px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--crystal);font-size:11px;font-family:'Montserrat',sans-serif;outline:none;}
+  .copy-btn{padding:11px 18px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.2s;}
+  .copy-btn:hover{background:#f5d980;}
+
+  /* CTA */
+  .cta-card{background:linear-gradient(135deg,rgba(26,42,255,0.1) 0%,rgba(77,184,255,0.05) 100%);border:1.5px solid rgba(26,42,255,0.25);border-radius:16px;padding:24px;text-align:center;margin-bottom:40px;}
+  .cta-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:white;margin-bottom:8px;}
+  .cta-sub{font-size:11px;color:var(--gray);line-height:1.6;margin-bottom:16px;font-weight:300;}
+  .cta-btn{display:inline-block;padding:13px 28px;background:white;color:var(--navy);border-radius:8px;font-size:11px;letter-spacing:1.5px;font-weight:700;text-decoration:none;text-transform:uppercase;transition:all 0.2s;}
+  .cta-btn:hover{background:var(--crystal);transform:translateY(-2px);}
+
+  /* Footer */
+  footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(255,255,255,0.06);}
+  .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.2);margin-bottom:12px;}
+  .footer-copy{font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.5px;}
+
+  @media(max-width:600px){
+    header{padding:14px 18px;}
+    .hero{padding:40px 18px 28px;}
+    .modes{flex-direction:row;gap:8px;}
+    .form-row{grid-template-columns:1fr;}
+    .id-card-codes{grid-template-columns:1fr 1fr 1fr;}
+    .referral-link-wrap{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<div class="star s1">✦</div><div class="star s2">✦</div><div class="star s3">✦</div>
+<div class="star s4">✦</div><div class="star s5">✦</div><div class="star s6">✦</div>
+
+<header>
+  <a href="/" class="logo-wrap">
+    <div>
+      <div class="logo-name">OCCULTICS</div>
+      <div class="logo-sub">Match</div>
+    </div>
+  </a>
+  <a href="/" class="back-link">← Back to Occultics.ai</a>
+</header>
+
+<section class="hero">
+  <svg class="hero-gem" viewBox="0 0 80 100" fill="none">
+    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+    <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+    <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+    <polygon points="40,15 65,32 40,48" fill="#ffffff" opacity="0.18"/>
+  </svg>
+  <div class="hero-badge">Opening to the First 5,000 Members</div>
+  <h1 class="hero-title">Match According to<br><em>Your Birth Date</em></h1>
+  <p class="hero-sub">Powered by 350,000+ words of proprietary numerology knowledge and 81 unique compatibility combinations. We calculate your numbers — then match you with the people whose numbers complement yours.</p>
+  <div class="hero-count"><span id="counter">2,847</span> people already waiting</div>
+</section>
+
+<div class="modes" id="mode-section">
+  <div class="mode-btn active" data-mode="love" onclick="selectMode(this)">
+    <div class="mode-icon">💎</div>
+    <div class="mode-label">Love Match</div>
+  </div>
+  <div class="mode-btn" data-mode="friends" onclick="selectMode(this)">
+    <div class="mode-icon">🤝</div>
+    <div class="mode-label">Friend Match</div>
+  </div>
+  <div class="mode-btn" data-mode="business" onclick="selectMode(this)">
+    <div class="mode-icon">💼</div>
+    <div class="mode-label">Business Match</div>
+  </div>
+</div>
+
+<div class="form-wrap" id="signup-form">
+  <div class="form-card">
+    <div class="form-title">Enter Your Details</div>
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input type="text" id="m-name" placeholder="Your name"></div>
+      <div class="form-group"><label>Date of Birth</label><input type="date" id="m-dob"></div>
+    </div>
+    <div class="form-group full" style="margin-bottom:10px;">
+      <label>Email</label><input type="email" id="m-email" placeholder="your@email.com">
+    </div>
+    <div class="form-group full" style="margin-bottom:14px;">
+      <label>Gender</label>
+      <select id="m-gender"><option value="">Select...</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
+    </div>
+    <button class="submit-btn" id="submit-btn" onclick="handleSignup()">✦ Calculate My Numbers & Join Waitlist</button>
+  </div>
+</div>
+
+<div class="loading-state" id="loading">
+  <svg class="loading-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.15"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.4"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.5"/></svg>
+  <div class="loading-text">Calculating your numbers...</div>
+</div>
+
+<div class="result-wrap" id="result">
+
+  <div class="id-card">
+    <div class="id-card-header">
+      <div class="id-card-eyebrow">Your Numerological Identity</div>
+      <div class="id-card-name" id="card-name">—</div>
+      <div class="id-card-dob" id="card-dob">—</div>
+    </div>
+    <div class="id-card-body">
+      <div class="id-card-codes">
+        <div class="code-block"><div class="code-label">Biorhythm</div><div class="code-value" id="card-bio">—</div></div>
+        <div class="code-block"><div class="code-label">Generational</div><div class="code-value" id="card-gen">—</div></div>
+        <div class="code-block"><div class="code-label">Life Path</div><div class="code-value" id="card-lp">—</div></div>
+      </div>
+      <div class="id-card-traits">
+        <div class="trait-section">
+          <div class="trait-title">Who You Are</div>
+          <div class="trait-text" id="card-who">—</div>
+        </div>
+        <div class="trait-section">
+          <div class="trait-title">Your Energy in Relationships</div>
+          <div class="trait-text" id="card-energy">—</div>
+        </div>
+      </div>
+      <div class="id-card-seeking">
+        <div class="seeking-title" id="seeking-label">Your Ideal Match in Love</div>
+        <div class="seeking-text" id="card-seeking">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="waitlist-card">
+    <div class="waitlist-pos" id="wl-pos">#—</div>
+    <div class="waitlist-label">Your position on the waitlist</div>
+    <div class="waitlist-bar"><div class="waitlist-fill" id="wl-fill" style="width:0%"></div></div>
+    <div class="waitlist-info">When we reach <strong>5,000 members</strong>, we activate matching — our system runs your numbers against everyone else and finds the people whose codes complement yours. Share your link to move up.</div>
+  </div>
+
+  <div class="referral-card">
+    <div class="referral-title">Share & Move Up</div>
+    <div class="referral-sub">Every person who joins through your link moves you up 10 positions — and adds another set of numbers to the matching pool.</div>
+    <div class="referral-link-wrap">
+      <input type="text" class="referral-input" id="ref-link" readonly>
+      <button class="copy-btn" onclick="copyLink()">COPY</button>
+    </div>
+  </div>
+
+  <div class="cta-card">
+    <div class="cta-title">Already Have Someone in Mind?</div>
+    <div class="cta-sub">Get your full Compatibility Report — we calculate your combined code from 81 unique combinations and reveal whether your numbers lead to permanence or separation.</div>
+    <a href="/" class="cta-btn">Check Compatibility — $147</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-quote">"Some connections are written before they begin."</div>
+  <div class="footer-copy">© 2026 Occultics Publishing · occultics.ai · For informational and entertainment purposes only.</div>
+</footer>
+
+<script>
+// ===== NUMEROLOGY ENGINE =====
+function r(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);return n;}
+function getBio(d){const[,m,dy]=d.split('-').map(Number);return r([...String(dy),...String(m)].reduce((a,b)=>a+parseInt(b),0));}
+function getGen(d){const[y]=d.split('-').map(Number);return r([...String(y)].reduce((a,b)=>a+parseInt(b),0));}
+function getLP(d){const[y,m,dy]=d.split('-').map(Number);return r([...String(y),...String(m),...String(dy)].reduce((a,b)=>a+parseInt(b),0));}
+
+// ===== PERSONALITY DATA =====
+const WHO = {
+  1:"You're a natural leader with solar energy — ambitious, analytical, and driven by conscious purpose. You analyze everything before you act. Pride is both your greatest strength and your shadow.",
+  2:"You carry Moon energy — deeply emotional, intuitive, prophetic. You feel things before they happen. Your sixth sense about people is remarkably strong, and your connections feel destined.",
+  3:"Jupiter energy flows through you — optimistic, passionate, honest to a fault. You say what you think like rapid fire. Lucky by nature, the fortunate number never entirely abandons you.",
+  4:"Saturn's consciousness defines you — everything you do, good or bad, is done with full awareness. You build structures meant to last. Fear of abandonment runs deep, but your loyalty is unshakeable.",
+  5:"Mercury's duality lives in you — logical yet restless, communicative yet unpredictable. Freedom is sacred to you. You connect the conscious and unconscious worlds through constant mental movement.",
+  6:"Venus makes you unconsciously beautiful in everything you do. Love, beauty, harmony — these aren't desires, they're necessities. You create warmth wherever you go, sometimes idealizing what you love.",
+  7:"Uranus energy makes you the most spiritually attuned number. Mysterious, deeply intelligent, susceptible to sudden insights. You need solitude to recharge and freedom to explore the unknown.",
+  8:"Mars power runs through your veins — instinctive, volcanic, physically vital. Your reactions are immediate and intense. You carry a birthmark somewhere as your angel guardian sign.",
+  9:"Neptune's compassion defines you — empathetic, intuitive, carrying universal wisdom. You complete karmic cycles and absorb the world's pain to transform it into healing."
+};
+
+const BIO_DESC = {
+  1:"Others see your leadership instantly — your presence commands attention and respect before you speak a word.",
+  2:"People sense your emotional depth immediately. There's something prophetic about you that makes others share their secrets.",
+  3:"Your optimism and passion are magnetic. People feel lucky around you — your Jupiter energy lifts everyone in the room.",
+  4:"You radiate reliability and strength. Others feel safe around you because your Saturn energy promises stability.",
+  5:"Your mind moves visibly fast. People are drawn to your wit, your unexpected observations, your restless brilliance.",
+  6:"Beauty radiates from you unconsciously. Others feel harmonized in your presence — you create peace without trying.",
+  7:"Mystery surrounds you. People sense depth and intelligence they can't quite reach, which makes them want to know you more.",
+  8:"Your physical presence is powerful. Others feel your Mars energy — there's an intensity about you that's impossible to ignore.",
+  9:"Compassion radiates from you. People feel understood in your presence, as if you can see their soul without judgment."
+};
+
+const SEEK = {
+  love:{
+    1:"An intelligent partner who matches your ambition. Someone educated, articulate, and strong enough to be your equal — never someone who submits without challenge.",
+    2:"Someone who shows emotion clearly and lifts you up. You need words of love, tenderness, and a partner who helps build your confidence.",
+    3:"Unconditional love and maximum tolerance. You give everything when you find it — and expect the same depth of giving in return.",
+    4:"Someone with the same worldview and values. Honest, traditional, hardworking. A simple but genuine love that doesn't need drama to feel real.",
+    5:"An intelligent, witty partner who takes initiative and creates surprises. Someone who respects your freedom as sacred — a person who feels free stays willingly.",
+    6:"A charming, attractive partner who provides love, status, family, and harmony. You don't separate love from beauty — both are required.",
+    7:"An exceptionally intelligent partner for philosophical conversations and new discoveries. Pure of soul, without manipulation, approaching you with sincere love.",
+    8:"A strong, accomplished partner — the authority figure missing since your early years. Someone who leads, sets clear limits, and whom you genuinely respect.",
+    9:"A loyal partner you can trust completely. You give everything when trust is established, but one betrayal closes you off permanently."
+  },
+  friends:{
+    1:"Friends who challenge you intellectually and match your drive. You need people who are going somewhere — stagnation in your circle is intolerable.",
+    2:"Emotionally available friends who show they care. Deep bonds over surface connections. You're the friend everyone confides in.",
+    3:"Friends who match your energy — spontaneous, honest, up for adventure. You need a tribe that doesn't judge your impulsiveness.",
+    4:"Loyal, dependable people with shared values. Small circle, deep roots. Quality over quantity, always.",
+    5:"Mentally stimulating friends who never bore you. You need a diverse circle — each friend bringing a different world to explore.",
+    6:"Friends who appreciate beauty and harmony. You create the gatherings, the warmth, the beautiful experiences your circle needs.",
+    7:"A very select few who respect your need for solitude. Deep thinkers who can match your philosophical depth without feeling threatened.",
+    8:"Powerful, ambitious friends who build things. Your circle becomes your army — loyal, driven, creating material success together.",
+    9:"Compassionate, trustworthy friends who see the world as deeply as you do. You need people whose loyalty is absolute."
+  },
+  business:{
+    1:"Co-founders who execute while you lead. You bring vision and direction — you need partners who complement with operational strength.",
+    2:"Partners with emotional intelligence who handle the human side while you navigate with intuition. You sense market shifts before data confirms them.",
+    3:"Collaborators who match your speed and optimism. You generate ideas like lightning — you need partners who can keep up and ground them.",
+    4:"Structured, reliable partners who share your work ethic. Together you build empires that last — slow, steady, unshakeable.",
+    5:"Innovative partners who communicate and adapt. You pivot fast — you need people who can keep up with your two-track mind.",
+    6:"Partners who bring beauty to business. Design, brand, customer experience — you make everything look and feel premium.",
+    7:"Visionary partners who see what others miss. You provide breakthrough insights — you need someone to transform them into revenue.",
+    8:"Power partners for building material empires. Your instinct for deals and resources is volcanic — pair with a strategist for maximum impact.",
+    9:"Purpose-driven partners building something meaningful. Your business must serve a larger mission or it won't hold your attention."
+  }
+};
+
+let selectedModes = ['love'];
+
+function selectMode(el) {
+  el.classList.toggle('active');
+  selectedModes = [...document.querySelectorAll('.mode-btn.active')].map(b => b.dataset.mode);
+  if (selectedModes.length === 0) { el.classList.add('active'); selectedModes = [el.dataset.mode]; }
+}
+
+function handleSignup() {
+  const name = document.getElementById('m-name').value.trim();
+  const dob = document.getElementById('m-dob').value;
+  const email = document.getElementById('m-email').value.trim();
+  const gender = document.getElementById('m-gender').value;
+
+  if (!name || !dob || !email) { alert('Please fill in your name, date of birth, and email.'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Calculating...';
+
+  document.getElementById('signup-form').style.display = 'none';
+  document.getElementById('mode-section').style.display = 'none';
+  document.getElementById('loading').classList.add('active');
+
+  setTimeout(() => {
+    const bio = getBio(dob);
+    const gen = getGen(dob);
+    const lp = getLP(dob);
+    const [y, m, dy] = dob.split('-').map(Number);
+    const months = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    // Fill identity card
+    document.getElementById('card-name').textContent = name;
+    document.getElementById('card-dob').textContent = dy + ' ' + months[m] + ' ' + y;
+    document.getElementById('card-bio').textContent = bio;
+    document.getElementById('card-gen').textContent = gen;
+    document.getElementById('card-lp').textContent = lp;
+    document.getElementById('card-who').textContent = WHO[lp] || WHO[1];
+    document.getElementById('card-energy').textContent = BIO_DESC[bio] || BIO_DESC[1];
+
+    // Seeking text based on selected modes
+    const seekTexts = selectedModes.map(mode => SEEK[mode][gen] || SEEK[mode][1]);
+    const seekLabels = {love:'Your Ideal Match in Love',friends:'Your Ideal Match in Friendship',business:'Your Ideal Match in Business'};
+    if (selectedModes.length === 1) {
+      document.getElementById('seeking-label').textContent = seekLabels[selectedModes[0]];
+      document.getElementById('card-seeking').textContent = seekTexts[0];
+    } else {
+      document.getElementById('seeking-label').textContent = 'Your Ideal Matches';
+      document.getElementById('card-seeking').innerHTML = selectedModes.map((mode, i) => '<strong style="color:var(--crystal);">' + mode.charAt(0).toUpperCase() + mode.slice(1) + ':</strong> ' + seekTexts[i]).join('<br><br>');
+    }
+
+    // Waitlist position (seeded from email hash)
+    let hash = 0;
+    for (let i = 0; i < email.length; i++) hash = ((hash << 5) - hash) + email.charCodeAt(i);
+    const pos = 200 + Math.abs(hash % 2800);
+    document.getElementById('wl-pos').textContent = '#' + pos;
+    document.getElementById('wl-fill').style.width = ((pos / 5000) * 100).toFixed(1) + '%';
+
+    // Update counter
+    document.getElementById('counter').textContent = (2847 + Math.abs(hash % 200)).toLocaleString();
+
+    // Referral link
+    const code = btoa(email).replace(/[^a-zA-Z0-9]/g, '').substring(0, 8).toLowerCase();
+    document.getElementById('ref-link').value = 'https://occultics.ai/match?ref=' + code;
+
+    document.getElementById('loading').classList.remove('active');
+    document.getElementById('result').classList.add('active');
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+
+  }, 2000);
+}
+
+function copyLink() {
+  const input = document.getElementById('ref-link');
+  input.select();
+  navigator.clipboard.writeText(input.value).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = 'COPIED!';
+    setTimeout(() => btn.textContent = 'COPY', 2000);
+  });
+}
+</script>
+</body>
+</html>
