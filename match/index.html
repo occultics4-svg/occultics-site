@@ -3,400 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Occultics Match — Find the People Written in Your Numbers</title>
+<title>Occultics.ai — Your Relationship Has a Code</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray:#8892a4;--dark:#0d1117;--mid:#3d4a5c;--gold:#f0c75e;}
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Montserrat',sans-serif;background:var(--navy);color:white;min-height:100vh;overflow-x:hidden;}
-  body::before{content:'';position:fixed;top:30%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(26,42,255,0.12) 0%,transparent 70%);pointer-events:none;}
-
-  /* Stars */
-  .star{position:fixed;color:rgba(77,184,255,0.2);animation:twinkle 4s ease-in-out infinite;pointer-events:none;font-size:6px;}
-  @keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:0.8}}
-  .s1{top:8%;left:5%;animation-delay:0s;} .s2{top:15%;right:8%;animation-delay:1.2s;} .s3{top:45%;left:3%;animation-delay:0.6s;font-size:8px;} .s4{top:70%;right:5%;animation-delay:2s;} .s5{top:85%;left:12%;animation-delay:0.3s;} .s6{top:30%;right:15%;animation-delay:1.8s;font-size:9px;}
-
-  /* Header */
-  header{padding:18px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,0.06);}
-  .logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none;}
-  .logo-name{font-weight:700;font-size:15px;letter-spacing:4px;color:white;}
-  .logo-sub{font-size:7px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:1px;}
-  .back-link{font-size:10px;color:var(--gray);text-decoration:none;letter-spacing:1px;transition:color 0.2s;}
-  .back-link:hover{color:var(--crystal);}
-
-  /* Hero */
-  .hero{text-align:center;padding:60px 20px 40px;position:relative;}
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-  .hero-gem{width:56px;margin:0 auto 24px;display:block;animation:float 4s ease-in-out infinite;}
-  .hero-badge{display:inline-block;background:rgba(26,42,255,0.15);border:1px solid rgba(26,42,255,0.3);border-radius:100px;padding:6px 18px;font-size:9px;letter-spacing:2px;color:var(--crystal);font-weight:600;text-transform:uppercase;margin-bottom:20px;}
-  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,56px);font-weight:300;line-height:1.15;margin-bottom:16px;letter-spacing:-0.5px;}
-  .hero-title em{font-style:italic;color:var(--crystal);}
-  .hero-sub{font-size:13px;color:var(--gray);max-width:480px;margin:0 auto 8px;line-height:1.7;font-weight:300;}
-  .hero-count{font-size:11px;color:var(--crystal);margin-top:16px;font-weight:500;letter-spacing:0.5px;}
-  .hero-count span{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;vertical-align:-2px;margin:0 3px;}
-
-  /* Mode selector */
-  .modes{display:flex;justify-content:center;gap:12px;padding:0 20px;margin:32px auto;max-width:520px;}
-  .mode-btn{flex:1;padding:16px 12px;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;cursor:pointer;transition:all 0.3s;text-align:center;}
-  .mode-btn:hover{border-color:rgba(77,184,255,0.3);background:rgba(26,42,255,0.06);}
-  .mode-btn.active{border-color:var(--royal);background:rgba(26,42,255,0.1);}
-  .mode-icon{font-size:24px;margin-bottom:6px;}
-  .mode-label{font-size:10px;letter-spacing:1.5px;font-weight:600;text-transform:uppercase;color:var(--gray);}
-  .mode-btn.active .mode-label{color:var(--crystal);}
-
-  /* Form */
-  .form-wrap{max-width:440px;margin:0 auto;padding:0 20px;}
-  .form-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;margin-bottom:20px;}
-  .form-title{font-size:9px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;font-weight:600;margin-bottom:16px;}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
-  .form-group{display:flex;flex-direction:column;gap:4px;}
-  .form-group.full{grid-column:1/-1;}
-  .form-group label{font-size:10px;font-weight:500;color:var(--gray);letter-spacing:0.5px;}
-  .form-group input,.form-group select{padding:11px 13px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;color:white;font-size:13px;font-family:'Montserrat',sans-serif;outline:none;transition:border-color 0.2s;}
-  .form-group input:focus,.form-group select:focus{border-color:var(--royal);}
-  .form-group input::placeholder{color:rgba(255,255,255,0.25);font-size:12px;}
-  .form-group select{-webkit-appearance:none;appearance:none;}
-  .form-group select option{background:var(--navy);color:white;}
-  .submit-btn{width:100%;padding:16px;background:var(--royal);color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;text-transform:uppercase;margin-top:6px;}
-  .submit-btn:hover{background:#0d1aff;transform:translateY(-1px);box-shadow:0 8px 32px rgba(26,42,255,0.3);}
-  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
-
-  /* Loading */
-  .loading-state{display:none;text-align:center;padding:40px 20px;}
-  .loading-state.active{display:block;}
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.92)}}
-  .loading-gem{width:40px;margin:0 auto 16px;animation:pulse 1.5s ease-in-out infinite;}
-  .loading-text{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--crystal);font-style:italic;}
-
-  /* Result - Identity Card */
-  .result-wrap{display:none;max-width:520px;margin:0 auto;padding:0 20px 40px;}
-  .result-wrap.active{display:block;}
-  .id-card{background:linear-gradient(135deg,rgba(26,42,255,0.08) 0%,rgba(77,184,255,0.04) 100%);border:1.5px solid rgba(77,184,255,0.2);border-radius:20px;overflow:hidden;margin-bottom:24px;}
-  .id-card-header{background:rgba(26,42,255,0.12);padding:20px 24px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.15);}
-  .id-card-eyebrow{font-size:8px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
-  .id-card-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:white;}
-  .id-card-dob{font-size:10px;color:var(--gray);margin-top:4px;letter-spacing:1px;}
-  .id-card-body{padding:24px;}
-  .id-card-codes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px;}
-  .code-block{text-align:center;padding:14px 8px;background:rgba(255,255,255,0.03);border-radius:10px;border:1px solid rgba(255,255,255,0.06);}
-  .code-label{font-size:8px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
-  .code-value{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal);font-weight:300;}
-  .id-card-traits{margin-bottom:20px;}
-  .trait-section{margin-bottom:14px;}
-  .trait-title{font-size:9px;letter-spacing:1.5px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
-  .trait-text{font-size:12px;color:var(--gray);line-height:1.7;font-weight:300;}
-  .id-card-seeking{background:rgba(26,42,255,0.08);border-radius:12px;padding:16px 18px;}
-  .seeking-title{font-size:9px;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:6px;}
-  .seeking-text{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;font-weight:300;}
-
-  /* Waitlist */
-  .waitlist-card{background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 24px;text-align:center;margin-bottom:20px;}
-  .waitlist-pos{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--crystal);font-weight:300;line-height:1;}
-  .waitlist-label{font-size:10px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;margin-bottom:16px;}
-  .waitlist-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:12px;overflow:hidden;}
-  .waitlist-fill{height:100%;background:linear-gradient(90deg,var(--royal),var(--crystal));border-radius:2px;transition:width 1s ease;}
-  .waitlist-info{font-size:11px;color:var(--gray);line-height:1.6;}
-  .waitlist-info strong{color:white;}
-
-  /* Referral */
-  .copy-btn{padding:11px 18px;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all 0.2s;}
-  .copy-btn:hover{background:#f5d980;}
-
-  /* CTA */
-  .cta-card{background:linear-gradient(135deg,rgba(26,42,255,0.1) 0%,rgba(77,184,255,0.05) 100%);border:1.5px solid rgba(26,42,255,0.25);border-radius:16px;padding:24px;text-align:center;margin-bottom:40px;}
-  .cta-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:white;margin-bottom:8px;}
-  .cta-sub{font-size:11px;color:var(--gray);line-height:1.6;margin-bottom:16px;font-weight:300;}
-  .cta-btn{display:inline-block;padding:13px 28px;background:white;color:var(--navy);border-radius:8px;font-size:11px;letter-spacing:1.5px;font-weight:700;text-decoration:none;text-transform:uppercase;transition:all 0.2s;}
-  .cta-btn:hover{background:var(--crystal);transform:translateY(-2px);}
-
-  /* Footer */
-  footer{text-align:center;padding:28px 20px;border-top:1px solid rgba(255,255,255,0.06);}
-  .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.2);margin-bottom:12px;}
-  .footer-copy{font-size:9px;color:rgba(255,255,255,0.15);letter-spacing:0.5px;}
-
-  @media(max-width:600px){
-    header{padding:14px 18px;}
-    .hero{padding:40px 18px 28px;}
-    .modes{flex-direction:row;gap:8px;}
-    .form-row{grid-template-columns:1fr;}
-    .id-card-codes{grid-template-columns:1fr 1fr 1fr;}
-  }
+:root{--blue-deep:#0a0e2e;--blue-royal:#1a2aff;--blue-electric:#2a7fff;--blue-crystal:#4db8ff;--blue-light:#e8f4ff;--white:#fff;--off-white:#f8faff;--gray-light:#e8edf5;--gray-mid:#8892a4;--text-dark:#0d1117;--text-mid:#3d4a5c}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--gray-light);background:var(--white);position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:14px}.logo-gem{width:32px;height:38px}.logo-name{font-weight:700;font-size:17px;letter-spacing:4px;color:var(--text-dark)}.logo-tagline{font-size:8px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-top:2px}
+nav{display:flex;gap:8px;align-items:center}.lang-toggle{display:flex;gap:4px;align-items:center;margin-right:8px}
+.lang-btn{padding:6px 10px;border-radius:4px;font-size:10px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:1.5px solid var(--gray-light);background:transparent;color:var(--gray-mid)}.lang-btn.lang-active{background:var(--blue-royal);color:#fff;border-color:var(--blue-royal)}.lang-btn:hover:not(.lang-active){border-color:var(--blue-royal);color:var(--blue-royal)}
+.nav-btn{padding:10px 22px;border-radius:6px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:none;background:var(--blue-royal);color:#fff}.nav-btn:hover{background:var(--blue-deep)}
+.hero{padding:80px 48px 60px;text-align:center;background:linear-gradient(180deg,var(--off-white) 0%,var(--white) 100%);position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,.04) 0%,transparent 70%);pointer-events:none}
+.hero-gem{width:80px;margin:0 auto 32px;display:block;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-eyebrow{font-size:10px;letter-spacing:3px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,72px);font-weight:300;line-height:1.08;color:var(--text-dark);margin-bottom:20px;letter-spacing:-1px}.hero-title em{font-style:italic;color:var(--blue-royal)}
+.hero-sub{font-size:15px;color:var(--text-mid);max-width:520px;margin:0 auto 12px;line-height:1.7;font-weight:300}
+.hero-anchor{font-size:11px;color:var(--gray-mid);margin-bottom:48px;letter-spacing:.5px}.hero-anchor strong{color:var(--blue-royal)}
+.hero-cta{display:inline-block;padding:18px 48px;background:var(--blue-royal);color:#fff;border:none;border-radius:10px;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none}.hero-cta:hover{background:var(--blue-deep);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,.2)}
+.hero-price{font-size:12px;color:var(--gray-mid);margin-top:12px}.hero-price strong{color:var(--text-dark);font-size:14px}
+.social-proof{padding:48px;text-align:center;border-bottom:1px solid var(--gray-light)}.social-proof-row{display:flex;justify-content:center;gap:56px;flex-wrap:wrap}.social-proof-item{text-align:center}.social-proof-number{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--blue-royal)}.social-proof-label{font-size:10px;color:var(--gray-mid);letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
+.how-it-works{padding:80px 48px;max-width:800px;margin:0 auto}
+.section-eyebrow{font-size:10px;letter-spacing:3px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--text-dark);margin-bottom:40px;text-align:center}
+.step-list{display:flex;flex-direction:column;gap:28px}.step{display:flex;gap:20px;align-items:flex-start}.step-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--blue-royal);flex-shrink:0;width:40px}.step-content{flex:1}.step-title{font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:6px}.step-desc{font-size:13px;color:var(--text-mid);line-height:1.7;font-weight:300}
+.what-you-get{padding:80px 48px;background:var(--off-white)}.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}.feature{padding:24px;border-radius:12px;background:var(--white);border:1px solid var(--gray-light)}.feature-title{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:6px}.feature-desc{font-size:12px;color:var(--text-mid);line-height:1.6;font-weight:300}
+.final-cta{padding:80px 48px;text-align:center}.final-sub{font-size:14px;color:var(--text-mid);max-width:460px;margin:0 auto 32px;line-height:1.7;font-weight:300}
+footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:11px;color:var(--gray-mid)}.footer-disclaimer{font-size:10px;color:var(--gray-mid);max-width:380px;text-align:right;line-height:1.5}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,46,.65);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:20px}.modal-overlay.active{display:flex}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--gray-light);position:sticky;top:0;background:var(--white);border-radius:20px 20px 0 0;z-index:10}
+.modal-close{position:absolute;top:18px;right:18px;width:30px;height:30px;border:1px solid var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--gray-mid);background:#fff;transition:all .2s}.modal-close:hover{border-color:var(--blue-royal);color:var(--blue-royal)}
+.modal-type{font-size:10px;letter-spacing:2px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:6px}.modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text-dark)}.modal-body{padding:24px 32px 32px}
+.form-section{margin-bottom:20px}.form-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-mid);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}.form-label::after{content:'';flex:1;height:1px;background:var(--gray-light)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.form-group{display:flex;flex-direction:column;gap:5px}.form-group label{font-size:11px;font-weight:500;color:var(--text-mid)}.form-group input{padding:11px 13px;border:1.5px solid var(--gray-light);border-radius:8px;font-size:13px;font-family:'Montserrat',sans-serif;color:var(--text-dark);background:var(--off-white);transition:border-color .2s;outline:none}.form-group input:focus{border-color:var(--blue-royal);background:#fff}.form-group input::placeholder{color:var(--gray-mid);font-size:12px}
+.email-gate{background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:10px;padding:16px 18px;margin-bottom:16px}.email-gate-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:4px}.email-gate-sub{font-size:11px;color:var(--gray-mid);margin-bottom:12px;line-height:1.5}
+.generate-btn{width:100%;padding:15px;background:var(--blue-royal);color:#fff;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase}.generate-btn:hover{background:var(--blue-deep)}
+.modal-guarantee{font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px}
+.modal-intro{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text-mid);line-height:1.8;font-weight:300;margin-bottom:20px;font-style:italic}
+@media(max-width:768px){header{padding:14px 18px}.logo-name{font-size:14px}.hero{padding:44px 18px 36px}.how-it-works{padding:48px 18px}.what-you-get{padding:48px 18px}.features-grid{grid-template-columns:1fr}.final-cta{padding:48px 18px}.modal-header{padding:20px 18px 16px}.modal-body{padding:18px 18px 28px}.form-row{grid-template-columns:1fr}footer{flex-direction:column;gap:10px;text-align:center}.footer-disclaimer{text-align:center}.social-proof{padding:28px 18px}.social-proof-row{gap:28px}.step{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
+<header><div class="logo-wrap"><svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg><div><div class="logo-name">OCCULTICS</div><div class="logo-tagline" id="tagline">Welcome to Your New Reality</div></div></div>
+<nav><div class="lang-toggle"><button class="lang-btn lang-active" id="lang-en" onclick="setLang('en')">EN</button><button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button><button class="lang-btn" id="lang-ja" onclick="setLang('ja')">JA</button></div><button class="nav-btn" style="background:transparent;color:var(--text-mid);border:1px solid var(--gray-light);" onclick="openModal()" id="nav-cta" onmouseover="this.style.borderColor='#1a2aff';this.style.color='#1a2aff'" onmouseout="this.style.borderColor='#e8edf5';this.style.color='#3d4a5c'">Check Compatibility</button><a href="/match" class="nav-btn" style="text-decoration:none;display:inline-flex;align-items:center;" id="nav-match">Match</a></nav></header>
 
-<div class="star s1">✦</div><div class="star s2">✦</div><div class="star s3">✦</div>
-<div class="star s4">✦</div><div class="star s5">✦</div><div class="star s6">✦</div>
+<section class="hero"><svg class="hero-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+<p class="hero-eyebrow" id="eyebrow">Numerology AI — Powered by 350,000+ Words of Research</p>
+<h1 class="hero-title" id="hero-title">Your Relationship<br>Has a <em>Code.</em></h1>
+<p class="hero-sub" id="hero-sub">Some connections feel effortless. Others consume everything you have. Numerology has known the difference for centuries. Enter two birthdays — discover what your numbers reveal.</p>
+<p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> unique Pythagoras combinations ✦ <strong>8</strong> report sections ✦ <strong>3</strong> languages</p>
+<button class="hero-cta" onclick="openModal()" id="hero-cta-btn">Discover Your Relationship Code</button>
+<div class="hero-price" id="hero-price"><strong>$147</strong> · Full 8-section report · Delivered in 5 minutes</div></section>
 
-<header>
-  <a href="/" class="logo-wrap">
-    <div>
-      <div class="logo-name">OCCULTICS</div>
-      <div class="logo-sub">Match</div>
-    </div>
-  </a>
-  <a href="/" class="back-link">← Back to Occultics.ai</a>
-</header>
+<div class="social-proof"><div class="social-proof-row"><div class="social-proof-item"><div class="social-proof-number">350K+</div><div class="social-proof-label" id="sp-1">Words of Research</div></div><div class="social-proof-item"><div class="social-proof-number">81</div><div class="social-proof-label" id="sp-2">Pythagoras Combinations</div></div><div class="social-proof-item"><div class="social-proof-number">8</div><div class="social-proof-label" id="sp-3">Report Sections</div></div><div class="social-proof-item"><div class="social-proof-number">$453</div><div class="social-proof-label" id="sp-4">Avg Saved vs Numerologist</div></div></div></div>
 
-<section class="hero">
-  <svg class="hero-gem" viewBox="0 0 80 100" fill="none">
-    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-    <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-    <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-    <polygon points="40,15 65,32 40,48" fill="#ffffff" opacity="0.18"/>
-  </svg>
-  <div class="hero-badge">Opening to the First 5,000 Members</div>
-  <h1 class="hero-title">Match According to<br><em>Your Birth Date</em></h1>
-  <p class="hero-sub">Powered by 350,000+ words of proprietary numerology knowledge and 81 unique compatibility combinations. We calculate your numbers — then match you with the people whose numbers complement yours.</p>
-  <div class="hero-count"><span id="counter">2,847</span> people already waiting</div>
-</section>
+<section class="how-it-works"><p class="section-eyebrow" id="hiw-eyebrow">How It Works</p><h2 class="section-title" id="hiw-title">Two Birthdays. Eight Revelations.</h2><div class="step-list"><div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title" id="s1t">Enter both birth dates</div><div class="step-desc" id="s1d">Your date of birth and theirs. That's all we need. The numbers contain everything.</div></div></div><div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Our AI reads your codes</div><div class="step-desc" id="s2d">350,000+ words of proprietary numerology research — Pythagorean codes, biorhythm compatibility, karmic aspects, life cycles — analyzed against your specific combination.</div></div></div><div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title" id="s3t">Your report arrives in 5 minutes</div><div class="step-desc" id="s3d">A complete 8-section compatibility analysis delivered to your email. Not a horoscope. Not a personality quiz. A mathematically precise reading of what your relationship is, and where it's going.</div></div></div></div></section>
 
-<div class="modes" id="mode-section">
-  <div class="mode-btn active" data-mode="love" onclick="selectMode(this)">
-    <div class="mode-icon">💎</div>
-    <div class="mode-label">Love Match</div>
-  </div>
-  <div class="mode-btn" data-mode="friends" onclick="selectMode(this)">
-    <div class="mode-icon">🤝</div>
-    <div class="mode-label">Friend Match</div>
-  </div>
-  <div class="mode-btn" data-mode="business" onclick="selectMode(this)">
-    <div class="mode-icon">💼</div>
-    <div class="mode-label">Business Match</div>
-  </div>
-</div>
+<section class="what-you-get"><p class="section-eyebrow" id="wyg-eyebrow">What Your Report Reveals</p><h2 class="section-title" id="wyg-title">Everything the Numbers See</h2><div class="features-grid"><div class="feature"><div class="feature-title" id="f1t">Your Relationship Code</div><div class="feature-desc" id="f1d">The 3-digit Pythagoras Code that reveals the flow, purpose, and karmic weight of your connection.</div></div><div class="feature"><div class="feature-title" id="f2t">Both Personality Profiles</div><div class="feature-desc" id="f2d">Each person's biorhythm, generational number, and life path — how they love, what they need, where they struggle.</div></div><div class="feature"><div class="feature-title" id="f3t">Strengths & Challenges</div><div class="feature-desc" id="f3d">What makes you work together and what threatens to pull you apart. Named specifically, not generically.</div></div><div class="feature"><div class="feature-title" id="f4t">Karmic Aspects</div><div class="feature-desc" id="f4d">Past-life connections, unresolved patterns, and the karmic lessons this relationship exists to teach you.</div></div><div class="feature"><div class="feature-title" id="f5t">Combined Life Path</div><div class="feature-desc" id="f5d">When your life paths are added together, the number reveals the destiny of the relationship itself.</div></div><div class="feature"><div class="feature-title" id="f6t">Relationship Timeline</div><div class="feature-desc" id="f6d">When your relationship started matters. The personal year of each partner at the time of meeting reveals the trajectory and timing of the connection.</div></div></div></section>
 
-<div class="form-wrap" id="signup-form">
-  <div class="form-card">
-    <div class="form-title">Enter Your Details</div>
-    <div class="form-row">
-      <div class="form-group"><label>First Name</label><input type="text" id="m-name" placeholder="Your name"></div>
-      <div class="form-group"><label>Date of Birth</label><input type="date" id="m-dob"></div>
-    </div>
-    <div class="form-group full" style="margin-bottom:10px;">
-      <label>Email</label><input type="email" id="m-email" placeholder="your@email.com">
-    </div>
-    <div class="form-group full" style="margin-bottom:14px;">
-      <label>Gender</label>
-      <select id="m-gender"><option value="">Select...</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
-    </div>
-    <button class="submit-btn" id="submit-btn" onclick="handleSignup()">✦ Calculate My Numbers & Join Waitlist</button>
-  </div>
-</div>
+<section class="match-promo" style="padding:80px 48px;text-align:center;background:linear-gradient(180deg,#0a0e2e 0%,#111640 100%);color:white;position:relative;overflow:hidden;"><div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);pointer-events:none;"></div><p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Coming Soon</p><h2 class="section-title" style="color:white;font-size:clamp(32px,5vw,48px);" id="match-title">Stop Swiping Blind.</h2><p style="font-size:14px;color:#8892a4;max-width:480px;margin:0 auto 12px;line-height:1.7;font-weight:300;" id="match-sub">No dating app matches on deep compatibility. We do. Enter your birthday — our system calculates your numbers and finds the people whose codes complement yours.</p><p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Opening to the first 5,000 members</p><a href="/match" style="display:inline-block;padding:16px 40px;background:transparent;color:white;border:1.5px solid rgba(77,184,255,0.4);border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;text-decoration:none;" id="match-btn" onmouseover="this.style.borderColor='#1a2aff';this.style.background='rgba(26,42,255,0.15)'" onmouseout="this.style.borderColor='rgba(77,184,255,0.4)';this.style.background='transparent'">Join the Waitlist — Free</a><div style="display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;"><div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m1-label">Love Match</div><div style="font-size:20px;">💎</div></div><div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m2-label">Friend Match</div><div style="font-size:20px;">🤝</div></div><div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m3-label">Business Match</div><div style="font-size:20px;">💼</div></div></div></section>
 
-<div class="loading-state" id="loading">
-  <svg class="loading-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.15"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.4"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.5"/></svg>
-  <div class="loading-text">Calculating your numbers...</div>
-</div>
+<section class="final-cta"><h2 class="section-title" id="final-title">The Numbers Don't Lie.</h2><p class="final-sub" id="final-sub">Enter two birthdays. Get the answer numerologists charge $600 for — delivered to your inbox in five minutes.</p><button class="hero-cta" onclick="openModal()" id="final-btn">Discover Your Relationship Code — $147</button><div class="hero-price" id="final-price">Secure payment · Instant delivery · 100% satisfaction guarantee</div></section>
 
-<div class="result-wrap" id="result">
+<footer><div class="footer-copy">© 2026 Occultics Publishing. All rights reserved. occultics.ai</div><div class="footer-disclaimer" id="disclaimer">For informational and entertainment purposes only. Not a substitute for professional advice.</div></footer>
 
-  <div class="id-card">
-    <div class="id-card-header">
-      <div class="id-card-eyebrow">Your Numerological Identity</div>
-      <div class="id-card-name" id="card-name">—</div>
-      <div class="id-card-dob" id="card-dob">—</div>
-    </div>
-    <div class="id-card-body">
-      <div class="id-card-codes">
-        <div class="code-block"><div class="code-label">Biorhythm</div><div class="code-value" id="card-bio">—</div></div>
-        <div class="code-block"><div class="code-label">Generational</div><div class="code-value" id="card-gen">—</div></div>
-        <div class="code-block"><div class="code-label">Life Path</div><div class="code-value" id="card-lp">—</div></div>
-      </div>
-      <div class="id-card-traits">
-        <div class="trait-section">
-          <div class="trait-title">Who You Are</div>
-          <div class="trait-text" id="card-who">—</div>
-        </div>
-        <div class="trait-section">
-          <div class="trait-title">Your Energy in Relationships</div>
-          <div class="trait-text" id="card-energy">—</div>
-        </div>
-      </div>
-      <div class="id-card-seeking">
-        <div class="seeking-title" id="seeking-label">Your Ideal Match in Love</div>
-        <div class="seeking-text" id="card-seeking">—</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="waitlist-card">
-    <div class="waitlist-pos" id="wl-pos">#—</div>
-    <div class="waitlist-label">Your position on the waitlist</div>
-    <div class="waitlist-bar"><div class="waitlist-fill" id="wl-fill" style="width:0%"></div></div>
-    <div class="waitlist-info">When we reach <strong>5,000 members</strong>, we activate matching — our system runs your numbers against everyone else and finds the people whose codes complement yours. Share your link to move up.</div>
-  </div>
-
-  <div class="cta-card">
-    <div class="cta-title">Already Have Someone in Mind?</div>
-    <div class="cta-sub">Get your full Compatibility Report — we calculate your combined code from 81 unique combinations and reveal whether your numbers lead to permanence or separation.</div>
-    <a href="/" class="cta-btn">Check Compatibility — $147</a>
-  </div>
-
-</div>
-
-<footer>
-  <div class="footer-quote">"Some connections are written before they begin."</div>
-  <div class="footer-copy">© 2026 Occultics Publishing · occultics.ai · For informational and entertainment purposes only.</div>
-</footer>
+<div class="modal-overlay" id="modal-compat"><div class="modal"><div class="modal-header"><button class="modal-close" onclick="closeModal()">✕</button><div class="modal-type" id="modal-type">Compatibility Report</div><div class="modal-title" id="modal-title">Discover Your Relationship Code</div></div><div class="modal-body"><div class="modal-intro" id="modal-intro">Some connections feel effortless from the start. Others take everything you have — and still leave you questioning why. Enter both birthdates and discover your Relationship Code.</div><div class="form-section"><div class="form-label" id="label-you">Your Details</div><div class="form-row"><div class="form-group"><label id="lbl-n1">First Name</label><input type="text" id="c-name1" placeholder="Your first name"></div><div class="form-group"><label id="lbl-d1">Date of Birth</label><input type="date" id="c-dob1"></div></div></div><div class="form-section"><div class="form-label" id="label-them">Their Details</div><div class="form-row"><div class="form-group"><label id="lbl-n2">First Name</label><input type="text" id="c-name2" placeholder="Their first name"></div><div class="form-group"><label id="lbl-d2">Date of Birth</label><input type="date" id="c-dob2"></div></div></div><div class="email-gate"><div class="email-gate-title" id="email-title">Where shall we send your report?</div><div class="email-gate-sub" id="email-sub">Your full compatibility report will be delivered to this email within 5 minutes of payment.</div><div class="form-group"><input type="email" id="c-email" placeholder="your@email.com"></div></div><button class="generate-btn" onclick="handlePayment()" id="pay-btn">✦ Discover Your Code — $147</button><div class="modal-guarantee" id="guarantee">🔒 Secure payment · 100% satisfaction guarantee · Instant delivery</div></div></div></div>
 
 <script>
-// ===== NUMEROLOGY ENGINE =====
-function r(n){while(n>9)n=String(n).split('').reduce((a,b)=>a+parseInt(b),0);return n;}
-function getBio(d){const[,m,dy]=d.split('-').map(Number);return r([...String(dy),...String(m)].reduce((a,b)=>a+parseInt(b),0));}
-function getGen(d){const[y]=d.split('-').map(Number);return r([...String(y)].reduce((a,b)=>a+parseInt(b),0));}
-function getLP(d){const[y,m,dy]=d.split('-').map(Number);return r([...String(y),...String(m),...String(dy)].reduce((a,b)=>a+parseInt(b),0));}
+function openModal(){document.getElementById('modal-compat').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal-compat').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('modal-compat').addEventListener('click',function(e){if(e.target===this)closeModal()});
 
-// ===== PERSONALITY DATA =====
-const WHO = {
-  1:"You're a natural leader with solar energy — ambitious, analytical, and driven by conscious purpose. You analyze everything before you act. Pride is both your greatest strength and your shadow.",
-  2:"You carry Moon energy — deeply emotional, intuitive, prophetic. You feel things before they happen. Your sixth sense about people is remarkably strong, and your connections feel destined.",
-  3:"Jupiter energy flows through you — optimistic, passionate, honest to a fault. You say what you think like rapid fire. Lucky by nature, the fortunate number never entirely abandons you.",
-  4:"Saturn's consciousness defines you — everything you do, good or bad, is done with full awareness. You build structures meant to last. Fear of abandonment runs deep, but your loyalty is unshakeable.",
-  5:"Mercury's duality lives in you — logical yet restless, communicative yet unpredictable. Freedom is sacred to you. You connect the conscious and unconscious worlds through constant mental movement.",
-  6:"Venus makes you unconsciously beautiful in everything you do. Love, beauty, harmony — these aren't desires, they're necessities. You create warmth wherever you go, sometimes idealizing what you love.",
-  7:"Uranus energy makes you the most spiritually attuned number. Mysterious, deeply intelligent, susceptible to sudden insights. You need solitude to recharge and freedom to explore the unknown.",
-  8:"Mars power runs through your veins — instinctive, volcanic, physically vital. Your reactions are immediate and intense. You carry a birthmark somewhere as your angel guardian sign.",
-  9:"Neptune's compassion defines you — empathetic, intuitive, carrying universal wisdom. You complete karmic cycles and absorb the world's pain to transform it into healing."
-};
+async function handlePayment(){
+var payload={type:'compatibility',lang:window._reportLang||'en',name:document.getElementById('c-name1').value.trim(),email:document.getElementById('c-email').value.trim(),dob:document.getElementById('c-dob1').value,name2:document.getElementById('c-name2').value.trim(),dob2:document.getElementById('c-dob2').value};
+if(!payload.name||!payload.dob||!payload.name2||!payload.dob2||!payload.email){alert('Please fill in all fields.');return}
+var btn=document.getElementById('pay-btn');btn.textContent='⏳ Processing...';btn.disabled=true;
+try{var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});var data=await res.json();if(data.url){window.location.href=data.url}else{throw new Error(data.error||'Checkout failed')}}catch(err){window.open('https://buy.stripe.com/test_fZu5kvfGb0aq1Lz9LX0co04','_blank')}finally{btn.textContent='✦ Discover Your Code — $147';btn.disabled=false}}
 
-const BIO_DESC = {
-  1:"Others see your leadership instantly — your presence commands attention and respect before you speak a word.",
-  2:"People sense your emotional depth immediately. There's something prophetic about you that makes others share their secrets.",
-  3:"Your optimism and passion are magnetic. People feel lucky around you — your Jupiter energy lifts everyone in the room.",
-  4:"You radiate reliability and strength. Others feel safe around you because your Saturn energy promises stability.",
-  5:"Your mind moves visibly fast. People are drawn to your wit, your unexpected observations, your restless brilliance.",
-  6:"Beauty radiates from you unconsciously. Others feel harmonized in your presence — you create peace without trying.",
-  7:"Mystery surrounds you. People sense depth and intelligence they can't quite reach, which makes them want to know you more.",
-  8:"Your physical presence is powerful. Others feel your Mars energy — there's an intensity about you that's impossible to ignore.",
-  9:"Compassion radiates from you. People feel understood in your presence, as if you can see their soul without judgment."
-};
+var T={en:{tagline:'Welcome to Your New Reality',eyebrow:'Numerology AI — Powered by 350,000+ Words of Research',title:'Your Relationship<br>Has a <em>Code.</em>',sub:'Some connections feel effortless. Others consume everything you have. Numerology has known the difference for centuries. Enter two birthdays — discover what your numbers reveal.',anchor:'✦ <strong>81</strong> unique Pythagoras combinations ✦ <strong>8</strong> report sections ✦ <strong>3</strong> languages',heroCtaBtn:'Discover Your Relationship Code',heroPrice:'<strong>$147</strong> · Full 8-section report · Delivered in 5 minutes',navCta:'Check Compatibility',navMatch:'Match',sp1:'Words of Research',sp2:'Pythagoras Combinations',sp3:'Report Sections',sp4:'Avg Saved vs Numerologist',hiwE:'How It Works',hiwT:'Two Birthdays. Eight Revelations.',s1t:'Enter both birth dates',s1d:"Your date of birth and theirs. That's all we need. The numbers contain everything.",s2t:'Our AI reads your codes',s2d:'350,000+ words of proprietary numerology research — Pythagorean codes, biorhythm compatibility, karmic aspects, life cycles — analyzed against your specific combination.',s3t:'Your report arrives in 5 minutes',s3d:"A complete 8-section compatibility analysis delivered to your email. Not a horoscope. Not a personality quiz. A mathematically precise reading of what your relationship is, and where it's going.",wygE:'What Your Report Reveals',wygT:'Everything the Numbers See',f1t:'Your Relationship Code',f1d:'The 3-digit Pythagoras Code that reveals the flow, purpose, and karmic weight of your connection.',f2t:'Both Personality Profiles',f2d:"Each person's biorhythm, generational number, and life path — how they love, what they need, where they struggle.",f3t:'Strengths & Challenges',f3d:'What makes you work together and what threatens to pull you apart. Named specifically, not generically.',f4t:'Karmic Aspects',f4d:'Past-life connections, unresolved patterns, and the karmic lessons this relationship exists to teach you.',f5t:'Combined Life Path',f5d:'When your life paths are added together, the number reveals the destiny of the relationship itself.',f6t:'Relationship Timeline',f6d:'When your relationship started matters. The personal year of each partner at the time of meeting reveals the trajectory and timing of the connection.',finalT:"The Numbers Don't Lie.",finalS:'Enter two birthdays. Get the answer numerologists charge $600 for — delivered to your inbox in five minutes.',finalBtn:'Discover Your Relationship Code — $147',finalP:'Secure payment · Instant delivery · 100% satisfaction guarantee',disc:'For informational and entertainment purposes only. Not a substitute for professional advice.',mType:'Compatibility Report',mTitle:'Discover Your Relationship Code',mIntro:'Some connections feel effortless from the start. Others take everything you have — and still leave you questioning why. Enter both birthdates and discover your Relationship Code.',lYou:'Your Details',lThem:'Their Details',lN1:'First Name',lD1:'Date of Birth',lN2:'First Name',lD2:'Date of Birth',eTitle:'Where shall we send your report?',eSub:'Your full compatibility report will be delivered to this email within 5 minutes of payment.',payBtn:'✦ Discover Your Code — $147',guar:'🔒 Secure payment · 100% satisfaction guarantee · Instant delivery',matchE:'Coming Soon',matchT:'Stop Swiping Blind.',matchS:'No dating app matches on deep compatibility. We do. Enter your birthday — our system calculates your numbers and finds the people whose codes complement yours.',matchC:'Opening to the first 5,000 members',matchBtn:'Join the Waitlist — Free',matchM1:'Love Match',matchM2:'Friend Match',matchM3:'Business Match'},
+es:{tagline:'Bienvenido a Tu Nueva Realidad',eyebrow:'IA de Numerología — Más de 350,000 Palabras de Investigación',title:'Tu Relación<br>Tiene un <em>Código.</em>',sub:'Algunas conexiones fluyen sin esfuerzo. Otras consumen todo lo que tienes. La numerología ha conocido la diferencia durante siglos. Ingresa dos fechas de nacimiento — descubre lo que revelan tus números.',anchor:'✦ <strong>81</strong> combinaciones Pitágoras ✦ <strong>9</strong> secciones del informe ✦ <strong>3</strong> idiomas',heroCtaBtn:'Descubre Tu Código de Relación',heroPrice:'<strong>$147</strong> · Informe completo de 8 secciones · Entregado en 5 minutos',navCta:'Ver Compatibilidad',navMatch:'Match',sp1:'Palabras de Investigación',sp2:'Combinaciones Pitágoras',sp3:'Secciones del Informe',sp4:'Ahorro vs Numerólogo',hiwE:'Cómo Funciona',hiwT:'Dos Fechas. Ocho Revelaciones.',s1t:'Ingresa ambas fechas',s1d:'Tu fecha de nacimiento y la suya. Es todo lo que necesitamos. Los números contienen todo.',s2t:'Nuestra IA lee tus códigos',s2d:'Más de 350,000 palabras de investigación numerológica — códigos pitagóricos, compatibilidad de biorritmo, aspectos kármicos — analizados contra tu combinación.',s3t:'Tu informe llega en 5 minutos',s3d:'Un análisis completo de compatibilidad de 8 secciones entregado a tu correo. No es un horóscopo. Una lectura matemáticamente precisa de tu relación.',wygE:'Lo Que Revela Tu Informe',wygT:'Todo Lo Que Ven Los Números',f1t:'Tu Código de Relación',f1d:'El código Pitágoras de 3 dígitos que revela el flujo, propósito y peso kármico de tu conexión.',f2t:'Ambos Perfiles',f2d:'El biorritmo, número generacional y camino de vida de cada persona — cómo aman, qué necesitan, dónde luchan.',f3t:'Fortalezas y Desafíos',f3d:'Qué los hace funcionar y qué amenaza con separarlos. Nombrado específicamente.',f4t:'Aspectos Kármicos',f4d:'Conexiones de vidas pasadas y las lecciones kármicas que esta relación existe para enseñarte.',f5t:'Camino de Vida Combinado',f5d:'Cuando se suman sus caminos de vida, el número revela el destino de la relación.',f6t:'Línea de Tiempo de la Relación',f6d:'Cuándo comenzó tu relación importa. El año personal de cada persona al momento de conocerse revela la trayectoria de la conexión.',finalT:'Los Números No Mienten.',finalS:'Ingresa dos fechas. Obtén la respuesta por la que los numerólogos cobran $600 — en tu bandeja en cinco minutos.',finalBtn:'Descubre Tu Código — $147',finalP:'Pago seguro · Entrega instantánea · Garantía de satisfacción',disc:'Solo con fines informativos y de entretenimiento. No sustituye el asesoramiento profesional.',mType:'Informe de Compatibilidad',mTitle:'Descubre Tu Código de Relación',mIntro:'Hay personas que entran en tu vida y todo encaja. Otras te consumen sin que entiendas por qué. Ingresa ambas fechas y descubre tu Código de Relación.',lYou:'Tus Datos',lThem:'Sus Datos',lN1:'Nombre',lD1:'Fecha de Nacimiento',lN2:'Nombre',lD2:'Fecha de Nacimiento',eTitle:'¿Dónde enviamos tu informe?',eSub:'Tu informe se entregará a este correo dentro de 5 minutos del pago.',payBtn:'✦ Descubre Tu Código — $147',guar:'🔒 Pago seguro · Garantía de satisfacción · Entrega instantánea',matchE:'Próximamente',matchT:'Deja de Deslizar a Ciegas.',matchS:'Ninguna app de citas conecta por compatibilidad profunda. Nosotros sí. Ingresa tu fecha de nacimiento — nuestro sistema calcula tus números y encuentra a las personas cuyos códigos complementan los tuyos.',matchC:'Abriendo para los primeros 5,000 miembros',matchBtn:'Únete a la Lista — Gratis',matchM1:'Match de Amor',matchM2:'Match de Amistad',matchM3:'Match de Negocios'},
+ja:{tagline:'あなたの新しい現実へようこそ',eyebrow:'数秘術AI — 350,000語以上の研究に基づく',title:'あなたの関係には<br><em>コード</em>がある。',sub:'自然に感じる繋がりもあれば、全てを捧げても疑問が残る繋がりもあります。数秘術は何世紀もその違いを知っています。二人の誕生日を入力して、真実を発見してください。',anchor:'✦ <strong>81</strong>のピタゴラス組み合わせ ✦ <strong>9</strong>セクションのレポート ✦ <strong>3</strong>言語対応',heroCtaBtn:'関係コードを発見する',heroPrice:'<strong>$147</strong> · 全8セクションレポート · 5分以内にお届け',navCta:'相性を確認',navMatch:'マッチ',sp1:'研究の言葉数',sp2:'ピタゴラスの組み合わせ',sp3:'レポートセクション',sp4:'数秘術師との比較節約額',hiwE:'仕組み',hiwT:'二つの誕生日。八つの啓示。',s1t:'二人の生年月日を入力',s1d:'あなたの生年月日と相手の生年月日。必要なのはそれだけです。',s2t:'AIがコードを読み解く',s2d:'350,000語以上の独自数秘術研究がお二人の組み合わせに対して分析されます。',s3t:'5分以内にレポートが届く',s3d:'完全な8セクションの相性分析がメールに届きます。星占いでも性格診断でもありません。',wygE:'レポートが明かすもの',wygT:'数字が見る全て',f1t:'関係コード',f1d:'繋がりの流れ、目的、カルマの重みを明かす3桁のピタゴラスコード。',f2t:'二人の性格プロフィール',f2d:'バイオリズム、世代数、ライフパス — 愛し方、必要なもの、苦しむところ。',f3t:'強みと課題',f3d:'何が二人を結びつけ、何が引き離す脅威となるか。具体的に名指しされます。',f4t:'カルマアスペクト',f4d:'前世の繋がりと、この関係が教えるカルマの教訓。',f5t:'統合ライフパス',f5d:'二人のライフパスを合計した数字が関係の運命を明かします。',f6t:'2026年カップル予報',f6d:'今年の関係に何が待つか — チャンス、プレッシャー、重要な月。',finalT:'数字は嘘をつかない。',finalS:'二人の誕生日を入力。数秘術師が$600で提供する答えが5分以内に届きます。',finalBtn:'関係コードを発見する — $147',finalP:'安全な支払い · 即時配信 · 満足保証',disc:'情報およびエンターテインメント目的のみ。専門的なアドバイスの代わりにはなりません。',mType:'相性レポート',mTitle:'関係コードを発見する',mIntro:'出会った瞬間から自然に感じる人もいれば、すべてを捧げても疑問が残る人もいます。二人の生年月日を入力して、関係コードを発見してください。',lYou:'あなたの情報',lThem:'相手の情報',lN1:'名前',lD1:'生年月日',lN2:'名前',lD2:'生年月日',eTitle:'レポートの送付先は？',eSub:'お支払い後5分以内にこのメールアドレスに届きます。',payBtn:'✦ コードを発見する — $147',guar:'🔒 安全な支払い · 満足保証 · 即時配信',matchE:'近日公開',matchT:'盲目のスワイプをやめよう。',matchS:'深い相性でマッチングするアプリはありません。私たちはそれをします。誕生日を入力すれば、あなたの数字を計算し、コードが補完し合う人々を見つけます。',matchC:'最初の5,000人限定で公開',matchBtn:'ウェイトリストに参加 — 無料',matchM1:'恋愛マッチ',matchM2:'友人マッチ',matchM3:'ビジネスマッチ'}};
 
-const SEEK = {
-  love:{
-    1:"An intelligent partner who matches your ambition. Someone educated, articulate, and strong enough to be your equal — never someone who submits without challenge.",
-    2:"Someone who shows emotion clearly and lifts you up. You need words of love, tenderness, and a partner who helps build your confidence.",
-    3:"Unconditional love and maximum tolerance. You give everything when you find it — and expect the same depth of giving in return.",
-    4:"Someone with the same worldview and values. Honest, traditional, hardworking. A simple but genuine love that doesn't need drama to feel real.",
-    5:"An intelligent, witty partner who takes initiative and creates surprises. Someone who respects your freedom as sacred — a person who feels free stays willingly.",
-    6:"A charming, attractive partner who provides love, status, family, and harmony. You don't separate love from beauty — both are required.",
-    7:"An exceptionally intelligent partner for philosophical conversations and new discoveries. Pure of soul, without manipulation, approaching you with sincere love.",
-    8:"A strong, accomplished partner — the authority figure missing since your early years. Someone who leads, sets clear limits, and whom you genuinely respect.",
-    9:"A loyal partner you can trust completely. You give everything when trust is established, but one betrayal closes you off permanently."
-  },
-  friends:{
-    1:"Friends who challenge you intellectually and match your drive. You need people who are going somewhere — stagnation in your circle is intolerable.",
-    2:"Emotionally available friends who show they care. Deep bonds over surface connections. You're the friend everyone confides in.",
-    3:"Friends who match your energy — spontaneous, honest, up for adventure. You need a tribe that doesn't judge your impulsiveness.",
-    4:"Loyal, dependable people with shared values. Small circle, deep roots. Quality over quantity, always.",
-    5:"Mentally stimulating friends who never bore you. You need a diverse circle — each friend bringing a different world to explore.",
-    6:"Friends who appreciate beauty and harmony. You create the gatherings, the warmth, the beautiful experiences your circle needs.",
-    7:"A very select few who respect your need for solitude. Deep thinkers who can match your philosophical depth without feeling threatened.",
-    8:"Powerful, ambitious friends who build things. Your circle becomes your army — loyal, driven, creating material success together.",
-    9:"Compassionate, trustworthy friends who see the world as deeply as you do. You need people whose loyalty is absolute."
-  },
-  business:{
-    1:"Co-founders who execute while you lead. You bring vision and direction — you need partners who complement with operational strength.",
-    2:"Partners with emotional intelligence who handle the human side while you navigate with intuition. You sense market shifts before data confirms them.",
-    3:"Collaborators who match your speed and optimism. You generate ideas like lightning — you need partners who can keep up and ground them.",
-    4:"Structured, reliable partners who share your work ethic. Together you build empires that last — slow, steady, unshakeable.",
-    5:"Innovative partners who communicate and adapt. You pivot fast — you need people who can keep up with your two-track mind.",
-    6:"Partners who bring beauty to business. Design, brand, customer experience — you make everything look and feel premium.",
-    7:"Visionary partners who see what others miss. You provide breakthrough insights — you need someone to transform them into revenue.",
-    8:"Power partners for building material empires. Your instinct for deals and resources is volcanic — pair with a strategist for maximum impact.",
-    9:"Purpose-driven partners building something meaningful. Your business must serve a larger mission or it won't hold your attention."
-  }
-};
-
-let selectedModes = ['love'];
-
-function selectMode(el) {
-  el.classList.toggle('active');
-  selectedModes = [...document.querySelectorAll('.mode-btn.active')].map(b => b.dataset.mode);
-  if (selectedModes.length === 0) { el.classList.add('active'); selectedModes = [el.dataset.mode]; }
-}
-
-const MATCH_API = 'https://occultics-match.occultics4.workers.dev/';
-
-// Load live count on page load
-(async function(){
-  try {
-    const res = await fetch(MATCH_API);
-    const data = await res.json();
-    if (data.count > 0) document.getElementById('counter').textContent = data.count.toLocaleString();
-  } catch(e){}
-})();
-
-async function handleSignup() {
-  const name = document.getElementById('m-name').value.trim();
-  const dob = document.getElementById('m-dob').value;
-  const email = document.getElementById('m-email').value.trim();
-  const gender = document.getElementById('m-gender').value;
-
-  if (!name || !dob || !email) { alert('Please fill in your name, date of birth, and email.'); return; }
-
-  const btn = document.getElementById('submit-btn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Calculating...';
-
-  document.getElementById('signup-form').style.display = 'none';
-  document.getElementById('mode-section').style.display = 'none';
-  document.getElementById('loading').classList.add('active');
-
-  const urlRef = new URLSearchParams(window.location.search).get('ref') || '';
-  let pos = 0, count = 0;
-
-  try {
-    const res = await fetch(MATCH_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, dob, gender, modes: selectedModes, ref: urlRef })
-    });
-    const result = await res.json();
-    pos = result.position || 1;
-    count = result.count || pos;
-  } catch(e) {
-    let hash = 0;
-    for (let i = 0; i < email.length; i++) hash = ((hash << 5) - hash) + email.charCodeAt(i);
-    pos = 200 + Math.abs(hash % 2800);
-    count = pos;
-  }
-
-
-  const bio = getBio(dob);
-  const gen = getGen(dob);
-  const lp = getLP(dob);
-  const [y, m, dy] = dob.split('-').map(Number);
-  const months = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
-
-  document.getElementById('card-name').textContent = name;
-  document.getElementById('card-dob').textContent = dy + ' ' + months[m] + ' ' + y;
-  document.getElementById('card-bio').textContent = bio;
-  document.getElementById('card-gen').textContent = gen;
-  document.getElementById('card-lp').textContent = lp;
-  document.getElementById('card-who').textContent = WHO[lp] || WHO[1];
-  document.getElementById('card-energy').textContent = BIO_DESC[bio] || BIO_DESC[1];
-
-  const seekTexts = selectedModes.map(mode => SEEK[mode][gen] || SEEK[mode][1]);
-  const seekLabels = {love:'Your Ideal Match in Love',friends:'Your Ideal Match in Friendship',business:'Your Ideal Match in Business'};
-  if (selectedModes.length === 1) {
-    document.getElementById('seeking-label').textContent = seekLabels[selectedModes[0]];
-    document.getElementById('card-seeking').textContent = seekTexts[0];
-  } else {
-    document.getElementById('seeking-label').textContent = 'Your Ideal Matches';
-    document.getElementById('card-seeking').innerHTML = selectedModes.map((mode, i) => '<strong style="color:var(--crystal);">' + mode.charAt(0).toUpperCase() + mode.slice(1) + ':</strong> ' + seekTexts[i]).join('<br><br>');
-  }
-
-  document.getElementById('wl-pos').textContent = '#' + pos;
-  document.getElementById('wl-fill').style.width = ((count / 5000) * 100).toFixed(1) + '%';
-  document.getElementById('counter').textContent = count.toLocaleString();
-
-  document.getElementById('loading').classList.remove('active');
-  document.getElementById('result').classList.add('active');
-  document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
-}
+function setLang(lang){
+document.getElementById('lang-en').classList.toggle('lang-active',lang==='en');
+document.getElementById('lang-es').classList.toggle('lang-active',lang==='es');
+document.getElementById('lang-ja').classList.toggle('lang-active',lang==='ja');
+window._reportLang=lang;var l=T[lang]||T.en;
+document.getElementById('tagline').textContent=l.tagline;
+document.getElementById('eyebrow').textContent=l.eyebrow;
+document.getElementById('hero-title').innerHTML=l.title;
+document.getElementById('hero-sub').textContent=l.sub;
+document.getElementById('hero-anchor').innerHTML=l.anchor;
+document.getElementById('hero-cta-btn').textContent=l.heroCtaBtn;
+document.getElementById('hero-price').innerHTML=l.heroPrice;
+document.getElementById('nav-cta').textContent=l.navCta;if(document.getElementById('nav-match'))document.getElementById('nav-match').textContent=l.navMatch;
+document.getElementById('sp-1').textContent=l.sp1;document.getElementById('sp-2').textContent=l.sp2;
+document.getElementById('sp-3').textContent=l.sp3;document.getElementById('sp-4').textContent=l.sp4;
+document.getElementById('hiw-eyebrow').textContent=l.hiwE;document.getElementById('hiw-title').textContent=l.hiwT;
+document.getElementById('s1t').textContent=l.s1t;document.getElementById('s1d').textContent=l.s1d;
+document.getElementById('s2t').textContent=l.s2t;document.getElementById('s2d').textContent=l.s2d;
+document.getElementById('s3t').textContent=l.s3t;document.getElementById('s3d').textContent=l.s3d;
+document.getElementById('wyg-eyebrow').textContent=l.wygE;document.getElementById('wyg-title').textContent=l.wygT;
+document.getElementById('f1t').textContent=l.f1t;document.getElementById('f1d').textContent=l.f1d;
+document.getElementById('f2t').textContent=l.f2t;document.getElementById('f2d').textContent=l.f2d;
+document.getElementById('f3t').textContent=l.f3t;document.getElementById('f3d').textContent=l.f3d;
+document.getElementById('f4t').textContent=l.f4t;document.getElementById('f4d').textContent=l.f4d;
+document.getElementById('f5t').textContent=l.f5t;document.getElementById('f5d').textContent=l.f5d;
+document.getElementById('f6t').textContent=l.f6t;document.getElementById('f6d').textContent=l.f6d;
+document.getElementById('final-title').textContent=l.finalT;document.getElementById('final-sub').textContent=l.finalS;
+document.getElementById('final-btn').textContent=l.finalBtn;document.getElementById('final-price').textContent=l.finalP;
+document.getElementById('disclaimer').textContent=l.disc;
+document.getElementById('modal-type').textContent=l.mType;document.getElementById('modal-title').textContent=l.mTitle;
+document.getElementById('modal-intro').textContent=l.mIntro;
+document.getElementById('label-you').textContent=l.lYou;document.getElementById('label-them').textContent=l.lThem;
+document.getElementById('lbl-n1').textContent=l.lN1;document.getElementById('lbl-d1').textContent=l.lD1;
+document.getElementById('lbl-n2').textContent=l.lN2;document.getElementById('lbl-d2').textContent=l.lD2;
+document.getElementById('email-title').textContent=l.eTitle;document.getElementById('email-sub').textContent=l.eSub;
+document.getElementById('pay-btn').textContent=l.payBtn;document.getElementById('guarantee').textContent=l.guar;if(l.matchE){document.getElementById('match-eyebrow').textContent=l.matchE;document.getElementById('match-title').textContent=l.matchT;document.getElementById('match-sub').textContent=l.matchS;document.getElementById('match-count').textContent=l.matchC;document.getElementById('match-btn').textContent=l.matchBtn;document.getElementById('match-m1-label').textContent=l.matchM1;document.getElementById('match-m2-label').textContent=l.matchM2;document.getElementById('match-m3-label').textContent=l.matchM3}}
 </script>
-</body>
-</html>
+</body></html>
