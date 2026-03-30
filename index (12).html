@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Occultics.ai — Every Relationship Has a Mathematical Signature</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue-deep:#0a0e2e;--blue-royal:#1a2aff;--blue-electric:#2a7fff;--blue-crystal:#4db8ff;--blue-light:#e8f4ff;--white:#fff;--off-white:#f8faff;--gray-light:#e8edf5;--gray-mid:#8892a4;--text-dark:#0d1117;--text-mid:#3d4a5c}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--text-dark);min-height:100vh;overflow-x:hidden}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid var(--gray-light);background:var(--white);position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:14px}.logo-gem{width:32px;height:38px}.logo-name{font-weight:700;font-size:17px;letter-spacing:4px;color:var(--text-dark)}.logo-tagline{font-size:8px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-top:2px}
+nav{display:flex;gap:8px;align-items:center}.lang-toggle{display:flex;gap:4px;align-items:center;margin-right:8px}
+.lang-btn{padding:6px 10px;border-radius:4px;font-size:10px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:1.5px solid var(--gray-light);background:transparent;color:var(--gray-mid)}.lang-btn.lang-active{background:var(--blue-royal);color:#fff;border-color:var(--blue-royal)}.lang-btn:hover:not(.lang-active){border-color:var(--blue-royal);color:var(--blue-royal)}
+.nav-btn{padding:10px 22px;border-radius:6px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:none;background:var(--blue-royal);color:#fff}.nav-btn:hover{background:var(--blue-deep)}.nav-outline{background:transparent;color:var(--text-mid);border:1px solid var(--gray-light)}.nav-outline:hover{border-color:var(--blue-royal);color:var(--blue-royal);background:transparent}
+.hero{padding:80px 48px 60px;text-align:center;background:linear-gradient(180deg,var(--off-white) 0%,var(--white) 100%);position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,.04) 0%,transparent 70%);pointer-events:none}
+.hero-gem{width:80px;margin:0 auto 32px;display:block;animation:float 4s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-eyebrow{font-size:10px;letter-spacing:3px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(42px,6vw,72px);font-weight:300;line-height:1.08;color:var(--text-dark);margin-bottom:20px;letter-spacing:-1px}.hero-title em{font-style:italic;color:var(--blue-royal)}
+.hero-sub{font-size:15px;color:var(--text-mid);max-width:560px;margin:0 auto 12px;line-height:1.7;font-weight:300}
+.hero-anchor{font-size:11px;color:var(--gray-mid);margin-bottom:48px;letter-spacing:.5px}.hero-anchor strong{color:var(--blue-royal)}
+.hero-cta{display:inline-block;padding:18px 48px;background:var(--blue-royal);color:#fff;border:none;border-radius:10px;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none}.hero-cta:hover{background:var(--blue-deep);transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,.2)}
+.hero-price{font-size:12px;color:var(--gray-mid);margin-top:12px}.hero-price strong{color:var(--text-dark);font-size:14px}
+.social-proof{padding:48px;text-align:center;border-bottom:1px solid var(--gray-light)}.social-proof-row{display:flex;justify-content:center;gap:56px;flex-wrap:wrap}.social-proof-item{text-align:center}.social-proof-number{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--blue-royal)}.social-proof-label{font-size:10px;color:var(--gray-mid);letter-spacing:1.5px;text-transform:uppercase;font-weight:500;margin-top:4px}
+.how-it-works{padding:80px 48px;max-width:800px;margin:0 auto}
+.section-eyebrow{font-size:10px;letter-spacing:3px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--text-dark);margin-bottom:40px;text-align:center}
+.step-list{display:flex;flex-direction:column;gap:28px}.step{display:flex;gap:20px;align-items:flex-start}.step-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--blue-royal);flex-shrink:0;width:40px}.step-content{flex:1}.step-title{font-size:14px;font-weight:600;color:var(--text-dark);margin-bottom:6px}.step-desc{font-size:13px;color:var(--text-mid);line-height:1.7;font-weight:300}
+.what-you-get{padding:80px 48px;background:var(--off-white)}.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:900px;margin:0 auto}.feature{padding:24px;border-radius:12px;background:var(--white);border:1px solid var(--gray-light)}.feature-title{font-size:13px;font-weight:600;color:var(--text-dark);margin-bottom:6px}.feature-desc{font-size:12px;color:var(--text-mid);line-height:1.6;font-weight:300}
+.methodology{padding:80px 48px;max-width:860px;margin:0 auto}
+.methodology-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:40px}
+.method-block{padding:28px;border-radius:14px;border:1px solid var(--gray-light);background:var(--white)}
+.method-block-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--blue-royal);line-height:1;margin-bottom:12px}
+.method-block-title{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px;letter-spacing:.5px}
+.method-block-text{font-size:12px;color:var(--text-mid);line-height:1.75;font-weight:300}
+.method-quote{grid-column:1/-1;padding:32px;border-radius:14px;background:var(--blue-deep);text-align:center}
+.method-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.7);line-height:1.6}
+.method-quote-attr{font-size:10px;letter-spacing:2px;color:rgba(77,184,255,0.6);text-transform:uppercase;margin-top:12px}
+.final-cta{padding:80px 48px;text-align:center}.final-sub{font-size:14px;color:var(--text-mid);max-width:460px;margin:0 auto 32px;line-height:1.7;font-weight:300}
+footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:11px;color:var(--gray-mid)}.footer-disclaimer{font-size:10px;color:var(--gray-mid);max-width:380px;text-align:right;line-height:1.5}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,46,.65);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:20px}.modal-overlay.active{display:flex}
+.modal{background:var(--white);border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn .3s ease}@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{padding:28px 32px 20px;border-bottom:1px solid var(--gray-light);position:sticky;top:0;background:var(--white);border-radius:20px 20px 0 0;z-index:10}
+.modal-close{position:absolute;top:18px;right:18px;width:30px;height:30px;border:1px solid var(--gray-light);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:var(--gray-mid);background:#fff;transition:all .2s}.modal-close:hover{border-color:var(--blue-royal);color:var(--blue-royal)}
+.modal-type{font-size:10px;letter-spacing:2px;color:var(--blue-royal);text-transform:uppercase;font-weight:600;margin-bottom:6px}.modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--text-dark)}.modal-body{padding:24px 32px 32px}
+.form-section{margin-bottom:20px}.form-label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray-mid);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}.form-label::after{content:'';flex:1;height:1px;background:var(--gray-light)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}.form-group{display:flex;flex-direction:column;gap:5px}.form-group label{font-size:11px;font-weight:500;color:var(--text-mid)}.form-group input,.form-group select{padding:11px 13px;border:1.5px solid var(--gray-light);border-radius:8px;font-size:13px;font-family:'Montserrat',sans-serif;color:var(--text-dark);background:var(--off-white);transition:border-color .2s;outline:none}.form-group input:focus,.form-group select:focus{border-color:var(--blue-royal);background:#fff}.form-group input::placeholder{color:var(--gray-mid);font-size:12px}
+.email-gate{background:var(--off-white);border:1.5px solid var(--gray-light);border-radius:10px;padding:16px 18px;margin-bottom:16px}.email-gate-title{font-size:12px;font-weight:600;color:var(--text-dark);margin-bottom:4px}.email-gate-sub{font-size:11px;color:var(--gray-mid);margin-bottom:12px;line-height:1.5}
+.generate-btn{width:100%;padding:15px;background:var(--blue-royal);color:#fff;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase}.generate-btn:hover{background:var(--blue-deep)}
+.modal-guarantee{font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px}
+.modal-intro{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text-mid);line-height:1.8;font-weight:300;margin-bottom:20px;font-style:italic}
+@media(max-width:768px){header{padding:14px 18px}.logo-name{font-size:14px}.hero{padding:44px 18px 36px}.how-it-works{padding:48px 18px}.what-you-get{padding:48px 18px}.methodology{padding:48px 18px}.methodology-grid{grid-template-columns:1fr}.final-cta{padding:48px 18px}.modal-header{padding:20px 18px 16px}.modal-body{padding:18px 18px 28px}.form-row{grid-template-columns:1fr}footer{flex-direction:column;gap:10px;text-align:center}.footer-disclaimer{text-align:center}.social-proof{padding:28px 18px}.social-proof-row{gap:28px}.step{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-wrap">
+    <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+    <div><div class="logo-name">OCCULTICS</div><div class="logo-tagline" id="tagline">Know Your Numbers. Find Your People.</div></div>
+  </div>
+  <nav>
+    <div class="lang-toggle">
+      <button class="lang-btn lang-active" id="lang-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="lang-ja" onclick="setLang('ja')">JA</button>
+    </div>
+    <button class="nav-btn nav-outline" onclick="openModal()" id="nav-cta">Check Compatibility</button>
+    <button class="nav-btn" onclick="window.location='https://occultics.ai/match/join'" id="nav-match">Match</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="hero-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+  <p class="hero-eyebrow" id="eyebrow">Ancient Wisdom. Modern Precision. — Powered by 350,000+ Words of Research</p>
+  <h1 class="hero-title" id="hero-title">Every Relationship Has a<br><em>Mathematical Signature.</em></h1>
+  <p class="hero-sub" id="hero-sub">Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 350,000 words of that research into a precise compatibility engine.</p>
+  <p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages</p>
+  <button class="hero-cta" onclick="openModal()" id="hero-cta-btn">Discover Your Relationship Code</button>
+  <div class="hero-price" id="hero-price"><strong>$147</strong> · Full 10-section report · Delivered in 5 minutes</div>
+</section>
+
+<div class="social-proof">
+  <div class="social-proof-row">
+    <div class="social-proof-item"><div class="social-proof-number">350K+</div><div class="social-proof-label" id="sp-1">Words of Research</div></div>
+    <div class="social-proof-item"><div class="social-proof-number">81</div><div class="social-proof-label" id="sp-2">Compatibility Codes</div></div>
+    <div class="social-proof-item"><div class="social-proof-number">2,500</div><div class="social-proof-label" id="sp-3">Years of Tradition</div></div>
+    <div class="social-proof-item"><div class="social-proof-number">$331</div><div class="social-proof-label" id="sp-4">Avg Saved vs Numerologist</div></div>
+  </div>
+</div>
+
+<section class="how-it-works">
+  <p class="section-eyebrow" id="hiw-eyebrow">How It Works</p>
+  <h2 class="section-title" id="hiw-title">The Science of Human Connection. Digitized.</h2>
+  <div class="step-list">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title" id="s1t">Input two birth dates</div><div class="step-desc" id="s1d">Date of birth encodes biorhythm, generational frequency, and life path — three independent variables that define how two people interact. That is all we need.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Our engine computes your codes</div><div class="step-desc" id="s2d">Your Pythagorean codes are cross-referenced against 350,000+ words of proprietary research spanning biorhythm compatibility, life cycle alignment, and synastry — producing an analysis specific to your exact combination. No two reports are identical.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title" id="s3t">Your report arrives in 5 minutes</div><div class="step-desc" id="s3d">A structured, 10-section compatibility analysis delivered to your inbox. Not a horoscope. Not a personality quiz. A mathematically derived reading of what your relationship is built on — and where it is likely to go.</div></div></div>
+  </div>
+</section>
+
+<section class="what-you-get">
+  <p class="section-eyebrow" id="wyg-eyebrow">What Your Report Reveals</p>
+  <h2 class="section-title" id="wyg-title">Everything the Numbers See</h2>
+  <div class="features-grid">
+    <div class="feature"><div class="feature-title" id="f1t">Your Compatibility Code</div><div class="feature-desc" id="f1d">The 3-digit Pythagorean code that defines how your connection began, what its purpose is, and what it is fundamentally built upon.</div></div>
+    <div class="feature"><div class="feature-title" id="f2t">Both Personality Profiles</div><div class="feature-desc" id="f2d">Each person's biorhythm, generational number, and life path — how they love, what they truly need from a partner, and where their patterns create friction.</div></div>
+    <div class="feature"><div class="feature-title" id="f3t">Strengths & Challenges</div><div class="feature-desc" id="f3d">What makes you function well together and what will reliably create tension. Named specifically from your numbers, not generically.</div></div>
+    <div class="feature"><div class="feature-title" id="f4t">Emotional Dynamics</div><div class="feature-desc" id="f4d">How each person feels when they enter a connection, what they carry emotionally, and the energy between you before a single word is spoken.</div></div>
+    <div class="feature"><div class="feature-title" id="f5t">Combined Life Path</div><div class="feature-desc" id="f5d">When your life paths are added together, the resulting number reveals the mathematical destiny of the relationship itself.</div></div>
+    <div class="feature"><div class="feature-title" id="f6t">The Year You Are In</div><div class="feature-desc" id="f6d">Both partners' personal year numbers for 2026 — what timing means for your connection right now and what the numbers indicate about this specific period.</div></div>
+  </div>
+</section>
+
+<section class="methodology">
+  <p class="section-eyebrow" id="meth-eyebrow">Methodology</p>
+  <h2 class="section-title" id="meth-title">2,500 Years of Human Wisdom. Now Accessible to Everyone.</h2>
+  <div class="methodology-grid">
+    <div class="method-block">
+      <div class="method-block-num">570<span style="font-size:20px;">BC</span></div>
+      <div class="method-block-title" id="meth-b1-title">Historical Foundation</div>
+      <div class="method-block-text" id="meth-b1-text">Pythagorean numerology originates with Pythagoras of Samos, who proposed that numbers are the fundamental language through which reality is structured. His school documented that specific numerical relationships govern personality, behavior, and human compatibility — a framework refined over centuries by scholars including Iamblichus (245–325 AD).</div>
+    </div>
+    <div class="method-block">
+      <div class="method-block-num">3</div>
+      <div class="method-block-title" id="meth-b2-title">The Three Variables</div>
+      <div class="method-block-text" id="meth-b2-text">Every person's date of birth produces three independently calculated numbers: the Biorhythm Number (how you are perceived emotionally before words are exchanged), the Generational Number (what you need at the deepest level from a partner), and the Life Path Number (the overall direction and character of your life).</div>
+    </div>
+    <div class="method-block">
+      <div class="method-block-num">81</div>
+      <div class="method-block-title" id="meth-b3-title">The Compatibility Engine</div>
+      <div class="method-block-text" id="meth-b3-text">When two people's codes are combined digit by digit, they produce a unique three-number Compatibility Code — one of 81 mathematically distinct combinations, each with a specific and documented meaning derived from 350,000+ words of proprietary research.</div>
+    </div>
+    <div class="method-block">
+      <div class="method-block-num">AI</div>
+      <div class="method-block-title" id="meth-b4-title">The Technology</div>
+      <div class="method-block-text" id="meth-b4-text">Each report is computed and written by an AI system trained specifically on this research base. The result is the depth and specificity of a $400 numerologist session — structured across 10 analytical sections and delivered in five minutes.</div>
+    </div>
+    <div class="method-quote">
+      <div class="method-quote-text" id="meth-quote">"Numbers are the highest degree of knowledge. It is knowledge itself."</div>
+      <div class="method-quote-attr">— Plato, on the Pythagorean tradition</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 48px;text-align:center;background:linear-gradient(180deg,#0a0e2e 0%,#111640 100%);color:white;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+  <p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Coming Soon</p>
+  <h2 class="section-title" style="color:white;font-size:clamp(32px,5vw,48px);" id="match-title">Matching Apps Connect on Faces.<br>We Connect on Mathematics.</h2>
+  <p style="font-size:14px;color:#8892a4;max-width:520px;margin:0 auto 12px;line-height:1.7;font-weight:300;" id="match-sub">Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.</p>
+  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Opening to the first 100 founding members — $9/month.</p>
+  <button onclick="window.location='https://occultics.ai/match/join'" style="display:inline-block;padding:16px 40px;background:transparent;color:white;border:1.5px solid rgba(77,184,255,0.4);border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join the Waitlist — Free</button>
+  <div style="display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;">
+    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m1-label">Love Match</div><div style="font-size:20px;">💎</div></div>
+    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m2-label">Friend Match</div><div style="font-size:20px;">🤝</div></div>
+    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m3-label">Business Match</div><div style="font-size:20px;">💼</div></div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2 class="section-title" id="final-title">Two Birth Dates. One Mathematical Truth.</h2>
+  <p class="final-sub" id="final-sub">Get the analysis numerologists charge $400 for — computed, structured, and delivered to your inbox in five minutes.</p>
+  <button class="hero-cta" onclick="openModal()" id="final-btn">Discover Your Relationship Code — $147</button>
+  <div class="hero-price" id="final-price">Secure payment · Instant delivery · 100% satisfaction guarantee</div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 Occultics Publishing. All rights reserved. occultics.ai</div>
+  <div class="footer-disclaimer" id="disclaimer">For informational and entertainment purposes only. Not a substitute for professional advice.</div>
+</footer>
+
+<div class="modal-overlay" id="modal-compat">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-type" id="modal-type">Compatibility Report</div>
+      <div class="modal-title" id="modal-title">Discover Your Relationship Code</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-intro" id="modal-intro">Some connections feel effortless from the start. Others take everything you have — and still leave you questioning why. Enter both birthdates and discover your Relationship Code.</div>
+      <div class="form-section">
+        <div class="form-label" id="label-you">Your Details</div>
+        <div class="form-row">
+          <div class="form-group"><label id="lbl-n1">First Name</label><input type="text" id="c-name1" placeholder="Your first name"></div>
+          <div class="form-group"><label id="lbl-d1">Date of Birth</label><input type="date" id="c-dob1"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label id="lbl-t1">Birth Time</label><input type="time" id="c-time1" value="12:00"></div>
+          <div class="form-group"><label id="lbl-g1">Gender</label><select id="c-gender1"><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div>
+        </div>
+      </div>
+      <div class="form-section">
+        <div class="form-label" id="label-them">Their Details</div>
+        <div class="form-row">
+          <div class="form-group"><label id="lbl-n2">First Name</label><input type="text" id="c-name2" placeholder="Their first name"></div>
+          <div class="form-group"><label id="lbl-d2">Date of Birth</label><input type="date" id="c-dob2"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label id="lbl-t2">Birth Time</label><input type="time" id="c-time2" value="12:00"></div>
+          <div class="form-group"><label id="lbl-g2">Gender</label><select id="c-gender2"><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div>
+        </div>
+      </div>
+      <div class="email-gate">
+        <div class="email-gate-title" id="email-title">Where shall we send your report?</div>
+        <div class="email-gate-sub" id="email-sub">Your full compatibility report will be delivered to this email within 5 minutes of payment.</div>
+        <div class="form-group"><input type="email" id="c-email" placeholder="your@email.com"></div>
+      </div>
+      <button class="generate-btn" onclick="handlePayment()" id="pay-btn">✦ Discover Your Code — $147</button>
+      <div class="modal-guarantee" id="guarantee">🔒 Secure payment · 100% satisfaction guarantee · Instant delivery</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal(){document.getElementById('modal-compat').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modal-compat').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('modal-compat').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+async function handlePayment(){
+  var payload={
+    type:'compatibility',
+    lang:window._reportLang||'en',
+    name:document.getElementById('c-name1').value.trim(),
+    email:document.getElementById('c-email').value.trim(),
+    dob:document.getElementById('c-dob1').value,
+    time:document.getElementById('c-time1').value||'12:00',
+    gender:document.getElementById('c-gender1').value,
+    name2:document.getElementById('c-name2').value.trim(),
+    dob2:document.getElementById('c-dob2').value,
+    time2:document.getElementById('c-time2').value||'12:00',
+    gender2:document.getElementById('c-gender2').value
+  };
+  if(!payload.name||!payload.dob||!payload.name2||!payload.dob2||!payload.email){alert('Please fill in all fields.');return}
+  var btn=document.getElementById('pay-btn');btn.textContent='⏳ Processing...';btn.disabled=true;
+  try{
+    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    var data=await res.json();
+    if(data.url){window.location.href=data.url}else{throw new Error(data.error||'Checkout failed')}
+  }catch(err){
+    window.open('https://buy.stripe.com/test_fZu5kvfGb0aq1Lz9LX0co04','_blank')
+  }finally{
+    btn.textContent='✦ Discover Your Code — $147';btn.disabled=false
+  }
+}
+
+var T={
+en:{
+  tagline:'Know Your Numbers. Find Your People.',
+  eyebrow:'Ancient Wisdom. Modern Precision. — Powered by 350,000+ Words of Research',
+  title:'Every Relationship Has a<br><em>Mathematical Signature.</em>',
+  sub:'Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 350,000 words of that research into a precise compatibility engine.',
+  anchor:'✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages',
+  heroCtaBtn:'Discover Your Relationship Code',
+  heroPrice:'<strong>$147</strong> · Full 10-section report · Delivered in 5 minutes',
+  navCta:'Check Compatibility',navMatch:'Match',
+  sp1:'Words of Research',sp2:'Compatibility Codes',sp3:'Years of Tradition',sp4:'Avg Saved vs Numerologist',
+  hiwE:'How It Works',hiwT:'The Science of Human Connection. Digitized.',
+  s1t:'Input two birth dates',s1d:'Date of birth encodes biorhythm, generational frequency, and life path — three independent variables that define how two people interact. That is all we need.',
+  s2t:'Our engine computes your codes',s2d:'Your Pythagorean codes are cross-referenced against 350,000+ words of proprietary research spanning biorhythm compatibility, life cycle alignment, and synastry — producing an analysis specific to your exact combination. No two reports are identical.',
+  s3t:'Your report arrives in 5 minutes',s3d:'A structured, 10-section compatibility analysis delivered to your inbox. Not a horoscope. Not a personality quiz. A mathematically derived reading of what your relationship is built on — and where it is likely to go.',
+  wygE:'What Your Report Reveals',wygT:'Everything the Numbers See',
+  f1t:'Your Compatibility Code',f1d:'The 3-digit Pythagorean code that defines how your connection began, what its purpose is, and what it is fundamentally built upon.',
+  f2t:'Both Personality Profiles',f2d:"Each person's biorhythm, generational number, and life path — how they love, what they truly need from a partner, and where their patterns create friction.",
+  f3t:'Strengths & Challenges',f3d:'What makes you function well together and what will reliably create tension. Named specifically from your numbers, not generically.',
+  f4t:'Emotional Dynamics',f4d:'How each person feels when they enter a connection, what they carry emotionally, and the energy between you before a single word is spoken.',
+  f5t:'Combined Life Path',f5d:'When your life paths are added together, the resulting number reveals the mathematical destiny of the relationship itself.',
+  f6t:'The Year You Are In',f6d:"Both partners' personal year numbers for 2026 — what timing means for your connection right now and what the numbers indicate about this specific period.",
+  methE:'Methodology',methT:'2,500 Years of Human Wisdom. Now Accessible to Everyone.',
+  methB1T:'Historical Foundation',methB1:'Pythagorean numerology was born with Pythagoras of Samos (570 BC), who believed that numbers reveal the hidden patterns beneath all of human experience. For 2,500 years, scholars have refined this framework into a rich system for understanding personality and connection.',
+  methB2T:'The Three Variables',methB2:"Your date of birth is not just a date — it carries three distinct numerical codes that reveal how you love, what you need from others, and where your life is naturally headed. These three numbers tell a story most people spend years trying to figure out.",
+  methB3T:'The Compatibility Engine',methB3:'When two people\'s codes are brought together, they produce a unique Compatibility Code — one of 81 possible combinations. Each combination has its own character, its own strengths, its own challenges. Yours is specific to you and no one else.',
+  methB4T:'The Technology',methB4:'We have taken 350,000 words of numerology research and made it available to anyone. What once required a $400 session with a specialist now arrives in your inbox in five minutes — specific, personal, and honest about both the gifts and the challenges.',
+  methQ:'"Numbers are the highest degree of knowledge. It is knowledge itself."',
+  matchE:'Coming Soon',matchT:'Matching Apps Connect on Faces.\nWe Connect on Mathematics.',
+  matchS:'Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.',
+  matchC:'Opening to the first 100 founding members — $9/month.',
+  matchBtn:'Join the Waitlist — Free',matchM1:'Love Match',matchM2:'Friend Match',matchM3:'Business Match',
+  finalT:'Two Birth Dates. One Mathematical Truth.',
+  finalS:'Get the analysis numerologists charge $400 for — computed, structured, and delivered to your inbox in five minutes.',
+  finalBtn:'Discover Your Relationship Code — $147',
+  finalP:'Secure payment · Instant delivery · 100% satisfaction guarantee',
+  disc:'For informational and entertainment purposes only. Not a substitute for professional advice.',
+  mType:'Compatibility Report',mTitle:'Discover Your Relationship Code',
+  mIntro:'Some connections feel effortless from the start. Others take everything you have — and still leave you questioning why. Enter both birthdates and discover your Relationship Code.',
+  lYou:'Your Details',lThem:'Their Details',lN1:'First Name',lD1:'Date of Birth',lT1:'Birth Time',lG1:'Gender',lN2:'First Name',lD2:'Date of Birth',lT2:'Birth Time',lG2:'Gender',
+  eTitle:'Where shall we send your report?',eSub:'Your full compatibility report will be delivered to this email within 5 minutes of payment.',
+  payBtn:'✦ Discover Your Code — $147',guar:'🔒 Secure payment · 100% satisfaction guarantee · Instant delivery'
+},
+es:{
+  tagline:'Conoce Tus Números. Encuentra Tu Gente.',
+  eyebrow:'Sabiduría Ancestral. Precisión Moderna. — Más de 350,000 Palabras de Investigación',
+  title:'Cada Relación Tiene una<br><em>Firma Matemática.</em>',
+  sub:'Dos fechas de nacimiento contienen más información sobre vuestra compatibilidad que años de conversación. La numerología pitagórica ha cartografiado la conexión humana durante 2,500 años. Hemos digitalizado 350,000 palabras de esa investigación en un motor de compatibilidad preciso.',
+  anchor:'✦ <strong>81</strong> códigos de compatibilidad matemáticamente distintos ✦ <strong>10</strong> secciones analíticas ✦ <strong>3</strong> idiomas',
+  heroCtaBtn:'Descubre Tu Código de Relación',
+  heroPrice:'<strong>$147</strong> · Informe completo de 10 secciones · Entregado en 5 minutos',
+  navCta:'Ver Compatibilidad',navMatch:'Match',
+  sp1:'Palabras de Investigación',sp2:'Códigos de Compatibilidad',sp3:'Años de Tradición',sp4:'Ahorro vs Numerólogo',
+  hiwE:'Cómo Funciona',hiwT:'La Ciencia de la Conexión Humana. Digitalizada.',
+  s1t:'Introduce dos fechas de nacimiento',s1d:'La fecha de nacimiento codifica el biorritmo, la frecuencia generacional y el sendero de vida — tres variables independientes que definen cómo interactúan dos personas.',
+  s2t:'Nuestro motor calcula tus códigos',s2d:'Tus códigos pitagóricos se cruzan con más de 350,000 palabras de investigación propietaria sobre compatibilidad de biorritmo, alineación de ciclos de vida y sinastría — produciendo un análisis específico para tu combinación exacta.',
+  s3t:'Tu informe llega en 5 minutos',s3d:'Un análisis de compatibilidad estructurado en 10 secciones entregado en tu correo. No es un horóscopo. No es un test de personalidad. Una lectura matemáticamente derivada de lo que es tu relación y hacia dónde va.',
+  wygE:'Lo Que Revela Tu Informe',wygT:'Todo Lo Que Ven Los Números',
+  f1t:'Tu Código de Compatibilidad',f1d:'El código pitagórico de 3 dígitos que define cómo comenzó tu conexión, cuál es su propósito y sobre qué está fundamentalmente construida.',
+  f2t:'Ambos Perfiles de Personalidad',f2d:'El biorritmo, número generacional y sendero de vida de cada persona — cómo aman, qué necesitan verdaderamente de una pareja y dónde sus patrones crean fricción.',
+  f3t:'Fortalezas y Desafíos',f3d:'Qué os hace funcionar bien juntos y qué creará tensión de manera predecible. Nombrado específicamente desde vuestros números.',
+  f4t:'Dinámica Emocional',f4d:'Cómo se siente cada persona al entrar en una conexión, qué carga emocionalmente, y la energía entre vosotros antes de que se diga una sola palabra.',
+  f5t:'Sendero de Vida Combinado',f5d:'Cuando se suman vuestros senderos de vida, el número resultante revela el destino matemático de la relación.',
+  f6t:'El Año en el que Estáis',f6d:'Los números de año personal de ambas personas para 2026 — qué significa el momento para vuestra conexión ahora mismo.',
+  methE:'Metodología',methT:'2,500 Años de Sabiduría Humana. Ahora al Alcance de Todos.',
+  methB1T:'Fundamento Histórico',methB1:'La numerología pitagórica tiene su origen en Pitágoras de Samos (570 a.C.), quien propuso que los números son el lenguaje fundamental a través del cual se estructura la realidad. Su escuela documentó que relaciones numéricas específicas gobiernan la personalidad, el comportamiento y la compatibilidad humana.',
+  methB2T:'Las Tres Variables',methB2:'La fecha de nacimiento de cada persona produce tres números calculados de forma independiente: el Número de Biorritmo, el Número Generacional y el Número de Sendero de Vida — cada uno revelando una capa diferente de quién es una persona y cómo se conecta.',
+  methB3T:'El Motor de Compatibilidad',methB3:'Cuando dos códigos se combinan dígito a dígito, producen un Código de Compatibilidad único de tres números — una de 81 combinaciones matemáticamente distintas, cada una con un significado específico y documentado.',
+  methB4T:'La Tecnología',methB4:'Cada informe es calculado y escrito por un sistema de IA entrenado específicamente en esta base de investigación. El resultado es la profundidad de una sesión de numerólogo de $400 — estructurada en 10 secciones analíticas y entregada en cinco minutos.',
+  methQ:'"Los números son el más alto grado de conocimiento. Es el conocimiento mismo."',
+  matchE:'Próximamente',matchT:'Las Apps de Matching Conectan por Caras.\nNosotros Conectamos por Matemáticas.',
+  matchS:'Cada persona lleva una firma numérica única derivada de su fecha de nacimiento. Nuestro motor de emparejamiento identifica los códigos específicos que complementan los tuyos — en amor, amistad y negocios. Esto no es astrología. Es reconocimiento de patrones aplicado a la conexión humana.',
+  matchC:'Abierto a los primeros 100 miembros fundadores — $9/mes.',
+  matchBtn:'Únete a la Lista — Gratis',matchM1:'Match de Amor',matchM2:'Match de Amistad',matchM3:'Match de Negocios',
+  finalT:'Dos Fechas de Nacimiento. Una Verdad Matemática.',
+  finalS:'Obtén el análisis por el que los numerólogos cobran $400 — calculado, estructurado y entregado en tu bandeja en cinco minutos.',
+  finalBtn:'Descubre Tu Código de Relación — $147',
+  finalP:'Pago seguro · Entrega instantánea · Garantía de satisfacción',
+  disc:'Solo con fines informativos y de entretenimiento. No sustituye el asesoramiento profesional.',
+  mType:'Informe de Compatibilidad',mTitle:'Descubre Tu Código de Relación',
+  mIntro:'Hay personas con las que todo encaja desde el primer momento. Otras te consumen sin que entiendas por qué. Introduce ambas fechas y descubre tu Código de Relación.',
+  lYou:'Tus Datos',lThem:'Sus Datos',lN1:'Nombre',lD1:'Fecha de Nacimiento',lT1:'Hora de Nacimiento',lG1:'Género',lN2:'Nombre',lD2:'Fecha de Nacimiento',lT2:'Hora de Nacimiento',lG2:'Género',
+  eTitle:'¿Dónde enviamos tu informe?',eSub:'Tu informe completo se entregará a este correo dentro de 5 minutos del pago.',
+  payBtn:'✦ Descubre Tu Código — $147',guar:'🔒 Pago seguro · Garantía de satisfacción · Entrega instantánea'
+},
+ja:{
+  tagline:'数字を知る。あなたの人々を見つける。',
+  eyebrow:'古代の知恵。現代の精度。— 350,000語以上の研究に基づく',
+  title:'すべての関係には<br><em>数学的シグネチャー</em>がある。',
+  sub:'二つの生年月日には、何年もの会話よりも多くの相性情報が含まれています。ピタゴラス数秘術は2,500年にわたり人間のつながりを解析してきました。私たちはその350,000語の研究を精密な相性エンジンにデジタル化しました。',
+  anchor:'✦ <strong>81</strong>の数学的に異なる相性コード ✦ <strong>10</strong>の分析セクション ✦ <strong>3</strong>言語対応',
+  heroCtaBtn:'関係コードを発見する',
+  heroPrice:'<strong>$147</strong> · 全10セクションレポート · 5分以内にお届け',
+  navCta:'相性を確認',navMatch:'マッチ',
+  sp1:'研究の言葉数',sp2:'相性コード',sp3:'年の伝統',sp4:'数秘術師との比較節約額',
+  hiwE:'仕組み',hiwT:'人間のつながりの科学。デジタル化。',
+  s1t:'二つの生年月日を入力',s1d:'生年月日はバイオリズム、世代周波数、ライフパスをエンコードします — 二人の相互作用を定義する三つの独立した変数です。それだけで十分です。',
+  s2t:'エンジンがコードを計算する',s2d:'あなたのピタゴラスコードは、バイオリズム相性、ライフサイクルの整合性、シナストリーにわたる350,000語以上の独自研究と照合されます。二つのレポートは同一ではありません。',
+  s3t:'5分以内にレポートが届く',s3d:'受信トレイに届く構造化された10セクションの相性分析。星占いでも性格診断でもありません。あなたの関係の数学的に導かれた読み解きです。',
+  wygE:'レポートが明かすもの',wygT:'数字が見るすべて',
+  f1t:'相性コード',f1d:'あなたのつながりがどのように始まったか、その目的は何か、根本的に何の上に築かれているかを定義する3桁のピタゴラスコード。',
+  f2t:'二人の性格プロフィール',f2d:'バイオリズム、世代数、ライフパス — 愛し方、パートナーに本当に必要なもの、パターンが摩擦を生む場所。',
+  f3t:'強みと課題',f3d:'何があなたたちをうまく機能させ、何が確実に緊張を生み出すか。一般的にではなく、あなたの数字から具体的に名指しされます。',
+  f4t:'感情のダイナミクス',f4d:'それぞれの人がつながりに入るときにどう感じるか、感情的に何を持ち込むか、そして一言も発せられる前の二人のエネルギー。',
+  f5t:'統合ライフパス',f5d:'ライフパスを合算すると、結果の数字が関係自体の数学的運命を明かします。',
+  f6t:'今いる年',f6d:'2026年の両パートナーの個人年数 — 今まさにあなたのつながりにとって時機が何を意味するか。',
+  methE:'方法論',methT:'2,500年の人類の知恵。今、すべての人に。',
+  methB1T:'歴史的基盤',methB1:'ピタゴラス数秘術はサモスのピタゴラス（紀元前570年）に由来し、数字は現実が構造化される根本的な言語であると提唱しました。彼の学校は特定の数値関係が性格、行動、人間の相性を支配することを文書化しました。',
+  methB2T:'三つの変数',methB2:'各人の生年月日は三つの独立して計算された数字を生成します：バイオリズム数、世代数、ライフパス数 — それぞれが人物の異なる層と人とのつながり方を明かします。',
+  methB3T:'相性エンジン',methB3:'二つのコードを桁ごとに組み合わせると、ユニークな3桁の相性コードが生成されます — 81の数学的に異なる組み合わせの一つで、それぞれに特定の文書化された意味があります。',
+  methB4T:'テクノロジー',methB4:'各レポートはこの研究ベースで特別に訓練されたAIシステムによって計算・作成されます。結果は$400の数秘術師セッションの深さ — 10の分析セクションに構造化され、5分で配信されます。',
+  methQ:'「数字は知識の最高の程度である。それは知識そのものである。」',
+  matchE:'近日公開',matchT:'マッチングアプリは顔でつながる。\n私たちは数学でつながる。',
+  matchS:'すべての人は生年月日から導かれたユニークな数値シグネチャーを持っています。私たちのマッチングエンジンはあなたのコードを補完する特定のコードを識別します — 愛、友情、ビジネスにわたって。これは占星術ではありません。人間のつながりに適用されたパターン認識です。',
+  matchC:'最初の100人の創設メンバー限定 — 月額$9。',
+  matchBtn:'ウェイトリストに参加 — 無料',matchM1:'恋愛マッチ',matchM2:'友人マッチ',matchM3:'ビジネスマッチ',
+  finalT:'二つの生年月日。一つの数学的真実。',
+  finalS:'数秘術師が$400で提供する分析を — 計算・構造化し、5分以内に受信トレイにお届けします。',
+  finalBtn:'関係コードを発見する — $147',
+  finalP:'安全な支払い · 即時配信 · 満足保証',
+  disc:'情報およびエンターテインメント目的のみ。専門的なアドバイスの代わりにはなりません。',
+  mType:'相性レポート',mTitle:'関係コードを発見する',
+  mIntro:'出会った瞬間から自然に感じる人もいれば、すべてを捧げても疑問が残る人もいます。二人の生年月日を入力して、関係コードを発見してください。',
+  lYou:'あなたの情報',lThem:'相手の情報',lN1:'名前',lD1:'生年月日',lT1:'出生時刻',lG1:'性別',lN2:'名前',lD2:'生年月日',lT2:'出生時刻',lG2:'性別',
+  eTitle:'レポートの送付先は？',eSub:'お支払い後5分以内にこのメールアドレスに届きます。',
+  payBtn:'✦ コードを発見する — $147',guar:'🔒 安全な支払い · 満足保証 · 即時配信'
+}};
+
+function setLang(lang){
+  document.getElementById('lang-en').classList.toggle('lang-active',lang==='en');
+  document.getElementById('lang-es').classList.toggle('lang-active',lang==='es');
+  document.getElementById('lang-ja').classList.toggle('lang-active',lang==='ja');
+  window._reportLang=lang;var l=T[lang]||T.en;
+  document.getElementById('tagline').textContent=l.tagline;
+  document.getElementById('eyebrow').textContent=l.eyebrow;
+  document.getElementById('hero-title').innerHTML=l.title;
+  document.getElementById('hero-sub').textContent=l.sub;
+  document.getElementById('hero-anchor').innerHTML=l.anchor;
+  document.getElementById('hero-cta-btn').textContent=l.heroCtaBtn;
+  document.getElementById('hero-price').innerHTML=l.heroPrice;
+  document.getElementById('nav-cta').textContent=l.navCta;
+  document.getElementById('nav-match').textContent=l.navMatch||'Match';
+  document.getElementById('sp-1').textContent=l.sp1;document.getElementById('sp-2').textContent=l.sp2;
+  document.getElementById('sp-3').textContent=l.sp3;document.getElementById('sp-4').textContent=l.sp4;
+  document.getElementById('hiw-eyebrow').textContent=l.hiwE;document.getElementById('hiw-title').textContent=l.hiwT;
+  document.getElementById('s1t').textContent=l.s1t;document.getElementById('s1d').textContent=l.s1d;
+  document.getElementById('s2t').textContent=l.s2t;document.getElementById('s2d').textContent=l.s2d;
+  document.getElementById('s3t').textContent=l.s3t;document.getElementById('s3d').textContent=l.s3d;
+  document.getElementById('wyg-eyebrow').textContent=l.wygE;document.getElementById('wyg-title').textContent=l.wygT;
+  document.getElementById('f1t').textContent=l.f1t;document.getElementById('f1d').textContent=l.f1d;
+  document.getElementById('f2t').textContent=l.f2t;document.getElementById('f2d').textContent=l.f2d;
+  document.getElementById('f3t').textContent=l.f3t;document.getElementById('f3d').textContent=l.f3d;
+  document.getElementById('f4t').textContent=l.f4t;document.getElementById('f4d').textContent=l.f4d;
+  document.getElementById('f5t').textContent=l.f5t;document.getElementById('f5d').textContent=l.f5d;
+  document.getElementById('f6t').textContent=l.f6t;document.getElementById('f6d').textContent=l.f6d;
+  document.getElementById('meth-eyebrow').textContent=l.methE;document.getElementById('meth-title').textContent=l.methT;
+  document.getElementById('meth-b1-title').textContent=l.methB1T;document.getElementById('meth-b1-text').textContent=l.methB1;
+  document.getElementById('meth-b2-title').textContent=l.methB2T;document.getElementById('meth-b2-text').textContent=l.methB2;
+  document.getElementById('meth-b3-title').textContent=l.methB3T;document.getElementById('meth-b3-text').textContent=l.methB3;
+  document.getElementById('meth-b4-title').textContent=l.methB4T;document.getElementById('meth-b4-text').textContent=l.methB4;
+  document.getElementById('meth-quote').textContent=l.methQ;
+  if(document.getElementById('match-eyebrow')){
+    document.getElementById('match-eyebrow').textContent=l.matchE||'Coming Soon';
+    document.getElementById('match-title').textContent=l.matchT||'';
+    document.getElementById('match-sub').textContent=l.matchS||'';
+    document.getElementById('match-count').textContent=l.matchC||'';
+    document.getElementById('match-btn').textContent=l.matchBtn||'Join the Waitlist — Free';
+    document.getElementById('match-m1-label').textContent=l.matchM1||'Love Match';
+    document.getElementById('match-m2-label').textContent=l.matchM2||'Friend Match';
+    document.getElementById('match-m3-label').textContent=l.matchM3||'Business Match';
+  }
+  document.getElementById('final-title').textContent=l.finalT;document.getElementById('final-sub').textContent=l.finalS;
+  document.getElementById('final-btn').textContent=l.finalBtn;document.getElementById('final-price').textContent=l.finalP;
+  document.getElementById('disclaimer').textContent=l.disc;
+  document.getElementById('modal-type').textContent=l.mType;document.getElementById('modal-title').textContent=l.mTitle;
+  document.getElementById('modal-intro').textContent=l.mIntro;
+  document.getElementById('label-you').textContent=l.lYou;document.getElementById('label-them').textContent=l.lThem;
+  document.getElementById('lbl-n1').textContent=l.lN1;document.getElementById('lbl-d1').textContent=l.lD1;
+  document.getElementById('lbl-t1').textContent=l.lT1;document.getElementById('lbl-g1').textContent=l.lG1;
+  document.getElementById('lbl-n2').textContent=l.lN2;document.getElementById('lbl-d2').textContent=l.lD2;
+  document.getElementById('lbl-t2').textContent=l.lT2;document.getElementById('lbl-g2').textContent=l.lG2;
+  document.getElementById('email-title').textContent=l.eTitle;document.getElementById('email-sub').textContent=l.eSub;
+  document.getElementById('pay-btn').textContent=l.payBtn;document.getElementById('guarantee').textContent=l.guar;
+}
+</script>
+</body>
+</html>
