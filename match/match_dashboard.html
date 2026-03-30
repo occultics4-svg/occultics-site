@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Matches — Occultics Match</title>
+<link rel="manifest" href="/match/manifest.json">
+<meta name="theme-color" content="#0a0e2e">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+// Safe Supabase loader
+window.supabaseLoaded = false;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" 
+  onerror="console.log('Supabase CDN failed, running in demo mode')"
+  onload="window.supabaseLoaded=true">
+</script>
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+
+/* APP HEADER */
+.app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(77,184,255,0.1);background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-gem{width:24px;height:28px}
+.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
+.app-nav{display:flex;gap:4px}
+.nav-item{padding:8px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;text-decoration:none;color:var(--gray-mid);border:none;background:transparent;font-family:'Montserrat',sans-serif}
+.nav-item.active,.nav-item:hover{background:rgba(26,42,255,0.2);color:var(--crystal)}
+.header-right{display:flex;align-items:center;gap:12px}
+.notif-btn{position:relative;cursor:pointer;background:none;border:none;color:var(--gray-mid);font-size:16px;transition:color .2s}
+.notif-btn:hover{color:var(--crystal)}
+.notif-badge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:var(--royal);border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.avatar-btn{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal)}
+.avatar-btn img{width:100%;height:100%;object-fit:cover}
+
+/* MY CODE BAR */
+.my-code-bar{background:rgba(26,42,255,0.08);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.my-code-left{}
+.my-code-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:3px}
+.my-code-value{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crystal);letter-spacing:8px}
+.my-code-sub{font-size:9px;color:var(--gray-mid);margin-top:2px}
+.code-details{display:flex;gap:16px}
+.code-detail{text-align:center}
+.code-detail-num{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white)}
+.code-detail-label{font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase}
+
+/* CONTENT */
+.content{max-width:960px;margin:0 auto;padding:24px}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;border:1.5px solid rgba(77,184,255,0.15);background:transparent;color:var(--gray-mid);font-family:'Montserrat',sans-serif}
+.filter-btn.active{background:rgba(26,42,255,0.3);border-color:var(--crystal);color:var(--white)}
+.filter-btn:hover:not(.active){border-color:rgba(77,184,255,0.3);color:var(--white)}
+
+/* SUBSCRIBE BANNER */
+.subscribe-banner{background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:16px;padding:24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.banner-text{}
+.banner-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+.banner-sub{font-size:12px;color:var(--gray-mid);font-weight:300}
+.banner-btn{padding:12px 24px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;white-space:nowrap;transition:all .2s}
+.banner-btn:hover{background:#1420cc}
+
+/* MATCH GRID */
+.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.match-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer;text-decoration:none;display:block;color:inherit}
+.match-card:hover{border-color:rgba(77,184,255,0.3);transform:translateY(-3px);background:rgba(26,42,255,0.06)}
+.match-photo{width:100%;height:200px;object-fit:cover;background:rgba(26,42,255,0.15);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
+.match-photo img{width:100%;height:100%;object-fit:cover}
+.match-photo-placeholder{width:100%;height:200px;background:linear-gradient(135deg,rgba(26,42,255,0.2),rgba(77,184,255,0.1));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(77,184,255,0.4)}
+.match-blur{position:relative}
+.match-blur img,.match-blur .match-photo-placeholder{filter:blur(12px)}
+.match-lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,14,46,0.4)}
+.match-lock-icon{text-align:center}
+.match-lock-icon span{font-size:24px;display:block;margin-bottom:6px}
+.match-lock-icon p{font-size:10px;color:var(--crystal);font-weight:600;letter-spacing:1px}
+.match-info{padding:16px}
+.match-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
+.match-code{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gray-mid);margin-bottom:8px}
+.compat-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.compat-code{font-size:11px;color:var(--gray-mid)}
+.compat-code strong{color:var(--crystal)}
+.compat-score{display:flex;align-items:center;gap:6px}
+.score-bar{width:60px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.score-fill{height:100%;border-radius:2px;background:var(--crystal)}
+.score-pct{font-size:10px;color:var(--crystal);font-weight:600}
+.match-tags{display:flex;gap:6px}
+.match-tag{padding:3px 8px;border-radius:100px;font-size:9px;background:rgba(26,42,255,0.2);border:1px solid rgba(77,184,255,0.15);color:var(--gray-mid)}
+
+/* EMPTY STATE */
+.empty-state{text-align:center;padding:60px 20px}
+.empty-gem{width:60px;height:72px;margin:0 auto 20px;opacity:0.3}
+.empty-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px}
+.empty-sub{font-size:13px;color:var(--gray-mid);font-weight:300}
+
+/* LOADING */
+.loading-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.skeleton{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.08);border-radius:16px;overflow:hidden;animation:shimmer 1.5s ease-in-out infinite}
+.skeleton-photo{height:200px;background:rgba(255,255,255,0.04)}
+.skeleton-body{padding:16px}
+.skeleton-line{height:12px;background:rgba(255,255,255,0.04);border-radius:4px;margin-bottom:8px}
+.skeleton-line.short{width:60%}
+@keyframes shimmer{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* MOBILE NAV */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(77,184,255,0.1);padding:8px 0;z-index:100}
+.mobile-nav-items{display:flex;justify-content:space-around}
+.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 16px;cursor:pointer;text-decoration:none;color:var(--gray-mid);transition:color .2s}
+.mobile-nav-item.active{color:var(--crystal)}
+.mobile-nav-icon{font-size:18px}
+.mobile-nav-label{font-size:9px;letter-spacing:0.5px;font-weight:600}
+
+@media(max-width:768px){
+  .app-nav{display:none}
+  .mobile-nav{display:block}
+  .content{padding:16px 16px 80px}
+  .my-code-bar{padding:12px 16px}
+  .match-grid{grid-template-columns:1fr 1fr}
+  .app-header{padding:12px 16px}
+  .subscribe-banner{flex-direction:column}
+}
+@media(max-width:480px){
+  .match-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- APP HEADER -->
+<header class="app-header">
+  <a href="https://occultics.ai" class="logo-wrap">
+    <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
+      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
+    </svg>
+    <div class="logo-name">MATCH</div>
+  </a>
+  <nav class="app-nav">
+    <a href="/match/dashboard.html" class="nav-item active">My Matches</a>
+    <a href="/match/messages.html" class="nav-item">Messages</a>
+    <a href="/match/settings.html" class="nav-item">Profile</a>
+  </nav>
+  <div class="header-right">
+    <button class="notif-btn" onclick="window.location='/match/messages.html'">
+      ✉
+      <span class="notif-badge" id="notif-count" style="display:none">0</span>
+    </button>
+    <div class="avatar-btn" id="user-avatar" onclick="window.location='/match/settings.html'">?</div>
+  </div>
+</header>
+
+<!-- MY CODE BAR -->
+<div class="my-code-bar">
+  <div class="my-code-left">
+    <div class="my-code-label">Your Pythagorean Code</div>
+    <div class="my-code-value" id="my-code">— · — · —</div>
+    <div class="my-code-sub">Biorhythm · Generational · Life Path</div>
+  </div>
+  <div class="code-details">
+    <div class="code-detail">
+      <div class="code-detail-num" id="my-bio">—</div>
+      <div class="code-detail-label">Biorhythm</div>
+    </div>
+    <div class="code-detail">
+      <div class="code-detail-num" id="my-gen">—</div>
+      <div class="code-detail-label">Generational</div>
+    </div>
+    <div class="code-detail">
+      <div class="code-detail-num" id="my-lp">—</div>
+      <div class="code-detail-label">Life Path</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- SUBSCRIBE BANNER (shown when not subscribed) -->
+  <div class="subscribe-banner" id="subscribe-banner" style="display:none">
+    <div class="banner-text">
+      <div class="banner-title">Subscribe to see all your matches</div>
+      <div class="banner-sub">Founding member rate — $29/month · First 100 members only</div>
+    </div>
+    <button class="banner-btn" onclick="goToCheckout()">Unlock All Matches — $29/mo</button>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterMatches('all',this)">All Matches</button>
+    <button class="filter-btn" onclick="filterMatches('love',this)">💎 Love</button>
+    <button class="filter-btn" onclick="filterMatches('friendship',this)">🤝 Friendship</button>
+    <button class="filter-btn" onclick="filterMatches('business',this)">💼 Business</button>
+  </div>
+
+  <!-- MATCHES -->
+  <div id="matches-container">
+    <!-- Loading skeletons -->
+    <div class="loading-grid" id="loading-state">
+      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+    </div>
+    <div class="match-grid" id="match-grid" style="display:none"></div>
+    <div class="empty-state" id="empty-state" style="display:none">
+      <svg class="empty-gem" viewBox="0 0 80 100" fill="none">
+        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/>
+        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.5"/>
+        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.5"/>
+      </svg>
+      <div class="empty-title">No matches yet</div>
+      <div class="empty-sub">Be patient — your numbers will find the right people.<br>More members join every day.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-items">
+    <a href="/match/dashboard.html" class="mobile-nav-item active">
+      <span class="mobile-nav-icon">💎</span>
+      <span class="mobile-nav-label">Matches</span>
+    </a>
+    <a href="/match/messages.html" class="mobile-nav-item">
+      <span class="mobile-nav-icon">✉</span>
+      <span class="mobile-nav-label">Messages</span>
+    </a>
+    <a href="/match/settings.html" class="mobile-nav-item">
+      <span class="mobile-nav-icon">◈</span>
+      <span class="mobile-nav-label">Profile</span>
+    </a>
+  </div>
+</nav>
+
+<script>
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var supabase = null;
+try {
+  if(window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_URL !== 'https://dtquqaridqyjdgirjczr.supabase.co') {
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  }
+} catch(e) {
+  console.log('Running in demo mode:', e.message);
+}
+
+var currentUser = null;
+var currentProfile = null;
+var allMatches = [];
+var isSubscribed = false;
+
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
+
+function compatCode(c1,c2){
+  return r(c1.biorhythm+c2.biorhythm)+'.'+r(c1.generational+c2.generational)+'.'+r(c1.lifePath+c2.lifePath);
+}
+
+var BEST=['448','268','369','134','639','358','573','595','628','843','865','696','246','516'];
+var GOOD=['123','314','291','371','461','731','292','382','472','562','483','753'];
+var CHALLENGING=['145','279','977','347','437','527','167','617','538','786','876'];
+var DIFFICULT=['911','955','775','584','742','797','898'];
+
+function getScore(code){
+  var c=code.replace(/\./g,'').replace(/ /g,'');
+  if(BEST.indexOf(c)>-1)return 100;
+  if(GOOD.indexOf(c)>-1)return 75;
+  if(CHALLENGING.indexOf(c)>-1)return 40;
+  if(DIFFICULT.indexOf(c)>-1)return 10;
+  return 50;
+}
+
+async function init(){
+  if(!supabase || SUPABASE_URL === 'https://dtquqaridqyjdgirjczr.supabase.co'){
+    showDemoMatches();
+    return;
+  }
+
+  var session = await supabase.auth.getSession();
+  if(!session.data.session){
+    window.location.href='/match/join.html';
+    return;
+  }
+
+  currentUser = session.data.session.user;
+
+  var profileRes = await supabase.from('profiles').select('*').eq('user_id',currentUser.id).single();
+  if(profileRes.error||!profileRes.data){
+    window.location.href='/match/join.html';
+    return;
+  }
+
+  currentProfile = profileRes.data;
+  isSubscribed = currentProfile.is_subscribed;
+
+  // Show user's code
+  document.getElementById('my-code').textContent = currentProfile.biorhythm+' · '+currentProfile.generational+' · '+currentProfile.life_path;
+  document.getElementById('my-bio').textContent = currentProfile.biorhythm;
+  document.getElementById('my-gen').textContent = currentProfile.generational;
+  document.getElementById('my-lp').textContent = currentProfile.life_path;
+
+  // Avatar
+  var avatarEl = document.getElementById('user-avatar');
+  if(currentProfile.photo_url){
+    avatarEl.innerHTML = '<img src="'+currentProfile.photo_url+'" alt="You">';
+  } else {
+    avatarEl.textContent = currentProfile.name.charAt(0).toUpperCase();
+  }
+
+  if(!isSubscribed){
+    document.getElementById('subscribe-banner').style.display='flex';
+  }
+
+  await loadMatches();
+}
+
+async function loadMatches(){
+  var res = await supabase.from('profiles').select('*').neq('user_id', currentUser.id).limit(50);
+
+  if(res.error||!res.data){
+    showEmpty();
+    return;
+  }
+
+  var profiles = res.data;
+  allMatches = profiles.map(function(p){
+    var code = compatCode(
+      {biorhythm:currentProfile.biorhythm,generational:currentProfile.generational,lifePath:currentProfile.life_path},
+      {biorhythm:p.biorhythm,generational:p.generational,lifePath:p.life_path}
+    );
+    var score = getScore(code);
+    return Object.assign({},p,{compatibilityCode:code,score:score});
+  }).sort(function(a,b){return b.score-a.score});
+
+  renderMatches(allMatches);
+}
+
+function renderMatches(matches){
+  document.getElementById('loading-state').style.display='none';
+
+  if(matches.length===0){
+    showEmpty();
+    return;
+  }
+
+  var grid = document.getElementById('match-grid');
+  grid.style.display='grid';
+  grid.innerHTML='';
+
+  matches.forEach(function(m,i){
+    var locked = !isSubscribed && i>=3;
+    var scoreWidth = m.score+'%';
+    var tags = (m.looking_for||[]).map(function(t){
+      return '<span class="match-tag">'+({'love':'💎 Love','friendship':'🤝 Friend','business':'💼 Business'}[t]||t)+'</span>';
+    }).join('');
+
+    var photoHtml = '';
+    if(m.photo_url){
+      photoHtml = '<img src="'+m.photo_url+'" alt="'+m.name+'" style="width:100%;height:200px;object-fit:cover">';
+    } else {
+      photoHtml = '<div class="match-photo-placeholder">'+m.name.charAt(0)+'</div>';
+    }
+
+    if(locked){
+      photoHtml = '<div class="match-blur">'+photoHtml+'<div class="match-lock"><div class="match-lock-icon"><span>🔒</span><p>Subscribe to unlock</p></div></div></div>';
+    }
+
+    var card = document.createElement('a');
+    card.className = 'match-card';
+    card.href = locked ? '#' : '/match/profile.html?id='+m.user_id;
+    if(locked) card.onclick = function(e){e.preventDefault();goToCheckout()};
+
+    card.innerHTML = photoHtml+
+      '<div class="match-info">'+
+        '<div class="match-name">'+(locked?m.name.charAt(0)+'***':m.name)+'</div>'+
+        '<div class="match-code">'+m.biorhythm+' · '+m.generational+' · '+m.life_path+'</div>'+
+        '<div class="compat-row">'+
+          '<div class="compat-code">Code: <strong>'+m.compatibilityCode.replace(/\./g,' · ')+'</strong></div>'+
+          '<div class="compat-score">'+
+            '<div class="score-bar"><div class="score-fill" style="width:'+scoreWidth+'"></div></div>'+
+            '<div class="score-pct">'+m.score+'%</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="match-tags">'+tags+'</div>'+
+      '</div>';
+
+    grid.appendChild(card);
+  });
+}
+
+function filterMatches(type,btn){
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  btn.classList.add('active');
+
+  if(type==='all'){
+    renderMatches(allMatches);
+  } else {
+    var filtered = allMatches.filter(function(m){
+      return m.looking_for && m.looking_for.indexOf(type)>-1;
+    });
+    renderMatches(filtered);
+  }
+}
+
+function showEmpty(){
+  document.getElementById('loading-state').style.display='none';
+  document.getElementById('match-grid').style.display='none';
+  document.getElementById('empty-state').style.display='block';
+}
+
+function showDemoMatches(){
+  // Demo data when Supabase not connected
+  document.getElementById('my-code').textContent='2 · 8 · 1';
+  document.getElementById('my-bio').textContent='2';
+  document.getElementById('my-gen').textContent='8';
+  document.getElementById('my-lp').textContent='1';
+  document.getElementById('subscribe-banner').style.display='flex';
+
+  var demoMatches=[
+    {user_id:'1',name:'Sofia',biorhythm:2,generational:5,life_path:7,looking_for:['love','friendship'],photo_url:null,compatibilityCode:'4.4.8',score:100},
+    {user_id:'2',name:'Marco',biorhythm:3,generational:6,life_path:9,looking_for:['business','friendship'],photo_url:null,compatibilityCode:'5.5.1',score:75},
+    {user_id:'3',name:'Elena',biorhythm:1,generational:4,life_path:5,looking_for:['love'],photo_url:null,compatibilityCode:'3.3.6',score:75},
+    {user_id:'4',name:'James',biorhythm:7,generational:2,life_path:9,looking_for:['love','business'],photo_url:null,compatibilityCode:'9.1.1',score:50},
+    {user_id:'5',name:'Yuki',biorhythm:4,generational:8,life_path:3,looking_for:['friendship'],photo_url:null,compatibilityCode:'6.7.4',score:40},
+    {user_id:'6',name:'Carlos',biorhythm:9,generational:3,life_path:3,looking_for:['love'],photo_url:null,compatibilityCode:'2.2.4',score:75}
+  ];
+
+  allMatches=demoMatches;
+  renderMatches(demoMatches);
+}
+
+async function goToCheckout(){
+  // Redirect to Stripe checkout for subscription
+  // You'll need to create a checkout session via your Cloudflare worker
+  var email = currentProfile ? currentProfile.email : '';
+  window.location.href='https://buy.stripe.com/YOUR_STRIPE_PAYMENT_LINK';
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(init, 100);
+});
+</script>
+</body>
+</html>

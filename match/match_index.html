@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Occultics Match — Find the People Your Numbers Have Been Waiting For</title>
+<link rel="manifest" href="/match/manifest.json">
+<meta name="theme-color" content="#0a0e2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--text-dark:#0d1117;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid rgba(77,184,255,0.1);position:sticky;top:0;z-index:100;background:rgba(10,14,46,0.95);backdrop-filter:blur(12px)}
+.logo-wrap{display:flex;align-items:center;gap:12px;text-decoration:none}
+.logo-gem{width:28px;height:34px}
+.logo-text{display:flex;flex-direction:column}
+.logo-name{font-weight:700;font-size:15px;letter-spacing:4px;color:var(--white)}
+.logo-sub{font-size:7px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-top:1px}
+.header-nav{display:flex;align-items:center;gap:8px}
+.lang-toggle{display:flex;gap:4px;margin-right:8px}
+.lang-btn{padding:5px 9px;border-radius:4px;font-size:9px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;border:1.5px solid rgba(77,184,255,0.2);background:transparent;color:var(--gray-mid);transition:all .2s}
+.lang-btn.active{background:var(--royal);color:var(--white);border-color:var(--royal)}
+.lang-btn:hover:not(.active){border-color:var(--crystal);color:var(--crystal)}
+.btn{padding:10px 20px;border-radius:6px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;border:none;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.15)}
+.btn-outline:hover{border-color:var(--crystal);color:var(--crystal)}
+.btn-primary{background:var(--royal);color:var(--white)}
+.btn-primary:hover{background:#1420cc;transform:translateY(-1px)}
+
+/* HERO */
+.hero{padding:80px 48px 60px;text-align:center;position:relative;overflow:hidden;min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(26,42,255,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;color:var(--crystal);opacity:0.3;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:0.7}}
+.gem-wrap{position:relative;margin-bottom:32px}
+.gem-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid rgba(26,42,255,0.3);animation:pulse-ring 3s ease-out infinite}
+.gem-ring-1{width:120px;height:120px;margin:-60px 0 0 -60px}
+.gem-ring-2{width:160px;height:160px;margin:-80px 0 0 -80px;animation-delay:1s}
+@keyframes pulse-ring{0%{transform:translate(-50%,-50%) scale(0.9);opacity:0.6}100%{transform:translate(-50%,-50%) scale(1.3);opacity:0}}
+.hero-gem{width:80px;height:96px;animation:float 4s ease-in-out infinite;position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-eyebrow{font-size:9px;letter-spacing:4px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6vw,68px);font-weight:300;line-height:1.1;margin-bottom:20px;letter-spacing:-0.5px;max-width:760px}
+.hero-title em{font-style:italic;color:var(--crystal)}
+.hero-sub{font-size:14px;color:var(--gray-mid);max-width:520px;margin:0 auto 12px;line-height:1.8;font-weight:300}
+.hero-founding{font-size:11px;color:var(--crystal);margin-bottom:40px;font-weight:500;letter-spacing:0.5px}
+.hero-founding strong{color:var(--white)}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.btn-hero{padding:16px 40px;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;border:none;transition:all .2s;text-decoration:none;text-transform:uppercase}
+.btn-hero-primary{background:var(--royal);color:var(--white)}
+.btn-hero-primary:hover{background:#1420cc;transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,0.3)}
+.btn-hero-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.2)}
+.btn-hero-outline:hover{border-color:var(--crystal);color:var(--crystal)}
+.member-count{font-size:11px;color:var(--gray-mid)}
+.member-count strong{color:var(--crystal)}
+
+/* MATCH TYPES */
+.match-types{padding:80px 48px;max-width:960px;margin:0 auto}
+.section-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:12px;text-align:center}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:40px;text-align:center;line-height:1.2}
+.match-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.match-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:16px;padding:32px 24px;text-align:center;transition:all .3s;cursor:pointer}
+.match-card:hover{background:rgba(26,42,255,0.08);border-color:rgba(77,184,255,0.3);transform:translateY(-4px)}
+.match-card-icon{font-size:32px;margin-bottom:16px;display:block}
+.match-card-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:10px;color:var(--white)}
+.match-card-desc{font-size:12px;color:var(--gray-mid);line-height:1.7;font-weight:300}
+
+/* HOW IT WORKS */
+.how-it-works{padding:80px 48px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08)}
+.hiw-inner{max-width:800px;margin:0 auto}
+.steps{display:flex;flex-direction:column;gap:32px;margin-top:40px}
+.step{display:flex;gap:24px;align-items:flex-start}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(77,184,255,0.3);flex-shrink:0;width:60px;line-height:1}
+.step-content{}
+.step-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:6px}
+.step-desc{font-size:13px;color:var(--gray-mid);line-height:1.7;font-weight:300}
+
+/* CODE PREVIEW */
+.code-preview{padding:80px 48px;max-width:760px;margin:0 auto;text-align:center}
+.code-demo{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:20px;padding:40px;margin:40px 0}
+.code-demo-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:8px}
+.code-display{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:var(--crystal);letter-spacing:16px;margin-bottom:8px}
+.code-names{font-size:12px;color:var(--gray-mid);margin-bottom:24px}
+.code-inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;text-align:left}
+.code-input-group{display:flex;flex-direction:column;gap:4px}
+.code-input-group label{font-size:10px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase}
+.code-input-group input{padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.2);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:12px;outline:none;transition:border-color .2s}
+.code-input-group input:focus{border-color:var(--crystal)}
+.code-input-group input::placeholder{color:rgba(136,146,164,0.5)}
+.calc-btn{width:100%;padding:12px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
+.calc-btn:hover{background:#1420cc}
+.code-result{display:none;margin-top:20px;padding:20px;background:rgba(77,184,255,0.05);border-radius:12px;border:1px solid rgba(77,184,255,0.15)}
+.code-result.show{display:block}
+.code-result-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:8px}
+.code-result-value{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--crystal);letter-spacing:12px}
+.code-result-cta{font-size:11px;color:var(--gray-mid);margin-top:12px}
+.code-result-cta a{color:var(--crystal);text-decoration:none;font-weight:600}
+
+/* STATS */
+.stats{padding:48px;border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08)}
+.stats-row{display:flex;justify-content:center;gap:64px;flex-wrap:wrap;max-width:800px;margin:0 auto}
+.stat-item{text-align:center}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--crystal)}
+.stat-label{font-size:9px;letter-spacing:1.5px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px}
+
+/* PRICING */
+.pricing{padding:80px 48px;text-align:center}
+.pricing-inner{max-width:480px;margin:0 auto}
+.pricing-card{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.2);border-radius:20px;padding:40px;margin:40px 0;position:relative;overflow:hidden}
+.pricing-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--royal),var(--crystal))}
+.founding-badge{display:inline-block;background:rgba(77,184,255,0.15);border:1px solid rgba(77,184,255,0.3);border-radius:100px;padding:4px 14px;font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px}
+.pricing-price{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:300;color:var(--white);line-height:1}
+.pricing-period{font-size:13px;color:var(--gray-mid);margin-bottom:8px}
+.pricing-note{font-size:11px;color:var(--crystal);margin-bottom:24px}
+.pricing-features{list-style:none;text-align:left;margin-bottom:28px}
+.pricing-features li{font-size:12px;color:var(--gray-mid);padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:10px;font-weight:300}
+.pricing-features li::before{content:'✦';color:var(--crystal);font-size:8px;flex-shrink:0}
+.btn-join{display:block;width:100%;padding:16px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none;text-align:center}
+.btn-join:hover{background:#1420cc;transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,0.3)}
+.pricing-guarantee{font-size:10px;color:var(--gray-mid);margin-top:12px}
+
+/* LIVE EVENTS */
+.events{padding:80px 48px;background:rgba(255,255,255,0.02);border-top:1px solid rgba(77,184,255,0.08)}
+.events-inner{max-width:760px;margin:0 auto;text-align:center}
+.cities{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:32px 0}
+.city-tag{padding:8px 20px;border:1px solid rgba(77,184,255,0.2);border-radius:100px;font-size:11px;color:var(--gray-mid);letter-spacing:1px}
+.city-tag.soon{color:var(--crystal);border-color:rgba(77,184,255,0.4)}
+
+/* FOOTER */
+footer{padding:32px 48px;border-top:1px solid rgba(77,184,255,0.08);text-align:center}
+.footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:16px}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.15)}
+
+/* MOBILE */
+@media(max-width:768px){
+  header{padding:14px 18px}
+  .hero{padding:60px 18px 40px;min-height:auto}
+  .match-types{padding:48px 18px}
+  .match-grid{grid-template-columns:1fr}
+  .how-it-works{padding:48px 18px}
+  .code-preview{padding:48px 18px}
+  .code-inputs{grid-template-columns:1fr}
+  .pricing{padding:48px 18px}
+  .events{padding:48px 18px}
+  .stats{padding:32px 18px}
+  .stats-row{gap:32px}
+  footer{padding:24px 18px}
+  .hero-btns{flex-direction:column;align-items:center}
+  .btn-hero{width:100%;max-width:320px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="https://occultics.ai" class="logo-wrap">
+    <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
+      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
+    </svg>
+    <div class="logo-text">
+      <div class="logo-name">OCCULTICS</div>
+      <div class="logo-sub">Publishing</div>
+    </div>
+  </a>
+  <div class="header-nav">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('ja')">JA</button>
+    </div>
+    <a href="/match/join.html" class="btn btn-outline" id="hdr-signin">Sign In</a>
+    <a href="/match/join.html" class="btn btn-primary" id="hdr-join">Join Free</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-stars">
+    <span class="star" style="top:8%;left:6%;font-size:10px;animation-delay:0s">✦</span>
+    <span class="star" style="top:15%;right:8%;font-size:7px;animation-delay:1s">✦</span>
+    <span class="star" style="top:70%;left:4%;font-size:8px;animation-delay:2s">✦</span>
+    <span class="star" style="top:80%;right:6%;font-size:9px;animation-delay:0.5s">✦</span>
+    <span class="star" style="top:40%;left:2%;font-size:6px;animation-delay:1.5s">✦</span>
+    <span class="star" style="top:55%;right:3%;font-size:7px;animation-delay:3s">✦</span>
+  </div>
+
+  <div class="gem-wrap">
+    <div class="gem-ring gem-ring-1"></div>
+    <div class="gem-ring gem-ring-2"></div>
+    <svg class="hero-gem" viewBox="0 0 80 100" fill="none">
+      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow" id="hero-eyebrow">Ancient Wisdom · Modern Precision</p>
+  <h1 class="hero-title" id="hero-title">Find the People Your<br>Numbers Have Been <em>Waiting For</em></h1>
+  <p class="hero-sub" id="hero-sub">Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business.</p>
+  <p class="hero-founding" id="hero-founding">Opening to the first <strong>100 founding members</strong> only — <strong>$29/month</strong></p>
+
+  <div class="hero-btns">
+    <a href="/match/join.html" class="btn-hero btn-hero-primary" id="hero-cta">Calculate My Numbers — Join Now</a>
+    <a href="/match/waitlist.html" class="btn-hero btn-hero-outline" id="hero-waitlist">Join Waitlist — Free</a>
+  </div>
+  <p class="member-count" id="hero-count">Join <strong id="member-num">—</strong> people already finding their match</p>
+</section>
+
+<!-- MATCH TYPES -->
+<section class="match-types">
+  <p class="section-eyebrow" id="types-eyebrow">What You're Looking For</p>
+  <h2 class="section-title" id="types-title">Three Ways to Connect.<br>One Mathematical System.</h2>
+  <div class="match-grid">
+    <div class="match-card">
+      <span class="match-card-icon">💎</span>
+      <div class="match-card-title" id="card1-title">Love Match</div>
+      <div class="match-card-desc" id="card1-desc">Find someone whose numbers create lasting compatibility. Not based on photos or preferences — based on the mathematical signature of who you actually are.</div>
+    </div>
+    <div class="match-card">
+      <span class="match-card-icon">🤝</span>
+      <div class="match-card-title" id="card2-title">Friend Match</div>
+      <div class="match-card-desc" id="card2-desc">Discover connections built on genuine understanding. People whose codes complement yours in ways that make friendship feel effortless and real.</div>
+    </div>
+    <div class="match-card">
+      <span class="match-card-icon">💼</span>
+      <div class="match-card-title" id="card3-title">Business Match</div>
+      <div class="match-card-desc" id="card3-desc">Partner with someone whose numerical code complements yours professionally. The right business partner is in the numbers before it's in the results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="hiw-inner">
+    <p class="section-eyebrow" id="hiw-eyebrow">How It Works</p>
+    <h2 class="section-title" id="hiw-title">Your Birth Date Contains<br>Everything We Need.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title" id="s1t">Enter your birth date</div>
+          <div class="step-desc" id="s1d">Your date of birth encodes three independent variables — your Biorhythm, your Generational number, and your Life Path. Together they form your unique Pythagorean Code.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title" id="s2t">We calculate your matches</div>
+          <div class="step-desc" id="s2d">Your code is compared against every member. Each combination produces a unique Compatibility Code — one of 81 mathematically distinct possibilities. We rank your matches by score and show you the best ones first.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title" id="s3t">Connect — in the app or in person</div>
+          <div class="step-desc" id="s3d">Send connection requests, message your matches, and meet at Occultics live events in cities worldwide. You already know if your numbers are compatible before you say hello.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE CODE DEMO -->
+<section class="code-preview">
+  <p class="section-eyebrow">Try It Now</p>
+  <h2 class="section-title" id="demo-title">See Your Compatibility<br>Code in Seconds</h2>
+  <div class="code-demo">
+    <div class="code-demo-label" id="demo-label">Enter two birth dates</div>
+    <div class="code-inputs">
+      <div class="code-input-group">
+        <label id="lbl-p1">Person 1 — Date of Birth</label>
+        <input type="date" id="dob1" onchange="tryCalc()">
+      </div>
+      <div class="code-input-group">
+        <label id="lbl-p2">Person 2 — Date of Birth</label>
+        <input type="date" id="dob2" onchange="tryCalc()">
+      </div>
+    </div>
+    <button class="calc-btn" onclick="calcCompatibility()" id="calc-btn">Calculate Compatibility Code</button>
+    <div class="code-result" id="result">
+      <div class="code-result-label" id="result-label">Your Compatibility Code</div>
+      <div class="code-result-value" id="result-code">— · — · —</div>
+      <div class="code-result-cta" id="result-cta">Want the full 10-section analysis? <a href="https://occultics.ai">Get your report →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-row">
+    <div class="stat-item"><div class="stat-num">350K+</div><div class="stat-label" id="stat1">Words of Research</div></div>
+    <div class="stat-item"><div class="stat-num">81</div><div class="stat-label" id="stat2">Compatibility Codes</div></div>
+    <div class="stat-item"><div class="stat-num">2,500</div><div class="stat-label" id="stat3">Years of Tradition</div></div>
+    <div class="stat-item"><div class="stat-num">100</div><div class="stat-label" id="stat4">Founding Member Spots</div></div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing">
+  <div class="pricing-inner">
+    <p class="section-eyebrow" id="price-eyebrow">Founding Member</p>
+    <h2 class="section-title" id="price-title">Join Before the Price<br>Goes Up.</h2>
+    <div class="pricing-card">
+      <div class="founding-badge" id="founding-badge">Founding Member</div>
+      <div class="pricing-price">$29</div>
+      <div class="pricing-period" id="price-period">per month</div>
+      <div class="pricing-note" id="price-note">First 100 members only · Price increases after</div>
+      <ul class="pricing-features">
+        <li id="pf1">See all your compatibility matches</li>
+        <li id="pf2">Send and receive connection requests</li>
+        <li id="pf3">Message your matches directly</li>
+        <li id="pf4">Access to live Occultics events in your city</li>
+        <li id="pf5">Your full Pythagorean profile</li>
+        <li id="pf6">Priority access to new features</li>
+      </ul>
+      <a href="/match/join.html" class="btn-join" id="price-cta">Claim Your Founding Spot</a>
+      <div class="pricing-guarantee" id="price-guarantee">🔒 Secure payment · Cancel anytime</div>
+    </div>
+    <p style="font-size:11px;color:var(--gray-mid)" id="price-footer">After 100 founding members, price increases to $39/month.</p>
+  </div>
+</section>
+
+<!-- LIVE EVENTS -->
+<section class="events">
+  <div class="events-inner">
+    <p class="section-eyebrow" id="events-eyebrow">Live Events</p>
+    <h2 class="section-title" id="events-title">Meet in Person.<br>Your Numbers Already Know.</h2>
+    <p style="font-size:13px;color:var(--gray-mid);line-height:1.8;font-weight:300;max-width:480px;margin:0 auto" id="events-sub">Occultics Match hosts live events in cities worldwide. Everyone arrives knowing their code. You already know if your numbers are compatible before you say hello.</p>
+    <div class="cities">
+      <span class="city-tag soon">Miami</span>
+      <span class="city-tag soon">Mexico City</span>
+      <span class="city-tag soon">Buenos Aires</span>
+      <span class="city-tag soon">Tokyo</span>
+      <span class="city-tag">London</span>
+      <span class="city-tag">Barcelona</span>
+      <span class="city-tag">New York</span>
+      <span class="city-tag">Los Angeles</span>
+    </div>
+    <p style="font-size:10px;color:var(--gray-mid);margin-top:8px" id="events-note"><span style="color:var(--crystal)">✦</span> Highlighted cities launching first</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-quote" id="footer-quote">"Your numbers have always known the way."</div>
+  <div class="footer-copy">© 2026 Occultics Publishing · occultics.ai · For informational and entertainment purposes only.</div>
+</footer>
+
+<script>
+// ---- NUMEROLOGY CALCULATIONS ----
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
+
+function calcCodes(day,month,year){
+  var bio=r(day+month);
+  var gen=r(String(year).split('').reduce(function(s,d){return s+parseInt(d)},0));
+  var lp=r(bio+gen);
+  return{biorhythm:bio,generational:gen,lifePath:lp};
+}
+
+function compatCode(c1,c2){
+  var a=r(c1.biorhythm+c2.biorhythm);
+  var b=r(c1.generational+c2.generational);
+  var c=r(c1.lifePath+c2.lifePath);
+  return a+' · '+b+' · '+c;
+}
+
+function tryCalc(){
+  var d1=document.getElementById('dob1').value;
+  var d2=document.getElementById('dob2').value;
+  if(d1&&d2)calcCompatibility();
+}
+
+function calcCompatibility(){
+  var d1=document.getElementById('dob1').value;
+  var d2=document.getElementById('dob2').value;
+  if(!d1||!d2){alert('Please enter both birth dates');return}
+  var p1=d1.split('-').map(Number);
+  var p2=d2.split('-').map(Number);
+  var c1=calcCodes(p1[2],p1[1],p1[0]);
+  var c2=calcCodes(p2[2],p2[1],p2[0]);
+  var code=compatCode(c1,c2);
+  document.getElementById('result-code').textContent=code;
+  document.getElementById('result').classList.add('show');
+}
+
+// ---- MEMBER COUNT (from Supabase) ----
+async function loadMemberCount(){
+  try{
+    var res=await fetch('https://YOUR-SUPABASE-URL.supabase.co/rest/v1/rpc/get_member_count',{
+      headers:{'apikey':'YOUR-ANON-KEY','Content-Type':'application/json'}
+    });
+    var count=await res.json();
+    if(count&&count>0){
+      document.getElementById('member-num').textContent=count;
+    }
+  }catch(e){
+    document.getElementById('hero-count').style.display='none';
+  }
+}
+loadMemberCount();
+
+// ---- LANGUAGE TRANSLATIONS ----
+var T={
+  en:{
+    'hero-eyebrow':'Ancient Wisdom · Modern Precision',
+    'hero-title':'Find the People Your<br>Numbers Have Been <em>Waiting For</em>',
+    'hero-sub':'Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business.',
+    'hero-founding':'Opening to the first <strong>100 founding members</strong> only — <strong>$29/month</strong>',
+    'hero-cta':'Calculate My Numbers — Join Now',
+    'hero-waitlist':'Join Waitlist — Free',
+    'types-eyebrow':'What You\'re Looking For',
+    'types-title':'Three Ways to Connect.<br>One Mathematical System.',
+    'card1-title':'Love Match','card2-title':'Friend Match','card3-title':'Business Match',
+    'card1-desc':'Find someone whose numbers create lasting compatibility. Not based on photos — based on the mathematical signature of who you actually are.',
+    'card2-desc':'Discover connections built on genuine understanding. People whose codes complement yours in ways that make friendship feel effortless.',
+    'card3-desc':'Partner with someone whose numerical code complements yours professionally. The right business partner is in the numbers.',
+    'hiw-eyebrow':'How It Works',
+    'hiw-title':'Your Birth Date Contains<br>Everything We Need.',
+    's1t':'Enter your birth date','s2t':'We calculate your matches','s3t':'Connect — in the app or in person',
+    's1d':'Your date of birth encodes three independent variables — your Biorhythm, your Generational number, and your Life Path. Together they form your unique Pythagorean Code.',
+    's2d':'Your code is compared against every member. Each combination produces a unique Compatibility Code — one of 81 mathematically distinct possibilities.',
+    's3d':'Send connection requests, message your matches, and meet at Occultics live events in cities worldwide.',
+    'demo-title':'See Your Compatibility<br>Code in Seconds',
+    'demo-label':'Enter two birth dates',
+    'lbl-p1':'Person 1 — Date of Birth','lbl-p2':'Person 2 — Date of Birth',
+    'calc-btn':'Calculate Compatibility Code',
+    'result-label':'Your Compatibility Code',
+    'result-cta':'Want the full 10-section analysis? <a href="https://occultics.ai">Get your report →</a>',
+    'stat1':'Words of Research','stat2':'Compatibility Codes','stat3':'Years of Tradition','stat4':'Founding Member Spots',
+    'price-eyebrow':'Founding Member',
+    'price-title':'Join Before the Price<br>Goes Up.',
+    'founding-badge':'Founding Member',
+    'price-period':'per month',
+    'price-note':'First 100 members only · Price increases after',
+    'pf1':'See all your compatibility matches','pf2':'Send and receive connection requests',
+    'pf3':'Message your matches directly','pf4':'Access to live Occultics events in your city',
+    'pf5':'Your full Pythagorean profile','pf6':'Priority access to new features',
+    'price-cta':'Claim Your Founding Spot',
+    'price-guarantee':'🔒 Secure payment · Cancel anytime',
+    'price-footer':'After 100 founding members, price increases to $39/month.',
+    'events-eyebrow':'Live Events',
+    'events-title':'Meet in Person.<br>Your Numbers Already Know.',
+    'events-sub':'Occultics Match hosts live events in cities worldwide. Everyone arrives knowing their code. You already know if your numbers are compatible before you say hello.',
+    'events-note':'✦ Highlighted cities launching first',
+    'footer-quote':'"Your numbers have always known the way."',
+    'hdr-signin':'Sign In','hdr-join':'Join Free'
+  },
+  es:{
+    'hero-eyebrow':'Sabiduría Ancestral · Precisión Moderna',
+    'hero-title':'Encuentra a las Personas que Tus<br>Números Han Estado <em>Esperando</em>',
+    'hero-sub':'Cada persona lleva una firma numérica única derivada de su fecha de nacimiento. Nuestro motor identifica los códigos específicos que complementan los tuyos — en amor, amistad y negocios.',
+    'hero-founding':'Abierto a los primeros <strong>100 miembros fundadores</strong> — <strong>$29/mes</strong>',
+    'hero-cta':'Calcula Mis Números — Únete Ahora',
+    'hero-waitlist':'Unirse a la Lista — Gratis',
+    'types-eyebrow':'Lo Que Buscas',
+    'types-title':'Tres Formas de Conectar.<br>Un Sistema Matemático.',
+    'card1-title':'Match de Amor','card2-title':'Match de Amistad','card3-title':'Match de Negocios',
+    'card1-desc':'Encuentra a alguien cuyos números creen compatibilidad duradera. No basado en fotos — basado en la firma matemática de quién eres realmente.',
+    'card2-desc':'Descubre conexiones construidas sobre entendimiento genuino. Personas cuyos códigos complementan los tuyos de formas que hacen la amistad fluir.',
+    'card3-desc':'Asóciate con alguien cuyo código numérico complemente el tuyo profesionalmente. El socio correcto está en los números.',
+    'hiw-eyebrow':'Cómo Funciona',
+    'hiw-title':'Tu Fecha de Nacimiento Contiene<br>Todo lo que Necesitamos.',
+    's1t':'Introduce tu fecha de nacimiento','s2t':'Calculamos tus matches','s3t':'Conecta — en la app o en persona',
+    's1d':'Tu fecha de nacimiento codifica tres variables independientes — tu Biorritmo, tu número Generacional y tu Sendero de Vida.',
+    's2d':'Tu código se compara con cada miembro. Cada combinación produce un Código de Compatibilidad único — una de 81 posibilidades matemáticamente distintas.',
+    's3d':'Envía solicitudes de conexión, escribe a tus matches y queda en eventos en directo de Occultics en ciudades de todo el mundo.',
+    'demo-title':'Ve Tu Código de Compatibilidad<br>en Segundos',
+    'demo-label':'Introduce dos fechas de nacimiento',
+    'lbl-p1':'Persona 1 — Fecha de Nacimiento','lbl-p2':'Persona 2 — Fecha de Nacimiento',
+    'calc-btn':'Calcular Código de Compatibilidad',
+    'result-label':'Tu Código de Compatibilidad',
+    'result-cta':'¿Quieres el análisis completo de 10 secciones? <a href="https://occultics.ai">Obtén tu informe →</a>',
+    'stat1':'Palabras de Investigación','stat2':'Códigos de Compatibilidad','stat3':'Años de Tradición','stat4':'Plazas de Miembro Fundador',
+    'price-eyebrow':'Miembro Fundador',
+    'price-title':'Únete Antes de que<br>Suba el Precio.',
+    'founding-badge':'Miembro Fundador',
+    'price-period':'por mes',
+    'price-note':'Solo los primeros 100 miembros · El precio sube después',
+    'pf1':'Ver todos tus matches de compatibilidad','pf2':'Enviar y recibir solicitudes de conexión',
+    'pf3':'Escribir directamente a tus matches','pf4':'Acceso a eventos en directo de Occultics',
+    'pf5':'Tu perfil pitagórico completo','pf6':'Acceso prioritario a nuevas funciones',
+    'price-cta':'Reserva Tu Plaza Fundadora',
+    'price-guarantee':'🔒 Pago seguro · Cancela cuando quieras',
+    'price-footer':'Tras los 100 miembros fundadores, el precio sube a $39/mes.',
+    'events-eyebrow':'Eventos en Directo',
+    'events-title':'Queda en Persona.<br>Tus Números Ya Lo Saben.',
+    'events-sub':'Occultics Match organiza eventos en directo en ciudades de todo el mundo. Todos llegan conociendo su código. Ya sabes si vuestros números son compatibles antes de decir hola.',
+    'events-note':'✦ Las ciudades destacadas se lanzan primero',
+    'footer-quote':'"Tus números siempre han conocido el camino."',
+    'hdr-signin':'Iniciar Sesión','hdr-join':'Unirse Gratis'
+  },
+  ja:{
+    'hero-eyebrow':'古代の知恵 · 現代の精度',
+    'hero-title':'あなたの数字が待っていた<br>人々を<em>見つけよう</em>',
+    'hero-sub':'すべての人は生年月日から導かれたユニークな数値シグネチャーを持っています。私たちのマッチングエンジンはあなたのコードを補完する特定のコードを識別します。',
+    'hero-founding':'最初の<strong>100人の創設メンバー</strong>限定 — <strong>月額$29</strong>',
+    'hero-cta':'数字を計算する — 今すぐ参加',
+    'hero-waitlist':'ウェイトリストに参加 — 無料',
+    'types-eyebrow':'求めているもの',
+    'types-title':'三つのつながり方。<br>一つの数学的システム。',
+    'card1-title':'恋愛マッチ','card2-title':'友人マッチ','card3-title':'ビジネスマッチ',
+    'card1-desc':'長続きする相性を生み出す数字を持つ人を見つけましょう。写真ではなく、あなたが実際に誰であるかの数学的シグネチャーに基づいています。',
+    'card2-desc':'本当の理解に基づいたつながりを発見しましょう。あなたのコードを補完する人々との友情は自然に感じられます。',
+    'card3-desc':'数値コードがあなたのものを補完するビジネスパートナーを見つけましょう。適切なビジネスパートナーは数字の中にいます。',
+    'hiw-eyebrow':'仕組み',
+    'hiw-title':'生年月日に<br>必要なすべてが含まれています。',
+    's1t':'生年月日を入力','s2t':'マッチを計算','s3t':'アプリまたは対面でつながる',
+    's1d':'生年月日はバイオリズム、世代数、ライフパスの3つの独立した変数をエンコードします。これらが合わさってユニークなピタゴラスコードを形成します。',
+    's2d':'あなたのコードはすべてのメンバーと比較されます。各組み合わせは81の数学的に異なる可能性のうちの一つです。',
+    's3d':'つながりリクエストを送り、マッチにメッセージを送り、世界中の都市でOcculticのライブイベントで会いましょう。',
+    'demo-title':'数秒で相性コードを<br>確認しましょう',
+    'demo-label':'二つの生年月日を入力',
+    'lbl-p1':'人物1 — 生年月日','lbl-p2':'人物2 — 生年月日',
+    'calc-btn':'相性コードを計算する',
+    'result-label':'あなたの相性コード',
+    'result-cta':'完全な10セクションの分析が欲しいですか？<a href="https://occultics.ai">レポートを取得 →</a>',
+    'stat1':'研究の言葉数','stat2':'相性コード','stat3':'年の伝統','stat4':'創設メンバー枠',
+    'price-eyebrow':'創設メンバー',
+    'price-title':'価格が上がる前に<br>参加しましょう。',
+    'founding-badge':'創設メンバー',
+    'price-period':'月額',
+    'price-note':'最初の100人のみ · その後価格が上がります',
+    'pf1':'すべての相性マッチを見る','pf2':'つながりリクエストを送受信',
+    'pf3':'マッチに直接メッセージ','pf4':'あなたの都市のOcculticライブイベントへのアクセス',
+    'pf5':'完全なピタゴラスプロフィール','pf6':'新機能への優先アクセス',
+    'price-cta':'創設メンバー枠を確保する',
+    'price-guarantee':'🔒 安全な支払い · いつでもキャンセル可能',
+    'price-footer':'100人の創設メンバーの後、価格は月額$39に上がります。',
+    'events-eyebrow':'ライブイベント',
+    'events-title':'対面で会いましょう。<br>あなたの数字はすでに知っています。',
+    'events-sub':'Occulticマッチは世界中の都市でライブイベントを開催しています。全員がコードを知って到着します。挨拶する前にすでに数字が相性を知っています。',
+    'events-note':'✦ ハイライトされた都市が最初に開始',
+    'footer-quote':'"あなたの数字は常に道を知っていました。"',
+    'hdr-signin':'サインイン','hdr-join':'無料で参加'
+  }
+};
+
+function setLang(lang){
+  document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});
+  document.getElementById('lang-'+lang) && document.getElementById('lang-'+lang).classList.add('active');
+  // find active button
+  document.querySelectorAll('.lang-btn').forEach(function(b){
+    if(b.textContent===lang.toUpperCase())b.classList.add('active');
+  });
+  window._lang=lang;
+  var t=T[lang]||T.en;
+  Object.keys(t).forEach(function(id){
+    var el=document.getElementById(id);
+    if(el)el.innerHTML=t[id];
+  });
+}
+
+// Set lang buttons properly
+document.querySelectorAll('.lang-btn').forEach(function(b,i){
+  var langs=['en','es','ja'];
+  b.id='lang-'+langs[i];
+});
+</script>
+</body>
+</html>
