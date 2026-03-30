@@ -217,7 +217,7 @@ footer{padding:32px 48px;border-top:1px solid rgba(77,184,255,0.08);text-align:c
 
   <div class="hero-btns">
     <a href="/match/join.html" class="btn-hero btn-hero-primary" id="hero-cta">Calculate My Numbers — Join Now</a>
-    <a href="/match/waitlist.html" class="btn-hero btn-hero-outline" id="hero-waitlist">Join Waitlist — Free</a>
+    <a href="/match/join.html" class="btn-hero btn-hero-outline" id="hero-waitlist">Join Waitlist — Free</a>
   </div>
   <p class="member-count" id="hero-count">Join <strong id="member-num">—</strong> people already finding their match</p>
 </section>
@@ -402,8 +402,8 @@ function calcCompatibility(){
 // ---- MEMBER COUNT (from Supabase) ----
 async function loadMemberCount(){
   try{
-    var res=await fetch('https://YOUR-SUPABASE-URL.supabase.co/rest/v1/rpc/get_member_count',{
-      headers:{'apikey':'YOUR-ANON-KEY','Content-Type':'application/json'}
+    var res=await fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/rpc/get_member_count',{
+      headers:{'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k','Content-Type':'application/json'}
     });
     var count=await res.json();
     if(count&&count>0){
