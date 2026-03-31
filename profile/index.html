@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Personal Alignment — Occultics Publishing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0a0e2e;
+  --royal:#1a2aff;
+  --crystal:#4db8ff;
+  --gold:#c9a84c;
+  --gold-light:#e8d5a3;
+  --gray-mid:#8892a4;
+  --white:#fff;
+  --card-bg:rgba(255,255,255,0.03);
+  --card-border:rgba(77,184,255,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+
+/* EXPIRED / LOADING states */
+.state-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
+.state-gem{width:60px;height:72px;margin:0 auto 24px;opacity:0.4}
+.state-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:12px}
+.state-sub{font-size:13px;color:var(--gray-mid);font-weight:300;line-height:1.7;max-width:400px;margin:0 auto 24px}
+.state-btn{display:inline-block;padding:12px 32px;background:var(--royal);color:var(--white);border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-decoration:none;font-family:'Montserrat',sans-serif;text-transform:uppercase}
+
+/* HEADER */
+.profile-header{background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(77,184,255,0.1);padding:16px 48px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-gem{width:24px;height:28px}
+.logo-name{font-weight:700;font-size:13px;letter-spacing:4px;color:var(--white)}
+.header-right{display:flex;align-items:center;gap:16px}
+.expiry-badge{font-size:10px;color:var(--gray-mid);letter-spacing:0.5px}
+.expiry-badge span{color:var(--crystal)}
+.print-btn{padding:8px 16px;border:1.5px solid rgba(77,184,255,0.2);border-radius:6px;font-size:10px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;color:var(--gray-mid);background:transparent;transition:all .2s;text-transform:uppercase}
+.print-btn:hover{border-color:var(--crystal);color:var(--crystal)}
+
+/* HERO */
+.profile-hero{padding:80px 48px 60px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(77,184,255,0.08)}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(circle,rgba(26,42,255,0.1) 0%,transparent 70%);pointer-events:none}
+.hero-stars{position:absolute;inset:0;pointer-events:none}
+.star{position:absolute;color:var(--crystal);opacity:0.25;animation:twinkle 4s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0.15}50%{opacity:0.5}}
+.hero-gem{width:72px;height:86px;margin:0 auto 24px;animation:float 5s ease-in-out infinite;display:block;position:relative;z-index:1}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-greeting{font-size:10px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,6vw,72px);font-weight:300;line-height:1.05;margin-bottom:8px}
+.hero-subtitle{font-size:12px;color:var(--gray-mid);margin-bottom:32px;font-weight:300;letter-spacing:1px}
+.code-display{display:inline-flex;align-items:center;gap:16px;background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.2);border-radius:16px;padding:20px 40px;margin-bottom:12px}
+.code-number{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--crystal);line-height:1}
+.code-dot{font-family:'Cormorant Garamond',serif;font-size:32px;color:rgba(77,184,255,0.3)}
+.code-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-top:32px}
+.code-sub-row{display:flex;justify-content:center;gap:40px;margin-top:16px}
+.code-sub-item{text-align:center}
+.code-sub-num{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--white);font-weight:300}
+.code-sub-label{font-size:8px;letter-spacing:1.5px;color:var(--gray-mid);text-transform:uppercase;margin-top:3px}
+
+/* NAV */
+.section-nav{padding:0 48px;border-bottom:1px solid rgba(77,184,255,0.08);background:rgba(10,14,46,0.6);backdrop-filter:blur(8px);overflow-x:auto;white-space:nowrap;position:sticky;top:57px;z-index:90}
+.section-nav-inner{display:inline-flex;gap:0}
+.nav-tab{padding:14px 20px;font-size:10px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;background:none;border-left:none;border-right:none;border-top:none;font-family:'Montserrat',sans-serif;text-transform:uppercase}
+.nav-tab:hover{color:var(--crystal)}
+.nav-tab.active{color:var(--crystal);border-bottom-color:var(--crystal)}
+
+/* CONTENT */
+.profile-content{max-width:860px;margin:0 auto;padding:48px 24px 80px}
+
+/* SECTION */
+.profile-section{margin-bottom:48px;scroll-margin-top:120px}
+.section-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(77,184,255,0.08)}
+.section-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(77,184,255,0.2);line-height:1;flex-shrink:0;width:60px}
+.section-header-text{}
+.section-eyebrow{font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;line-height:1.2}
+.section-body{font-size:13px;line-height:1.9;color:rgba(255,255,255,0.75);font-weight:300}
+.section-body p{margin-bottom:16px}
+.section-body p:last-child{margin-bottom:0}
+
+/* INFO CARDS */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.info-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:14px;padding:20px}
+.info-card-label{font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.info-card-value{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--white);margin-bottom:6px}
+.info-card-desc{font-size:11px;color:var(--gray-mid);line-height:1.6;font-weight:300}
+
+/* HIGHLIGHT BOX */
+.highlight-box{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:14px;padding:24px;margin:20px 0}
+.highlight-box-title{font-size:10px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.highlight-box-text{font-size:13px;line-height:1.8;color:rgba(255,255,255,0.8);font-weight:300}
+
+/* WARNING BOX */
+.warning-box{background:rgba(255,200,100,0.05);border:1px solid rgba(255,200,100,0.2);border-radius:14px;padding:20px;margin:20px 0}
+.warning-box-title{font-size:10px;letter-spacing:2px;color:var(--gold-light);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.warning-box-text{font-size:12px;line-height:1.7;color:rgba(255,220,150,0.7);font-weight:300}
+
+/* LOADING SKELETON */
+.skeleton{background:rgba(255,255,255,0.04);border-radius:8px;animation:shimmer 1.5s ease-in-out infinite}
+.skeleton-line{height:14px;margin-bottom:10px}
+.skeleton-line.long{width:90%}
+.skeleton-line.medium{width:65%}
+.skeleton-line.short{width:40%}
+@keyframes shimmer{0%,100%{opacity:0.5}50%{opacity:1}}
+
+/* QUOTE */
+.profile-quote{text-align:center;padding:40px 0;border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08);margin:40px 0}
+.profile-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:rgba(255,255,255,0.4);line-height:1.6}
+
+/* FOOTER */
+.profile-footer{text-align:center;padding:32px;border-top:1px solid rgba(77,184,255,0.08)}
+.profile-footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.15);margin-bottom:8px}
+.profile-footer-copy{font-size:10px;color:rgba(255,255,255,0.1)}
+
+/* MOBILE */
+@media(max-width:768px){
+  .profile-header{padding:14px 18px}
+  .profile-hero{padding:60px 18px 40px}
+  .section-nav{padding:0 18px}
+  .profile-content{padding:32px 18px 60px}
+  .info-grid{grid-template-columns:1fr}
+  .code-display{padding:16px 24px;gap:10px}
+  .code-number{font-size:40px}
+  .header-right{gap:8px}
+  .expiry-badge{display:none}
+}
+
+/* PRINT */
+@media print{
+  .profile-header,.section-nav,.print-btn{display:none}
+  .profile-hero{padding:32px}
+  body{background:white;color:black}
+  .section-title,.hero-name{color:black}
+  .section-body{color:#333}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADING STATE -->
+<div id="loading-state" class="state-screen">
+  <svg class="state-gem" viewBox="0 0 80 100" fill="none">
+    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/>
+    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.5"/>
+    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.5"/>
+  </svg>
+  <div class="state-title">Loading your profile...</div>
+  <div class="state-sub">Your Personal Alignment Profile is being prepared.</div>
+</div>
+
+<!-- EXPIRED STATE -->
+<div id="expired-state" class="state-screen" style="display:none">
+  <svg class="state-gem" viewBox="0 0 80 100" fill="none">
+    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.3"/>
+    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.3"/>
+  </svg>
+  <div class="state-title">Your profile access has expired</div>
+  <div class="state-sub">Your Personal Alignment Profile was accessible for 3 months. To renew your access or purchase a new reading, visit occultics.ai</div>
+  <a href="https://occultics.ai" class="state-btn">Return to Occultics</a>
+</div>
+
+<!-- NOT FOUND STATE -->
+<div id="notfound-state" class="state-screen" style="display:none">
+  <svg class="state-gem" viewBox="0 0 80 100" fill="none">
+    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.3"/>
+    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.3"/>
+  </svg>
+  <div class="state-title">Profile not found</div>
+  <div class="state-sub">This link may be incorrect or the profile may have been removed. Please check your email for your correct profile link.</div>
+  <a href="https://occultics.ai" class="state-btn">Return to Occultics</a>
+</div>
+
+<!-- MAIN PROFILE -->
+<div id="main-profile" style="display:none">
+
+  <!-- HEADER -->
+  <header class="profile-header">
+    <a href="https://occultics.ai" class="logo-wrap">
+      <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
+        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+        <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+        <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+        <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
+      </svg>
+      <div class="logo-name">OCCULTICS</div>
+    </a>
+    <div class="header-right">
+      <div class="expiry-badge">Profile expires <span id="expiry-display">—</span></div>
+      <button class="print-btn" onclick="window.print()">↓ Save PDF</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="profile-hero">
+    <div class="hero-glow"></div>
+    <div class="hero-stars">
+      <span class="star" style="top:10%;left:8%;font-size:10px;animation-delay:0s">✦</span>
+      <span class="star" style="top:15%;right:10%;font-size:7px;animation-delay:1s">✦</span>
+      <span class="star" style="top:70%;left:5%;font-size:8px;animation-delay:2s">✦</span>
+      <span class="star" style="top:75%;right:7%;font-size:9px;animation-delay:0.5s">✦</span>
+      <span class="star" style="top:40%;left:3%;font-size:6px;animation-delay:1.5s">✦</span>
+    </div>
+    <svg class="hero-gem" viewBox="0 0 80 100" fill="none">
+      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
+      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
+      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
+      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
+      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
+      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
+    </svg>
+    <p class="hero-greeting">Personal Alignment Profile</p>
+    <h1 class="hero-name" id="hero-name">—</h1>
+    <p class="hero-subtitle" id="hero-subtitle">Born — · Pythagorean Code</p>
+    <div class="code-display">
+      <div style="text-align:center">
+        <div class="code-number" id="code-bio">—</div>
+        <div style="font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Biorhythm</div>
+      </div>
+      <div class="code-dot">·</div>
+      <div style="text-align:center">
+        <div class="code-number" id="code-gen">—</div>
+        <div style="font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Generational</div>
+      </div>
+      <div class="code-dot">·</div>
+      <div style="text-align:center">
+        <div class="code-number" id="code-lp">—</div>
+        <div style="font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Life Path</div>
+      </div>
+    </div>
+    <div class="code-label">Your Pythagorean Code</div>
+  </section>
+
+  <!-- SECTION NAV -->
+  <nav class="section-nav">
+    <div class="section-nav-inner">
+      <button class="nav-tab active" onclick="scrollTo('s1')">Profile</button>
+      <button class="nav-tab" onclick="scrollTo('s2')">Health</button>
+      <button class="nav-tab" onclick="scrollTo('s3')">Karma</button>
+      <button class="nav-tab" onclick="scrollTo('s4')">Pyramid</button>
+      <button class="nav-tab" onclick="scrollTo('s5')">Life Cycles</button>
+      <button class="nav-tab" onclick="scrollTo('s6')">2026</button>
+      <button class="nav-tab" onclick="scrollTo('s7')">Business</button>
+      <button class="nav-tab" onclick="scrollTo('s8')">Relationships</button>
+      <button class="nav-tab" onclick="scrollTo('s9')">Psychology</button>
+      <button class="nav-tab" onclick="scrollTo('s10')">Forecast</button>
+    </div>
+  </nav>
+
+  <!-- CONTENT -->
+  <div class="profile-content" id="profile-content">
+    <!-- Sections populated by JS -->
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="profile-footer">
+    <div class="profile-footer-quote">"Your numbers have always known the way."</div>
+    <div class="profile-footer-copy">© 2026 Occultics Publishing · occultics.ai · Personal Alignment Profile · For informational and entertainment purposes only.</div>
+  </footer>
+
+</div>
+
+<script>
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+
+function scrollTo(id){
+  var el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth'});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+  event.target.classList.add('active');
+}
+
+function getProfileId(){
+  var path = window.location.pathname;
+  var parts = path.split('/');
+  return parts[parts.length - 1] || parts[parts.length - 2];
+}
+
+function formatDate(dateStr){
+  if(!dateStr) return '—';
+  var d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+}
+
+function isExpired(expiryDate){
+  if(!expiryDate) return false;
+  return new Date() > new Date(expiryDate);
+}
+
+function renderSection(num, eyebrow, title, content){
+  return '<div class="profile-section" id="s'+num+'">'+
+    '<div class="section-header">'+
+      '<div class="section-num">0'+num+'</div>'+
+      '<div class="section-header-text">'+
+        '<div class="section-eyebrow">'+eyebrow+'</div>'+
+        '<div class="section-title">'+title+'</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="section-body">'+content+'</div>'+
+  '</div>';
+}
+
+function renderHighlight(title, text){
+  return '<div class="highlight-box"><div class="highlight-box-title">'+title+'</div><div class="highlight-box-text">'+text+'</div></div>';
+}
+
+function renderWarning(title, text){
+  return '<div class="warning-box"><div class="warning-box-title">⚠ '+title+'</div><div class="warning-box-text">'+text+'</div></div>';
+}
+
+function renderProfile(data){
+  // Set hero
+  document.getElementById('hero-name').textContent = data.name;
+  document.getElementById('hero-subtitle').textContent = 'Born ' + formatDate(data.date_of_birth) + ' · Personal Alignment Profile';
+  document.getElementById('code-bio').textContent = data.biorhythm || '—';
+  document.getElementById('code-gen').textContent = data.generational || '—';
+  document.getElementById('code-lp').textContent = data.life_path || '—';
+  document.title = data.name + ' — Personal Alignment · Occultics';
+
+  // Set expiry
+  if(data.expires_at){
+    document.getElementById('expiry-display').textContent = formatDate(data.expires_at);
+  }
+
+  // Build sections from stored AI content
+  var sections = data.sections || {};
+  var content = '';
+
+  var sectionDefs = [
+    {num:1, eyebrow:'Section 01', title:'Your Complete Pythagorean Profile', key:'profile'},
+    {num:2, eyebrow:'Section 02', title:'Health Vulnerabilities & Number Medicine', key:'health'},
+    {num:3, eyebrow:'Section 03', title:'Your Karmic Profile', key:'karma'},
+    {num:4, eyebrow:'Section 04', title:'Your Pyramid Matrix', key:'pyramid'},
+    {num:5, eyebrow:'Section 05', title:'Life Cycles — Where You Are Now', key:'cycles'},
+    {num:6, eyebrow:'Section 06', title:'2026 — The Year You Are In', key:'year2026'},
+    {num:7, eyebrow:'Section 07', title:'Business Alignment', key:'business'},
+    {num:8, eyebrow:'Section 08', title:'Relationship Patterns', key:'relationships'},
+    {num:9, eyebrow:'Section 09', title:'Your Psychological Profile', key:'psychology'},
+    {num:10, eyebrow:'Section 10', title:'Complete Annual Forecast', key:'forecast'},
+  ];
+
+  sectionDefs.forEach(function(s){
+    var sectionContent = sections[s.key] || '<div class="skeleton"><div class="skeleton-line long"></div><div class="skeleton-line medium"></div><div class="skeleton-line long"></div><div class="skeleton-line short"></div></div>';
+    content += renderSection(s.num, s.eyebrow, s.title, sectionContent);
+
+    if(s.num === 5){
+      content += '<div class="profile-quote"><div class="profile-quote-text">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</div></div>';
+    }
+  });
+
+  document.getElementById('profile-content').innerHTML = content;
+
+  // Show profile
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('main-profile').style.display = 'block';
+}
+
+async function loadProfile(){
+  var profileId = getProfileId();
+
+  if(!profileId || profileId === 'profile'){
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('notfound-state').style.display = 'flex';
+    return;
+  }
+
+  try{
+    var res = await fetch(SUPABASE_URL + '/rest/v1/personal_alignment_profiles?profile_id=eq.' + profileId + '&select=*', {
+      headers:{
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    });
+
+    var data = await res.json();
+
+    if(!data || data.length === 0){
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('notfound-state').style.display = 'flex';
+      return;
+    }
+
+    var profile = data[0];
+
+    // Check expiry
+    if(isExpired(profile.expires_at)){
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('expired-state').style.display = 'flex';
+      return;
+    }
+
+    renderProfile(profile);
+
+  } catch(e){
+    console.error(e);
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('notfound-state').style.display = 'flex';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadProfile);
+</script>
+</body>
+</html>
