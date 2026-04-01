@@ -4,6 +4,150 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Occultics.ai — Every Relationship Has a Mathematical Signature</title>
+<script>
+// Profile page detection — if URL has ?id= show profile instead of main site
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if(!id) return;
+
+  // Hide main site immediately
+  document.addEventListener('DOMContentLoaded', function(){
+    var main = document.getElementById('main-site');
+    if(main) main.style.display = 'none';
+    var profile = document.getElementById('profile-app');
+    if(profile) profile.style.display = 'block';
+    loadProfile(id);
+  });
+
+  var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+
+  var SESSION_DEFS = [
+    {key:'session1',num:'01',day:'Day 1', title:'Who You Are'},
+    {key:'session2',num:'02',day:'Day 3', title:'How You Feel'},
+    {key:'session3',num:'03',day:'Day 5', title:'What You Truly Need'},
+    {key:'session4',num:'04',day:'Day 7', title:'Why You React The Way You React'},
+    {key:'session5',num:'05',day:'Day 9', title:'The Karma You Carry'},
+    {key:'session6',num:'06',day:'Day 11',title:'The Architecture of Your Life'},
+    {key:'session7',num:'07',day:'Day 13',title:'What You Attract'},
+  ];
+
+  function formatDate(str){
+    if(!str) return '—';
+    return new Date(str).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  }
+
+  function textToParas(text){
+    if(!text) return '<div class="pc-skeleton"></div>';
+    return text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){return '<p>'+p.trim()+'</p>';}).join('');
+  }
+
+  function renderSessions(sections){
+    var html = '';
+    SESSION_DEFS.forEach(function(def, idx){
+      var s = sections[def.key] || {};
+      var unlocked = s.unlocked || s.text;
+      if(unlocked){
+        html += '<div class="pc-card pc-unlocked">';
+        html += '<div class="pc-card-hdr" onclick="document.getElementById(\'pcb'+idx+'\').classList.toggle(\'pcb-open\')">';
+        html += '<div class="pc-num">'+def.num+'</div>';
+        html += '<div class="pc-meta"><div class="pc-ey">Session '+def.num+' · '+def.day+'</div><div class="pc-ti">'+def.title+'</div></div>';
+        html += '<div class="pc-arr">↓</div>';
+        html += '</div>';
+        html += '<div class="pc-body" id="pcb'+idx+(idx===0?' pcb-open':'')+'"><div class="pc-text">'+textToParas(s.text)+'</div></div>';
+        html += '</div>';
+      } else {
+        html += '<div class="pc-card pc-locked">';
+        html += '<div class="pc-card-hdr">';
+        html += '<div class="pc-num">'+def.num+'</div>';
+        html += '<div class="pc-meta"><div class="pc-ey">Session '+def.num+'</div><div class="pc-ti">'+def.title+'</div></div>';
+        html += '<div class="pc-lock">Unlocks '+def.day+'</div>';
+        html += '</div></div>';
+      }
+      if(idx===3) html += '<div class="pc-quote">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</div>';
+    });
+    document.getElementById('pc-sessions').innerHTML = html;
+  }
+
+  function loadProfile(profileId){
+    fetch(SUPABASE_URL+'/rest/v1/transformational_profiles?profile_id=eq.'+encodeURIComponent(profileId)+'&select=*',
+      {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}})
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(!data||!data.length){
+        document.getElementById('pc-loading').style.display='none';
+        document.getElementById('pc-notfound').style.display='flex';
+        return;
+      }
+      var p = data[0];
+      if(new Date()>new Date(p.expires_at)){
+        document.getElementById('pc-loading').style.display='none';
+        document.getElementById('pc-expired').style.display='flex';
+        return;
+      }
+      document.getElementById('pc-name').textContent = p.name;
+      document.getElementById('pc-sub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
+      document.getElementById('pc-bio').textContent = p.biorhythm||'—';
+      document.getElementById('pc-gen').textContent = p.generational||'—';
+      document.getElementById('pc-lp').textContent = p.life_path||'—';
+      document.getElementById('pc-expiry').textContent = formatDate(p.expires_at);
+      document.title = p.name+' — The Transformational Code · Occultics';
+      renderSessions(p.sections||{});
+      document.getElementById('pc-loading').style.display='none';
+      document.getElementById('pc-main').style.display='block';
+    })
+    .catch(function(){
+      document.getElementById('pc-loading').style.display='none';
+      document.getElementById('pc-notfound').style.display='flex';
+    });
+  }
+})();
+</script>
+<style>
+/* Profile App Styles */
+#profile-app{display:none;background:#0a0e2e;min-height:100vh;font-family:'Montserrat',sans-serif;color:#fff}
+.pc-state{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;background:#0a0e2e}
+.pc-state-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:12px}
+.pc-state-sub{font-size:13px;color:#8892a4;line-height:1.7;max-width:400px;margin:0 auto 24px}
+.pc-state-btn{display:inline-block;padding:12px 32px;background:#1a2aff;color:#fff;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-decoration:none;text-transform:uppercase}
+.pc-hdr{background:rgba(10,14,46,0.97);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.pc-logo{font-weight:700;font-size:12px;letter-spacing:4px;color:#fff;text-decoration:none}
+.pc-expiry-badge{font-size:10px;color:#8892a4}
+.pc-expiry-badge span{color:#4db8ff}
+.pc-hero{padding:60px 32px 44px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.08);background:radial-gradient(ellipse at 50% 0%,rgba(26,42,255,0.08) 0%,transparent 70%)}
+.pc-eyebrow{font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.pc-hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,60px);font-weight:300;margin-bottom:6px}
+.pc-hero-sub{font-size:11px;color:#8892a4;margin-bottom:24px;font-weight:300}
+.pc-code-box{display:inline-flex;align-items:center;gap:14px;background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:14px;padding:16px 32px;margin-bottom:8px}
+.pc-cn{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:#4db8ff;line-height:1}
+.pc-cd{font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(77,184,255,0.25)}
+.pc-code-label{font-size:8px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-top:14px}
+.pc-sessions{max-width:800px;margin:0 auto;padding:36px 24px 80px}
+.pc-card{margin-bottom:12px;border-radius:14px;overflow:hidden;border:1px solid rgba(77,184,255,0.1);background:rgba(255,255,255,0.02)}
+.pc-unlocked{border-color:rgba(77,184,255,0.18)}
+.pc-locked{border-color:rgba(255,255,255,0.05);opacity:0.55}
+.pc-card-hdr{display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;user-select:none}
+.pc-locked .pc-card-hdr{cursor:default}
+.pc-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:rgba(77,184,255,0.2);line-height:1;flex-shrink:0;width:40px}
+.pc-meta{flex:1}
+.pc-ey{font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:3px}
+.pc-ti{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;line-height:1.2}
+.pc-arr{font-size:14px;color:#4db8ff;flex-shrink:0}
+.pc-lock{font-size:10px;color:rgba(77,184,255,0.4);flex-shrink:0}
+.pc-body{display:none;padding:0 20px 24px}
+.pc-body.pcb-open{display:block}
+.pc-text{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.75);font-weight:300}
+.pc-text p{margin-bottom:16px}
+.pc-text p:last-child{margin-bottom:0}
+.pc-skeleton{height:120px;background:rgba(255,255,255,0.04);border-radius:8px;animation:pcshim 1.5s ease-in-out infinite}
+@keyframes pcshim{0%,100%{opacity:.4}50%{opacity:.9}}
+.pc-quote{text-align:center;padding:28px 16px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);line-height:1.6}
+.pc-footer{text-align:center;padding:24px;border-top:1px solid rgba(77,184,255,0.08)}
+.pc-footer-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.15);margin-bottom:6px}
+.pc-footer-c{font-size:9px;color:rgba(255,255,255,0.08)}
+@media(max-width:600px){.pc-hdr{padding:12px 16px}.pc-hero{padding:44px 16px 28px}.pc-sessions{padding:20px 12px 60px}.pc-code-box{padding:12px 18px;gap:10px}.pc-cn{font-size:36px}}
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--blue-deep:#0a0e2e;--blue-royal:#1a2aff;--blue-electric:#2a7fff;--blue-crystal:#4db8ff;--blue-light:#e8f4ff;--white:#fff;--off-white:#f8faff;--gray-light:#e8edf5;--gray-mid:#8892a4;--text-dark:#0d1117;--text-mid:#3d4a5c}
@@ -53,6 +197,52 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 </style>
 </head>
 <body>
+
+<!-- PROFILE APP — shown when URL has ?id= -->
+<div id="profile-app">
+  <div id="pc-loading" class="pc-state">
+    <svg width="48" height="58" viewBox="0 0 80 100" fill="none" style="margin-bottom:20px;opacity:0.4"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/></svg>
+    <div class="pc-state-title">Loading your profile...</div>
+  </div>
+  <div id="pc-notfound" class="pc-state" style="display:none">
+    <div class="pc-state-title">Profile not found</div>
+    <div class="pc-state-sub">This link may be incorrect. Please check your email for your correct profile link.</div>
+    <a href="/" class="pc-state-btn">Return to Occultics</a>
+  </div>
+  <div id="pc-expired" class="pc-state" style="display:none">
+    <div class="pc-state-title">Your profile access has expired</div>
+    <div class="pc-state-sub">Your Transformational Code profile was accessible for 3 months.</div>
+    <a href="/" class="pc-state-btn">Return to Occultics</a>
+  </div>
+  <div id="pc-main" style="display:none">
+    <div class="pc-hdr">
+      <a href="/" class="pc-logo">OCCULTICS</a>
+      <div class="pc-expiry-badge">Expires <span id="pc-expiry">-</span></div>
+    </div>
+    <div class="pc-hero">
+      <svg width="52" height="63" viewBox="0 0 80 100" fill="none" style="margin:0 auto 16px;display:block"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.1"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.3"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.4"/></svg>
+      <div class="pc-eyebrow">The Transformational Code</div>
+      <h1 class="pc-hero-name" id="pc-name">-</h1>
+      <p class="pc-hero-sub" id="pc-sub">7 Sessions - 14 Days</p>
+      <div class="pc-code-box">
+        <div style="text-align:center"><div class="pc-cn" id="pc-bio">-</div><div style="font-size:7px;letter-spacing:1px;color:#8892a4;text-transform:uppercase;margin-top:4px">Biorhythm</div></div>
+        <div class="pc-cd">.</div>
+        <div style="text-align:center"><div class="pc-cn" id="pc-gen">-</div><div style="font-size:7px;letter-spacing:1px;color:#8892a4;text-transform:uppercase;margin-top:4px">Generational</div></div>
+        <div class="pc-cd">.</div>
+        <div style="text-align:center"><div class="pc-cn" id="pc-lp">-</div><div style="font-size:7px;letter-spacing:1px;color:#8892a4;text-transform:uppercase;margin-top:4px">Life Path</div></div>
+      </div>
+      <div class="pc-code-label">Your Pythagorean Code</div>
+    </div>
+    <div class="pc-sessions" id="pc-sessions"></div>
+    <div class="pc-footer">
+      <div class="pc-footer-q">"Your numbers have always known the way."</div>
+      <div class="pc-footer-c">2026 Occultics Publishing - The Transformational Code</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN SITE -->
+<div id="main-site">
 <header>
   <div class="logo-wrap">
     <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
@@ -427,5 +617,6 @@ function setLang(lang){
   document.getElementById('pay-btn').textContent=l.payBtn;document.getElementById('guarantee').textContent=l.guar;
 }
 </script>
+</div><!-- end main-site -->
 </body>
 </html>
