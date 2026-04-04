@@ -3,207 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Transformational Code — Occultics Publishing</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Your Life Code — Occultics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --navy:#0a0e2e;
-  --royal:#1a2aff;
-  --crystal:#4db8ff;
-  --gold:#c9a84c;
-  --gold-light:#e8d5a3;
-  --gray-mid:#8892a4;
-  --white:#fff;
-  --card-bg:rgba(255,255,255,0.03);
-  --card-border:rgba(77,184,255,0.12);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
-
-/* STATE SCREENS */
-.state-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
-.state-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:12px}
-.state-sub{font-size:13px;color:var(--gray-mid);font-weight:300;line-height:1.7;max-width:400px;margin:0 auto 24px}
-.state-btn{display:inline-block;padding:12px 32px;background:var(--royal);color:var(--white);border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-decoration:none;font-family:'Montserrat',sans-serif;text-transform:uppercase}
-
-/* HEADER */
-.hdr{background:rgba(10,14,46,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-name{font-weight:700;font-size:12px;letter-spacing:4px;color:var(--white)}
-.hdr-right{display:flex;align-items:center;gap:14px}
-.expiry-badge{font-size:10px;color:var(--gray-mid)}
-.expiry-badge span{color:var(--crystal)}
-.pdf-btn{padding:7px 16px;border:1px solid rgba(77,184,255,0.2);border-radius:6px;font-size:10px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;color:var(--gray-mid);background:transparent;transition:all .2s;text-transform:uppercase}
-.pdf-btn:hover{border-color:var(--crystal);color:var(--crystal)}
-
-/* HERO */
-.hero{padding:64px 32px 48px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.08);background:radial-gradient(ellipse at 50% 0%,rgba(26,42,255,0.08) 0%,transparent 70%)}
-.hero-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
-.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,64px);font-weight:300;line-height:1.05;margin-bottom:8px}
-.hero-sub{font-size:11px;color:var(--gray-mid);margin-bottom:28px;font-weight:300;letter-spacing:0.5px}
-.code-box{display:inline-flex;align-items:center;gap:14px;background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:14px;padding:16px 32px;margin-bottom:10px}
-.code-n{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--crystal);line-height:1}
-.code-dot{font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(77,184,255,0.25)}
-.code-label{font-size:8px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-top:16px}
-
-/* SESSIONS */
-.sessions-wrap{max-width:800px;margin:0 auto;padding:40px 24px 80px}
-
-/* SESSION CARD */
-.session-card{margin-bottom:14px;border-radius:14px;overflow:hidden;border:1px solid rgba(77,184,255,0.12);background:var(--card-bg);transition:border-color .2s}
-.session-card.unlocked{border-color:rgba(77,184,255,0.18)}
-.session-card.locked{border-color:rgba(255,255,255,0.05);opacity:0.55}
-.session-card.unlocked:hover{border-color:rgba(77,184,255,0.3)}
-
-/* SESSION HEADER */
-.session-hdr{display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;user-select:none}
-.session-card.locked .session-hdr{cursor:default}
-.s-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:rgba(77,184,255,0.2);line-height:1;flex-shrink:0;width:40px}
-.s-meta{flex:1}
-.s-eyebrow{font-size:8px;letter-spacing:1.5px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:3px}
-.s-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;line-height:1.2}
-.s-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.unlock-label{font-size:10px;color:rgba(77,184,255,0.4);letter-spacing:0.5px}
-
-/* PLAY BUTTON */
-.play-btn{width:38px;height:38px;border-radius:50%;background:var(--royal);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s;outline:none}
-.play-btn:hover{background:#2a3aff}
-.play-btn.playing{background:#e74c3c}
-.play-icon{width:0;height:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-left:10px solid #fff;margin-left:2px}
-.pause-icon{display:flex;gap:3px}
-.pause-bar{width:3px;height:12px;background:#fff;border-radius:1px}
-
-/* AUDIO PROGRESS BAR */
-.audio-bar-wrap{padding:0 20px 14px;display:flex;align-items:center;gap:10px}
-.audio-time{font-size:10px;color:var(--gray-mid);font-family:'Montserrat',sans-serif;min-width:34px}
-.audio-bar{flex:1;height:3px;background:rgba(77,184,255,0.12);border-radius:2px;cursor:pointer;position:relative}
-.audio-fill{height:100%;background:var(--crystal);border-radius:2px;width:0%;transition:width .1s linear}
-
-/* SESSION CONTENT */
-.session-body{padding:0 20px 24px;display:none}
-.session-body.open{display:block}
-.session-text{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.75);font-weight:300}
-.session-text p{margin-bottom:16px}
-.session-text p:last-child{margin-bottom:0}
-
-/* DIVIDER */
-.mid-quote{text-align:center;padding:32px 16px;margin:8px 0}
-.mq-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);line-height:1.6}
-
-/* SKELETON */
-.skeleton-line{height:13px;background:rgba(255,255,255,0.04);border-radius:6px;margin-bottom:10px;animation:shimmer 1.5s ease-in-out infinite}
-.skeleton-line.l{width:92%}.skeleton-line.m{width:68%}.skeleton-line.s{width:45%}
-@keyframes shimmer{0%,100%{opacity:.4}50%{opacity:.9}}
-
-/* FOOTER */
-.footer{text-align:center;padding:28px;border-top:1px solid rgba(77,184,255,0.08)}
-.footer-q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.15);margin-bottom:6px}
-.footer-c{font-size:9px;color:rgba(255,255,255,0.08)}
-
-@media(max-width:600px){
-  .hdr{padding:12px 16px}
-  .hero{padding:48px 16px 32px}
-  .sessions-wrap{padding:24px 14px 60px}
-  .expiry-badge{display:none}
-  .code-box{padding:12px 20px;gap:10px}
-  .code-n{font-size:36px}
-}
-@media print{
-  .hdr,.pdf-btn{display:none}
-  body{background:#fff;color:#000}
-  .hero-name,.s-title{color:#000}
-  .session-text{color:#333}
-  .session-body{display:block!important}
-}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-height:100vh;}
+#loading{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+#loading svg{opacity:0.4;}
+#loading p{font-size:11px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;}
+#notfound{min-height:100vh;display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:40px;}
+#notfound h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;}
+#notfound p{font-size:13px;color:#8892a4;}
+#notfound a{color:#4db8ff;text-decoration:none;}
+#main{display:none;width:100%;}
+.hdr{background:rgba(10,14,46,0.97);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.hdr a{font-weight:700;font-size:12px;letter-spacing:4px;color:#fff;text-decoration:none;}
+.hdr span{font-size:10px;color:#8892a4;}
+.hero{padding:60px 32px 44px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.08);background:radial-gradient(ellipse at 50% 0%,rgba(26,42,255,0.08) 0%,transparent 70%);}
+.eyebrow{font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:16px;}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;margin-bottom:8px;}
+.hero-sub{font-size:11px;color:#8892a4;margin-bottom:28px;}
+.code-box{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:8px;}
+.code-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#4db8ff;}
+.code-dot{font-size:24px;color:rgba(77,184,255,0.3);}
+.code-label{font-size:8px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;text-align:center;}
+.sessions{max-width:720px;margin:0 auto;padding:40px 24px;}
+.session-card{border:1px solid rgba(77,184,255,0.1);border-radius:16px;margin-bottom:16px;overflow:hidden;}
+.session-card.unlocked{border-color:rgba(77,184,255,0.2);}
+.session-card.locked{opacity:0.5;}
+.session-hdr{padding:20px 24px;display:flex;align-items:center;gap:16px;cursor:pointer;background:rgba(255,255,255,0.02);}
+.session-hdr:hover{background:rgba(255,255,255,0.04);}
+.session-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#4db8ff;min-width:48px;}
+.session-meta{flex:1;}
+.session-ey{font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-bottom:4px;}
+.session-ti{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;}
+.session-arr{color:#4db8ff;font-size:18px;transition:transform 0.2s;}
+.session-body{display:none;padding:0 24px 24px;}
+.session-body.open{display:block;}
+.session-body p{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.85);margin-bottom:20px;}
+.session-lock{font-size:10px;color:#8892a4;letter-spacing:1px;}
+.footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
+.footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
+.footer-copy{font-size:9px;color:rgba(255,255,255,0.1);}
 </style>
 </head>
 <body>
 
-<!-- LOADING -->
-<div id="state-loading" class="state-screen">
-  <svg width="48" height="58" viewBox="0 0 80 100" fill="none" style="margin-bottom:20px;opacity:0.4">
-    <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/>
-    <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/>
-    <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/>
-  </svg>
-  <div class="state-title">Loading your profile...</div>
+<div id="loading">
+  <svg width="48" height="58" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/></svg>
+  <p>Loading your profile...</p>
 </div>
 
-<!-- EXPIRED -->
-<div id="state-expired" class="state-screen" style="display:none">
-  <div class="state-title">Your profile access has expired</div>
-  <div class="state-sub">Your Transformational Code profile was accessible for 3 months. To renew or purchase a new reading, visit occultics.ai</div>
-  <a href="https://occultics.ai" class="state-btn">Return to Occultics</a>
+<div id="notfound">
+  <h2>Profile not found</h2>
+  <p>This link may be incorrect or expired.</p>
+  <a href="/">Return to Occultics</a>
 </div>
 
-<!-- NOT FOUND -->
-<div id="state-notfound" class="state-screen" style="display:none">
-  <div class="state-title">Profile not found</div>
-  <div class="state-sub">This link may be incorrect. Please check your email for your correct profile link.</div>
-  <a href="https://occultics.ai" class="state-btn">Return to Occultics</a>
-</div>
-
-<!-- MAIN PROFILE -->
-<div id="main-profile" style="display:none">
-
-  <header class="hdr">
-    <a href="https://occultics.ai" class="logo-wrap">
-      <svg width="20" height="24" viewBox="0 0 80 100" fill="none">
-        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-        <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-        <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-      </svg>
-      <span class="logo-name">OCCULTICS</span>
-    </a>
-    <div class="hdr-right">
-      <div class="expiry-badge">Expires <span id="expiry-display">—</span></div>
-      <button class="pdf-btn" onclick="window.print()">↓ Save PDF</button>
-    </div>
-  </header>
-
+<div id="main">
+  <div class="hdr">
+    <a href="/">OCCULTICS</a>
+    <span>Expires <span id="expiry">—</span></span>
+  </div>
   <div class="hero">
-    <svg width="56" height="68" viewBox="0 0 80 100" fill="none" style="margin:0 auto 16px;display:block">
-      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.1"/>
-      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.3"/>
-      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.4"/>
-      <polygon points="40,14 65,32 40,48" fill="#fff" opacity="0.15"/>
-    </svg>
-    <div class="hero-eyebrow">The Transformational Code</div>
-    <h1 class="hero-name" id="hero-name">—</h1>
-    <p class="hero-sub" id="hero-sub">7 Sessions · 14 Days · Your Complete Personal Reading</p>
+    <div class="eyebrow">The Life Code Alignment</div>
+    <h1 class="hero-name" id="pname">—</h1>
+    <p class="hero-sub" id="psub">—</p>
     <div class="code-box">
-      <div style="text-align:center">
-        <div class="code-n" id="code-bio">—</div>
-        <div style="font-size:7px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Biorhythm</div>
-      </div>
+      <div><div class="code-num" id="pbio">—</div><div class="code-label">Biorhythm</div></div>
       <div class="code-dot">·</div>
-      <div style="text-align:center">
-        <div class="code-n" id="code-gen">—</div>
-        <div style="font-size:7px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Generational</div>
-      </div>
+      <div><div class="code-num" id="pgen">—</div><div class="code-label">Generational</div></div>
       <div class="code-dot">·</div>
-      <div style="text-align:center">
-        <div class="code-n" id="code-lp">—</div>
-        <div style="font-size:7px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:4px">Life Path</div>
-      </div>
+      <div><div class="code-num" id="plp">—</div><div class="code-label">Life Path</div></div>
     </div>
-    <div class="code-label">Your Pythagorean Code</div>
   </div>
-
-  <div class="sessions-wrap" id="sessions-wrap">
-    <!-- Sessions rendered by JS -->
+  <div class="sessions" id="sessions"></div>
+  <div class="footer">
+    <div class="footer-quote">"Your numbers have always known the way."</div>
+    <div class="footer-copy">© 2026 Occultics Publishing</div>
   </div>
-
-  <footer class="footer">
-    <div class="footer-q">"Your numbers have always known the way."</div>
-    <div class="footer-c">© 2026 Occultics Publishing · occultics.ai · The Transformational Code · For informational and entertainment purposes only.</div>
-  </footer>
-
 </div>
 
 <script>
@@ -211,237 +89,107 @@ var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
 var SESSION_DEFS = [
-  {key:'session1', num:'01', day:'Day 1',  title:'Who You Are'},
-  {key:'session2', num:'02', day:'Day 3',  title:'How You Feel'},
-  {key:'session3', num:'03', day:'Day 5',  title:'What You Truly Need'},
-  {key:'session4', num:'04', day:'Day 7',  title:'Why You React The Way You React'},
-  {key:'session5', num:'05', day:'Day 9',  title:'The Karma You Carry'},
-  {key:'session6', num:'06', day:'Day 11', title:'The Architecture of Your Life'},
-  {key:'session7', num:'07', day:'Day 13', title:'What You Attract'},
+  {key:'session1', num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
+  {key:'session2', num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
+  {key:'session3', num:'03', day:'Day 5',  title:'Your Core Drivers'},
+  {key:'session4', num:'04', day:'Day 7',  title:'Your Behavioral Code'},
+  {key:'session5', num:'05', day:'Day 9',  title:'Your Karmic Blueprint'},
+  {key:'session6', num:'06', day:'Day 11', title:'The Architecture of Your Reality'},
+  {key:'session7', num:'07', day:'Day 13', title:'Your Energetic Patterns'},
 ];
 
-var currentAudio = null;
-var currentBtn = null;
-
-// Get profile ID from URL query parameter ?id=xxx
-function getProfileId(){
-  var params = new URLSearchParams(window.location.search);
-  return params.get('id') || '';
-}
-
-function formatDate(str){
+function formatDate(str) {
   if(!str) return '—';
-  var d = new Date(str);
-  return d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  try { return new Date(str).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}); }
+  catch(e) { return str; }
 }
 
-function isExpired(str){
-  if(!str) return false;
-  return new Date() > new Date(str);
+function textToHTML(text) {
+  if(!text || text === 'Generating...') return '<p style="color:#8892a4;font-style:italic;">Your session is being prepared. Please refresh in a few minutes.</p>';
+  return text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){return '<p>'+p.trim()+'</p>';}).join('');
 }
 
-function skeleton(){
-  return '<div class="skeleton-line l"></div><div class="skeleton-line m"></div><div class="skeleton-line l"></div><div class="skeleton-line s"></div><div class="skeleton-line l"></div><div class="skeleton-line m"></div>';
-}
-
-function textToParas(text){
-  if(!text) return skeleton();
-  var paras = text.split('\n\n').filter(function(p){return p.trim().length > 0;});
-  if(paras.length === 0) return '<p>'+text+'</p>';
-  return paras.map(function(p){return '<p>'+p.trim()+'</p>';}).join('');
-}
-
-function toggleSession(key){
-  var body = document.getElementById('body-'+key);
-  if(!body) return;
-  if(body.classList.contains('open')){
+function toggleSession(idx) {
+  var body = document.getElementById('sb'+idx);
+  var arr = document.getElementById('sa'+idx);
+  if(body.classList.contains('open')) {
     body.classList.remove('open');
+    arr.style.transform = '';
   } else {
     body.classList.add('open');
+    arr.style.transform = 'rotate(180deg)';
   }
 }
 
-function toggleAudio(key, audioUrl){
-  var btn = document.getElementById('play-'+key);
-  if(!btn) return;
-
-  // If same session — pause/resume
-  if(currentAudio && currentBtn === btn){
-    if(currentAudio.paused){
-      currentAudio.play();
-      btn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
-      btn.classList.add('playing');
-    } else {
-      currentAudio.pause();
-      btn.innerHTML = '<div class="play-icon"></div>';
-      btn.classList.remove('playing');
-    }
-    return;
-  }
-
-  // Stop previous
-  if(currentAudio){
-    currentAudio.pause();
-    if(currentBtn){
-      currentBtn.innerHTML = '<div class="play-icon"></div>';
-      currentBtn.classList.remove('playing');
-    }
-  }
-
-  if(!audioUrl){
-    // No audio yet — show text instead
-    var body = document.getElementById('body-'+key);
-    if(body) body.classList.add('open');
-    return;
-  }
-
-  // Play new audio
-  currentAudio = new Audio(audioUrl);
-  currentBtn = btn;
-
-  var fill = document.getElementById('fill-'+key);
-  var timeEl = document.getElementById('time-'+key);
-
-  currentAudio.addEventListener('timeupdate', function(){
-    if(currentAudio.duration && fill){
-      fill.style.width = (currentAudio.currentTime / currentAudio.duration * 100) + '%';
-    }
-    if(timeEl && currentAudio.duration){
-      var rem = Math.floor(currentAudio.duration - currentAudio.currentTime);
-      var m = Math.floor(rem/60);
-      var s = rem % 60;
-      timeEl.textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    }
-  });
-
-  currentAudio.addEventListener('ended', function(){
-    btn.innerHTML = '<div class="play-icon"></div>';
-    btn.classList.remove('playing');
-    if(fill) fill.style.width = '0%';
-    currentAudio = null;
-    currentBtn = null;
-  });
-
-  currentAudio.play();
-  btn.innerHTML = '<div class="pause-icon"><div class="pause-bar"></div><div class="pause-bar"></div></div>';
-  btn.classList.add('playing');
-}
-
-function renderSessions(sections){
+function renderSessions(sections) {
   var html = '';
-
-  SESSION_DEFS.forEach(function(def, idx){
-    var session = sections[def.key] || {};
-    var unlocked = session.unlocked === true || session.text;
-    var text = session.text || '';
-    var audioUrl = session.audio_url || '';
-
-    if(unlocked){
-      html += '<div class="session-card unlocked" id="card-'+def.key+'">';
-      html += '<div class="session-hdr" onclick="toggleSession(\''+def.key+'\')">';
-      html += '<div class="s-num">'+def.num+'</div>';
-      html += '<div class="s-meta">';
-      html += '<div class="s-eyebrow">Session '+def.num+' · '+def.day+'</div>';
-      html += '<div class="s-title">'+def.title+'</div>';
+  SESSION_DEFS.forEach(function(def, idx) {
+    var s = sections[def.key] || {};
+    var unlocked = s.unlocked || s.text;
+    if(unlocked) {
+      html += '<div class="session-card unlocked">';
+      html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
+      html += '<div class="session-num">'+def.num+'</div>';
+      html += '<div class="session-meta"><div class="session-ey">Session '+def.num+' · '+def.day+'</div><div class="session-ti">'+def.title+'</div></div>';
+      html += '<div class="session-arr" id="sa'+idx+'">↓</div>';
       html += '</div>';
-      html += '<div class="s-right">';
-      html += '<button class="play-btn" id="play-'+def.key+'" onclick="event.stopPropagation();toggleAudio(\''+def.key+'\',\''+audioUrl+'\')">';
-      html += '<div class="play-icon"></div></button>';
-      html += '</div>';
-      html += '</div>';
-      // Audio bar
-      html += '<div class="audio-bar-wrap" id="audiobar-'+def.key+'">';
-      html += '<div class="audio-time">—</div>';
-      html += '<div class="audio-bar"><div class="audio-fill" id="fill-'+def.key+'"></div></div>';
-      html += '<div class="audio-time" id="time-'+def.key+'">—</div>';
-      html += '</div>';
-      // Text body
-      html += '<div class="session-body" id="body-'+def.key+'">';
-      html += '<div class="session-text">'+textToParas(text)+'</div>';
-      html += '</div>';
+      html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'">'+textToHTML(s.text)+'</div>';
       html += '</div>';
     } else {
       html += '<div class="session-card locked">';
       html += '<div class="session-hdr">';
-      html += '<div class="s-num">'+def.num+'</div>';
-      html += '<div class="s-meta">';
-      html += '<div class="s-eyebrow">Session '+def.num+'</div>';
-      html += '<div class="s-title">'+def.title+'</div>';
-      html += '</div>';
-      html += '<div class="s-right"><div class="unlock-label">Unlocks '+def.day+'</div></div>';
-      html += '</div>';
-      html += '</div>';
-    }
-
-    // Mid quote after session 4
-    if(idx === 3){
-      html += '<div class="mid-quote"><div class="mq-text">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</div></div>';
+      html += '<div class="session-num">'+def.num+'</div>';
+      html += '<div class="session-meta"><div class="session-ey">Session '+def.num+'</div><div class="session-ti">'+def.title+'</div></div>';
+      html += '<div class="session-lock">Unlocks '+def.day+'</div>';
+      html += '</div></div>';
     }
   });
-
-  document.getElementById('sessions-wrap').innerHTML = html;
-
-  // Auto-open first unlocked session
-  var first = SESSION_DEFS[0];
-  var firstBody = document.getElementById('body-'+first.key);
-  if(firstBody) firstBody.classList.add('open');
+  document.getElementById('sessions').innerHTML = html;
 }
 
-async function loadProfile(){
-  var id = getProfileId();
-
-  if(!id){
-    document.getElementById('state-loading').style.display = 'none';
-    document.getElementById('state-notfound').style.display = 'flex';
+function loadProfile() {
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  if(!id) {
+    document.getElementById('loading').style.display='none';
+    document.getElementById('notfound').style.display='flex';
     return;
   }
 
-  try{
-    var res = await fetch(
-      SUPABASE_URL + '/rest/v1/transformational_profiles?profile_id=eq.' + encodeURIComponent(id) + '&select=*',
-      {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}}
-    );
-
-    var data = await res.json();
-
-    if(!data || data.length === 0){
-      document.getElementById('state-loading').style.display = 'none';
-      document.getElementById('state-notfound').style.display = 'flex';
+  fetch(SUPABASE_URL+'/rest/v1/transformational_profiles?profile_id=eq.'+encodeURIComponent(id)+'&select=*', {
+    headers: {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer '+SUPABASE_KEY}
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    document.getElementById('loading').style.display='none';
+    if(!data || !data.length) {
+      document.getElementById('notfound').style.display='flex';
       return;
     }
-
     var p = data[0];
+    document.getElementById('pname').textContent = p.name || '—';
+    document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
+    document.getElementById('pbio').textContent = p.biorhythm || '—';
+    document.getElementById('pgen').textContent = p.generational || '—';
+    document.getElementById('plp').textContent = p.life_path || '—';
+    document.getElementById('expiry').textContent = formatDate(p.expires_at);
+    document.title = (p.name||'Your')+' Life Code — Occultics';
 
-    if(isExpired(p.expires_at)){
-      document.getElementById('state-loading').style.display = 'none';
-      document.getElementById('state-expired').style.display = 'flex';
-      return;
+    var sections = p.sections || {};
+    if(typeof sections === 'string') {
+      try { sections = JSON.parse(sections); } catch(e) { sections = {}; }
     }
-
-    // Populate hero
-    document.getElementById('hero-name').textContent = p.name;
-    document.getElementById('hero-sub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 7 Sessions · 14 Days';
-    document.getElementById('code-bio').textContent = p.biorhythm || '—';
-    document.getElementById('code-gen').textContent = p.generational || '—';
-    document.getElementById('code-lp').textContent = p.life_path || '—';
-    document.getElementById('expiry-display').textContent = formatDate(p.expires_at);
-    document.title = p.name + ' — The Transformational Code · Occultics';
-
-    // Render sessions
-    renderSessions(p.sections || {});
-
-    // Show profile
-    document.getElementById('state-loading').style.display = 'none';
-    document.getElementById('main-profile').style.display = 'block';
-
-  } catch(e){
-    console.error(e);
-    document.getElementById('state-loading').style.display = 'none';
-    document.getElementById('state-notfound').style.display = 'flex';
-  }
+    renderSessions(sections);
+    document.getElementById('main').style.display = 'block';
+  })
+  .catch(function(err) {
+    console.error('Load error:', err);
+    document.getElementById('loading').style.display='none';
+    document.getElementById('notfound').style.display='flex';
+  });
 }
 
-document.addEventListener('DOMContentLoaded', loadProfile);
+loadProfile();
 </script>
 </body>
 </html>
