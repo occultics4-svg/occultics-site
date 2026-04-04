@@ -605,7 +605,7 @@ async function handleLCMPayment(){
     if(data.url){window.location.href=data.url;}
     else throw new Error(data.error||'Unknown error');
   }catch(e){
-    alert('Something went wrong. Please try again.');
+    alert('Error: ' + e.message);
     btn.textContent='Session 1 Only — Life Code Map · $297';btn.disabled=false;
   }
 }
@@ -628,7 +628,7 @@ async function handleLCAPayment(){
     if(data.url){window.location.href=data.url;}
     else throw new Error(data.error||'Unknown error');
   }catch(e){
-    alert('Something went wrong. Please try again.');
+    alert('Error: ' + e.message);
     btn.textContent='✦ Begin The Life Code Alignment — $2,222';btn.disabled=false;
   }
 }
