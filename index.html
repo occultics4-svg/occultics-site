@@ -85,14 +85,21 @@ Two complete Life Code Alignment profiles. Every layer of both codes — emotion
   var id = params.get('id');
   if(!id) return;
 
-  // Hide main site immediately
-  document.addEventListener('DOMContentLoaded', function(){
+  // Hide main site and show profile app
+  function initProfile() {
     var main = document.getElementById('main-site');
     if(main) main.style.display = 'none';
     var profile = document.getElementById('profile-app');
     if(profile) profile.style.display = 'block';
     loadProfile(id);
-  });
+  }
+
+  // Run immediately if DOM ready, otherwise wait
+  if(document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProfile);
+  } else {
+    initProfile();
+  }
 
   var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
@@ -183,6 +190,7 @@ Two complete Life Code Alignment profiles. Every layer of both codes — emotion
 <style>
 /* Profile App Styles */
 #profile-app{display:none;background:#0a0e2e;min-height:100vh;font-family:'Montserrat',sans-serif;color:#fff}
+#pc-main{display:block;width:100%;min-height:100vh;background:#0a0e2e;color:#fff;}
 .pc-state{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;background:#0a0e2e}
 .pc-state-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:12px}
 .pc-state-sub{font-size:13px;color:#8892a4;line-height:1.7;max-width:400px;margin:0 auto 24px}
