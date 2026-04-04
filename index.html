@@ -167,7 +167,9 @@ Two complete Life Code Alignment profiles. Every layer of both codes — emotion
       document.getElementById('pc-lp').textContent = p.life_path||'—';
       document.getElementById('pc-expiry').textContent = formatDate(p.expires_at);
       document.title = p.name+' — The Transformational Code · Occultics';
-      renderSessions(p.sections||{});
+      var sections = p.sections || {};
+      if (typeof sections === 'string') { try { sections = JSON.parse(sections); } catch(e) { sections = {}; } }
+      renderSessions(sections);
       document.getElementById('pc-loading').style.display='none';
       document.getElementById('pc-main').style.display='block';
     })
