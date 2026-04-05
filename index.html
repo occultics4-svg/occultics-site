@@ -27,7 +27,11 @@
   <p class="hero-sub" id="hero-sub">Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.</p>
   <p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages</p>
   <button class="hero-cta" onclick="openCompatModal()" id="hero-cta-btn">Discover The Compatibility Code — $3,700</button>
-  <p style="margin-top:12px;"><span onclick="openLCAModal()" style="color:rgba(255,255,255,0.5);font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;">Try Session 1 only — Life Code Alignment · $2,222</span></p>
+  <p style="margin-top:14px;">
+    <span onclick="openLCAModal()" style="color:#1a2aff;font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;">Try Session 1 only — Life Code Alignment · $2,222</span>
+    <span style="color:rgba(26,42,255,0.4);font-size:11px;font-family:'Montserrat',sans-serif;margin:0 8px;">·</span>
+    <span onclick="openLCMModal()" style="color:#1a2aff;font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;">Life Code Map · $297</span>
+  </p>
   <div class="hero-price" id="hero-price"><strong>$297</strong> · 1 session · 30 minutes · Private profile in 24hrs</div>
 </section>
 
@@ -39,7 +43,7 @@
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;color:#fff;line-height:1.1;margin-bottom:16px;">Every Relationship Has a<br><em style="font-style:italic;color:#4db8ff;">Mathematical Signature.</em></h2>
     <p style="font-size:13px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;font-weight:500;margin-bottom:16px;font-family:'Montserrat',sans-serif;">The Compatibility Code</p>
     <p style="font-size:11px;color:rgba(255,255,255,0.25);font-family:'Montserrat',sans-serif;margin-bottom:24px;letter-spacing:1px;">✦ 2 complete Life Code Alignment profiles ✦ 28 days ✦ 1 private profile ✦ 3 languages</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto 40px;line-height:1.8;font-style:italic;">Two birth dates contain more information about your connection than years of conversation. Pythagorean numerology has mapped human relationships for 2,500 years. We have digitized 700,000 words of that research into a complete compatibility reading.
+    <p style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto 40px;line-height:1.8;font-style:italic;">Two birth dates contain more information about your connection than years of conversation. Pythagorean numerology has mapped human relationships for 2,500 years. We have digitized 700,000 words of that research into a complete compatibility session.
 
 Two complete Life Code Alignment profiles. Every layer of both codes — emotional frequencies, core drivers, behavioral patterns, karmic blueprints, and the mathematics of what happens when your two codes meet. One private profile. 28 days.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto 40px;">
@@ -60,35 +64,13 @@ Two complete Life Code Alignment profiles. Every layer of both codes — emotion
       <div style="font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:6px;">Investment</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:#fff;">$3,700</div>
     </div>
-    <p style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Launching soon — join the waitlist to be notified first</p>
-    <div style="margin-top:20px;">
-      <input type="email" id="compat-waitlist-email" placeholder="your@email.com" style="padding:10px 16px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;width:240px;margin-right:8px;">
-      <button onclick="joinCompatWaitlist()" style="padding:10px 20px;background:transparent;color:#4db8ff;border:1px solid rgba(77,184,255,0.3);border-radius:7px;font-size:10px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;">Notify Me</button>
-    </div>
+    <p style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;margin-bottom:20px;">Private profile within 24hrs · 28 days · 11 sessions · 3 languages</p>
+    <button onclick="openCompatModal()" style="padding:16px 40px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Begin The Compatibility Code — $3,700</button>
   </div>
 </section>
 
 <script>
-async function joinCompatWaitlist(){
-  var email = document.getElementById('compat-waitlist-email').value.trim();
-  if(!email){alert('Please enter your email.');return;}
-  // Store in Supabase waitlist
-  try{
-    await fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/waitlist',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-        'apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k',
-        'Authorization':'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k'
-      },
-      body:JSON.stringify({email:email,type:'compatibility_code',source:'website'})
-    });
-    document.getElementById('compat-waitlist-email').value='';
-    alert('You are on the list. We will notify you when The Compatibility Code launches.');
-  }catch(e){
-    alert('Something went wrong. Please try again.');
-  }
-}
+
 </script>
  html>
 <html lang="en">
@@ -349,8 +331,8 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   <h2 class="section-title" id="hiw-title">Ancient Wisdom. Modern Precision.</h2>
   <div class="step-list">
     <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title" id="s1t">Enter your birth date</div><div class="step-desc" id="s1d">Your date of birth encodes three independent numbers — your biorhythm, your generational frequency, and your life path. These three numbers contain everything. That is all we need.</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Your code is computed</div><div class="step-desc" id="s2d">Your Pythagorean code is cross-referenced against 350,000+ words of proprietary research — producing a reading specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.</div></div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title" id="s3t">Your private profile is ready</div><div class="step-desc" id="s3d">Your reading is delivered to a private profile page that belongs only to you. Not a horoscope. Not a personality quiz. A mathematically precise portrait of who you are — and why you have always been this way.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Your code is computed</div><div class="step-desc" id="s2d">Your Pythagorean code is cross-referenced against 350,000+ words of proprietary research — producing a session specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title" id="s3t">Your private profile is ready</div><div class="step-desc" id="s3d">Your session is delivered to a private profile page that belongs only to you. Not a horoscope. Not a personality quiz. A mathematically precise portrait of who you are — and why you have always been this way.</div></div></div>
   </div>
 </section>
 
@@ -389,7 +371,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <div class="method-block">
       <div class="method-block-num">AI</div>
       <div class="method-block-title" id="meth-b4-title">The Technology</div>
-      <div class="method-block-text" id="meth-b4-text">Each session is generated by an AI system trained specifically on 700,000 words of proprietary Pythagorean research. The result is a deeply personal reading — specific to your exact birth date, birth time, and the karmic threads written into your numbers.</div>
+      <div class="method-block-text" id="meth-b4-text">Each session is generated by an AI system trained specifically on 700,000 words of proprietary Pythagorean research. The result is a deeply personal session — specific to your exact birth date, birth time, and the karmic threads written into your numbers.</div>
     </div>
     <div class="method-quote">
       <div class="method-quote-text" id="meth-quote">"Numbers are the highest degree of knowledge. It is knowledge itself."</div>
@@ -498,7 +480,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     </div>
 
     <p style="text-align:center;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">Secure payment · Private profile within 24hrs · Life Code Map credit applied toward full program</p>
-    <p style="text-align:center;margin-top:12px;"><span onclick="openLCMModal()" style="color:#4db8ff;font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;font-weight:500;">Try Session 1 only — Life Code Map · $297</span></p>
+    <p style="text-align:center;margin-top:12px;"><span onclick="openLCMModal()" style="color:#1a2aff;font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;font-weight:500;">Try Session 1 only — Life Code Map · $297</span></p>
 
   </div>
 </section>
@@ -623,7 +605,7 @@ async function handleLCMPayment(){
     if(data.url){window.location.href=data.url;}
     else throw new Error(data.error||'Unknown error');
   }catch(e){
-    alert('Something went wrong. Please try again.');
+    alert('Error: ' + e.message);
     btn.textContent='Session 1 Only — Life Code Map · $297';btn.disabled=false;
   }
 }
@@ -646,7 +628,7 @@ async function handleLCAPayment(){
     if(data.url){window.location.href=data.url;}
     else throw new Error(data.error||'Unknown error');
   }catch(e){
-    alert('Something went wrong. Please try again.');
+    alert('Error: ' + e.message);
     btn.textContent='✦ Begin The Life Code Alignment — $2,222';btn.disabled=false;
   }
 }
@@ -722,223 +704,94 @@ async function handleLCAPayment(){
   </div>
 </div>
 
+
+</div><!-- end main-site -->
+
+<!-- COMPATIBILITY CODE MODAL -->
+<div id="modal-compat" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closeCompatModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
+    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Compatibility Code</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Two codes. 28 days. One picture.</div>
+    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">Enter both birth dates to begin.</div>
+
+    <!-- Person 1 -->
+    <div style="font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:12px;">Your Details</div>
+    <input id="compat-name1" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="compat-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="compat-dob1" type="text" placeholder="Your date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="compat-time1" type="text" placeholder="Your time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:20px;box-sizing:border-box;">
+
+    <!-- Person 2 -->
+    <div style="font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:12px;">Person of Interest</div>
+    <input id="compat-name2" type="text" placeholder="Their name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="compat-dob2" type="text" placeholder="Their date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="compat-time2" type="text" placeholder="Their time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:20px;box-sizing:border-box;">
+
+    <!-- Language -->
+    <select id="compat-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ja">日本語</option>
+    </select>
+
+    <button onclick="handleCompatPayment()" id="compat-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Begin The Compatibility Code — $3,700</button>
+    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 28 days · 11 sessions</div>
+  </div>
+</div>
+
 <script>
-function openLCMModal(){document.getElementById('modal-compat').classList.add('active');document.body.style.overflow='hidden'}
-function closeModal(){document.getElementById('modal-compat').classList.remove('active');document.body.style.overflow=''}
-document.getElementById('modal-compat').addEventListener('click',function(e){if(e.target===this)closeModal()});
+function openCompatModal(){document.getElementById('modal-compat').style.display='flex';document.body.style.overflow='hidden';}
+function closeCompatModal(){document.getElementById('modal-compat').style.display='none';document.body.style.overflow='';}
 
-async function handlePayment(){
-  var payload={
-    type:'compatibility',
-    lang:window._reportLang||'en',
-    name:document.getElementById('c-name1').value.trim(),
-    email:document.getElementById('c-email').value.trim(),
-    dob:document.getElementById('c-dob1').value,
-    time:document.getElementById('c-time1').value||'12:00',
-    gender:document.getElementById('c-gender1').value,
-    name2:document.getElementById('c-name2').value.trim(),
-    dob2:document.getElementById('c-dob2').value,
-    time2:document.getElementById('c-time2').value||'12:00',
-    gender2:document.getElementById('c-gender2').value
-  };
-  if(!payload.name||!payload.dob||!payload.name2||!payload.dob2||!payload.email){alert('Please fill in all fields.');return}
-  var btn=document.getElementById('pay-btn');btn.textContent='⏳ Processing...';btn.disabled=true;
-  try{
-    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    var data=await res.json();
-    if(data.url){window.location.href=data.url}else{throw new Error(data.error||'Checkout failed')}
-  }catch(err){
-    window.open('https://buy.stripe.com/test_fZu5kvfGb0aq1Lz9LX0co04','_blank')
-  }finally{
-    btn.textContent='✦ Session 1 Only — Life Code Map · $297';btn.disabled=false
+async function handleCompatPayment(){
+  var name1 = document.getElementById('compat-name1').value.trim();
+  var email = document.getElementById('compat-email').value.trim();
+  var dob1 = document.getElementById('compat-dob1').value.trim();
+  var time1 = document.getElementById('compat-time1').value.trim();
+  var name2 = document.getElementById('compat-name2').value.trim();
+  var dob2 = document.getElementById('compat-dob2').value.trim();
+  var time2 = document.getElementById('compat-time2').value.trim();
+  var lang = document.getElementById('compat-lang').value;
+
+  if(!name1){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  if(!dob1){alert('Please enter your date of birth.');return;}
+  if(!dob2){alert('Please enter their date of birth.');return;}
+
+  var btn = document.getElementById('compat-pay-btn');
+  btn.textContent = 'Preparing your session...';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        type: 'compatibility_code',
+        email: email,
+        name: name1,
+        dob: dob1,
+        time: time1,
+        name2: name2,
+        dob2: dob2,
+        time2: time2,
+        lang: lang
+      })
+    });
+    var data = await res.json();
+    if(data.url){
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Payment error');
+    }
+  } catch(err) {
+    alert('Something went wrong: ' + err.message);
+    btn.textContent = '✦ Begin The Compatibility Code — $3,700';
+    btn.disabled = false;
   }
-}
-
-var T={
-en:{
-  tagline:'Know Your Numbers. Find Your People.',
-  eyebrow:'Ancient Wisdom. Modern Precision. — Powered by 350,000+ Words of Research',
-  title:'Every Relationship Has a<br><em>Mathematical Signature.</em>',
-  sub:'Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.',
-  anchor:'✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages',
-  heroCtaBtn:'Begin The Life Code Alignment — $2,222',
-  heroPrice:'<strong>$297</strong> · 1 session · 30 minutes · Private profile in 24hrs',
-  navCta:'Life Code Map — $297',navMatch:'Match',
-  sp1:'Words of Research',sp2:'Compatibility Codes',sp3:'Years of Tradition',sp4:'Avg Saved vs Numerologist',
-  hiwE:'How It Works',hiwT:'The Science of Human Connection. Digitized.',
-  s1t:'Enter your birth date',s1d:'Date of birth encodes biorhythm, generational frequency, and life path — three independent variables that define how two people interact. That is all we need.',
-  s2t:'Your code is computed',s2d:'Your Pythagorean codes are cross-referenced against 350,000+ words of proprietary research spanning biorhythm compatibility, life cycle alignment, and synastry — producing an analysis specific to your exact combination. No two reports are identical.',
-  s3t:'Your private profile is ready',s3d:'A deeply personal numerology reading delivered to your private profile. Not a horoscope. Not a personality quiz. A mathematically derived portrait of who you are — and what your numbers have always known about you.',
-  wygE:'What Your Report Reveals',wygT:'Everything the Numbers See',
-  f1t:'Your Compatibility Code',f1d:'The 3-digit Pythagorean code that defines how your connection began, what its purpose is, and what it is fundamentally built upon.',
-  f2t:'Both Personality Profiles',f2d:"Each person's biorhythm, generational number, and life path — how they love, what they truly need from a partner, and where their patterns create friction.",
-  f3t:'Strengths & Challenges',f3d:'What makes you function well together and what will reliably create tension. Named specifically from your numbers, not generically.',
-  f4t:'Emotional Dynamics',f4d:'How each person feels when they enter a connection, what they carry emotionally, and the energy between you before a single word is spoken.',
-  f5t:'Combined Life Path',f5d:'When your life paths are added together, the resulting number reveals the mathematical destiny of the relationship itself.',
-  f6t:'The Year You Are In',f6d:"Both partners' personal year numbers for 2026 — what timing means for your connection right now and what the numbers indicate about this specific period.",
-  methE:'Methodology',methT:'2,500 Years of Human Wisdom. Now Accessible to Everyone.',
-  methB1T:'Historical Foundation',methB1:'Pythagorean numerology was born with Pythagoras of Samos (570 BC), who believed that numbers reveal the hidden patterns beneath all of human experience. For 2,500 years, scholars have refined this framework into a rich system for understanding personality and connection.',
-  methB2T:'The Three Variables',methB2:"Your date of birth is not just a date — it carries three distinct numerical codes that reveal how you love, what you need from others, and where your life is naturally headed. These three numbers tell a story most people spend years trying to figure out.",
-  methB3T:'The Compatibility Engine',methB3:'When two people\'s codes are brought together, they produce a unique Compatibility Code — one of 81 possible combinations. Each combination has its own character, its own strengths, its own challenges. Yours is specific to you and no one else.',
-  methB4T:'The Technology',methB4:'Each session is generated by an AI system trained on 700,000 words of proprietary Pythagorean research. Seven sessions. Fourteen days. Delivered to your private profile. Specific to your exact birth date and the numbers that have always governed your life.',
-  methQ:'"Numbers are the highest degree of knowledge. It is knowledge itself."',
-  matchE:'Coming Soon',matchT:'Matching Apps Connect on Faces.\nWe Connect on Mathematics.',
-  matchS:'Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.',
-  matchC:'Opening to the first 100 founding members — $19/month.',
-  matchBtn:'Join the Waitlist — Free',matchM1:'Love Match',matchM2:'Friend Match',matchM3:'Business Match',
-  finalT:'Two Birth Dates. One Mathematical Truth.',
-  finalS:'Seven sessions. Fourteen days. The most complete numerological reading that exists. Generated from your exact birth date and delivered to your private profile.',
-  finalBtn:'Begin The Life Code Alignment — $2,222',
-  finalP:'Secure payment · Instant delivery · 100% satisfaction guarantee',
-  disc:'For informational and entertainment purposes only. Not a substitute for professional advice.',
-  mType:'Compatibility Report',mTitle:'Discover Your Life Code Map',
-  mIntro:'Some connections feel effortless from the start. Others take everything you have — and still leave you questioning why. Enter both birthdates and discover your Relationship Code.',
-  lYou:'Your Details',lThem:'Their Details',lN1:'First Name',lD1:'Date of Birth',lT1:'Birth Time',lG1:'Gender',lN2:'First Name',lD2:'Date of Birth',lT2:'Birth Time',lG2:'Gender',
-  eTitle:'Where shall we send your report?',eSub:'Your full compatibility report will be delivered to this email within 5 minutes of payment.',
-  payBtn:'✦ Session 1 Only — Life Code Map · $297',guar:'🔒 Secure payment · 100% satisfaction guarantee · Instant delivery'
-},
-es:{
-  tagline:'Conoce Tus Números. Encuentra Tu Gente.',
-  eyebrow:'Sabiduría Ancestral. Precisión Moderna. — Más de 350,000 Palabras de Investigación',
-  title:'Cada Relación Tiene una<br><em>Firma Matemática.</em>',
-  sub:'Dos fechas de nacimiento contienen más información sobre vuestra compatibilidad que años de conversación. La numerología pitagórica ha cartografiado la conexión humana durante 2,500 años. Hemos digitalizado 350,000 palabras de esa investigación en un motor de compatibilidad preciso.',
-  anchor:'✦ <strong>7</strong> sesiones en 14 días ✦ <strong>30</strong> minutos de audio en Sesión 1 ✦ <strong>3</strong> idiomas',
-  heroCtaBtn:'Comenzar El Alineamiento — $2,222',
-  heroPrice:'<strong>$297</strong> · 1 sesión · 30 minutos · Perfil privado en 24hrs',
-  navCta:'Mapa de Código — $297',navMatch:'Match',
-  sp1:'Palabras de Investigación',sp2:'Sesiones en 14 Días',sp3:'Años de Tradición',sp4:'Ahorro vs Numerólogo',
-  hiwE:'Cómo Funciona',hiwT:'La Ciencia de la Conexión Humana. Digitalizada.',
-  s1t:'Introduce dos fechas de nacimiento',s1d:'La fecha de nacimiento codifica el biorritmo, la frecuencia generacional y el sendero de vida — tres variables independientes que definen cómo interactúan dos personas.',
-  s2t:'Nuestro motor calcula tus códigos',s2d:'Tus códigos pitagóricos se cruzan con más de 350,000 palabras de investigación propietaria sobre compatibilidad de biorritmo, alineación de ciclos de vida y sinastría — produciendo un análisis específico para tu combinación exacta.',
-  s3t:'Tu informe llega en 5 minutos',s3d:'Un análisis de compatibilidad estructurado en 10 secciones entregado en tu correo. No es un horóscopo. No es un test de personalidad. Una lectura matemáticamente derivada de lo que es tu relación y hacia dónde va.',
-  wygE:'Lo Que Revela Tu Informe',wygT:'Todo Lo Que Ven Los Números',
-  f1t:'Tu Código de Compatibilidad',f1d:'El código pitagórico de 3 dígitos que define cómo comenzó tu conexión, cuál es su propósito y sobre qué está fundamentalmente construida.',
-  f2t:'Ambos Perfiles de Personalidad',f2d:'El biorritmo, número generacional y sendero de vida de cada persona — cómo aman, qué necesitan verdaderamente de una pareja y dónde sus patrones crean fricción.',
-  f3t:'Fortalezas y Desafíos',f3d:'Qué os hace funcionar bien juntos y qué creará tensión de manera predecible. Nombrado específicamente desde vuestros números.',
-  f4t:'Dinámica Emocional',f4d:'Cómo se siente cada persona al entrar en una conexión, qué carga emocionalmente, y la energía entre vosotros antes de que se diga una sola palabra.',
-  f5t:'Sendero de Vida Combinado',f5d:'Cuando se suman vuestros senderos de vida, el número resultante revela el destino matemático de la relación.',
-  f6t:'El Año en el que Estáis',f6d:'Los números de año personal de ambas personas para 2026 — qué significa el momento para vuestra conexión ahora mismo.',
-  methE:'Metodología',methT:'2,500 Años de Sabiduría Humana. Ahora al Alcance de Todos.',
-  methB1T:'Fundamento Histórico',methB1:'La numerología pitagórica tiene su origen en Pitágoras de Samos (570 a.C.), quien propuso que los números son el lenguaje fundamental a través del cual se estructura la realidad. Su escuela documentó que relaciones numéricas específicas gobiernan la personalidad, el comportamiento y la compatibilidad humana.',
-  methB2T:'Las Tres Variables',methB2:'La fecha de nacimiento de cada persona produce tres números calculados de forma independiente: el Número de Biorritmo, el Número Generacional y el Número de Sendero de Vida — cada uno revelando una capa diferente de quién es una persona y cómo se conecta.',
-  methB3T:'El Motor de Compatibilidad',methB3:'Cuando dos códigos se combinan dígito a dígito, producen un Código de Compatibilidad único de tres números — una de 81 combinaciones matemáticamente distintas, cada una con un significado específico y documentado.',
-  methB4T:'La Tecnología',methB4:'Cada sesión es generada por un sistema de IA entrenado en 700,000 palabras de investigación pitagórica exclusiva. Siete sesiones. Catorce días. Entregado a tu perfil privado.',
-  methQ:'"Los números son el más alto grado de conocimiento. Es el conocimiento mismo."',
-  matchE:'Próximamente',matchT:'Las Apps de Matching Conectan por Caras.\nNosotros Conectamos por Matemáticas.',
-  matchS:'Cada persona lleva una firma numérica única derivada de su fecha de nacimiento. Nuestro motor de emparejamiento identifica los códigos específicos que complementan los tuyos — en amor, amistad y negocios. Esto no es astrología. Es reconocimiento de patrones aplicado a la conexión humana.',
-  matchC:'Abierto a los primeros 100 miembros fundadores — $19/mes.',
-  matchBtn:'Únete a la Lista — Gratis',matchM1:'Match de Amor',matchM2:'Match de Amistad',matchM3:'Match de Negocios',
-  finalT:'Dos Fechas de Nacimiento. Una Verdad Matemática.',
-  finalS:'Siete sesiones. Catorce días. La lectura numerológica más completa que existe. Generada desde tu fecha exacta de nacimiento y entregada a tu perfil privado.',
-  finalBtn:'Comenzar El Alineamiento — $2,222',
-  finalP:'Pago seguro · Entrega instantánea · Garantía de satisfacción',
-  disc:'Solo con fines informativos y de entretenimiento. No sustituye el asesoramiento profesional.',
-  mType:'Informe de Compatibilidad',mTitle:'Descubre Tu Código de Relación',
-  mIntro:'Hay personas con las que todo encaja desde el primer momento. Otras te consumen sin que entiendas por qué. Introduce ambas fechas y descubre tu Código de Relación.',
-  lYou:'Tus Datos',lThem:'Sus Datos',lN1:'Nombre',lD1:'Fecha de Nacimiento',lT1:'Hora de Nacimiento',lG1:'Género',lN2:'Nombre',lD2:'Fecha de Nacimiento',lT2:'Hora de Nacimiento',lG2:'Género',
-  eTitle:'¿Dónde enviamos tu informe?',eSub:'Tu informe completo se entregará a este correo dentro de 5 minutos del pago.',
-  payBtn:'✦ Descubre Tu Mapa de Código de Vida — $297',guar:'🔒 Pago seguro · Garantía de satisfacción · Entrega instantánea'
-},
-ja:{
-  tagline:'数字を知る。あなたの人々を見つける。',
-  eyebrow:'古代の知恵。現代の精度。— 350,000語以上の研究に基づく',
-  title:'すべての関係には<br><em>数学的シグネチャー</em>がある。',
-  sub:'二つの生年月日には、何年もの会話よりも多くの相性情報が含まれています。ピタゴラス数秘術は2,500年にわたり人間のつながりを解析してきました。私たちはその350,000語の研究を精密な相性エンジンにデジタル化しました。',
-  anchor:'✦ <strong>81</strong>の数学的に異なる相性コード ✦ <strong>10</strong>の分析セクション ✦ <strong>3</strong>言語対応',
-  heroCtaBtn:'関係コードを発見する',
-  heroPrice:'<strong>$297</strong> · 1セッション · 30分 · 24時間以内にプライベートプロフィール',
-  navCta:'ライフコードマップ — $297',navMatch:'マッチ',
-  sp1:'研究の言葉数',sp2:'14日間のセッション',sp3:'年の伝統',sp4:'数秘術師との比較節約額',
-  hiwE:'仕組み',hiwT:'人間のつながりの科学。デジタル化。',
-  s1t:'二つの生年月日を入力',s1d:'生年月日はバイオリズム、世代周波数、ライフパスをエンコードします — 二人の相互作用を定義する三つの独立した変数です。それだけで十分です。',
-  s2t:'エンジンがコードを計算する',s2d:'あなたのピタゴラスコードは、バイオリズム相性、ライフサイクルの整合性、シナストリーにわたる350,000語以上の独自研究と照合されます。二つのレポートは同一ではありません。',
-  s3t:'5分以内にレポートが届く',s3d:'受信トレイに届く構造化された10セクションの相性分析。星占いでも性格診断でもありません。あなたの関係の数学的に導かれた読み解きです。',
-  wygE:'レポートが明かすもの',wygT:'数字が見るすべて',
-  f1t:'相性コード',f1d:'あなたのつながりがどのように始まったか、その目的は何か、根本的に何の上に築かれているかを定義する3桁のピタゴラスコード。',
-  f2t:'二人の性格プロフィール',f2d:'バイオリズム、世代数、ライフパス — 愛し方、パートナーに本当に必要なもの、パターンが摩擦を生む場所。',
-  f3t:'強みと課題',f3d:'何があなたたちをうまく機能させ、何が確実に緊張を生み出すか。一般的にではなく、あなたの数字から具体的に名指しされます。',
-  f4t:'感情のダイナミクス',f4d:'それぞれの人がつながりに入るときにどう感じるか、感情的に何を持ち込むか、そして一言も発せられる前の二人のエネルギー。',
-  f5t:'統合ライフパス',f5d:'ライフパスを合算すると、結果の数字が関係自体の数学的運命を明かします。',
-  f6t:'今いる年',f6d:'2026年の両パートナーの個人年数 — 今まさにあなたのつながりにとって時機が何を意味するか。',
-  methE:'方法論',methT:'2,500年の人類の知恵。今、すべての人に。',
-  methB1T:'歴史的基盤',methB1:'ピタゴラス数秘術はサモスのピタゴラス（紀元前570年）に由来し、数字は現実が構造化される根本的な言語であると提唱しました。彼の学校は特定の数値関係が性格、行動、人間の相性を支配することを文書化しました。',
-  methB2T:'三つの変数',methB2:'各人の生年月日は三つの独立して計算された数字を生成します：バイオリズム数、世代数、ライフパス数 — それぞれが人物の異なる層と人とのつながり方を明かします。',
-  methB3T:'相性エンジン',methB3:'二つのコードを桁ごとに組み合わせると、ユニークな3桁の相性コードが生成されます — 81の数学的に異なる組み合わせの一つで、それぞれに特定の文書化された意味があります。',
-  methB4T:'テクノロジー',methB4:'各セッションは70万語の独自ピタゴラス研究で訓練されたAIシステムによって生成されます。7セッション。14日間。あなたのプライベートプロフィールに配信されます。',
-  methQ:'「数字は知識の最高の程度である。それは知識そのものである。」',
-  matchE:'近日公開',matchT:'マッチングアプリは顔でつながる。\n私たちは数学でつながる。',
-  matchS:'すべての人は生年月日から導かれたユニークな数値シグネチャーを持っています。私たちのマッチングエンジンはあなたのコードを補完する特定のコードを識別します — 愛、友情、ビジネスにわたって。これは占星術ではありません。人間のつながりに適用されたパターン認識です。',
-  matchC:'最初の100人の創設メンバー限定 — 月額$19。',
-  matchBtn:'ウェイトリストに参加 — 無料',matchM1:'恋愛マッチ',matchM2:'友人マッチ',matchM3:'ビジネスマッチ',
-  finalT:'二つの生年月日。一つの数学的真実。',
-  finalS:'7セッション。14日間。存在する最も完全な数秘術的リーディング。あなたの正確な生年月日から生成され、プライベートプロフィールに配信されます。',
-  finalBtn:'ライフコードアライメントを始める — $2,222',
-  finalP:'安全な支払い · 即時配信 · 満足保証',
-  disc:'情報およびエンターテインメント目的のみ。専門的なアドバイスの代わりにはなりません。',
-  mType:'相性レポート',mTitle:'関係コードを発見する',
-  mIntro:'出会った瞬間から自然に感じる人もいれば、すべてを捧げても疑問が残る人もいます。二人の生年月日を入力して、関係コードを発見してください。',
-  lYou:'あなたの情報',lThem:'相手の情報',lN1:'名前',lD1:'生年月日',lT1:'出生時刻',lG1:'性別',lN2:'名前',lD2:'生年月日',lT2:'出生時刻',lG2:'性別',
-  eTitle:'レポートの送付先は？',eSub:'お支払い後5分以内にこのメールアドレスに届きます。',
-  payBtn:'✦ ライフコードマップを発見する — $297',guar:'🔒 安全な支払い · 満足保証 · 即時配信'
-}};
-
-function setLang(lang){
-  document.getElementById('lang-en').classList.toggle('lang-active',lang==='en');
-  document.getElementById('lang-es').classList.toggle('lang-active',lang==='es');
-  document.getElementById('lang-ja').classList.toggle('lang-active',lang==='ja');
-  window._reportLang=lang;var l=T[lang]||T.en;
-  document.getElementById('tagline').textContent=l.tagline;
-  document.getElementById('eyebrow').textContent=l.eyebrow;
-  document.getElementById('hero-title').innerHTML=l.title;
-  document.getElementById('hero-sub').textContent=l.sub;
-  document.getElementById('hero-anchor').innerHTML=l.anchor;
-  document.getElementById('hero-cta-btn').textContent=l.heroCtaBtn;
-  document.getElementById('hero-price').innerHTML=l.heroPrice;
-  document.getElementById('nav-cta').textContent=l.navCta;
-  document.getElementById('nav-match').textContent=l.navMatch||'Match';
-  document.getElementById('sp-1').textContent=l.sp1;document.getElementById('sp-2').textContent=l.sp2;
-  document.getElementById('sp-3').textContent=l.sp3;document.getElementById('sp-4').textContent=l.sp4;
-  document.getElementById('hiw-eyebrow').textContent=l.hiwE;document.getElementById('hiw-title').textContent=l.hiwT;
-  document.getElementById('s1t').textContent=l.s1t;document.getElementById('s1d').textContent=l.s1d;
-  document.getElementById('s2t').textContent=l.s2t;document.getElementById('s2d').textContent=l.s2d;
-  document.getElementById('s3t').textContent=l.s3t;document.getElementById('s3d').textContent=l.s3d;
-  document.getElementById('wyg-eyebrow').textContent=l.wygE;document.getElementById('wyg-title').textContent=l.wygT;
-  document.getElementById('f1t').textContent=l.f1t;document.getElementById('f1d').textContent=l.f1d;
-  document.getElementById('f2t').textContent=l.f2t;document.getElementById('f2d').textContent=l.f2d;
-  document.getElementById('f3t').textContent=l.f3t;document.getElementById('f3d').textContent=l.f3d;
-  document.getElementById('f4t').textContent=l.f4t;document.getElementById('f4d').textContent=l.f4d;
-  document.getElementById('f5t').textContent=l.f5t;document.getElementById('f5d').textContent=l.f5d;
-  document.getElementById('f6t').textContent=l.f6t;document.getElementById('f6d').textContent=l.f6d;
-  document.getElementById('meth-eyebrow').textContent=l.methE;document.getElementById('meth-title').textContent=l.methT;
-  document.getElementById('meth-b1-title').textContent=l.methB1T;document.getElementById('meth-b1-text').textContent=l.methB1;
-  document.getElementById('meth-b2-title').textContent=l.methB2T;document.getElementById('meth-b2-text').textContent=l.methB2;
-  document.getElementById('meth-b3-title').textContent=l.methB3T;document.getElementById('meth-b3-text').textContent=l.methB3;
-  document.getElementById('meth-b4-title').textContent=l.methB4T;document.getElementById('meth-b4-text').textContent=l.methB4;
-  document.getElementById('meth-quote').textContent=l.methQ;
-  if(document.getElementById('match-eyebrow')){
-    document.getElementById('match-eyebrow').textContent=l.matchE||'Coming Soon';
-    document.getElementById('match-title').textContent=l.matchT||'';
-    document.getElementById('match-sub').textContent=l.matchS||'';
-    document.getElementById('match-count').textContent=l.matchC||'';
-    document.getElementById('match-btn').textContent=l.matchBtn||'Join the Waitlist — Free';
-    document.getElementById('match-m1-label').textContent=l.matchM1||'Love Match';
-    document.getElementById('match-m2-label').textContent=l.matchM2||'Friend Match';
-    document.getElementById('match-m3-label').textContent=l.matchM3||'Business Match';
-  }
-  document.getElementById('final-title').textContent=l.finalT;document.getElementById('final-sub').textContent=l.finalS;
-  document.getElementById('final-btn').textContent=l.finalBtn;document.getElementById('final-price').textContent=l.finalP;
-  document.getElementById('disclaimer').textContent=l.disc;
-  document.getElementById('modal-type').textContent=l.mType;document.getElementById('modal-title').textContent=l.mTitle;
-  document.getElementById('modal-intro').textContent=l.mIntro;
-  document.getElementById('label-you').textContent=l.lYou;document.getElementById('label-them').textContent=l.lThem;
-  document.getElementById('lbl-n1').textContent=l.lN1;document.getElementById('lbl-d1').textContent=l.lD1;
-  document.getElementById('lbl-t1').textContent=l.lT1;document.getElementById('lbl-g1').textContent=l.lG1;
-  document.getElementById('lbl-n2').textContent=l.lN2;document.getElementById('lbl-d2').textContent=l.lD2;
-  document.getElementById('lbl-t2').textContent=l.lT2;document.getElementById('lbl-g2').textContent=l.lG2;
-  document.getElementById('email-title').textContent=l.eTitle;document.getElementById('email-sub').textContent=l.eSub;
-  document.getElementById('pay-btn').textContent=l.payBtn;document.getElementById('guarantee').textContent=l.guar;
 }
 </script>
-</div><!-- end main-site -->
+
 </body>
 </html>
