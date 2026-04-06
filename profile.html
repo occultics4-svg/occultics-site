@@ -141,24 +141,21 @@ function renderSessions(sections) {
   var html = '';
   SESSION_DEFS.forEach(function(def, idx) {
     var s = sections[def.key] || {};
-    var unlocked = s.unlocked || s.text;
-    if(unlocked) {
-      html += '<div class="session-card unlocked">';
-      html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
-      html += '<div class="session-num">'+def.num+'</div>';
-      html += '<div class="session-meta"><div class="session-ey">Session '+def.num+' · '+def.day+'</div><div class="session-ti">'+def.title+'</div></div>';
-      html += '<div class="session-arr" id="sa'+idx+'">↓</div>';
-      html += '</div>';
+    var hasText = s.text && s.text !== 'Generating...';
+    var isPending = s.text === 'Generating...' || (!s.text && idx === 0);
+
+    html += '<div class="session-card unlocked">';
+    html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
+    html += '<div class="session-num">'+def.num+'</div>';
+    html += '<div class="session-meta"><div class="session-ey">Session '+def.num+' · '+def.day+'</div><div class="session-ti">'+def.title+'</div></div>';
+    html += '<div class="session-arr" id="sa'+idx+'">↓</div>';
+    html += '</div>';
+    if(hasText) {
       html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'">'+textToHTML(s.text)+'</div>';
-      html += '</div>';
     } else {
-      html += '<div class="session-card locked">';
-      html += '<div class="session-hdr">';
-      html += '<div class="session-num">'+def.num+'</div>';
-      html += '<div class="session-meta"><div class="session-ey">Session '+def.num+'</div><div class="session-ti">'+def.title+'</div></div>';
-      html += '<div class="session-lock">Unlocks '+def.day+'</div>';
-      html += '</div></div>';
+      html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'"><p style="color:#8892a4;font-style:italic;">Your session is being prepared. Please refresh in a few minutes.</p></div>';
     }
+    html += '</div>';
   });
   document.getElementById('sessions').innerHTML = html;
 }
