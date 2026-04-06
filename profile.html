@@ -27,6 +27,14 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .code-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#4db8ff;}
 .code-dot{font-size:24px;color:rgba(77,184,255,0.3);}
 .code-label{font-size:8px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;text-align:center;}
+/* Compatibility dual codes */
+.compat-codes{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:24px;}
+.compat-person{background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:14px;padding:16px 24px;text-align:center;min-width:180px;}
+.compat-person-name{font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-bottom:6px;}
+.compat-person-code{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#4db8ff;letter-spacing:8px;}
+.compat-synastry{background:rgba(26,42,255,0.2);border:1px solid rgba(77,184,255,0.25);border-radius:14px;padding:20px;text-align:center;margin-bottom:16px;max-width:280px;margin-left:auto;margin-right:auto;}
+.compat-synastry-label{font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-bottom:6px;}
+.compat-synastry-code{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:#fff;letter-spacing:12px;}
 .sessions{max-width:720px;margin:0 auto;padding:40px 24px;}
 .session-card{border:1px solid rgba(77,184,255,0.1);border-radius:16px;margin-bottom:16px;overflow:hidden;}
 .session-card.unlocked{border-color:rgba(77,184,255,0.2);}
@@ -45,6 +53,7 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
 .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
 .footer-copy{font-size:9px;color:rgba(255,255,255,0.1);}
+@media(max-width:600px){.compat-codes{flex-direction:column;align-items:center;}.code-num{font-size:40px;}}
 </style>
 </head>
 <body>
@@ -66,15 +75,33 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
     <span>Expires <span id="expiry">—</span></span>
   </div>
   <div class="hero">
-    <div class="eyebrow">The Life Code Alignment</div>
+    <div class="eyebrow" id="eyebrow-text">The Life Code Alignment</div>
     <h1 class="hero-name" id="pname">—</h1>
     <p class="hero-sub" id="psub">—</p>
-    <div class="code-box">
+    <!-- Standard single-person code display -->
+    <div class="code-box" id="single-code">
       <div><div class="code-num" id="pbio">—</div><div class="code-label">Biorhythm</div></div>
       <div class="code-dot">·</div>
       <div><div class="code-num" id="pgen">—</div><div class="code-label">Generational</div></div>
       <div class="code-dot">·</div>
       <div><div class="code-num" id="plp">—</div><div class="code-label">Life Path</div></div>
+    </div>
+    <!-- Compatibility dual code display -->
+    <div id="compat-display" style="display:none;">
+      <div class="compat-codes">
+        <div class="compat-person">
+          <div class="compat-person-name" id="compat-name1">—</div>
+          <div class="compat-person-code" id="compat-code1">—</div>
+        </div>
+        <div class="compat-person">
+          <div class="compat-person-name" id="compat-name2">—</div>
+          <div class="compat-person-code" id="compat-code2">—</div>
+        </div>
+      </div>
+      <div class="compat-synastry">
+        <div class="compat-synastry-label">Compatibility Code</div>
+        <div class="compat-synastry-code" id="compat-synastry">—</div>
+      </div>
     </div>
   </div>
   <div class="sessions" id="sessions"></div>
@@ -102,14 +129,14 @@ var COMPAT_DEFS = [
   {key:'session1',  num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
   {key:'session2',  num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
   {key:'session3',  num:'03', day:'Day 5',  title:'Your Core Drivers'},
-  {key:'session4',  num:'04', day:'Day 7',  title:'Your Behavioral Code'},
+  {key:'session4',  num:'04', day:'Day 7',  title:'Your Karmic Blueprint'},
   {key:'session5',  num:'05', day:'Day 10', title:'Their Mathematical Blueprint'},
   {key:'session6',  num:'06', day:'Day 12', title:'Their Emotional Frequency'},
   {key:'session7',  num:'07', day:'Day 14', title:'Their Core Drivers'},
-  {key:'session8',  num:'08', day:'Day 16', title:'Their Behavioral Code'},
-  {key:'session9',  num:'09', day:'Day 19', title:'The Mathematical Signature of Your Connection'},
-  {key:'session10', num:'10', day:'Day 22', title:'The Dominant Code'},
-  {key:'session11', num:'11', day:'Day 25', title:'What You Are Building Together'},
+  {key:'session8',  num:'08', day:'Day 16', title:'Their Karmic Blueprint'},
+  {key:'session9',  num:'09', day:'Day 19', title:'How You Met — What You Are Building'},
+  {key:'session10', num:'10', day:'Day 22', title:'The Mission — The Karmic Connection'},
+  {key:'session11', num:'11', day:'Day 25', title:'Your Combined Life Path — The Complete Picture'},
 ];
 
 var SESSION_DEFS = LCA_DEFS;
@@ -121,7 +148,8 @@ function formatDate(str) {
 }
 
 function textToHTML(text) {
-  if(!text || text === 'Generating...') return '<p style="color:#8892a4;font-style:italic;">Your session is being prepared. Please refresh in a few minutes.</p>';
+  if(!text || text === 'Generating...' || text === 'Session 1 generating — please refresh in a moment.')
+    return '<p style="color:#8892a4;font-style:italic;">Your session is being prepared. Please refresh in a few minutes.</p>';
   return text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){return '<p>'+p.trim()+'</p>';}).join('');
 }
 
@@ -141,8 +169,7 @@ function renderSessions(sections) {
   var html = '';
   SESSION_DEFS.forEach(function(def, idx) {
     var s = sections[def.key] || {};
-    var hasText = s.text && s.text !== 'Generating...';
-    var isPending = s.text === 'Generating...' || (!s.text && idx === 0);
+    var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
 
     html += '<div class="session-card unlocked">';
     html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
@@ -180,39 +207,95 @@ function loadProfile() {
       return;
     }
     var p = data[0];
-    document.getElementById('pname').textContent = p.name || '—';
-    document.getElementById('pbio').textContent = p.biorhythm || '—';
-    document.getElementById('pgen').textContent = p.generational || '—';
-    document.getElementById('plp').textContent = p.life_path || '—';
+    var rt = p.report_type || '';
+    var isCompat = rt === 'compatibility_code';
+
+    // ---- SET NAME ----
+    document.getElementById('pname').textContent = p.name || p.customer_name || '—';
     document.getElementById('expiry').textContent = formatDate(p.expires_at);
 
-    var rt = p.report_type || p.language || '';
-    if(rt === 'life_code_map') {
-      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · Session 1 · 30 Minutes';
-      document.querySelector('.eyebrow').textContent = 'The Life Code Map';
-      document.title = (p.name||'Your')+' Life Code Map — Occultics';
-    } else if(rt === 'compatibility_code') {
-      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 11 Sessions · 28 Days';
-      document.querySelector('.eyebrow').textContent = 'The Compatibility Code';
-      document.title = (p.name||'Your')+' Compatibility Code — Occultics';
+    // ---- SET CODES ----
+    if (isCompat) {
+      // Hide single code, show compatibility display
+      document.getElementById('single-code').style.display = 'none';
+      document.getElementById('compat-display').style.display = 'block';
+
+      // Parse pyth codes
+      var code1 = (p.pyth_code || '').split('.');
+      var code2 = (p.pyth_code_2 || '').split('.');
+      var synCode = (p.synastry_code || '').split('.');
+
+      document.getElementById('compat-name1').textContent = p.name || p.customer_name || 'Person 1';
+      document.getElementById('compat-name2').textContent = p.partner_name || 'Person 2';
+      document.getElementById('compat-code1').textContent = code1.join(' · ');
+      document.getElementById('compat-code2').textContent = code2.join(' · ');
+      document.getElementById('compat-synastry').textContent = synCode.join(' · ');
+
+      document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 11 Sessions';
+      document.getElementById('eyebrow-text').textContent = 'The Compatibility Code';
+      document.title = (p.name || 'Your') + ' Compatibility Code — Occultics';
     } else {
-      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
-      document.querySelector('.eyebrow').textContent = 'The Life Code Alignment';
-      document.title = (p.name||'Your')+' Life Code — Occultics';
+      // Standard single-person display
+      document.getElementById('single-code').style.display = 'flex';
+      document.getElementById('compat-display').style.display = 'none';
+
+      // Try direct columns first, then parse from pyth_code
+      var bio = p.biorhythm;
+      var gen = p.generational;
+      var lp = p.life_path;
+      if ((!bio || bio === '—') && p.pyth_code) {
+        var parts = p.pyth_code.split('.');
+        bio = parts[0]; gen = parts[1]; lp = parts[2];
+      }
+      if ((!bio || bio === '—') && p.pythagorean_code) {
+        var parts = p.pythagorean_code.split('.');
+        bio = parts[0]; gen = parts[1]; lp = parts[2];
+      }
+
+      document.getElementById('pbio').textContent = bio || '—';
+      document.getElementById('pgen').textContent = gen || '—';
+      document.getElementById('plp').textContent = lp || '—';
+
+      if (rt === 'life_code_map') {
+        document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · Session 1 · 30 Minutes';
+        document.getElementById('eyebrow-text').textContent = 'The Life Code Map';
+        document.title = (p.name || 'Your') + ' Life Code Map — Occultics';
+      } else {
+        document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 7 Sessions · 14 Days';
+        document.getElementById('eyebrow-text').textContent = 'The Life Code Alignment';
+        document.title = (p.name || 'Your') + ' Life Code — Occultics';
+      }
     }
 
-    var sections = p.sections || {};
-    if(typeof sections === 'string') {
-      try { sections = JSON.parse(sections); } catch(e) { sections = {}; }
-    }
-    // Set correct session definitions based on product type
-    if(p.report_type === 'compatibility_code') {
+    // ---- SET SESSION DEFINITIONS ----
+    if (isCompat) {
       SESSION_DEFS = COMPAT_DEFS;
-    } else if(p.report_type === 'life_code_map') {
+    } else if (rt === 'life_code_map') {
       SESSION_DEFS = [{key:'session1', num:'01', day:'Day 1', title:'Your Mathematical Blueprint'}];
     } else {
       SESSION_DEFS = LCA_DEFS;
     }
+
+    // ---- BUILD SESSIONS ----
+    var sections = {};
+
+    if (isCompat) {
+      // Compatibility code stores sessions as separate columns: session_1, session_2, etc.
+      for (var i = 1; i <= 11; i++) {
+        var colName = 'session_' + i;
+        var keyName = 'session' + i;
+        if (p[colName]) {
+          sections[keyName] = { text: p[colName], unlocked: true };
+        }
+      }
+    } else {
+      // LCA/LCM stores sessions inside a sections JSON object
+      sections = p.sections || {};
+      if (typeof sections === 'string') {
+        try { sections = JSON.parse(sections); } catch(e) { sections = {}; }
+      }
+    }
+
     renderSessions(sections);
     document.getElementById('main').style.display = 'block';
   })
