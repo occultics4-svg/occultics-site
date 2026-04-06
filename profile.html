@@ -88,7 +88,7 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
-var SESSION_DEFS = [
+var LCA_DEFS = [
   {key:'session1', num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
   {key:'session2', num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
   {key:'session3', num:'03', day:'Day 5',  title:'Your Core Drivers'},
@@ -97,6 +97,22 @@ var SESSION_DEFS = [
   {key:'session6', num:'06', day:'Day 11', title:'The Architecture of Your Reality'},
   {key:'session7', num:'07', day:'Day 13', title:'Your Energetic Patterns'},
 ];
+
+var COMPAT_DEFS = [
+  {key:'session1',  num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
+  {key:'session2',  num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
+  {key:'session3',  num:'03', day:'Day 5',  title:'Your Core Drivers'},
+  {key:'session4',  num:'04', day:'Day 7',  title:'Your Behavioral Code'},
+  {key:'session5',  num:'05', day:'Day 10', title:'Their Mathematical Blueprint'},
+  {key:'session6',  num:'06', day:'Day 12', title:'Their Emotional Frequency'},
+  {key:'session7',  num:'07', day:'Day 14', title:'Their Core Drivers'},
+  {key:'session8',  num:'08', day:'Day 16', title:'Their Behavioral Code'},
+  {key:'session9',  num:'09', day:'Day 19', title:'The Mathematical Signature of Your Connection'},
+  {key:'session10', num:'10', day:'Day 22', title:'The Dominant Code'},
+  {key:'session11', num:'11', day:'Day 25', title:'What You Are Building Together'},
+];
+
+var SESSION_DEFS = LCA_DEFS;
 
 function formatDate(str) {
   if(!str) return '—';
@@ -168,16 +184,37 @@ function loadProfile() {
     }
     var p = data[0];
     document.getElementById('pname').textContent = p.name || '—';
-    document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
     document.getElementById('pbio').textContent = p.biorhythm || '—';
     document.getElementById('pgen').textContent = p.generational || '—';
     document.getElementById('plp').textContent = p.life_path || '—';
     document.getElementById('expiry').textContent = formatDate(p.expires_at);
-    document.title = (p.name||'Your')+' Life Code — Occultics';
+
+    var rt = p.report_type || p.language || '';
+    if(rt === 'life_code_map') {
+      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · Session 1 · 30 Minutes';
+      document.querySelector('.eyebrow').textContent = 'The Life Code Map';
+      document.title = (p.name||'Your')+' Life Code Map — Occultics';
+    } else if(rt === 'compatibility_code') {
+      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 11 Sessions · 28 Days';
+      document.querySelector('.eyebrow').textContent = 'The Compatibility Code';
+      document.title = (p.name||'Your')+' Compatibility Code — Occultics';
+    } else {
+      document.getElementById('psub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
+      document.querySelector('.eyebrow').textContent = 'The Life Code Alignment';
+      document.title = (p.name||'Your')+' Life Code — Occultics';
+    }
 
     var sections = p.sections || {};
     if(typeof sections === 'string') {
       try { sections = JSON.parse(sections); } catch(e) { sections = {}; }
+    }
+    // Set correct session definitions based on product type
+    if(p.report_type === 'compatibility_code') {
+      SESSION_DEFS = COMPAT_DEFS;
+    } else if(p.report_type === 'life_code_map') {
+      SESSION_DEFS = [{key:'session1', num:'01', day:'Day 1', title:'Your Mathematical Blueprint'}];
+    } else {
+      SESSION_DEFS = LCA_DEFS;
     }
     renderSessions(sections);
     document.getElementById('main').style.display = 'block';
