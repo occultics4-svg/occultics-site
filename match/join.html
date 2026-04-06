@@ -80,6 +80,20 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .photo-upload-hint{font-size:10px;color:rgba(136,146,164,0.5);margin-top:4px}
 .photo-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:none;border:2px solid var(--crystal)}
 
+/* PAYMENT STEP */
+.payment-summary{border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);padding:24px;margin-bottom:24px}
+.payment-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(77,184,255,0.08)}
+.payment-row:last-child{border-bottom:none}
+.payment-label{font-size:12px;color:var(--gray-mid);font-weight:300}
+.payment-value{font-size:12px;color:var(--white);font-weight:600}
+.payment-total{display:flex;justify-content:space-between;align-items:center;padding:16px 0 0;margin-top:8px;border-top:1px solid rgba(77,184,255,0.2)}
+.payment-total .payment-label{font-size:13px;color:var(--white);font-weight:600}
+.payment-total .payment-value{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crystal)}
+.payment-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.payment-feature{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--gray-mid);font-weight:300}
+.payment-feature span{color:var(--crystal);font-size:14px}
+.payment-guarantee{font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
+
 /* BUTTONS */
 .btn-next{width:100%;padding:15px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
 .btn-next:hover{background:#1420cc}
@@ -133,7 +147,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       </svg>
       <div class="logo-name">OCCULTICS</div>
     </a>
-    <a href="/match/" class="back-link">← Back to Match</a>
+    <a href="https://occultics.ai" class="back-link">← Back to Occultics</a>
   </div>
 
   <!-- PROGRESS -->
@@ -143,8 +157,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       <div class="prog-step" id="prog2"></div>
       <div class="prog-step" id="prog3"></div>
       <div class="prog-step" id="prog4"></div>
+      <div class="prog-step" id="prog5"></div>
     </div>
-    <div class="progress-label" id="prog-label">Step 1 of 4 — Your Numbers</div>
+    <div class="progress-label" id="prog-label">Step 1 of 5 — Your Numbers</div>
   </div>
 
   <div id="msg-box" class="msg"></div>
@@ -245,11 +260,38 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <button class="btn-back" onclick="goStep4()" style="margin-top:6px;font-size:10px">Skip for now →</button>
   </div>
 
-  <!-- STEP 4: ACCOUNT -->
+  <!-- STEP 4: PAYMENT -->
   <div id="step4" class="join-card" style="display:none">
-    <div class="card-eyebrow">Step 4</div>
-    <div class="card-title">Create Your Account</div>
-    <div class="card-sub">Your profile is ready. Create your account to see your matches.</div>
+    <div class="card-eyebrow">Step 4 — Founding Member</div>
+    <div class="card-title">Activate Your Membership</div>
+    <div class="card-sub">Your Pythagorean Code has been calculated. Activate your membership to see who your numbers match with.</div>
+
+    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:24px;text-align:center">
+      <div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div>
+    </div>
+
+    <div class="payment-features">
+      <div class="payment-feature"><span>✦</span> Unlimited compatibility matches across love, friendship & business</div>
+      <div class="payment-feature"><span>✦</span> Full Pythagorean compatibility scores for every match</div>
+      <div class="payment-feature"><span>✦</span> Private messaging with your top matches</div>
+      <div class="payment-feature"><span>✦</span> Founding member pricing — locked in forever</div>
+    </div>
+
+    <div class="payment-summary">
+      <div class="payment-row">
+        <span class="payment-label">Occultics Match — Founding Member</span>
+        <span class="payment-value">Monthly</span>
+      </div>
+      <div class="payment-row">
+        <span class="payment-label">First 100 members pricing</span>
+        <span class="payment-value" style="color:var(--crystal)">Locked in</span>
+      </div>
+      <div class="payment-total">
+        <span class="payment-label">Total</span>
+        <span class="payment-value">$29/mo</span>
+      </div>
+    </div>
 
     <div class="form-row single">
       <div class="form-group">
@@ -257,21 +299,38 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
         <input type="email" id="s4-email" placeholder="your@email.com">
       </div>
     </div>
+
+    <button class="btn-next" onclick="handleMatchPayment()" id="pay-btn">✦ Activate Membership — $29/month</button>
+    <div class="payment-guarantee">🔒 Secure payment via Stripe · Cancel anytime</div>
+    <button class="btn-back" onclick="goStep(3)">← Back</button>
+  </div>
+
+  <!-- STEP 5: CREATE ACCOUNT -->
+  <div id="step5" class="join-card" style="display:none">
+    <div class="card-eyebrow">Step 5</div>
+    <div class="card-title">Create Your Account</div>
+    <div class="card-sub">Payment confirmed. Set your password to access your matches.</div>
+
+    <div class="form-row single">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="s5-email" placeholder="your@email.com" readonly style="opacity:0.7">
+      </div>
+    </div>
     <div class="form-row single">
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="s4-pwd" placeholder="Min 8 characters" oninput="checkPwd()">
+        <input type="password" id="s5-pwd" placeholder="Min 8 characters" oninput="checkPwd()">
         <div class="pwd-strength"><div class="pwd-bar" id="pwd-bar"></div></div>
       </div>
     </div>
 
-    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px">
+    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center">
       <div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s5-code">— · — · —</div>
     </div>
 
-    <button class="btn-next" onclick="createAccount()" id="create-btn">✦ Create Account & Join Match</button>
-    <button class="btn-back" onclick="goStep(3)">← Back</button>
+    <button class="btn-next" onclick="createAccount()" id="create-btn">✦ Create Account & See Matches</button>
     <p style="font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px">By joining you agree to our terms of service</p>
   </div>
 
@@ -288,7 +347,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <div class="success-title">Welcome, <span id="success-name">—</span></div>
     <p style="font-size:13px;color:var(--gray-mid);margin-bottom:8px">Your Pythagorean Code</p>
     <div class="success-code" id="success-code">— · — · —</div>
-    <p class="success-sub">Your profile is live. Your matches are being calculated right now. Complete your membership to see who your numbers have been waiting for.</p>
+    <p class="success-sub">Your profile is live. Your matches are being calculated right now. You'll see your first matches on your dashboard.</p>
     <a href="/match/dashboard.html" class="btn-dashboard">See My Matches →</a>
     <p style="font-size:10px;color:var(--gray-mid);margin-top:16px">Redirecting in <span id="redirect-count">5</span> seconds...</p>
   </div>
@@ -297,12 +356,11 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 
 <script>
 // ---- SUPABASE SETUP ----
-// Replace with your actual keys
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 var supabase = null;
 try {
-  if(window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_URL !== 'https://dtquqaridqyjdgirjczr.supabase.co') {
+  if(window.supabase && typeof window.supabase.createClient === 'function') {
     supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   }
 } catch(e) {
@@ -330,10 +388,12 @@ function tryShowCode(){
   document.getElementById('code-preview-val').textContent = codeStr;
   document.getElementById('code-preview').classList.add('show');
   document.getElementById('s4-code').textContent = codeStr;
+  document.getElementById('s5-code').textContent = codeStr;
 }
 
 // ---- STEP NAVIGATION ----
 var currentStep = 1;
+var totalSteps = 5;
 var selectedLF = [];
 
 function goStep(n){
@@ -346,11 +406,17 @@ function goStep(n){
 }
 
 function updateProgress(n){
-  for(var i=1;i<=4;i++){
+  for(var i=1;i<=totalSteps;i++){
     var el = document.getElementById('prog'+i);
     el.className = 'prog-step' + (i<n?' done':i===n?' active':'');
   }
-  var labels = ['Step 1 of 4 — Your Numbers','Step 2 of 4 — What You\'re Looking For','Step 3 of 4 — Your Photo','Step 4 of 4 — Create Account'];
+  var labels = [
+    'Step 1 of 5 — Your Numbers',
+    'Step 2 of 5 — What You\'re Looking For',
+    'Step 3 of 5 — Your Photo',
+    'Step 4 of 5 — Membership',
+    'Step 5 of 5 — Create Account'
+  ];
   document.getElementById('prog-label').textContent = labels[n-1];
 }
 
@@ -407,7 +473,7 @@ function previewPhoto(){
 
 // ---- PASSWORD STRENGTH ----
 function checkPwd(){
-  var pwd = document.getElementById('s4-pwd').value;
+  var pwd = document.getElementById('s5-pwd').value;
   var bar = document.getElementById('pwd-bar');
   var strength = 0;
   if(pwd.length>=8) strength++;
@@ -420,10 +486,101 @@ function checkPwd(){
   bar.style.background = strength>0 ? colors[strength-1] : 'transparent';
 }
 
+// ---- PAYMENT ----
+async function handleMatchPayment(){
+  var email = document.getElementById('s4-email').value.trim();
+  if(!email || !email.includes('@')){showMsg('Please enter a valid email','error');return}
+  if(!_codes){showMsg('Please go back and enter your birth date','error');return}
+
+  var name = document.getElementById('s1-name').value.trim();
+  var dob = document.getElementById('s1-dob').value;
+  var time = document.getElementById('s1-time').value || '12:00';
+  var gender = document.getElementById('s1-gender').value;
+
+  var btn = document.getElementById('pay-btn');
+  btn.textContent = 'Redirecting to checkout...';
+  btn.disabled = true;
+
+  try {
+    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        type: 'match_membership',
+        email: email,
+        name: name,
+        dob: dob,
+        time: time,
+        gender: gender,
+        looking_for: selectedLF.join(','),
+        biorhythm: _codes.biorhythm,
+        generational: _codes.generational,
+        life_path: _codes.lifePath,
+        pythagorean_code: _codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath
+      })
+    });
+    var data = await res.json();
+    if(data.url){
+      // Store email for step 5 when they return
+      localStorage.setItem('occultics_match_email', email);
+      localStorage.setItem('occultics_match_data', JSON.stringify({
+        name: name, dob: dob, time: time, gender: gender,
+        looking_for: selectedLF, bio: document.getElementById('s2-bio').value.trim(),
+        codes: _codes
+      }));
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Payment error');
+    }
+  } catch(err){
+    showMsg('Something went wrong: ' + err.message, 'error');
+    btn.textContent = '✦ Activate Membership — $29/month';
+    btn.disabled = false;
+  }
+}
+
+// ---- CHECK IF RETURNING FROM PAYMENT ----
+(function checkPaymentReturn(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('payment') === 'success' || params.get('session_id')){
+    // User returned from Stripe — go to Step 5
+    var savedEmail = localStorage.getItem('occultics_match_email');
+    var savedData = localStorage.getItem('occultics_match_data');
+    if(savedEmail && savedData){
+      var data = JSON.parse(savedData);
+      _codes = data.codes;
+
+      // Restore form data
+      document.getElementById('s1-name').value = data.name;
+      document.getElementById('s1-dob').value = data.dob;
+      document.getElementById('s1-time').value = data.time;
+      document.getElementById('s1-gender').value = data.gender;
+      document.getElementById('s2-bio').value = data.bio || '';
+      selectedLF = data.looking_for || [];
+
+      // Restore code displays
+      var codeStr = _codes.biorhythm + ' · ' + _codes.generational + ' · ' + _codes.lifePath;
+      document.getElementById('s4-code').textContent = codeStr;
+      document.getElementById('s5-code').textContent = codeStr;
+
+      // Pre-fill email and go to step 5
+      document.getElementById('s5-email').value = savedEmail;
+
+      // Show step 5
+      document.getElementById('step1').style.display = 'none';
+      document.getElementById('step5').style.display = 'block';
+      currentStep = 5;
+      updateProgress(5);
+
+      showMsg('Payment confirmed! Create your password to finish.', 'success');
+    }
+  }
+})();
+
 // ---- CREATE ACCOUNT ----
 async function createAccount(){
-  var email = document.getElementById('s4-email').value.trim();
-  var pwd = document.getElementById('s4-pwd').value;
+  var email = document.getElementById('s5-email').value.trim();
+  var pwd = document.getElementById('s5-pwd').value;
   var name = document.getElementById('s1-name').value.trim();
   var dob = document.getElementById('s1-dob').value;
   var time = document.getElementById('s1-time').value || '12:00';
@@ -432,21 +589,20 @@ async function createAccount(){
 
   if(!email){showMsg('Please enter your email','error');return}
   if(!pwd||pwd.length<8){showMsg('Password must be at least 8 characters','error');return}
-  if(!_codes){showMsg('Please go back and enter your birth date','error');return}
+  if(!_codes){showMsg('Something went wrong. Please start over.','error');return}
 
   var btn = document.getElementById('create-btn');
   btn.textContent = '⏳ Creating your account...';
   btn.disabled = true;
 
   try {
-    if(!supabase || SUPABASE_URL === 'https://dtquqaridqyjdgirjczr.supabase.co'){
+    if(!supabase){
       // Demo mode - no Supabase connected yet
       showSuccess(name, _codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath);
       return;
     }
 
     // Sign up with Supabase Auth
-    var parts = dob.split('-').map(Number);
     var authRes = await supabase.auth.signUp({email:email, password:pwd});
     if(authRes.error) throw authRes.error;
 
@@ -478,25 +634,35 @@ async function createAccount(){
       generational: _codes.generational,
       life_path: _codes.lifePath,
       pythagorean_code: _codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath,
+      membership: 'founding',
       language: window._lang || 'en'
     });
 
     if(profileRes.error) throw profileRes.error;
 
+    // Clean up localStorage
+    localStorage.removeItem('occultics_match_email');
+    localStorage.removeItem('occultics_match_data');
+
     showSuccess(name, _codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath);
 
   } catch(err){
     showMsg(err.message || 'Something went wrong. Please try again.', 'error');
-    btn.textContent = '✦ Create Account & Join Match';
+    btn.textContent = '✦ Create Account & See Matches';
     btn.disabled = false;
   }
 }
 
 function showSuccess(name, code){
-  document.getElementById('step4').style.display='none';
+  document.getElementById('step5').style.display='none';
+  document.querySelector('.progress-wrap').style.display='none';
   document.getElementById('success-screen').classList.add('show');
   document.getElementById('success-name').textContent = name;
   document.getElementById('success-code').textContent = code;
+
+  // Clean up localStorage
+  localStorage.removeItem('occultics_match_email');
+  localStorage.removeItem('occultics_match_data');
 
   // Countdown redirect
   var count = 5;
