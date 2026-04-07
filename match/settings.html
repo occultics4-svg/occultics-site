@@ -3,491 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile — Occultics Match</title>
+<title>Settings — Occultics Match</title>
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Safe Supabase loader
-window.supabaseLoaded = false;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" 
-  onerror="console.log('Supabase CDN failed, running in demo mode')"
-  onload="window.supabaseLoaded=true">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')"></script>
 <style>
-:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff;--error:#ff4d6d;--success:#4dffb8}
+:root{--navy:#0a0e2e;--navy-light:#0f1538;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--gray-dim:rgba(136,146,164,0.4);--white:#fff;--card-bg:rgba(255,255,255,0.03);--card-border:rgba(77,184,255,0.1);--success:#4dffb8;--danger:#ff4d6d}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
-.app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(77,184,255,0.1);background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-gem{width:24px;height:28px}
-.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
-.app-nav{display:flex;gap:4px}
-.nav-item{padding:8px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;text-decoration:none;color:var(--gray-mid);border:none;background:transparent;font-family:'Montserrat',sans-serif}
-.nav-item.active,.nav-item:hover{background:rgba(26,42,255,0.2);color:var(--crystal)}
-.content{max-width:560px;margin:0 auto;padding:32px 20px 100px}
 
-/* PROFILE HEADER */
-.profile-header{text-align:center;margin-bottom:36px;padding-bottom:32px;border-bottom:1px solid rgba(77,184,255,0.1)}
-.profile-photo-wrap{position:relative;width:100px;height:100px;margin:0 auto 16px}
-.profile-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;border:2px solid rgba(77,184,255,0.3);background:rgba(26,42,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--crystal)}
-.photo-edit-btn{position:absolute;bottom:2px;right:2px;width:28px;height:28px;border-radius:50%;background:var(--royal);border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px}
-.photo-edit-input{position:absolute;inset:0;opacity:0;cursor:pointer;border-radius:50%}
-.profile-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:4px}
-.profile-code{font-size:13px;color:var(--crystal);letter-spacing:4px;margin-bottom:8px}
-.profile-status{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:100px;font-size:9px;letter-spacing:2px;font-weight:600;text-transform:uppercase}
-.status-founding{background:rgba(77,184,255,0.1);border:1px solid rgba(77,184,255,0.3);color:var(--crystal)}
-.status-free{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--gray-mid)}
+/* NAV */
+.app-nav{background:rgba(10,14,46,0.97);border-bottom:1px solid var(--card-border);padding:0 24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo svg{width:20px;height:24px}
+.nav-logo span{font-weight:700;font-size:11px;letter-spacing:3px;color:var(--white)}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);text-decoration:none;transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.nav-link.active{color:var(--crystal);background:rgba(77,184,255,0.08)}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal);cursor:pointer;overflow:hidden}
+.nav-avatar img{width:100%;height:100%;object-fit:cover}
+
+/* LAYOUT */
+.settings-layout{max-width:640px;margin:0 auto;padding:40px 24px}
+.settings-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:32px}
 
 /* SECTIONS */
-.settings-section{margin-bottom:28px}
-.section-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray-mid);font-weight:600;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.05)}
-.settings-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:14px;overflow:hidden}
-.settings-item{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .2s}
-.settings-item:last-child{border-bottom:none}
-.settings-item:hover{background:rgba(255,255,255,0.02)}
-.settings-item-left{}
-.settings-item-label{font-size:13px;font-weight:500;color:var(--white)}
-.settings-item-sub{font-size:11px;color:var(--gray-mid);margin-top:2px;font-weight:300}
-.settings-item-right{display:flex;align-items:center;gap:8px;color:var(--gray-mid);font-size:12px}
-.settings-arrow{opacity:0.4}
+.settings-section{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:28px;margin-bottom:20px}
+.section-label{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px}
 
-/* EDIT FORM */
-.edit-form{padding:18px;border-top:1px solid rgba(77,184,255,0.08);display:none}
-.edit-form.show{display:block}
-.form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+/* AVATAR SECTION */
+.avatar-edit{display:flex;align-items:center;gap:20px;margin-bottom:20px}
+.avatar-large{width:80px;height:80px;border-radius:50%;background:rgba(26,42,255,0.2);border:2px solid rgba(77,184,255,0.25);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--crystal);overflow:hidden;flex-shrink:0}
+.avatar-large img{width:100%;height:100%;object-fit:cover}
+.avatar-actions{display:flex;flex-direction:column;gap:8px}
+.avatar-upload-btn{padding:8px 16px;background:rgba(26,42,255,0.15);border:1px solid rgba(77,184,255,0.2);border-radius:8px;color:var(--crystal);font-size:10px;font-weight:600;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;position:relative;overflow:hidden}
+.avatar-upload-btn:hover{background:rgba(26,42,255,0.25)}
+.avatar-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.avatar-hint{font-size:10px;color:var(--gray-dim)}
+
+/* FORM */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-row.single{grid-template-columns:1fr}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:5px}
 .form-group label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-mid);font-weight:600}
-.form-group input,.form-group textarea,.form-group select{padding:11px 13px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--crystal)}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(136,146,164,0.4)}
-.form-group select option{background:#0a0e2e}
+.form-group input,.form-group select,.form-group textarea{padding:12px 14px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,184,255,0.15);border-radius:10px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--crystal)}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--gray-dim)}
+.form-group input:read-only{opacity:0.5}
+.form-group select option{background:#0a0e2e;color:var(--white)}
 .form-group textarea{resize:vertical;min-height:80px}
 
-/* LOOKING FOR MINI */
-.lf-mini{display:flex;gap:8px;flex-wrap:wrap}
-.lf-mini-tag{padding:6px 14px;border-radius:100px;border:1.5px solid rgba(77,184,255,0.15);font-size:11px;cursor:pointer;transition:all .2s;background:transparent;color:var(--gray-mid);font-family:'Montserrat',sans-serif}
-.lf-mini-tag.selected{border-color:var(--crystal);background:rgba(77,184,255,0.1);color:var(--white)}
+/* CODE DISPLAY */
+.code-display{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px}
+.code-display-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:6px}
+.code-display-value{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--crystal);letter-spacing:10px}
+.code-display-sub{font-size:10px;color:var(--gray-dim);margin-top:4px}
 
-/* SUBSCRIPTION CARD */
-.sub-card{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.2);border-radius:14px;padding:20px;margin-bottom:12px}
-.sub-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.sub-card-title{font-size:14px;font-weight:600}
-.sub-card-price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--crystal)}
-.sub-card-features{list-style:none}
-.sub-card-features li{font-size:11px;color:var(--gray-mid);padding:4px 0;display:flex;align-items:center;gap:8px;font-weight:300}
-.sub-card-features li::before{content:'✦';color:var(--crystal);font-size:8px}
+/* LOOKING FOR */
+.lf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.lf-option{border:1.5px solid rgba(77,184,255,0.15);border-radius:10px;padding:14px 10px;text-align:center;cursor:pointer;transition:all .2s}
+.lf-option:hover{border-color:rgba(77,184,255,0.4)}
+.lf-option.selected{border-color:var(--crystal);background:rgba(77,184,255,0.1)}
+.lf-option-icon{font-size:20px;margin-bottom:4px}
+.lf-option-label{font-size:10px;font-weight:600}
+
+/* SUBSCRIPTION */
+.sub-card{display:flex;align-items:center;justify-content:space-between;padding:16px;background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:12px;margin-bottom:16px}
+.sub-info{}
+.sub-plan{font-size:13px;font-weight:600;margin-bottom:2px}
+.sub-status{font-size:11px;color:var(--success);font-weight:300}
+.sub-price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crystal)}
+.sub-price span{font-size:12px;color:var(--gray-mid);font-family:'Montserrat',sans-serif}
+.sub-note{font-size:10px;color:var(--gray-dim);margin-bottom:16px}
 
 /* BUTTONS */
-.btn-save{width:100%;padding:12px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:4px}
+.btn-save{width:100%;padding:14px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
 .btn-save:hover{background:#1420cc}
-.btn-subscribe{display:block;width:100%;padding:14px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none;text-align:center}
-.btn-subscribe:hover{background:#1420cc}
-.btn-danger{width:100%;padding:12px;background:transparent;color:#ff4d6d;border:1.5px solid rgba(255,77,109,0.3);border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:8px}
-.btn-danger:hover{background:rgba(255,77,109,0.1)}
-.btn-signout{width:100%;padding:12px;background:transparent;color:var(--gray-mid);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
-.btn-signout:hover{border-color:rgba(255,255,255,0.2);color:var(--white)}
+.btn-save:disabled{opacity:0.5;cursor:not-allowed}
+.btn-danger{width:100%;padding:12px;background:transparent;color:var(--danger);border:1px solid rgba(255,77,109,0.2);border-radius:10px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:10px}
+.btn-danger:hover{background:rgba(255,77,109,0.08);border-color:rgba(255,77,109,0.4)}
+.btn-secondary{width:100%;padding:12px;background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.08);border-radius:10px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:10px}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.2);color:var(--white)}
 
-/* MSG */
-.msg{padding:12px 16px;border-radius:8px;font-size:12px;margin-bottom:16px;display:none}
-.msg.show{display:block}
-.msg.error{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);color:#ff4d6d}
-.msg.success{background:rgba(77,255,184,0.1);border:1px solid rgba(77,255,184,0.3);color:#4dffb8}
+/* MESSAGES */
+.settings-msg{padding:12px 16px;border-radius:8px;font-size:12px;margin-bottom:16px;display:none}
+.settings-msg.show{display:block}
+.settings-msg.success{background:rgba(77,255,184,0.1);border:1px solid rgba(77,255,184,0.3);color:var(--success)}
+.settings-msg.error{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);color:var(--danger)}
 
-/* MOBILE NAV */
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(77,184,255,0.1);padding:8px 0;z-index:100}
-.mobile-nav-items{display:flex;justify-content:space-around}
-.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 16px;cursor:pointer;text-decoration:none;color:var(--gray-mid);transition:color .2s}
-.mobile-nav-item.active{color:var(--crystal)}
-.mobile-nav-icon{font-size:18px}
-.mobile-nav-label{font-size:9px;letter-spacing:0.5px;font-weight:600}
-@media(max-width:768px){.app-nav{display:none}.mobile-nav{display:block}.content{padding:24px 16px 100px}}
+/* FOOTER */
+.settings-footer{text-align:center;padding:32px 0;margin-top:20px}
+.settings-footer p{font-size:9px;color:rgba(255,255,255,0.1)}
 </style>
 </head>
 <body>
 
-<header class="app-header">
-  <a href="https://occultics.ai" class="logo-wrap">
-    <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
-      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
-    </svg>
-    <div class="logo-name">MATCH</div>
-  </a>
-  <nav class="app-nav">
-    <a href="/match/dashboard.html" class="nav-item">My Matches</a>
-    <a href="/match/messages.html" class="nav-item">Messages</a>
-    <a href="/match/settings.html" class="nav-item active">Profile</a>
-  </nav>
-</header>
-
-<div class="content">
-  <div id="msg-box" class="msg"></div>
-
-  <!-- PROFILE HEADER -->
-  <div class="profile-header">
-    <div class="profile-photo-wrap">
-      <div class="profile-photo" id="profile-photo-el">?</div>
-      <div class="photo-edit-btn">
-        📷
-        <input type="file" class="photo-edit-input" accept="image/*" onchange="uploadPhoto()">
-      </div>
+<!-- NAV -->
+<nav class="app-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
+      <span>OCCULTICS</span>
+    </a>
+    <div class="nav-links">
+      <a href="/match/dashboard.html" class="nav-link">Matches</a>
+      <a href="/match/messages.html" class="nav-link">Messages</a>
+      <a href="/match/settings.html" class="nav-link active">Settings</a>
     </div>
-    <div class="profile-name" id="profile-name-display">Loading...</div>
-    <div class="profile-code" id="profile-code-display">— · — · —</div>
-    <span class="profile-status" id="profile-status-badge">
-      <span id="profile-status-text">Loading...</span>
-    </span>
+    <div class="nav-avatar" id="nav-avatar" onclick="window.location='/match/settings.html'">?</div>
   </div>
+</nav>
 
-  <!-- PROFILE INFO -->
+<div class="settings-layout">
+  <div class="settings-title">Settings</div>
+
+  <div id="settings-msg" class="settings-msg"></div>
+
+  <!-- PROFILE -->
   <div class="settings-section">
-    <div class="section-title">Profile Information</div>
-    <div class="settings-card">
-      <div class="settings-item" onclick="toggleEdit('bio-edit')">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Bio</div>
-          <div class="settings-item-sub" id="bio-display">Tap to edit your bio</div>
-        </div>
-        <span class="settings-arrow">›</span>
-      </div>
-      <div class="edit-form" id="bio-edit">
-        <div class="form-group">
-          <label>Your Bio (max 300 chars)</label>
-          <textarea id="bio-input" maxlength="300" placeholder="Tell people about yourself..."></textarea>
-        </div>
-        <button class="btn-save" onclick="saveBio()">Save Bio</button>
-      </div>
+    <div class="section-label">Your Profile</div>
 
-      <div class="settings-item" onclick="toggleEdit('lf-edit')">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Looking For</div>
-          <div class="settings-item-sub" id="lf-display">Tap to edit</div>
-        </div>
-        <span class="settings-arrow">›</span>
+    <div class="avatar-edit">
+      <div class="avatar-large" id="settings-avatar">?</div>
+      <div class="avatar-actions">
+        <label class="avatar-upload-btn">
+          Change Photo
+          <input type="file" accept="image/*" onchange="uploadPhoto(this)">
+        </label>
+        <div class="avatar-hint">JPG or PNG · Max 5MB</div>
       </div>
-      <div class="edit-form" id="lf-edit">
-        <div class="lf-mini">
-          <button class="lf-mini-tag" id="lft-love" onclick="toggleLFTag('love')">💎 Love</button>
-          <button class="lf-mini-tag" id="lft-friendship" onclick="toggleLFTag('friendship')">🤝 Friendship</button>
-          <button class="lf-mini-tag" id="lft-business" onclick="toggleLFTag('business')">💼 Business</button>
-        </div>
-        <button class="btn-save" onclick="saveLookingFor()" style="margin-top:12px">Save</button>
+    </div>
+
+    <div class="code-display">
+      <div class="code-display-label">Your Pythagorean Code</div>
+      <div class="code-display-value" id="settings-code">— · — · —</div>
+      <div class="code-display-sub">Calculated from your birth date · Cannot be changed</div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="s-name" placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select id="s-gender">
+          <option value="">Select...</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date of Birth</label>
+        <input type="date" id="s-dob" readonly>
+      </div>
+      <div class="form-group">
+        <label>Birth Time</label>
+        <input type="time" id="s-time">
+      </div>
+    </div>
+
+    <div class="form-row single">
+      <div class="form-group">
+        <label>Bio</label>
+        <textarea id="s-bio" placeholder="Tell people about yourself..." maxlength="300"></textarea>
       </div>
     </div>
   </div>
 
-  <!-- YOUR CODE -->
+  <!-- LOOKING FOR -->
   <div class="settings-section">
-    <div class="section-title">Your Pythagorean Code</div>
-    <div class="settings-card">
-      <div class="settings-item" style="cursor:default">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Biorhythm</div>
-          <div class="settings-item-sub">How others experience you emotionally</div>
-        </div>
-        <div class="settings-item-right" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal)" id="disp-bio">—</div>
+    <div class="section-label">Looking For</div>
+    <div class="lf-grid">
+      <div class="lf-option" id="lf-love" onclick="toggleLF('love')">
+        <div class="lf-option-icon">💎</div>
+        <div class="lf-option-label">Love</div>
       </div>
-      <div class="settings-item" style="cursor:default">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Generational</div>
-          <div class="settings-item-sub">What you truly need from a partner</div>
-        </div>
-        <div class="settings-item-right" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal)" id="disp-gen">—</div>
+      <div class="lf-option" id="lf-friendship" onclick="toggleLF('friendship')">
+        <div class="lf-option-icon">🤝</div>
+        <div class="lf-option-label">Friendship</div>
       </div>
-      <div class="settings-item" style="cursor:default">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Life Path</div>
-          <div class="settings-item-sub">The overall direction of your life</div>
-        </div>
-        <div class="settings-item-right" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal)" id="disp-lp">—</div>
+      <div class="lf-option" id="lf-business" onclick="toggleLF('business')">
+        <div class="lf-option-icon">💼</div>
+        <div class="lf-option-label">Business</div>
       </div>
     </div>
   </div>
+
+  <!-- SAVE -->
+  <button class="btn-save" onclick="saveProfile()" id="save-btn">Save Changes</button>
 
   <!-- SUBSCRIPTION -->
-  <div class="settings-section">
-    <div class="section-title">Membership</div>
-    <div id="sub-content">
-      <!-- Populated by JS -->
+  <div class="settings-section" style="margin-top:20px">
+    <div class="section-label">Subscription</div>
+    <div class="sub-card">
+      <div class="sub-info">
+        <div class="sub-plan">Founding Member</div>
+        <div class="sub-status">● Active</div>
+      </div>
+      <div class="sub-price">$29<span>/mo</span></div>
     </div>
+    <div class="sub-note">Your founding member pricing is locked in forever. Cancel anytime from your Stripe billing portal.</div>
+    <button class="btn-secondary" onclick="manageBilling()">Manage Billing</button>
   </div>
 
   <!-- ACCOUNT -->
   <div class="settings-section">
-    <div class="section-title">Account</div>
-    <div class="settings-card">
-      <div class="settings-item" onclick="toggleEdit('pwd-edit')">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Change Password</div>
-        </div>
-        <span class="settings-arrow">›</span>
-      </div>
-      <div class="edit-form" id="pwd-edit">
-        <div class="form-group">
-          <label>New Password</label>
-          <input type="password" id="new-pwd" placeholder="Min 8 characters">
-        </div>
-        <button class="btn-save" onclick="changePassword()">Update Password</button>
-      </div>
-
-      <div class="settings-item" onclick="toggleEdit('lang-edit')">
-        <div class="settings-item-left">
-          <div class="settings-item-label">Language</div>
-          <div class="settings-item-sub" id="lang-display">English</div>
-        </div>
-        <span class="settings-arrow">›</span>
-      </div>
-      <div class="edit-form" id="lang-edit">
-        <div class="form-group">
-          <label>Preferred Language</label>
-          <select id="lang-select">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="ja">日本語</option>
-          </select>
-        </div>
-        <button class="btn-save" onclick="saveLanguage()">Save Language</button>
+    <div class="section-label">Account</div>
+    <div class="form-row single">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="s-email" readonly>
       </div>
     </div>
+    <button class="btn-secondary" onclick="changePassword()">Change Password</button>
+    <button class="btn-secondary" onclick="signOut()">Sign Out</button>
+    <button class="btn-danger" onclick="deleteAccount()">Delete Account</button>
   </div>
 
-  <!-- DANGER ZONE -->
-  <div class="settings-section">
-    <button class="btn-signout" onclick="signOut()">Sign Out</button>
-    <button class="btn-danger" onclick="confirmDelete()">Delete Account</button>
-  </div>
-
-  <div style="text-align:center;margin-top:24px">
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:rgba(255,255,255,0.15)">"Your numbers have always known the way."</p>
-    <p style="font-size:10px;color:rgba(255,255,255,0.1);margin-top:8px">© 2026 Occultics Publishing · occultics.ai</p>
+  <div class="settings-footer">
+    <p>"Your numbers have always known the way." · © 2026 Occultics Publishing</p>
   </div>
 </div>
 
-<nav class="mobile-nav">
-  <div class="mobile-nav-items">
-    <a href="/match/dashboard.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">💎</span>
-      <span class="mobile-nav-label">Matches</span>
-    </a>
-    <a href="/match/messages.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">✉</span>
-      <span class="mobile-nav-label">Messages</span>
-    </a>
-    <a href="/match/settings.html" class="mobile-nav-item active">
-      <span class="mobile-nav-icon">◈</span>
-      <span class="mobile-nav-label">Profile</span>
-    </a>
-  </div>
-</nav>
-
 <script>
-var SUPABASE_URL='https://dtquqaridqyjdgirjczr.supabase.co';
-var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-var supabase = null;
-try {
-  if(window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_URL !== 'https://dtquqaridqyjdgirjczr.supabase.co') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-} catch(e) {
-  console.log('Running in demo mode:', e.message);
-}
-var currentUser=null;
-var currentProfile=null;
-var selectedLF=[];
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var sb = null;
+var myProfile = null;
+var myUserId = null;
+var selectedLF = [];
 
-async function init(){
-  if(!supabase || SUPABASE_URL === 'https://dtquqaridqyjdgirjczr.supabase.co'){showDemoProfile();return}
-  var session=await supabase.auth.getSession();
-  if(!session.data.session){window.location.href='/match/join.html';return}
-  currentUser=session.data.session.user;
-  var res=await supabase.from('profiles').select('*').eq('user_id',currentUser.id).single();
-  if(res.error){window.location.href='/match/join.html';return}
-  currentProfile=res.data;
-  renderProfile(currentProfile);
+try { if(window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
+
+function getInitial(name) { return name ? name.charAt(0).toUpperCase() : '?'; }
+
+function showMsg(text, type) {
+  var el = document.getElementById('settings-msg');
+  el.textContent = text;
+  el.className = 'settings-msg show ' + type;
+  window.scrollTo(0, 0);
+  setTimeout(function(){ el.className = 'settings-msg'; }, 5000);
 }
 
-function renderProfile(p){
-  // Photo
-  var photoEl=document.getElementById('profile-photo-el');
-  if(p.photo_url){
-    photoEl.innerHTML='<img src="'+p.photo_url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
+// ---- LOOKING FOR ----
+function toggleLF(type) {
+  var card = document.getElementById('lf-' + type);
+  var idx = selectedLF.indexOf(type);
+  if(idx > -1) {
+    selectedLF.splice(idx, 1);
+    card.classList.remove('selected');
   } else {
-    photoEl.style.display='flex';
-    photoEl.style.alignItems='center';
-    photoEl.style.justifyContent='center';
-    photoEl.textContent=p.name ? p.name.charAt(0).toUpperCase() : '?';
+    selectedLF.push(type);
+    card.classList.add('selected');
+  }
+}
+
+// ---- PHOTO UPLOAD ----
+async function uploadPhoto(input) {
+  var file = input.files[0];
+  if(!file) return;
+  if(file.size > 5 * 1024 * 1024) { showMsg('Photo must be under 5MB', 'error'); return; }
+
+  try {
+    var fileName = myUserId + '/avatar.' + file.name.split('.').pop();
+    var uploadRes = await sb.storage.from('avatars').upload(fileName, file, {upsert: true});
+    if(uploadRes.error) throw uploadRes.error;
+
+    var urlRes = sb.storage.from('avatars').getPublicUrl(fileName);
+    var photoUrl = urlRes.data.publicUrl;
+
+    await sb.from('profiles').update({photo_url: photoUrl}).eq('user_id', myUserId);
+
+    document.getElementById('settings-avatar').innerHTML = '<img src="'+photoUrl+'" alt="">';
+    document.getElementById('nav-avatar').innerHTML = '<img src="'+photoUrl+'" alt="">';
+    showMsg('Photo updated!', 'success');
+  } catch(e) {
+    showMsg('Failed to upload photo: ' + e.message, 'error');
+  }
+}
+
+// ---- SAVE PROFILE ----
+async function saveProfile() {
+  var btn = document.getElementById('save-btn');
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  try {
+    var updates = {
+      name: document.getElementById('s-name').value.trim(),
+      gender: document.getElementById('s-gender').value,
+      time_of_birth: document.getElementById('s-time').value,
+      bio: document.getElementById('s-bio').value.trim(),
+      looking_for: selectedLF
+    };
+
+    var res = await sb.from('profiles').update(updates).eq('user_id', myUserId);
+    if(res.error) throw res.error;
+
+    showMsg('Profile saved!', 'success');
+  } catch(e) {
+    showMsg('Failed to save: ' + e.message, 'error');
   }
 
-  document.getElementById('profile-name-display').textContent=p.name;
-  document.getElementById('profile-code-display').textContent=p.biorhythm+' · '+p.generational+' · '+p.life_path;
+  btn.textContent = 'Save Changes';
+  btn.disabled = false;
+}
 
-  var badge=document.getElementById('profile-status-badge');
-  var statusText=document.getElementById('profile-status-text');
-  if(p.is_subscribed){
-    badge.className='profile-status status-founding';
-    statusText.textContent='✦ Founding Member';
-  } else {
-    badge.className='profile-status status-free';
-    statusText.textContent='Free Member';
+// ---- ACCOUNT ACTIONS ----
+function manageBilling() {
+  window.open('https://billing.stripe.com/p/login/test_00g00000000000', '_blank');
+}
+
+async function changePassword() {
+  var email = document.getElementById('s-email').value;
+  if(!email) return;
+  try {
+    await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.origin + '/match/settings.html'});
+    showMsg('Password reset email sent to ' + email, 'success');
+  } catch(e) {
+    showMsg('Failed: ' + e.message, 'error');
+  }
+}
+
+async function signOut() {
+  await sb.auth.signOut();
+  window.location.href = '/match/join.html';
+}
+
+async function deleteAccount() {
+  if(!confirm('Are you sure you want to delete your account? This cannot be undone.')) return;
+  if(!confirm('This will permanently delete your profile, matches, and messages. Continue?')) return;
+
+  try {
+    await sb.from('messages').delete().or('from_user.eq.'+myUserId+',to_user.eq.'+myUserId);
+    await sb.from('profiles').delete().eq('user_id', myUserId);
+    await sb.auth.signOut();
+    window.location.href = '/';
+  } catch(e) {
+    showMsg('Failed to delete account: ' + e.message, 'error');
+  }
+}
+
+// ---- INIT ----
+async function init() {
+  if(!sb) return;
+
+  var session = await sb.auth.getSession();
+  if(!session.data.session) {
+    window.location.href = '/match/join.html';
+    return;
   }
 
-  document.getElementById('bio-display').textContent=p.bio||'Add a bio...';
-  document.getElementById('bio-input').value=p.bio||'';
-  document.getElementById('disp-bio').textContent=p.biorhythm;
-  document.getElementById('disp-gen').textContent=p.generational;
-  document.getElementById('disp-lp').textContent=p.life_path;
+  myUserId = session.data.session.user.id;
+  document.getElementById('s-email').value = session.data.session.user.email;
 
-  selectedLF=p.looking_for||[];
-  selectedLF.forEach(function(t){
-    var el=document.getElementById('lft-'+t);
-    if(el)el.classList.add('selected');
+  var res = await sb.from('profiles').select('*').eq('user_id', myUserId).single();
+  if(res.error || !res.data) {
+    window.location.href = '/match/join.html';
+    return;
+  }
+  myProfile = res.data;
+
+  // Populate form
+  document.getElementById('s-name').value = myProfile.name || '';
+  document.getElementById('s-gender').value = myProfile.gender || '';
+  document.getElementById('s-dob').value = myProfile.date_of_birth || '';
+  document.getElementById('s-time').value = myProfile.time_of_birth || '';
+  document.getElementById('s-bio').value = myProfile.bio || '';
+
+  // Code display
+  var code = myProfile.pythagorean_code || (myProfile.biorhythm+'.'+myProfile.generational+'.'+myProfile.lifePath);
+  document.getElementById('settings-code').textContent = code.split('.').join(' · ');
+
+  // Avatar
+  var avatarEl = document.getElementById('settings-avatar');
+  var navAvatar = document.getElementById('nav-avatar');
+  if(myProfile.photo_url) {
+    avatarEl.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
+    navAvatar.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
+  } else {
+    avatarEl.textContent = getInitial(myProfile.name);
+    navAvatar.textContent = getInitial(myProfile.name);
+  }
+
+  // Looking for
+  var lf = myProfile.looking_for || [];
+  if(typeof lf === 'string') { try { lf = JSON.parse(lf); } catch(e) { lf = [lf]; } }
+  selectedLF = lf;
+  lf.forEach(function(t) {
+    var el = document.getElementById('lf-' + t);
+    if(el) el.classList.add('selected');
   });
-  document.getElementById('lf-display').textContent=selectedLF.length>0 ? selectedLF.map(function(t){return({love:'💎 Love',friendship:'🤝 Friendship',business:'💼 Business'}[t]||t)}).join(', ') : 'Tap to select what you are looking for';
 
-  if(p.language){
-    document.getElementById('lang-select').value=p.language;
-    document.getElementById('lang-display').textContent={'en':'English','es':'Español','ja':'日本語'}[p.language]||'English';
-  }
-
-  renderSubscription(p);
-}
-
-function renderSubscription(p){
-  var el=document.getElementById('sub-content');
-  if(p.is_subscribed){
-    el.innerHTML='<div class="sub-card"><div class="sub-card-top"><div class="sub-card-title">Founding Member</div><div class="sub-card-price">$29<span style="font-size:14px;color:var(--gray-mid)">/mo</span></div></div><ul class="sub-card-features"><li>All matches unlocked</li><li>Unlimited messaging</li><li>Live event access</li><li>Founding member rate locked in</li></ul></div><button class="btn-signout" onclick="manageSubscription()" style="margin-bottom:8px">Manage Subscription</button>';
-  } else {
-    el.innerHTML='<div class="sub-card"><div class="sub-card-top"><div class="sub-card-title">Upgrade to Founding Member</div><div class="sub-card-price">$29<span style="font-size:14px;color:var(--gray-mid)">/mo</span></div></div><ul class="sub-card-features"><li>See all your matches</li><li>Send connection requests</li><li>Message your matches</li><li>Access live events</li></ul></div><a href="/match/join.html" class="btn-subscribe">Become a Founding Member</a><p style="font-size:10px;color:var(--gray-mid);text-align:center;margin-top:8px">First 100 spots only · Price increases after</p>';
+  // Check for password reset
+  var hash = window.location.hash;
+  if(hash && hash.indexOf('type=recovery') > -1) {
+    var newPwd = prompt('Enter your new password (min 8 characters):');
+    if(newPwd && newPwd.length >= 8) {
+      var pwdRes = await sb.auth.updateUser({password: newPwd});
+      if(pwdRes.error) showMsg('Password update failed: ' + pwdRes.error.message, 'error');
+      else showMsg('Password updated successfully!', 'success');
+    }
+    window.location.hash = '';
   }
 }
 
-function toggleEdit(id){
-  var form=document.getElementById(id);
-  form.classList.toggle('show');
-}
-
-function toggleLFTag(type){
-  var el=document.getElementById('lft-'+type);
-  var idx=selectedLF.indexOf(type);
-  if(idx>-1){selectedLF.splice(idx,1);el.classList.remove('selected');}
-  else{selectedLF.push(type);el.classList.add('selected');}
-}
-
-async function saveBio(){
-  var bio=document.getElementById('bio-input').value.trim();
-  if(supabase&&currentUser){
-    var res=await supabase.from('profiles').update({bio:bio}).eq('user_id',currentUser.id);
-    if(res.error){showMsg(res.error.message,'error');return}
-  }
-  document.getElementById('bio-display').textContent=bio||'Add a bio...';
-  document.getElementById('bio-edit').classList.remove('show');
-  showMsg('Bio updated!','success');
-}
-
-async function saveLookingFor(){
-  if(supabase&&currentUser){
-    var res=await supabase.from('profiles').update({looking_for:selectedLF}).eq('user_id',currentUser.id);
-    if(res.error){showMsg(res.error.message,'error');return}
-  }
-  document.getElementById('lf-display').textContent=selectedLF.length>0 ? selectedLF.map(function(t){return({love:'💎 Love',friendship:'🤝 Friendship',business:'💼 Business'}[t]||t)}).join(', ') : 'Tap to select what you are looking for';
-  document.getElementById('lf-edit').classList.remove('show');
-  showMsg('Saved!','success');
-}
-
-async function changePassword(){
-  var pwd=document.getElementById('new-pwd').value;
-  if(!pwd||pwd.length<8){showMsg('Password must be at least 8 characters','error');return}
-  if(supabase){
-    var res=await supabase.auth.updateUser({password:pwd});
-    if(res.error){showMsg(res.error.message,'error');return}
-  }
-  document.getElementById('pwd-edit').classList.remove('show');
-  document.getElementById('new-pwd').value='';
-  showMsg('Password updated!','success');
-}
-
-async function saveLanguage(){
-  var lang=document.getElementById('lang-select').value;
-  if(supabase&&currentUser){
-    await supabase.from('profiles').update({language:lang}).eq('user_id',currentUser.id);
-  }
-  document.getElementById('lang-display').textContent={'en':'English','es':'Español','ja':'日本語'}[lang];
-  document.getElementById('lang-edit').classList.remove('show');
-  showMsg('Language saved!','success');
-}
-
-async function uploadPhoto(){
-  var file=document.querySelector('.photo-edit-input').files[0];
-  if(!file||!supabase||!currentUser)return;
-  var fileName=currentUser.id+'/avatar.'+file.name.split('.').pop();
-  var res=await supabase.storage.from('avatars').upload(fileName,file,{upsert:true});
-  if(res.error){showMsg(res.error.message,'error');return}
-  var urlRes=supabase.storage.from('avatars').getPublicUrl(fileName);
-  var url=urlRes.data.publicUrl;
-  await supabase.from('profiles').update({photo_url:url}).eq('user_id',currentUser.id);
-  var photoEl=document.getElementById('profile-photo-el');
-  photoEl.innerHTML='<img src="'+url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-  showMsg('Photo updated!','success');
-}
-
-function manageSubscription(){
-  // Link to Stripe customer portal
-  window.location.href='https://billing.stripe.com/p/YOUR_STRIPE_PORTAL_LINK';
-}
-
-async function signOut(){
-  if(supabase)await supabase.auth.signOut();
-  window.location.href='/match/';
-}
-
-function confirmDelete(){
-  if(confirm('Are you sure you want to delete your account? This cannot be undone.')){
-    deleteAccount();
-  }
-}
-
-async function deleteAccount(){
-  if(supabase&&currentUser){
-    await supabase.from('profiles').delete().eq('user_id',currentUser.id);
-    await supabase.auth.signOut();
-  }
-  window.location.href='/match/';
-}
-
-function showDemoProfile(){
-  var demo={
-    name:'Your Name',
-    biorhythm:2,
-    generational:8,
-    life_path:1,
-    bio:'',
-    looking_for:[],
-    is_subscribed:false,
-    language:'en',
-    photo_url:null
-  };
-  renderProfile(demo);
-  showMsg('Connect Supabase to load your real profile. See setup instructions.','success');
-}
-
-function showMsg(text,type){
-  var el=document.getElementById('msg-box');
-  el.textContent=text;
-  el.className='msg show '+type;
-  setTimeout(function(){el.className='msg'},3000);
-  window.scrollTo(0,0);
-}
-
-
-// Safe init - wait for everything to load
-document.addEventListener('DOMContentLoaded', function(){
-  setTimeout(init, 100);
-});
+init();
 </script>
 </body>
 </html>
