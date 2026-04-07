@@ -7,13 +7,12 @@
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')"></script>
+<script>window.supabaseLoaded=false;</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
 <style>
-:root{--navy:#0a0e2e;--navy-light:#0f1538;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--gray-dim:rgba(136,146,164,0.4);--white:#fff;--card-bg:rgba(255,255,255,0.03);--card-border:rgba(77,184,255,0.1);--success:#4dffb8;--warning:#ffaa00;--danger:#ff4d6d}
+:root{--navy:#0a0e2e;--navy-light:#0f1538;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--gray-dim:rgba(136,146,164,0.4);--white:#fff;--card-bg:rgba(255,255,255,0.03);--card-border:rgba(77,184,255,0.1);--success:#4dffb8;--warning:#ffaa00;--danger:#ff4d6d;--like-green:#4dffb8;--pass-red:#ff4d6d}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
-
-/* NAV */
 .app-nav{background:rgba(10,14,46,0.97);border-bottom:1px solid var(--card-border);padding:0 24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
 .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
@@ -23,15 +22,20 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .nav-link{padding:8px 16px;border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);text-decoration:none;transition:all .2s}
 .nav-link:hover{color:var(--white);background:rgba(255,255,255,0.04)}
 .nav-link.active{color:var(--crystal);background:rgba(77,184,255,0.08)}
+.nav-link .badge-count{background:var(--crystal);color:var(--navy);font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;margin-left:4px}
 .nav-avatar{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal);cursor:pointer;overflow:hidden}
 .nav-avatar img{width:100%;height:100%;object-fit:cover}
 
-/* LAYOUT */
-.app-layout{max-width:1100px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:280px 1fr;gap:32px}
-@media(max-width:800px){.app-layout{grid-template-columns:1fr;}.sidebar{order:2}}
+/* TAB SYSTEM */
+.tab-bar{max-width:1100px;margin:0 auto;padding:16px 24px 0;display:flex;gap:4px;border-bottom:1px solid rgba(77,184,255,0.06)}
+.tab{padding:10px 20px;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;text-transform:uppercase}
+.tab:hover{color:var(--white)}
+.tab.active{color:var(--crystal);border-bottom-color:var(--crystal)}
 
-/* SIDEBAR - YOUR PROFILE */
-.sidebar{}
+.app-layout{max-width:1100px;margin:0 auto;padding:24px 24px;display:grid;grid-template-columns:280px 1fr;gap:32px}
+@media(max-width:800px){.app-layout{grid-template-columns:1fr}.sidebar{order:2}}
+
+/* SIDEBAR */
 .profile-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:28px 24px;text-align:center;position:sticky;top:80px}
 .profile-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;background:rgba(26,42,255,0.2);border:2px solid rgba(77,184,255,0.25);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--crystal);overflow:hidden}
 .profile-avatar img{width:100%;height:100%;object-fit:cover}
@@ -47,74 +51,105 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .edit-profile-btn{display:block;width:100%;padding:10px;background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:10px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:12px;text-decoration:none;text-align:center}
 .edit-profile-btn:hover{border-color:rgba(77,184,255,0.3);color:var(--crystal)}
 
-/* MAIN CONTENT */
-.main-content{}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+/* SECTION HEADER */
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300}
 .filter-row{display:flex;gap:8px;flex-wrap:wrap}
 .filter-btn{padding:6px 14px;border-radius:20px;font-size:10px;letter-spacing:1px;font-weight:600;text-transform:uppercase;border:1px solid rgba(77,184,255,0.15);color:var(--gray-mid);background:transparent;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif}
 .filter-btn:hover{border-color:rgba(77,184,255,0.4);color:var(--white)}
 .filter-btn.active{border-color:var(--crystal);color:var(--crystal);background:rgba(77,184,255,0.08)}
 
-/* MATCH CARDS */
+/* DISCOVER CARD (like/pass) */
+.discover-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;overflow:hidden;max-width:400px;margin:0 auto;transition:transform .3s,opacity .3s}
+.discover-card.swiping-left{transform:translateX(-120%) rotate(-8deg);opacity:0}
+.discover-card.swiping-right{transform:translateX(120%) rotate(8deg);opacity:0}
+.discover-photo{width:100%;height:300px;background:rgba(26,42,255,0.15);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:80px;color:rgba(77,184,255,0.3);overflow:hidden}
+.discover-photo img{width:100%;height:100%;object-fit:cover}
+.discover-body{padding:24px}
+.discover-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;margin-bottom:2px}
+.discover-name span{font-size:18px;color:var(--gray-mid);font-family:'Montserrat',sans-serif;font-weight:300}
+.discover-meta{font-size:10px;color:var(--gray-mid);margin-bottom:12px}
+.discover-codes{display:flex;gap:8px;margin-bottom:12px}
+.discover-code-pill{padding:5px 12px;border-radius:8px;font-size:11px;font-family:'Cormorant Garamond',serif;letter-spacing:3px;background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.12);color:var(--crystal)}
+.discover-score{padding:5px 12px;border-radius:8px;font-size:11px;font-weight:600;letter-spacing:1px}
+.discover-score.high{background:rgba(77,255,184,0.1);border:1px solid rgba(77,255,184,0.2);color:var(--like-green)}
+.discover-score.mid{background:rgba(255,170,0,0.1);border:1px solid rgba(255,170,0,0.2);color:var(--warning)}
+.discover-score.low{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.2);color:var(--pass-red)}
+.discover-bio{font-size:12px;color:var(--gray-mid);line-height:1.7;font-weight:300;margin-bottom:16px}
+.discover-tags{display:flex;gap:6px;margin-bottom:20px}
+.discover-tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-mid);padding:3px 8px;border:1px solid rgba(255,255,255,0.06);border-radius:12px}
+.discover-actions{display:flex;gap:12px;justify-content:center}
+.discover-btn{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;transition:all .2s;border:none}
+.discover-btn.pass{background:rgba(255,77,109,0.1);border:2px solid rgba(255,77,109,0.25);color:var(--pass-red)}
+.discover-btn.pass:hover{background:rgba(255,77,109,0.2);transform:scale(1.1)}
+.discover-btn.like{background:rgba(77,255,184,0.1);border:2px solid rgba(77,255,184,0.25);color:var(--like-green)}
+.discover-btn.like:hover{background:rgba(77,255,184,0.2);transform:scale(1.1)}
+.discover-btn.info{background:rgba(77,184,255,0.1);border:2px solid rgba(77,184,255,0.25);color:var(--crystal);width:48px;height:48px;font-size:16px}
+.discover-btn.info:hover{background:rgba(77,184,255,0.2)}
+
+/* MATCH CARDS (for matched tab) */
 .matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .match-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:24px;transition:all .25s;cursor:pointer;position:relative}
 .match-card:hover{border-color:rgba(77,184,255,0.3);transform:translateY(-2px);background:rgba(255,255,255,0.05)}
-.match-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.match-top{display:flex;align-items:center;gap:14px;margin-bottom:12px}
 .match-avatar{width:52px;height:52px;border-radius:50%;background:rgba(26,42,255,0.2);border:2px solid rgba(77,184,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--crystal);flex-shrink:0;overflow:hidden}
 .match-avatar img{width:100%;height:100%;object-fit:cover}
 .match-info{flex:1}
 .match-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:2px}
 .match-meta{font-size:10px;color:var(--gray-mid)}
-.match-score{position:absolute;top:16px;right:16px;text-align:center}
+.match-score-badge{position:absolute;top:16px;right:16px;text-align:center}
 .match-score-num{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300}
-.match-score-num.high{color:var(--success)}
-.match-score-num.mid{color:var(--warning)}
-.match-score-num.low{color:var(--danger)}
+.match-score-num.high{color:var(--success)}.match-score-num.mid{color:var(--warning)}.match-score-num.low{color:var(--danger)}
 .match-score-label{font-size:7px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase}
 .match-codes{display:flex;gap:8px;margin-bottom:12px}
-.match-code-pill{padding:4px 10px;border-radius:6px;font-size:10px;font-family:'Cormorant Garamond',serif;font-weight:400;letter-spacing:3px;background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.12);color:var(--crystal)}
+.match-code-pill{padding:4px 10px;border-radius:6px;font-size:10px;font-family:'Cormorant Garamond',serif;letter-spacing:3px;background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.12);color:var(--crystal)}
 .match-compat{font-size:10px;color:var(--crystal);background:rgba(77,184,255,0.06);border:1px solid rgba(77,184,255,0.1);border-radius:6px;padding:4px 10px}
 .match-bio{font-size:11px;color:var(--gray-mid);line-height:1.6;font-weight:300;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.match-tags{display:flex;gap:6px;margin-bottom:14px}
-.match-tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-mid);padding:3px 8px;border:1px solid rgba(255,255,255,0.06);border-radius:12px}
+.match-mutual{font-size:10px;color:var(--like-green);margin-bottom:12px;display:flex;align-items:center;gap:6px}
 .match-actions{display:flex;gap:8px}
 .match-btn{flex:1;padding:10px;border-radius:8px;font-size:10px;letter-spacing:1px;font-weight:700;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;border:none;text-align:center;text-decoration:none}
-.match-btn.primary{background:var(--royal);color:var(--white)}
-.match-btn.primary:hover{background:#1420cc}
-.match-btn.secondary{background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.1)}
-.match-btn.secondary:hover{border-color:rgba(77,184,255,0.3);color:var(--crystal)}
+.match-btn.primary{background:var(--royal);color:var(--white)}.match-btn.primary:hover{background:#1420cc}
+.match-btn.secondary{background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.1)}.match-btn.secondary:hover{border-color:rgba(77,184,255,0.3);color:var(--crystal)}
 
-/* COMPATIBILITY DETAIL MODAL */
+/* MATCH NOTIFICATION */
+.match-notif{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:300;align-items:center;justify-content:center;text-align:center;padding:40px}
+.match-notif.show{display:flex}
+.match-notif-inner{max-width:360px}
+.match-notif-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--crystal);margin-bottom:12px}
+.match-notif-sub{font-size:13px;color:var(--gray-mid);line-height:1.7;margin-bottom:24px}
+.match-notif-avatars{display:flex;justify-content:center;gap:16px;margin-bottom:24px}
+.match-notif-av{width:72px;height:72px;border-radius:50%;border:2px solid var(--crystal);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--crystal);background:rgba(26,42,255,0.2);overflow:hidden}
+.match-notif-av img{width:100%;height:100%;object-fit:cover}
+.match-notif-code{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--crystal);letter-spacing:8px;margin-bottom:24px}
+
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.show{display:flex}
 .modal{background:var(--navy-light);border:1px solid var(--card-border);border-radius:20px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;padding:36px}
-.modal-close{float:right;background:none;border:none;color:var(--gray-mid);font-size:20px;cursor:pointer;padding:4px 8px}
-.modal-close:hover{color:var(--white)}
+.modal-close{float:right;background:none;border:none;color:var(--gray-mid);font-size:20px;cursor:pointer;padding:4px 8px}.modal-close:hover{color:var(--white)}
 
-/* EMPTY STATE */
+/* PAGINATION */
+.pagination{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.page-btn{padding:8px 14px;border-radius:8px;font-size:11px;font-weight:600;border:1px solid rgba(77,184,255,0.15);color:var(--gray-mid);background:transparent;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s}
+.page-btn:hover{border-color:var(--crystal);color:var(--white)}
+.page-btn.active{background:rgba(77,184,255,0.1);border-color:var(--crystal);color:var(--crystal)}
+.page-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+/* EMPTY/LOADING */
 .empty-state{text-align:center;padding:80px 24px}
 .empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
 .empty-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px;color:var(--gray-mid)}
 .empty-sub{font-size:12px;color:var(--gray-dim);line-height:1.7}
-
-/* LOADING */
 .loading-spinner{text-align:center;padding:60px;font-size:11px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase}
-
-/* FOOTER */
 .app-footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(77,184,255,0.04);margin-top:48px}
 .app-footer p{font-size:9px;color:rgba(255,255,255,0.1)}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="app-nav">
   <div class="nav-inner">
-    <a href="/" class="nav-logo">
-      <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
-      <span>OCCULTICS</span>
-    </a>
+    <a href="/" class="nav-logo"><svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg><span>OCCULTICS</span></a>
     <div class="nav-links">
       <a href="/match/dashboard.html" class="nav-link active">Matches</a>
       <a href="/match/messages.html" class="nav-link">Messages</a>
@@ -124,9 +159,14 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
   </div>
 </nav>
 
-<div class="app-layout">
+<!-- TABS -->
+<div class="tab-bar">
+  <div class="tab active" id="tab-discover" onclick="switchTab('discover')">Discover</div>
+  <div class="tab" id="tab-matches" onclick="switchTab('matches')">Matches <span id="match-count-badge"></span></div>
+  <div class="tab" id="tab-liked" onclick="switchTab('liked')">Liked You</div>
+</div>
 
-  <!-- SIDEBAR -->
+<div class="app-layout">
   <div class="sidebar">
     <div class="profile-card">
       <div class="profile-avatar" id="my-avatar">?</div>
@@ -136,291 +176,358 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       <div class="profile-tags" id="my-tags"></div>
       <div class="profile-stat-row">
         <div class="profile-stat"><div class="profile-stat-num" id="stat-matches">—</div><div class="profile-stat-label">Matches</div></div>
-        <div class="profile-stat"><div class="profile-stat-num" id="stat-messages">—</div><div class="profile-stat-label">Messages</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="stat-likes">—</div><div class="profile-stat-label">Likes</div></div>
         <div class="profile-stat"><div class="profile-stat-num" id="stat-views">—</div><div class="profile-stat-label">Views</div></div>
       </div>
       <a href="/match/settings.html" class="edit-profile-btn">Edit Profile</a>
     </div>
   </div>
 
-  <!-- MAIN -->
   <div class="main-content">
-    <div class="section-header">
-      <div class="section-title">Your Matches</div>
-      <div class="filter-row">
-        <button class="filter-btn active" onclick="filterMatches('all')">All</button>
-        <button class="filter-btn" onclick="filterMatches('love')">Love</button>
-        <button class="filter-btn" onclick="filterMatches('friendship')">Friendship</button>
-        <button class="filter-btn" onclick="filterMatches('business')">Business</button>
-        <button class="filter-btn" onclick="filterMatches('best')">Best Match</button>
+    <!-- DISCOVER TAB -->
+    <div id="panel-discover">
+      <div class="section-header">
+        <div class="section-title">Discover</div>
+        <div class="filter-row">
+          <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All</button>
+          <button class="filter-btn" data-filter="love" onclick="setFilter('love',this)">Love</button>
+          <button class="filter-btn" data-filter="friendship" onclick="setFilter('friendship',this)">Friendship</button>
+          <button class="filter-btn" data-filter="business" onclick="setFilter('business',this)">Business</button>
+        </div>
       </div>
+      <div id="discover-container" class="loading-spinner">Loading...</div>
     </div>
 
-    <div id="matches-container" class="loading-spinner">Loading your matches...</div>
+    <!-- MATCHES TAB -->
+    <div id="panel-matches" style="display:none">
+      <div class="section-header"><div class="section-title">Your Matches</div></div>
+      <div id="matches-container"></div>
+    </div>
+
+    <!-- LIKED YOU TAB -->
+    <div id="panel-liked" style="display:none">
+      <div class="section-header"><div class="section-title">Who Liked You</div></div>
+      <div id="liked-container"></div>
+    </div>
   </div>
-
 </div>
 
-<!-- COMPATIBILITY MODAL -->
-<div class="modal-overlay" id="compat-modal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <div id="modal-content"></div>
+<!-- MATCH NOTIFICATION -->
+<div class="match-notif" id="match-notif" onclick="closeMatchNotif()">
+  <div class="match-notif-inner">
+    <div class="match-notif-title">It's a Match!</div>
+    <div class="match-notif-avatars"><div class="match-notif-av" id="notif-av1">?</div><div style="font-size:24px;color:var(--crystal);align-self:center">✦</div><div class="match-notif-av" id="notif-av2">?</div></div>
+    <div class="match-notif-code" id="notif-code">— · — · —</div>
+    <div class="match-notif-sub" id="notif-sub">You and — both liked each other. Start a conversation!</div>
+    <a href="#" id="notif-msg-btn" class="match-btn primary" style="display:inline-block;padding:14px 32px">Message →</a>
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-dim);cursor:pointer" onclick="closeMatchNotif()">or keep discovering</div>
   </div>
 </div>
 
-<div class="app-footer">
-  <p>"Your numbers have always known the way." · © 2026 Occultics Publishing</p>
-</div>
+<!-- COMPAT MODAL -->
+<div class="modal-overlay" id="compat-modal"><div class="modal"><button class="modal-close" onclick="closeModal()">&times;</button><div id="modal-content"></div></div></div>
+
+<div class="app-footer"><p>"Your numbers have always known the way." · © 2026 Occultics Publishing</p></div>
 
 <script>
-var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
-var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-var _supaLib2 = window.supabase;
-var sb = null;
-var myProfile = null;
-var allMatches = [];
+var SUPABASE_URL='https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var _supaLib2=window.supabase;var sb=null;
+try{if(_supaLib2&&typeof _supaLib2.createClient==="function")sb=_supaLib2.createClient(SUPABASE_URL,SUPABASE_KEY);}catch(e){}
 
-try {
-  if(_supaLib2 && typeof _supaLib2.createClient === "function") sb = _supaLib2.createClient(SUPABASE_URL, SUPABASE_KEY);
-} catch(e) {}
+var myProfile=null,myUserId=null;
+var discoverQueue=[],discoverIdx=0,currentFilter='all';
+var PAGE_SIZE=50,currentPage=0;
+var myLikes={},mutualMatches=[];
 
-// ---- NUMEROLOGY ----
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
+function getScoreClass(s){return s>=75?'high':s>=50?'mid':'low'}
+function getAge(dob){if(!dob)return'';var d=new Date(dob);var a=Math.floor((Date.now()-d.getTime())/31557600000);return a>0&&a<120?a:''}
+function getInitial(n){return n?n.charAt(0).toUpperCase():'?'}
 
-// Compatibility score: 0-100 based on Pythagorean system
-function calcCompatScore(me, them) {
-  var synBio = r(me.biorhythm + them.biorhythm);
-  var synGen = r(me.generational + them.generational);
-  var synLP = r(me.life_path + them.life_path);
-  var code = ''+synBio+synGen+synLP;
-  
-  var score = 50; // base
-
-  // Best codes get high scores
-  var bestCodes = ['448','268','369','134','246','562','459','628'];
-  var goodCodes = ['123','156','358','573','584','854','865','966'];
-  var hardCodes = ['911','955','775','797','189','898'];
-  
-  if(bestCodes.indexOf(code) > -1) score = 92 + Math.floor(Math.random()*6);
-  else if(goodCodes.indexOf(code) > -1) score = 78 + Math.floor(Math.random()*10);
-  else if(hardCodes.indexOf(code) > -1) score = 35 + Math.floor(Math.random()*15);
-  else score = 55 + Math.floor(Math.random()*25);
-
-  // Same biorhythm bonus
-  if(me.biorhythm === them.biorhythm) score = Math.min(99, score + 12);
-
-  // Vertical compatibility (LP combinations)
-  var vertBest = [[1,9],[2,6],[2,9],[3,5],[3,9],[4,4],[4,8],[5,5],[5,7],[6,8]];
-  var isVertBest = vertBest.some(function(pair){
-    return (me.life_path===pair[0] && them.life_path===pair[1]) || (me.life_path===pair[1] && them.life_path===pair[0]);
+// ---- TABS ----
+var activeTab='discover';
+function switchTab(tab){
+  activeTab=tab;
+  ['discover','matches','liked'].forEach(function(t){
+    document.getElementById('panel-'+t).style.display=t===tab?'block':'none';
+    document.getElementById('tab-'+t).classList.toggle('active',t===tab);
   });
-  if(isVertBest) score = Math.min(99, score + 8);
-
-  return { score: Math.min(99, Math.max(20, score)), synCode: synBio+'.'+synGen+'.'+synLP, synBio:synBio, synGen:synGen, synLP:synLP };
+  if(tab==='matches')loadMatches();
+  if(tab==='liked')loadLikedYou();
 }
 
-function getScoreClass(score) {
-  if(score >= 75) return 'high';
-  if(score >= 50) return 'mid';
-  return 'low';
+function setFilter(f,el){
+  currentFilter=f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+  el.classList.add('active');
+  discoverIdx=0;
+  loadDiscover();
 }
 
-function getAge(dob) {
-  if(!dob) return '';
-  var d = new Date(dob);
-  var age = Math.floor((Date.now() - d.getTime()) / 31557600000);
-  return age > 0 && age < 120 ? age : '';
-}
+// ---- DISCOVER (like/pass) ----
+async function loadDiscover(){
+  var container=document.getElementById('discover-container');
+  container.innerHTML='<div class="loading-spinner">Finding people for you...</div>';
 
-function getInitial(name) {
-  return name ? name.charAt(0).toUpperCase() : '?';
-}
-
-// ---- RENDER MATCHES ----
-function renderMatches(matches) {
-  var container = document.getElementById('matches-container');
-  if(!matches.length) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No matches yet</div><div class="empty-sub">Your profile is being matched with other members. New matches appear as members join. Check back soon.</div></div>';
+  // Get pre-calculated scores
+  var q=sb.from('compatibility_scores').select('*, profiles!compatibility_scores_user_b_fkey(*)').eq('user_a',myUserId).order('score',{ascending:false}).range(currentPage*PAGE_SIZE,(currentPage+1)*PAGE_SIZE-1);
+  
+  var res=await q;
+  
+  if(!res.data||!res.data.length){
+    // Fallback: load profiles directly if no scores yet
+    var profileRes=await sb.from('profiles').select('*').neq('user_id',myUserId).range(0,PAGE_SIZE-1);
+    if(!profileRes.data||!profileRes.data.length){
+      container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No one here yet</div><div class="empty-sub">You are among the first members. New people are joining every day. Check back soon!</div></div>';
+      return;
+    }
+    // Use fallback with client-side scoring
+    discoverQueue=profileRes.data.filter(function(p){return!myLikes[p.user_id]});
+    discoverIdx=0;
+    showDiscoverCard();
     return;
   }
 
-  var html = '<div class="matches-grid">';
-  matches.forEach(function(m, idx) {
-    var compat = calcCompatScore(myProfile, m);
-    m._compat = compat;
-    var age = getAge(m.date_of_birth);
-    var scoreClass = getScoreClass(compat.score);
-    var lookingFor = m.looking_for || [];
-    if(typeof lookingFor === 'string') { try { lookingFor = JSON.parse(lookingFor); } catch(e) { lookingFor = [lookingFor]; } }
-    var tagsHtml = lookingFor.map(function(t){ return '<div class="match-tag">'+t+'</div>'; }).join('');
-    var avatarHtml = m.photo_url ? '<img src="'+m.photo_url+'" alt="">' : getInitial(m.name);
-
-    html += '<div class="match-card" onclick="showCompatDetail('+idx+')">';
-    html += '<div class="match-top">';
-    html += '<div class="match-avatar">'+avatarHtml+'</div>';
-    html += '<div class="match-info"><div class="match-name">'+m.name+(age?' <span style="font-size:13px;color:var(--gray-mid);font-family:Montserrat,sans-serif;font-weight:300">'+age+'</span>':'')+'</div>';
-    html += '<div class="match-meta">'+m.pythagorean_code+' · '+(m.gender||'')+'</div></div>';
-    html += '<div class="match-score"><div class="match-score-num '+scoreClass+'">'+compat.score+'</div><div class="match-score-label">Match</div></div>';
-    html += '</div>';
-    html += '<div class="match-codes">';
-    html += '<div class="match-code-pill">'+m.pythagorean_code+'</div>';
-    html += '<div class="match-compat">Synastry '+compat.synCode+'</div>';
-    html += '</div>';
-    if(m.bio) html += '<div class="match-bio">'+m.bio+'</div>';
-    if(tagsHtml) html += '<div class="match-tags">'+tagsHtml+'</div>';
-    html += '<div class="match-actions">';
-    html += '<a href="/match/messages.html?user='+m.user_id+'" class="match-btn primary" onclick="event.stopPropagation()">Message</a>';
-    html += '<button class="match-btn secondary" onclick="event.stopPropagation();showCompatDetail('+idx+')">View Code</button>';
-    html += '</div>';
-    html += '</div>';
+  // Filter out already liked/passed
+  discoverQueue=res.data.filter(function(s){return!myLikes[s.user_b]&&s.profiles}).map(function(s){
+    var p=s.profiles;
+    p._score=s.score;p._synCode=s.synastry_code;p._synBio=s.syn_bio;p._synGen=s.syn_gen;p._synLp=s.syn_lp;p._sameBio=s.same_biorhythm;
+    return p;
   });
-  html += '</div>';
-  container.innerHTML = html;
+
+  // Apply filter
+  if(currentFilter!=='all'){
+    discoverQueue=discoverQueue.filter(function(p){
+      var lf=p.looking_for||[];
+      if(typeof lf==='string'){try{lf=JSON.parse(lf)}catch(e){lf=[lf]}}
+      return lf.indexOf(currentFilter)>-1;
+    });
+  }
+
+  discoverIdx=0;
+  showDiscoverCard();
 }
 
-// ---- COMPATIBILITY DETAIL MODAL ----
-function showCompatDetail(idx) {
-  var m = allMatches[idx];
-  if(!m) return;
-  var c = m._compat || calcCompatScore(myProfile, m);
-  var scoreClass = getScoreClass(c.score);
+function clientScore(them){
+  var synBio=r(myProfile.biorhythm+them.biorhythm),synGen=r(myProfile.generational+them.generational),synLP=r(myProfile.life_path+them.life_path);
+  var code=''+synBio+synGen+synLP;var score=50;
+  var best=['448','268','369','134','246','562','459','628'],good=['123','156','358','573','584','854','865','966'],hard=['911','955','775','797','189','898'];
+  if(best.indexOf(code)>-1)score=92+Math.floor(Math.random()*6);else if(good.indexOf(code)>-1)score=78+Math.floor(Math.random()*10);else if(hard.indexOf(code)>-1)score=35+Math.floor(Math.random()*15);else score=55+Math.floor(Math.random()*25);
+  if(myProfile.biorhythm===them.biorhythm)score=Math.min(99,score+12);
+  return{score:Math.min(99,Math.max(20,score)),synCode:synBio+'.'+synGen+'.'+synLP,synBio:synBio,synGen:synGen,synLP:synLP,sameBio:myProfile.biorhythm===them.biorhythm};
+}
 
-  var html = '';
-  html += '<div style="text-align:center;margin-bottom:24px">';
-  html += '<div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Compatibility Analysis</div>';
-  html += '<div style="font-family:Cormorant Garamond,serif;font-size:28px;font-weight:300;margin-bottom:4px">'+myProfile.name+' & '+m.name+'</div>';
-  html += '<div style="font-family:Cormorant Garamond,serif;font-size:48px;font-weight:300;color:var(--crystal);letter-spacing:10px;margin:16px 0">'+c.synCode+'</div>';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Code</div>';
-  html += '</div>';
+function showDiscoverCard(){
+  var container=document.getElementById('discover-container');
+  if(discoverIdx>=discoverQueue.length){
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">You\'ve seen everyone</div><div class="empty-sub">Check back later for new members, or switch to the Matches tab to see your connections.</div></div>';
+    return;
+  }
+  var p=discoverQueue[discoverIdx];
+  var c=p._score?{score:p._score,synCode:p._synCode||'?.?.?',synBio:p._synBio,synGen:p._synGen,synLP:p._synLp,sameBio:p._sameBio}:clientScore(p);
+  var age=getAge(p.date_of_birth);
+  var scoreClass=getScoreClass(c.score);
+  var lf=p.looking_for||[];if(typeof lf==='string'){try{lf=JSON.parse(lf)}catch(e){lf=[lf]}}
+  var tagsHtml=lf.map(function(t){return'<div class="discover-tag">'+t+'</div>'}).join('');
+  var avatarHtml=p.photo_url?'<img src="'+p.photo_url+'" alt="">':getInitial(p.name);
+  var photoHtml=p.photo_url?'<img src="'+p.photo_url+'" alt="">':getInitial(p.name);
 
-  html += '<div style="display:flex;justify-content:center;gap:16px;margin-bottom:24px">';
-  html += '<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1">';
-  html += '<div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+myProfile.name+'</div>';
-  html += '<div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+myProfile.pythagorean_code+'</div>';
-  html += '</div>';
-  html += '<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1">';
-  html += '<div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+m.name+'</div>';
-  html += '<div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+m.pythagorean_code+'</div>';
-  html += '</div>';
-  html += '</div>';
+  var html='<div class="discover-card" id="discover-card">';
+  html+='<div class="discover-photo">'+photoHtml+'</div>';
+  html+='<div class="discover-body">';
+  html+='<div class="discover-name">'+p.name+(age?' <span>'+age+'</span>':'')+'</div>';
+  html+='<div class="discover-meta">'+(p.pythagorean_code||'')+' · '+(p.gender||'')+'</div>';
+  html+='<div class="discover-codes"><div class="discover-code-pill">'+(p.pythagorean_code||'')+'</div><div class="discover-code-pill">Synastry '+(c.synCode)+'</div><div class="discover-score '+scoreClass+'">'+c.score+'%</div></div>';
+  if(p.bio)html+='<div class="discover-bio">'+p.bio+'</div>';
+  if(tagsHtml)html+='<div class="discover-tags">'+tagsHtml+'</div>';
+  if(c.sameBio)html+='<div style="font-size:10px;color:var(--like-green);margin-bottom:16px">✦ Same Biorhythm — instant recognition</div>';
+  html+='<div class="discover-actions">';
+  html+='<button class="discover-btn pass" onclick="doAction(\'pass\')">✕</button>';
+  html+='<button class="discover-btn info" onclick="showDetail(discoverIdx)">i</button>';
+  html+='<button class="discover-btn like" onclick="doAction(\'like\')">♥</button>';
+  html+='</div></div></div>';
+  container.innerHTML=html;
+}
 
-  html += '<div style="text-align:center;margin-bottom:24px">';
-  html += '<div style="font-family:Cormorant Garamond,serif;font-size:56px;font-weight:300" class="'+scoreClass+'">'+c.score+'</div>';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Score</div>';
-  html += '</div>';
+async function doAction(action){
+  var p=discoverQueue[discoverIdx];
+  if(!p)return;
+  var card=document.getElementById('discover-card');
+  card.classList.add(action==='like'?'swiping-right':'swiping-left');
+  
+  myLikes[p.user_id]=action;
 
-  html += '<div style="border-top:1px solid rgba(77,184,255,0.08);padding-top:20px;margin-bottom:20px">';
-  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:12px">How The Numbers Connect</div>';
-  html += '<div style="display:flex;flex-direction:column;gap:10px">';
-  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm (How you met)</span><span style="color:var(--white)">'+c.synBio+'</span></div>';
-  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational (The goal)</span><span style="color:var(--white)">'+c.synGen+'</span></div>';
-  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path (What you build)</span><span style="color:var(--white)">'+c.synLP+'</span></div>';
-  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(myProfile.biorhythm===m.biorhythm?'var(--success)':'var(--gray-mid)')+'">'+( myProfile.biorhythm===m.biorhythm?'Yes — instant recognition':'No')+'</span></div>';
-  html += '</div></div>';
+  // Save to Supabase
+  await sb.from('likes').upsert({from_user:myUserId,to_user:p.user_id,action:action},{onConflict:'from_user,to_user'});
 
-  html += '<a href="/match/messages.html?user='+m.user_id+'" class="match-btn primary" style="display:block;text-align:center;padding:14px;margin-top:20px">Message '+m.name+' →</a>';
+  // Check if mutual match
+  if(action==='like'){
+    var checkRes=await sb.from('likes').select('action').eq('from_user',p.user_id).eq('to_user',myUserId).eq('action','like').single();
+    if(checkRes.data){
+      // It's a match!
+      setTimeout(function(){showMatchNotif(p)},400);
+    }
+  }
 
-  document.getElementById('modal-content').innerHTML = html;
+  setTimeout(function(){
+    discoverIdx++;
+    showDiscoverCard();
+  },350);
+}
+
+function showMatchNotif(p){
+  var c=p._score?{synCode:p._synCode}:clientScore(p);
+  document.getElementById('notif-av1').innerHTML=myProfile.photo_url?'<img src="'+myProfile.photo_url+'" alt="">':getInitial(myProfile.name);
+  document.getElementById('notif-av2').innerHTML=p.photo_url?'<img src="'+p.photo_url+'" alt="">':getInitial(p.name);
+  document.getElementById('notif-code').textContent=c.synCode||'';
+  document.getElementById('notif-sub').textContent='You and '+p.name+' both liked each other. Your compatibility code: '+(c.synCode||'')+'. Start a conversation!';
+  document.getElementById('notif-msg-btn').href='/match/messages.html?user='+p.user_id;
+  document.getElementById('match-notif').classList.add('show');
+}
+function closeMatchNotif(){document.getElementById('match-notif').classList.remove('show')}
+
+// ---- MATCHES TAB ----
+async function loadMatches(){
+  var container=document.getElementById('matches-container');
+  container.innerHTML='<div class="loading-spinner">Loading matches...</div>';
+
+  var res=await sb.from('matches').select('*').or('user_a.eq.'+myUserId+',user_b.eq.'+myUserId);
+  if(!res.data||!res.data.length){
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No matches yet</div><div class="empty-sub">Keep discovering people. When someone likes you back, they\'ll appear here.</div></div>';
+    return;
+  }
+
+  var partnerIds=res.data.map(function(m){return m.user_a===myUserId?m.user_b:m.user_a});
+  var profileRes=await sb.from('profiles').select('*').in('user_id',partnerIds);
+  var scoreRes=await sb.from('compatibility_scores').select('*').eq('user_a',myUserId).in('user_b',partnerIds);
+  var scoreMap={};
+  if(scoreRes.data)scoreRes.data.forEach(function(s){scoreMap[s.user_b]=s});
+
+  var html='<div class="matches-grid">';
+  (profileRes.data||[]).forEach(function(p,idx){
+    var s=scoreMap[p.user_id]||{};
+    var score=s.score||clientScore(p).score;
+    var synCode=s.synastry_code||clientScore(p).synCode;
+    var age=getAge(p.date_of_birth);
+    var scoreClass=getScoreClass(score);
+    var avatarHtml=p.photo_url?'<img src="'+p.photo_url+'" alt="">':getInitial(p.name);
+    html+='<div class="match-card">';
+    html+='<div class="match-top"><div class="match-avatar">'+avatarHtml+'</div><div class="match-info"><div class="match-name">'+p.name+(age?' <span style="font-size:13px;color:var(--gray-mid);font-family:Montserrat;font-weight:300">'+age+'</span>':'')+'</div><div class="match-meta">'+(p.pythagorean_code||'')+'</div></div>';
+    html+='<div class="match-score-badge"><div class="match-score-num '+scoreClass+'">'+score+'</div><div class="match-score-label">Match</div></div></div>';
+    html+='<div class="match-codes"><div class="match-code-pill">'+(p.pythagorean_code||'')+'</div><div class="match-compat">Synastry '+synCode+'</div></div>';
+    html+='<div class="match-mutual">✦ Mutual match</div>';
+    if(p.bio)html+='<div class="match-bio">'+p.bio+'</div>';
+    html+='<div class="match-actions"><a href="/match/messages.html?user='+p.user_id+'" class="match-btn primary">Message</a></div>';
+    html+='</div>';
+  });
+  html+='</div>';
+  container.innerHTML=html;
+  document.getElementById('stat-matches').textContent=partnerIds.length;
+}
+
+// ---- LIKED YOU TAB ----
+async function loadLikedYou(){
+  var container=document.getElementById('liked-container');
+  container.innerHTML='<div class="loading-spinner">Loading...</div>';
+
+  var res=await sb.from('likes').select('from_user').eq('to_user',myUserId).eq('action','like');
+  if(!res.data||!res.data.length){
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">♥</div><div class="empty-title">No likes yet</div><div class="empty-sub">When someone likes your profile, they\'ll appear here.</div></div>';
+    return;
+  }
+
+  var likerIds=res.data.map(function(l){return l.from_user});
+  var profileRes=await sb.from('profiles').select('*').in('user_id',likerIds);
+  document.getElementById('stat-likes').textContent=likerIds.length;
+
+  var html='<div class="matches-grid">';
+  (profileRes.data||[]).forEach(function(p){
+    var c=clientScore(p);
+    var age=getAge(p.date_of_birth);
+    var scoreClass=getScoreClass(c.score);
+    var avatarHtml=p.photo_url?'<img src="'+p.photo_url+'" alt="">':getInitial(p.name);
+    var alreadyLiked=myLikes[p.user_id]==='like';
+    html+='<div class="match-card">';
+    html+='<div class="match-top"><div class="match-avatar">'+avatarHtml+'</div><div class="match-info"><div class="match-name">'+p.name+(age?' <span style="font-size:13px;color:var(--gray-mid);font-family:Montserrat;font-weight:300">'+age+'</span>':'')+'</div><div class="match-meta">'+(p.pythagorean_code||'')+'</div></div>';
+    html+='<div class="match-score-badge"><div class="match-score-num '+scoreClass+'">'+c.score+'</div><div class="match-score-label">Match</div></div></div>';
+    html+='<div class="match-codes"><div class="match-code-pill">'+(p.pythagorean_code||'')+'</div><div class="match-compat">Synastry '+c.synCode+'</div></div>';
+    if(alreadyLiked)html+='<div class="match-mutual">✦ Mutual match!</div>';
+    html+='<div class="match-actions">';
+    if(!alreadyLiked)html+='<button class="match-btn primary" onclick="likeBack(\''+p.user_id+'\',this)">Like Back ♥</button>';
+    else html+='<a href="/match/messages.html?user='+p.user_id+'" class="match-btn primary">Message</a>';
+    html+='</div></div>';
+  });
+  html+='</div>';
+  container.innerHTML=html;
+}
+
+async function likeBack(userId,btn){
+  btn.textContent='Liked!';btn.disabled=true;
+  myLikes[userId]='like';
+  await sb.from('likes').upsert({from_user:myUserId,to_user:userId,action:'like'},{onConflict:'from_user,to_user'});
+  // Reload
+  setTimeout(function(){loadLikedYou()},500);
+}
+
+// ---- DETAIL MODAL ----
+function showDetail(idx){
+  var p=discoverQueue[idx];if(!p)return;
+  var c=p._score?{score:p._score,synCode:p._synCode,synBio:p._synBio,synGen:p._synGen,synLP:p._synLp,sameBio:p._sameBio}:clientScore(p);
+  var scoreClass=getScoreClass(c.score);
+  var html='<div style="text-align:center;margin-bottom:24px">';
+  html+='<div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Compatibility Analysis</div>';
+  html+='<div style="font-family:Cormorant Garamond,serif;font-size:28px;font-weight:300;margin-bottom:4px">'+myProfile.name+' & '+p.name+'</div>';
+  html+='<div style="font-family:Cormorant Garamond,serif;font-size:48px;font-weight:300;color:var(--crystal);letter-spacing:10px;margin:16px 0">'+(c.synCode||'')+'</div>';
+  html+='<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Code</div>';
+  html+='<div style="font-family:Cormorant Garamond,serif;font-size:56px;font-weight:300;margin-top:12px" class="'+scoreClass+'">'+c.score+'</div>';
+  html+='<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Score</div></div>';
+  html+='<div style="display:flex;justify-content:center;gap:16px;margin-bottom:24px">';
+  html+='<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1"><div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+myProfile.name+'</div><div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+(myProfile.pythagorean_code||'')+'</div></div>';
+  html+='<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1"><div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+p.name+'</div><div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+(p.pythagorean_code||'')+'</div></div></div>';
+  html+='<div style="border-top:1px solid rgba(77,184,255,0.08);padding-top:16px;display:flex;flex-direction:column;gap:8px">';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm</span><span>'+c.synBio+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational</span><span>'+c.synGen+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path</span><span>'+c.synLP+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(c.sameBio?'var(--success)':'var(--gray-mid)')+'">'+( c.sameBio?'Yes':'No')+'</span></div></div>';
+  document.getElementById('modal-content').innerHTML=html;
   document.getElementById('compat-modal').classList.add('show');
 }
-
-function closeModal() {
-  document.getElementById('compat-modal').classList.remove('show');
-}
-document.getElementById('compat-modal').addEventListener('click', function(e) {
-  if(e.target === this) closeModal();
-});
-
-// ---- FILTER MATCHES ----
-var currentFilter = 'all';
-function filterMatches(type) {
-  currentFilter = type;
-  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
-  event.target.classList.add('active');
-
-  var filtered;
-  if(type === 'all') {
-    filtered = allMatches;
-  } else if(type === 'best') {
-    filtered = allMatches.slice().sort(function(a,b){
-      var sa = (a._compat||calcCompatScore(myProfile,a)).score;
-      var sb = (b._compat||calcCompatScore(myProfile,b)).score;
-      return sb - sa;
-    });
-  } else {
-    filtered = allMatches.filter(function(m){
-      var lf = m.looking_for || [];
-      if(typeof lf === 'string') { try { lf = JSON.parse(lf); } catch(e) { lf = [lf]; } }
-      return lf.indexOf(type) > -1;
-    });
-  }
-  renderMatches(filtered);
-}
+function closeModal(){document.getElementById('compat-modal').classList.remove('show')}
+document.getElementById('compat-modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
 
 // ---- INIT ----
-async function init() {
-  if(!sb) {
-    document.getElementById('matches-container').innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub">You need to be signed in to see your matches.<br><a href="/match/login.html" style="color:var(--crystal)">Join Occultics Match →</a></div></div>';
-    return;
-  }
+async function init(){
+  if(!sb){document.getElementById('discover-container').innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub"><a href="/match/login.html" style="color:var(--crystal)">Sign in to Occultics Match →</a></div></div>';return}
+  var session=await sb.auth.getSession();
+  if(!session.data.session){window.location.href='/match/login.html';return}
+  myUserId=session.data.session.user.id;
+  var res=await sb.from('profiles').select('*').eq('user_id',myUserId).single();
+  if(res.error||!res.data){window.location.href='/match/join.html';return}
+  myProfile=res.data;
 
-  // Check auth
-  var session = await sb.auth.getSession();
-  if(!session.data.session) {
-    window.location.href = '/match/login.html';
-    return;
-  }
+  document.getElementById('my-name').textContent=myProfile.name;
+  document.getElementById('my-code').textContent=myProfile.pythagorean_code||(myProfile.biorhythm+'.'+myProfile.generational+'.'+myProfile.life_path);
+  var navAv=document.getElementById('nav-avatar'),myAv=document.getElementById('my-avatar');
+  if(myProfile.photo_url){navAv.innerHTML='<img src="'+myProfile.photo_url+'" alt="">';myAv.innerHTML='<img src="'+myProfile.photo_url+'" alt="">';}
+  else{navAv.textContent=getInitial(myProfile.name);myAv.textContent=getInitial(myProfile.name);}
+  var lf=myProfile.looking_for||[];if(typeof lf==='string'){try{lf=JSON.parse(lf)}catch(e){lf=[lf]}}
+  document.getElementById('my-tags').innerHTML=lf.map(function(t){return'<div class="profile-tag">'+t+'</div>'}).join('');
 
-  var userId = session.data.session.user.id;
-  var userEmail = session.data.session.user.email;
+  // Load my likes
+  var likesRes=await sb.from('likes').select('to_user,action').eq('from_user',myUserId);
+  if(likesRes.data)likesRes.data.forEach(function(l){myLikes[l.to_user]=l.action});
 
-  // Load my profile
-  var res = await sb.from('profiles').select('*').eq('user_id', userId).single();
-  if(res.error || !res.data) {
-    window.location.href = '/match/login.html';
-    return;
-  }
-  myProfile = res.data;
+  // Stats
+  var matchRes=await sb.from('matches').select('id',{count:'exact'}).or('user_a.eq.'+myUserId+',user_b.eq.'+myUserId);
+  document.getElementById('stat-matches').textContent=matchRes.count||0;
+  var likedRes=await sb.from('likes').select('id',{count:'exact'}).eq('to_user',myUserId).eq('action','like');
+  document.getElementById('stat-likes').textContent=likedRes.count||0;
+  document.getElementById('stat-views').textContent=Math.floor(Math.random()*20+(matchRes.count||0));
+  if(matchRes.count>0)document.getElementById('match-count-badge').innerHTML='<span class="badge-count">'+matchRes.count+'</span>';
 
-  // Render my profile card
-  document.getElementById('my-name').textContent = myProfile.name;
-  document.getElementById('my-code').textContent = myProfile.pythagorean_code || (myProfile.biorhythm+'.'+myProfile.generational+'.'+myProfile.lifePath);
-  var navAvatar = document.getElementById('nav-avatar');
-  var myAvatarEl = document.getElementById('my-avatar');
-  if(myProfile.photo_url) {
-    navAvatar.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
-    myAvatarEl.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
-  } else {
-    navAvatar.textContent = getInitial(myProfile.name);
-    myAvatarEl.textContent = getInitial(myProfile.name);
-  }
-  var lf = myProfile.looking_for || [];
-  if(typeof lf === 'string') { try { lf = JSON.parse(lf); } catch(e) { lf = [lf]; } }
-  document.getElementById('my-tags').innerHTML = lf.map(function(t){ return '<div class="profile-tag">'+t+'</div>'; }).join('');
-
-  // Load all other profiles (matches)
-  var matchRes = await sb.from('profiles').select('*').neq('user_id', userId);
-  if(matchRes.data) {
-    allMatches = matchRes.data;
-    
-    // Sort by compatibility score by default
-    allMatches.sort(function(a,b) {
-      return calcCompatScore(myProfile,b).score - calcCompatScore(myProfile,a).score;
-    });
-
-    document.getElementById('stat-matches').textContent = allMatches.length;
-    renderMatches(allMatches);
-  } else {
-    renderMatches([]);
-  }
-
-  // Count messages
-  var msgRes = await sb.from('messages').select('id', {count:'exact'}).or('sender_id.eq.'+userId+',receiver_id.eq.'+userId);
-  document.getElementById('stat-messages').textContent = (msgRes.count || 0);
-  document.getElementById('stat-views').textContent = Math.floor(Math.random()*20 + allMatches.length);
+  loadDiscover();
 }
-
 init();
 </script>
 </body>
