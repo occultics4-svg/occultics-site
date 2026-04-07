@@ -219,7 +219,7 @@ async function doForgot() {
 
   try {
     var res = await sb.auth.resetPasswordForEmail(email, {
-      redirectTo: window.location.origin + '/match/settings.html'
+      redirectTo: window.location.origin + '/match/reset-password.html'
     });
     if(res.error) throw res.error;
 
