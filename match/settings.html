@@ -344,7 +344,7 @@ async function deleteAccount() {
   if(!confirm('This will permanently delete your profile, matches, and messages. Continue?')) return;
 
   try {
-    await sb.from('messages').delete().or('from_user.eq.'+myUserId+',to_user.eq.'+myUserId);
+    await sb.from('messages').delete().or('sender_id.eq.'+myUserId+',receiver_id.eq.'+myUserId);
     await sb.from('profiles').delete().eq('user_id', myUserId);
     await sb.auth.signOut();
     window.location.href = '/';
