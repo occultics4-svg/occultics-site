@@ -415,7 +415,7 @@ async function init() {
   }
 
   // Count messages
-  var msgRes = await sb.from('messages').select('id', {count:'exact'}).or('from_user.eq.'+userId+',to_user.eq.'+userId);
+  var msgRes = await sb.from('messages').select('id', {count:'exact'}).or('sender_id.eq.'+userId+',receiver_id.eq.'+userId);
   document.getElementById('stat-messages').textContent = (msgRes.count || 0);
   document.getElementById('stat-views').textContent = Math.floor(Math.random()*20 + allMatches.length);
 }
