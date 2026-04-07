@@ -259,13 +259,13 @@ async function openConvo(userId) {
 
   // Load messages
   var msgRes = await sb.from('messages').select('*')
-    .or('and(from_user.eq.'+myUserId+',to_user.eq.'+userId+'),and(from_user.eq.'+userId+',to_user.eq.'+myUserId+')')
+    .or('and(sender_id.eq.'+myUserId+',receiver_id.eq.'+userId+'),and(sender_id.eq.'+userId+',receiver_id.eq.'+myUserId+')')
     .order('created_at', {ascending:true});
 
   renderMessages(msgRes.data || []);
 
   // Mark as read
-  await sb.from('messages').update({read:true}).eq('to_user', myUserId).eq('from_user', userId).eq('read', false);
+  await sb.from('messages').update({is_read:true}).eq('receiver_id', myUserId).eq('sender_id', userId).eq('is_read', false);
 
   // Subscribe to new messages in this conversation
   if(realtimeSub) realtimeSub.unsubscribe();
@@ -273,11 +273,11 @@ async function openConvo(userId) {
     event: 'INSERT',
     schema: 'public',
     table: 'messages',
-    filter: 'to_user=eq.'+myUserId
+    filter: 'receiver_id=eq.'+myUserId
   }, function(payload) {
-    if(payload.new.from_user === activeConvoUserId) {
+    if(payload.new.sender_id === activeConvoUserId) {
       appendMessage(payload.new);
-      sb.from('messages').update({read:true}).eq('id', payload.new.id);
+      sb.from('messages').update({is_read:true}).eq('id', payload.new.id);
     }
     loadConversations(); // refresh sidebar
   }).subscribe();
@@ -298,7 +298,7 @@ function renderMessages(msgs) {
       html += '<div class="msg-date-sep">'+dateStr+'</div>';
       lastDate = dateStr;
     }
-    var isMine = m.from_user === myUserId;
+    var isMine = m.sender_id === myUserId;
     html += '<div class="msg-row '+(isMine?'mine':'theirs')+'">';
     html += '<div class="msg-bubble">'+escapeHtml(m.content)+'</div>';
     html += '<div class="msg-time">'+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</div>';
@@ -313,7 +313,7 @@ function appendMessage(msg) {
   var noMsgDiv = container.querySelector('div[style*="text-align:center"]');
   if(noMsgDiv) noMsgDiv.remove();
   var d = new Date(msg.created_at);
-  var isMine = msg.from_user === myUserId;
+  var isMine = msg.sender_id === myUserId;
   var el = document.createElement('div');
   el.className = 'msg-row ' + (isMine ? 'mine' : 'theirs');
   el.innerHTML = '<div class="msg-bubble">'+escapeHtml(msg.content)+'</div><div class="msg-time">'+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</div>';
@@ -337,10 +337,10 @@ async function sendMessage() {
   document.getElementById('send-btn').disabled = true;
 
   var msg = {
-    from_user: myUserId,
-    to_user: activeConvoUserId,
+    sender_id: myUserId,
+    receiver_id: activeConvoUserId,
     content: text,
-    read: false
+    is_read: false
   };
 
   var res = await sb.from('messages').insert(msg).select().single();
@@ -368,7 +368,7 @@ function showConvoList() {
 async function loadConversations() {
   // Get all messages involving this user
   var res = await sb.from('messages').select('*')
-    .or('from_user.eq.'+myUserId+',to_user.eq.'+myUserId)
+    .or('sender_id.eq.'+myUserId+',receiver_id.eq.'+myUserId)
     .order('created_at', {ascending:false});
 
   if(!res.data) { renderConvoList([]); return; }
@@ -376,13 +376,13 @@ async function loadConversations() {
   // Group by conversation partner
   var convoMap = {};
   res.data.forEach(function(m) {
-    var partnerId = m.from_user === myUserId ? m.to_user : m.from_user;
+    var partnerId = m.sender_id === myUserId ? m.receiver_id : m.sender_id;
     if(!convoMap[partnerId]) {
       convoMap[partnerId] = {
         userId: partnerId,
         lastMsg: m.content,
         lastTime: m.created_at,
-        unread: m.to_user === myUserId && !m.read
+        unread: m.receiver_id === myUserId && !m.is_read
       };
     }
   });
@@ -391,7 +391,7 @@ async function loadConversations() {
   var params = new URLSearchParams(window.location.search);
   var targetUser = params.get('user');
   if(targetUser && !convoMap[targetUser]) {
-    convoMap[targetUser] = { userId: targetUser, lastMsg: '', lastTime: null, unread: false };
+    convoMap[targetUser] = { userId: targetUser, lastMsg: '', lastTime: null, is_read: false };
   }
 
   // Load profiles for each conversation partner
