@@ -328,7 +328,7 @@ async function changePassword() {
   var email = document.getElementById('s-email').value;
   if(!email) return;
   try {
-    await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.origin + '/match/settings.html'});
+    await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.origin + '/match/reset-password.html'});
     showMsg('Password reset email sent to ' + email, 'success');
   } catch(e) {
     showMsg('Failed: ' + e.message, 'error');
