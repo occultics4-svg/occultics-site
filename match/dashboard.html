@@ -309,13 +309,109 @@ async function loadDiscover(){
   showDiscoverCard();
 }
 
+// ============ FULL COMPATIBILITY ENGINE ============
+var COMPAT_CODES={
+'191':{score:42,desc:'Strong desire for dominance. Power struggle between two strong individuals.'},
+'281':{score:62,desc:'A fated encounter. Emotions develop gradually but powerful passion draws partners back together.'},
+'371':{score:75,desc:'Strong emotional potential. Love, warmth, genuine affection form the foundation.'},
+'461':{score:68,desc:'Develops slowly with obstacles early. Karmic challenges confronted first. Potential to become stable and long-lasting.'},
+'551':{score:48,desc:'Primarily intellectual connection. May not sustain without deeper emotional involvement.'},
+'641':{score:82,desc:'Passionate and emotionally rich, often culminating in serious long-term commitment or marriage.'},
+'731':{score:65,desc:'Emotionally powerful but turbulent. Requires adaptation and willingness to let go of control.'},
+'821':{score:60,desc:'Driven by strong emotion and physical attraction. Power dynamics may cause friction.'},
+'911':{score:35,desc:'Strong independence on both sides. Difficult to maintain if neither is willing to compromise.'},
+'292':{score:85,desc:'Deeply connected with destiny and karmic influences. Partners share similar thoughts. Can be a lifelong match.'},
+'382':{score:64,desc:'Initiated by strong emotion and physical attraction. Shared desire for family.'},
+'472':{score:72,desc:'Fated-karmic connection. Partners often know each other from early life. Can lead to marriage.'},
+'562':{score:80,desc:'Partnership grows from long-standing friendship. Love develops quickly. Long-lasting match.'},
+'652':{score:58,desc:'Love present but impulsiveness dominates. One partner may be unwilling to commit fully.'},
+'742':{score:66,desc:'Succeeds when partners are mature. Intellectual connection is strong.'},
+'832':{score:55,desc:'Very complicated fated connection. Passions intense and uncontrolled.'},
+'922':{score:45,desc:'Challenging with insecurity and misunderstandings. Requires effort to establish trust.'},
+'123':{score:83,desc:'Fated connection. Progression is natural. Stable and long-lasting.'},
+'213':{score:52,desc:'Challenging, conflict-prone. Partners emotionally attached but have differing priorities.'},
+'393':{score:56,desc:'Highly sensitive and intense. Strong initial emotions but can become emotionally draining.'},
+'483':{score:65,desc:'Develops slowly, requiring patience. Brings sexual and intellectual compatibility.'},
+'573':{score:78,desc:'Grounded in friendship and effective communication. Stable and likely to last.'},
+'663':{score:62,desc:'Strong emotional and physical desires. Intense passion can lead to neglect of responsibilities.'},
+'753':{score:74,desc:'Spiritually aligned. Emotional stability helps navigate differences.'},
+'843':{score:76,desc:'Energetically strong and stable. Partners practical and grounded.'},
+'933':{score:50,desc:'Karmic relationship with hidden dynamic. Passion and jealousy intertwined.'},
+'134':{score:84,desc:'Challenging start but over time, realize potential for great accomplishments together.'},
+'224':{score:70,desc:'Fated and karmic connection meant to happen. Marriage is likely outcome.'},
+'314':{score:73,desc:'Communication generally good. Lasting partnership.'},
+'494':{score:55,desc:'Very difficult karmic connection. Destined to spend significant time together despite difficulties.'},
+'584':{score:79,desc:'Strong and stable with good potential. Communication forms foundation. Relationship renews itself.'},
+'674':{score:64,desc:'Begins with love and attraction, but jealousy creates challenges. Stability supported by the 4.'},
+'764':{score:58,desc:'Unconventional connection with need for freedom. Distance can help it last.'},
+'854':{score:80,desc:'Compatible and harmonious. Like-minded partners. Practical approach maintains long-term compatibility.'},
+'944':{score:53,desc:'Complex and karmic. Initially feels like fairytale but misunderstandings arise.'},
+'145':{score:60,desc:'Often starts well but communication issues may arise. Children may become source of challenges.'},
+'235':{score:55,desc:'Fated connection marked by impulsiveness. Both temperamental, often competing for control.'},
+'325':{score:48,desc:'Fated but significantly more unstable. Outside interference destabilizes.'},
+'415':{score:62,desc:'The 4 delays start. Long-distance arrangements often produce better outcomes.'},
+'595':{score:40,desc:'Two opposing 5s create instability. Romantic love may fade even if marriage is reached.'},
+'685':{score:70,desc:'Born from love and passion. Turbulence inevitable but desire for family can renew connection.'},
+'775':{score:32,desc:'Very turbulent and complicated. Sudden twists and communication breakdowns. Difficult to sustain.'},
+'865':{score:82,desc:'Beautiful combination fueled by love and passion. Creates strong need for togetherness.'},
+'955':{score:38,desc:'Works for friendship but unsuitable for stable romantic bond. Neither willing to compromise freedom.'},
+'156':{score:78,desc:'Begins positively, evolving into love, often culminating in marriage and children.'},
+'246':{score:85,desc:'Fated and karmic connection that almost always leads to marriage. Strong family orientation.'},
+'336':{score:64,desc:'Passion drives the relationship but impulsiveness creates jealousy and ego conflicts.'},
+'426':{score:60,desc:'Karmic and fated where love is present yet challenges abound.'},
+'516':{score:75,desc:'Quality communication. Marriage and children likely.'},
+'696':{score:72,desc:'Karmic connection on family level — partners were involved in past life.'},
+'786':{score:50,desc:'Partners highly different: one seeks commitment, other craves freedom.'},
+'876':{score:58,desc:'Love present but arguments and sudden twists make it turbulent.'},
+'966':{score:74,desc:'Karmic connection with initial obstacles but strong love and excellent physical compatibility.'},
+'167':{score:55,desc:'Begins beautifully but impulsiveness and lack of compromise emerge.'},
+'257':{score:45,desc:'Fated connection but communication tends to be superficial. Better suited to platonic dynamic.'},
+'347':{score:58,desc:'Strong emotions unite partners but unexpected challenges and twists.'},
+'437':{score:42,desc:'High expectations and unwillingness to compromise often culminate in separation.'},
+'527':{score:52,desc:'Fated connection that relies on willingness to adapt and make sacrifices.'},
+'617':{score:48,desc:'Initially passionate but selfish tendencies create misunderstandings.'},
+'797':{score:30,desc:'Major imbalance. One partner gives significantly more. Very limited long-term prospects.'},
+'887':{score:56,desc:'Intense passion keeps couple connected despite repeated breakups.'},
+'977':{score:54,desc:'Karmic connection with spiritual elevation. Can endure with mutual commitment.'},
+'178':{score:58,desc:'Challenging as both prioritize own needs. Creates tension but keeps relationship together.'},
+'268':{score:90,desc:'Fated connection rich in emotion, physical attraction, and material stability. Strong potential for success.'},
+'358':{score:77,desc:'Begins with deep emotion and strong communication. Each respects the other\'s freedom.'},
+'448':{score:97,desc:'The strongest code. Wisdom, maturity, willingness to sacrifice. Does not lead to separation — ends only when one partner dies.'},
+'538':{score:52,desc:'Communication good but superficial. Emotional depth limited. Frequent breakups and reconciliations.'},
+'628':{score:80,desc:'Begins with love and develops shared desire for family. Strong foundation for long-term.'},
+'718':{score:62,desc:'Challenges from stubbornness but shared interests help it endure.'},
+'898':{score:35,desc:'Relationship centered on material gain. Bond lasts only as long as benefits exist.'},
+'988':{score:42,desc:'Based on personal interests rather than emotion. Can survive with compromises.'},
+'189':{score:33,desc:'Difficult relationship. Both pull in different directions. Betrayal and deception may arise.'},
+'279':{score:72,desc:'Very specific soulmate connection demanding energy and adaptability. Has spiritual protection.'},
+'369':{score:94,desc:'Rare and harmonious. Love, commitment, and mutual sacrifice. One of the highest-quality matches.'},
+'459':{score:74,desc:'Strong karmic relationship developing gradually. Partners mature together. Stable.'},
+'549':{score:56,desc:'Karmic with significant challenges. Need for freedom intense. Must allow autonomy.'},
+'639':{score:60,desc:'Strong emotion and passion. Intense but constant tension from jealousy.'},
+'729':{score:68,desc:'Karmic-fated connection designed to teach partners about themselves.'},
+'819':{score:70,desc:'Karmic connection with spiritual protection. Energy to overcome obstacles.'},
+'999':{score:50,desc:'Unpredictable and ambiguous. May last very short time or lifetime. Highly unusual and intense.'}
+};
+var VERT_SCORES={'1-1':-15,'1-2':5,'1-3':10,'1-4':-10,'1-5':-5,'1-6':-8,'1-7':15,'1-8':-15,'1-9':18,'2-2':-12,'2-3':-5,'2-4':10,'2-5':-15,'2-6':20,'2-7':-18,'2-8':-5,'2-9':22,'3-3':8,'3-4':-18,'3-5':15,'3-6':10,'3-7':12,'3-8':-12,'3-9':18,'4-4':20,'4-5':-10,'4-6':8,'4-7':-22,'4-8':18,'4-9':-15,'5-5':18,'5-6':-5,'5-7':20,'5-8':-15,'5-9':12,'6-6':5,'6-7':-8,'6-8':14,'6-9':16,'7-7':-25,'7-8':-8,'7-9':-15,'8-8':-22,'8-9':-12,'9-9':-5};
+var BIO_SCORES={'1-2':8,'1-4':8,'1-9':5,'2-3':-5,'2-5':-10,'2-6':15,'2-8':-8,'2-9':22,'3-5':12,'3-6':8,'3-8':-8,'4-4':15,'4-6':8,'4-8':18,'5-7':15,'6-8':12,'7-8':-5,'8-9':-10};
+
 function clientScore(them){
   var synBio=r(myProfile.biorhythm+them.biorhythm),synGen=r(myProfile.generational+them.generational),synLP=r(myProfile.life_path+them.life_path);
-  var code=''+synBio+synGen+synLP;var score=50;
-  var best=['448','268','369','134','246','562','459','628'],good=['123','156','358','573','584','854','865','966'],hard=['911','955','775','797','189','898'];
-  if(best.indexOf(code)>-1)score=92+Math.floor(Math.random()*6);else if(good.indexOf(code)>-1)score=78+Math.floor(Math.random()*10);else if(hard.indexOf(code)>-1)score=35+Math.floor(Math.random()*15);else score=55+Math.floor(Math.random()*25);
-  if(myProfile.biorhythm===them.biorhythm)score=Math.min(99,score+12);
-  return{score:Math.min(99,Math.max(20,score)),synCode:synBio+'.'+synGen+'.'+synLP,synBio:synBio,synGen:synGen,synLP:synLP,sameBio:myProfile.biorhythm===them.biorhythm};
+  var code=''+synBio+synGen+synLP;
+  var sameBio=myProfile.biorhythm===them.biorhythm;
+  var codeData=COMPAT_CODES[code];
+  var score,desc;
+  if(codeData){score=codeData.score;desc=codeData.desc;}
+  else{score=55;desc='A unique compatibility code. The combined energies of '+synBio+', '+synGen+', and '+synLP+' create a connection worth exploring.';}
+  var lpKey=Math.min(myProfile.life_path,them.life_path)+'-'+Math.max(myProfile.life_path,them.life_path);
+  var vertAdj=VERT_SCORES[lpKey]||0;
+  score+=Math.round(vertAdj*0.3);
+  var bioKey=Math.min(myProfile.biorhythm,them.biorhythm)+'-'+Math.max(myProfile.biorhythm,them.biorhythm);
+  var bioAdj=BIO_SCORES[bioKey]||0;
+  score+=Math.round(bioAdj*0.2);
+  if(sameBio)score+=8;
+  score=Math.min(99,Math.max(15,score));
+  return{score:score,synCode:synBio+'.'+synGen+'.'+synLP,synBio:synBio,synGen:synGen,synLP:synLP,sameBio:sameBio,code:code,desc:desc};
 }
 
 function showDiscoverCard(){
@@ -473,7 +569,9 @@ async function likeBack(userId,btn){
 // ---- DETAIL MODAL ----
 function showDetail(idx){
   var p=discoverQueue[idx];if(!p)return;
-  var c=p._score?{score:p._score,synCode:p._synCode,synBio:p._synBio,synGen:p._synGen,synLP:p._synLp,sameBio:p._sameBio}:clientScore(p);
+  var c=p._score?{score:p._score,synCode:p._synCode,synBio:p._synBio,synGen:p._synGen,synLP:p._synLp,sameBio:p._sameBio,desc:p._desc}:clientScore(p);
+  // Get description from COMPAT_CODES if not already present
+  if(!c.desc){var cd=COMPAT_CODES[c.synCode?c.synCode.replace(/\./g,''):''];if(cd)c.desc=cd.desc;}
   var scoreClass=getScoreClass(c.score);
   var html='<div style="text-align:center;margin-bottom:24px">';
   html+='<div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Compatibility Analysis</div>';
@@ -482,14 +580,21 @@ function showDetail(idx){
   html+='<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Code</div>';
   html+='<div style="font-family:Cormorant Garamond,serif;font-size:56px;font-weight:300;margin-top:12px" class="'+scoreClass+'">'+c.score+'</div>';
   html+='<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Score</div></div>';
+  // Description
+  if(c.desc){
+    html+='<div style="background:rgba(26,42,255,0.06);border:1px solid rgba(77,184,255,0.1);border-radius:12px;padding:16px;margin-bottom:24px">';
+    html+='<div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">What This Code Means</div>';
+    html+='<div style="font-family:Cormorant Garamond,serif;font-size:14px;color:rgba(255,255,255,0.75);line-height:1.8">'+c.desc+'</div>';
+    html+='</div>';
+  }
   html+='<div style="display:flex;justify-content:center;gap:16px;margin-bottom:24px">';
   html+='<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1"><div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+myProfile.name+'</div><div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+(myProfile.pythagorean_code||'')+'</div></div>';
   html+='<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1"><div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+p.name+'</div><div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+(p.pythagorean_code||'')+'</div></div></div>';
   html+='<div style="border-top:1px solid rgba(77,184,255,0.08);padding-top:16px;display:flex;flex-direction:column;gap:8px">';
-  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm</span><span>'+c.synBio+'</span></div>';
-  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational</span><span>'+c.synGen+'</span></div>';
-  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path</span><span>'+c.synLP+'</span></div>';
-  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(c.sameBio?'var(--success)':'var(--gray-mid)')+'">'+( c.sameBio?'Yes':'No')+'</span></div></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm (How you connect)</span><span>'+c.synBio+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational (The goal)</span><span>'+c.synGen+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path (What you build)</span><span>'+c.synLP+'</span></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(c.sameBio?'var(--success)':'var(--gray-mid)')+'">'+( c.sameBio?'Yes — instant recognition':'No')+'</span></div></div>';
   document.getElementById('modal-content').innerHTML=html;
   document.getElementById('compat-modal').classList.add('show');
 }
