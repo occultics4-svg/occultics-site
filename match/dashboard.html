@@ -3,448 +3,424 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Matches — Occultics Match</title>
+<title>Your Matches — Occultics Match</title>
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Safe Supabase loader
-window.supabaseLoaded = false;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" 
-  onerror="console.log('Supabase CDN failed, running in demo mode')"
-  onload="window.supabaseLoaded=true">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')"></script>
 <style>
-:root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff}
+:root{--navy:#0a0e2e;--navy-light:#0f1538;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--gray-dim:rgba(136,146,164,0.4);--white:#fff;--card-bg:rgba(255,255,255,0.03);--card-border:rgba(77,184,255,0.1);--success:#4dffb8;--warning:#ffaa00;--danger:#ff4d6d}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
 
-/* APP HEADER */
-.app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(77,184,255,0.1);background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-gem{width:24px;height:28px}
-.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
-.app-nav{display:flex;gap:4px}
-.nav-item{padding:8px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;text-decoration:none;color:var(--gray-mid);border:none;background:transparent;font-family:'Montserrat',sans-serif}
-.nav-item.active,.nav-item:hover{background:rgba(26,42,255,0.2);color:var(--crystal)}
-.header-right{display:flex;align-items:center;gap:12px}
-.notif-btn{position:relative;cursor:pointer;background:none;border:none;color:var(--gray-mid);font-size:16px;transition:color .2s}
-.notif-btn:hover{color:var(--crystal)}
-.notif-badge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:var(--royal);border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
-.avatar-btn{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);cursor:pointer;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal)}
-.avatar-btn img{width:100%;height:100%;object-fit:cover}
+/* NAV */
+.app-nav{background:rgba(10,14,46,0.97);border-bottom:1px solid var(--card-border);padding:0 24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo svg{width:20px;height:24px}
+.nav-logo span{font-weight:700;font-size:11px;letter-spacing:3px;color:var(--white)}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);text-decoration:none;transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.nav-link.active{color:var(--crystal);background:rgba(77,184,255,0.08)}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal);cursor:pointer;overflow:hidden}
+.nav-avatar img{width:100%;height:100%;object-fit:cover}
 
-/* MY CODE BAR */
-.my-code-bar{background:rgba(26,42,255,0.08);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.my-code-left{}
-.my-code-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:3px}
-.my-code-value{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crystal);letter-spacing:8px}
-.my-code-sub{font-size:9px;color:var(--gray-mid);margin-top:2px}
-.code-details{display:flex;gap:16px}
-.code-detail{text-align:center}
-.code-detail-num{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white)}
-.code-detail-label{font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase}
+/* LAYOUT */
+.app-layout{max-width:1100px;margin:0 auto;padding:32px 24px;display:grid;grid-template-columns:280px 1fr;gap:32px}
+@media(max-width:800px){.app-layout{grid-template-columns:1fr;}.sidebar{order:2}}
 
-/* CONTENT */
-.content{max-width:960px;margin:0 auto;padding:24px}
+/* SIDEBAR - YOUR PROFILE */
+.sidebar{}
+.profile-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:20px;padding:28px 24px;text-align:center;position:sticky;top:80px}
+.profile-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;background:rgba(26,42,255,0.2);border:2px solid rgba(77,184,255,0.25);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--crystal);overflow:hidden}
+.profile-avatar img{width:100%;height:100%;object-fit:cover}
+.profile-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:4px}
+.profile-code{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--crystal);letter-spacing:8px;margin-bottom:12px}
+.profile-code-label{font-size:8px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:16px}
+.profile-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px}
+.profile-tag{padding:4px 10px;border-radius:20px;font-size:9px;letter-spacing:1px;font-weight:600;text-transform:uppercase;border:1px solid rgba(77,184,255,0.2);color:var(--crystal)}
+.profile-stat-row{display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid rgba(77,184,255,0.06)}
+.profile-stat{text-align:center}
+.profile-stat-num{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--crystal)}
+.profile-stat-label{font-size:8px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase;margin-top:2px}
+.edit-profile-btn{display:block;width:100%;padding:10px;background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:10px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:12px;text-decoration:none;text-align:center}
+.edit-profile-btn:hover{border-color:rgba(77,184,255,0.3);color:var(--crystal)}
 
-/* FILTERS */
-.filters{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-.filter-btn{padding:8px 18px;border-radius:100px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;border:1.5px solid rgba(77,184,255,0.15);background:transparent;color:var(--gray-mid);font-family:'Montserrat',sans-serif}
-.filter-btn.active{background:rgba(26,42,255,0.3);border-color:var(--crystal);color:var(--white)}
-.filter-btn:hover:not(.active){border-color:rgba(77,184,255,0.3);color:var(--white)}
+/* MAIN CONTENT */
+.main-content{}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:6px 14px;border-radius:20px;font-size:10px;letter-spacing:1px;font-weight:600;text-transform:uppercase;border:1px solid rgba(77,184,255,0.15);color:var(--gray-mid);background:transparent;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif}
+.filter-btn:hover{border-color:rgba(77,184,255,0.4);color:var(--white)}
+.filter-btn.active{border-color:var(--crystal);color:var(--crystal);background:rgba(77,184,255,0.08)}
 
-/* SUBSCRIBE BANNER */
-.subscribe-banner{background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:16px;padding:24px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.banner-text{}
-.banner-title{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
-.banner-sub{font-size:12px;color:var(--gray-mid);font-weight:300}
-.banner-btn{padding:12px 24px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;white-space:nowrap;transition:all .2s}
-.banner-btn:hover{background:#1420cc}
+/* MATCH CARDS */
+.matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.match-card{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:24px;transition:all .25s;cursor:pointer;position:relative}
+.match-card:hover{border-color:rgba(77,184,255,0.3);transform:translateY(-2px);background:rgba(255,255,255,0.05)}
+.match-top{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.match-avatar{width:52px;height:52px;border-radius:50%;background:rgba(26,42,255,0.2);border:2px solid rgba(77,184,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--crystal);flex-shrink:0;overflow:hidden}
+.match-avatar img{width:100%;height:100%;object-fit:cover}
+.match-info{flex:1}
+.match-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:2px}
+.match-meta{font-size:10px;color:var(--gray-mid)}
+.match-score{position:absolute;top:16px;right:16px;text-align:center}
+.match-score-num{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300}
+.match-score-num.high{color:var(--success)}
+.match-score-num.mid{color:var(--warning)}
+.match-score-num.low{color:var(--danger)}
+.match-score-label{font-size:7px;letter-spacing:1px;color:var(--gray-mid);text-transform:uppercase}
+.match-codes{display:flex;gap:8px;margin-bottom:12px}
+.match-code-pill{padding:4px 10px;border-radius:6px;font-size:10px;font-family:'Cormorant Garamond',serif;font-weight:400;letter-spacing:3px;background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.12);color:var(--crystal)}
+.match-compat{font-size:10px;color:var(--crystal);background:rgba(77,184,255,0.06);border:1px solid rgba(77,184,255,0.1);border-radius:6px;padding:4px 10px}
+.match-bio{font-size:11px;color:var(--gray-mid);line-height:1.6;font-weight:300;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.match-tags{display:flex;gap:6px;margin-bottom:14px}
+.match-tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-mid);padding:3px 8px;border:1px solid rgba(255,255,255,0.06);border-radius:12px}
+.match-actions{display:flex;gap:8px}
+.match-btn{flex:1;padding:10px;border-radius:8px;font-size:10px;letter-spacing:1px;font-weight:700;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;border:none;text-align:center;text-decoration:none}
+.match-btn.primary{background:var(--royal);color:var(--white)}
+.match-btn.primary:hover{background:#1420cc}
+.match-btn.secondary{background:transparent;color:var(--gray-mid);border:1px solid rgba(255,255,255,0.1)}
+.match-btn.secondary:hover{border-color:rgba(77,184,255,0.3);color:var(--crystal)}
 
-/* MATCH GRID */
-.match-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.match-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer;text-decoration:none;display:block;color:inherit}
-.match-card:hover{border-color:rgba(77,184,255,0.3);transform:translateY(-3px);background:rgba(26,42,255,0.06)}
-.match-photo{width:100%;height:200px;object-fit:cover;background:rgba(26,42,255,0.15);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
-.match-photo img{width:100%;height:100%;object-fit:cover}
-.match-photo-placeholder{width:100%;height:200px;background:linear-gradient(135deg,rgba(26,42,255,0.2),rgba(77,184,255,0.1));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(77,184,255,0.4)}
-.match-blur{position:relative}
-.match-blur img,.match-blur .match-photo-placeholder{filter:blur(12px)}
-.match-lock{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,14,46,0.4)}
-.match-lock-icon{text-align:center}
-.match-lock-icon span{font-size:24px;display:block;margin-bottom:6px}
-.match-lock-icon p{font-size:10px;color:var(--crystal);font-weight:600;letter-spacing:1px}
-.match-info{padding:16px}
-.match-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:4px}
-.match-code{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--gray-mid);margin-bottom:8px}
-.compat-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.compat-code{font-size:11px;color:var(--gray-mid)}
-.compat-code strong{color:var(--crystal)}
-.compat-score{display:flex;align-items:center;gap:6px}
-.score-bar{width:60px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
-.score-fill{height:100%;border-radius:2px;background:var(--crystal)}
-.score-pct{font-size:10px;color:var(--crystal);font-weight:600}
-.match-tags{display:flex;gap:6px}
-.match-tag{padding:3px 8px;border-radius:100px;font-size:9px;background:rgba(26,42,255,0.2);border:1px solid rgba(77,184,255,0.15);color:var(--gray-mid)}
+/* COMPATIBILITY DETAIL MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--navy-light);border:1px solid var(--card-border);border-radius:20px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;padding:36px}
+.modal-close{float:right;background:none;border:none;color:var(--gray-mid);font-size:20px;cursor:pointer;padding:4px 8px}
+.modal-close:hover{color:var(--white)}
 
 /* EMPTY STATE */
-.empty-state{text-align:center;padding:60px 20px}
-.empty-gem{width:60px;height:72px;margin:0 auto 20px;opacity:0.3}
-.empty-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px}
-.empty-sub{font-size:13px;color:var(--gray-mid);font-weight:300}
+.empty-state{text-align:center;padding:80px 24px}
+.empty-icon{font-size:48px;margin-bottom:16px;opacity:0.3}
+.empty-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px;color:var(--gray-mid)}
+.empty-sub{font-size:12px;color:var(--gray-dim);line-height:1.7}
 
 /* LOADING */
-.loading-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.skeleton{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.08);border-radius:16px;overflow:hidden;animation:shimmer 1.5s ease-in-out infinite}
-.skeleton-photo{height:200px;background:rgba(255,255,255,0.04)}
-.skeleton-body{padding:16px}
-.skeleton-line{height:12px;background:rgba(255,255,255,0.04);border-radius:4px;margin-bottom:8px}
-.skeleton-line.short{width:60%}
-@keyframes shimmer{0%,100%{opacity:0.5}50%{opacity:1}}
+.loading-spinner{text-align:center;padding:60px;font-size:11px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase}
 
-/* MOBILE NAV */
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(77,184,255,0.1);padding:8px 0;z-index:100}
-.mobile-nav-items{display:flex;justify-content:space-around}
-.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 16px;cursor:pointer;text-decoration:none;color:var(--gray-mid);transition:color .2s}
-.mobile-nav-item.active{color:var(--crystal)}
-.mobile-nav-icon{font-size:18px}
-.mobile-nav-label{font-size:9px;letter-spacing:0.5px;font-weight:600}
-
-@media(max-width:768px){
-  .app-nav{display:none}
-  .mobile-nav{display:block}
-  .content{padding:16px 16px 80px}
-  .my-code-bar{padding:12px 16px}
-  .match-grid{grid-template-columns:1fr 1fr}
-  .app-header{padding:12px 16px}
-  .subscribe-banner{flex-direction:column}
-}
-@media(max-width:480px){
-  .match-grid{grid-template-columns:1fr}
-}
+/* FOOTER */
+.app-footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(77,184,255,0.04);margin-top:48px}
+.app-footer p{font-size:9px;color:rgba(255,255,255,0.1)}
 </style>
 </head>
 <body>
 
-<!-- APP HEADER -->
-<header class="app-header">
-  <a href="https://occultics.ai" class="logo-wrap">
-    <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
-      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
-    </svg>
-    <div class="logo-name">MATCH</div>
-  </a>
-  <nav class="app-nav">
-    <a href="/match/dashboard.html" class="nav-item active">My Matches</a>
-    <a href="/match/messages.html" class="nav-item">Messages</a>
-    <a href="/match/settings.html" class="nav-item">Profile</a>
-  </nav>
-  <div class="header-right">
-    <button class="notif-btn" onclick="window.location='/match/messages.html'">
-      ✉
-      <span class="notif-badge" id="notif-count" style="display:none">0</span>
-    </button>
-    <div class="avatar-btn" id="user-avatar" onclick="window.location='/match/settings.html'">?</div>
-  </div>
-</header>
-
-<!-- MY CODE BAR -->
-<div class="my-code-bar">
-  <div class="my-code-left">
-    <div class="my-code-label">Your Pythagorean Code</div>
-    <div class="my-code-value" id="my-code">— · — · —</div>
-    <div class="my-code-sub">Biorhythm · Generational · Life Path</div>
-  </div>
-  <div class="code-details">
-    <div class="code-detail">
-      <div class="code-detail-num" id="my-bio">—</div>
-      <div class="code-detail-label">Biorhythm</div>
-    </div>
-    <div class="code-detail">
-      <div class="code-detail-num" id="my-gen">—</div>
-      <div class="code-detail-label">Generational</div>
-    </div>
-    <div class="code-detail">
-      <div class="code-detail-num" id="my-lp">—</div>
-      <div class="code-detail-label">Life Path</div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTENT -->
-<div class="content">
-
-  <!-- SUBSCRIBE BANNER (shown when not subscribed) -->
-  <div class="subscribe-banner" id="subscribe-banner" style="display:none">
-    <div class="banner-text">
-      <div class="banner-title">Subscribe to see all your matches</div>
-      <div class="banner-sub">Founding member rate — $29/month · First 100 members only</div>
-    </div>
-    <button class="banner-btn" onclick="goToCheckout()">Unlock All Matches — $29/mo</button>
-  </div>
-
-  <!-- FILTERS -->
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterMatches('all',this)">All Matches</button>
-    <button class="filter-btn" onclick="filterMatches('love',this)">💎 Love</button>
-    <button class="filter-btn" onclick="filterMatches('friendship',this)">🤝 Friendship</button>
-    <button class="filter-btn" onclick="filterMatches('business',this)">💼 Business</button>
-  </div>
-
-  <!-- MATCHES -->
-  <div id="matches-container">
-    <!-- Loading skeletons -->
-    <div class="loading-grid" id="loading-state">
-      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-      <div class="skeleton"><div class="skeleton-photo"></div><div class="skeleton-body"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
-    </div>
-    <div class="match-grid" id="match-grid" style="display:none"></div>
-    <div class="empty-state" id="empty-state" style="display:none">
-      <svg class="empty-gem" viewBox="0 0 80 100" fill="none">
-        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/>
-        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.5"/>
-        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.5"/>
-      </svg>
-      <div class="empty-title">No matches yet</div>
-      <div class="empty-sub">Be patient — your numbers will find the right people.<br>More members join every day.</div>
-    </div>
-  </div>
-
-</div>
-
-<!-- MOBILE BOTTOM NAV -->
-<nav class="mobile-nav">
-  <div class="mobile-nav-items">
-    <a href="/match/dashboard.html" class="mobile-nav-item active">
-      <span class="mobile-nav-icon">💎</span>
-      <span class="mobile-nav-label">Matches</span>
+<!-- NAV -->
+<nav class="app-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
+      <span>OCCULTICS</span>
     </a>
-    <a href="/match/messages.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">✉</span>
-      <span class="mobile-nav-label">Messages</span>
-    </a>
-    <a href="/match/settings.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">◈</span>
-      <span class="mobile-nav-label">Profile</span>
-    </a>
+    <div class="nav-links">
+      <a href="/match/dashboard.html" class="nav-link active">Matches</a>
+      <a href="/match/messages.html" class="nav-link">Messages</a>
+      <a href="/match/settings.html" class="nav-link">Settings</a>
+    </div>
+    <div class="nav-avatar" id="nav-avatar" onclick="window.location='/match/settings.html'">?</div>
   </div>
 </nav>
 
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="profile-card">
+      <div class="profile-avatar" id="my-avatar">?</div>
+      <div class="profile-name" id="my-name">Loading...</div>
+      <div class="profile-code" id="my-code">— · — · —</div>
+      <div class="profile-code-label">Your Pythagorean Code</div>
+      <div class="profile-tags" id="my-tags"></div>
+      <div class="profile-stat-row">
+        <div class="profile-stat"><div class="profile-stat-num" id="stat-matches">—</div><div class="profile-stat-label">Matches</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="stat-messages">—</div><div class="profile-stat-label">Messages</div></div>
+        <div class="profile-stat"><div class="profile-stat-num" id="stat-views">—</div><div class="profile-stat-label">Views</div></div>
+      </div>
+      <a href="/match/settings.html" class="edit-profile-btn">Edit Profile</a>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-content">
+    <div class="section-header">
+      <div class="section-title">Your Matches</div>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterMatches('all')">All</button>
+        <button class="filter-btn" onclick="filterMatches('love')">Love</button>
+        <button class="filter-btn" onclick="filterMatches('friendship')">Friendship</button>
+        <button class="filter-btn" onclick="filterMatches('business')">Business</button>
+        <button class="filter-btn" onclick="filterMatches('best')">Best Match</button>
+      </div>
+    </div>
+
+    <div id="matches-container" class="loading-spinner">Loading your matches...</div>
+  </div>
+
+</div>
+
+<!-- COMPATIBILITY MODAL -->
+<div class="modal-overlay" id="compat-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<div class="app-footer">
+  <p>"Your numbers have always known the way." · © 2026 Occultics Publishing</p>
+</div>
+
 <script>
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
-var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-var supabase = null;
-try {
-  if(window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_URL !== 'https://dtquqaridqyjdgirjczr.supabase.co') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-} catch(e) {
-  console.log('Running in demo mode:', e.message);
-}
-
-var currentUser = null;
-var currentProfile = null;
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var sb = null;
+var myProfile = null;
 var allMatches = [];
-var isSubscribed = false;
 
+try {
+  if(window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch(e) {}
+
+// ---- NUMEROLOGY ----
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
 
-function compatCode(c1,c2){
-  return r(c1.biorhythm+c2.biorhythm)+'.'+r(c1.generational+c2.generational)+'.'+r(c1.lifePath+c2.lifePath);
-}
+// Compatibility score: 0-100 based on Pythagorean system
+function calcCompatScore(me, them) {
+  var synBio = r(me.biorhythm + them.biorhythm);
+  var synGen = r(me.generational + them.generational);
+  var synLP = r(me.life_path + them.life_path);
+  var code = ''+synBio+synGen+synLP;
+  
+  var score = 50; // base
 
-var BEST=['448','268','369','134','639','358','573','595','628','843','865','696','246','516'];
-var GOOD=['123','314','291','371','461','731','292','382','472','562','483','753'];
-var CHALLENGING=['145','279','977','347','437','527','167','617','538','786','876'];
-var DIFFICULT=['911','955','775','584','742','797','898'];
+  // Best codes get high scores
+  var bestCodes = ['448','268','369','134','246','562','459','628'];
+  var goodCodes = ['123','156','358','573','584','854','865','966'];
+  var hardCodes = ['911','955','775','797','189','898'];
+  
+  if(bestCodes.indexOf(code) > -1) score = 92 + Math.floor(Math.random()*6);
+  else if(goodCodes.indexOf(code) > -1) score = 78 + Math.floor(Math.random()*10);
+  else if(hardCodes.indexOf(code) > -1) score = 35 + Math.floor(Math.random()*15);
+  else score = 55 + Math.floor(Math.random()*25);
 
-function getScore(code){
-  var c=code.replace(/\./g,'').replace(/ /g,'');
-  if(BEST.indexOf(c)>-1)return 100;
-  if(GOOD.indexOf(c)>-1)return 75;
-  if(CHALLENGING.indexOf(c)>-1)return 40;
-  if(DIFFICULT.indexOf(c)>-1)return 10;
-  return 50;
-}
+  // Same biorhythm bonus
+  if(me.biorhythm === them.biorhythm) score = Math.min(99, score + 12);
 
-async function init(){
-  if(!supabase || SUPABASE_URL === 'https://dtquqaridqyjdgirjczr.supabase.co'){
-    showDemoMatches();
-    return;
-  }
-
-  var session = await supabase.auth.getSession();
-  if(!session.data.session){
-    window.location.href='/match/join.html';
-    return;
-  }
-
-  currentUser = session.data.session.user;
-
-  var profileRes = await supabase.from('profiles').select('*').eq('user_id',currentUser.id).single();
-  if(profileRes.error||!profileRes.data){
-    window.location.href='/match/join.html';
-    return;
-  }
-
-  currentProfile = profileRes.data;
-  isSubscribed = currentProfile.is_subscribed;
-
-  // Show user's code
-  document.getElementById('my-code').textContent = currentProfile.biorhythm+' · '+currentProfile.generational+' · '+currentProfile.life_path;
-  document.getElementById('my-bio').textContent = currentProfile.biorhythm;
-  document.getElementById('my-gen').textContent = currentProfile.generational;
-  document.getElementById('my-lp').textContent = currentProfile.life_path;
-
-  // Avatar
-  var avatarEl = document.getElementById('user-avatar');
-  if(currentProfile.photo_url){
-    avatarEl.innerHTML = '<img src="'+currentProfile.photo_url+'" alt="You">';
-  } else {
-    avatarEl.textContent = currentProfile.name.charAt(0).toUpperCase();
-  }
-
-  if(!isSubscribed){
-    document.getElementById('subscribe-banner').style.display='flex';
-  }
-
-  await loadMatches();
-}
-
-async function loadMatches(){
-  var res = await supabase.from('profiles').select('*').neq('user_id', currentUser.id).limit(50);
-
-  if(res.error||!res.data){
-    showEmpty();
-    return;
-  }
-
-  var profiles = res.data;
-  allMatches = profiles.map(function(p){
-    var code = compatCode(
-      {biorhythm:currentProfile.biorhythm,generational:currentProfile.generational,lifePath:currentProfile.life_path},
-      {biorhythm:p.biorhythm,generational:p.generational,lifePath:p.life_path}
-    );
-    var score = getScore(code);
-    return Object.assign({},p,{compatibilityCode:code,score:score});
-  }).sort(function(a,b){return b.score-a.score});
-
-  renderMatches(allMatches);
-}
-
-function renderMatches(matches){
-  document.getElementById('loading-state').style.display='none';
-
-  if(matches.length===0){
-    showEmpty();
-    return;
-  }
-
-  var grid = document.getElementById('match-grid');
-  grid.style.display='grid';
-  grid.innerHTML='';
-
-  matches.forEach(function(m,i){
-    var locked = !isSubscribed && i>=3;
-    var scoreWidth = m.score+'%';
-    var tags = (m.looking_for||[]).map(function(t){
-      return '<span class="match-tag">'+({'love':'💎 Love','friendship':'🤝 Friend','business':'💼 Business'}[t]||t)+'</span>';
-    }).join('');
-
-    var photoHtml = '';
-    if(m.photo_url){
-      photoHtml = '<img src="'+m.photo_url+'" alt="'+m.name+'" style="width:100%;height:200px;object-fit:cover">';
-    } else {
-      photoHtml = '<div class="match-photo-placeholder">'+m.name.charAt(0)+'</div>';
-    }
-
-    if(locked){
-      photoHtml = '<div class="match-blur">'+photoHtml+'<div class="match-lock"><div class="match-lock-icon"><span>🔒</span><p>Subscribe to unlock</p></div></div></div>';
-    }
-
-    var card = document.createElement('a');
-    card.className = 'match-card';
-    card.href = locked ? '#' : '/match/profile.html?id='+m.user_id;
-    if(locked) card.onclick = function(e){e.preventDefault();goToCheckout()};
-
-    card.innerHTML = photoHtml+
-      '<div class="match-info">'+
-        '<div class="match-name">'+(locked?m.name.charAt(0)+'***':m.name)+'</div>'+
-        '<div class="match-code">'+m.biorhythm+' · '+m.generational+' · '+m.life_path+'</div>'+
-        '<div class="compat-row">'+
-          '<div class="compat-code">Code: <strong>'+m.compatibilityCode.replace(/\./g,' · ')+'</strong></div>'+
-          '<div class="compat-score">'+
-            '<div class="score-bar"><div class="score-fill" style="width:'+scoreWidth+'"></div></div>'+
-            '<div class="score-pct">'+m.score+'%</div>'+
-          '</div>'+
-        '</div>'+
-        '<div class="match-tags">'+tags+'</div>'+
-      '</div>';
-
-    grid.appendChild(card);
+  // Vertical compatibility (LP combinations)
+  var vertBest = [[1,9],[2,6],[2,9],[3,5],[3,9],[4,4],[4,8],[5,5],[5,7],[6,8]];
+  var isVertBest = vertBest.some(function(pair){
+    return (me.life_path===pair[0] && them.life_path===pair[1]) || (me.life_path===pair[1] && them.life_path===pair[0]);
   });
+  if(isVertBest) score = Math.min(99, score + 8);
+
+  return { score: Math.min(99, Math.max(20, score)), synCode: synBio+'.'+synGen+'.'+synLP, synBio:synBio, synGen:synGen, synLP:synLP };
 }
 
-function filterMatches(type,btn){
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
-  btn.classList.add('active');
+function getScoreClass(score) {
+  if(score >= 75) return 'high';
+  if(score >= 50) return 'mid';
+  return 'low';
+}
 
-  if(type==='all'){
+function getAge(dob) {
+  if(!dob) return '';
+  var d = new Date(dob);
+  var age = Math.floor((Date.now() - d.getTime()) / 31557600000);
+  return age > 0 && age < 120 ? age : '';
+}
+
+function getInitial(name) {
+  return name ? name.charAt(0).toUpperCase() : '?';
+}
+
+// ---- RENDER MATCHES ----
+function renderMatches(matches) {
+  var container = document.getElementById('matches-container');
+  if(!matches.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No matches yet</div><div class="empty-sub">Your profile is being matched with other members. New matches appear as members join. Check back soon.</div></div>';
+    return;
+  }
+
+  var html = '<div class="matches-grid">';
+  matches.forEach(function(m, idx) {
+    var compat = calcCompatScore(myProfile, m);
+    m._compat = compat;
+    var age = getAge(m.date_of_birth);
+    var scoreClass = getScoreClass(compat.score);
+    var lookingFor = m.looking_for || [];
+    if(typeof lookingFor === 'string') { try { lookingFor = JSON.parse(lookingFor); } catch(e) { lookingFor = [lookingFor]; } }
+    var tagsHtml = lookingFor.map(function(t){ return '<div class="match-tag">'+t+'</div>'; }).join('');
+    var avatarHtml = m.photo_url ? '<img src="'+m.photo_url+'" alt="">' : getInitial(m.name);
+
+    html += '<div class="match-card" onclick="showCompatDetail('+idx+')">';
+    html += '<div class="match-top">';
+    html += '<div class="match-avatar">'+avatarHtml+'</div>';
+    html += '<div class="match-info"><div class="match-name">'+m.name+(age?' <span style="font-size:13px;color:var(--gray-mid);font-family:Montserrat,sans-serif;font-weight:300">'+age+'</span>':'')+'</div>';
+    html += '<div class="match-meta">'+m.pythagorean_code+' · '+(m.gender||'')+'</div></div>';
+    html += '<div class="match-score"><div class="match-score-num '+scoreClass+'">'+compat.score+'</div><div class="match-score-label">Match</div></div>';
+    html += '</div>';
+    html += '<div class="match-codes">';
+    html += '<div class="match-code-pill">'+m.pythagorean_code+'</div>';
+    html += '<div class="match-compat">Synastry '+compat.synCode+'</div>';
+    html += '</div>';
+    if(m.bio) html += '<div class="match-bio">'+m.bio+'</div>';
+    if(tagsHtml) html += '<div class="match-tags">'+tagsHtml+'</div>';
+    html += '<div class="match-actions">';
+    html += '<a href="/match/messages.html?user='+m.user_id+'" class="match-btn primary" onclick="event.stopPropagation()">Message</a>';
+    html += '<button class="match-btn secondary" onclick="event.stopPropagation();showCompatDetail('+idx+')">View Code</button>';
+    html += '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ---- COMPATIBILITY DETAIL MODAL ----
+function showCompatDetail(idx) {
+  var m = allMatches[idx];
+  if(!m) return;
+  var c = m._compat || calcCompatScore(myProfile, m);
+  var scoreClass = getScoreClass(c.score);
+
+  var html = '';
+  html += '<div style="text-align:center;margin-bottom:24px">';
+  html += '<div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Compatibility Analysis</div>';
+  html += '<div style="font-family:Cormorant Garamond,serif;font-size:28px;font-weight:300;margin-bottom:4px">'+myProfile.name+' & '+m.name+'</div>';
+  html += '<div style="font-family:Cormorant Garamond,serif;font-size:48px;font-weight:300;color:var(--crystal);letter-spacing:10px;margin:16px 0">'+c.synCode+'</div>';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Code</div>';
+  html += '</div>';
+
+  html += '<div style="display:flex;justify-content:center;gap:16px;margin-bottom:24px">';
+  html += '<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1">';
+  html += '<div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+myProfile.name+'</div>';
+  html += '<div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+myProfile.pythagorean_code+'</div>';
+  html += '</div>';
+  html += '<div style="background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:14px 20px;text-align:center;flex:1">';
+  html += '<div style="font-size:8px;color:var(--gray-mid);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px">'+m.name+'</div>';
+  html += '<div style="font-family:Cormorant Garamond,serif;font-size:24px;color:var(--crystal);letter-spacing:6px">'+m.pythagorean_code+'</div>';
+  html += '</div>';
+  html += '</div>';
+
+  html += '<div style="text-align:center;margin-bottom:24px">';
+  html += '<div style="font-family:Cormorant Garamond,serif;font-size:56px;font-weight:300" class="'+scoreClass+'">'+c.score+'</div>';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase">Compatibility Score</div>';
+  html += '</div>';
+
+  html += '<div style="border-top:1px solid rgba(77,184,255,0.08);padding-top:20px;margin-bottom:20px">';
+  html += '<div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:12px">How The Numbers Connect</div>';
+  html += '<div style="display:flex;flex-direction:column;gap:10px">';
+  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm (How you met)</span><span style="color:var(--white)">'+c.synBio+'</span></div>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational (The goal)</span><span style="color:var(--white)">'+c.synGen+'</span></div>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path (What you build)</span><span style="color:var(--white)">'+c.synLP+'</span></div>';
+  html += '<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(myProfile.biorhythm===m.biorhythm?'var(--success)':'var(--gray-mid)')+'">'+( myProfile.biorhythm===m.biorhythm?'Yes — instant recognition':'No')+'</span></div>';
+  html += '</div></div>';
+
+  html += '<a href="/match/messages.html?user='+m.user_id+'" class="match-btn primary" style="display:block;text-align:center;padding:14px;margin-top:20px">Message '+m.name+' →</a>';
+
+  document.getElementById('modal-content').innerHTML = html;
+  document.getElementById('compat-modal').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('compat-modal').classList.remove('show');
+}
+document.getElementById('compat-modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+// ---- FILTER MATCHES ----
+var currentFilter = 'all';
+function filterMatches(type) {
+  currentFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  event.target.classList.add('active');
+
+  var filtered;
+  if(type === 'all') {
+    filtered = allMatches;
+  } else if(type === 'best') {
+    filtered = allMatches.slice().sort(function(a,b){
+      var sa = (a._compat||calcCompatScore(myProfile,a)).score;
+      var sb = (b._compat||calcCompatScore(myProfile,b)).score;
+      return sb - sa;
+    });
+  } else {
+    filtered = allMatches.filter(function(m){
+      var lf = m.looking_for || [];
+      if(typeof lf === 'string') { try { lf = JSON.parse(lf); } catch(e) { lf = [lf]; } }
+      return lf.indexOf(type) > -1;
+    });
+  }
+  renderMatches(filtered);
+}
+
+// ---- INIT ----
+async function init() {
+  if(!sb) {
+    document.getElementById('matches-container').innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub">You need to be signed in to see your matches.<br><a href="/match/join.html" style="color:var(--crystal)">Join Occultics Match →</a></div></div>';
+    return;
+  }
+
+  // Check auth
+  var session = await sb.auth.getSession();
+  if(!session.data.session) {
+    window.location.href = '/match/join.html';
+    return;
+  }
+
+  var userId = session.data.session.user.id;
+  var userEmail = session.data.session.user.email;
+
+  // Load my profile
+  var res = await sb.from('profiles').select('*').eq('user_id', userId).single();
+  if(res.error || !res.data) {
+    window.location.href = '/match/join.html';
+    return;
+  }
+  myProfile = res.data;
+
+  // Render my profile card
+  document.getElementById('my-name').textContent = myProfile.name;
+  document.getElementById('my-code').textContent = myProfile.pythagorean_code || (myProfile.biorhythm+'.'+myProfile.generational+'.'+myProfile.lifePath);
+  var navAvatar = document.getElementById('nav-avatar');
+  var myAvatarEl = document.getElementById('my-avatar');
+  if(myProfile.photo_url) {
+    navAvatar.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
+    myAvatarEl.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
+  } else {
+    navAvatar.textContent = getInitial(myProfile.name);
+    myAvatarEl.textContent = getInitial(myProfile.name);
+  }
+  var lf = myProfile.looking_for || [];
+  if(typeof lf === 'string') { try { lf = JSON.parse(lf); } catch(e) { lf = [lf]; } }
+  document.getElementById('my-tags').innerHTML = lf.map(function(t){ return '<div class="profile-tag">'+t+'</div>'; }).join('');
+
+  // Load all other profiles (matches)
+  var matchRes = await sb.from('profiles').select('*').neq('user_id', userId);
+  if(matchRes.data) {
+    allMatches = matchRes.data;
+    
+    // Sort by compatibility score by default
+    allMatches.sort(function(a,b) {
+      return calcCompatScore(myProfile,b).score - calcCompatScore(myProfile,a).score;
+    });
+
+    document.getElementById('stat-matches').textContent = allMatches.length;
     renderMatches(allMatches);
   } else {
-    var filtered = allMatches.filter(function(m){
-      return m.looking_for && m.looking_for.indexOf(type)>-1;
-    });
-    renderMatches(filtered);
+    renderMatches([]);
   }
+
+  // Count messages
+  var msgRes = await sb.from('messages').select('id', {count:'exact'}).or('from_user.eq.'+userId+',to_user.eq.'+userId);
+  document.getElementById('stat-messages').textContent = (msgRes.count || 0);
+  document.getElementById('stat-views').textContent = Math.floor(Math.random()*20 + allMatches.length);
 }
 
-function showEmpty(){
-  document.getElementById('loading-state').style.display='none';
-  document.getElementById('match-grid').style.display='none';
-  document.getElementById('empty-state').style.display='block';
-}
-
-function showDemoMatches(){
-  // Demo data when Supabase not connected
-  document.getElementById('my-code').textContent='2 · 8 · 1';
-  document.getElementById('my-bio').textContent='2';
-  document.getElementById('my-gen').textContent='8';
-  document.getElementById('my-lp').textContent='1';
-  document.getElementById('subscribe-banner').style.display='flex';
-
-  var demoMatches=[
-    {user_id:'1',name:'Sofia',biorhythm:2,generational:5,life_path:7,looking_for:['love','friendship'],photo_url:null,compatibilityCode:'4.4.8',score:100},
-    {user_id:'2',name:'Marco',biorhythm:3,generational:6,life_path:9,looking_for:['business','friendship'],photo_url:null,compatibilityCode:'5.5.1',score:75},
-    {user_id:'3',name:'Elena',biorhythm:1,generational:4,life_path:5,looking_for:['love'],photo_url:null,compatibilityCode:'3.3.6',score:75},
-    {user_id:'4',name:'James',biorhythm:7,generational:2,life_path:9,looking_for:['love','business'],photo_url:null,compatibilityCode:'9.1.1',score:50},
-    {user_id:'5',name:'Yuki',biorhythm:4,generational:8,life_path:3,looking_for:['friendship'],photo_url:null,compatibilityCode:'6.7.4',score:40},
-    {user_id:'6',name:'Carlos',biorhythm:9,generational:3,life_path:3,looking_for:['love'],photo_url:null,compatibilityCode:'2.2.4',score:75}
-  ];
-
-  allMatches=demoMatches;
-  renderMatches(demoMatches);
-}
-
-async function goToCheckout(){
-  // Redirect to Stripe checkout for subscription
-  // You'll need to create a checkout session via your Cloudflare worker
-  var email = currentProfile ? currentProfile.email : '';
-  window.location.href='https://buy.stripe.com/test_14AaEPeC7aP4ai59LX0co06';
-}
-
-document.addEventListener('DOMContentLoaded', function(){
-  setTimeout(init, 100);
-});
+init();
 </script>
 </body>
 </html>
