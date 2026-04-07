@@ -154,6 +154,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 <script>
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var _supaLib2 = window.supabase;
 var sb = null;
 var myProfile = null;
 var myUserId = null;
@@ -162,7 +163,7 @@ var activeConvoUserId = null;
 var profilesCache = {};
 var realtimeSub = null;
 
-try { if(window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
+try { if(_supaLib2 && typeof _supaLib2.createClient === "function") sb = _supaLib2.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
 
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
 
