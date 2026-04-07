@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — Occultics Match</title>
+<link rel="manifest" href="/match/manifest.json">
+<meta name="theme-color" content="#0a0e2e">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>window.supabaseLoaded = false;</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff;--error:#ff4d6d;--success:#4dffb8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
+body::before{content:"";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(26,42,255,0.12) 0%,transparent 70%);pointer-events:none}
+.star{position:fixed;color:rgba(77,184,255,0.2);font-size:8px}
+.s1{top:15%;left:10%}.s2{top:30%;right:12%}.s3{bottom:25%;left:8%}.s4{bottom:15%;right:15%}
+@keyframes twinkle{0%,100%{opacity:0.2}50%{opacity:0.8}}
+.star{animation:twinkle 4s ease-in-out infinite}
+.s2{animation-delay:1s}.s3{animation-delay:2s}.s4{animation-delay:0.5s}
+
+.login-container{max-width:420px;width:100%;position:relative;z-index:1}
+.login-logo{text-align:center;margin-bottom:40px}
+.login-logo svg{width:40px;height:48px;margin-bottom:12px;display:block;margin-left:auto;margin-right:auto}
+.login-logo-name{font-weight:700;font-size:14px;letter-spacing:5px}
+.login-logo-sub{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;margin-top:4px}
+
+.login-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:20px;padding:40px 32px;backdrop-filter:blur(8px)}
+.login-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;text-align:center;margin-bottom:6px}
+.login-sub{font-size:12px;color:var(--gray-mid);text-align:center;margin-bottom:28px;font-weight:300}
+
+.form-group{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.form-group label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-mid);font-weight:600}
+.form-group input{padding:14px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,184,255,0.15);border-radius:10px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.form-group input:focus{border-color:var(--crystal);background:rgba(77,184,255,0.05)}
+.form-group input::placeholder{color:rgba(136,146,164,0.4)}
+
+.forgot-link{text-align:right;margin-bottom:20px}
+.forgot-link a{font-size:10px;color:var(--crystal);text-decoration:none;letter-spacing:0.5px;transition:opacity .2s}
+.forgot-link a:hover{opacity:0.7}
+
+.btn-login{width:100%;padding:15px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
+.btn-login:hover{background:#1420cc}
+.btn-login:disabled{opacity:0.5;cursor:not-allowed}
+
+.divider{display:flex;align-items:center;gap:16px;margin:24px 0}
+.divider-line{flex:1;height:1px;background:rgba(77,184,255,0.08)}
+.divider-text{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase}
+
+.btn-join{display:block;width:100%;padding:14px;background:transparent;color:var(--crystal);border:1.5px solid rgba(77,184,255,0.2);border-radius:10px;font-size:11px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none;text-align:center}
+.btn-join:hover{border-color:rgba(77,184,255,0.5);background:rgba(77,184,255,0.05)}
+
+.msg{padding:12px 16px;border-radius:8px;font-size:12px;margin-bottom:16px;display:none}
+.msg.show{display:block}
+.msg.error{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);color:#ff4d6d}
+.msg.success{background:rgba(77,255,184,0.1);border:1px solid rgba(77,255,184,0.3);color:#4dffb8}
+
+/* FORGOT PASSWORD VIEW */
+.forgot-view{display:none}
+.forgot-view.show{display:block}
+.login-view.hide{display:none}
+.back-to-login{font-size:11px;color:var(--gray-mid);cursor:pointer;text-align:center;margin-top:16px;transition:color .2s}
+.back-to-login:hover{color:var(--crystal)}
+
+.login-footer{text-align:center;margin-top:32px}
+.login-footer a{font-size:10px;color:rgba(255,255,255,0.15);text-decoration:none}
+.login-footer a:hover{color:var(--gray-mid)}
+.login-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.12);text-align:center;margin-top:20px}
+
+@media(max-width:500px){.login-card{padding:28px 20px}}
+</style>
+</head>
+<body>
+
+<div class="star s1">✦</div>
+<div class="star s2">✦</div>
+<div class="star s3">✦</div>
+<div class="star s4">✦</div>
+
+<div class="login-container">
+  <div class="login-logo">
+    <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+    <div class="login-logo-name">OCCULTICS</div>
+    <div class="login-logo-sub">Match</div>
+  </div>
+
+  <div class="login-card">
+    <div id="msg-box" class="msg"></div>
+
+    <!-- LOGIN VIEW -->
+    <div id="login-view" class="login-view">
+      <div class="login-title">Welcome Back</div>
+      <div class="login-sub">Sign in to see your matches</div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="login-pwd" placeholder="Your password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+
+      <div class="forgot-link"><a href="#" onclick="showForgot();return false">Forgot password?</a></div>
+
+      <button class="btn-login" id="login-btn" onclick="doLogin()">Sign In →</button>
+
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-text">New here?</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <a href="/match/join.html" class="btn-join">✦ Join Occultics Match</a>
+    </div>
+
+    <!-- FORGOT PASSWORD VIEW -->
+    <div id="forgot-view" class="forgot-view">
+      <div class="login-title">Reset Password</div>
+      <div class="login-sub">Enter your email and we'll send you a reset link</div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="forgot-email" placeholder="your@email.com" onkeydown="if(event.key==='Enter')doForgot()">
+      </div>
+
+      <button class="btn-login" id="forgot-btn" onclick="doForgot()">Send Reset Link →</button>
+
+      <div class="back-to-login" onclick="showLogin()">← Back to sign in</div>
+    </div>
+  </div>
+
+  <div class="login-footer">
+    <a href="/">occultics.ai</a>
+  </div>
+  <div class="login-quote">"Your numbers have always known the way."</div>
+</div>
+
+<script>
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+
+var _supaLib = window.supabase;
+var sb = null;
+try {
+  if(_supaLib && typeof _supaLib.createClient === 'function') {
+    sb = _supaLib.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+} catch(e) {}
+
+// Check if already logged in
+async function checkAuth() {
+  if(!sb) return;
+  var session = await sb.auth.getSession();
+  if(session.data.session) {
+    window.location.href = '/match/dashboard.html';
+  }
+}
+checkAuth();
+
+function showMsg(text, type) {
+  var el = document.getElementById('msg-box');
+  el.textContent = text;
+  el.className = 'msg show ' + type;
+}
+
+function clearMsg() {
+  document.getElementById('msg-box').className = 'msg';
+}
+
+function showForgot() {
+  document.getElementById('login-view').classList.add('hide');
+  document.getElementById('forgot-view').classList.add('show');
+  clearMsg();
+}
+
+function showLogin() {
+  document.getElementById('login-view').classList.remove('hide');
+  document.getElementById('forgot-view').classList.remove('show');
+  clearMsg();
+}
+
+async function doLogin() {
+  var email = document.getElementById('login-email').value.trim();
+  var pwd = document.getElementById('login-pwd').value;
+
+  if(!email || !email.includes('@')) { showMsg('Please enter a valid email', 'error'); return; }
+  if(!pwd) { showMsg('Please enter your password', 'error'); return; }
+  if(!sb) { showMsg('Connection error. Please refresh.', 'error'); return; }
+
+  var btn = document.getElementById('login-btn');
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+
+  try {
+    var res = await sb.auth.signInWithPassword({ email: email, password: pwd });
+    if(res.error) throw res.error;
+
+    window.location.href = '/match/dashboard.html';
+  } catch(err) {
+    var msg = err.message || 'Sign in failed';
+    if(msg.includes('Invalid login')) msg = 'Invalid email or password. Please try again.';
+    showMsg(msg, 'error');
+    btn.textContent = 'Sign In →';
+    btn.disabled = false;
+  }
+}
+
+async function doForgot() {
+  var email = document.getElementById('forgot-email').value.trim();
+
+  if(!email || !email.includes('@')) { showMsg('Please enter a valid email', 'error'); return; }
+  if(!sb) { showMsg('Connection error. Please refresh.', 'error'); return; }
+
+  var btn = document.getElementById('forgot-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    var res = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/match/settings.html'
+    });
+    if(res.error) throw res.error;
+
+    showMsg('Reset link sent! Check your inbox for ' + email, 'success');
+    btn.textContent = 'Link Sent ✓';
+  } catch(err) {
+    showMsg(err.message || 'Something went wrong', 'error');
+    btn.textContent = 'Send Reset Link →';
+    btn.disabled = false;
+  }
+}
+</script>
+</body>
+</html>
