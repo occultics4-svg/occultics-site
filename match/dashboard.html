@@ -361,14 +361,14 @@ function filterMatches(type) {
 // ---- INIT ----
 async function init() {
   if(!sb) {
-    document.getElementById('matches-container').innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub">You need to be signed in to see your matches.<br><a href="/match/join.html" style="color:var(--crystal)">Join Occultics Match →</a></div></div>';
+    document.getElementById('matches-container').innerHTML = '<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub">You need to be signed in to see your matches.<br><a href="/match/login.html" style="color:var(--crystal)">Join Occultics Match →</a></div></div>';
     return;
   }
 
   // Check auth
   var session = await sb.auth.getSession();
   if(!session.data.session) {
-    window.location.href = '/match/join.html';
+    window.location.href = '/match/login.html';
     return;
   }
 
@@ -378,7 +378,7 @@ async function init() {
   // Load my profile
   var res = await sb.from('profiles').select('*').eq('user_id', userId).single();
   if(res.error || !res.data) {
-    window.location.href = '/match/join.html';
+    window.location.href = '/match/login.html';
     return;
   }
   myProfile = res.data;
