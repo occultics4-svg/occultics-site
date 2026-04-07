@@ -7,43 +7,29 @@
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Safe Supabase loader
-window.supabaseLoaded = false;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" 
-  onerror="console.log('Supabase CDN failed, running in demo mode')"
-  onload="window.supabaseLoaded=true">
-</script>
+<script>window.supabaseLoaded = false;</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
 <style>
 :root{--navy:#0a0e2e;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff;--error:#ff4d6d;--success:#4dffb8}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
 .page{max-width:560px;margin:0 auto;padding:40px 20px 80px}
-
-/* HEADER */
 .join-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0;margin-bottom:32px}
 .logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-gem{width:24px;height:28px}
 .logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
 .back-link{font-size:11px;color:var(--gray-mid);text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .2s}
 .back-link:hover{color:var(--crystal)}
-
-/* PROGRESS */
 .progress-wrap{margin-bottom:40px}
 .progress-steps{display:flex;gap:8px;margin-bottom:12px}
 .prog-step{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,0.1);transition:background .3s}
 .prog-step.done{background:var(--crystal)}
 .prog-step.active{background:var(--royal)}
 .progress-label{font-size:10px;color:var(--gray-mid);letter-spacing:1px}
-
-/* CARD */
 .join-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:20px;padding:36px 32px;margin-bottom:20px}
 .card-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
 .card-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:6px}
 .card-sub{font-size:12px;color:var(--gray-mid);margin-bottom:28px;line-height:1.6;font-weight:300}
-
-/* FORM */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .form-row.single{grid-template-columns:1fr}
 .form-group{display:flex;flex-direction:column;gap:5px}
@@ -54,15 +40,11 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .form-group select option{background:#0a0e2e;color:var(--white)}
 .form-group textarea{resize:vertical;min-height:80px}
 .char-count{font-size:10px;color:var(--gray-mid);text-align:right;margin-top:3px}
-
-/* CODE PREVIEW */
 .code-preview-box{background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.2);border-radius:12px;padding:20px;text-align:center;margin-bottom:20px;display:none}
 .code-preview-box.show{display:block}
 .code-preview-label{font-size:9px;letter-spacing:2px;color:var(--gray-mid);text-transform:uppercase;margin-bottom:6px}
 .code-preview-value{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--crystal);letter-spacing:10px}
 .code-preview-sub{font-size:10px;color:var(--gray-mid);margin-top:6px}
-
-/* LOOKING FOR */
 .looking-for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .lf-card{border:1.5px solid rgba(77,184,255,0.15);border-radius:12px;padding:20px 12px;text-align:center;cursor:pointer;transition:all .2s;user-select:none}
 .lf-card:hover{border-color:rgba(77,184,255,0.4);background:rgba(26,42,255,0.05)}
@@ -70,8 +52,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .lf-icon{font-size:24px;margin-bottom:8px;display:block}
 .lf-label{font-size:11px;font-weight:600;color:var(--white)}
 .lf-sub{font-size:10px;color:var(--gray-mid);margin-top:3px}
-
-/* PHOTO UPLOAD */
 .photo-upload{border:1.5px dashed rgba(77,184,255,0.25);border-radius:12px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:20px;position:relative}
 .photo-upload:hover{border-color:rgba(77,184,255,0.5);background:rgba(77,184,255,0.03)}
 .photo-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
@@ -79,8 +59,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .photo-upload-text{font-size:12px;color:var(--gray-mid);font-weight:300}
 .photo-upload-hint{font-size:10px;color:rgba(136,146,164,0.5);margin-top:4px}
 .photo-preview{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:none;border:2px solid var(--crystal)}
-
-/* PAYMENT STEP */
 .payment-summary{border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);padding:24px;margin-bottom:24px}
 .payment-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(77,184,255,0.08)}
 .payment-row:last-child{border-bottom:none}
@@ -93,21 +71,15 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .payment-feature{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--gray-mid);font-weight:300}
 .payment-feature span{color:var(--crystal);font-size:14px}
 .payment-guarantee{font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px}
-
-/* BUTTONS */
 .btn-next{width:100%;padding:15px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
 .btn-next:hover{background:#1420cc}
 .btn-next:disabled{opacity:0.5;cursor:not-allowed}
 .btn-back{width:100%;padding:13px;background:transparent;color:var(--gray-mid);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;margin-top:10px}
 .btn-back:hover{border-color:rgba(255,255,255,0.25);color:var(--white)}
-
-/* ERROR/SUCCESS */
 .msg{padding:12px 16px;border-radius:8px;font-size:12px;margin-bottom:16px;display:none}
 .msg.show{display:block}
 .msg.error{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.3);color:#ff4d6d}
 .msg.success{background:rgba(77,255,184,0.1);border:1px solid rgba(77,255,184,0.3);color:#4dffb8}
-
-/* SUCCESS SCREEN */
 .success-screen{text-align:center;padding:40px 0;display:none}
 .success-screen.show{display:block}
 .success-gem{width:80px;height:96px;margin:0 auto 24px;animation:float 4s ease-in-out infinite}
@@ -117,233 +89,77 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .success-sub{font-size:13px;color:var(--gray-mid);line-height:1.7;font-weight:300;max-width:360px;margin:0 auto 32px}
 .btn-dashboard{display:inline-block;padding:16px 40px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none}
 .btn-dashboard:hover{background:#1420cc;transform:translateY(-2px)}
-
-/* PASSWORD STRENGTH */
 .pwd-strength{height:3px;border-radius:2px;background:rgba(255,255,255,0.1);margin-top:6px;overflow:hidden}
 .pwd-bar{height:100%;width:0;transition:all .3s;border-radius:2px}
-
-/* MOBILE */
-@media(max-width:600px){
-  .page{padding:20px 16px 60px}
-  .join-card{padding:24px 18px}
-  .form-row{grid-template-columns:1fr}
-  .looking-for-grid{grid-template-columns:1fr}
-}
+@media(max-width:600px){.page{padding:20px 16px 60px}.join-card{padding:24px 18px}.form-row{grid-template-columns:1fr}.looking-for-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="page">
-
-  <!-- HEADER -->
   <div class="join-header">
     <a href="https://occultics.ai" class="logo-wrap">
-      <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
-        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-        <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-        <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-        <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
-      </svg>
+      <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
       <div class="logo-name">OCCULTICS</div>
     </a>
     <a href="https://occultics.ai" class="back-link">← Back to Occultics</a>
   </div>
-
-  <!-- PROGRESS -->
   <div class="progress-wrap">
-    <div class="progress-steps">
-      <div class="prog-step active" id="prog1"></div>
-      <div class="prog-step" id="prog2"></div>
-      <div class="prog-step" id="prog3"></div>
-      <div class="prog-step" id="prog4"></div>
-      <div class="prog-step" id="prog5"></div>
-    </div>
+    <div class="progress-steps"><div class="prog-step active" id="prog1"></div><div class="prog-step" id="prog2"></div><div class="prog-step" id="prog3"></div><div class="prog-step" id="prog4"></div><div class="prog-step" id="prog5"></div></div>
     <div class="progress-label" id="prog-label">Step 1 of 5 — Your Numbers</div>
   </div>
-
   <div id="msg-box" class="msg"></div>
-
-  <!-- STEP 1: YOUR NUMBERS -->
   <div id="step1" class="join-card">
     <div class="card-eyebrow">Step 1</div>
     <div class="card-title">Your Numbers</div>
     <div class="card-sub">Your birth date is all we need to calculate your unique Pythagorean Code.</div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label>First Name</label>
-        <input type="text" id="s1-name" placeholder="Your first name" oninput="tryShowCode()">
-      </div>
-      <div class="form-group">
-        <label>Date of Birth</label>
-        <input type="date" id="s1-dob" onchange="tryShowCode()">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Birth Time <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label>
-        <input type="time" id="s1-time" value="12:00">
-      </div>
-      <div class="form-group">
-        <label>Gender</label>
-        <select id="s1-gender">
-          <option value="">Select...</option>
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="code-preview-box" id="code-preview">
-      <div class="code-preview-label">Your Pythagorean Code</div>
-      <div class="code-preview-value" id="code-preview-val">— · — · —</div>
-      <div class="code-preview-sub">Biorhythm · Generational · Life Path</div>
-    </div>
-
+    <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" id="s1-name" placeholder="Your first name" oninput="tryShowCode()"></div><div class="form-group"><label>Date of Birth</label><input type="date" id="s1-dob" onchange="tryShowCode()"></div></div>
+    <div class="form-row"><div class="form-group"><label>Birth Time <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label><input type="time" id="s1-time" value="12:00"></div><div class="form-group"><label>Gender</label><select id="s1-gender"><option value="">Select...</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div></div>
+    <div class="code-preview-box" id="code-preview"><div class="code-preview-label">Your Pythagorean Code</div><div class="code-preview-value" id="code-preview-val">— · — · —</div><div class="code-preview-sub">Biorhythm · Generational · Life Path</div></div>
     <button class="btn-next" onclick="goStep2()">Continue →</button>
   </div>
-
-  <!-- STEP 2: LOOKING FOR -->
   <div id="step2" class="join-card" style="display:none">
     <div class="card-eyebrow">Step 2</div>
     <div class="card-title">What Are You Looking For?</div>
     <div class="card-sub">Select all that apply. You can connect with people in any of these categories.</div>
-
-    <div class="looking-for-grid">
-      <div class="lf-card" id="lf-love" onclick="toggleLF('love')">
-        <span class="lf-icon">💎</span>
-        <div class="lf-label">Love</div>
-        <div class="lf-sub">Romantic connection</div>
-      </div>
-      <div class="lf-card" id="lf-friendship" onclick="toggleLF('friendship')">
-        <span class="lf-icon">🤝</span>
-        <div class="lf-label">Friendship</div>
-        <div class="lf-sub">Genuine connection</div>
-      </div>
-      <div class="lf-card" id="lf-business" onclick="toggleLF('business')">
-        <span class="lf-icon">💼</span>
-        <div class="lf-label">Business</div>
-        <div class="lf-sub">Professional match</div>
-      </div>
-    </div>
-
-    <div class="form-row single">
-      <div class="form-group">
-        <label>Short Bio <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label>
-        <textarea id="s2-bio" placeholder="Tell people a little about yourself..." maxlength="300" oninput="updateCharCount()"></textarea>
-        <div class="char-count"><span id="char-count">0</span>/300</div>
-      </div>
-    </div>
-
+    <div class="looking-for-grid"><div class="lf-card" id="lf-love" onclick="toggleLF('love')"><span class="lf-icon">💎</span><div class="lf-label">Love</div><div class="lf-sub">Romantic connection</div></div><div class="lf-card" id="lf-friendship" onclick="toggleLF('friendship')"><span class="lf-icon">🤝</span><div class="lf-label">Friendship</div><div class="lf-sub">Genuine connection</div></div><div class="lf-card" id="lf-business" onclick="toggleLF('business')"><span class="lf-icon">💼</span><div class="lf-label">Business</div><div class="lf-sub">Professional match</div></div></div>
+    <div class="form-row single"><div class="form-group"><label>Short Bio <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label><textarea id="s2-bio" placeholder="Tell people a little about yourself..." maxlength="300" oninput="updateCharCount()"></textarea><div class="char-count"><span id="char-count">0</span>/300</div></div></div>
     <button class="btn-next" onclick="goStep3()">Continue →</button>
     <button class="btn-back" onclick="goStep(1)">← Back</button>
   </div>
-
-  <!-- STEP 3: PHOTO -->
   <div id="step3" class="join-card" style="display:none">
     <div class="card-eyebrow">Step 3</div>
     <div class="card-title">Your Photo</div>
     <div class="card-sub">Your photo is only shown to your matches. You can skip this and add it later.</div>
-
     <img id="photo-preview" class="photo-preview" src="" alt="Preview">
-    <div class="photo-upload" id="photo-drop">
-      <input type="file" id="photo-input" accept="image/*" onchange="previewPhoto()">
-      <span class="photo-upload-icon">📷</span>
-      <div class="photo-upload-text">Tap to upload your photo</div>
-      <div class="photo-upload-hint">JPG or PNG · Max 5MB</div>
-    </div>
-
+    <div class="photo-upload" id="photo-drop"><input type="file" id="photo-input" accept="image/*" onchange="previewPhoto()"><span class="photo-upload-icon">📷</span><div class="photo-upload-text">Tap to upload your photo</div><div class="photo-upload-hint">JPG or PNG · Max 5MB</div></div>
     <button class="btn-next" onclick="goStep4()">Continue →</button>
     <button class="btn-back" onclick="goStep(2)">← Back</button>
     <button class="btn-back" onclick="goStep4()" style="margin-top:6px;font-size:10px">Skip for now →</button>
   </div>
-
-  <!-- STEP 4: PAYMENT -->
   <div id="step4" class="join-card" style="display:none">
     <div class="card-eyebrow">Step 4 — Founding Member</div>
     <div class="card-title">Activate Your Membership</div>
     <div class="card-sub">Your Pythagorean Code has been calculated. Activate your membership to see who your numbers match with.</div>
-
-    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:24px;text-align:center">
-      <div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div>
-    </div>
-
-    <div class="payment-features">
-      <div class="payment-feature"><span>✦</span> Unlimited compatibility matches across love, friendship & business</div>
-      <div class="payment-feature"><span>✦</span> Full Pythagorean compatibility scores for every match</div>
-      <div class="payment-feature"><span>✦</span> Private messaging with your top matches</div>
-      <div class="payment-feature"><span>✦</span> Founding member pricing — locked in forever</div>
-    </div>
-
-    <div class="payment-summary">
-      <div class="payment-row">
-        <span class="payment-label">Occultics Match — Founding Member</span>
-        <span class="payment-value">Monthly</span>
-      </div>
-      <div class="payment-row">
-        <span class="payment-label">First 100 members pricing</span>
-        <span class="payment-value" style="color:var(--crystal)">Locked in</span>
-      </div>
-      <div class="payment-total">
-        <span class="payment-label">Total</span>
-        <span class="payment-value">$29/mo</span>
-      </div>
-    </div>
-
-    <div class="form-row single">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="s4-email" placeholder="your@email.com">
-      </div>
-    </div>
-
+    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:24px;text-align:center"><div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div></div>
+    <div class="payment-features"><div class="payment-feature"><span>✦</span> Unlimited compatibility matches across love, friendship & business</div><div class="payment-feature"><span>✦</span> Full Pythagorean compatibility scores for every match</div><div class="payment-feature"><span>✦</span> Private messaging with your top matches</div><div class="payment-feature"><span>✦</span> Founding member pricing — locked in forever</div></div>
+    <div class="payment-summary"><div class="payment-row"><span class="payment-label">Occultics Match — Founding Member</span><span class="payment-value">Monthly</span></div><div class="payment-row"><span class="payment-label">First 100 members pricing</span><span class="payment-value" style="color:var(--crystal)">Locked in</span></div><div class="payment-total"><span class="payment-label">Total</span><span class="payment-value">$29/mo</span></div></div>
+    <div class="form-row single"><div class="form-group"><label>Email</label><input type="email" id="s4-email" placeholder="your@email.com"></div></div>
     <button class="btn-next" onclick="handleMatchPayment()" id="pay-btn">✦ Activate Membership — $29/month</button>
     <div class="payment-guarantee">🔒 Secure payment via Stripe · Cancel anytime</div>
     <button class="btn-back" onclick="goStep(3)">← Back</button>
   </div>
-
-  <!-- STEP 5: CREATE ACCOUNT -->
   <div id="step5" class="join-card" style="display:none">
     <div class="card-eyebrow">Step 5</div>
     <div class="card-title">Create Your Account</div>
     <div class="card-sub">Payment confirmed. Set your password to access your matches.</div>
-
-    <div class="form-row single">
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="s5-email" placeholder="your@email.com" readonly style="opacity:0.7">
-      </div>
-    </div>
-    <div class="form-row single">
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="s5-pwd" placeholder="Min 8 characters" oninput="checkPwd()">
-        <div class="pwd-strength"><div class="pwd-bar" id="pwd-bar"></div></div>
-      </div>
-    </div>
-
-    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center">
-      <div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s5-code">— · — · —</div>
-    </div>
-
+    <div class="form-row single"><div class="form-group"><label>Email</label><input type="email" id="s5-email" placeholder="your@email.com" readonly style="opacity:0.7"></div></div>
+    <div class="form-row single"><div class="form-group"><label>Password</label><input type="password" id="s5-pwd" placeholder="Min 8 characters" oninput="checkPwd()"><div class="pwd-strength"><div class="pwd-bar" id="pwd-bar"></div></div></div></div>
+    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center"><div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s5-code">— · — · —</div></div>
     <button class="btn-next" onclick="createAccount()" id="create-btn">✦ Create Account & See Matches</button>
     <p style="font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px">By joining you agree to our terms of service</p>
   </div>
-
-  <!-- SUCCESS -->
   <div id="success-screen" class="success-screen">
-    <svg class="success-gem" viewBox="0 0 80 100" fill="none">
-      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
-    </svg>
+    <svg class="success-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
     <div class="success-title">Welcome, <span id="success-name">—</span></div>
     <p style="font-size:13px;color:var(--gray-mid);margin-bottom:8px">Your Pythagorean Code</p>
     <div class="success-code" id="success-code">— · — · —</div>
@@ -351,342 +167,110 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <a href="/match/dashboard.html" class="btn-dashboard">See My Matches →</a>
     <p style="font-size:10px;color:var(--gray-mid);margin-top:16px">Redirecting in <span id="redirect-count">5</span> seconds...</p>
   </div>
-
 </div>
 
 <script>
-// ---- SUPABASE SETUP ----
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-var supabase = null;
+
+// FIX: Capture Supabase library reference before declaring client variable
+var _supaLib = window.supabase;
+var supaClient = null;
 try {
-  if(window.supabase && typeof window.supabase.createClient === 'function') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  if(_supaLib && typeof _supaLib.createClient === 'function') {
+    supaClient = _supaLib.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    console.log('Supabase connected successfully');
+  } else {
+    console.log('Supabase library not available, running in demo mode');
   }
 } catch(e) {
   console.log('Running in demo mode:', e.message);
 }
 
-// ---- NUMEROLOGY ----
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
-
-function calcCodes(day,month,year){
-  var bio=r(day+month);
-  var gen=r(String(year).split('').reduce(function(s,d){return s+parseInt(d)},0));
-  var lp=r(bio+gen);
-  return{biorhythm:bio,generational:gen,lifePath:lp};
-}
-
+function calcCodes(day,month,year){var bio=r(day+month);var gen=r(String(year).split('').reduce(function(s,d){return s+parseInt(d)},0));var lp=r(bio+gen);return{biorhythm:bio,generational:gen,lifePath:lp};}
 var _codes = null;
+function tryShowCode(){var dob=document.getElementById('s1-dob').value;if(!dob)return;var parts=dob.split('-').map(Number);_codes=calcCodes(parts[2],parts[1],parts[0]);var codeStr=_codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath;document.getElementById('code-preview-val').textContent=codeStr;document.getElementById('code-preview').classList.add('show');document.getElementById('s4-code').textContent=codeStr;document.getElementById('s5-code').textContent=codeStr;}
 
-function tryShowCode(){
-  var dob = document.getElementById('s1-dob').value;
-  if(!dob) return;
-  var parts = dob.split('-').map(Number);
-  _codes = calcCodes(parts[2], parts[1], parts[0]);
-  var codeStr = _codes.biorhythm + ' · ' + _codes.generational + ' · ' + _codes.lifePath;
-  document.getElementById('code-preview-val').textContent = codeStr;
-  document.getElementById('code-preview').classList.add('show');
-  document.getElementById('s4-code').textContent = codeStr;
-  document.getElementById('s5-code').textContent = codeStr;
-}
+var currentStep=1;var totalSteps=5;var selectedLF=[];
+function goStep(n){document.getElementById('step'+currentStep).style.display='none';document.getElementById('step'+n).style.display='block';currentStep=n;updateProgress(n);window.scrollTo(0,0);clearMsg();}
+function updateProgress(n){for(var i=1;i<=totalSteps;i++){var el=document.getElementById('prog'+i);el.className='prog-step'+(i<n?' done':i===n?' active':'');}var labels=['Step 1 of 5 — Your Numbers','Step 2 of 5 — What You\'re Looking For','Step 3 of 5 — Your Photo','Step 4 of 5 — Membership','Step 5 of 5 — Create Account'];document.getElementById('prog-label').textContent=labels[n-1];}
+function goStep2(){var name=document.getElementById('s1-name').value.trim();var dob=document.getElementById('s1-dob').value;var gender=document.getElementById('s1-gender').value;if(!name){showMsg('Please enter your first name','error');return}if(!dob){showMsg('Please enter your date of birth','error');return}if(!gender){showMsg('Please select your gender','error');return}goStep(2);}
+function goStep3(){if(selectedLF.length===0){showMsg('Please select at least one option','error');return}goStep(3);}
+function goStep4(){goStep(4);}
+function toggleLF(type){var card=document.getElementById('lf-'+type);var idx=selectedLF.indexOf(type);if(idx>-1){selectedLF.splice(idx,1);card.classList.remove('selected');}else{selectedLF.push(type);card.classList.add('selected');}}
+function updateCharCount(){var bio=document.getElementById('s2-bio').value;document.getElementById('char-count').textContent=bio.length;}
+function previewPhoto(){var file=document.getElementById('photo-input').files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var preview=document.getElementById('photo-preview');preview.src=e.target.result;preview.style.display='block';};reader.readAsDataURL(file);}
+function checkPwd(){var pwd=document.getElementById('s5-pwd').value;var bar=document.getElementById('pwd-bar');var strength=0;if(pwd.length>=8)strength++;if(pwd.match(/[A-Z]/))strength++;if(pwd.match(/[0-9]/))strength++;if(pwd.match(/[^A-Za-z0-9]/))strength++;var colors=['#ff4d6d','#ffaa00','#4dffb8','#4dffb8'];var widths=['25%','50%','75%','100%'];bar.style.width=strength>0?widths[strength-1]:'0';bar.style.background=strength>0?colors[strength-1]:'transparent';}
 
-// ---- STEP NAVIGATION ----
-var currentStep = 1;
-var totalSteps = 5;
-var selectedLF = [];
-
-function goStep(n){
-  document.getElementById('step'+currentStep).style.display='none';
-  document.getElementById('step'+n).style.display='block';
-  currentStep = n;
-  updateProgress(n);
-  window.scrollTo(0,0);
-  clearMsg();
-}
-
-function updateProgress(n){
-  for(var i=1;i<=totalSteps;i++){
-    var el = document.getElementById('prog'+i);
-    el.className = 'prog-step' + (i<n?' done':i===n?' active':'');
-  }
-  var labels = [
-    'Step 1 of 5 — Your Numbers',
-    'Step 2 of 5 — What You\'re Looking For',
-    'Step 3 of 5 — Your Photo',
-    'Step 4 of 5 — Membership',
-    'Step 5 of 5 — Create Account'
-  ];
-  document.getElementById('prog-label').textContent = labels[n-1];
-}
-
-function goStep2(){
-  var name = document.getElementById('s1-name').value.trim();
-  var dob = document.getElementById('s1-dob').value;
-  var gender = document.getElementById('s1-gender').value;
-  if(!name){showMsg('Please enter your first name','error');return}
-  if(!dob){showMsg('Please enter your date of birth','error');return}
-  if(!gender){showMsg('Please select your gender','error');return}
-  goStep(2);
-}
-
-function goStep3(){
-  if(selectedLF.length===0){showMsg('Please select at least one option','error');return}
-  goStep(3);
-}
-
-function goStep4(){
-  goStep(4);
-}
-
-// ---- LOOKING FOR TOGGLE ----
-function toggleLF(type){
-  var card = document.getElementById('lf-'+type);
-  var idx = selectedLF.indexOf(type);
-  if(idx>-1){
-    selectedLF.splice(idx,1);
-    card.classList.remove('selected');
-  } else {
-    selectedLF.push(type);
-    card.classList.add('selected');
-  }
-}
-
-// ---- CHAR COUNT ----
-function updateCharCount(){
-  var bio = document.getElementById('s2-bio').value;
-  document.getElementById('char-count').textContent = bio.length;
-}
-
-// ---- PHOTO PREVIEW ----
-function previewPhoto(){
-  var file = document.getElementById('photo-input').files[0];
-  if(!file) return;
-  var reader = new FileReader();
-  reader.onload = function(e){
-    var preview = document.getElementById('photo-preview');
-    preview.src = e.target.result;
-    preview.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-// ---- PASSWORD STRENGTH ----
-function checkPwd(){
-  var pwd = document.getElementById('s5-pwd').value;
-  var bar = document.getElementById('pwd-bar');
-  var strength = 0;
-  if(pwd.length>=8) strength++;
-  if(pwd.match(/[A-Z]/)) strength++;
-  if(pwd.match(/[0-9]/)) strength++;
-  if(pwd.match(/[^A-Za-z0-9]/)) strength++;
-  var colors = ['#ff4d6d','#ffaa00','#4dffb8','#4dffb8'];
-  var widths = ['25%','50%','75%','100%'];
-  bar.style.width = strength>0 ? widths[strength-1] : '0';
-  bar.style.background = strength>0 ? colors[strength-1] : 'transparent';
-}
-
-// ---- PAYMENT ----
 async function handleMatchPayment(){
-  var email = document.getElementById('s4-email').value.trim();
-  if(!email || !email.includes('@')){showMsg('Please enter a valid email','error');return}
+  var email=document.getElementById('s4-email').value.trim();
+  if(!email||!email.includes('@')){showMsg('Please enter a valid email','error');return}
   if(!_codes){showMsg('Please go back and enter your birth date','error');return}
-
-  var name = document.getElementById('s1-name').value.trim();
-  var dob = document.getElementById('s1-dob').value;
-  var time = document.getElementById('s1-time').value || '12:00';
-  var gender = document.getElementById('s1-gender').value;
-
-  var btn = document.getElementById('pay-btn');
-  btn.textContent = 'Redirecting to checkout...';
-  btn.disabled = true;
-
-  try {
-    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        type: 'match_membership',
-        email: email,
-        name: name,
-        dob: dob,
-        time: time,
-        gender: gender,
-        looking_for: selectedLF.join(','),
-        biorhythm: _codes.biorhythm,
-        generational: _codes.generational,
-        life_path: _codes.lifePath,
-        pythagorean_code: _codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath
-      })
-    });
-    var data = await res.json();
-    if(data.url){
-      // Store email for step 5 when they return
-      localStorage.setItem('occultics_match_email', email);
-      localStorage.setItem('occultics_match_data', JSON.stringify({
-        name: name, dob: dob, time: time, gender: gender,
-        looking_for: selectedLF, bio: document.getElementById('s2-bio').value.trim(),
-        codes: _codes
-      }));
-      window.location.href = data.url;
-    } else {
-      throw new Error(data.error || 'Payment error');
-    }
-  } catch(err){
-    showMsg('Something went wrong: ' + err.message, 'error');
-    btn.textContent = '✦ Activate Membership — $29/month';
-    btn.disabled = false;
-  }
+  var name=document.getElementById('s1-name').value.trim();
+  var dob=document.getElementById('s1-dob').value;
+  var time=document.getElementById('s1-time').value||'12:00';
+  var gender=document.getElementById('s1-gender').value;
+  var btn=document.getElementById('pay-btn');
+  btn.textContent='Redirecting to checkout...';btn.disabled=true;
+  try{
+    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'match_membership',email:email,name:name,dob:dob,time:time,gender:gender,looking_for:selectedLF.join(','),biorhythm:_codes.biorhythm,generational:_codes.generational,life_path:_codes.lifePath,pythagorean_code:_codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath})});
+    var data=await res.json();
+    if(data.url){localStorage.setItem('occultics_match_email',email);localStorage.setItem('occultics_match_data',JSON.stringify({name:name,dob:dob,time:time,gender:gender,looking_for:selectedLF,bio:document.getElementById('s2-bio').value.trim(),codes:_codes}));window.location.href=data.url;}
+    else{throw new Error(data.error||'Payment error');}
+  }catch(err){showMsg('Something went wrong: '+err.message,'error');btn.textContent='✦ Activate Membership — $29/month';btn.disabled=false;}
 }
 
-// ---- CHECK IF RETURNING FROM PAYMENT ----
 (function checkPaymentReturn(){
-  var params = new URLSearchParams(window.location.search);
-  if(params.get('payment') === 'success' || params.get('session_id')){
-    // User returned from Stripe — go to Step 5
-    var savedEmail = localStorage.getItem('occultics_match_email');
-    var savedData = localStorage.getItem('occultics_match_data');
-    if(savedEmail && savedData){
-      var data = JSON.parse(savedData);
-      _codes = data.codes;
-
-      // Restore form data
-      document.getElementById('s1-name').value = data.name;
-      document.getElementById('s1-dob').value = data.dob;
-      document.getElementById('s1-time').value = data.time;
-      document.getElementById('s1-gender').value = data.gender;
-      document.getElementById('s2-bio').value = data.bio || '';
-      selectedLF = data.looking_for || [];
-
-      // Restore code displays
-      var codeStr = _codes.biorhythm + ' · ' + _codes.generational + ' · ' + _codes.lifePath;
-      document.getElementById('s4-code').textContent = codeStr;
-      document.getElementById('s5-code').textContent = codeStr;
-
-      // Pre-fill email and go to step 5
-      document.getElementById('s5-email').value = savedEmail;
-
-      // Show step 5
-      document.getElementById('step1').style.display = 'none';
-      document.getElementById('step5').style.display = 'block';
-      currentStep = 5;
-      updateProgress(5);
-
-      showMsg('Payment confirmed! Create your password to finish.', 'success');
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('payment')==='success'||params.get('session_id')){
+    var savedEmail=localStorage.getItem('occultics_match_email');
+    var savedData=localStorage.getItem('occultics_match_data');
+    if(savedEmail&&savedData){
+      var data=JSON.parse(savedData);_codes=data.codes;
+      document.getElementById('s1-name').value=data.name;document.getElementById('s1-dob').value=data.dob;document.getElementById('s1-time').value=data.time;document.getElementById('s1-gender').value=data.gender;document.getElementById('s2-bio').value=data.bio||'';selectedLF=data.looking_for||[];
+      var codeStr=_codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath;document.getElementById('s4-code').textContent=codeStr;document.getElementById('s5-code').textContent=codeStr;
+      document.getElementById('s5-email').value=savedEmail;
+      document.getElementById('step1').style.display='none';document.getElementById('step5').style.display='block';currentStep=5;updateProgress(5);
+      showMsg('Payment confirmed! Create your password to finish.','success');
     }
   }
 })();
 
-// ---- CREATE ACCOUNT ----
 async function createAccount(){
-  var email = document.getElementById('s5-email').value.trim();
-  var pwd = document.getElementById('s5-pwd').value;
-  var name = document.getElementById('s1-name').value.trim();
-  var dob = document.getElementById('s1-dob').value;
-  var time = document.getElementById('s1-time').value || '12:00';
-  var gender = document.getElementById('s1-gender').value;
-  var bio = document.getElementById('s2-bio').value.trim();
-
+  var email=document.getElementById('s5-email').value.trim();
+  var pwd=document.getElementById('s5-pwd').value;
+  var name=document.getElementById('s1-name').value.trim();
+  var dob=document.getElementById('s1-dob').value;
+  var time=document.getElementById('s1-time').value||'12:00';
+  var gender=document.getElementById('s1-gender').value;
+  var bio=document.getElementById('s2-bio').value.trim();
   if(!email){showMsg('Please enter your email','error');return}
   if(!pwd||pwd.length<8){showMsg('Password must be at least 8 characters','error');return}
   if(!_codes){showMsg('Something went wrong. Please start over.','error');return}
-
-  var btn = document.getElementById('create-btn');
-  btn.textContent = '⏳ Creating your account...';
-  btn.disabled = true;
-
-  try {
-    if(!supabase){
-      // Demo mode - no Supabase connected yet
-      showSuccess(name, _codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath);
-      return;
+  var btn=document.getElementById('create-btn');btn.textContent='⏳ Creating your account...';btn.disabled=true;
+  try{
+    if(!supaClient){showMsg('Connection error. Please refresh and try again.','error');btn.textContent='✦ Create Account & See Matches';btn.disabled=false;return;}
+    var authRes=await supaClient.auth.signUp({email:email,password:pwd});
+    if(authRes.error)throw authRes.error;
+    var userId=authRes.data.user.id;
+    var photoUrl=null;
+    var photoFile=document.getElementById('photo-input').files[0];
+    if(photoFile){
+      var fileName=userId+'/avatar.'+photoFile.name.split('.').pop();
+      var uploadRes=await supaClient.storage.from('avatars').upload(fileName,photoFile,{upsert:true});
+      if(!uploadRes.error){var urlRes=supaClient.storage.from('avatars').getPublicUrl(fileName);photoUrl=urlRes.data.publicUrl;}
     }
-
-    // Sign up with Supabase Auth
-    var authRes = await supabase.auth.signUp({email:email, password:pwd});
-    if(authRes.error) throw authRes.error;
-
-    var userId = authRes.data.user.id;
-
-    // Upload photo if provided
-    var photoUrl = null;
-    var photoFile = document.getElementById('photo-input').files[0];
-    if(photoFile && supabase){
-      var fileName = userId+'/avatar.'+photoFile.name.split('.').pop();
-      var uploadRes = await supabase.storage.from('avatars').upload(fileName, photoFile, {upsert:true});
-      if(!uploadRes.error){
-        var urlRes = supabase.storage.from('avatars').getPublicUrl(fileName);
-        photoUrl = urlRes.data.publicUrl;
-      }
-    }
-
-    // Insert profile
-    var profileRes = await supabase.from('profiles').insert({
-      user_id: userId,
-      name: name,
-      date_of_birth: dob,
-      time_of_birth: time,
-      gender: gender,
-      looking_for: selectedLF,
-      bio: bio,
-      photo_url: photoUrl,
-      biorhythm: _codes.biorhythm,
-      generational: _codes.generational,
-      life_path: _codes.lifePath,
-      pythagorean_code: _codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath,
-      membership: 'founding',
-      language: window._lang || 'en'
-    });
-
-    if(profileRes.error) throw profileRes.error;
-
-    // Clean up localStorage
-    localStorage.removeItem('occultics_match_email');
-    localStorage.removeItem('occultics_match_data');
-
-    showSuccess(name, _codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath);
-
-  } catch(err){
-    showMsg(err.message || 'Something went wrong. Please try again.', 'error');
-    btn.textContent = '✦ Create Account & See Matches';
-    btn.disabled = false;
-  }
+    var profileRes=await supaClient.from('profiles').insert({user_id:userId,name:name,date_of_birth:dob,time_of_birth:time,gender:gender,looking_for:selectedLF,bio:bio,photo_url:photoUrl,biorhythm:_codes.biorhythm,generational:_codes.generational,life_path:_codes.lifePath,pythagorean_code:_codes.biorhythm+'.'+_codes.generational+'.'+_codes.lifePath,membership:'founding',language:window._lang||'en'});
+    if(profileRes.error)throw profileRes.error;
+    localStorage.removeItem('occultics_match_email');localStorage.removeItem('occultics_match_data');
+    showSuccess(name,_codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath);
+  }catch(err){showMsg(err.message||'Something went wrong. Please try again.','error');btn.textContent='✦ Create Account & See Matches';btn.disabled=false;}
 }
 
-function showSuccess(name, code){
-  document.getElementById('step5').style.display='none';
-  document.querySelector('.progress-wrap').style.display='none';
-  document.getElementById('success-screen').classList.add('show');
-  document.getElementById('success-name').textContent = name;
-  document.getElementById('success-code').textContent = code;
-
-  // Clean up localStorage
-  localStorage.removeItem('occultics_match_email');
-  localStorage.removeItem('occultics_match_data');
-
-  // Countdown redirect
-  var count = 5;
-  var interval = setInterval(function(){
-    count--;
-    document.getElementById('redirect-count').textContent = count;
-    if(count<=0){
-      clearInterval(interval);
-      window.location.href = '/match/dashboard.html';
-    }
-  }, 1000);
-}
-
-// ---- MESSAGES ----
-function showMsg(text, type){
-  var el = document.getElementById('msg-box');
-  el.textContent = text;
-  el.className = 'msg show ' + type;
-  window.scrollTo(0,0);
-}
-function clearMsg(){
-  var el = document.getElementById('msg-box');
-  el.className = 'msg';
-}
+function showSuccess(name,code){document.getElementById('step5').style.display='none';document.querySelector('.progress-wrap').style.display='none';document.getElementById('success-screen').classList.add('show');document.getElementById('success-name').textContent=name;document.getElementById('success-code').textContent=code;localStorage.removeItem('occultics_match_email');localStorage.removeItem('occultics_match_data');var count=5;var interval=setInterval(function(){count--;document.getElementById('redirect-count').textContent=count;if(count<=0){clearInterval(interval);window.location.href='/match/dashboard.html';}},1000);}
+function showMsg(text,type){var el=document.getElementById('msg-box');el.textContent=text;el.className='msg show '+type;window.scrollTo(0,0);}
+function clearMsg(){var el=document.getElementById('msg-box');el.className='msg';}
 </script>
 </body>
 </html>
