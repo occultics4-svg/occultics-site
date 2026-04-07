@@ -425,7 +425,7 @@ async function init() {
 
   var session = await sb.auth.getSession();
   if(!session.data.session) {
-    window.location.href = '/match/join.html';
+    window.location.href = '/match/login.html';
     return;
   }
 
@@ -433,7 +433,7 @@ async function init() {
 
   var res = await sb.from('profiles').select('*').eq('user_id', myUserId).single();
   if(res.error || !res.data) {
-    window.location.href = '/match/join.html';
+    window.location.href = '/match/login.html';
     return;
   }
   myProfile = res.data;
