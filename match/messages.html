@@ -7,304 +7,444 @@
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script>
-// Safe Supabase loader
-window.supabaseLoaded = false;
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" 
-  onerror="console.log('Supabase CDN failed, running in demo mode')"
-  onload="window.supabaseLoaded=true">
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')"></script>
 <style>
-:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray-mid:#8892a4;--white:#fff}
+:root{--navy:#0a0e2e;--navy-light:#0f1538;--royal:#1a2aff;--electric:#2a7fff;--crystal:#4db8ff;--gray-mid:#8892a4;--gray-dim:rgba(136,146,164,0.4);--white:#fff;--card-bg:rgba(255,255,255,0.03);--card-border:rgba(77,184,255,0.1)}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
-.app-header{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid rgba(77,184,255,0.1);background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-gem{width:24px;height:28px}
-.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
-.app-nav{display:flex;gap:4px}
-.nav-item{padding:8px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;letter-spacing:0.5px;transition:all .2s;text-decoration:none;color:var(--gray-mid);border:none;background:transparent;font-family:'Montserrat',sans-serif}
-.nav-item.active,.nav-item:hover{background:rgba(26,42,255,0.2);color:var(--crystal)}
 
-.messages-layout{display:flex;flex:1;height:calc(100vh - 57px)}
+/* NAV */
+.app-nav{background:rgba(10,14,46,0.97);border-bottom:1px solid var(--card-border);padding:0 24px;position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo svg{width:20px;height:24px}
+.nav-logo span{font-weight:700;font-size:11px;letter-spacing:3px;color:var(--white)}
+.nav-links{display:flex;gap:4px}
+.nav-link{padding:8px 16px;border-radius:8px;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--gray-mid);text-decoration:none;transition:all .2s}
+.nav-link:hover{color:var(--white);background:rgba(255,255,255,0.04)}
+.nav-link.active{color:var(--crystal);background:rgba(77,184,255,0.08)}
+.nav-avatar{width:32px;height:32px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--crystal);cursor:pointer;overflow:hidden}
+.nav-avatar img{width:100%;height:100%;object-fit:cover}
 
-/* LEFT PANEL */
-.conversations-panel{width:320px;border-right:1px solid rgba(77,184,255,0.1);overflow-y:auto;flex-shrink:0}
-.panel-header{padding:16px 20px;border-bottom:1px solid rgba(77,184,255,0.08)}
-.panel-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300}
-.conv-list{}
-.conv-item{display:flex;gap:12px;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .2s;text-decoration:none;color:inherit}
-.conv-item:hover,.conv-item.active{background:rgba(26,42,255,0.08)}
-.conv-avatar{width:44px;height:44px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.2);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:var(--crystal)}
-.conv-avatar img{width:100%;height:100%;object-fit:cover}
-.conv-info{flex:1;min-width:0}
-.conv-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:3px}
-.conv-preview{font-size:11px;color:var(--gray-mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:300}
-.conv-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-.conv-time{font-size:10px;color:var(--gray-mid)}
-.conv-unread{width:18px;height:18px;background:var(--royal);border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700}
+/* CHAT LAYOUT */
+.chat-layout{flex:1;display:grid;grid-template-columns:320px 1fr;max-width:1100px;margin:0 auto;width:100%}
+@media(max-width:800px){.chat-layout{grid-template-columns:1fr}.convo-list{display:none}.convo-list.mobile-show{display:block;position:fixed;inset:0;z-index:150;background:var(--navy)}.chat-panel.no-convo{display:none}}
 
-/* RIGHT PANEL - CHAT */
-.chat-panel{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.chat-header{padding:14px 20px;border-bottom:1px solid rgba(77,184,255,0.1);display:flex;align-items:center;gap:12px}
-.chat-avatar{width:36px;height:36px;border-radius:50%;background:rgba(26,42,255,0.3);border:1.5px solid rgba(77,184,255,0.2);overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--crystal)}
-.chat-name{font-size:14px;font-weight:600}
-.chat-code{font-size:10px;color:var(--gray-mid)}
-.chat-messages{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
-.msg-bubble{max-width:70%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5;font-weight:300}
-.msg-bubble.sent{background:rgba(26,42,255,0.3);border:1px solid rgba(26,42,255,0.4);align-self:flex-end;border-bottom-right-radius:4px}
-.msg-bubble.received{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);align-self:flex-start;border-bottom-left-radius:4px}
-.msg-time{font-size:9px;color:var(--gray-mid);margin-top:4px;text-align:right}
-.chat-input-bar{padding:14px 20px;border-top:1px solid rgba(77,184,255,0.1);display:flex;gap:10px;align-items:center}
-.chat-input{flex:1;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,184,255,0.15);border-radius:10px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+/* CONVERSATION LIST */
+.convo-list{border-right:1px solid var(--card-border);overflow-y:auto;height:calc(100vh - 56px)}
+.convo-header{padding:20px 20px 12px;border-bottom:1px solid rgba(77,184,255,0.06)}
+.convo-header-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;margin-bottom:8px}
+.convo-search{width:100%;padding:8px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.1);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:11px;outline:none}
+.convo-search::placeholder{color:var(--gray-dim)}
+.convo-search:focus{border-color:var(--crystal)}
+.convo-item{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;transition:background .15s;border-bottom:1px solid rgba(255,255,255,0.02)}
+.convo-item:hover{background:rgba(255,255,255,0.03)}
+.convo-item.active{background:rgba(26,42,255,0.1);border-left:2px solid var(--crystal)}
+.convo-avatar{width:40px;height:40px;border-radius:50%;background:rgba(26,42,255,0.2);border:1.5px solid rgba(77,184,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--crystal);flex-shrink:0;overflow:hidden}
+.convo-avatar img{width:100%;height:100%;object-fit:cover}
+.convo-info{flex:1;min-width:0}
+.convo-name{font-size:12px;font-weight:600;margin-bottom:2px;display:flex;align-items:center;gap:6px}
+.convo-name .score{font-size:9px;color:var(--crystal);font-weight:400}
+.convo-last{font-size:11px;color:var(--gray-mid);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.convo-time{font-size:9px;color:var(--gray-dim);flex-shrink:0}
+.convo-unread{width:8px;height:8px;border-radius:50%;background:var(--crystal);flex-shrink:0}
+.convo-empty{text-align:center;padding:60px 20px;font-size:12px;color:var(--gray-mid)}
+
+/* CHAT PANEL */
+.chat-panel{display:flex;flex-direction:column;height:calc(100vh - 56px)}
+.chat-header{padding:14px 24px;border-bottom:1px solid var(--card-border);display:flex;align-items:center;gap:14px;background:rgba(10,14,46,0.5)}
+.chat-back{display:none;background:none;border:none;color:var(--gray-mid);font-size:18px;cursor:pointer;padding:4px 8px}
+@media(max-width:800px){.chat-back{display:block}}
+.chat-header-avatar{width:36px;height:36px;border-radius:50%;background:rgba(26,42,255,0.2);border:1.5px solid rgba(77,184,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--crystal);overflow:hidden}
+.chat-header-avatar img{width:100%;height:100%;object-fit:cover}
+.chat-header-info{flex:1}
+.chat-header-name{font-size:13px;font-weight:600}
+.chat-header-sub{font-size:10px;color:var(--gray-mid)}
+.chat-header-score{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--crystal)}
+
+/* MESSAGES */
+.chat-messages{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:12px}
+.msg-row{display:flex;gap:8px;max-width:75%}
+.msg-row.mine{align-self:flex-end;flex-direction:row-reverse}
+.msg-row.theirs{align-self:flex-start}
+.msg-bubble{padding:12px 16px;border-radius:16px;font-size:13px;line-height:1.6;font-weight:300}
+.msg-row.mine .msg-bubble{background:var(--royal);color:var(--white);border-bottom-right-radius:4px}
+.msg-row.theirs .msg-bubble{background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.85);border-bottom-left-radius:4px}
+.msg-time{font-size:9px;color:var(--gray-dim);align-self:flex-end;margin:0 4px}
+.msg-date-sep{text-align:center;font-size:10px;color:var(--gray-dim);padding:8px;letter-spacing:1px}
+
+/* CHAT INPUT */
+.chat-input-wrap{padding:16px 24px;border-top:1px solid var(--card-border);display:flex;gap:10px;background:rgba(10,14,46,0.8)}
+.chat-input{flex:1;padding:12px 16px;background:rgba(255,255,255,0.05);border:1.5px solid rgba(77,184,255,0.15);border-radius:12px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;resize:none;max-height:100px}
+.chat-input::placeholder{color:var(--gray-dim)}
 .chat-input:focus{border-color:var(--crystal)}
-.chat-input::placeholder{color:rgba(136,146,164,0.4)}
-.send-btn{padding:12px 20px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s}
-.send-btn:hover{background:#1420cc}
+.chat-send{padding:12px 20px;background:var(--royal);border:none;border-radius:12px;color:var(--white);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;letter-spacing:1px}
+.chat-send:hover{background:#1420cc}
+.chat-send:disabled{opacity:0.4;cursor:not-allowed}
 
 /* EMPTY CHAT */
-.empty-chat{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center}
-.empty-chat-gem{width:60px;height:72px;margin:0 auto 20px;opacity:0.3}
-.empty-chat-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px}
-.empty-chat-sub{font-size:12px;color:var(--gray-mid);font-weight:300;line-height:1.6}
-
-/* SUBSCRIBE WALL */
-.subscribe-wall{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;text-align:center}
-.sub-wall-card{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.2);border-radius:20px;padding:40px;max-width:360px}
-.sub-wall-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:10px}
-.sub-wall-sub{font-size:12px;color:var(--gray-mid);line-height:1.7;font-weight:300;margin-bottom:24px}
-.sub-wall-btn{display:block;padding:14px 32px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none}
-.sub-wall-btn:hover{background:#1420cc}
-
-/* MOBILE */
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(10,14,46,0.95);backdrop-filter:blur(12px);border-top:1px solid rgba(77,184,255,0.1);padding:8px 0;z-index:100}
-.mobile-nav-items{display:flex;justify-content:space-around}
-.mobile-nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 16px;cursor:pointer;text-decoration:none;color:var(--gray-mid);transition:color .2s}
-.mobile-nav-item.active{color:var(--crystal)}
-.mobile-nav-icon{font-size:18px}
-.mobile-nav-label{font-size:9px;letter-spacing:0.5px;font-weight:600}
-
-@media(max-width:768px){
-  .app-nav{display:none}
-  .mobile-nav{display:block}
-  .messages-layout{height:calc(100vh - 57px - 56px)}
-  .conversations-panel{width:100%;border-right:none;display:none}
-  .conversations-panel.show{display:block}
-  .chat-panel{display:none}
-  .chat-panel.show{display:flex}
-}
+.chat-empty{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px}
+.chat-empty-inner{max-width:300px}
+.chat-empty-icon{font-size:40px;margin-bottom:16px;opacity:0.3}
+.chat-empty-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px;color:var(--gray-mid)}
+.chat-empty-sub{font-size:11px;color:var(--gray-dim);line-height:1.7}
 </style>
 </head>
 <body>
 
-<header class="app-header">
-  <a href="https://occultics.ai" class="logo-wrap">
-    <svg class="logo-gem" viewBox="0 0 80 100" fill="none">
-      <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/>
-      <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/>
-      <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/>
-      <polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/>
-      <polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/>
-      <polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/>
-    </svg>
-    <div class="logo-name">MATCH</div>
-  </a>
-  <nav class="app-nav">
-    <a href="/match/dashboard.html" class="nav-item">My Matches</a>
-    <a href="/match/messages.html" class="nav-item active">Messages</a>
-    <a href="/match/settings.html" class="nav-item">Profile</a>
-  </nav>
-</header>
-
-<div class="messages-layout">
-  <!-- LEFT: Conversations -->
-  <div class="conversations-panel show" id="conv-panel">
-    <div class="panel-header">
-      <div class="panel-title">Messages</div>
-    </div>
-    <div class="conv-list" id="conv-list">
-      <!-- Populated by JS -->
-    </div>
-  </div>
-
-  <!-- RIGHT: Chat or Empty -->
-  <div class="chat-panel" id="chat-panel">
-    <div class="empty-chat" id="empty-chat">
-      <svg class="empty-chat-gem" viewBox="0 0 80 100" fill="none">
-        <polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/>
-        <polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.5"/>
-        <polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.5"/>
-      </svg>
-      <div class="empty-chat-title">Select a conversation</div>
-      <div class="empty-chat-sub">Your messages with matches<br>will appear here.</div>
-    </div>
-
-    <div id="subscribe-wall" class="subscribe-wall" style="display:none">
-      <div class="sub-wall-card">
-        <div class="sub-wall-title">Subscribe to Message</div>
-        <div class="sub-wall-sub">Messaging is available to founding members. Join now at $29/month — first 100 spots only.</div>
-        <a href="/match/join.html" class="sub-wall-btn">Become a Founding Member</a>
-      </div>
-    </div>
-
-    <div id="active-chat" style="display:none;flex:1;flex-direction:column">
-      <div class="chat-header" id="chat-header"></div>
-      <div class="chat-messages" id="chat-messages"></div>
-      <div class="chat-input-bar">
-        <input type="text" class="chat-input" id="msg-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
-        <button class="send-btn" onclick="sendMessage()">Send</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<nav class="mobile-nav">
-  <div class="mobile-nav-items">
-    <a href="/match/dashboard.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">💎</span>
-      <span class="mobile-nav-label">Matches</span>
+<!-- NAV -->
+<nav class="app-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
+      <span>OCCULTICS</span>
     </a>
-    <a href="/match/messages.html" class="mobile-nav-item active">
-      <span class="mobile-nav-icon">✉</span>
-      <span class="mobile-nav-label">Messages</span>
-    </a>
-    <a href="/match/settings.html" class="mobile-nav-item">
-      <span class="mobile-nav-icon">◈</span>
-      <span class="mobile-nav-label">Profile</span>
-    </a>
+    <div class="nav-links">
+      <a href="/match/dashboard.html" class="nav-link">Matches</a>
+      <a href="/match/messages.html" class="nav-link active">Messages</a>
+      <a href="/match/settings.html" class="nav-link">Settings</a>
+    </div>
+    <div class="nav-avatar" id="nav-avatar" onclick="window.location='/match/settings.html'">?</div>
   </div>
 </nav>
 
+<div class="chat-layout">
+
+  <!-- CONVERSATION LIST -->
+  <div class="convo-list" id="convo-list">
+    <div class="convo-header">
+      <div class="convo-header-title">Messages</div>
+      <input type="text" class="convo-search" placeholder="Search conversations..." oninput="searchConvos(this.value)">
+    </div>
+    <div id="convo-items"></div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="chat-panel" id="chat-panel">
+    <div class="chat-empty" id="chat-empty">
+      <div class="chat-empty-inner">
+        <div class="chat-empty-icon">✦</div>
+        <div class="chat-empty-title">Select a conversation</div>
+        <div class="chat-empty-sub">Choose a match from the left to start chatting, or <a href="/match/dashboard.html" style="color:var(--crystal)">find new matches</a>.</div>
+      </div>
+    </div>
+
+    <div id="chat-active" style="display:none;flex-direction:column;height:100%">
+      <div class="chat-header" id="chat-header">
+        <button class="chat-back" onclick="showConvoList()">←</button>
+        <div class="chat-header-avatar" id="chat-avatar">?</div>
+        <div class="chat-header-info">
+          <div class="chat-header-name" id="chat-name">—</div>
+          <div class="chat-header-sub" id="chat-sub">—</div>
+        </div>
+        <div class="chat-header-score" id="chat-score">—</div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="chat-input-wrap">
+        <textarea class="chat-input" id="chat-input" placeholder="Type a message..." rows="1" onkeydown="handleKey(event)"></textarea>
+        <button class="chat-send" id="send-btn" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <script>
-var SUPABASE_URL='https://dtquqaridqyjdgirjczr.supabase.co';
-var SUPABASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-var supabase = null;
-try {
-  if(window.supabase && typeof window.supabase.createClient === 'function' && SUPABASE_URL !== 'https://dtquqaridqyjdgirjczr.supabase.co') {
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
-} catch(e) {
-  console.log('Running in demo mode:', e.message);
-}
-var currentUser=null;
-var currentProfile=null;
-var activeConnectionId=null;
-var realtimeChannel=null;
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var sb = null;
+var myProfile = null;
+var myUserId = null;
+var conversations = [];
+var activeConvoUserId = null;
+var profilesCache = {};
+var realtimeSub = null;
 
-async function init(){
-  if(!supabase || SUPABASE_URL === 'https://dtquqaridqyjdgirjczr.supabase.co'){showDemoConversations();return}
-  var session=await supabase.auth.getSession();
-  if(!session.data.session){window.location.href='/match/join.html';return}
-  currentUser=session.data.session.user;
-  var profileRes=await supabase.from('profiles').select('*').eq('user_id',currentUser.id).single();
-  if(profileRes.error){window.location.href='/match/join.html';return}
-  currentProfile=profileRes.data;
-  if(!currentProfile.is_subscribed){
-    document.getElementById('empty-chat').style.display='none';
-    document.getElementById('subscribe-wall').style.display='flex';
-  }
-  await loadConversations();
+try { if(window.supabase) sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) {}
+
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
+
+function calcCompatScore(me, them) {
+  if(!me || !them) return {score:50,synCode:'?.?.?'};
+  var synBio = r(me.biorhythm + them.biorhythm);
+  var synGen = r(me.generational + them.generational);
+  var synLP = r(me.life_path + them.life_path);
+  var code = ''+synBio+synGen+synLP;
+  var score = 50;
+  var bestCodes = ['448','268','369','134','246','562','459','628'];
+  var goodCodes = ['123','156','358','573','584','854','865','966'];
+  var hardCodes = ['911','955','775','797','189','898'];
+  if(bestCodes.indexOf(code) > -1) score = 92 + Math.floor(Math.random()*6);
+  else if(goodCodes.indexOf(code) > -1) score = 78 + Math.floor(Math.random()*10);
+  else if(hardCodes.indexOf(code) > -1) score = 35 + Math.floor(Math.random()*15);
+  else score = 55 + Math.floor(Math.random()*25);
+  if(me.biorhythm === them.biorhythm) score = Math.min(99, score + 12);
+  return {score:Math.min(99,Math.max(20,score)), synCode:synBio+'.'+synGen+'.'+synLP};
 }
 
-async function loadConversations(){
-  var res=await supabase.from('connections').select('*,profiles!connections_from_user_id_fkey(*),profiles!connections_to_user_id_fkey(*)').eq('status','accepted').or('from_user_id.eq.'+currentUser.id+',to_user_id.eq.'+currentUser.id);
-  if(res.error||!res.data){return}
-  var list=document.getElementById('conv-list');
-  list.innerHTML='';
-  if(res.data.length===0){
-    list.innerHTML='<div style="padding:32px 20px;text-align:center;font-size:12px;color:var(--gray-mid);font-weight:300">No conversations yet.<br>Connect with your matches to start chatting.</div>';
+function getInitial(name) { return name ? name.charAt(0).toUpperCase() : '?'; }
+function formatTime(ts) {
+  if(!ts) return '';
+  var d = new Date(ts);
+  var now = new Date();
+  if(d.toDateString() === now.toDateString()) return d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  var yesterday = new Date(now); yesterday.setDate(yesterday.getDate()-1);
+  if(d.toDateString() === yesterday.toDateString()) return 'Yesterday';
+  return d.toLocaleDateString([],{month:'short',day:'numeric'});
+}
+
+// ---- RENDER CONVERSATION LIST ----
+function renderConvoList(convos) {
+  var container = document.getElementById('convo-items');
+  if(!convos.length) {
+    container.innerHTML = '<div class="convo-empty">No conversations yet.<br><a href="/match/dashboard.html" style="color:var(--crystal)">Find matches to message</a></div>';
     return;
   }
-  res.data.forEach(function(conn){
-    var other=conn.from_user_id===currentUser.id?conn['profiles!connections_to_user_id_fkey']:conn['profiles!connections_from_user_id_fkey'];
-    if(!other)return;
-    var item=document.createElement('div');
-    item.className='conv-item';
-    item.onclick=function(){openChat(conn.id,other)};
-    var avatarHtml=other.photo_url?'<img src="'+other.photo_url+'" alt="'+other.name+'">':other.name.charAt(0);
-    item.innerHTML='<div class="conv-avatar">'+avatarHtml+'</div><div class="conv-info"><div class="conv-name">'+other.name+'</div><div class="conv-preview">'+other.biorhythm+' · '+other.generational+' · '+other.life_path+'</div></div>';
-    list.appendChild(item);
+  var html = '';
+  convos.forEach(function(c) {
+    var p = c.profile;
+    var isActive = c.userId === activeConvoUserId;
+    var avatarHtml = p && p.photo_url ? '<img src="'+p.photo_url+'" alt="">' : getInitial(p ? p.name : '?');
+    var score = p ? calcCompatScore(myProfile, p).score : '?';
+    html += '<div class="convo-item'+(isActive?' active':'')+'" onclick="openConvo(\''+c.userId+'\')">';
+    html += '<div class="convo-avatar">'+avatarHtml+'</div>';
+    html += '<div class="convo-info">';
+    html += '<div class="convo-name">'+(p?p.name:'Unknown')+' <span class="score">'+score+'%</span></div>';
+    html += '<div class="convo-last">'+(c.lastMsg||'Start a conversation...')+'</div>';
+    html += '</div>';
+    if(c.lastTime) html += '<div class="convo-time">'+formatTime(c.lastTime)+'</div>';
+    if(c.unread) html += '<div class="convo-unread"></div>';
+    html += '</div>';
   });
+  container.innerHTML = html;
 }
 
-async function openChat(connectionId,other){
-  if(!currentProfile.is_subscribed){
-    document.getElementById('empty-chat').style.display='none';
-    document.getElementById('subscribe-wall').style.display='flex';
-    return;
-  }
-  activeConnectionId=connectionId;
-  document.getElementById('empty-chat').style.display='none';
-  document.getElementById('subscribe-wall').style.display='none';
-  var activeChat=document.getElementById('active-chat');
-  activeChat.style.display='flex';
-  activeChat.style.flexDirection='column';
-  var avatarHtml=other.photo_url?'<img src="'+other.photo_url+'" alt="'+other.name+'" style="width:36px;height:36px;border-radius:50%;object-fit:cover">':other.name.charAt(0);
-  document.getElementById('chat-header').innerHTML='<div class="chat-avatar">'+avatarHtml+'</div><div><div class="chat-name">'+other.name+'</div><div class="chat-code">'+other.biorhythm+' · '+other.generational+' · '+other.life_path+'</div></div>';
-  await loadMessages(connectionId);
-  subscribeToMessages(connectionId);
+function searchConvos(query) {
+  if(!query) { renderConvoList(conversations); return; }
+  var q = query.toLowerCase();
+  var filtered = conversations.filter(function(c){ return c.profile && c.profile.name.toLowerCase().indexOf(q) > -1; });
+  renderConvoList(filtered);
 }
 
-async function loadMessages(connectionId){
-  var res=await supabase.from('messages').select('*').eq('connection_id',connectionId).order('created_at',{ascending:true});
-  var container=document.getElementById('chat-messages');
-  container.innerHTML='';
-  if(res.data){
-    res.data.forEach(function(msg){appendMessage(msg)});
-    container.scrollTop=container.scrollHeight;
+// ---- OPEN CONVERSATION ----
+async function openConvo(userId) {
+  activeConvoUserId = userId;
+  document.getElementById('chat-empty').style.display = 'none';
+  document.getElementById('chat-active').style.display = 'flex';
+
+  // On mobile, hide conversation list
+  if(window.innerWidth <= 800) {
+    document.getElementById('convo-list').classList.remove('mobile-show');
   }
+
+  // Highlight active convo
+  renderConvoList(conversations);
+
+  // Load profile
+  var profile = profilesCache[userId];
+  if(!profile) {
+    var res = await sb.from('profiles').select('*').eq('user_id', userId).single();
+    if(res.data) { profile = res.data; profilesCache[userId] = profile; }
+  }
+
+  if(profile) {
+    document.getElementById('chat-name').textContent = profile.name;
+    document.getElementById('chat-sub').textContent = profile.pythagorean_code + ' · Synastry ' + calcCompatScore(myProfile, profile).synCode;
+    document.getElementById('chat-score').textContent = calcCompatScore(myProfile, profile).score + '%';
+    var avatarEl = document.getElementById('chat-avatar');
+    avatarEl.innerHTML = profile.photo_url ? '<img src="'+profile.photo_url+'" alt="">' : getInitial(profile.name);
+  }
+
+  // Load messages
+  var msgRes = await sb.from('messages').select('*')
+    .or('and(from_user.eq.'+myUserId+',to_user.eq.'+userId+'),and(from_user.eq.'+userId+',to_user.eq.'+myUserId+')')
+    .order('created_at', {ascending:true});
+
+  renderMessages(msgRes.data || []);
+
   // Mark as read
-  await supabase.from('messages').update({is_read:true}).eq('connection_id',connectionId).neq('sender_id',currentUser.id);
-}
+  await sb.from('messages').update({read:true}).eq('to_user', myUserId).eq('from_user', userId).eq('read', false);
 
-function appendMessage(msg){
-  var container=document.getElementById('chat-messages');
-  var div=document.createElement('div');
-  var isSent=msg.sender_id===currentUser.id;
-  div.className='msg-bubble '+(isSent?'sent':'received');
-  var time=new Date(msg.created_at).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  div.innerHTML=msg.content+'<div class="msg-time">'+time+'</div>';
-  container.appendChild(div);
-  container.scrollTop=container.scrollHeight;
-}
-
-function subscribeToMessages(connectionId){
-  if(realtimeChannel)supabase.removeChannel(realtimeChannel);
-  realtimeChannel=supabase.channel('messages:'+connectionId).on('postgres_changes',{event:'INSERT',schema:'public',table:'messages',filter:'connection_id=eq.'+connectionId},function(payload){
-    if(payload.new.sender_id!==currentUser.id)appendMessage(payload.new);
+  // Subscribe to new messages in this conversation
+  if(realtimeSub) realtimeSub.unsubscribe();
+  realtimeSub = sb.channel('msgs-'+userId).on('postgres_changes', {
+    event: 'INSERT',
+    schema: 'public',
+    table: 'messages',
+    filter: 'to_user=eq.'+myUserId
+  }, function(payload) {
+    if(payload.new.from_user === activeConvoUserId) {
+      appendMessage(payload.new);
+      sb.from('messages').update({read:true}).eq('id', payload.new.id);
+    }
+    loadConversations(); // refresh sidebar
   }).subscribe();
 }
 
-async function sendMessage(){
-  var input=document.getElementById('msg-input');
-  var content=input.value.trim();
-  if(!content||!activeConnectionId)return;
-  input.value='';
-  var tempMsg={sender_id:currentUser.id,content:content,created_at:new Date().toISOString()};
-  appendMessage(tempMsg);
-  if(supabase){
-    await supabase.from('messages').insert({connection_id:activeConnectionId,sender_id:currentUser.id,content:content});
+function renderMessages(msgs) {
+  var container = document.getElementById('chat-messages');
+  if(!msgs.length) {
+    container.innerHTML = '<div style="text-align:center;padding:40px;font-size:12px;color:var(--gray-dim)">No messages yet. Say hello!</div>';
+    return;
+  }
+  var html = '';
+  var lastDate = '';
+  msgs.forEach(function(m) {
+    var d = new Date(m.created_at);
+    var dateStr = d.toLocaleDateString([],{month:'long',day:'numeric',year:'numeric'});
+    if(dateStr !== lastDate) {
+      html += '<div class="msg-date-sep">'+dateStr+'</div>';
+      lastDate = dateStr;
+    }
+    var isMine = m.from_user === myUserId;
+    html += '<div class="msg-row '+(isMine?'mine':'theirs')+'">';
+    html += '<div class="msg-bubble">'+escapeHtml(m.content)+'</div>';
+    html += '<div class="msg-time">'+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</div>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+  container.scrollTop = container.scrollHeight;
+}
+
+function appendMessage(msg) {
+  var container = document.getElementById('chat-messages');
+  var noMsgDiv = container.querySelector('div[style*="text-align:center"]');
+  if(noMsgDiv) noMsgDiv.remove();
+  var d = new Date(msg.created_at);
+  var isMine = msg.from_user === myUserId;
+  var el = document.createElement('div');
+  el.className = 'msg-row ' + (isMine ? 'mine' : 'theirs');
+  el.innerHTML = '<div class="msg-bubble">'+escapeHtml(msg.content)+'</div><div class="msg-time">'+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})+'</div>';
+  container.appendChild(el);
+  container.scrollTop = container.scrollHeight;
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ---- SEND MESSAGE ----
+async function sendMessage() {
+  var input = document.getElementById('chat-input');
+  var text = input.value.trim();
+  if(!text || !activeConvoUserId) return;
+
+  input.value = '';
+  document.getElementById('send-btn').disabled = true;
+
+  var msg = {
+    from_user: myUserId,
+    to_user: activeConvoUserId,
+    content: text,
+    read: false
+  };
+
+  var res = await sb.from('messages').insert(msg).select().single();
+  if(res.data) {
+    appendMessage(res.data);
+    loadConversations(); // refresh sidebar
+  }
+
+  document.getElementById('send-btn').disabled = false;
+  input.focus();
+}
+
+function handleKey(e) {
+  if(e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
   }
 }
 
-function handleKeyPress(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}}
-
-function showDemoConversations(){
-  var list=document.getElementById('conv-list');
-  var demos=[{name:'Sofia',code:'2 · 5 · 7',preview:'Hey! I saw our compatibility code is 4·4·8...'},
-    {name:'Marco',code:'3 · 6 · 9',preview:'That\'s such an interesting code!'}];
-  demos.forEach(function(d){
-    var item=document.createElement('div');
-    item.className='conv-item';
-    item.innerHTML='<div class="conv-avatar">'+d.name.charAt(0)+'</div><div class="conv-info"><div class="conv-name">'+d.name+'</div><div class="conv-preview">'+d.preview+'</div></div>';
-    list.appendChild(item);
-  });
+function showConvoList() {
+  document.getElementById('convo-list').classList.add('mobile-show');
 }
 
-document.addEventListener('DOMContentLoaded', function(){
-  setTimeout(init, 100);
-});
+// ---- LOAD CONVERSATIONS ----
+async function loadConversations() {
+  // Get all messages involving this user
+  var res = await sb.from('messages').select('*')
+    .or('from_user.eq.'+myUserId+',to_user.eq.'+myUserId)
+    .order('created_at', {ascending:false});
+
+  if(!res.data) { renderConvoList([]); return; }
+
+  // Group by conversation partner
+  var convoMap = {};
+  res.data.forEach(function(m) {
+    var partnerId = m.from_user === myUserId ? m.to_user : m.from_user;
+    if(!convoMap[partnerId]) {
+      convoMap[partnerId] = {
+        userId: partnerId,
+        lastMsg: m.content,
+        lastTime: m.created_at,
+        unread: m.to_user === myUserId && !m.read
+      };
+    }
+  });
+
+  // Also add matches who haven't been messaged yet (from URL param)
+  var params = new URLSearchParams(window.location.search);
+  var targetUser = params.get('user');
+  if(targetUser && !convoMap[targetUser]) {
+    convoMap[targetUser] = { userId: targetUser, lastMsg: '', lastTime: null, unread: false };
+  }
+
+  // Load profiles for each conversation partner
+  var userIds = Object.keys(convoMap);
+  if(userIds.length) {
+    var profileRes = await sb.from('profiles').select('*').in('user_id', userIds);
+    if(profileRes.data) {
+      profileRes.data.forEach(function(p) {
+        profilesCache[p.user_id] = p;
+        if(convoMap[p.user_id]) convoMap[p.user_id].profile = p;
+      });
+    }
+  }
+
+  conversations = Object.values(convoMap).sort(function(a,b) {
+    return (b.lastTime||'') > (a.lastTime||'') ? 1 : -1;
+  });
+
+  renderConvoList(conversations);
+
+  // Auto-open conversation if user param in URL
+  if(targetUser) {
+    openConvo(targetUser);
+  }
+}
+
+// ---- INIT ----
+async function init() {
+  if(!sb) return;
+
+  var session = await sb.auth.getSession();
+  if(!session.data.session) {
+    window.location.href = '/match/join.html';
+    return;
+  }
+
+  myUserId = session.data.session.user.id;
+
+  var res = await sb.from('profiles').select('*').eq('user_id', myUserId).single();
+  if(res.error || !res.data) {
+    window.location.href = '/match/join.html';
+    return;
+  }
+  myProfile = res.data;
+
+  var navAvatar = document.getElementById('nav-avatar');
+  if(myProfile.photo_url) navAvatar.innerHTML = '<img src="'+myProfile.photo_url+'" alt="">';
+  else navAvatar.textContent = getInitial(myProfile.name);
+
+  await loadConversations();
+}
+
+init();
 </script>
 </body>
 </html>
