@@ -6,6 +6,10 @@
 <title>Messages — Occultics Match</title>
 <link rel="manifest" href="/match/manifest.json">
 <meta name="theme-color" content="#0a0e2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Occultics">
+<link rel="apple-touch-icon" href="/match/icons/icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')"></script>
 <style>
@@ -447,5 +451,6 @@ async function init() {
 
 init();
 </script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/match/sw.js").then(function(r){console.log("SW registered")}).catch(function(e){console.log("SW failed:",e)})}</script>
 </body>
 </html>
