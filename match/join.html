@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Occultics">
-<link rel="apple-touch-icon" href="/match/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/match/icons/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>window.supabaseLoaded = false;</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
@@ -164,12 +164,13 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
   </div>
   <div id="success-screen" class="success-screen">
     <svg class="success-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
-    <div class="success-title">Welcome, <span id="success-name">—</span></div>
+    <div class="success-title">Check Your Email</div>
     <p style="font-size:13px;color:var(--gray-mid);margin-bottom:8px">Your Pythagorean Code</p>
     <div class="success-code" id="success-code">— · — · —</div>
-    <p class="success-sub">Your profile is live. Your matches are being calculated right now. You'll see your first matches on your dashboard.</p>
-    <a href="/match/dashboard.html" class="btn-dashboard">See My Matches →</a>
-    <p style="font-size:10px;color:var(--gray-mid);margin-top:16px">Redirecting in <span id="redirect-count">5</span> seconds...</p>
+    <p class="success-sub">We sent a confirmation link to <strong id="success-email" style="color:var(--crystal)">your email</strong>. Click the link to verify your account and start seeing your matches.</p>
+    <p style="font-size:11px;color:var(--gray-mid);margin-bottom:24px">Check your spam folder if you don't see it.</p>
+    <a href="/match/login.html" class="btn-dashboard">I've Confirmed — Sign In →</a>
+    <p style="font-size:10px;color:var(--gray-mid);margin-top:20px;cursor:pointer" onclick="resendConfirmation()">Didn't receive it? <span style="color:var(--crystal)">Resend email</span></p>
   </div>
 </div>
 
@@ -272,7 +273,8 @@ async function createAccount(){
   }catch(err){showMsg(err.message||'Something went wrong. Please try again.','error');btn.textContent='✦ Create Account & See Matches';btn.disabled=false;}
 }
 
-function showSuccess(name,code){document.getElementById('step5').style.display='none';document.querySelector('.progress-wrap').style.display='none';document.getElementById('success-screen').classList.add('show');document.getElementById('success-name').textContent=name;document.getElementById('success-code').textContent=code;localStorage.removeItem('occultics_match_email');localStorage.removeItem('occultics_match_data');var count=5;var interval=setInterval(function(){count--;document.getElementById('redirect-count').textContent=count;if(count<=0){clearInterval(interval);window.location.href='/match/dashboard.html';}},1000);}
+function showSuccess(name,code){document.getElementById('step5').style.display='none';document.querySelector('.progress-wrap').style.display='none';document.getElementById('success-screen').classList.add('show');document.getElementById('success-code').textContent=code;document.getElementById('success-email').textContent=document.getElementById('s5-email').value;localStorage.removeItem('occultics_match_email');localStorage.removeItem('occultics_match_data');}
+async function resendConfirmation(){var email=document.getElementById('s5-email').value||document.getElementById('success-email').textContent;if(!email||!supaClient)return;try{await supaClient.auth.resend({type:'signup',email:email});alert('Confirmation email resent to '+email);}catch(e){alert('Failed to resend: '+e.message);}}
 function showMsg(text,type){var el=document.getElementById('msg-box');el.textContent=text;el.className='msg show '+type;window.scrollTo(0,0);}
 function clearMsg(){var el=document.getElementById('msg-box');el.className='msg';}
 </script>
