@@ -53,6 +53,12 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
 .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
 .footer-copy{font-size:9px;color:rgba(255,255,255,0.1);}
+.generating-banner{background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:12px;padding:16px 20px;margin:0 auto 24px;max-width:720px;display:none;text-align:center;}
+.generating-banner.show{display:block;}
+.generating-banner-title{font-size:11px;font-weight:600;color:#4db8ff;margin-bottom:4px;}
+.generating-banner-sub{font-size:11px;color:#8892a4;font-weight:300;}
+.generating-dot{display:inline-block;width:6px;height:6px;background:#4db8ff;border-radius:50%;margin-right:8px;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:0.3}50%{opacity:1}}
 @media(max-width:600px){.compat-codes{flex-direction:column;align-items:center;}.code-num{font-size:40px;}}
 </style>
 </head>
@@ -103,6 +109,10 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
         <div class="compat-synastry-code" id="compat-synastry">—</div>
       </div>
     </div>
+  </div>
+  <div class="generating-banner" id="generating-banner">
+    <div class="generating-banner-title"><span class="generating-dot"></span>Your sessions are being generated</div>
+    <div class="generating-banner-sub">This usually takes 10-15 minutes. This page will refresh automatically — no need to do anything.</div>
   </div>
   <div class="sessions" id="sessions"></div>
   <div class="footer">
@@ -297,6 +307,26 @@ function loadProfile() {
     }
 
     renderSessions(sections);
+    
+    // Check if any sessions are still generating
+    var totalSessions = SESSION_DEFS.length;
+    var readySessions = 0;
+    SESSION_DEFS.forEach(function(def) {
+      var s = sections[def.key] || {};
+      if (s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.') {
+        readySessions++;
+      }
+    });
+    
+    if (readySessions < totalSessions) {
+      // Show generating banner
+      document.getElementById('generating-banner').classList.add('show');
+      // Auto-refresh every 30 seconds
+      setTimeout(function() { window.location.reload(); }, 30000);
+    } else {
+      document.getElementById('generating-banner').classList.remove('show');
+    }
+    
     document.getElementById('main').style.display = 'block';
   })
   .catch(function(err) {
