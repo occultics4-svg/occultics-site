@@ -193,7 +193,8 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 .generate-btn{width:100%;padding:15px;background:var(--blue-royal);color:#fff;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;text-transform:uppercase}.generate-btn:hover{background:var(--blue-deep)}
 .modal-guarantee{font-size:10px;color:var(--gray-mid);text-align:center;margin-top:12px}
 .modal-intro{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text-mid);line-height:1.8;font-weight:300;margin-bottom:20px;font-style:italic}
-@media(max-width:768px){header{padding:14px 18px}.logo-name{font-size:14px}.hero{padding:44px 18px 36px}.how-it-works{padding:48px 18px}.what-you-get{padding:48px 18px}.methodology{padding:48px 18px}.methodology-grid{grid-template-columns:1fr}.final-cta{padding:48px 18px}.modal-header{padding:20px 18px 16px}.modal-body{padding:18px 18px 28px}.form-row{grid-template-columns:1fr}footer{flex-direction:column;gap:10px;text-align:center}.footer-disclaimer{text-align:center}.social-proof{padding:28px 18px}.social-proof-row{gap:28px}.step{flex-direction:column;gap:8px}}
+@media(max-width:768px){header{padding:12px 16px;flex-wrap:wrap;gap:8px}nav{width:100%;display:flex;align-items:center;justify-content:space-between;gap:6px}.logo-name{font-size:13px;letter-spacing:3px}.logo-tagline{display:none}.logo-gem{width:24px;height:28px}.lang-btn{padding:4px 8px;font-size:9px}.nav-btn{padding:8px 12px;font-size:9px;letter-spacing:0.5px}.hero{padding:44px 24px 36px}.hero-sub{font-size:13px;padding:0 8px}.hero-anchor{font-size:10px;padding:0 8px}.how-it-works{padding:48px 24px}.what-you-get{padding:48px 24px}.features-grid{grid-template-columns:1fr}.methodology{padding:48px 24px}.methodology-grid{grid-template-columns:1fr}.final-cta{padding:48px 24px}.modal-header{padding:20px 20px 16px}.modal-body{padding:20px 20px 28px}.modal{margin:10px;max-height:85vh;border-radius:16px}.form-row{grid-template-columns:1fr}footer{flex-direction:column;gap:10px;text-align:center;padding:24px 20px}.footer-disclaimer{text-align:center}.social-proof{padding:28px 24px}.social-proof-row{gap:28px}.step{flex-direction:column;gap:8px}.section-title{font-size:clamp(24px,6vw,42px);padding:0 8px}.section-eyebrow{padding:0 8px}}
+@media(max-width:480px){[style*="grid-template-columns:repeat(3"],[style*="grid-template-columns: repeat(3"],[style*="grid-template-columns:1fr 1fr 1fr"]{grid-template-columns:1fr!important}[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}[style*="padding:80px 48px"]{padding:48px 20px!important}[style*="padding:60px 48px"]{padding:40px 20px!important}[style*="max-width:760px"]{padding-left:20px!important;padding-right:20px!important}[style*="max-width:860px"]{padding-left:16px!important;padding-right:16px!important}}
 </style>
 </head>
 <body>
@@ -254,7 +255,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
       <button class="lang-btn" id="lang-ja" onclick="setLang('ja')">JA</button>
     </div>
-    <button class="nav-btn nav-outline" onclick="openCompatModal()" id="nav-cta">Compatibility Code</button>
+    <button class="nav-btn nav-outline" onclick="openLCMModal()" id="nav-cta">Life Code Map</button>
     <button class="nav-btn" onclick="window.location='https://occultics.ai/match/join'" id="nav-match">Match</button>
   </nav>
 </header>
@@ -279,15 +280,15 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:600px;margin:0 auto 40px;">
       <div style="padding:20px;border:1px solid rgba(77,184,255,0.08);border-radius:12px;background:rgba(255,255,255,0.02);">
         <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#4db8ff;margin-bottom:8px;">2</div>
-        <div style="font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Complete Life Code Map profiles</div>
+        <div style="font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Complete Life Code Alignment profiles</div>
       </div>
       <div style="padding:20px;border:1px solid rgba(77,184,255,0.08);border-radius:12px;background:rgba(255,255,255,0.02);">
         <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#4db8ff;margin-bottom:8px;">1</div>
         <div style="font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Private profile — shared access</div>
       </div>
       <div style="padding:20px;border:1px solid rgba(77,184,255,0.08);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#4db8ff;margin-bottom:8px;">28</div>
-        <div style="font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Days · 1 private profile</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#4db8ff;margin-bottom:8px;">11</div>
+        <div style="font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;font-weight:300;">Sessions · 1 private profile</div>
       </div>
     </div>
     <div style="display:inline-block;padding:20px 48px;border:1px solid rgba(77,184,255,0.15);border-radius:12px;background:rgba(255,255,255,0.02);margin-bottom:16px;">
@@ -369,7 +370,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <p style="font-size:10px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;text-align:center;margin-bottom:16px;">Occultics Publishing</p>
     <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:#fff;text-align:center;line-height:1.1;margin-bottom:20px;">You Are Not Complicated.<br><em style="font-style:italic;color:#4db8ff;">You Are Coded.</em></h2>
     <p style="font-size:13px;letter-spacing:3px;color:rgba(255,255,255,0.4);text-transform:uppercase;font-weight:500;text-align:center;margin-bottom:16px;">The Life Code Alignment</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,0.65);max-width:620px;margin:0 auto 48px;line-height:1.7;text-align:center;font-style:italic;">A private 14-day journey through the mathematics of who you are — why you feel the way you feel, why you react the way you react, and what your numbers have always known about your life.</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,0.65);max-width:620px;margin:0 auto 48px;line-height:1.7;text-align:center;font-style:italic;">A private journey through the mathematics of who you are — why you feel the way you feel, why you react the way you react, and what your numbers have always known about your life.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:0 auto 48px;">
       <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
         <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 1 · Day 1</div>
@@ -403,9 +404,6 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <div style="display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:48px;">
       <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;">
         <span style="color:#4db8ff;">✦</span> Private profile — 3 months access
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;">
-        <span style="color:#4db8ff;">✦</span> One session every 2 days
       </div>
       <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;">
         <span style="color:#4db8ff;">✦</span> Generated from your exact birth date
@@ -443,7 +441,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       <div style="padding:28px 24px;border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);text-align:center;">
         <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:10px;">Full Program</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#fff;margin-bottom:6px;">The Life Code Alignment</div>
-        <div style="font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;margin-bottom:20px;line-height:1.6;">7 sessions · 14 days<br>Your complete journey</div>
+        <div style="font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;margin-bottom:20px;line-height:1.6;">7 sessions<br>Your complete journey</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;margin-bottom:20px;">$2,222</div>
         <button onclick="openLCAModal()" style="width:100%;padding:12px;background:transparent;color:#4db8ff;border:1px solid rgba(77,184,255,0.3);border-radius:8px;font-size:9px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.borderColor='#4db8ff'" onmouseout="this.style.borderColor='rgba(77,184,255,0.3)'">
           Life Code Alignment · $2,222
@@ -540,7 +538,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       <button onclick="handleLCAPayment()" id="lca-pay-btn" style="width:100%;padding:14px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;">
         ✦ Begin The Life Code Alignment — $2,222
       </button>
-      <div style="text-align:center;margin-top:10px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">7 sessions · 14 days · Private profile in 10 minutes · 3 months access</div>
+      <div style="text-align:center;margin-top:10px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">7 sessions · Private profile in 10 minutes · 3 months access</div>
     </div>
   </div>
 </div>
@@ -606,11 +604,11 @@ async function handleLCAPayment(){
 
 <section style="padding:80px 48px;text-align:center;background:linear-gradient(180deg,#0a0e2e 0%,#111640 100%);color:white;position:relative;overflow:hidden;">
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);pointer-events:none;"></div>
-  <p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Coming Soon</p>
+  <p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Live Now</p>
   <h2 class="section-title" style="color:white;font-size:clamp(32px,5vw,48px);" id="match-title">Matching Apps Connect on Faces.<br>We Connect on Mathematics.</h2>
   <p style="font-size:14px;color:#8892a4;max-width:520px;margin:0 auto 12px;line-height:1.7;font-weight:300;" id="match-sub">Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.</p>
-  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Opening to the first 100 founding members — $29/month.</p>
-  <button onclick="window.location='https://occultics.ai/match/join'" style="display:inline-block;padding:16px 40px;background:transparent;color:white;border:1.5px solid rgba(77,184,255,0.4);border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join the Waitlist — Free</button>
+  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Founding members — $29/month. Limited spots.</p>
+  <button onclick="window.location='https://occultics.ai/match/join'" style="display:inline-block;padding:16px 40px;background:#1a2aff;color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join Occultics Match →</button>
   <div style="display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;">
     <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m1-label">Love Match</div><div style="font-size:20px;">💎</div></div>
     <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m2-label">Friend Match</div><div style="font-size:20px;">🤝</div></div>
@@ -759,11 +757,11 @@ var translations = {
     'meth-b4-title': 'The Technology',
     'meth-b4-text': 'Each session is generated by an AI system trained specifically on 700,000 words of proprietary Pythagorean research. The result is a deeply personal session — specific to your exact birth date, birth time, and the karmic threads written into your numbers.',
     'meth-quote': '"Numbers are the highest degree of knowledge. It is knowledge itself."',
-    'match-eyebrow': 'Coming Soon',
+    'match-eyebrow': 'Live Now',
     'match-title': 'Matching Apps Connect on Faces.<br>We Connect on Mathematics.',
     'match-sub': 'Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.',
-    'match-count': 'Opening to the first 100 founding members — $29/month.',
-    'match-btn': 'Join the Waitlist — Free',
+    'match-count': 'Founding members — $29/month. Limited spots.',
+    'match-btn': 'Join Occultics Match →',
     'match-m1-label': 'Love Match',
     'match-m2-label': 'Friend Match',
     'match-m3-label': 'Business Match',
@@ -819,11 +817,11 @@ var translations = {
     'meth-b4-title': 'La Tecnología',
     'meth-b4-text': 'Cada sesión es generada por un sistema de IA entrenado específicamente en 700,000 palabras de investigación pitagórica propietaria. El resultado es una sesión profundamente personal — específica para tu fecha exacta de nacimiento, hora de nacimiento y los hilos kármicos escritos en tus números.',
     'meth-quote': '"Los números son el grado más alto de conocimiento. Es el conocimiento mismo."',
-    'match-eyebrow': 'Próximamente',
+    'match-eyebrow': 'Disponible Ahora',
     'match-title': 'Las Apps de Citas Conectan por Caras.<br>Nosotros Conectamos por Matemáticas.',
     'match-sub': 'Cada persona lleva una firma numérica única derivada de su fecha de nacimiento. Nuestro motor de matching identifica los códigos específicos que complementan los tuyos — en amor, amistad y negocios. Esto no es astrología. Es reconocimiento de patrones aplicado a la conexión humana.',
-    'match-count': 'Abriendo para los primeros 100 miembros fundadores — $29/mes.',
-    'match-btn': 'Únete a la Lista de Espera — Gratis',
+    'match-count': 'Miembros fundadores — $29/mes. Plazas limitadas.',
+    'match-btn': 'Únete a Occultics Match →',
     'match-m1-label': 'Match de Amor',
     'match-m2-label': 'Match de Amistad',
     'match-m3-label': 'Match de Negocios',
@@ -879,11 +877,11 @@ var translations = {
     'meth-b4-title': 'テクノロジー',
     'meth-b4-text': '各セッションは、700,000語の独自のピタゴラス研究に特化して訓練されたAIシステムによって生成されます。その結果は、あなたの正確な生年月日、出生時間、そしてあなたの数字に書き込まれたカルマの糸に特化した、深くパーソナルなセッションです。',
     'meth-quote': '「数字は知識の最高の形である。それは知識そのものである。」',
-    'match-eyebrow': '近日公開',
+    'match-eyebrow': '公開中',
     'match-title': 'マッチングアプリは顔でつなぐ。<br>私たちは数学でつなぐ。',
     'match-sub': 'すべての人は生年月日から導かれるユニークな数的シグネチャーを持っています。私たちのマッチングエンジンは、あなたのコードを補完する特定のコードを特定します — 恋愛、友情、ビジネスにわたって。これは占星術ではありません。人間のつながりに適用されたパターン認識です。',
-    'match-count': '最初の100名の創設メンバーに公開 — $29/月。',
-    'match-btn': 'ウェイトリストに参加 — 無料',
+    'match-count': '創設メンバー — $29/月。限定枠。',
+    'match-btn': 'Occultics Matchに参加 →',
     'match-m1-label': '恋愛マッチ',
     'match-m2-label': '友情マッチ',
     'match-m3-label': 'ビジネスマッチ',
