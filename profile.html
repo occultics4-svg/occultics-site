@@ -52,6 +52,10 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .session-lock{font-size:10px;color:#8892a4;letter-spacing:1px;}
 .footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
 .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
+.audio-player{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:16px;margin-bottom:20px;}
+.audio-label{font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:10px;}
+audio{filter:sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);height:36px;}
+audio::-webkit-media-controls-panel{background:rgba(26,42,255,0.15);}
 .footer-copy{font-size:9px;color:rgba(255,255,255,0.1);}
 .generating-banner{background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:12px;padding:16px 20px;margin:0 auto 24px;max-width:720px;display:none;text-align:center;}
 .generating-banner.show{display:block;}
@@ -175,11 +179,12 @@ function toggleSession(idx) {
   }
 }
 
-function renderSessions(sections) {
+function renderSessions(sections, audioUrls) {
   var html = '';
   SESSION_DEFS.forEach(function(def, idx) {
     var s = sections[def.key] || {};
     var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
+    var audioUrl = audioUrls ? audioUrls[idx + 1] : null;
 
     html += '<div class="session-card unlocked">';
     html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
@@ -188,7 +193,15 @@ function renderSessions(sections) {
     html += '<div class="session-arr" id="sa'+idx+'">↓</div>';
     html += '</div>';
     if(hasText) {
-      html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'">'+textToHTML(s.text)+'</div>';
+      html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'">';
+      if(audioUrl) {
+        html += '<div class="audio-player">';
+        html += '<div class="audio-label">Listen to this session</div>';
+        html += '<audio controls preload="none" style="width:100%;margin-bottom:16px;border-radius:8px;"><source src="'+audioUrl+'" type="audio/mpeg">Your browser does not support audio.</audio>';
+        html += '</div>';
+      }
+      html += textToHTML(s.text);
+      html += '</div>';
     } else {
       html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'"><p style="color:#8892a4;font-style:italic;">Your session is being prepared. Please refresh in a few minutes.</p></div>';
     }
@@ -306,7 +319,13 @@ function loadProfile() {
       }
     }
 
-    renderSessions(sections);
+    // ---- EXTRACT AUDIO URLs ----
+    var audioUrls = {};
+    for (var a = 1; a <= 11; a++) {
+      if (p['audio_' + a]) audioUrls[a] = p['audio_' + a];
+    }
+
+    renderSessions(sections, audioUrls);
     
     // Check if any sessions are still generating
     var totalSessions = SESSION_DEFS.length;
