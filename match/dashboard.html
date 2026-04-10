@@ -220,12 +220,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 <!-- MATCH NOTIFICATION -->
 <div class="match-notif" id="match-notif" onclick="closeMatchNotif()">
   <div class="match-notif-inner">
-    <div class="match-notif-title">It's a Match!</div>
+    <div class="match-notif-title">'+t('its_a_match')+'</div>
     <div class="match-notif-avatars"><div class="match-notif-av" id="notif-av1">?</div><div style="font-size:24px;color:var(--crystal);align-self:center">✦</div><div class="match-notif-av" id="notif-av2">?</div></div>
     <div class="match-notif-code" id="notif-code">— · — · —</div>
     <div class="match-notif-sub" id="notif-sub">You and — both liked each other. Start a conversation!</div>
-    <a href="#" id="notif-msg-btn" class="match-btn primary" style="display:inline-block;padding:14px 32px">Message →</a>
-    <div style="margin-top:12px;font-size:10px;color:var(--gray-dim);cursor:pointer" onclick="closeMatchNotif()">or keep discovering</div>
+    <a href="#" id="notif-msg-btn" class="match-btn primary" style="display:inline-block;padding:14px 32px">'+t('message_btn')+'</a>
+    <div style="margin-top:12px;font-size:10px;color:var(--gray-dim);cursor:pointer" onclick="closeMatchNotif()">'+t('keep_discovering')+'</div>
   </div>
 </div>
 
@@ -564,7 +564,7 @@ async function loadLikedYou(){
 }
 
 async function likeBack(userId,btn){
-  btn.textContent='Liked!';btn.disabled=true;
+  btn.textContent='✓';btn.disabled=true;
   myLikes[userId]='like';
   await sb.from('likes').upsert({from_user:myUserId,to_user:userId,action:'like'},{onConflict:'from_user,to_user'});
   // Reload
@@ -599,7 +599,7 @@ function showDetail(idx){
   html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Biorhythm (How you connect)</span><span>'+c.synBio+'</span></div>';
   html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Generational (The goal)</span><span>'+c.synGen+'</span></div>';
   html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Combined Life Path (What you build)</span><span>'+c.synLP+'</span></div>';
-  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(c.sameBio?'var(--success)':'var(--gray-mid)')+'">'+( c.sameBio?'Yes — instant recognition':'No')+'</span></div></div>';
+  html+='<div style="display:flex;justify-content:space-between;font-size:11px"><span style="color:var(--gray-mid)">Same Biorhythm</span><span style="color:'+(c.sameBio?'var(--success)':'var(--gray-mid)')+'">'+( c.sameBio?t('same_bio_yes'):'No')+'</span></div></div>';
   document.getElementById('modal-content').innerHTML=html;
   document.getElementById('compat-modal').classList.add('show');
 }
@@ -679,6 +679,18 @@ if(filterBtns[3]) filterBtns[3].textContent = t('business');
 
 // Footer
 document.querySelector('.app-footer p').innerHTML = t('footer_quote') + ' · ' + t('footer_copy');
+
+// Translate match notification
+var notifTitle = document.querySelector('.match-notif-title');
+if(notifTitle) notifTitle.textContent = t('its_a_match');
+var notifMsgBtn = document.querySelector('#notif-msg-btn');
+if(notifMsgBtn) notifMsgBtn.textContent = t('message_btn');
+var keepDisc = document.querySelector('.match-notif-title');
+if(keepDisc) keepDisc.parentNode.querySelector('[onclick="closeMatchNotif()"]');
+
+// Translate loading spinner
+document.querySelector('#discover-container').innerHTML = '<div class="loading-spinner">' + t('loading') + '</div>';
+document.querySelector('#my-name').textContent = t('loading');
 
 window._lang = MATCH_LANG;
 
