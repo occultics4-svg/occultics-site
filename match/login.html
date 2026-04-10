@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Occultics">
-<link rel="apple-touch-icon" href="/match/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/match/icons/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>window.supabaseLoaded = false;</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
@@ -74,6 +74,7 @@ body::before{content:"";position:fixed;top:50%;left:50%;transform:translate(-50%
 
 @media(max-width:500px){.login-card{padding:28px 20px}}
 </style>
+<script src="/match/i18n.js"></script>
 </head>
 <body>
 
@@ -235,6 +236,38 @@ async function doForgot() {
     btn.disabled = false;
   }
 }
+</script>
+<script>
+
+// Language switcher
+var lsDiv = document.createElement('div');
+lsDiv.innerHTML = getLangSwitcher();
+document.querySelector('.login-card').insertBefore(lsDiv.firstChild, document.querySelector('.login-card').firstChild);
+
+// Translate login
+document.querySelector('.login-title').textContent = t('welcome_back');
+document.querySelector('.login-sub').textContent = t('sign_in_sub');
+document.querySelector('#login-email').placeholder = t('email_ph');
+document.querySelector('#login-pwd').placeholder = t('password_ph');
+var forgotLink = document.querySelector('.forgot-link a');
+if(forgotLink) forgotLink.textContent = t('forgot_password');
+document.querySelector('#login-btn').textContent = t('sign_in');
+document.querySelector('.divider-text').textContent = t('new_here');
+document.querySelector('.btn-join').textContent = t('join_match');
+// Forgot view
+var fTitle = document.querySelector('#forgot-view .login-title');
+if(fTitle) fTitle.textContent = t('reset_password');
+var fSub = document.querySelector('#forgot-view .login-sub');
+if(fSub) fSub.textContent = t('reset_sub');
+document.querySelector('#forgot-btn').textContent = t('send_reset');
+// Labels
+var loginLabels = document.querySelectorAll('#login-view label');
+if(loginLabels[0]) loginLabels[0].textContent = t('email');
+if(loginLabels[1]) loginLabels[1].textContent = t('password');
+var forgotLabels = document.querySelectorAll('#forgot-view label');
+if(forgotLabels[0]) forgotLabels[0].textContent = t('email');
+window._lang = MATCH_LANG;
+
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/match/sw.js").then(function(r){console.log("SW registered")}).catch(function(e){console.log("SW failed:",e)})}</script>
 </body>
