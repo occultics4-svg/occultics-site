@@ -314,256 +314,243 @@ async function loadDiscover(){
   showDiscoverCard();
 }
 
-// ============ FULL COMPATIBILITY ENGINE ============
-var COMPAT_CODES={
-'191':{score:42,desc:'Strong desire for dominance. Power struggle between two strong individuals.'},
-'281':{score:62,desc:'A fated encounter. Emotions develop gradually but powerful passion draws partners back together.'},
-'371':{score:75,desc:'Strong emotional potential. Love, warmth, genuine affection form the foundation.'},
-'461':{score:68,desc:'Develops slowly with obstacles early. Karmic challenges confronted first. Potential to become stable and long-lasting.'},
-'551':{score:48,desc:'Primarily intellectual connection. May not sustain without deeper emotional involvement.'},
-'641':{score:82,desc:'Passionate and emotionally rich, often culminating in serious long-term commitment or marriage.'},
-'731':{score:65,desc:'Emotionally powerful but turbulent. Requires adaptation and willingness to let go of control.'},
-'821':{score:60,desc:'Driven by strong emotion and physical attraction. Power dynamics may cause friction.'},
-'911':{score:35,desc:'Strong independence on both sides. Difficult to maintain if neither is willing to compromise.'},
-'292':{score:85,desc:'Deeply connected with destiny and karmic influences. Partners share similar thoughts. Can be a lifelong match.'},
-'382':{score:64,desc:'Initiated by strong emotion and physical attraction. Shared desire for family.'},
-'472':{score:72,desc:'Fated-karmic connection. Partners often know each other from early life. Can lead to marriage.'},
-'562':{score:80,desc:'Partnership grows from long-standing friendship. Love develops quickly. Long-lasting match.'},
-'652':{score:58,desc:'Love present but impulsiveness dominates. One partner may be unwilling to commit fully.'},
-'742':{score:66,desc:'Succeeds when partners are mature. Intellectual connection is strong.'},
-'832':{score:55,desc:'Very complicated fated connection. Passions intense and uncontrolled.'},
-'922':{score:45,desc:'Challenging with insecurity and misunderstandings. Requires effort to establish trust.'},
-'123':{score:83,desc:'Fated connection. Progression is natural. Stable and long-lasting.'},
-'213':{score:52,desc:'Challenging, conflict-prone. Partners emotionally attached but have differing priorities.'},
-'393':{score:56,desc:'Highly sensitive and intense. Strong initial emotions but can become emotionally draining.'},
-'483':{score:65,desc:'Develops slowly, requiring patience. Brings sexual and intellectual compatibility.'},
-'573':{score:78,desc:'Grounded in friendship and effective communication. Stable and likely to last.'},
-'663':{score:62,desc:'Strong emotional and physical desires. Intense passion can lead to neglect of responsibilities.'},
-'753':{score:74,desc:'Spiritually aligned. Emotional stability helps navigate differences.'},
-'843':{score:76,desc:'Energetically strong and stable. Partners practical and grounded.'},
-'933':{score:50,desc:'Karmic relationship with hidden dynamic. Passion and jealousy intertwined.'},
-'134':{score:84,desc:'Challenging start but over time, realize potential for great accomplishments together.'},
-'224':{score:70,desc:'Fated and karmic connection meant to happen. Marriage is likely outcome.'},
-'314':{score:73,desc:'Communication generally good. Lasting partnership.'},
-'494':{score:55,desc:'Very difficult karmic connection. Destined to spend significant time together despite difficulties.'},
-'584':{score:79,desc:'Strong and stable with good potential. Communication forms foundation. Relationship renews itself.'},
-'674':{score:64,desc:'Begins with love and attraction, but jealousy creates challenges. Stability supported by the 4.'},
-'764':{score:58,desc:'Unconventional connection with need for freedom. Distance can help it last.'},
-'854':{score:80,desc:'Compatible and harmonious. Like-minded partners. Practical approach maintains long-term compatibility.'},
-'944':{score:53,desc:'Complex and karmic. Initially feels like fairytale but misunderstandings arise.'},
-'145':{score:60,desc:'Often starts well but communication issues may arise. Children may become source of challenges.'},
-'235':{score:55,desc:'Fated connection marked by impulsiveness. Both temperamental, often competing for control.'},
-'325':{score:48,desc:'Fated but significantly more unstable. Outside interference destabilizes.'},
-'415':{score:62,desc:'The 4 delays start. Long-distance arrangements often produce better outcomes.'},
-'595':{score:40,desc:'Two opposing 5s create instability. Romantic love may fade even if marriage is reached.'},
-'685':{score:70,desc:'Born from love and passion. Turbulence inevitable but desire for family can renew connection.'},
-'775':{score:32,desc:'Very turbulent and complicated. Sudden twists and communication breakdowns. Difficult to sustain.'},
-'865':{score:82,desc:'Beautiful combination fueled by love and passion. Creates strong need for togetherness.'},
-'955':{score:38,desc:'Works for friendship but unsuitable for stable romantic bond. Neither willing to compromise freedom.'},
-'156':{score:78,desc:'Begins positively, evolving into love, often culminating in marriage and children.'},
-'246':{score:85,desc:'Fated and karmic connection that almost always leads to marriage. Strong family orientation.'},
-'336':{score:64,desc:'Passion drives the relationship but impulsiveness creates jealousy and ego conflicts.'},
-'426':{score:60,desc:'Karmic and fated where love is present yet challenges abound.'},
-'516':{score:75,desc:'Quality communication. Marriage and children likely.'},
-'696':{score:72,desc:'Karmic connection on family level — partners were involved in past life.'},
-'786':{score:50,desc:'Partners highly different: one seeks commitment, other craves freedom.'},
-'876':{score:58,desc:'Love present but arguments and sudden twists make it turbulent.'},
-'966':{score:74,desc:'Karmic connection with initial obstacles but strong love and excellent physical compatibility.'},
-'167':{score:55,desc:'Begins beautifully but impulsiveness and lack of compromise emerge.'},
-'257':{score:45,desc:'Fated connection but communication tends to be superficial. Better suited to platonic dynamic.'},
-'347':{score:58,desc:'Strong emotions unite partners but unexpected challenges and twists.'},
-'437':{score:42,desc:'High expectations and unwillingness to compromise often culminate in separation.'},
-'527':{score:52,desc:'Fated connection that relies on willingness to adapt and make sacrifices.'},
-'617':{score:48,desc:'Initially passionate but selfish tendencies create misunderstandings.'},
-'797':{score:30,desc:'Major imbalance. One partner gives significantly more. Very limited long-term prospects.'},
-'887':{score:56,desc:'Intense passion keeps couple connected despite repeated breakups.'},
-'977':{score:54,desc:'Karmic connection with spiritual elevation. Can endure with mutual commitment.'},
-'178':{score:58,desc:'Challenging as both prioritize own needs. Creates tension but keeps relationship together.'},
-'268':{score:90,desc:'Fated connection rich in emotion, physical attraction, and material stability. Strong potential for success.'},
-'358':{score:77,desc:'Begins with deep emotion and strong communication. Each respects the other\'s freedom.'},
-'448':{score:97,desc:'The strongest code. Wisdom, maturity, willingness to sacrifice. Does not lead to separation — ends only when one partner dies.'},
-'538':{score:52,desc:'Communication good but superficial. Emotional depth limited. Frequent breakups and reconciliations.'},
-'628':{score:80,desc:'Begins with love and develops shared desire for family. Strong foundation for long-term.'},
-'718':{score:62,desc:'Challenges from stubbornness but shared interests help it endure.'},
-'898':{score:35,desc:'Relationship centered on material gain. Bond lasts only as long as benefits exist.'},
-'988':{score:42,desc:'Based on personal interests rather than emotion. Can survive with compromises.'},
-'189':{score:33,desc:'Difficult relationship. Both pull in different directions. Betrayal and deception may arise.'},
-'279':{score:72,desc:'Very specific soulmate connection demanding energy and adaptability. Has spiritual protection.'},
-'369':{score:94,desc:'Rare and harmonious. Love, commitment, and mutual sacrifice. One of the highest-quality matches.'},
-'459':{score:74,desc:'Strong karmic relationship developing gradually. Partners mature together. Stable.'},
-'549':{score:56,desc:'Karmic with significant challenges. Need for freedom intense. Must allow autonomy.'},
-'639':{score:60,desc:'Strong emotion and passion. Intense but constant tension from jealousy.'},
-'729':{score:68,desc:'Karmic-fated connection designed to teach partners about themselves.'},
-'819':{score:70,desc:'Karmic connection with spiritual protection. Energy to overcome obstacles.'},
-'999':{score:50,desc:'Unpredictable and ambiguous. May last very short time or lifetime. Highly unusual and intense.'}
-};
-var VERT_SCORES={'1-1':-15,'1-2':5,'1-3':10,'1-4':-10,'1-5':-5,'1-6':-8,'1-7':15,'1-8':-15,'1-9':18,'2-2':-12,'2-3':-5,'2-4':10,'2-5':-15,'2-6':20,'2-7':-18,'2-8':-5,'2-9':22,'3-3':8,'3-4':-18,'3-5':15,'3-6':10,'3-7':12,'3-8':-12,'3-9':18,'4-4':20,'4-5':-10,'4-6':8,'4-7':-22,'4-8':18,'4-9':-15,'5-5':18,'5-6':-5,'5-7':20,'5-8':-15,'5-9':12,'6-6':5,'6-7':-8,'6-8':14,'6-9':16,'7-7':-25,'7-8':-8,'7-9':-15,'8-8':-22,'8-9':-12,'9-9':-5};
-var BIO_SCORES={'1-2':8,'1-4':8,'1-9':5,'2-3':-5,'2-5':-10,'2-6':15,'2-8':-8,'2-9':22,'3-5':12,'3-6':8,'3-8':-8,'4-4':15,'4-6':8,'4-8':18,'5-7':15,'6-8':12,'7-8':-5,'8-9':-10};
-var COMPAT_CODES_ES = {
-'191':'Fuerte deseo de dominación. Lucha de poder entre dos individuos fuertes.',
-'281':'Un encuentro destinado. Las emociones se desarrollan gradualmente pero una pasión poderosa los une.',
-'371':'Fuerte potencial emocional. Amor, calidez y afecto genuino forman la base.',
-'461':'Se desarrolla lentamente con obstáculos al principio. Desafíos kármicos confrontados primero. Potencial para ser estable y duradero.',
-'551':'Conexión principalmente intelectual. Puede no sostenerse sin una implicación emocional más profunda.',
-'641':'Apasionado y emocionalmente rico, a menudo culminando en un compromiso serio a largo plazo o matrimonio.',
-'731':'Emocionalmente poderoso pero turbulento. Requiere adaptación y disposición a soltar el control.',
-'821':'Impulsado por emociones fuertes y atracción física. La dinámica de poder puede causar fricción.',
-'911':'Fuerte independencia en ambos lados. Difícil de mantener si ninguno está dispuesto a comprometerse.',
-'292':'Profundamente conectados con el destino e influencias kármicas. Los socios comparten pensamientos similares. Puede ser una unión de por vida.',
-'382':'Iniciado por emociones fuertes y atracción física. Deseo compartido de familia.',
-'472':'Conexión kármica-destinada. Los socios a menudo se conocen desde temprano en la vida. Puede llevar al matrimonio.',
-'562':'La asociación crece de una amistad de larga data. El amor se desarrolla rápidamente. Unión duradera.',
-'652':'Amor presente pero la impulsividad domina. Un socio puede no estar dispuesto a comprometerse completamente.',
-'742':'Tiene éxito cuando los socios son maduros. La conexión intelectual es fuerte.',
-'832':'Conexión destinada muy complicada. Pasiones intensas e incontroladas.',
-'922':'Desafiante con inseguridad y malentendidos. Requiere esfuerzo para establecer confianza.',
-'123':'Conexión destinada. La progresión es natural. Estable y duradera.',
-'213':'Desafiante, propenso a conflictos. Socios emocionalmente apegados pero con prioridades diferentes.',
-'393':'Altamente sensible e intenso. Emociones iniciales fuertes pero puede volverse emocionalmente agotador.',
-'483':'Se desarrolla lentamente, requiere paciencia. Trae compatibilidad sexual e intelectual.',
-'573':'Basado en amistad y comunicación efectiva. Estable y probable que dure.',
-'663':'Fuertes deseos emocionales y físicos. La pasión intensa puede llevar a descuidar responsabilidades.',
-'753':'Espiritualmente alineados. La estabilidad emocional ayuda a navegar las diferencias.',
-'843':'Energéticamente fuerte y estable. Socios prácticos y con los pies en la tierra.',
-'933':'Relación kármica con dinámica oculta. Pasión y celos entrelazados.',
-'134':'Comienzo desafiante pero con el tiempo, realizan el potencial para grandes logros juntos.',
-'224':'Conexión destinada y kármica que debía suceder. El matrimonio es el resultado probable.',
-'314':'Comunicación generalmente buena. Asociación duradera.',
-'494':'Conexión kármica muy difícil. Destinados a pasar tiempo significativo juntos a pesar de las dificultades.',
-'584':'Fuerte y estable con buen potencial. La comunicación forma la base. La relación se renueva.',
-'674':'Comienza con amor y atracción, pero los celos crean desafíos. La estabilidad apoyada por el 4.',
-'764':'Conexión no convencional con necesidad de libertad. La distancia puede ayudar a que dure.',
-'854':'Compatible y armoniosa. Socios afines. El enfoque práctico mantiene la compatibilidad a largo plazo.',
-'944':'Complejo y kármico. Inicialmente se siente como un cuento de hadas pero surgen malentendidos.',
-'145':'A menudo comienza bien pero pueden surgir problemas de comunicación. Los hijos pueden ser fuente de desafíos.',
-'235':'Conexión destinada marcada por la impulsividad. Ambos temperamentales, a menudo compitiendo por el control.',
-'325':'Destinada pero significativamente más inestable. La interferencia externa desestabiliza.',
-'415':'El 4 retrasa el inicio. Los arreglos a larga distancia a menudo producen mejores resultados.',
-'595':'Dos 5 opuestos crean inestabilidad. El amor romántico puede desvanecerse incluso si se alcanza el matrimonio.',
-'685':'Nacido del amor y la pasión. Turbulencia inevitable pero el deseo de familia puede renovar la conexión.',
-'775':'Muy turbulento y complicado. Giros repentinos y rupturas en la comunicación. Difícil de sostener.',
-'865':'Hermosa combinación alimentada por amor y pasión. Crea una fuerte necesidad de estar juntos.',
-'955':'Funciona para amistad pero inadecuado para un vínculo romántico estable. Ninguno dispuesto a comprometer su libertad.',
-'156':'Comienza positivamente, evolucionando hacia el amor, a menudo culminando en matrimonio e hijos.',
-'246':'Conexión destinada y kármica que casi siempre lleva al matrimonio. Fuerte orientación familiar.',
-'336':'La pasión impulsa la relación pero la impulsividad crea celos y conflictos de ego.',
-'426':'Kármica y destinada donde el amor está presente pero los desafíos abundan.',
-'516':'Comunicación de calidad. Matrimonio e hijos probables.',
-'696':'Conexión kármica a nivel familiar — los socios estuvieron involucrados en una vida pasada.',
-'786':'Socios muy diferentes: uno busca compromiso, el otro ansía libertad.',
-'876':'Amor presente pero discusiones y giros repentinos lo hacen turbulento.',
-'966':'Conexión kármica con obstáculos iniciales pero fuerte amor y excelente compatibilidad física.',
-'167':'Comienza hermosamente pero emergen la impulsividad y la falta de compromiso.',
-'257':'Conexión destinada pero la comunicación tiende a ser superficial. Más adecuada para dinámica platónica.',
-'347':'Emociones fuertes unen a los socios pero desafíos y giros inesperados.',
-'437':'Altas expectativas y falta de voluntad para comprometerse a menudo culminan en separación.',
-'527':'Conexión destinada que depende de la voluntad de adaptarse y hacer sacrificios.',
-'617':'Inicialmente apasionado pero tendencias egoístas crean malentendidos.',
-'797':'Gran desequilibrio. Un socio da significativamente más. Perspectivas a largo plazo muy limitadas.',
-'887':'La pasión intensa mantiene a la pareja conectada a pesar de rupturas repetidas.',
-'977':'Conexión kármica con elevación espiritual. Puede perdurar con compromiso mutuo.',
-'178':'Desafiante ya que ambos priorizan sus propias necesidades. Crea tensión pero mantiene la relación unida.',
-'268':'Conexión destinada rica en emoción, atracción física y estabilidad material. Fuerte potencial de éxito.',
-'358':'Comienza con emoción profunda y comunicación fuerte. Cada uno respeta la libertad del otro.',
-'448':'El código más fuerte. Sabiduría, madurez, disposición al sacrificio. No lleva a la separación — termina solo cuando uno de los socios muere.',
-'538':'Comunicación buena pero superficial. Profundidad emocional limitada. Rupturas y reconciliaciones frecuentes.',
-'628':'Comienza con amor y desarrolla un deseo compartido de familia. Base fuerte para el largo plazo.',
-'718':'Desafíos por terquedad pero intereses compartidos ayudan a perdurar.',
-'898':'Relación centrada en ganancias materiales. El vínculo dura solo mientras existan beneficios.',
-'988':'Basado en intereses personales más que en emoción. Puede sobrevivir con compromisos.',
-'189':'Relación difícil. Ambos tiran en diferentes direcciones. Traición y engaño pueden surgir.',
-'279':'Conexión de almas gemelas muy específica que demanda energía y adaptabilidad. Tiene protección espiritual.',
-'369':'Raro y armonioso. Amor, compromiso y sacrificio mutuo. Una de las coincidencias de más alta calidad.',
-'459':'Fuerte relación kármica que se desarrolla gradualmente. Los socios maduran juntos. Estable.',
-'549':'Kármico con desafíos significativos. Necesidad de libertad intensa. Debe permitir autonomía.',
-'639':'Emoción y pasión fuertes. Intensa pero tensión constante por celos.',
-'729':'Conexión kármica-destinada diseñada para enseñar a los socios sobre sí mismos.',
-'819':'Conexión kármica con protección espiritual. Energía para superar obstáculos.',
-'999':'Impredecible y ambiguo. Puede durar muy poco tiempo o toda la vida. Altamente inusual e intenso.',
-};
-var COMPAT_CODES_JA = {
-'191':'支配欲が強い。二人の強い個人間の権力闘争。',
-'281':'運命的な出会い。感情は徐々に発展するが、強い情熱がパートナーを引き寄せる。',
-'371':'強い感情的ポテンシャル。愛、温かさ、純粋な愛情が基盤。',
-'461':'最初は障害がありゆっくり発展する。カルマ的課題に最初に直面。安定して長続きする可能性。',
-'551':'主に知的なつながり。より深い感情的関与なしには持続しない可能性。',
-'641':'情熱的で感情豊か。長期的なコミットメントや結婚に至ることが多い。',
-'731':'感情的に強力だが波乱含み。適応と制御を手放す意志が必要。',
-'821':'強い感情と身体的魅力に駆り立てられる。パワーダイナミクスが摩擦を起こす可能性。',
-'911':'両側に強い独立性。どちらも妥協する意志がなければ維持困難。',
-'292':'運命とカルマ的影響に深くつながっている。パートナーは同じ考えを共有。一生のマッチになりうる。',
-'382':'強い感情と身体的魅力から始まる。家族への共有の願望。',
-'472':'運命的・カルマ的つながり。パートナーは幼い頃から知り合いが多い。結婚につながりうる。',
-'562':'長年の友情からパートナーシップが育つ。愛がすぐに発展。長続きするマッチ。',
-'652':'愛はあるが衝動性が支配的。一方のパートナーが完全にコミットしない可能性。',
-'742':'パートナーが成熟している時に成功する。知的なつながりが強い。',
-'832':'非常に複雑な運命的つながり。情熱は激しく制御不能。',
-'922':'不安と誤解のある挑戦的な関係。信頼を確立する努力が必要。',
-'123':'運命的なつながり。進展は自然。安定して長続き。',
-'213':'挑戦的で対立しやすい。感情的に結びついているが優先事項が異なる。',
-'393':'非常に繊細で激しい。強い初期感情だが感情的に消耗する可能性。',
-'483':'ゆっくり発展し忍耐が必要。性的・知的互換性をもたらす。',
-'573':'友情と効果的なコミュニケーションに基づく。安定して長続きする可能性が高い。',
-'663':'強い感情的・身体的欲求。激しい情熱が責任の怠慢につながる可能性。',
-'753':'スピリチュアルに整合。感情的安定が違いを乗り越えるのに役立つ。',
-'843':'エネルギー的に強く安定。パートナーは実践的で地に足がついている。',
-'933':'隠れたダイナミクスを持つカルマ的関係。情熱と嫉妬が絡み合う。',
-'134':'挑戦的な始まりだが、時間とともに共に大きな成果を達成する可能性に気づく。',
-'224':'起こるべくして起こった運命的・カルマ的つながり。結婚が予想される結果。',
-'314':'コミュニケーションは概ね良好。持続的なパートナーシップ。',
-'494':'非常に困難なカルマ的つながり。困難にもかかわらず重要な時間を共に過ごす運命。',
-'584':'良い可能性を持つ強くて安定した関係。コミュニケーションが基盤。関係が自己再生する。',
-'674':'愛と魅力から始まるが、嫉妬が課題を作る。4によって安定が支えられる。',
-'764':'自由の必要性を持つ非従来型のつながり。距離が長続きを助ける可能性。',
-'854':'互換性があり調和的。似た考えのパートナー。実践的アプローチが長期的互換性を維持。',
-'944':'複雑でカルマ的。最初はおとぎ話のように感じるが誤解が生じる。',
-'145':'しばしば良い始まりだがコミュニケーションの問題が生じる可能性。子供が課題の原因になりうる。',
-'235':'衝動性が特徴の運命的つながり。両方とも気性が激しく、しばしば制御を争う。',
-'325':'運命的だが著しく不安定。外部の干渉が不安定にする。',
-'415':'4が開始を遅らせる。遠距離の取り決めがしばしばより良い結果を生む。',
-'595':'対立する二つの5が不安定を生む。結婚に至ってもロマンチックな愛が薄れる可能性。',
-'685':'愛と情熱から生まれる。混乱は避けられないが家族への願望がつながりを更新できる。',
-'775':'非常に波乱で複雑。突然の展開とコミュニケーション断絶。維持困難。',
-'865':'愛と情熱に燃える美しい組み合わせ。一緒にいたいという強い欲求を生む。',
-'955':'友情には適するが安定したロマンチックな絆には不適。どちらも自由を妥協する意志がない。',
-'156':'ポジティブに始まり、愛に発展。しばしば結婚と子供に至る。',
-'246':'ほぼ常に結婚に至る運命的・カルマ的つながり。強い家族志向。',
-'336':'情熱が関係を駆り立てるが衝動性が嫉妬とエゴの衝突を生む。',
-'426':'愛はあるが課題も多いカルマ的・運命的関係。',
-'516':'質の高いコミュニケーション。結婚と子供の可能性が高い。',
-'696':'家族レベルでのカルマ的つながり — パートナーは前世で関わりがあった。',
-'786':'非常に異なるパートナー：一方はコミットメントを求め、もう一方は自由を渇望。',
-'876':'愛はあるが口論と突然の展開が波乱を起こす。',
-'966':'初期障害のあるカルマ的つながりだが強い愛と優れた身体的互換性。',
-'167':'美しく始まるが衝動性と妥協の欠如が現れる。',
-'257':'運命的つながりだがコミュニケーションは表面的になりがち。プラトニックなダイナミクスに適する。',
-'347':'強い感情がパートナーを結びつけるが予期せぬ課題と展開。',
-'437':'高い期待と妥協の不意志がしばしば別離に至る。',
-'527':'適応と犠牲をする意志に依存する運命的つながり。',
-'617':'最初は情熱的だが利己的な傾向が誤解を生む。',
-'797':'大きな不均衡。一方のパートナーが著しく多く与える。長期的見通しが非常に限られている。',
-'887':'激しい情熱が繰り返しの別れにもかかわらずカップルを結びつける。',
-'977':'スピリチュアルな高揚を伴うカルマ的つながり。相互のコミットメントで持続可能。',
-'178':'両方が自分のニーズを優先するため挑戦的。緊張を生むが関係を一緒に保つ。',
-'268':'感情、身体的魅力、物質的安定に富んだ運命的つながり。成功の強い可能性。',
-'358':'深い感情と強いコミュニケーションから始まる。お互いの自由を尊重。',
-'448':'最も強いコード。知恵、成熟、犠牲の意志。別離に至らない — 一方のパートナーが亡くなった時のみ終わる。',
-'538':'コミュニケーションは良いが表面的。感情的深さが限られている。頻繁な別れと和解。',
-'628':'愛から始まり共有の家族願望を発展させる。長期的な強い基盤。',
-'718':'頑固さからの課題だが共有の興味が持続を助ける。',
-'898':'物質的利益を中心とした関係。利益がある限りのみ絆が続く。',
-'988':'感情よりも個人的利益に基づく。妥協で存続可能。',
-'189':'困難な関係。両方が異なる方向に引っ張る。裏切りと欺瞞が生じうる。',
-'279':'エネルギーと適応性を要求する非常に特定のソウルメイトつながり。スピリチュアルな保護あり。',
-'369':'稀で調和的。愛、コミットメント、相互犠牲。最高品質のマッチの一つ。',
-'459':'徐々に発展する強いカルマ的関係。パートナーが共に成熟。安定。',
-'549':'重大な課題を伴うカルマ的関係。自由の必要性が強い。自律を許さなければならない。',
-'639':'強い感情と情熱。激しいが嫉妬からの絶え間ない緊張。',
-'729':'パートナーに自分自身について教えるために設計されたカルマ的・運命的つながり。',
-'819':'スピリチュアルな保護を持つカルマ的つながり。障害を克服するエネルギー。',
-'999':'予測不能で曖昧。非常に短い時間か一生続く可能性。非常に珍しく激しい。',
+// ============================================================
+// OCCULTICS SCORING ENGINE v2 — Based on actual knowledge base
+// Rebuilt from SINASTRIJE documents
+// ============================================================
+
+// SAME BIORHYTHM ADJUSTMENTS (not universal bonus — depends on number)
+// From: VERTIKALNO DOBIJANJE BIORITAMSKIH BROJEVA
+var SAME_BIO_ADJ = {
+  1: -8,   // Two 1s: competing, sabotaging each other
+  2: -10,  // Two 2s: both passive, blocking, no push
+  3: 8,    // Two 3s: good passion, love, chemistry, good sex
+  4: 12,   // Two 4s: deep understanding, quality lasting marriage
+  5: 5,    // Two 5s: healthy foundation, understanding, but no passion
+  6: 8,    // Two 6s: huge love, passionate, but possessive/jealous
+  7: -15,  // Two 7s: won't work, nervous breakdowns, chandelier
+  8: -12,  // Two 8s: clash of wills, financial exploitation, bad sex
+  9: -8    // Two 9s: karmic, tough, falls apart when karma paid
 };
 
+// BIORHYTHM FROM DIFFERENT NUMBERS
+// Sum=1 combos: 1+9, 2+8, 3+7, 4+6
+// Sum=2 combos: 2+9, 3+8, 4+7, 5+6
+// Sum=3 combos: 1+2, 3+9, 4+8, 5+7
+// Sum=4 combos: 1+3, 4+9, 5+8, 6+7
+// Sum=5 combos: 1+4, 2+3, 5+9, 6+8
+// Sum=6 combos: 1+5, 2+4, 6+9, 7+8
+// Sum=7 combos: 1+6, 2+5, 3+4, 7+9
+// Sum=8 combos: 1+7, 2+6, 3+5, 4+4 (same), 6+3 (same as 3+6)
+// Sum=9 combos: 1+8, 2+7, 3+6, 4+5, 9+9 (same)
+
+var BIO_DIFF_ADJ = {
+  // Key: "min-max", value: adjustment
+  // Sum=1 group (healthy relationship, some need compromise)
+  '1-9': 2,    // can work, 9 steps back, but needs compromise
+  '2-8': 3,    // can work, 8 is calmer in biorhythm
+  '3-7': -2,   // more turbulent, but 3 can match 7
+  '4-6': 5,    // karma brings them together, understand each other
+
+  // Sum=2 group (fated but difficult, blocks)
+  '2-9': -8,   // nervous breakdown, 2 cares about money
+  '3-8': -6,   // slower 8 irritates 3, psychological crises
+  '4-7': -10,  // two different worlds, 4 takes advantage of 7
+  '5-6': -5,   // 6 can't understand 5's need for freedom
+
+  // Sum=3 group (passion, love, happiness)
+  '1-2': 8,    // great together, 1 leads, 2 follows, quality relationship
+  '3-9': 6,    // two friends
+  '4-8': 10,   // totally get each other, best friends
+  '5-7': 8,    // same language, equal level, understand each other
+
+  // Sum=4 group (karmic but complementary)
+  '1-3': 10,   // best karmic combo, beautiful story
+  '4-9': -12,  // two different worlds, catastrophic
+  '5-8': -8,   // communication gap over time
+  '6-7': -6,   // difficult under karma pressure
+
+  // Sum=5 group (casual, flirting start)
+  '1-4': 5,    // strong solid, quality
+  '2-3': -4,   // hardly understand each other, short-lived
+  '5-9': -2,   // casual, no lasting strength
+  '6-8': 6,    // marriage/love from casual start, quality
+
+  // Sum=6 group (all good, fall in love at first sight)
+  '1-5': 4,    // love born but 5 will cheat, expiration date
+  '2-4': 7,    // build love together, similar experiences, high quality
+  '6-9': 10,   // soulmates, naturally attracted, support each other
+  '7-8': 3,    // business great, emotional based on physical not true love
+
+  // Sum=7 group (nervous breakdowns, difficult)
+  '1-6': -5,   // nothing in common, 6 lives off 1, comes to head
+  '2-5': -12,  // doomed to fail, daily nervous breakdowns
+  '3-4': -10,  // 3 suffers losses, forced to change, doomed
+  '7-9': -12   // even more destructive than 7+7, terribly bad
+};
+
+// PERSONAL/LIFE PATH VERTICAL ADJUSTMENTS
+// From: MATCHING PERSONAL/DESTINY NUMBERS VERTICALLY
+var LP_ADJ = {
+  '1-1': -10,  // selfishness, egoism, competing, fizzles out
+  '1-2': 6,    // can last lifetime if man is 1, woman is 2
+  '1-3': 10,   // karma from past life, quality, fantastic team
+  '1-4': -5,   // neither here nor there, communication problems
+  '1-5': -4,   // 1 annoys 5, guaranteed expiration, 5 cheats
+  '1-6': -6,   // 6 lives off 1, things come to head, no future
+  '1-7': 12,   // fantastic match, + and -, complement, best financial team
+  '1-8': -12,  // big no-no, intentional scheming, revenge, destructive
+  '1-9': 8,    // can work, two extremes that build stability
+
+  '2-2': -12,  // must but not quality, sabotage, insane asylum
+  '2-3': -5,   // 3 snaps and leaves 2, expiration date
+  '2-4': 8,    // build love together, similar experiences, high quality
+  '2-5': -12,  // nervous breakdown every day, doomed
+  '2-6': 10,   // gets everything: money, love, attention, sex
+  '2-7': -12,  // worse than 2+5, karmic worst level, doomed
+  '2-8': -3,   // two worlds, one big nothing
+  '2-9': 15,   // soulmates
+
+  '3-3': 7,    // huge love, passionate, possessive but works
+  '3-4': -10,  // 3 suffers losses, doomed to fail
+  '3-5': 5,    // turbulent but passion, can last lifetime
+  '3-6': 4,    // similar nature, compatible, but 6 cheats (9 karma)
+  '3-7': 3,    // similar to 3+5 but more turbulent, compromise needed
+  '3-8': 2,    // can work, turbulent, 8 benefits from 3 in business
+  '3-9': 12,   // two best friends, greatest support, great love
+
+  '4-4': 3,    // neither stinks nor smells, nothing special
+  '4-5': -12,  // can't work at all, two different worlds, catastrophic
+  '4-6': -3,   // attracted but 6 cheats, 4 never forgives, cools off
+  '4-7': -12,  // definite no-go, nervous breakdowns, doomed
+  '4-8': 10,   // fantastic match, 4 and 8 best friends, support/happiness
+  '4-9': -10,  // most difficult karmic story, dishonest, different worlds
+
+  '5-5': 6,    // healthy foundation, understanding, lifelong marriages
+  '5-6': -4,   // fated but jealousy, depression, 5 leaves 6
+  '5-7': 8,    // incredible chemistry, strong love, chaotic but lasts
+  '5-8': -8,   // catastrophic communication gap, fades, doomed to problems
+  '5-9': 6,    // unconventional but fantastic, 5 profits, quality
+
+  '6-6': 7,    // huge love, passionate, possessive, can be whirlwind
+  '6-7': -8,   // 7 suffers severe nervous breakdown, not recommended
+  '6-8': 5,    // leads to marriage, children, dynamic but passionate
+  '6-9': 8,    // soulmates, naturally attracted, karmic family bond
+
+  '7-7': -15,  // destructive for both, nervous breakdowns, don't do it
+  '7-8': 3,    // business great, emotional based on passion not love
+  '7-9': -10,  // nervous, terribly bad, no future
+
+  '8-8': -8,   // passionate start but harsh words, aggression, fights
+  '8-9': -5,   // 8 hunts 9, arguments, material connection, breakups
+
+  '9-9': -3    // gamble, must be together, depends entirely on horizontal
+};
+
+// CORRECTED 81 COMPATIBILITY CODES
+// From: HORIZONTALNI SPOJEVI - TROBROJ
+var COMPAT_CODES = {
+  // Codes ending in 1
+  '191': {score:40, desc:'Karmic goal with ego dominance. Both self-centered. More like friends than lovers. No strong emotion. Depends heavily on vertical — some stay together but without passion.'},
+  '281': {score:58, desc:'Fated encounter with emotional friction. Strong destiny draws them together but masculine-feminine conflict creates tension. Power dynamics and some friction, carried by emotion.'},
+  '371': {score:72, desc:'Strong emotional potential with passion and love as the foundation. Turbulent but heartfelt. Unexpected twists require adaptation. The vertical determines lasting quality.'},
+  '461': {score:65, desc:'Develops slowly with karmic obstacles from the beginning. Over time, passion transforms into wisdom and compromise. Has potential to become stable and long-lasting if the vertical supports it.'},
+  '551': {score:45, desc:'Primarily intellectual connection. Neither fated nor karmic — a healthy start, but without strong passion or deep emotional pull. Depends entirely on the remaining two readings.'},
+  '641': {score:80, desc:'Passionate and emotionally rich. The goal is karma on a family level — love, marriage, and deep commitment. One of the higher quality codes when the vertical is strong.'},
+  '731': {score:62, desc:'Emotionally powerful but turbulent. Unexpected twists and power struggles. Requires adaptation and willingness to let go of control. Can work with a calm vertical.'},
+  '821': {score:72, desc:'Very high quality. Destiny infused with powerful emotion. The masculine principle protects the relationship. Leads to marriage with strong vertical — no divorce.'},
+  '911': {score:30, desc:'No future. Cannot establish a stable relationship. Partners compete rather than love. Dishonesty on both sides. Karmic connection that is probably the shortest-lasting. Breaks after roughly 5 years.'},
+
+  // Codes ending in 2
+  '112': {score:35, desc:'Eternal conflict between masculine and feminine principles. Based on a goal but not on love or passion. Partners are self-absorbed. One will eventually leave. Like a business marriage.'},
+  '292': {score:82, desc:'Deeply connected with destiny and karmic influences. Partners share similar thoughts. Can lead to lifelong marriage. The woman bears the karmic weight as pillar of the family.'},
+  '382': {score:60, desc:'Initiated by strong emotion and physical attraction. Jealousy leads to disagreements. Shared desire for family but the 8 with 2 creates material exploitation dynamics.'},
+  '472': {score:70, desc:'Fated-karmic connection. Partners often know each other from early life. Can lead to marriage. The 4 at the goal provides stability despite the fated obstacles.'},
+  '562': {score:78, desc:'Partnership grows from long-standing friendship. Love and desire for shared life develop naturally. Long-lasting match with unconventional qualities.'},
+  '652': {score:55, desc:'Love and emotional connection present, but impulsiveness dominates. The 6-5 creates physical attraction rather than true love. One partner may be unwilling to commit fully.'},
+  '742': {score:63, desc:'Succeeds when partners are mature and willing to build slowly. Intellectual connection is strong but requires calm vertical for lasting quality.'},
+  '832': {score:52, desc:'Complicated and fated. Driven by passion, money, and turbulence. The 3 fuels constant storms. Requires an exceptionally calm vertical to survive long-term.'},
+  '922': {score:38, desc:'No future as a stable relationship. Insecurity, doubt, secret affairs, and interference from female family members. Infidelity and scheming undermine the bond. "I can\'t with you, I can\'t without you."'},
+
+  // Codes ending in 3
+  '123': {score:85, desc:'Fated connection where destiny and emotion converge. The progression is natural — from fate to emotion to passion. Leads to marriage. With a good vertical, lasts a lifetime. One of the strongest codes.'},
+  '213': {score:48, desc:'Challenging and conflict-prone. Begins with a fated connection but has no strong purpose. Conflict between masculine and feminine principles escalates over time. Gets worse with age.'},
+  '393': {score:50, desc:'Genuine emotion drives this relationship but it is far too turbulent. Exaggerated passion, jealousy, and possessiveness create breaking points. Falls apart after karma is paid — 13 to 23 years.'},
+  '483': {score:75, desc:'Harmonious marriage, strong as a rock. Karmic burdens present at the beginning but weaken over time. The 4 and 8 are best friends in synastry — deep understanding between partners.'},
+  '573': {score:76, desc:'Grounded in friendship between the two greatest friends (5 and 7). Passionate, fiery, but with sincere support. Leads to marriage and children. Lifelong if vertical is good.'},
+  '663': {score:60, desc:'Strong emotional and physical desires. Driven by the passion of two 6s creating a 3. Intense but the turbulence from possessiveness and jealousy can lead to neglect of responsibilities.'},
+  '753': {score:74, desc:'The 5 and 7 as best friends create daily adrenaline with the passion of 3. Leads to marriage and children. Their relationship is extraordinary — summer storms that clear in five minutes. Lasts if vertical is good.'},
+  '843': {score:78, desc:'Very harmonious marriage with heavy karmic burdens throughout. Partners grow stronger through trials. The 4 and 8 bond is unbreakable. The masculine principle usually departs first. Partner may not find another.'},
+  '933': {score:48, desc:'Volcanic passion — genuine emotion but exaggerated in every way. The 3-3 creates madness that never calms. Falls apart turbulently after 13-23 years when karma is paid.'},
+
+  // Codes ending in 4
+  '134': {score:82, desc:'In 80% of cases, guarantees a quality long marriage. Partners entered from love without calculation. Over time they learn wisdom, tolerance, and compromise — but passion remains. Very high quality.'},
+  '224': {score:68, desc:'Fated and karmic — cannot be avoided. Marriage likely, lasting decades. But the woman bears the karmic weight as pillar of the family. She endures and swallows problems for the family\'s survival.'},
+  '314': {score:70, desc:'Communication generally good. The goal guarantees quality and durability. Passion is present through the 3. Lasting partnership that ends in marriage with good vertical.'},
+  '494': {score:50, desc:'Begins and ends with karma repayment. The entire course is karmic. Can last 30-50 years if verticals are strong. But the 9-4 aspect shatters dreams — after decades, serious disappointments surface.'},
+  '584': {score:80, desc:'One of the strongest codes. The 8-4 opposition provides constant protective bond. Strong and stable with children as focus. The greatest karmic burdens concern children, especially sons.'},
+  '674': {score:55, desc:'Begins with love but the 7-6 reveals it was physical attraction, not true love. Over time, distance grows and love cools. The 7-4 opposition destroys daily. Partners end like dog and cat.'},
+  '764': {score:35, desc:'Love cools because it was never true love — only physical attraction and passion. The 7-6 aspect is thoughtless entry into marriage. The 7-4 opposition destroys everything over years. No perspective or future.'},
+  '854': {score:80, desc:'The 8-4 in opposition provides constant protective bond. Compatible and harmonious. Like-minded partners. Children are the priority. Very high quality and stable marriage.'},
+  '944': {score:55, desc:'Pure karma from beginning to end. Can last 30-50 years but becomes harmonious only with strong verticals. The 9-4 aspect eventually shatters the image held for decades. Late-life separations possible.'},
+
+  // Codes ending in 5
+  '145': {score:62, desc:'The strongest possible karmic goal. 90% get married. Karma hits hardest in first 8 years. The biggest karmic difficulty is with children — health and behavior problems. Partners give necessary space for freedom.'},
+  '235': {score:52, desc:'Fated and passionate but interference from family members threatens stability. Should never live in one partner\'s family home. Turbulent but they love each other — only outside forces disturb their peace.'},
+  '325': {score:42, desc:'Fated but significantly more unstable. Outside interference destabilizes. The 3 amplifies everything while the 2-5 opposition brings family members interfering in the relationship.'},
+  '415': {score:58, desc:'Begins casually with a strong solid foundation. The 1 and 4 understand each other. But the 4-5 aspect points to karmic burdens regarding children. Can be quality with good vertical.'},
+  '595': {score:35, desc:'Two opposing 5s create complete instability. Even if marriage is reached, it becomes roommates in separate rooms. The gap grows wider until they realize they are not right for each other. Has an expiration date.'},
+  '685': {score:68, desc:'Born from love and passion at first sight. Children are born. Turbulence inevitable but desire for family renews connection. The 6-5 adds flirting on the side but doesn\'t threaten if vertical is good.'},
+  '775': {score:28, desc:'Maximum lifespan of 10 years. No strong love, no strong karma, huge need for freedom. Partners are nervous and tense. Communication is totally reversed. Breakups are intense and nasty — once it breaks, it\'s over.'},
+  '865': {score:76, desc:'Entered by falling in love at first sight. The goal is marriage, family, children. Strong potential — but depends heavily on the vertical. With a good vertical, extremely difficult to break. With a weak vertical, the relationship can still fall apart despite the initial love.'},
+  '955': {score:32, desc:'Cannot work for emotional relationship. Dishonesty, lies, deceptions, and manipulation. Partners become roommates. Over time the gap grows until the expiration date arrives. No longevity even with good vertical.'},
+
+  // Codes ending in 6
+  '156': {score:72, desc:'Begins through casual flirting but love blossoms and likely leads to marriage and children. The 1-6 opposition means rose-colored glasses — they don\'t want to see problems. The 5-6 means eventual betrayal but they don\'t separate.'},
+  '246': {score:85, desc:'Fated karmic connection that almost always leads to marriage. Strong family orientation. The woman is the pillar and victim of karma. The 4 provides the highest quality goal. Love deeply despite karmic burdens.'},
+  '336': {score:60, desc:'Passion and strong emotion drive the relationship. Two 3s create impulsive jealousy and ego conflicts. The 6 goal brings love and family but the 3-3 turbulence makes daily life explosive.'},
+  '426': {score:58, desc:'Karmic and fated where love is present yet challenges abound. Three feminine principles mean the woman bears the burden. The 4-6 aspect means love curse — but wisdom helps navigate it.'},
+  '516': {score:73, desc:'Quality communication forms the foundation. Marriage and children likely. A casual beginning evolves into something real. The 5 brings some unconventionality but doesn\'t threaten the relationship.'},
+  '696': {score:70, desc:'Karmic connection on family level — partners were connected in past life. Initial trials from family interference last 3-5 years. After karmic obstacles pass, produces sweet and long-lasting marriage.'},
+  '786': {score:42, desc:'Only about sex, passion, and adventure. The 7-8 is lust and physical attraction, the 7-6 is perversion. Beautiful chemistry but no quality for long-term. Starts with a bang, ends with a bang.'},
+  '876': {score:38, desc:'Even greater turbulence than 786. The 8-7 and 7-6 aspects together mean only sex, passion, and excessive lust. Partners become exhausted. Leads to restraining orders. Falls apart because passion is not love.'},
+  '966': {score:72, desc:'Family karma with initial obstacles lasting 3-5 years. After karmic trials pass, partners live with strong love and the 6-6 bond. Produces very harmonious marriages. Can lead to sweet lasting love.'},
+
+  // Codes ending in 7
+  '167': {score:45, desc:'Rose-colored glasses at the beginning. They fall in love quickly but it is not true love — it is the 6-7 illusion. When the illusion fades, the 1-7 opposition guarantees instability. Ends very abruptly and turbulently. Cannot last forever.'},
+  '257': {score:38, desc:'Fated connection but communication is superficial and backward. Better suited to platonic dynamic. Over time the 2-5 nervous energy destroys the relationship. No quality for long-term.'},
+  '347': {score:42, desc:'Strong emotions unite partners but the 3-4 aspect means the 3 suffers severe losses. The 7 at the end guarantees sudden ending. High expectations and unwillingness to compromise culminate in separation.'},
+  '437': {score:40, desc:'The 4 works like a slave to save the marriage while the 3 is impulsive. Complications present. High expectations and total misunderstanding. Only a matter of time before communication collapses completely.'},
+  '527': {score:48, desc:'Fated connection that relies on willingness to adapt. The 5-2 creates interference from outside. The 7 ending means sudden twists. Can survive with sacrifice but quality is limited.'},
+  '617': {score:42, desc:'The goal is marriage and family karma, but the 1-7 opposition guarantees instability. Initially passionate but the 6-7 illusion of love fades. Ends abruptly — divorces here are sudden, stressful, turbulent.'},
+  '797': {score:25, desc:'Karma repaid in the worst possible way — mentally. Partners go through nervous breakdowns. The 7-7 opposition brings interference and self-destruction. Betrayal at the worst level. People come out psychologically disturbed.'},
+  '887': {score:35, desc:'A volcano waiting to erupt. Mix of bomb and explosion. Passion drives it but erupts through ugly words, curses, aggression. Physical assault possible. Not recommended for people with pathological numbers. No future.'},
+  '977': {score:45, desc:'Spiritual bond brings them together but partners are very tense. Interference from outside, intrigue, and feelings of betrayal. Karmic difficulties with children. Rare cases survive with strong verticals.'},
+
+  // Codes ending in 8
+  '178': {score:52, desc:'Goal is spirituality — strong force pulling together. But the 1-8 opposition leads to constant poking, provoking, arguing and making up. Exhausting and can lead to aggression. Financial dynamics — one lives off the other.'},
+  '268': {score:88, desc:'Fated connection rich in emotion, physical attraction, and material stability. The 2-6 aspect means immediate skin-deep connection and thoughts of family. Very high quality. Strong potential for lifelong success.'},
+  '358': {score:75, desc:'Begins with deep emotion and strong communication. Each respects the other\'s freedom. The 5 and 7 as friends plus the 8 creates passion and prosperity. Can last with good vertical.'},
+  '448': {score:97, desc:'The strongest code in all of numerology. Two 4s bring wisdom, maturity, and willingness to sacrifice. The 8 provides passion and protection. Does not lead to separation — ends only when one partner passes away.'},
+  '538': {score:50, desc:'Communication good but superficial. The 5 and 3 refuse to back down creating verbal conflicts. Emotional depth limited. Frequent breakups and reconciliations. Turbulent but can last with strong horizontal.'},
+  '628': {score:78, desc:'Begins with love and develops shared desire for family. The 6-2 aspect dreams of romance and family. Strong foundation for long-term. Partners create quality relationship through genuine emotion.'},
+  '718': {score:60, desc:'Challenges from stubbornness and struggles for dominance. The 7 and 1 complement each other financially but the 8 ending means material connection and breakups/reconciliations.'},
+  '898': {score:28, desc:'Someone is with someone else for money. Severe exploitation. The 9-8 backstabbing means total betrayal. Bond lasts only as long as financial benefits exist. Deception in sexual/emotional relationships. Secret and dishonest.'},
+  '988': {score:35, desc:'Similar to 898 but lasts slightly longer. Based on passion and money, not love. The 8 at end means severe disappointment and betrayal. Ends with aggression, arguments, and disappointment. Never peacefully.'},
+
+  // Codes ending in 9
+  '189': {score:28, desc:'Difficult relationship where both lie to themselves. The 1-9 creates fairy tale illusion but 8-9 means backstabbing. Dishonesty, deceptions, and serious malfeasance in business. From the start, they can\'t see past the illusion.'},
+  '279': {score:65, desc:'Very specific soulmate connection demanding energy and adaptability. Has spiritual protection. The 2-9 creates pathological bonding — like a burr you can\'t shake off. Quality depends heavily on vertical.'},
+  '369': {score:94, desc:'Rare and harmonious. Love, commitment, and mutual sacrifice prominent. One of the highest-quality matches. The 3 and 9 are greatest friends, the 6 provides love and family. Exceptional code.'},
+  '459': {score:68, desc:'Strong karmic relationship developing gradually. The 4 provides stability but the 5 at end brings some need for freedom. Partners mature in decision-making. Can be stable with good vertical.'},
+  '549': {score:50, desc:'Karmic with significant challenges. The 5-4 communication gap grows catastrophically over time. Initial physical attraction fades. Karmic burdens especially concerning children. Doomed to serious problems.'},
+  '639': {score:55, desc:'Strong emotion and passion but secret relationships and constant tension from jealousy. The 9 at end means karma and possible infidelity. Intense but complicated.'},
+  '729': {score:60, desc:'Karmic-fated connection designed to teach partners about themselves. The 7 creates initial instability but the 2-9 bonding is pathological. Spiritual and intellectual but nervous.'},
+  '819': {score:78, desc:'Very high quality and strong. Healthy goal with spiritual protection. Provides both emotion and stability. Successfully withstands all karmic trials. Produces the most long-lasting and highest quality marriages.'},
+  '999': {score:45, desc:'Pure karma — undefined, steeped in secret affairs and ideals. Can last lifetime with 3+6 vertical, but most verticals lead to breakup. Greatest possible disappointment or greatest possible love. A gamble.'}
+};
+
+console.log("Scoring engine v2 loaded: " + Object.keys(COMPAT_CODES).length + " codes");
 
 
 function clientScore(them){
@@ -573,24 +560,36 @@ function clientScore(them){
   var codeData=COMPAT_CODES[code];
   var score,desc;
   if(codeData){score=codeData.score;desc=codeData.desc;
-  if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='es'&&COMPAT_CODES_ES[code])desc=COMPAT_CODES_ES[code];
-  if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='ja'&&COMPAT_CODES_JA[code])desc=COMPAT_CODES_JA[code];
-}
+    if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='es'&&COMPAT_CODES_ES[code])desc=COMPAT_CODES_ES[code];
+    if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='ja'&&COMPAT_CODES_JA[code])desc=COMPAT_CODES_JA[code];
+  }
   else{score=55;
-  if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='es')desc='Un código de compatibilidad único. Las energías combinadas de '+synBio+', '+synGen+' y '+synLP+' crean una conexión que vale la pena explorar.';
-  else if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='ja')desc='ユニークな互換性コード。'+synBio+'、'+synGen+'、'+synLP+'の組み合わせエネルギーが探求に値するつながりを生み出します。';
-  else desc='A unique compatibility code. The combined energies of '+synBio+', '+synGen+', and '+synLP+' create a connection worth exploring.';
-}
+    if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='es')desc='Un código de compatibilidad único. Las energías combinadas de '+synBio+', '+synGen+' y '+synLP+' crean una conexión que vale la pena explorar.';
+    else if(typeof MATCH_LANG!=='undefined'&&MATCH_LANG==='ja')desc='ユニークな互換性コード。'+synBio+'、'+synGen+'、'+synLP+'の組み合わせエネルギーが探求に値するつながりを生み出します。';
+    else desc='A unique compatibility code. The combined energies of '+synBio+', '+synGen+', and '+synLP+' create a connection worth exploring.';
+  }
+
+  // Vertical LP adjustment (30% weight)
   var lpKey=Math.min(myProfile.life_path,them.life_path)+'-'+Math.max(myProfile.life_path,them.life_path);
-  var vertAdj=VERT_SCORES[lpKey]||0;
-  score+=Math.round(vertAdj*0.3);
-  var bioKey=Math.min(myProfile.biorhythm,them.biorhythm)+'-'+Math.max(myProfile.biorhythm,them.biorhythm);
-  var bioAdj=BIO_SCORES[bioKey]||0;
-  score+=Math.round(bioAdj*0.2);
-  if(sameBio)score+=8;
+  var lpAdj=LP_ADJ[lpKey]||0;
+  score+=Math.round(lpAdj*0.3);
+
+  // Biorhythm adjustment
+  if(sameBio){
+    // Same biorhythm — number-specific (not universal bonus)
+    var sameBioAdj=SAME_BIO_ADJ[myProfile.biorhythm]||0;
+    score+=Math.round(sameBioAdj*0.25);
+  } else {
+    // Different biorhythm numbers
+    var bioKey=Math.min(myProfile.biorhythm,them.biorhythm)+'-'+Math.max(myProfile.biorhythm,them.biorhythm);
+    var bioAdj=BIO_DIFF_ADJ[bioKey]||0;
+    score+=Math.round(bioAdj*0.2);
+  }
+
   score=Math.min(99,Math.max(15,score));
   return{score:score,synCode:synBio+'.'+synGen+'.'+synLP,synBio:synBio,synGen:synGen,synLP:synLP,sameBio:sameBio,code:code,desc:desc};
 }
+
 
 function showDiscoverCard(){
   var container=document.getElementById('discover-container');
