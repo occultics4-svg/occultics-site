@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Occultics">
-<link rel="apple-touch-icon" href="/match/icons/icon-192.png">
+<link rel="apple-touch-icon" href="/match/icons/apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script>window.supabaseLoaded=false;</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" onerror="console.log('Supabase CDN failed')" onload="window.supabaseLoaded=true"></script>
@@ -148,6 +148,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .app-footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(77,184,255,0.04);margin-top:48px}
 .app-footer p{font-size:9px;color:rgba(255,255,255,0.1)}
 </style>
+<script src="/match/i18n.js"></script>
 </head>
 <body>
 
@@ -638,6 +639,49 @@ async function init(){
   loadDiscover();
 }
 init();
+</script>
+<script>
+
+// Language switcher in sidebar
+var lsDiv = document.createElement('div');
+lsDiv.innerHTML = getLangSwitcher();
+document.querySelector('.profile-card').insertBefore(lsDiv.firstChild, document.querySelector('.profile-card').firstChild);
+
+// Nav
+document.querySelectorAll('.nav-link')[0].textContent = t('nav_matches');
+document.querySelectorAll('.nav-link')[1].textContent = t('nav_messages');
+document.querySelectorAll('.nav-link')[2].textContent = t('nav_settings');
+
+// Tabs
+document.querySelector('#tab-discover').textContent = t('discover');
+document.querySelector('#tab-matches').childNodes[0].textContent = t('matches') + ' ';
+document.querySelector('#tab-liked').textContent = t('liked_you');
+
+// Sidebar
+document.querySelector('.profile-code-label').textContent = t('your_pyth_code');
+document.querySelector('.edit-profile-btn').textContent = t('edit_profile');
+var statLabels = document.querySelectorAll('.profile-stat-label');
+if(statLabels[0]) statLabels[0].textContent = t('nav_matches');
+if(statLabels[1]) statLabels[1].textContent = t('likes');
+if(statLabels[2]) statLabels[2].textContent = t('views');
+
+// Section headers
+document.querySelector('#panel-discover .section-title').textContent = t('discover');
+document.querySelector('#panel-matches .section-title').textContent = t('your_matches');
+document.querySelector('#panel-liked .section-title').textContent = t('liked_you');
+
+// Filters
+var filterBtns = document.querySelectorAll('.filter-btn');
+if(filterBtns[0]) filterBtns[0].textContent = t('all');
+if(filterBtns[1]) filterBtns[1].textContent = t('love');
+if(filterBtns[2]) filterBtns[2].textContent = t('friendship');
+if(filterBtns[3]) filterBtns[3].textContent = t('business');
+
+// Footer
+document.querySelector('.app-footer p').innerHTML = t('footer_quote') + ' · ' + t('footer_copy');
+
+window._lang = MATCH_LANG;
+
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/match/sw.js").then(function(r){console.log("SW registered")}).catch(function(e){console.log("SW failed:",e)})}</script>
 </body>
