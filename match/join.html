@@ -97,6 +97,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .pwd-bar{height:100%;width:0;transition:all .3s;border-radius:2px}
 @media(max-width:600px){.page{padding:20px 16px 60px}.join-card{padding:24px 18px}.form-row{grid-template-columns:1fr}.looking-for-grid{grid-template-columns:1fr}}
 </style>
+<script src="/match/i18n.js"></script>
 </head>
 <body>
 <div class="page">
@@ -277,6 +278,141 @@ function showSuccess(name,code){document.getElementById('step5').style.display='
 async function resendConfirmation(){var email=document.getElementById('s5-email').value||document.getElementById('success-email').textContent;if(!email||!supaClient)return;try{await supaClient.auth.resend({type:'signup',email:email});alert('Confirmation email resent to '+email);}catch(e){alert('Failed to resend: '+e.message);}}
 function showMsg(text,type){var el=document.getElementById('msg-box');el.textContent=text;el.className='msg show '+type;window.scrollTo(0,0);}
 function clearMsg(){var el=document.getElementById('msg-box');el.className='msg';}
+</script>
+<script>
+
+// Add language switcher to header
+var langDiv = document.createElement('div');
+langDiv.innerHTML = getLangSwitcher();
+document.querySelector('.join-header').appendChild(langDiv.firstChild);
+
+// Translate join page
+function translateJoin() {
+  // Back link
+  var backLink = document.querySelector('.back-link');
+  if (backLink) backLink.textContent = t('back_to_occultics');
+  
+  // Progress labels
+  var labels = [t('step1of5'), t('step2of5'), t('step3of5'), t('step4of5'), t('step5of5')];
+  
+  // Step 1
+  document.querySelector('#step1 .card-eyebrow').textContent = t('step1_eyebrow');
+  document.querySelector('#step1 .card-title').textContent = t('step1_title');
+  document.querySelector('#step1 .card-sub').textContent = t('step1_sub');
+  document.querySelector('#s1-name').placeholder = t('first_name_ph');
+  document.querySelector('label[for="s1-name"]') || document.querySelectorAll('#step1 label')[0];
+  var step1Labels = document.querySelectorAll('#step1 label');
+  if(step1Labels[0]) step1Labels[0].textContent = t('first_name');
+  if(step1Labels[1]) step1Labels[1].textContent = t('date_of_birth');
+  if(step1Labels[2]) step1Labels[2].innerHTML = t('birth_time') + ' <span style="color:rgba(136,146,164,0.5);font-size:9px">' + t('optional') + '</span>';
+  if(step1Labels[3]) step1Labels[3].textContent = t('gender');
+  var genderOpts = document.querySelectorAll('#s1-gender option');
+  if(genderOpts[0]) genderOpts[0].textContent = t('gender_select');
+  if(genderOpts[1]) genderOpts[1].textContent = t('gender_female');
+  if(genderOpts[2]) genderOpts[2].textContent = t('gender_male');
+  if(genderOpts[3]) genderOpts[3].textContent = t('gender_other');
+  document.querySelector('.code-preview-label').textContent = t('your_pyth_code');
+  document.querySelector('.code-preview-sub').textContent = t('code_sub');
+  document.querySelector('#step1 .btn-next').textContent = t('continue');
+  
+  // Step 2
+  document.querySelector('#step2 .card-eyebrow').textContent = t('step2_eyebrow');
+  document.querySelector('#step2 .card-title').textContent = t('step2_title');
+  document.querySelector('#step2 .card-sub').textContent = t('step2_sub');
+  var lfLabels = document.querySelectorAll('.lf-label');
+  var lfSubs = document.querySelectorAll('.lf-sub');
+  if(lfLabels[0]) lfLabels[0].textContent = t('love');
+  if(lfLabels[1]) lfLabels[1].textContent = t('friendship');
+  if(lfLabels[2]) lfLabels[2].textContent = t('business');
+  if(lfSubs[0]) lfSubs[0].textContent = t('love_sub');
+  if(lfSubs[1]) lfSubs[1].textContent = t('friendship_sub');
+  if(lfSubs[2]) lfSubs[2].textContent = t('business_sub');
+  var step2Labels = document.querySelectorAll('#step2 label');
+  if(step2Labels[0]) step2Labels[0].innerHTML = t('short_bio') + ' <span style="color:rgba(136,146,164,0.5);font-size:9px">' + t('optional') + '</span>';
+  document.querySelector('#s2-bio').placeholder = t('bio_placeholder');
+  document.querySelector('#step2 .btn-next').textContent = t('continue');
+  document.querySelector('#step2 .btn-back').textContent = t('back');
+  
+  // Step 3
+  document.querySelector('#step3 .card-eyebrow').textContent = t('step3_eyebrow');
+  document.querySelector('#step3 .card-title').textContent = t('step3_title');
+  document.querySelector('#step3 .card-sub').textContent = t('step3_sub');
+  document.querySelector('.photo-upload-text').textContent = t('tap_upload');
+  document.querySelector('.photo-upload-hint').textContent = t('upload_hint');
+  document.querySelector('#step3 .btn-next').textContent = t('continue');
+  var step3Backs = document.querySelectorAll('#step3 .btn-back');
+  if(step3Backs[0]) step3Backs[0].textContent = t('back');
+  if(step3Backs[1]) step3Backs[1].textContent = t('skip_for_now');
+  
+  // Step 4
+  document.querySelector('#step4 .card-eyebrow').textContent = t('step4_eyebrow');
+  document.querySelector('#step4 .card-title').textContent = t('step4_title');
+  document.querySelector('#step4 .card-sub').textContent = t('step4_sub');
+  var features = document.querySelectorAll('.payment-feature');
+  if(features[0]) features[0].innerHTML = '<span>✦</span> ' + t('feature_1');
+  if(features[1]) features[1].innerHTML = '<span>✦</span> ' + t('feature_2');
+  if(features[2]) features[2].innerHTML = '<span>✦</span> ' + t('feature_3');
+  if(features[3]) features[3].innerHTML = '<span>✦</span> ' + t('feature_4');
+  var payLabels = document.querySelectorAll('.payment-label');
+  var payValues = document.querySelectorAll('.payment-value');
+  if(payLabels[0]) payLabels[0].textContent = t('payment_label');
+  if(payValues[0]) payValues[0].textContent = t('payment_monthly');
+  if(payLabels[1]) payLabels[1].textContent = t('payment_first100');
+  if(payLabels[2]) payLabels[2].textContent = t('payment_total');
+  var step4Labels = document.querySelectorAll('#step4 label');
+  if(step4Labels[0]) step4Labels[0].textContent = t('email');
+  document.querySelector('#s4-email').placeholder = t('email_ph');
+  document.querySelector('#pay-btn').textContent = t('activate_btn');
+  document.querySelector('.payment-guarantee').innerHTML = t('secure_payment');
+  document.querySelector('#step4 .btn-back').textContent = t('back');
+  
+  // Step 5
+  document.querySelector('#step5 .card-eyebrow').textContent = t('step5_eyebrow');
+  document.querySelector('#step5 .card-title').textContent = t('step5_title');
+  document.querySelector('#step5 .card-sub').textContent = t('step5_sub');
+  var step5Labels = document.querySelectorAll('#step5 label');
+  if(step5Labels[0]) step5Labels[0].textContent = t('email');
+  if(step5Labels[1]) step5Labels[1].textContent = t('password');
+  document.querySelector('#s5-pwd').placeholder = t('password_ph');
+  document.querySelector('#create-btn').textContent = t('create_btn');
+  
+  // Success screen
+  document.querySelector('.success-title').textContent = t('check_email');
+  document.querySelector('.btn-dashboard').textContent = t('confirmed_signin');
+  
+  // Update progress label
+  document.getElementById('prog-label').textContent = labels[currentStep - 1];
+  
+  // Override updateProgress to use translated labels
+  var origUpdateProgress = updateProgress;
+  updateProgress = function(n) {
+    for(var i=1;i<=totalSteps;i++){var el=document.getElementById('prog'+i);el.className='prog-step'+(i<n?' done':i===n?' active':'');}
+    document.getElementById('prog-label').textContent = labels[n-1];
+  };
+  
+  // Override showMsg to use translated validation messages
+  var origGoStep2 = goStep2;
+  goStep2 = function() {
+    var name = document.getElementById('s1-name').value.trim();
+    var dob = document.getElementById('s1-dob').value;
+    var gender = document.getElementById('s1-gender').value;
+    if(!name){showMsg(t('enter_name'),'error');return}
+    if(!dob){showMsg(t('enter_dob'),'error');return}
+    if(!gender){showMsg(t('select_gender'),'error');return}
+    goStep(2);
+  };
+  var origGoStep3 = goStep3;
+  goStep3 = function() {
+    if(selectedLF.length===0){showMsg(t('select_one'),'error');return}
+    goStep(3);
+  };
+}
+
+// Store lang for profile creation
+window._lang = MATCH_LANG;
+
+translateJoin();
+
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/match/sw.js").then(function(r){console.log("SW registered")}).catch(function(e){console.log("SW failed:",e)})}</script>
 </body>
