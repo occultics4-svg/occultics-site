@@ -273,7 +273,7 @@ function setFilter(f,el){
 // ---- DISCOVER (like/pass) ----
 async function loadDiscover(){
   var container=document.getElementById('discover-container');
-  container.innerHTML='<div class="loading-spinner">Finding people for you...</div>';
+  container.innerHTML='<div class="loading-spinner">'+t('loading')+'</div>';
 
   // Get pre-calculated scores
   var q=sb.from('compatibility_scores').select('*, profiles!compatibility_scores_user_b_fkey(*)').eq('user_a',myUserId).order('score',{ascending:false}).range(currentPage*PAGE_SIZE,(currentPage+1)*PAGE_SIZE-1);
@@ -284,7 +284,7 @@ async function loadDiscover(){
     // Fallback: load profiles directly if no scores yet
     var profileRes=await sb.from('profiles').select('*').neq('user_id',myUserId).range(0,PAGE_SIZE-1);
     if(!profileRes.data||!profileRes.data.length){
-      container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No one here yet</div><div class="empty-sub">You are among the first members. New people are joining every day. Check back soon!</div></div>';
+      container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">'+t('no_one_yet')+'</div><div class="empty-sub">'+t('no_one_sub')+'</div></div>';
       return;
     }
     // Use fallback with client-side scoring
@@ -595,7 +595,7 @@ function clientScore(them){
 function showDiscoverCard(){
   var container=document.getElementById('discover-container');
   if(discoverIdx>=discoverQueue.length){
-    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">You\'ve seen everyone</div><div class="empty-sub">Check back later for new members, or switch to the Matches tab to see your connections.</div></div>';
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">'+t('seen_everyone')+'</div><div class="empty-sub">'+t('seen_everyone_sub')+'</div></div>';
     return;
   }
   var p=discoverQueue[discoverIdx];
@@ -668,7 +668,7 @@ async function loadMatches(){
 
   var res=await sb.from('matches').select('*').or('user_a.eq.'+myUserId+',user_b.eq.'+myUserId);
   if(!res.data||!res.data.length){
-    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">No matches yet</div><div class="empty-sub">Keep discovering people. When someone likes you back, they\'ll appear here.</div></div>';
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">'+t('no_matches')+'</div><div class="empty-sub">'+t('no_matches_sub')+'</div></div>';
     return;
   }
 
@@ -707,7 +707,7 @@ async function loadLikedYou(){
 
   var res=await sb.from('likes').select('from_user').eq('to_user',myUserId).eq('action','like');
   if(!res.data||!res.data.length){
-    container.innerHTML='<div class="empty-state"><div class="empty-icon">♥</div><div class="empty-title">No likes yet</div><div class="empty-sub">When someone likes your profile, they\'ll appear here.</div></div>';
+    container.innerHTML='<div class="empty-state"><div class="empty-icon">♥</div><div class="empty-title">'+t('no_likes')+'</div><div class="empty-sub">'+t('no_likes_sub')+'</div></div>';
     return;
   }
 
@@ -781,7 +781,7 @@ document.getElementById('compat-modal').addEventListener('click',function(e){if(
 
 // ---- INIT ----
 async function init(){
-  if(!sb){document.getElementById('discover-container').innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">Please sign in</div><div class="empty-sub"><a href="/match/login.html" style="color:var(--crystal)">Sign in to Occultics Match →</a></div></div>';return}
+  if(!sb){document.getElementById('discover-container').innerHTML='<div class="empty-state"><div class="empty-icon">✦</div><div class="empty-title">'+t('please_signin')+'</div><div class="empty-sub"><a href="/match/login.html" style="color:var(--crystal)">'+t('signin_link')+'</a></div></div>';return}
   var session=await sb.auth.getSession();
   if(!session.data.session){window.location.href='/match/login.html';return}
   myUserId=session.data.session.user.id;
