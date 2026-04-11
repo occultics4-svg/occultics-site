@@ -118,7 +118,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <div class="card-title">Your Numbers</div>
     <div class="card-sub">Your birth date is all we need to calculate your unique Pythagorean Code.</div>
     <div class="form-row"><div class="form-group"><label>First Name</label><input type="text" id="s1-name" placeholder="Your first name" oninput="tryShowCode()"></div><div class="form-group"><label>Date of Birth</label><input type="date" id="s1-dob" onchange="tryShowCode()"></div></div>
-    <div class="form-row"><div class="form-group"><label>Birth Time <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label><input type="time" id="s1-time" value="12:00"></div><div class="form-group"><label>Gender</label><select id="s1-gender"><option value="">Select...</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div></div>
+    <div class="form-row"><div class="form-group"><label>Birth Time <span style="color:rgba(136,146,164,0.5);font-size:9px">(optional)</span></label><input type="time" id="s1-time" value=""></div><div class="form-group"><label>Gender</label><select id="s1-gender"><option value="">Select...</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select></div></div>
     <div class="code-preview-box" id="code-preview"><div class="code-preview-label">Your Pythagorean Code</div><div class="code-preview-value" id="code-preview-val">— · — · —</div><div class="code-preview-sub">Biorhythm · Generational · Life Path</div></div>
     <button class="btn-next" onclick="goStep2()">Continue →</button>
   </div>
@@ -215,7 +215,7 @@ async function handleMatchPayment(){
   if(!_codes){showMsg('Please go back and enter your birth date','error');return}
   var name=document.getElementById('s1-name').value.trim();
   var dob=document.getElementById('s1-dob').value;
-  var time=document.getElementById('s1-time').value||'12:00';
+  var time=document.getElementById('s1-time').value||'';
   var gender=document.getElementById('s1-gender').value;
   var btn=document.getElementById('pay-btn');
   btn.textContent='Redirecting to checkout...';btn.disabled=true;
@@ -248,7 +248,7 @@ async function createAccount(){
   var pwd=document.getElementById('s5-pwd').value;
   var name=document.getElementById('s1-name').value.trim();
   var dob=document.getElementById('s1-dob').value;
-  var time=document.getElementById('s1-time').value||'12:00';
+  var time=document.getElementById('s1-time').value||'';
   var gender=document.getElementById('s1-gender').value;
   var bio=document.getElementById('s2-bio').value.trim();
   if(!email){showMsg('Please enter your email','error');return}
