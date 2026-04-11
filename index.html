@@ -475,7 +475,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-size:11px;color:#8892a4;font-weight:500;font-family:'Montserrat',sans-serif;">Birth Time</label>
-          <input type="time" id="lcm-time" value="12:00" style="padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.2);border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;">
+          <input type="time" id="lcm-time" value="" style="padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.2);border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;">
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-size:11px;color:#8892a4;font-weight:500;font-family:'Montserrat',sans-serif;">Gender</label>
@@ -520,7 +520,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-size:11px;color:#8892a4;font-weight:500;font-family:'Montserrat',sans-serif;">Birth Time</label>
-          <input type="time" id="lca-time" value="12:00" style="padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.2);border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;">
+          <input type="time" id="lca-time" value="" style="padding:10px 12px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.2);border-radius:7px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;">
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-size:11px;color:#8892a4;font-weight:500;font-family:'Montserrat',sans-serif;">Gender</label>
@@ -558,7 +558,7 @@ function getLang(){
 async function handleLCMPayment(){
   var name=document.getElementById('lcm-name').value.trim();
   var dob=document.getElementById('lcm-dob').value;
-  var time=document.getElementById('lcm-time').value||'12:00';
+  var time=document.getElementById('lcm-time').value||'';
   var gender=document.getElementById('lcm-gender').value;
   var email=document.getElementById('lcm-email').value.trim();
   if(!name||!dob||!email){alert('Please fill in your name, date of birth, and email.');return;}
@@ -581,7 +581,7 @@ async function handleLCMPayment(){
 async function handleLCAPayment(){
   var name=document.getElementById('lca-name').value.trim();
   var dob=document.getElementById('lca-dob').value;
-  var time=document.getElementById('lca-time').value||'12:00';
+  var time=document.getElementById('lca-time').value||'';
   var gender=document.getElementById('lca-gender').value;
   var email=document.getElementById('lca-email').value.trim();
   if(!name||!dob||!email){alert('Please fill in your name, date of birth, and email.');return;}
