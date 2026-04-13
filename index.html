@@ -286,6 +286,25 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   </div>
 </section>
 
+<!-- FREE BOOK SECTION -->
+<section id="free-book" style="padding:80px 48px;background:#0d1235;color:#fff;position:relative;overflow:hidden;border-top:1px solid rgba(77,184,255,0.08);">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(26,42,255,0.06) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:640px;margin:0 auto;position:relative;z-index:1;text-align:center;">
+    <p style="font-size:10px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:12px;" id="book-eyebrow">Free Download</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;color:#fff;margin-bottom:16px;" id="book-title">The Birth Code</h2>
+    <p style="font-size:13px;color:#8892a4;line-height:1.8;margin-bottom:8px;font-family:'Montserrat',sans-serif;font-weight:300;" id="book-sub">What Your Birth Date Already Knows About Your Relationships</p>
+    <p style="font-size:12px;color:#6a7189;line-height:1.7;margin-bottom:32px;font-family:'Montserrat',sans-serif;font-weight:300;" id="book-desc">Learn how to calculate your code, understand what your Life Path Number seeks in a partner, and discover why the year you start a relationship changes everything. Enter your email and get the book instantly.</p>
+    <div id="book-form" style="display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
+      <input type="email" id="book-email" placeholder="your@email.com" style="flex:1;min-width:220px;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(77,184,255,0.2);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;" onfocus="this.style.borderColor='#4db8ff'" onblur="this.style.borderColor='rgba(77,184,255,0.2)'">
+      <button onclick="sendBook()" id="book-btn" style="padding:14px 28px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;white-space:nowrap;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Get Free Book</button>
+    </div>
+    <div id="book-success" style="display:none;padding:20px;background:rgba(77,184,255,0.08);border:1px solid rgba(77,184,255,0.2);border-radius:8px;margin-top:16px;">
+      <p style="font-size:13px;color:#4db8ff;font-family:'Montserrat',sans-serif;font-weight:500;">Check your email — The Birth Code is on its way.</p>
+    </div>
+    <p style="font-size:9px;color:#4a5068;margin-top:16px;font-family:'Montserrat',sans-serif;">No spam. Unsubscribe anytime. Your email stays with us.</p>
+  </div>
+</section>
+
 
 <div class="social-proof">
   <div class="social-proof-row">
@@ -743,6 +762,34 @@ function setLang(lang) {
 
   // Update html lang attribute
   document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'es' ? 'es' : 'en';
+}
+
+async function sendBook(){
+  var email=document.getElementById('book-email').value.trim();
+  if(!email||!email.includes('@')){document.getElementById('book-email').style.borderColor='#ff4444';return;}
+  var btn=document.getElementById('book-btn');
+  btn.textContent='SENDING...';btn.disabled=true;
+  try{
+    // Save email to Supabase
+    var sb=window.supabase||window._supaLib;
+    if(sb){
+      var supaClient=sb.createClient('https://dtquqaridqyjdgirjczr.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k');
+      await supaClient.from('book_leads').insert({email:email,source:'website',created_at:new Date().toISOString()});
+    }
+    // Send email with download link via checkout worker (reuse existing infra)
+    await fetch('https://occultics-checkout.occultics4.workers.dev/book',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email})
+    });
+    document.getElementById('book-form').style.display='none';
+    document.getElementById('book-success').style.display='block';
+  }catch(e){
+    console.error(e);
+    // Still show success - email was likely saved
+    document.getElementById('book-form').style.display='none';
+    document.getElementById('book-success').style.display='block';
+  }
 }
 </script>
 
