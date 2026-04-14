@@ -177,9 +177,9 @@ nav{display:flex;gap:8px;align-items:center}.lang-toggle{display:flex;gap:4px;al
 .method-block-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--blue-royal);line-height:1;margin-bottom:12px}
 .method-block-title{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:8px;letter-spacing:.5px}
 .method-block-text{font-size:12px;color:var(--text-mid);line-height:1.75;font-weight:300}
-.method-quote{grid-column:1/-1;padding:32px;border-radius:14px;background:var(--blue-deep);text-align:center}
-.method-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.7);line-height:1.6}
-.method-quote-attr{font-size:10px;letter-spacing:2px;color:rgba(77,184,255,0.6);text-transform:uppercase;margin-top:12px}
+.method-quote{grid-column:1/-1;padding:32px;border-radius:14px;background:rgba(26,42,255,0.08);text-align:center}
+.method-quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--navy);line-height:1.6}
+.method-quote-attr{font-size:10px;letter-spacing:2px;color:var(--royal);text-transform:uppercase;margin-top:12px}
 .final-cta{padding:80px 48px;text-align:center}.final-sub{font-size:14px;color:var(--text-mid);max-width:460px;margin:0 auto 32px;line-height:1.7;font-weight:300}
 footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;justify-content:space-between;align-items:center}.footer-copy{font-size:11px;color:var(--gray-mid)}.footer-disclaimer{font-size:10px;color:var(--gray-mid);max-width:380px;text-align:right;line-height:1.5}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,14,46,.65);backdrop-filter:blur(8px);z-index:1000;align-items:center;justify-content:center;padding:20px}.modal-overlay.active{display:flex}
@@ -264,7 +264,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 
 <section class="hero">
   <svg class="hero-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
-  <p class="hero-eyebrow" id="eyebrow">Ancient Wisdom. Modern Precision. — Powered by 350,000+ Words of Research</p>
+  <p class="hero-eyebrow" id="eyebrow">Ancient Wisdom. Modern Precision. — Powered by 700,000+ Words of Research</p>
   <h1 class="hero-title" id="hero-title">Every Relationship Has a<br><em>Mathematical Signature.</em></h1>
   <p class="hero-sub" id="hero-sub">Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.</p>
   <p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages</p>
@@ -298,7 +298,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <p style="font-size:12px;color:#6a7189;line-height:1.7;margin-bottom:32px;font-family:'Montserrat',sans-serif;font-weight:300;" id="book-desc">Learn how to calculate your code, understand what your Life Path Number seeks in a partner, and discover why the year you start a relationship changes everything. Enter your email and get the book instantly.</p>
     <div id="book-form" style="display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
       <input type="email" id="book-email" placeholder="your@email.com" style="flex:1;min-width:220px;padding:14px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(77,184,255,0.2);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;" onfocus="this.style.borderColor='#4db8ff'" onblur="this.style.borderColor='rgba(77,184,255,0.2)'">
-      <button onclick="sendBook()" id="book-btn" style="padding:14px 28px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;white-space:nowrap;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Get Free Book</button>
+      <button onclick="sendBook()" id="book-btn" style="padding:14px 28px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;white-space:nowrap;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Get Free E-Book</button>
     </div>
     <div id="book-success" style="display:none;padding:20px;background:rgba(77,184,255,0.08);border:1px solid rgba(77,184,255,0.2);border-radius:8px;margin-top:16px;">
       <p style="font-size:13px;color:#4db8ff;font-family:'Montserrat',sans-serif;font-weight:500;">Check your email — The Birth Code is on its way.</p>
@@ -310,7 +310,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 
 <div class="social-proof">
   <div class="social-proof-row">
-    <div class="social-proof-item"><div class="social-proof-number">350K+</div><div class="social-proof-label" id="sp-1">Words of Research</div></div>
+    <div class="social-proof-item"><div class="social-proof-number">700K+</div><div class="social-proof-label" id="sp-1">Words of Research</div></div>
     <div class="social-proof-item"><div class="social-proof-number">81</div><div class="social-proof-label" id="sp-2">Compatibility Codes</div></div>
     <div class="social-proof-item"><div class="social-proof-number">2,500</div><div class="social-proof-label" id="sp-3">Years of Tradition</div></div>
 
@@ -318,7 +318,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 </div>
 
 
-<section id="life-code-alignment" style="padding:80px 48px;background:#0a0e2e;color:#fff;position:relative;overflow:hidden;">
+<section id="life-code-alignment" style="padding:80px 48px;background:linear-gradient(180deg,#141a45 0%,#161d4a 50%,#111640 100%);color:#fff;position:relative;overflow:hidden;">
   <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(26,42,255,0.07) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="max-width:860px;margin:0 auto;position:relative;z-index:1;">
     <p style="font-size:10px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;text-align:center;margin-bottom:16px;">Occultics Publishing</p>
@@ -367,7 +367,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       </div>
     </div>
     <div style="text-align:center;margin-bottom:48px;padding:32px 0;border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08);">
-      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.3);line-height:1.6;max-width:500px;margin:0 auto;">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:500px;margin:0 auto;">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</p>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:860px;margin:0 auto 40px;">
       <div style="padding:28px 24px;border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);text-align:center;">
@@ -403,7 +403,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       </div>
     </div>
     <p style="text-align:center;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">Secure payment · Private profile within 24hrs · Life Code Map credit applied toward full program</p>
-    <p style="text-align:center;margin-top:12px;"><span onclick="openLCMModal()" style="color:#1a2aff;font-size:11px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;font-weight:500;">Try Session 1 only — Life Code Map · $297</span></p>
+    <p style="text-align:center;margin-top:12px;"><span onclick="openLCMModal()" style="color:#4db8ff;font-size:12px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;font-weight:600;">Try Session 1 only — Life Code Map · $297</span></p>
   </div>
 </section>
 
@@ -413,7 +413,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   <h2 class="section-title" id="hiw-title">Ancient Wisdom. Modern Precision.</h2>
   <div class="step-list">
     <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title" id="s1t">Enter your birth date</div><div class="step-desc" id="s1d">Your date of birth encodes three independent numbers — your biorhythm, your generational frequency, and your life path. These three numbers contain everything. That is all we need.</div></div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Your code is computed</div><div class="step-desc" id="s2d">Your Pythagorean code is cross-referenced against 350,000+ words of proprietary research — producing a session specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title" id="s2t">Your code is computed</div><div class="step-desc" id="s2d">Your Pythagorean code is cross-referenced against 700,000+ words of proprietary research — producing a session specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.</div></div></div>
     <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title" id="s3t">Your private profile is ready</div><div class="step-desc" id="s3d">Your session is delivered to a private profile page that belongs only to you. Not a horoscope. Not a personality quiz. A mathematically precise portrait of who you are — and why you have always been this way.</div></div></div>
   </div>
 </section>
@@ -467,7 +467,7 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 
 <section class="final-cta">
   <h2 class="section-title" id="final-title">Two Birth Dates. One Mathematical Truth.</h2>
-  <p class="final-sub" id="final-sub">Seven sessions. Fourteen days. The most complete numerological experience that exists. Generated from your exact birth date and delivered to your private profile.</p>
+  <p class="final-sub" id="final-sub"></p>
   <button class="hero-cta" onclick="window.location='https://occultics.ai/match/join'" id="final-btn">Join Occultics Match — $29/month</button>
   <div class="hero-price" id="final-price">Secure payment · Instant delivery · 100% satisfaction guarantee</div>
 </section>
@@ -561,7 +561,7 @@ var translations = {
     'nav-match': 'Match',
     'nav-blog': 'Blog',
     'nav-about': 'About',
-    eyebrow: 'Ancient Wisdom. Modern Precision. — Powered by 350,000+ Words of Research',
+    eyebrow: 'Ancient Wisdom. Modern Precision. — Powered by 700,000+ Words of Research',
     'hero-title': 'Every Relationship Has a<br><em>Mathematical Signature.</em>',
     'hero-sub': 'Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.',
     'hero-anchor': '✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages',
@@ -575,7 +575,7 @@ var translations = {
     's1t': 'Enter your birth date',
     's1d': 'Your date of birth encodes three independent numbers — your biorhythm, your generational frequency, and your life path. These three numbers contain everything. That is all we need.',
     's2t': 'Your code is computed',
-    's2d': 'Your Pythagorean code is cross-referenced against 350,000+ words of proprietary research — producing a session specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.',
+    's2d': 'Your Pythagorean code is cross-referenced against 700,000+ words of proprietary research — producing a session specific to your exact numbers. Your squares, trines, pyramid, life cycles, and personal year. No two birth dates are identical.',
     's3t': 'Your private profile is ready',
     's3d': 'Your session is delivered to a private profile page that belongs only to you. Not a horoscope. Not a personality quiz. A mathematically precise portrait of who you are — and why you have always been this way.',
     'wyg-eyebrow': 'What The Life Code Alignment and Compatibility Reveal',
@@ -612,7 +612,7 @@ var translations = {
     'match-m2-label': 'Friend Match',
     'match-m3-label': 'Business Match',
     'final-title': 'Two Birth Dates. One Mathematical Truth.',
-    'final-sub': 'Seven sessions. Fourteen days. The most complete numerological experience that exists. Generated from your exact birth date and delivered to your private profile.',
+    'final-sub': '',
     'final-btn': 'Begin The Life Code Alignment — $2,222',
     'final-price': 'Secure payment · Instant delivery · 100% satisfaction guarantee',
     disclaimer: 'For informational and entertainment purposes only. Not a substitute for professional advice.'
@@ -623,7 +623,7 @@ var translations = {
     'nav-match': 'Match',
     'nav-blog': 'Blog',
     'nav-about': 'Sobre',
-    eyebrow: 'Sabiduría Antigua. Precisión Moderna. — Basado en más de 350,000 Palabras de Investigación',
+    eyebrow: 'Sabiduría Antigua. Precisión Moderna. — Basado en más de 700,000 Palabras de Investigación',
     'hero-title': 'Cada Relación Tiene una<br><em>Firma Matemática.</em>',
     'hero-sub': 'Dos fechas de nacimiento contienen más información sobre tu compatibilidad que años de conversación. La numerología pitagórica ha mapeado la conexión humana durante 2,500 años. Hemos digitalizado 700,000 palabras de esa investigación en un motor de compatibilidad preciso.',
     'hero-anchor': '✦ <strong>81</strong> códigos de compatibilidad matemáticamente distintos ✦ <strong>10</strong> secciones analíticas ✦ <strong>3</strong> idiomas',
@@ -637,7 +637,7 @@ var translations = {
     's1t': 'Ingresa tu fecha de nacimiento',
     's1d': 'Tu fecha de nacimiento codifica tres números independientes — tu biorritmo, tu frecuencia generacional y tu camino de vida. Estos tres números lo contienen todo. Es todo lo que necesitamos.',
     's2t': 'Tu código es calculado',
-    's2d': 'Tu código pitagórico se cruza con más de 350,000 palabras de investigación propietaria — produciendo una sesión específica para tus números exactos. Tus cuadrados, trígonos, pirámide, ciclos de vida y año personal. Dos fechas de nacimiento nunca son idénticas.',
+    's2d': 'Tu código pitagórico se cruza con más de 700,000 palabras de investigación propietaria — produciendo una sesión específica para tus números exactos. Tus cuadrados, trígonos, pirámide, ciclos de vida y año personal. Dos fechas de nacimiento nunca son idénticas.',
     's3t': 'Tu perfil privado está listo',
     's3d': 'Tu sesión se entrega en una página de perfil privada que te pertenece solo a ti. No es un horóscopo. No es un test de personalidad. Un retrato matemáticamente preciso de quién eres — y por qué siempre has sido así.',
     'wyg-eyebrow': 'Lo Que Revela El Life Code Alignment y La Compatibilidad',
@@ -685,7 +685,7 @@ var translations = {
     'nav-match': 'マッチ',
     'nav-blog': 'ブログ',
     'nav-about': '概要',
-    eyebrow: '古代の知恵。現代の精度。— 350,000語以上の研究に基づく',
+    eyebrow: '古代の知恵。現代の精度。— 700,000語以上の研究に基づく',
     'hero-title': 'すべての関係には<br><em>数学的シグネチャーがある。</em>',
     'hero-sub': '2つの生年月日には、何年もの会話よりも多くの相性情報が含まれています。ピタゴラス数秘術は2,500年間、人間のつながりをマッピングしてきました。私たちはその研究の700,000語を精密な相性エンジンにデジタル化しました。',
     'hero-anchor': '✦ <strong>81</strong>の数学的に異なる相性コード ✦ <strong>10</strong>の分析セクション ✦ <strong>3</strong>言語',
@@ -699,7 +699,7 @@ var translations = {
     's1t': '生年月日を入力',
     's1d': 'あなたの生年月日は3つの独立した数字をエンコードしています — バイオリズム、世代の周波数、そしてライフパス。この3つの数字がすべてを含んでいます。必要なのはそれだけです。',
     's2t': 'あなたのコードが計算される',
-    's2d': 'あなたのピタゴラスコードは350,000語以上の独自研究と照合され、あなたの正確な数字に特化したセッションが生成されます。スクエア、トライン、ピラミッド、ライフサイクル、パーソナルイヤー。2つの生年月日が同じになることはありません。',
+    's2d': 'あなたのピタゴラスコードは700,000語以上の独自研究と照合され、あなたの正確な数字に特化したセッションが生成されます。スクエア、トライン、ピラミッド、ライフサイクル、パーソナルイヤー。2つの生年月日が同じになることはありません。',
     's3t': 'プライベートプロフィールが完成',
     's3d': 'あなたのセッションは、あなただけのプライベートプロフィールページに配信されます。星占いではありません。性格診断でもありません。あなたが誰であるか、そしてなぜずっとそうであったかの数学的に正確なポートレートです。',
     'wyg-eyebrow': 'ライフコードアラインメントと相性が明かすもの',
