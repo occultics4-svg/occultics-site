@@ -473,6 +473,60 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 
 </div><!-- end main-site -->
 
+<!-- LIFE CODE MAP MODAL -->
+<div id="modal-lcm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closeLCMModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
+    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Life Code Map</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Your Mathematical Blueprint</div>
+    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">1 session · 30 minutes · Private profile in 24hrs</div>
+    <input id="lcm-name" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lcm-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lcm-dob" type="text" placeholder="Date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lcm-time" type="text" placeholder="Time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <select id="lcm-gender" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+      <option value="">Gender (optional)</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
+    <select id="lcm-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ja">日本語</option>
+    </select>
+    <button onclick="handleLCMPayment()" id="lcm-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Life Code Map — $297</button>
+    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 1 session</div>
+  </div>
+</div>
+
+<!-- LIFE CODE ALIGNMENT MODAL -->
+<div id="modal-lca" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
+    <button onclick="closeLCAModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
+    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Life Code Alignment</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Your Complete Journey</div>
+    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">7 sessions · 14 days · Private profile</div>
+    <input id="lca-name" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lca-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lca-dob" type="text" placeholder="Date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <input id="lca-time" type="text" placeholder="Time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+    <select id="lca-gender" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+      <option value="">Gender (optional)</option>
+      <option value="female">Female</option>
+      <option value="male">Male</option>
+      <option value="other">Other</option>
+    </select>
+    <select id="lca-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ja">日本語</option>
+    </select>
+    <button onclick="handleLCAPayment()" id="lca-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Life Code Alignment — $2,222</button>
+    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 7 sessions</div>
+  </div>
+</div>
+
 <!-- COMPATIBILITY CODE MODAL -->
 <div id="modal-compat" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
   <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
@@ -502,6 +556,62 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 <script>
 function openCompatModal(){document.getElementById('modal-compat').style.display='flex';document.body.style.overflow='hidden';}
 function closeCompatModal(){document.getElementById('modal-compat').style.display='none';document.body.style.overflow='';}
+
+function openLCMModal(){document.getElementById('modal-lcm').style.display='flex';document.body.style.overflow='hidden';}
+function closeLCMModal(){document.getElementById('modal-lcm').style.display='none';document.body.style.overflow='';}
+
+function openLCAModal(){document.getElementById('modal-lca').style.display='flex';document.body.style.overflow='hidden';}
+function closeLCAModal(){document.getElementById('modal-lca').style.display='none';document.body.style.overflow='';}
+
+async function handleLCMPayment(){
+  var name=document.getElementById('lcm-name').value.trim();
+  var email=document.getElementById('lcm-email').value.trim();
+  var dob=document.getElementById('lcm-dob').value.trim();
+  var time=document.getElementById('lcm-time').value.trim();
+  var gender=document.getElementById('lcm-gender').value;
+  var lang=document.getElementById('lcm-lang').value;
+  if(!name){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  if(!dob){alert('Please enter your date of birth.');return;}
+  var btn=document.getElementById('lcm-pay-btn');
+  btn.textContent='Preparing your session...';btn.disabled=true;
+  try{
+    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({type:'life_code_map',email:email,name:name,dob:dob,time:time,gender:gender,lang:lang})
+    });
+    var data=await res.json();
+    if(data.url){window.location.href=data.url;}else{throw new Error(data.error||'Payment error');}
+  }catch(err){
+    alert('Something went wrong: '+err.message);
+    btn.textContent='✦ Life Code Map — $297';btn.disabled=false;
+  }
+}
+
+async function handleLCAPayment(){
+  var name=document.getElementById('lca-name').value.trim();
+  var email=document.getElementById('lca-email').value.trim();
+  var dob=document.getElementById('lca-dob').value.trim();
+  var time=document.getElementById('lca-time').value.trim();
+  var gender=document.getElementById('lca-gender').value;
+  var lang=document.getElementById('lca-lang').value;
+  if(!name){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
+  if(!dob){alert('Please enter your date of birth.');return;}
+  var btn=document.getElementById('lca-pay-btn');
+  btn.textContent='Preparing your session...';btn.disabled=true;
+  try{
+    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({type:'life_code_alignment',email:email,name:name,dob:dob,time:time,gender:gender,lang:lang})
+    });
+    var data=await res.json();
+    if(data.url){window.location.href=data.url;}else{throw new Error(data.error||'Payment error');}
+  }catch(err){
+    alert('Something went wrong: '+err.message);
+    btn.textContent='✦ Life Code Alignment — $2,222';btn.disabled=false;
+  }
+}
 
 async function handleCompatPayment(){
   var name1 = document.getElementById('compat-name1').value.trim();
@@ -589,6 +699,13 @@ var translations = {
     'f4d': 'How each person feels when they enter a connection, what they carry emotionally, and the energy between you before a single word is spoken.',
     'f5t': 'Combined Life Path',
     'f5d': 'When your life paths are added together, the resulting number reveals the mathematical destiny of the relationship itself.',
+    'book-eyebrow': 'Free Download',
+    'book-title': 'The Birth Code',
+    'book-sub': 'What Your Birth Date Already Knows About Your Relationships',
+    'book-desc': 'Learn how to calculate your code, understand what your Life Path Number seeks in a partner, and discover why the year you start a relationship changes everything. Enter your email and get the book instantly.',
+    'book-btn': 'Get Free E-Book',
+    'final-title': 'Calculate Your Code.',
+    'final-btn': 'Join Occultics Match — $29/month',
     'f6t': 'The Year You Are In',
     'f6d': 'Both partners\' personal year numbers for 2026 — what timing means for your connection right now and what the numbers indicate about this specific period.',
     'meth-eyebrow': 'Methodology',
@@ -651,6 +768,13 @@ var translations = {
     'f4d': 'Cómo se siente cada persona cuando entra en una conexión, lo que llevan emocionalmente y la energía entre ustedes antes de que se diga una sola palabra.',
     'f5t': 'Camino de Vida Combinado',
     'f5d': 'Cuando sus caminos de vida se suman, el número resultante revela el destino matemático de la relación misma.',
+    'book-eyebrow': 'Descarga Gratuita',
+    'book-title': 'El Código de Nacimiento',
+    'book-sub': 'Lo que tu fecha de nacimiento ya sabe sobre tus relaciones',
+    'book-desc': 'Aprende a calcular tu código, comprende lo que tu Número de Camino de Vida busca en una pareja y descubre por qué el año en que comienzas una relación lo cambia todo. Ingresa tu email y recibe el libro al instante.',
+    'book-btn': 'E-Book Gratis',
+    'final-title': 'Calcula Tu Código.',
+    'final-btn': 'Únete a Occultics Match — $29/mes',
     'f6t': 'El Año en el Que Estás',
     'f6d': 'Los números del año personal de ambos para 2026 — lo que el tiempo significa para su conexión ahora mismo y lo que los números indican sobre este período específico.',
     'meth-eyebrow': 'Metodología',
@@ -713,6 +837,13 @@ var translations = {
     'f4d': 'つながりに入るときに各人がどう感じるか、感情的に何を持ち運んでいるか、一言も話す前の2人の間のエネルギー。',
     'f5t': '統合されたライフパス',
     'f5d': 'ライフパスを足し合わせると、結果の数字が関係そのものの数学的な運命を明らかにします。',
+    'book-eyebrow': '無料ダウンロード',
+    'book-title': 'バースコード',
+    'book-sub': 'あなたの誕生日がすでに知っている、あなたの人間関係について',
+    'book-desc': 'あなたのコードの計算方法、ライフパスナンバーがパートナーに何を求めるか、そして関係を始める年がなぜすべてを変えるのかを学びましょう。メールアドレスを入力して、すぐに本を受け取りましょう。',
+    'book-btn': '無料E-Bookを入手',
+    'final-title': 'あなたのコードを計算する。',
+    'final-btn': 'Occultics Matchに参加 — $29/月',
     'f6t': 'あなたが今いる年',
     'f6d': '2026年の両パートナーのパーソナルイヤー数 — 今この瞬間のつながりにとってタイミングが意味すること、この特定の期間について数字が示すこと。',
     'meth-eyebrow': '方法論',
