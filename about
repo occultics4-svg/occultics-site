@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Occultics</title>
+<meta name="description" content="Meet Adriana — linguist, researcher, and the founder of Occultics. A personality and compatibility system built from your date of birth.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#1a1a2e;--gray:#8892a4;--bg:#fafbff;--light:#f0f2f8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text)}
+header{padding:20px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(10,14,46,0.06)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
+.logo-name{font-size:14px;letter-spacing:4px;font-weight:700}
+nav a{font-size:11px;letter-spacing:1px;color:var(--gray);text-decoration:none;margin-left:24px;font-weight:500}
+nav a:hover{color:var(--royal)}
+
+.about-layout{max-width:900px;margin:0 auto;padding:80px 24px 60px;display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start}
+.about-photo{width:100%;border-radius:12px;object-fit:cover;aspect-ratio:3/4}
+.about-eyebrow{font-size:10px;letter-spacing:3px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.about-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:6px}
+.about-title{font-size:12px;color:var(--gray);letter-spacing:0.5px;margin-bottom:32px}
+.about-body{font-size:14px;line-height:2;color:#3a3a4e}
+.about-body p{margin-bottom:18px}
+.about-body strong{color:var(--navy);font-weight:600}
+
+.credentials{margin-top:40px;padding-top:32px;border-top:1px solid rgba(10,14,46,0.06)}
+.credentials .cred-label{font-size:10px;letter-spacing:2px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:12px;color:var(--gray);line-height:1.8}
+.cred-grid span{padding-left:12px;border-left:2px solid rgba(26,42,255,0.15)}
+
+.cta-strip{max-width:900px;margin:0 auto;padding:0 24px 80px}
+.cta-strip-inner{text-align:center;padding:48px 32px;background:var(--navy);border-radius:12px}
+.cta-strip-inner h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:300;margin-bottom:12px}
+.cta-strip-inner p{font-size:13px;color:var(--gray);margin-bottom:20px}
+.cta-strip-inner a{display:inline-block;padding:14px 32px;background:var(--royal);color:#fff;text-decoration:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:0 8px 8px}
+.cta-strip-inner a:hover{background:#2a3aff}
+.cta-strip-inner a.outline{background:transparent;border:1px solid rgba(77,184,255,0.3);color:var(--crystal)}
+
+footer{padding:32px 48px;text-align:center;border-top:1px solid rgba(10,14,46,0.06);font-size:10px;color:var(--gray)}
+footer a{color:var(--royal);text-decoration:none}
+
+@media(max-width:768px){
+  header{padding:16px 20px}
+  .about-layout{grid-template-columns:1fr;gap:32px;padding:48px 20px 40px}
+  .about-photo{max-width:240px;margin:0 auto}
+  .cred-grid{grid-template-columns:1fr}
+  .cta-strip{padding:0 20px 60px}
+  footer{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo"><div class="logo-name">OCCULTICS</div></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/match/join">Match</a>
+    <a href="/blog/">Blog</a>
+    <a href="/about.html">About</a>
+  </nav>
+</header>
+
+<div class="about-layout">
+  <img src="/adriana.jpg" alt="Adriana — Founder of Occultics" class="about-photo">
+  <div>
+    <div class="about-eyebrow">Founder</div>
+    <h1 class="about-name">Adriana</h1>
+    <p class="about-title">Researcher · Founder of Occultics Publishing</p>
+    
+    <div class="about-body">
+      <p>Occultics is a publishing house focused on psychology, human behaviour, and the patterns encoded in our date of birth that shape who we are and how we connect.</p>
+
+      <p>My background is in language and pedagogy. I've spent years studying how humans communicate, how we form connections, and how patterns in behaviour mirror patterns in life. That work led me to a question I couldn't let go of: can the mathematics of a birth date predict what a person will pursue in life and how two people will connect?</p>
+
+      <p>In 2022, I began researching the Pythagorean system of numerology — not casually, but deeply. I attended a faculty of astrological studies, studied at various numerological schools, and researched over 700,000 words of original material, cross-referencing compatibility patterns, karmic structures, and personality codes derived entirely from dates of birth. What I found was a system that could map the trajectory of a relationship from two birth dates alone — not vaguely, but with mathematical specificity. 81 distinct compatibility codes. Each one telling a different story.</p>
+
+      <p>I also studied NLP, trained as a Yoga Nidra instructor, and completed Deep PEAT certification under Zivorad Slavinski. Each of these practices deepened my understanding of how the mind works — how we form patterns, how we repeat them, and how transformation happens when we finally see what was hidden.</p>
+
+      <p>Occultics is where all of this converges. It is a platform that translates ancient Pythagorean research into a modern compatibility engine and a space for self-acceptance — understanding who you are, with all your strengths and weaknesses, through the mathematics of your birth date. I built the system, digitized the research, and created a web matching platform that connects people based on mathematics, not photographs.</p>
+
+      <p>I believe the right connection changes everything. And I believe it starts with knowing yourself — truly, mathematically, without illusion. The math reveals the structure. But intuition is what brings it to life — that moment when you read your code and feel it resonating with something you always knew but could never articulate. Occultics exists at the intersection of both.</p>
+    </div>
+  </div>
+</div>
+
+<div class="cta-strip">
+  <div class="cta-strip-inner">
+    <h3>The system is live. The math is waiting.</h3>
+    <p>Calculate your code and see who you connect with.</p>
+    <a href="/match/join">Join Match — $29/month</a>
+    <a href="/blog/" class="outline">Read the Blog</a>
+  </div>
+</div>
+
+<footer>
+  © 2026 Occultics · <a href="/">occultics.ai</a>
+</footer>
+
+</body>
+</html>
