@@ -60,44 +60,106 @@ footer a{color:var(--royal);text-decoration:none}
     <a href="/match/join">Match</a>
     <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
+    <span style="margin-left:16px;">
+      <button onclick="setLang('en')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">EN</button>
+      <button onclick="setLang('es')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">ES</button>
+      <button onclick="setLang('ja')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">JA</button>
+    </span>
   </nav>
 </header>
 
 <div class="about-layout">
   <img src="/adriana.jpg" alt="Adriana — Founder of Occultics" class="about-photo">
   <div>
-    <div class="about-eyebrow">Founder</div>
+    <div class="about-eyebrow" id="t-eyebrow">Founder</div>
     <h1 class="about-name">Adriana</h1>
-    <p class="about-title">Researcher · Founder of Occultics Publishing</p>
+    <p class="about-title" id="t-title">Researcher · Founder of Occultics Publishing</p>
     
     <div class="about-body">
-      <p>Occultics is a publishing house focused on psychology, human behaviour, and the patterns encoded in our date of birth that shape who we are and how we connect.</p>
+      <p id="t-p1">Occultics is a publishing house focused on psychology, human behaviour, and the patterns encoded in our date of birth that shape who we are and how we connect.</p>
 
-      <p>My background is in language and pedagogy. I've spent years studying how humans communicate, how we form connections, and how patterns in behaviour mirror patterns in life. That work led me to a question I couldn't let go of: can the mathematics of a birth date predict what a person will pursue in life and how two people will connect?</p>
+      <p id="t-p2">My background is in language and pedagogy. I've spent years studying how humans communicate, how we form connections, and how patterns in behaviour mirror patterns in life. That work led me to a question I couldn't let go of: can the mathematics of a birth date predict what a person will pursue in life and how two people will connect?</p>
 
-      <p>In 2022, I began researching the Pythagorean system of numerology — not casually, but deeply. I attended a faculty of astrological studies, studied at various numerological schools, and researched over 700,000 words of original material, cross-referencing compatibility patterns, karmic structures, and personality codes derived entirely from dates of birth. What I found was a system that could map the trajectory of a relationship from two birth dates alone — not vaguely, but with mathematical specificity. 81 distinct compatibility codes. Each one telling a different story.</p>
+      <p id="t-p3">In 2022, I began researching the Pythagorean system of numerology — not casually, but deeply. I attended a faculty of astrological studies, studied at various numerological schools, and researched over 700,000 words of original material, cross-referencing compatibility patterns, karmic structures, and personality codes derived entirely from dates of birth. What I found was a system that could map the trajectory of a relationship from two birth dates alone — not vaguely, but with mathematical specificity. 81 distinct compatibility codes. Each one telling a different story.</p>
 
-      <p>I also studied NLP, trained as a Yoga Nidra instructor, and completed Deep PEAT certification under Zivorad Slavinski. Each of these practices deepened my understanding of how the mind works — how we form patterns, how we repeat them, and how transformation happens when we finally see what was hidden.</p>
+      <p id="t-p4">I also studied NLP, trained as a Yoga Nidra instructor, and completed Deep PEAT certification under Zivorad Slavinski. Each of these practices deepened my understanding of how the mind works — how we form patterns, how we repeat them, and how transformation happens when we finally see what was hidden.</p>
 
-      <p>Occultics is where all of this converges. It is a platform that translates ancient Pythagorean research into a modern compatibility engine and a space for self-acceptance — understanding who you are, with all your strengths and weaknesses, through the mathematics of your birth date. I built the system, digitized the research, and created a web matching platform that connects people based on mathematics, not photographs.</p>
+      <p id="t-p5">Occultics is where all of this converges. It is a platform that translates ancient Pythagorean research into a modern compatibility engine and a space for self-acceptance — understanding who you are, with all your strengths and weaknesses, through the mathematics of your birth date. I built the system, digitized the research, and created a web matching platform that connects people based on mathematics, not photographs.</p>
 
-      <p>I believe the right connection changes everything. And I believe it starts with knowing yourself — truly, mathematically, without illusion. The math reveals the structure. But intuition is what brings it to life — that moment when you read your code and feel it resonating with something you always knew but could never articulate. Occultics exists at the intersection of both.</p>
+      <p id="t-p6">I believe the right connection changes everything. And I believe it starts with knowing yourself — truly, mathematically, without illusion. The math reveals the structure. But intuition is what brings it to life — that moment when you read your code and feel it resonating with something you always knew but could never articulate. Occultics exists at the intersection of both.</p>
     </div>
   </div>
 </div>
 
 <div class="cta-strip">
   <div class="cta-strip-inner">
-    <h3>The system is live. The math is waiting.</h3>
-    <p>Calculate your code and see who you connect with.</p>
-    <a href="/match/join">Join Match — $29/month</a>
-    <a href="/blog/" class="outline">Read the Blog</a>
+    <h3 id="t-cta-title">The system is live. The math is waiting.</h3>
+    <p id="t-cta-sub">Calculate your code and see who you connect with.</p>
+    <a href="/match/join" id="t-cta-btn">Join Match — $29/month</a>
+    <a href="/blog/" class="outline" id="t-cta-blog">Read the Blog</a>
   </div>
 </div>
 
 <footer>
   © 2026 Occultics · <a href="/">occultics.ai</a>
 </footer>
+
+<script>
+var translations = {
+  en: {
+    't-eyebrow': 'Founder',
+    't-title': 'Researcher · Founder of Occultics Publishing',
+    't-p1': 'Occultics is a publishing house focused on psychology, human behaviour, and the patterns encoded in our date of birth that shape who we are and how we connect.',
+    't-p2': "My background is in language and pedagogy. I've spent years studying how humans communicate, how we form connections, and how patterns in behaviour mirror patterns in life. That work led me to a question I couldn't let go of: can the mathematics of a birth date predict what a person will pursue in life and how two people will connect?",
+    't-p3': 'In 2022, I began researching the Pythagorean system of numerology — not casually, but deeply. I attended a faculty of astrological studies, studied at various numerological schools, and researched over 700,000 words of original material, cross-referencing compatibility patterns, karmic structures, and personality codes derived entirely from dates of birth. What I found was a system that could map the trajectory of a relationship from two birth dates alone — not vaguely, but with mathematical specificity. 81 distinct compatibility codes. Each one telling a different story.',
+    't-p4': 'I also studied NLP, trained as a Yoga Nidra instructor, and completed Deep PEAT certification under Zivorad Slavinski. Each of these practices deepened my understanding of how the mind works — how we form patterns, how we repeat them, and how transformation happens when we finally see what was hidden.',
+    't-p5': 'Occultics is where all of this converges. It is a platform that translates ancient Pythagorean research into a modern compatibility engine and a space for self-acceptance — understanding who you are, with all your strengths and weaknesses, through the mathematics of your birth date. I built the system, digitized the research, and created a web matching platform that connects people based on mathematics, not photographs.',
+    't-p6': "I believe the right connection changes everything. And I believe it starts with knowing yourself — truly, mathematically, without illusion. The math reveals the structure. But intuition is what brings it to life — that moment when you read your code and feel it resonating with something you always knew but could never articulate. Occultics exists at the intersection of both.",
+    't-cta-title': 'The system is live. The math is waiting.',
+    't-cta-sub': 'Calculate your code and see who you connect with.',
+    't-cta-btn': 'Join Match — $29/month',
+    't-cta-blog': 'Read the Blog'
+  },
+  es: {
+    't-eyebrow': 'Fundadora',
+    't-title': 'Investigadora · Fundadora de Occultics Publishing',
+    't-p1': 'Occultics es una editorial enfocada en psicología, comportamiento humano y los patrones codificados en nuestra fecha de nacimiento que definen quiénes somos y cómo nos conectamos.',
+    't-p2': 'Mi formación es en lengua y pedagogía. He dedicado años a estudiar cómo nos comunicamos, cómo formamos conexiones y cómo los patrones de comportamiento reflejan patrones de vida. Ese trabajo me llevó a una pregunta que no podía soltar: ¿pueden las matemáticas de una fecha de nacimiento predecir lo que una persona perseguirá en la vida y cómo dos personas se conectarán?',
+    't-p3': 'En 2022, comencé a investigar el sistema pitagórico de numerología — no de manera casual, sino profunda. Asistí a una facultad de estudios astrológicos, estudié en varias escuelas de numerología e investigué más de 700.000 palabras de material original, cruzando patrones de compatibilidad, estructuras kármicas y códigos de personalidad derivados enteramente de fechas de nacimiento. Lo que encontré fue un sistema capaz de mapear la trayectoria de una relación a partir de dos fechas de nacimiento — no vagamente, sino con especificidad matemática. 81 códigos de compatibilidad distintos. Cada uno contando una historia diferente.',
+    't-p4': 'También estudié PNL, me formé como instructora de Yoga Nidra y completé la certificación Deep PEAT con Zivorad Slavinski. Cada una de estas prácticas profundizó mi comprensión de cómo funciona la mente — cómo formamos patrones, cómo los repetimos y cómo ocurre la transformación cuando finalmente vemos lo que estaba oculto.',
+    't-p5': 'Occultics es donde todo esto converge. Es una plataforma que traduce la investigación pitagórica antigua en un motor de compatibilidad moderno y un espacio de autoaceptación — comprender quién eres, con todas tus fortalezas y debilidades, a través de las matemáticas de tu fecha de nacimiento. Construí el sistema, digitalicé la investigación y creé una plataforma web de emparejamiento que conecta personas basándose en matemáticas, no en fotografías.',
+    't-p6': 'Creo que la conexión correcta lo cambia todo. Y creo que comienza conociéndote a ti mismo — verdaderamente, matemáticamente, sin ilusión. Las matemáticas revelan la estructura. Pero la intuición es lo que le da vida — ese momento en que lees tu código y sientes que resuena con algo que siempre supiste pero nunca pudiste articular. Occultics existe en la intersección de ambos.',
+    't-cta-title': 'El sistema está activo. Las matemáticas esperan.',
+    't-cta-sub': 'Calcula tu código y descubre con quién conectas.',
+    't-cta-btn': 'Únete a Match — $29/mes',
+    't-cta-blog': 'Leer el Blog'
+  },
+  ja: {
+    't-eyebrow': '創設者',
+    't-title': '研究者 · Occultics Publishing 創設者',
+    't-p1': 'Occultics（オカルティクス）は、心理学、人間の行動、そして私たちの誕生日に刻まれたパターン — 私たちが誰であり、どのようにつながるかを形作るパターン — に焦点を当てた出版社です。',
+    't-p2': '私のバックグラウンドは言語と教育学です。長年にわたり、人間がどのようにコミュニケーションをとり、どのようにつながりを形成し、行動のパターンが人生のパターンをどのように反映するかを研究してきました。その研究が、私が手放せない一つの問いへと導きました：誕生日の数学は、人が人生で何を追求するか、そして二人がどのようにつながるかを予測できるのか？',
+    't-p3': '2022年、私はピタゴラス数秘術の体系を研究し始めました — 軽くではなく、深く。占星術の学部に通い、様々な数秘術の学校で学び、70万語以上のオリジナル資料を研究し、相性パターン、カルマ的構造、誕生日のみから導き出される性格コードを照合しました。私が見つけたのは、二つの誕生日だけから関係の軌跡を — 曖昧にではなく、数学的な特異性をもって — マッピングできるシステムでした。81の異なる相性コード。それぞれが異なる物語を語ります。',
+    't-p4': '私はまたNLPを学び、ヨガニドラのインストラクターとして訓練を受け、ジヴォラド・スラヴィンスキーのもとでDeep PEAT認定を取得しました。これらの実践のそれぞれが、心がどのように機能するか — パターンをどのように形成し、繰り返し、そして隠されていたものを最終的に見たとき、変容がどのように起こるか — についての理解を深めました。',
+    't-p5': 'Occulticsは、これらすべてが収束する場所です。古代ピタゴラス研究を現代の相性エンジンと自己受容の空間に翻訳するプラットフォームです — 誕生日の数学を通じて、すべての強みと弱みを含めた自分自身を理解すること。私はシステムを構築し、研究をデジタル化し、写真ではなく数学に基づいて人々をつなぐウェブマッチングプラットフォームを作りました。',
+    't-p6': '正しいつながりがすべてを変えると信じています。そしてそれは、自分自身を知ることから始まると信じています — 真に、数学的に、幻想なく。数学は構造を明らかにします。しかし直感がそれに命を吹き込みます — あなたのコードを読んで、常に知っていたが決して言葉にできなかった何かと共鳴していると感じるその瞬間。Occulticsは、その両方の交差点に存在します。',
+    't-cta-title': 'システムは稼働中。数学が待っています。',
+    't-cta-sub': 'あなたのコードを計算し、誰とつながるか確認しましょう。',
+    't-cta-btn': 'Matchに参加 — $29/月',
+    't-cta-blog': 'ブログを読む'
+  }
+};
+
+function setLang(lang) {
+  var t = translations[lang];
+  if (!t) return;
+  Object.keys(t).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = t[id];
+  });
+  document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'es' ? 'es' : 'en';
+}
+</script>
 
 </body>
 </html>
