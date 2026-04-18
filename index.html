@@ -1151,18 +1151,18 @@ function setLang(lang) {
     if (cBtn) cBtn.textContent = lt.compat_begin_btn;
   }
 
-  // Free book section
-  var bookSection = document.querySelector('.book-section');
+// Free book section
+  var bookSection = document.getElementById('free-book');
   if (bookSection) {
-    var bEyebrow = bookSection.querySelector('.book-eyebrow');
+    var bEyebrow = document.getElementById('book-eyebrow');
     if (bEyebrow) bEyebrow.textContent = lt.book_eyebrow;
-    var bTitle = bookSection.querySelector('.book-title');
+    var bTitle = document.getElementById('book-title');
     if (bTitle) bTitle.textContent = lt.book_title;
-    var bSub = bookSection.querySelector('.book-sub');
+    var bSub = document.getElementById('book-sub');
     if (bSub) bSub.textContent = lt.book_sub;
-    var bDesc = bookSection.querySelector('.book-desc');
+    var bDesc = document.getElementById('book-desc');
     if (bDesc) bDesc.textContent = lt.book_desc;
-    var bBtn = bookSection.querySelector('.book-btn');
+    var bBtn = document.getElementById('book-btn');
     if (bBtn) bBtn.textContent = lt.book_btn;
   }
 
