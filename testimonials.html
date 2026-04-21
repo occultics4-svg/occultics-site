@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — Occultics</title>
+<meta name="description" content="Testimonials from people who received their Life Code Analysis from Occultics Publishing.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--white:#fff;--gray:#8892a4;--off-white:#f8faff}*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Montserrat',sans-serif;background:var(--white);color:#0d1117;min-height:100vh}header{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid #e8edf5;background:var(--white);position:sticky;top:0;z-index:100}.logo-wrap{display:flex;align-items:center;gap:14px;text-decoration:none}.logo-wrap svg{width:32px;height:38px}.logo-name{font-weight:700;font-size:17px;letter-spacing:4px;color:#0d1117}.logo-sub{font-size:8px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-top:2px}.nav-right{display:flex;align-items:center;gap:8px}.lang-toggle{display:flex;gap:4px;align-items:center;margin-right:8px}.lang-btn{padding:6px 10px;border-radius:4px;font-size:10px;letter-spacing:1px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:1.5px solid #e8edf5;background:transparent;color:var(--gray)}.lang-btn.active{background:var(--royal);color:#fff;border-color:var(--royal)}.lang-btn:hover:not(.active){border-color:var(--royal);color:var(--royal)}.nav-btn{padding:10px 22px;border-radius:6px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Montserrat',sans-serif;border:none;background:var(--royal);color:#fff;text-decoration:none}.nav-btn:hover{background:var(--navy)}.nav-outline{background:transparent;color:#3d4a5c;border:1px solid #e8edf5;margin-right:4px}.nav-outline:hover{border-color:var(--royal);color:var(--royal);background:transparent}
+.hero{padding:80px 48px 60px;text-align:center;background:var(--navy);color:var(--white);position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);pointer-events:none}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,6vw,64px);font-weight:400;line-height:1.1;margin-bottom:20px;position:relative;letter-spacing:1px}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto;line-height:1.8;font-weight:300;position:relative}
+.hero-sub strong{color:var(--crystal);font-weight:500}
+.highlight-section{padding:60px 48px;background:var(--off-white);border-bottom:1px solid #e8edf5}.highlight-grid{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;max-width:900px;margin:0 auto}.highlight{text-align:center;max-width:260px}.highlight-quote{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--navy);line-height:1.6;font-style:italic;margin-bottom:8px}.highlight-dash{width:24px;height:1px;background:var(--crystal);margin:0 auto}
+.testimonials{max-width:720px;margin:0 auto;padding:60px 24px 80px}.category{margin-bottom:48px}.category-label{font-size:9px;letter-spacing:3px;color:var(--royal);text-transform:uppercase;font-weight:700;margin-bottom:24px;padding-bottom:8px;border-bottom:1px solid #e8edf5}.testimonial{margin-bottom:28px;padding:24px 28px;border-radius:14px;border:1px solid #e8edf5;background:var(--white);transition:all .2s}.testimonial:hover{border-color:rgba(26,42,255,0.15);box-shadow:0 4px 20px rgba(26,42,255,0.04)}.testimonial-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:#2a2f3a;line-height:1.85;font-style:italic}.g{display:inline-block;width:8px;height:8px;background:var(--crystal);transform:rotate(45deg);margin-right:8px;opacity:0.4;vertical-align:middle}
+.cta{padding:80px 48px;text-align:center;background:var(--navy);color:var(--white)}.cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;margin-bottom:12px}.cta h2 em{font-style:italic;color:var(--crystal)}.cta p{font-size:13px;color:var(--gray);margin-bottom:32px;font-weight:300}.cta-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.cta-btn{padding:16px 36px;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;transition:all .2s}.cta-primary{background:var(--royal);color:var(--white);border:none}.cta-primary:hover{background:#2a3aff}.cta-secondary{background:transparent;color:var(--crystal);border:1px solid rgba(77,184,255,0.3)}.cta-secondary:hover{border-color:var(--crystal)}.cta-book{background:transparent;color:var(--gray);border:1px solid rgba(255,255,255,0.15)}.cta-book:hover{border-color:rgba(255,255,255,0.4);color:var(--white)}
+.page-footer{padding:24px 48px;border-top:1px solid #e8edf5;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.page-footer div{font-size:10px;color:var(--gray)}.page-footer a{color:var(--gray);text-decoration:none}
+@media(max-width:768px){header{padding:14px 20px;flex-wrap:wrap;gap:8px}.hero{padding:48px 24px 40px}.highlight-section{padding:40px 20px}.testimonials{padding:40px 16px 60px}.testimonial{padding:20px 20px}.cta{padding:48px 24px}.page-footer{padding:20px;flex-direction:column;text-align:center}.highlight-grid{gap:24px}.nav-right{width:100%;justify-content:space-between}}
+</style>
+</head>
+<body>
+<header>
+  <a href="/" class="logo-wrap">
+    <svg viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
+    <div><div class="logo-name">OCCULTICS</div><div class="logo-sub">Publishing</div></div>
+  </a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-ja" onclick="setLang('ja')">JA</button>
+    </div>
+    <a href="/code.html" class="nav-btn nav-outline" id="nav-book">Free E-Book</a>
+    <a href="/code.html" class="nav-btn" id="nav-cta">Calculate Your Code</a>
+  </div>
+</header>
+
+<section class="hero">
+  <h1 id="t-title">Testimonials</h1>
+  <p class="hero-sub" id="t-sub"><strong>The Life Code Analysis</strong> — a personalized Pythagorean analysis generated from your exact birth date. Names have been removed for privacy.</p>
+</section>
+
+<section class="highlight-section">
+  <div class="highlight-grid">
+    <div class="highlight"><div class="highlight-quote" id="h1">"How can you understand so much?"</div><div class="highlight-dash"></div></div>
+    <div class="highlight"><div class="highlight-quote" id="h2">"I read this and wondered — does this person know me?"</div><div class="highlight-dash"></div></div>
+    <div class="highlight"><div class="highlight-quote" id="h3">"It's amazing that you know this much."</div><div class="highlight-dash"></div></div>
+  </div>
+</section>
+
+<div class="testimonials">
+  <div class="category"><div class="category-label" id="c1">On Accuracy</div>
+    <div class="testimonial"><div class="testimonial-text" id="q1"><span class="g"></span>"You were able to predict the area where I had surgery two years ago and the medication I was taking — it was a bit scary how accurate it was."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q2"><span class="g"></span>"The birth chart has specific and detailed contents — how can you understand so much? I felt both eerily and mysteriously aware of this fateful destiny."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q3"><span class="g"></span>"I read this quickly and wondered — does this person know me? I was surprised by how many details landed exactly, especially things like 'the first marriage wasn't good.' I had been scared of turning 50, but after this, my feeling suddenly became brighter."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q4"><span class="g"></span>"There was more volume than I expected, and it was extremely rewarding to read. I was shocked by how familiar the events and thoughts felt. It was like I was being told not to avoid it, not to turn a blind eye."</div></div>
+  </div>
+  <div class="category"><div class="category-label" id="c2">On Career & Vocation</div>
+    <div class="testimonial"><div class="testimonial-text" id="q5"><span class="g"></span>"The analysis described exactly the job I had chosen in the past. Physical work doesn't suit me and I can't make money that way — it was clearly indicated. It also showed my drive toward self-development and psychology, which has always been my starting point."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q6"><span class="g"></span>"I really love to travel and have worked in the airline industry for about 20 years. I feel this industry is a vocation for me. I laughed when you described me as 'eccentric' — yes, I sometimes feel I'm a bit different from others, and I can finally enjoy that about myself."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q7"><span class="g"></span>"I was surprised that the name of the planet affecting me is part of my company name and has a connection overseas. I feel like I have arrived at the place I want to work in."</div></div>
+  </div>
+  <div class="category"><div class="category-label" id="c3">On Health & Warnings</div>
+    <div class="testimonial"><div class="testimonial-text" id="q8"><span class="g"></span>"Regarding the vaccine — I experienced a feeling of blockage in my throat, sweating, and palpitations. During the second shot, I was given the vaccination while lying in bed with doctors around me. The analysis described all of this sensitivity with incredible precision."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q9"><span class="g"></span>"A traffic accident with a taxi actually occurred when I was around 25, exactly as the analysis described. It served as a warning to me to be more careful. How can you understand so much?"</div></div>
+  </div>
+  <div class="category"><div class="category-label" id="c4">On Self-Discovery</div>
+    <div class="testimonial"><div class="testimonial-text" id="q10"><span class="g"></span>"When I looked through the analysis, I was really surprised by the 'does this person know me?' feeling in so many different situations. It made me feel like everything I've been doing up until now has been properly connected — that I've been accepted."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q11"><span class="g"></span>"I have a strong intuition and receive important messages through my dreams. Ever since I can remember, I have had vivid dreams every night. I had sometimes wondered if something was wrong with me — the analysis finally helped me see it as a gift."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q12"><span class="g"></span>"I had once had someone read my past life years ago, and I was told I was a military commander during the Warring States period. I was surprised that this analysis independently identified me as a warrior again. Having two practitioners confirm this independently gave me the clarity I needed."</div></div>
+  </div>
+  <div class="category"><div class="category-label" id="c5">On Relationships & Future</div>
+    <div class="testimonial"><div class="testimonial-text" id="q13"><span class="g"></span>"The outlook for next year was concrete — difficult family relationships, a kind of paperwork, and guidance about real estate. I was worried about holding all this by myself, so I asked my husband to look through it and share it with me. I'm glad I now know what to do."</div></div>
+    <div class="testimonial"><div class="testimonial-text" id="q14"><span class="g"></span>"It gives me courage to be able to predict something with almost certainty. I am now actually happy that the divorce is clear — the analysis helped me see it and gave me the strength to move forward."</div></div>
+  </div>
+</div>
+
+<section class="cta">
+  <h2 id="cta-t">What Will Your <em>Numbers</em> Reveal?</h2>
+  <p id="cta-s">Calculate your Pythagorean Code — free, instant, no email required.</p>
+  <div class="cta-btns">
+    <a href="/code.html" class="cta-btn cta-primary" id="cta-b1">Calculate Your Code — Free</a>
+    <a href="/" class="cta-btn cta-secondary" id="cta-b2">Learn More</a>
+    <a href="/#free-book" class="cta-btn cta-book" id="cta-b3">Get Free E-Book</a>
+  </div>
+</section>
+
+<div class="page-footer">
+  <div>&copy; 2026 Occultics Publishing. <a href="/">occultics.ai</a> · <a href="/privacy.html">Privacy</a></div>
+  <div id="t-disc">For informational and entertainment purposes only.</div>
+</div>
+
+<script>
+var L={en:{'nav-cta':'Calculate Your Code','nav-book':'Free E-Book','t-title':'Testimonials','t-sub':'<strong>The Life Code Analysis</strong> — a personalized Pythagorean analysis generated from your exact birth date. Names have been removed for privacy.',h1:'"How can you understand so much?"',h2:'"I read this and wondered — does this person know me?"',h3:'"It\'s amazing that you know this much."',c1:'On Accuracy',c2:'On Career & Vocation',c3:'On Health & Warnings',c4:'On Self-Discovery',c5:'On Relationships & Future','cta-t':'What Will Your <em>Numbers</em> Reveal?','cta-s':'Calculate your Pythagorean Code — free, instant, no email required.','cta-b1':'Calculate Your Code — Free','cta-b2':'Learn More','cta-b3':'Get Free E-Book','t-disc':'For informational and entertainment purposes only.'},es:{'nav-cta':'Calcula Tu Código','nav-book':'E-Book Gratis','t-title':'Testimonios','t-sub':'<strong>El Life Code Analysis</strong> — un análisis pitagórico personalizado generado a partir de su fecha exacta de nacimiento. Los nombres han sido eliminados por privacidad.',h1:'"¿Cómo puedes entender tanto?"',h2:'"Lo leí y me pregunté — ¿esta persona me conoce?"',h3:'"Es increíble que sepas tanto."',c1:'Sobre la Precisión',c2:'Sobre Carrera y Vocación',c3:'Sobre Salud y Advertencias',c4:'Sobre el Autodescubrimiento',c5:'Sobre Relaciones y Futuro','cta-t':'¿Qué Revelarán Tus <em>Números</em>?','cta-s':'Calcula tu Código Pitagórico — gratis, instantáneo, sin email.','cta-b1':'Calcula Tu Código — Gratis','cta-b2':'Saber Más','cta-b3':'E-Book Gratis','t-disc':'Solo con fines informativos y de entretenimiento.'},ja:{'nav-cta':'コードを計算','nav-book':'無料E-Book','t-title':'体験談','t-sub':'<strong>ライフコード分析</strong> — 正確な生年月日から生成されたピタゴラス分析。プライバシー保護のため、名前は削除しています。',h1:'「どうしてそんなにわかるのですか？」',h2:'「読んで思いました — この人は私を知っているの？」',h3:'「ここまでわかるなんて驚きです。」',c1:'正確さについて',c2:'キャリアと天職について',c3:'健康と警告について',c4:'自己発見について',c5:'人間関係と未来について','cta-t':'あなたの<em>数字</em>は何を明かす？','cta-s':'ピタゴラスコードを計算 — 無料、即時、メール不要。','cta-b1':'コードを計算 — 無料','cta-b2':'詳しく見る','cta-b3':'無料E-Bookを入手','t-disc':'情報およびエンターテインメント目的のみ。'}};
+var Q={es:{q1:'"Pudiste predecir el área donde tuve cirugía hace dos años y la medicación que tomaba — fue un poco aterrador lo preciso que fue."',q2:'"La carta natal tiene contenidos específicos y detallados — ¿cómo puedes entender tanto? Sentí una conciencia tanto espeluznante como misteriosa de este destino fatídico."',q3:'"Lo leí rápidamente y me pregunté — ¿esta persona me conoce? Me sorprendió cuántos detalles coincidieron, especialmente \'el primer matrimonio no fue bueno.\' Tenía miedo de cumplir 50, pero después mi sensación se volvió más brillante."',q4:'"Había más volumen del que esperaba, y fue extremadamente gratificante. Me impactó lo familiares que se sentían los eventos. Era como si me dijeran que no lo evitara, que no hiciera la vista gorda."',q5:'"El análisis describió exactamente el trabajo que había elegido. El trabajo físico no me conviene — estaba claramente indicado. También mostró mi impulso hacia el autodesarrollo y la psicología."',q6:'"Me encanta viajar y he trabajado en la industria aérea durante 20 años. Siento que es mi vocación. Me reí cuando me describiste como \'excéntrica\' — sí, soy un poco diferente, y finalmente puedo disfrutar eso."',q7:'"Me sorprendió que el nombre del planeta que me afecta es parte del nombre de mi empresa. Siento que he llegado al lugar donde quiero trabajar."',q8:'"Respecto a la vacuna — experimenté bloqueo en la garganta, sudoración y palpitaciones. El análisis describió toda esta sensibilidad con increíble precisión."',q9:'"Un accidente con un taxi ocurrió cuando tenía 25 años, exactamente como describía el análisis. Sirvió como advertencia. ¿Cómo puedes entender tanto?"',q10:'"Me sorprendió la sensación de \'¿esta persona me conoce?\' en tantas situaciones. Me hizo sentir que todo ha estado correctamente conectado — que he sido aceptada."',q11:'"Tengo intuición fuerte y recibo mensajes a través de mis sueños. Cada noche tengo sueños vívidos. A veces me preguntaba si algo estaba mal — el análisis me ayudó a verlo como un don."',q12:'"Una vez me dijeron que en mi vida pasada fui un comandante militar. Me sorprendió que este análisis me identificara independientemente como guerrera otra vez. Dos practicantes confirmaron esto — me dio la claridad que necesitaba."',q13:'"La perspectiva fue concreta — relaciones familiares difíciles, papeleo, orientación sobre bienes raíces. Le pedí a mi esposo que lo revisara conmigo. Me alegra saber qué hacer."',q14:'"Me da valor poder predecir algo con certeza. Estoy feliz de que el divorcio esté claro — el análisis me dio la fuerza para seguir adelante."'},ja:{q1:'「2年前に手術した部位と服用していた薬を言い当てた — その正確さは少し怖いくらいでした。」',q2:'「出生図には具体的で詳細な内容が — どうしてそんなにわかるのですか？この運命的な宿命を不気味なほど神秘的に感じました。」',q3:'「すぐに読んで思いました — この人は私を知っているの？「最初の結婚はうまくいかなかった」など詳細がぴったり。50歳が怖かったのですが、読んで気持ちが明るくなりました。」',q4:'「予想以上のボリュームで読み応えがありました。出来事や考えがあまりにも馴染み深く衝撃でした。目をそらすな、見て見ぬふりをするなと言われているようでした。」',q5:'「過去に選んだ仕事を正確に描写していました。肉体労働は向いておらずお金を稼げない — 明確に示されていました。自己開発と心理学への原動力も示されていました。」',q6:'「旅行が大好きで航空業界で約20年。天職だと感じています。「エキセントリック」と言われて笑いました — はい、少し違うと感じますが、今ではそれを楽しめます。」',q7:'「影響を与える惑星の名前が会社名の一部で海外とのつながりがあることに驚きました。働きたい場所にたどり着いたと感じています。」',q8:'「ワクチンについて — 喉の詰まり、発汗、動悸を経験しました。2回目は医師に囲まれベッドで接種。分析はこの感受性を驚くべき精度で描写していました。」',q9:'「タクシーとの事故が25歳頃に実際に起こりました。分析通りです。運転時の注意の警告として役立ちました。どうしてそんなにわかるのですか？」',q10:'「さまざまな場面で「この人は私を知っているの？」という感覚に驚きました。今までやってきたことがすべてつながっている — 受け入れられていると感じました。」',q11:'「直感が強く夢を通じてメッセージを受け取ります。毎晩鮮明な夢を見ます。何か問題があるのかと思いましたが、この分析で才能だと気づけました。」',q12:'「以前、前世で戦国時代の武将だったと言われました。この分析が独自に戦士と特定したことに驚きました。2人が独立して確認 — 必要な明確さを得ました。」',q13:'「来年の見通しは具体的でした — 困難な家族関係、書類手続き、不動産のガイダンス。夫と共有しました。何をすべきかわかって良かったです。」',q14:'「ほぼ確実に予測できることは勇気を与えてくれます。離婚が明確になり安心しています — 前に進む力を与えてくれました。」'}};
+function setLang(l){document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.remove('active')});document.getElementById('btn-'+l).classList.add('active');var t=L[l]||L.en;Object.keys(t).forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML=t[id]});var q=Q[l];if(q){Object.keys(q).forEach(function(id){var el=document.getElementById(id);if(el)el.innerHTML='<span class="g"></span>'+q[id]});}document.documentElement.lang=l;}
+</script>
+</body>
+</html>
