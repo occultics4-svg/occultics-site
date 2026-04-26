@@ -5,13 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Occultics.ai — Every Relationship Has a Mathematical Signature</title>
 <script>
-// Profile page detection — if URL has ?id= show profile instead of main site
 (function(){
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id');
   if(!id) return;
-
-  // Hide main site immediately
   document.addEventListener('DOMContentLoaded', function(){
     var main = document.getElementById('main-site');
     if(main) main.style.display = 'none';
@@ -19,10 +16,8 @@
     if(profile) profile.style.display = 'block';
     loadProfile(id);
   });
-
   var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
-
   var SESSION_DEFS = [
     {key:'session1',num:'01',day:'Day 1', title:'Your Mathematical Blueprint'},
     {key:'session2',num:'02',day:'Day 3', title:'Your Emotional Frequency'},
@@ -32,60 +27,29 @@
     {key:'session6',num:'06',day:'Day 11',title:'The Architecture of Your Reality'},
     {key:'session7',num:'07',day:'Day 13',title:'Your Energetic Patterns'},
   ];
-
-  function formatDate(str){
-    if(!str) return '—';
-    return new Date(str).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  }
-
-  function textToParas(text){
-    if(!text) return '<div class="pc-skeleton"></div>';
-    return text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){return '<p>'+p.trim()+'</p>';}).join('');
-  }
-
+  function formatDate(str){if(!str) return '—';return new Date(str).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}
+  function textToParas(text){if(!text) return '<div class="pc-skeleton"></div>';return text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){return '<p>'+p.trim()+'</p>';}).join('');}
   function renderSessions(sections){
     var html = '';
     SESSION_DEFS.forEach(function(def, idx){
       var s = sections[def.key] || {};
       var unlocked = s.unlocked || s.text;
       if(unlocked){
-        html += '<div class="pc-card pc-unlocked">';
-        html += '<div class="pc-card-hdr" onclick="document.getElementById(\'pcb'+idx+'\').classList.toggle(\'pcb-open\')">';
-        html += '<div class="pc-num">'+def.num+'</div>';
-        html += '<div class="pc-meta"><div class="pc-ey">Session '+def.num+' · '+def.day+'</div><div class="pc-ti">'+def.title+'</div></div>';
-        html += '<div class="pc-arr">↓</div>';
-        html += '</div>';
-        html += '<div class="pc-body" id="pcb'+idx+(idx===0?' pcb-open':'')+'"><div class="pc-text">'+textToParas(s.text)+'</div></div>';
-        html += '</div>';
+        html += '<div class="pc-card pc-unlocked"><div class="pc-card-hdr" onclick="document.getElementById(\'pcb'+idx+'\').classList.toggle(\'pcb-open\')"><div class="pc-num">'+def.num+'</div><div class="pc-meta"><div class="pc-ey">Session '+def.num+' · '+def.day+'</div><div class="pc-ti">'+def.title+'</div></div><div class="pc-arr">↓</div></div><div class="pc-body" id="pcb'+idx+(idx===0?' pcb-open':'')+'"><div class="pc-text">'+textToParas(s.text)+'</div></div></div>';
       } else {
-        html += '<div class="pc-card pc-locked">';
-        html += '<div class="pc-card-hdr">';
-        html += '<div class="pc-num">'+def.num+'</div>';
-        html += '<div class="pc-meta"><div class="pc-ey">Session '+def.num+'</div><div class="pc-ti">'+def.title+'</div></div>';
-        html += '<div class="pc-lock">Unlocks '+def.day+'</div>';
-        html += '</div></div>';
+        html += '<div class="pc-card pc-locked"><div class="pc-card-hdr"><div class="pc-num">'+def.num+'</div><div class="pc-meta"><div class="pc-ey">Session '+def.num+'</div><div class="pc-ti">'+def.title+'</div></div><div class="pc-lock">Unlocks '+def.day+'</div></div></div>';
       }
       if(idx===3) html += '<div class="pc-quote">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</div>';
     });
     document.getElementById('pc-sessions').innerHTML = html;
   }
-
   function loadProfile(profileId){
-    fetch(SUPABASE_URL+'/rest/v1/transformational_profiles?profile_id=eq.'+encodeURIComponent(profileId)+'&select=*',
-      {headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}})
+    fetch(SUPABASE_URL+'/rest/v1/transformational_profiles?profile_id=eq.'+encodeURIComponent(profileId)+'&select=*',{headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY}})
     .then(function(r){return r.json();})
     .then(function(data){
-      if(!data||!data.length){
-        document.getElementById('pc-loading').style.display='none';
-        document.getElementById('pc-notfound').style.display='flex';
-        return;
-      }
+      if(!data||!data.length){document.getElementById('pc-loading').style.display='none';document.getElementById('pc-notfound').style.display='flex';return;}
       var p = data[0];
-      if(new Date()>new Date(p.expires_at)){
-        document.getElementById('pc-loading').style.display='none';
-        document.getElementById('pc-expired').style.display='flex';
-        return;
-      }
+      if(new Date()>new Date(p.expires_at)){document.getElementById('pc-loading').style.display='none';document.getElementById('pc-expired').style.display='flex';return;}
       document.getElementById('pc-name').textContent = p.name;
       document.getElementById('pc-sub').textContent = 'Born '+formatDate(p.date_of_birth)+' · 7 Sessions · 14 Days';
       document.getElementById('pc-bio').textContent = p.biorhythm||'—';
@@ -96,16 +60,11 @@
       renderSessions(p.sections||{});
       document.getElementById('pc-loading').style.display='none';
       document.getElementById('pc-main').style.display='block';
-    })
-    .catch(function(){
-      document.getElementById('pc-loading').style.display='none';
-      document.getElementById('pc-notfound').style.display='flex';
-    });
+    }).catch(function(){document.getElementById('pc-loading').style.display='none';document.getElementById('pc-notfound').style.display='flex';});
   }
 })();
 </script>
 <style>
-/* Profile App Styles */
 #profile-app{display:none;background:#0a0e2e;min-height:100vh;font-family:'Montserrat',sans-serif;color:#fff}
 .pc-state{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px;background:#0a0e2e}
 .pc-state-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:12px}
@@ -113,8 +72,7 @@
 .pc-state-btn{display:inline-block;padding:12px 32px;background:#1a2aff;color:#fff;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-decoration:none;text-transform:uppercase}
 .pc-hdr{background:rgba(10,14,46,0.97);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .pc-logo{font-weight:700;font-size:12px;letter-spacing:4px;color:#fff;text-decoration:none}
-.pc-expiry-badge{font-size:10px;color:#8892a4}
-.pc-expiry-badge span{color:#4db8ff}
+.pc-expiry-badge{font-size:10px;color:#8892a4}.pc-expiry-badge span{color:#4db8ff}
 .pc-hero{padding:60px 32px 44px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.08);background:radial-gradient(ellipse at 50% 0%,rgba(26,42,255,0.08) 0%,transparent 70%)}
 .pc-eyebrow{font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:10px}
 .pc-hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,60px);font-weight:300;margin-bottom:6px}
@@ -125,21 +83,16 @@
 .pc-code-label{font-size:8px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-top:14px}
 .pc-sessions{max-width:800px;margin:0 auto;padding:36px 24px 80px}
 .pc-card{margin-bottom:12px;border-radius:14px;overflow:hidden;border:1px solid rgba(77,184,255,0.1);background:rgba(255,255,255,0.02)}
-.pc-unlocked{border-color:rgba(77,184,255,0.18)}
-.pc-locked{border-color:rgba(255,255,255,0.05);opacity:0.55}
+.pc-unlocked{border-color:rgba(77,184,255,0.18)}.pc-locked{border-color:rgba(255,255,255,0.05);opacity:0.55}
 .pc-card-hdr{display:flex;align-items:center;gap:16px;padding:18px 20px;cursor:pointer;user-select:none}
 .pc-locked .pc-card-hdr{cursor:default}
 .pc-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:rgba(77,184,255,0.2);line-height:1;flex-shrink:0;width:40px}
-.pc-meta{flex:1}
-.pc-ey{font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:3px}
+.pc-meta{flex:1}.pc-ey{font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:3px}
 .pc-ti{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;line-height:1.2}
-.pc-arr{font-size:14px;color:#4db8ff;flex-shrink:0}
-.pc-lock{font-size:10px;color:rgba(77,184,255,0.4);flex-shrink:0}
-.pc-body{display:none;padding:0 20px 24px}
-.pc-body.pcb-open{display:block}
+.pc-arr{font-size:14px;color:#4db8ff;flex-shrink:0}.pc-lock{font-size:10px;color:rgba(77,184,255,0.4);flex-shrink:0}
+.pc-body{display:none;padding:0 20px 24px}.pc-body.pcb-open{display:block}
 .pc-text{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1.9;color:rgba(255,255,255,0.75);font-weight:300}
-.pc-text p{margin-bottom:16px}
-.pc-text p:last-child{margin-bottom:0}
+.pc-text p{margin-bottom:16px}.pc-text p:last-child{margin-bottom:0}
 .pc-skeleton{height:120px;background:rgba(255,255,255,0.04);border-radius:8px;animation:pcshim 1.5s ease-in-out infinite}
 @keyframes pcshim{0%,100%{opacity:.4}50%{opacity:.9}}
 .pc-quote{text-align:center;padding:28px 16px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);line-height:1.6}
@@ -199,7 +152,6 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 </head>
 <body>
 
-<!-- PROFILE APP — shown when URL has ?id= -->
 <div id="profile-app">
   <div id="pc-loading" class="pc-state">
     <svg width="48" height="58" viewBox="0 0 80 100" fill="none" style="margin-bottom:20px;opacity:0.4"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.3"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.6"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.7"/></svg>
@@ -242,112 +194,6 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   </div>
 </div>
 
-<!-- MAIN SITE -->
-<div id="main-site">
-<header>
-  <div class="logo-wrap">
-    <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
-    <div><div class="logo-name">OCCULTICS</div><div class="logo-tagline" id="tagline">Know Your Numbers. Find Your Match.</div></div>
-  </div>
-  <nav>
-    <div class="lang-toggle">
-      <button class="lang-btn lang-active" id="lang-en" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
-      <button class="lang-btn" id="lang-ja" onclick="setLang('ja')">JA</button>
-    </div>
-    <button class="nav-btn nav-outline" onclick="openLCMModal()" id="nav-cta">Life Code Map</button>
-    <button class="nav-btn" onclick="window.location='https://occultics.ai/match/join'" id="nav-match">Match</button>
-    <button class="nav-btn nav-outline" onclick="window.location='https://occultics.ai/blog/'" id="nav-blog">Blog</button>
-    <button class="nav-btn nav-outline" onclick="window.location='https://occultics.ai/about.html'" id="nav-about">About</button>
-  </nav>
-</header>
-
-<section class="hero">
-  <svg class="hero-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
-  <p class="hero-eyebrow" id="eyebrow">Ancient Wisdom. Modern Precision. — Powered by 700,000+ Words of Research</p>
-  <h1 class="hero-title" id="hero-title">Every Relationship Has a<br><em>Mathematical Signature.</em></h1>
-  <p class="hero-sub" id="hero-sub">Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.</p>
-  <p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages</p>
-  <button class="hero-cta" onclick="window.location='https://occultics.ai/match/join'" id="hero-cta-btn" style="background:#1a2aff;">Calculate Your Code — Join Match</button>
-  <p style="margin-top:14px;font-size:11px;color:#8892a4;">Free for the first 100 founding members · Then $29/month</p>
-  <div style="margin-top:20px;"><button onclick="openLCMModal()" style="padding:10px 24px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:10px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Life Code Map · $297</button></div>
-</section>
-
-
-<section style="padding:80px 48px;text-align:center;background:linear-gradient(180deg,#0a0e2e 0%,#111640 100%);color:white;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);pointer-events:none;"></div>
-  <p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Live Now</p>
-  <h2 class="section-title" style="color:white;font-size:clamp(32px,5vw,48px);" id="match-title">Matching Apps Connect on Faces.<br>We Connect on Mathematics.</h2>
-  <p style="font-size:14px;color:#8892a4;max-width:520px;margin:0 auto 12px;line-height:1.7;font-weight:300;" id="match-sub">Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.</p>
-  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Free for the first 100 founding members. Then $29/month.</p>
-  <button onclick="window.location='https://occultics.ai/match/join'" style="display:inline-block;padding:16px 40px;background:#1a2aff;color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join Occultics Match →</button>
-  <div style="display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;">
-    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m1-label">Love Match</div><div style="font-size:20px;">💎</div></div>
-    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m2-label">Friend Match</div><div style="font-size:20px;">🤝</div></div>
-    <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m3-label">Business Match</div><div style="font-size:20px;">💼</div></div>
-  </div>
-</section>
-
-<!-- FREE BOOK SECTION -->
-<section id="free-book" style="padding:80px 48px;background:#ffffff;color:#1a1a2e;position:relative;overflow:hidden;border-top:1px solid rgba(10,14,46,0.06);border-bottom:1px solid rgba(10,14,46,0.06);">
-  <div style="max-width:640px;margin:0 auto;position:relative;z-index:1;text-align:center;">
-    <p style="font-size:10px;letter-spacing:3px;color:#1a2aff;text-transform:uppercase;font-weight:600;margin-bottom:12px;" id="book-eyebrow">Free Download</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,42px);font-weight:300;color:#0a0e2e;margin-bottom:16px;" id="book-title">The Birth Code</h2>
-    <p style="font-size:13px;color:#555;line-height:1.8;margin-bottom:8px;font-family:'Montserrat',sans-serif;font-weight:300;" id="book-sub">What Your Birth Date Already Knows About Your Relationships</p>
-    <p style="font-size:12px;color:#888;line-height:1.7;margin-bottom:32px;font-family:'Montserrat',sans-serif;font-weight:300;" id="book-desc">Learn how to calculate your code, understand what your Life Path Number seeks in a partner, and discover why the year you start a relationship changes everything. Enter your email and get the book instantly.</p>
-    <div id="book-form" style="display:flex;gap:10px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center;">
-      <input type="email" id="book-email" placeholder="your@email.com" style="flex:1;min-width:220px;padding:14px 18px;background:#f5f6fa;border:1px solid rgba(26,42,255,0.15);border-radius:8px;color:#1a1a2e;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;" onfocus="this.style.borderColor='#1a2aff'" onblur="this.style.borderColor='rgba(26,42,255,0.15)'">
-      <button onclick="sendBook()" id="book-btn" style="padding:14px 28px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;white-space:nowrap;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Get Free E-Book</button>
-    </div>
-    <div id="book-success" style="display:none;padding:20px;background:rgba(26,42,255,0.06);border:1px solid rgba(26,42,255,0.15);border-radius:8px;margin-top:16px;">
-      <p style="font-size:13px;color:#1a2aff;font-family:'Montserrat',sans-serif;font-weight:500;">Check your email — The Birth Code is on its way.</p>
-    </div>
-    <p style="font-size:9px;color:#aaa;margin-top:16px;font-family:'Montserrat',sans-serif;">No spam. Unsubscribe anytime. Your email stays with us.</p>
-  </div>
-</section>
-
-
-<div class="social-proof">
-  <div class="social-proof-row">
-    <div class="social-proof-item"><div class="social-proof-number">700K+</div><div class="social-proof-label" id="sp-1">Words of Research</div></div>
-    <div class="social-proof-item"><div class="social-proof-number">81</div><div class="social-proof-label" id="sp-2">Compatibility Codes</div></div>
-   <div class="social-proof-item"><div class="social-proof-number">2,500</div><div class="social-proof-label" id="sp-3">Years of Tradition</div></div>
-    <div class="social-proof-item"><a href="/testimonials.html" style="text-decoration:none;"><div class="social-proof-number" style="cursor:pointer;">✦</div><div class="social-proof-label" style="cursor:pointer;" id="sp-4">Testimonials</div></a></div>
-    <div class="social-proof-item"><a href="/testimonials.html" style="text-decoration:none;"><div class="social-proof-number" style="cursor:pointer;">✦</div><div class="social-proof-label" style="cursor:pointer;" id="sp-4">Testimonials</div></a></div>
-
-  </div>
-</div>
-
-
-<section id="life-code-alignment" style="padding:80px 48px;background:linear-gradient(180deg,#141a45 0%,#161d4a 50%,#111640 100%);color:#fff;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(26,42,255,0.07) 0%,transparent 70%);pointer-events:none;"></div>
-  <div style="max-width:860px;margin:0 auto;position:relative;z-index:1;">
-    <p style="font-size:10px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;text-align:center;margin-bottom:16px;">Occultics Publishing</p>
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,60px);font-weight:300;color:#fff;text-align:center;line-height:1.1;margin-bottom:20px;">You Are Not Complicated.<br><em style="font-style:italic;color:#4db8ff;">You Are Coded.</em></h2>
-    <p style="font-size:13px;letter-spacing:3px;color:rgba(255,255,255,0.4);text-transform:uppercase;font-weight:500;text-align:center;margin-bottom:16px;">The Life Code Alignment</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,0.65);max-width:620px;margin:0 auto 48px;line-height:1.7;text-align:center;font-style:italic;">A private journey through the mathematics of who you are — why you feel the way you feel, why you react the way you react, and what your numbers have always known about your life.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:640px;margin:0 auto 48px;">
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 1 · Day 1</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">Your Mathematical Blueprint</div>
-      </div>
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 2 · Day 3</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">Your Emotional Frequency</div>
-      </div>
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 3 · Day 5</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">Your Core Drivers</div>
-      </div>
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 4 · Day 7</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">Your Behavioral Code</div>
-      </div>
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
-        <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 5 · Day 9</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">Your Karmic Blueprint</div>
-      </div>
-      <div style="padding:18px 20px;border:1px solid rgba(77,184,255,0.1);border-radius:12px;background:rgba(255,255,255,0.02);">
         <div style="font-size:8px;letter-spacing:1.5px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:'Montserrat',sans-serif;">Session 6 · Day 11</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:#fff;">The Architecture of Your Reality</div>
       </div>
