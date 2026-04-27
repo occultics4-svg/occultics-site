@@ -179,7 +179,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
-// FIX: Capture Supabase library reference before declaring client variable
 var _supaLib = window.supabase;
 var supaClient = null;
 try {
@@ -254,7 +253,7 @@ async function createAccount(){
   if(!email){showMsg('Please enter your email','error');return}
   if(!pwd||pwd.length<8){showMsg('Password must be at least 8 characters','error');return}
   if(!_codes){showMsg('Something went wrong. Please start over.','error');return}
-  var btn=document.getElementById('create-btn');btn.textContent='⏳ Creating your account...';btn.disabled=true;
+  var btn=document.getElementById('create-btn');btn.textContent='Creating your account...';btn.disabled=true;
   try{
     if(!supaClient){showMsg('Connection error. Please refresh and try again.','error');btn.textContent='✦ Create Account & See Matches';btn.disabled=false;return;}
     var authRes=await supaClient.auth.signUp({email:email,password:pwd});
@@ -280,27 +279,18 @@ function showMsg(text,type){var el=document.getElementById('msg-box');el.textCon
 function clearMsg(){var el=document.getElementById('msg-box');el.className='msg';}
 </script>
 <script>
-
-// Add language switcher to header
 var langDiv = document.createElement('div');
 langDiv.innerHTML = getLangSwitcher();
 document.querySelector('.join-header').appendChild(langDiv.firstChild);
 
-// Translate join page
 function translateJoin() {
-  // Back link
   var backLink = document.querySelector('.back-link');
   if (backLink) backLink.textContent = t('back_to_occultics');
-  
-  // Progress labels
   var labels = [t('step1of5'), t('step2of5'), t('step3of5'), t('step4of5'), t('step5of5')];
-  
-  // Step 1
   document.querySelector('#step1 .card-eyebrow').textContent = t('step1_eyebrow');
   document.querySelector('#step1 .card-title').textContent = t('step1_title');
   document.querySelector('#step1 .card-sub').textContent = t('step1_sub');
   document.querySelector('#s1-name').placeholder = t('first_name_ph');
-  document.querySelector('label[for="s1-name"]') || document.querySelectorAll('#step1 label')[0];
   var step1Labels = document.querySelectorAll('#step1 label');
   if(step1Labels[0]) step1Labels[0].textContent = t('first_name');
   if(step1Labels[1]) step1Labels[1].textContent = t('date_of_birth');
@@ -314,8 +304,6 @@ function translateJoin() {
   document.querySelector('.code-preview-label').textContent = t('your_pyth_code');
   document.querySelector('.code-preview-sub').textContent = t('code_sub');
   document.querySelector('#step1 .btn-next').textContent = t('continue');
-  
-  // Step 2
   document.querySelector('#step2 .card-eyebrow').textContent = t('step2_eyebrow');
   document.querySelector('#step2 .card-title').textContent = t('step2_title');
   document.querySelector('#step2 .card-sub').textContent = t('step2_sub');
@@ -332,8 +320,6 @@ function translateJoin() {
   document.querySelector('#s2-bio').placeholder = t('bio_placeholder');
   document.querySelector('#step2 .btn-next').textContent = t('continue');
   document.querySelector('#step2 .btn-back').textContent = t('back');
-  
-  // Step 3
   document.querySelector('#step3 .card-eyebrow').textContent = t('step3_eyebrow');
   document.querySelector('#step3 .card-title').textContent = t('step3_title');
   document.querySelector('#step3 .card-sub').textContent = t('step3_sub');
@@ -343,8 +329,6 @@ function translateJoin() {
   var step3Backs = document.querySelectorAll('#step3 .btn-back');
   if(step3Backs[0]) step3Backs[0].textContent = t('back');
   if(step3Backs[1]) step3Backs[1].textContent = t('skip_for_now');
-  
-  // Step 4
   document.querySelector('#step4 .card-eyebrow').textContent = t('step4_eyebrow');
   document.querySelector('#step4 .card-title').textContent = t('step4_title');
   document.querySelector('#step4 .card-sub').textContent = t('step4_sub');
@@ -365,8 +349,6 @@ function translateJoin() {
   document.querySelector('#pay-btn').textContent = t('activate_btn');
   document.querySelector('.payment-guarantee').innerHTML = t('secure_payment');
   document.querySelector('#step4 .btn-back').textContent = t('back');
-  
-  // Step 5
   document.querySelector('#step5 .card-eyebrow').textContent = t('step5_eyebrow');
   document.querySelector('#step5 .card-title').textContent = t('step5_title');
   document.querySelector('#step5 .card-sub').textContent = t('step5_sub');
@@ -375,23 +357,14 @@ function translateJoin() {
   if(step5Labels[1]) step5Labels[1].textContent = t('password');
   document.querySelector('#s5-pwd').placeholder = t('password_ph');
   document.querySelector('#create-btn').textContent = t('create_btn');
-  
-  // Success screen
   document.querySelector('.success-title').textContent = t('check_email');
   document.querySelector('.btn-dashboard').textContent = t('confirmed_signin');
-  
-  // Update progress label
   document.getElementById('prog-label').textContent = labels[currentStep - 1];
-  
-  // Override updateProgress to use translated labels
   var origUpdateProgress = updateProgress;
   updateProgress = function(n) {
     for(var i=1;i<=totalSteps;i++){var el=document.getElementById('prog'+i);el.className='prog-step'+(i<n?' done':i===n?' active':'');}
     document.getElementById('prog-label').textContent = labels[n-1];
   };
-  
-  // Override showMsg to use translated validation messages
-  var origGoStep2 = goStep2;
   goStep2 = function() {
     var name = document.getElementById('s1-name').value.trim();
     var dob = document.getElementById('s1-dob').value;
@@ -401,18 +374,13 @@ function translateJoin() {
     if(!gender){showMsg(t('select_gender'),'error');return}
     goStep(2);
   };
-  var origGoStep3 = goStep3;
   goStep3 = function() {
     if(selectedLF.length===0){showMsg(t('select_one'),'error');return}
     goStep(3);
   };
 }
-
-// Store lang for profile creation
 window._lang = MATCH_LANG;
-
 translateJoin();
-
 </script>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/match/sw.js").then(function(r){console.log("SW registered")}).catch(function(e){console.log("SW failed:",e)})}</script>
 </body>
