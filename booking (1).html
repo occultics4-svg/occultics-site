@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Compatibility Reading — Occultics</title>
+<meta name="description" content="45-minute live compatibility reading with Adriana. Two birth dates decoded in real time. Only 4 spots per week. $888.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray:#8892a4;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:48px 24px 60px}
+
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:60px}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-gem{width:24px;height:28px}
+.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
+.back-link{font-size:11px;color:var(--gray);text-decoration:none}
+.back-link:hover{color:var(--crystal)}
+
+.hero{text-align:center;margin-bottom:56px}
+.hero-badge{display:inline-block;padding:6px 18px;border:1px solid rgba(77,184,255,0.25);border-radius:20px;font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:24px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,48px);font-weight:300;line-height:1.15;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--crystal)}
+.hero-sub{font-size:14px;color:var(--gray);line-height:1.8;font-weight:300;max-width:520px;margin:0 auto}
+
+.details-grid{display:grid;grid-template-columns:repeat(3,160px);justify-content:center 1fr;gap:16px;margin-bottom:48px}
+.detail-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:14px;padding:24px;text-align:center}
+.detail-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--crystal);margin-bottom:4px}
+.detail-label{font-size:10px;color:var(--gray);letter-spacing:1.5px;text-transform:uppercase}
+
+.what-box{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:20px;padding:36px 32px;margin-bottom:48px}
+.what-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:20px;color:var(--white)}
+.what-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.what-item:last-child{margin-bottom:0}
+.what-icon{color:var(--crystal);font-size:12px;flex-shrink:0;margin-top:3px}
+.what-text{font-size:13px;color:var(--gray);line-height:1.7;font-weight:300}
+
+.quote-box{text-align:center;padding:32px 24px;margin-bottom:48px;border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08)}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,0.4);font-style:italic;line-height:1.6;max-width:480px;margin:0 auto}
+
+.cta-box{text-align:center;margin-bottom:48px}
+.cta-price{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:var(--white);margin-bottom:8px}
+.cta-note{font-size:11px;color:var(--gray);margin-bottom:24px;letter-spacing:0.5px}
+.cta-btn{display:inline-block;padding:18px 56px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:13px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;transition:all .2s}
+.cta-btn:hover{background:#2a3aff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,0.3)}
+.cta-secure{font-size:10px;color:rgba(255,255,255,0.2);margin-top:16px}
+
+.how-box{margin-bottom:48px}
+.how-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;text-align:center;margin-bottom:28px}
+.how-steps{display:flex;flex-direction:column;gap:16px}
+.how-step{display:flex;gap:16px;align-items:flex-start}
+.how-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:rgba(77,184,255,0.3);flex-shrink:0;width:32px}
+.how-content{flex:1}
+.how-step-title{font-size:12px;font-weight:600;color:var(--white);margin-bottom:4px}
+.how-step-desc{font-size:12px;color:var(--gray);line-height:1.6;font-weight:300}
+
+.footer{text-align:center;padding-top:32px;border-top:1px solid rgba(77,184,255,0.06)}
+.footer a{font-size:11px;color:var(--gray);text-decoration:none;font-weight:300}
+.footer a:hover{color:var(--crystal)}
+.footer-copy{font-size:9px;color:rgba(255,255,255,0.12);margin-top:10px}
+
+@media(max-width:480px){.page{padding:32px 16px 40px}.details-grid{grid-template-columns:1fr}.what-box{padding:24px 18px}.cta-price{font-size:42px}.cta-btn{padding:16px 40px;font-size:11px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <a href="/" class="logo-wrap">
+      <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+      <div class="logo-name">OCCULTICS</div>
+    </a>
+    <a href="/" class="back-link">← Back to Occultics</a>
+  </div>
+
+  <div class="hero">
+    <h1>Live Compatibility Reading<br>with <em>Adriana</em></h1>
+    <p class="hero-sub">45 minutes. Two birth dates. One live session where your compatibility code is decoded in real time — by the founder of Occultics, using 2,500 years of Pythagorean mathematics and 700,000 words of proprietary research.</p>
+  </div>
+
+  <div class="details-grid">
+    <div class="detail-card">
+      <div class="detail-num">45</div>
+      <div class="detail-label">Minutes Live</div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-num">2</div>
+      <div class="detail-label">Birth Dates Decoded</div>
+    </div>
+    <div class="detail-card">
+      <div class="detail-num">81</div>
+      <div class="detail-label">Possible Compatibility Codes</div>
+    </div>
+
+  </div>
+
+  <div class="what-box">
+    <div class="what-title">What You Will Discover</div>
+    <div class="what-item"><div class="what-icon">✦</div><div class="what-text">Both complete Pythagorean profiles — biorhythm, generational number, and life path for each person</div></div>
+    <div class="what-item"><div class="what-icon">✦</div><div class="what-text">Your compatibility code — what it means, what it predicts, and what patterns are written in your numbers</div></div>
+    <div class="what-item"><div class="what-icon">✦</div><div class="what-text">Live Q&A — ask anything about your numbers during the session</div></div>
+  </div>
+
+  <div class="quote-box">
+    <div class="quote-text">"Your numbers have always known. This is the session where you hear what they have to say."</div>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-price">$888</div>
+    <div class="cta-note">45 minutes · Google Meet · Personally with Adriana</div>
+    <a href="https://calendly.com/occultics4/45min" target="_blank" class="cta-btn">Book Your Live Session</a>
+    <div class="cta-secure">Secure payment via Stripe · Book at least 3 days in advance</div>
+  </div>
+
+  <div class="how-box">
+    <div class="how-title">How It Works</div>
+    <div class="how-steps">
+      <div class="how-step"><div class="how-num">1</div><div class="how-content"><div class="how-step-title">Book Your Session</div><div class="how-step-desc">Choose your date and time. Enter both birth dates. Payment is collected securely through Stripe at the time of booking.</div></div></div>
+      <div class="how-step"><div class="how-num">2</div><div class="how-content"><div class="how-step-title">Adriana Prepares Your Codes</div><div class="how-step-desc">Before the session, your compatibility code is calculated and analyzed — both individual profiles and the relationship mathematics.</div></div></div>
+      <div class="how-step"><div class="how-num">3</div><div class="how-content"><div class="how-step-title">45 Minutes Live on Google Meet</div><div class="how-step-desc">Join the video call. Hear your codes decoded in real time. Ask anything. Leave with absolute clarity about your connection.</div></div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:48px">
+    <a href="https://calendly.com/occultics4/45min" target="_blank" class="cta-btn">Book Your Live Session — $888</a>
+  </div>
+
+  <div class="footer">
+    <a href="/">occultics.ai</a> · <a href="/match/compatibility.html">Free Compatibility Check</a> · <a href="/match/join.html">Join Match</a> · <a href="/privacy.html">Privacy</a>
+    <div class="footer-copy">&copy; 2026 Occultics Publishing</div>
+  </div>
+</div>
+</body>
+</html>
