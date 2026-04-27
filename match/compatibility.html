@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Your Compatibility — Occultics Match</title>
+<meta name="description" content="Enter two birth dates. See your compatibility code instantly. 81 mathematically distinct codes. Free.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray:#8892a4;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;overflow-x:hidden}
+.page{max-width:580px;margin:0 auto;padding:40px 24px 60px;min-height:100vh;display:flex;flex-direction:column}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
+.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-gem{width:24px;height:28px}
+.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
+.back-link{font-size:11px;color:var(--gray);text-decoration:none}
+.back-link:hover{color:var(--crystal)}
+
+.hero{text-align:center;margin-bottom:48px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,42px);font-weight:300;line-height:1.15;margin-bottom:12px}
+.hero h1 em{font-style:italic;color:var(--crystal)}
+.hero p{font-size:13px;color:var(--gray);line-height:1.7;font-weight:300;max-width:420px;margin:0 auto}
+
+.check-box{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:20px;padding:36px 32px;margin-bottom:24px}
+.person-label{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.person-label::after{content:'';flex:1;height:1px;background:rgba(77,184,255,0.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group label{font-size:10px;color:var(--gray);font-weight:500}
+.form-group select{padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%234db8ff' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.form-group select:focus{border-color:var(--crystal)}
+.form-group select option{background:var(--navy);color:var(--white)}
+.divider{text-align:center;margin:8px 0 24px;font-family:'Cormorant Garamond',serif;font-size:18px;color:rgba(77,184,255,0.25)}
+.check-btn{width:100%;padding:16px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
+.check-btn:hover{background:#2a3aff;transform:translateY(-1px)}
+.check-btn:active{transform:translateY(0)}
+.free-note{text-align:center;font-size:10px;color:rgba(255,255,255,0.2);margin-top:12px}
+
+/* Result */
+#result{display:none}
+.result-card{background:rgba(26,42,255,0.06);border:1px solid rgba(77,184,255,0.15);border-radius:20px;padding:40px 32px;text-align:center;position:relative;overflow:hidden;margin-bottom:24px}
+.result-card::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(26,42,255,0.1) 0%,transparent 70%);pointer-events:none}
+.result-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px;position:relative}
+.result-codes{display:flex;justify-content:center;align-items:center;gap:24px;margin-bottom:24px;position:relative}
+.result-person{text-align:center}
+.result-person-name{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.result-person-code{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white)}
+.result-x{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(77,184,255,0.3)}
+.result-divider{width:60px;height:1px;background:rgba(77,184,255,0.15);margin:0 auto 24px;position:relative}
+.result-compat-label{font-size:9px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:12px;position:relative}
+.result-compat-code{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,10vw,72px);font-weight:300;color:var(--crystal);letter-spacing:12px;margin-bottom:8px;position:relative}
+.result-compat-desc{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.5);font-style:italic;margin-bottom:24px;position:relative}
+.result-sub-codes{display:flex;justify-content:center;gap:32px;position:relative}
+.result-sub{text-align:center}
+.result-sub-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white)}
+.result-sub-label{font-size:8px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;margin-top:4px}
+
+.cta-section{text-align:center;margin-top:24px}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:rgba(255,255,255,0.4);font-style:italic;margin-bottom:20px;line-height:1.5}
+.cta-btns{display:flex;flex-direction:column;gap:10px}
+.cta-btn{display:block;padding:16px 24px;border-radius:10px;font-size:11px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s}
+.cta-primary{background:var(--royal);color:var(--white);border:none}
+.cta-primary:hover{background:#2a3aff}
+.cta-secondary{background:transparent;color:var(--crystal);border:1px solid rgba(77,184,255,0.3)}
+.cta-secondary:hover{border-color:var(--crystal)}
+.cta-tertiary{background:transparent;color:var(--gray);border:1px solid rgba(255,255,255,0.1)}
+.cta-tertiary:hover{border-color:rgba(255,255,255,0.3);color:var(--white)}
+.recalc{text-align:center;margin-top:20px}
+.recalc a{font-size:11px;color:var(--crystal);cursor:pointer;text-decoration:none;letter-spacing:1px}
+
+.share-row{display:flex;justify-content:center;gap:12px;margin-top:16px;position:relative}
+.share-btn{padding:8px 16px;border-radius:8px;font-size:10px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.15);color:var(--gray);transition:all .2s}
+.share-btn:hover{border-color:var(--crystal);color:var(--white)}
+
+.footer{text-align:center;margin-top:auto;padding-top:40px}
+.footer a{font-size:11px;color:var(--gray);text-decoration:none;font-weight:300}
+.footer a:hover{color:var(--crystal)}
+.footer-copy{font-size:9px;color:rgba(255,255,255,0.15);margin-top:12px}
+
+@media(max-width:480px){.form-row{grid-template-columns:1fr}.page{padding:24px 16px 40px}.check-box{padding:24px 18px}.result-card{padding:32px 20px}.result-codes{flex-direction:column;gap:12px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <a href="/match/join.html" class="logo-wrap">
+      <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+      <div class="logo-name">OCCULTICS</div>
+    </a>
+    <a href="/match/join.html" class="back-link">← Join Match</a>
+  </div>
+
+  <div id="calculator">
+    <div class="hero">
+      <h1>Check Your <em>Compatibility</em></h1>
+      <p>Enter two birth dates. See the mathematical code that defines your connection. 81 possible codes. Each one tells a different story.</p>
+    </div>
+
+    <div class="check-box">
+      <div class="person-label">Person 1</div>
+      <div class="form-row">
+        <div class="form-group"><label>Day</label><select id="day1"><option value="">—</option></select></div>
+        <div class="form-group"><label>Month</label><select id="month1"><option value="">—</option></select></div>
+        <div class="form-group"><label>Year</label><select id="year1"><option value="">—</option></select></div>
+      </div>
+
+      <div class="divider">×</div>
+
+      <div class="person-label">Person 2</div>
+      <div class="form-row">
+        <div class="form-group"><label>Day</label><select id="day2"><option value="">—</option></select></div>
+        <div class="form-group"><label>Month</label><select id="month2"><option value="">—</option></select></div>
+        <div class="form-group"><label>Year</label><select id="year2"><option value="">—</option></select></div>
+      </div>
+
+      <button class="check-btn" onclick="checkCompat()">Reveal Your Compatibility Code</button>
+      <div class="free-note">Free. No email required. No signup needed.</div>
+    </div>
+  </div>
+
+  <div id="result">
+    <div class="result-card">
+      <div class="result-eyebrow">Your Compatibility Code</div>
+      <div class="result-codes">
+        <div class="result-person">
+          <div class="result-person-name">Person 1</div>
+          <div class="result-person-code" id="r-code1">—</div>
+        </div>
+        <div class="result-x">×</div>
+        <div class="result-person">
+          <div class="result-person-name">Person 2</div>
+          <div class="result-person-code" id="r-code2">—</div>
+        </div>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-compat-label">Compatibility Code</div>
+      <div class="result-compat-code" id="r-compat">—</div>
+      <div class="result-compat-desc" id="r-desc">—</div>
+      <div class="result-sub-codes">
+        <div class="result-sub"><div class="result-sub-num" id="r-bio">—</div><div class="result-sub-label">Connection</div></div>
+        <div class="result-sub"><div class="result-sub-num" id="r-gen">—</div><div class="result-sub-label">Goal</div></div>
+        <div class="result-sub"><div class="result-sub-num" id="r-lp">—</div><div class="result-sub-label">Foundation</div></div>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" onclick="copyResult()">Copy Code</button>
+        <button class="share-btn" onclick="shareResult()">Share</button>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="cta-title">This is your code. But what does it mean?<br>What patterns are written in these numbers?</div>
+      <div class="cta-btns">
+        <a href="/match/join.html" class="cta-btn cta-primary">Join Occultics Match — Find Your Code Match</a>
+        <a href="/" class="cta-btn cta-tertiary">Back to Occultics</a>
+      </div>
+    </div>
+
+    <div class="recalc"><a onclick="showCalc()">← Check another pair</a></div>
+  </div>
+
+  <div class="footer">
+    <a href="/">occultics.ai</a> · <a href="/privacy.html">Privacy</a>
+    <div class="footer-copy">&copy; 2026 Occultics Publishing</div>
+  </div>
+</div>
+
+<script>
+// Populate dropdowns
+['day1','day2'].forEach(function(id){
+  var el=document.getElementById(id);
+  for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d;el.appendChild(o);}
+});
+var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+['month1','month2'].forEach(function(id){
+  var el=document.getElementById(id);
+  months.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});
+});
+var now=new Date().getFullYear();
+['year1','year2'].forEach(function(id){
+  var el=document.getElementById(id);
+  for(var y=now;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}
+});
+
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n;}
+
+function calcCode(day,month,year){
+  var bio=r(day+month);
+  var gen=r(String(year).split('').reduce(function(s,d){return s+parseInt(d)},0));
+  var lp=r(bio+gen);
+  return {bio:bio,gen:gen,lp:lp};
+}
+
+var compatDescs = {
+  '448': 'Permanent. Unbreakable. Destined.',
+  '988': 'Karmic. Powerful. Volatile.',
+  '281': 'Fated encounter. Empire builders.',
+  '639': 'Passion. Secrets. Intensity.',
+  '279': 'Soulmate energy. Deep karma.',
+  '999': 'Unpredictable. May last or may not.',
+  '111': 'Two leaders. Power struggle or empire.',
+  '222': 'Double destiny. Deep emotional bond.',
+  '333': 'Creative explosion. Joy and expansion.',
+  '444': 'Karmic permanence. Built to last.',
+  '555': 'Freedom seekers. Exciting but unstable.',
+  '666': 'Double Venus. Love is everything.',
+  '777': 'Two seekers. Intellectual but distant.',
+  '888': 'Double Mars. Passion and power.',
+};
+
+function getDesc(code) {
+  if (compatDescs[code]) return compatDescs[code];
+  var first = code[0];
+  var descs = {
+    '1': 'Individual energy. Leadership defines the connection.',
+    '2': 'Fated. Destiny brought you together.',
+    '3': 'Creative and expressive. Joy in the bond.',
+    '4': 'Karmic. Built on structure and lessons.',
+    '5': 'Freedom and change. Never boring.',
+    '6': 'Love-centered. Family and beauty.',
+    '7': 'Intellectual. Deep but needs space.',
+    '8': 'Power and ambition. Material success.',
+    '9': 'Karmic completion. Finishing old cycles.'
+  };
+  return descs[first] || 'A unique mathematical signature.';
+}
+
+function checkCompat() {
+  var d1=parseInt(document.getElementById('day1').value);
+  var m1=parseInt(document.getElementById('month1').value);
+  var y1=parseInt(document.getElementById('year1').value);
+  var d2=parseInt(document.getElementById('day2').value);
+  var m2=parseInt(document.getElementById('month2').value);
+  var y2=parseInt(document.getElementById('year2').value);
+
+  if(!d1||!m1||!y1){alert('Please enter Person 1\'s complete birth date.');return;}
+  if(!d2||!m2||!y2){alert('Please enter Person 2\'s complete birth date.');return;}
+
+  var c1 = calcCode(d1,m1,y1);
+  var c2 = calcCode(d2,m2,y2);
+  var cb = r(c1.bio+c2.bio);
+  var cg = r(c1.gen+c2.gen);
+  var cl = r(c1.lp+c2.lp);
+  var compatStr = ''+cb+cg+cl;
+
+  document.getElementById('r-code1').textContent = c1.bio+'.'+c1.gen+'.'+c1.lp;
+  document.getElementById('r-code2').textContent = c2.bio+'.'+c2.gen+'.'+c2.lp;
+  document.getElementById('r-compat').textContent = cb+' . '+cg+' . '+cl;
+  document.getElementById('r-bio').textContent = cb;
+  document.getElementById('r-gen').textContent = cg;
+  document.getElementById('r-lp').textContent = cl;
+  document.getElementById('r-desc').textContent = getDesc(compatStr);
+
+  document.getElementById('calculator').style.display='none';
+  document.getElementById('result').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function showCalc() {
+  document.getElementById('calculator').style.display='block';
+  document.getElementById('result').style.display='none';
+  window.scrollTo(0,0);
+}
+
+function copyResult() {
+  var code = document.getElementById('r-compat').textContent;
+  var desc = document.getElementById('r-desc').textContent;
+  var text = 'Our compatibility code is ' + code + ' — ' + desc + ' | occultics.ai/match/compatibility.html';
+  navigator.clipboard.writeText(text).then(function(){
+    alert('Copied to clipboard!');
+  });
+}
+
+function shareResult() {
+  var code = document.getElementById('r-compat').textContent;
+  var desc = document.getElementById('r-desc').textContent;
+  var text = 'Our compatibility code is ' + code + ' — ' + desc;
+  var url = 'https://occultics.ai/match/compatibility.html';
+  if (navigator.share) {
+    navigator.share({title:'Occultics Compatibility Code',text:text,url:url});
+  } else {
+    copyResult();
+  }
+}
+</script>
+</body>
+</html>
