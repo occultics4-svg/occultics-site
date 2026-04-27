@@ -152,8 +152,25 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <div class="cta-section">
       <div class="cta-title">This is your code. But what does it mean?<br>What patterns are written in these numbers?</div>
       <div class="cta-btns">
-        <a href="/match/join.html" class="cta-btn cta-primary">Join Occultics Match — Find Your Code Match</a>
-        <a href="/" class="cta-btn cta-tertiary">Back to Occultics</a>
+        <button onclick="buyReading('app_compatibility_code')" class="cta-btn cta-primary" id="btn-cca">Full Compatibility Analysis — 11 Sessions — $89.99</button>
+        <button onclick="buyReading('app_life_code_map')" class="cta-btn cta-secondary" id="btn-lcm">Your Personal Code Reading — $9.99</button>
+        <button onclick="buyReading('app_life_code_alignment')" class="cta-btn cta-secondary" id="btn-lca">Full 7-Session Journey — $29.99</button>
+        <a href="/match/join.html" class="cta-btn cta-tertiary">Join Occultics Match — Find Your Code Match</a>
+      </div>
+      <div style="text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2)">Secure payment via Stripe · Delivered to your private profile</div>
+    </div>
+
+    <!-- Purchase modal -->
+    <div id="buy-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
+      <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:480px;width:100%;padding:36px 32px;position:relative;">
+        <button onclick="closeBuyModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
+        <div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;" id="modal-eyebrow">Reading</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white);margin-bottom:20px;" id="modal-title">Your Reading</div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:20px;line-height:1.6;" id="modal-desc">Enter your email to receive your reading.</div>
+        <input id="buy-email" type="email" placeholder="your@email.com" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:10px;box-sizing:border-box;">
+        <input id="buy-name" type="text" placeholder="Your name" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:16px;box-sizing:border-box;">
+        <button onclick="processPurchase()" id="modal-btn" style="width:100%;padding:15px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;">Purchase</button>
+        <div style="text-align:center;margin-top:10px;font-size:10px;color:var(--gray);">🔒 Secure payment via Stripe</div>
       </div>
     </div>
 
@@ -281,6 +298,102 @@ function shareResult() {
     navigator.share({title:'Occultics Compatibility Code',text:text,url:url});
   } else {
     copyResult();
+  }
+}
+
+// In-app purchases
+var _buyType = '';
+var _storedDob1 = '';
+var _storedDob2 = '';
+
+var productInfo = {
+  'app_compatibility_code': {
+    eyebrow: 'Compatibility Code',
+    title: 'Full 11-Session Compatibility Analysis',
+    desc: 'Both complete profiles. Your compatibility code decoded. How you met, what you are building, and what the numbers have always known.',
+    btn: 'Purchase — $89.99'
+  },
+  'app_life_code_map': {
+    eyebrow: 'Life Code Map',
+    title: 'Your Mathematical Blueprint',
+    desc: 'A complete 30-minute reading of your Pythagorean Code. Your biorhythm, generational number, life path, squares, trines, and personal year.',
+    btn: 'Purchase — $9.99'
+  },
+  'app_life_code_alignment': {
+    eyebrow: 'Life Code Alignment',
+    title: '7 Sessions Over 14 Days',
+    desc: 'A private journey through the mathematics of who you are. 7 sessions unlocking over 14 days. Your complete code decoded.',
+    btn: 'Purchase — $29.99'
+  }
+};
+
+function buyReading(type) {
+  _buyType = type;
+  var info = productInfo[type];
+  document.getElementById('modal-eyebrow').textContent = info.eyebrow;
+  document.getElementById('modal-title').textContent = info.title;
+  document.getElementById('modal-desc').textContent = info.desc;
+  document.getElementById('modal-btn').textContent = info.btn;
+  
+  // Store the DOBs for the purchase
+  var d1=document.getElementById('day1').value;
+  var m1=document.getElementById('month1').value;
+  var y1=document.getElementById('year1').value;
+  var d2=document.getElementById('day2').value;
+  var m2=document.getElementById('month2').value;
+  var y2=document.getElementById('year2').value;
+  _storedDob1 = d1+'.'+m1+'.'+y1;
+  _storedDob2 = d2+'.'+m2+'.'+y2;
+  
+  document.getElementById('buy-modal').style.display = 'flex';
+}
+
+function closeBuyModal() {
+  document.getElementById('buy-modal').style.display = 'none';
+}
+
+async function processPurchase() {
+  var email = document.getElementById('buy-email').value.trim();
+  var name = document.getElementById('buy-name').value.trim();
+  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+  if (!name) { alert('Please enter your name.'); return; }
+  
+  var btn = document.getElementById('modal-btn');
+  btn.textContent = 'Redirecting to checkout...';
+  btn.disabled = true;
+  
+  var body = {
+    type: _buyType,
+    email: email,
+    name: name,
+    dob: _storedDob1,
+    lang: 'en'
+  };
+  
+  // Add partner data for compatibility code
+  if (_buyType === 'app_compatibility_code') {
+    body.dob = _storedDob1;
+    body.dob2 = _storedDob2;
+    body.name2 = 'Partner';
+  }
+  
+  try {
+    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    var data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      throw new Error(data.error || 'Payment error');
+    }
+  } catch(err) {
+    alert('Something went wrong: ' + err.message);
+    var info = productInfo[_buyType];
+    btn.textContent = info.btn;
+    btn.disabled = false;
   }
 }
 </script>
