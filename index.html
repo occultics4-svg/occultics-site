@@ -207,8 +207,8 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
       <button class="lang-btn" id="lang-es" onclick="setLang('es')">ES</button>
       <button class="lang-btn" id="lang-ja" onclick="setLang('ja')">JA</button>
     </div>
-    <button class="nav-btn nav-outline" onclick="openLCMModal()" id="nav-cta">Life Code Map</button>
-    <button class="nav-btn" onclick="window.location='https://occultics.ai/match/join'" id="nav-match">Match</button>
+    <button class="nav-btn nav-outline" onclick="window.location='/match/compatibility.html'" id="nav-cta">Life Code Map</button>
+    <button class="nav-btn" onclick="window.location='/match/compatibility.html'" id="nav-match">Match</button>
     <button class="nav-btn nav-outline" onclick="window.location='https://occultics.ai/blog/'" id="nav-blog">Blog</button>
     <button class="nav-btn nav-outline" onclick="window.location='https://occultics.ai/about.html'" id="nav-about">About</button>
   </nav>
@@ -220,9 +220,9 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   <h1 class="hero-title" id="hero-title">Every Relationship Has a<br><em>Mathematical Signature.</em></h1>
   <p class="hero-sub" id="hero-sub">Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.</p>
   <p class="hero-anchor" id="hero-anchor">✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages</p>
-  <button class="hero-cta" onclick="window.location='https://occultics.ai/match/join'" id="hero-cta-btn" style="background:#1a2aff;">Calculate Your Code — Join Match</button>
-  <p style="margin-top:14px;font-size:11px;color:#8892a4;">Free for the first 100 founding members · Then $29/month</p>
-  <div style="margin-top:20px;"><button onclick="openLCMModal()" style="padding:10px 24px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:10px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Life Code Map · $297</button></div>
+  <button class="hero-cta" onclick="window.location='/match/compatibility.html'" id="hero-cta-btn" style="background:#1a2aff;">Check Your Compatibility Code</button>
+  <p style="margin-top:14px;font-size:11px;color:#8892a4;">$29/month · The world's first human connection platform based on mathematics</p>
+  <div style="margin-top:20px;"><button onclick="window.location='/match/compatibility.html'" style="padding:10px 24px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:10px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Check Your Compatibility Code</button></div>
 </section>
 
 <section style="padding:80px 48px;text-align:center;background:linear-gradient(180deg,#0a0e2e 0%,#111640 100%);color:white;position:relative;overflow:hidden;">
@@ -230,8 +230,8 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
   <p class="section-eyebrow" style="color:#4db8ff;" id="match-eyebrow">Live Now</p>
   <h2 class="section-title" style="color:white;font-size:clamp(32px,5vw,48px);" id="match-title">Matching Apps Connect on Faces.<br>We Connect on Mathematics.</h2>
   <p style="font-size:14px;color:#8892a4;max-width:520px;margin:0 auto 12px;line-height:1.7;font-weight:300;" id="match-sub">Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.</p>
-  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">Free for the first 100 founding members. Then $29/month.</p>
-  <button onclick="window.location='https://occultics.ai/match/join'" style="display:inline-block;padding:16px 40px;background:#1a2aff;color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join Occultics Match →</button>
+  <p style="font-size:11px;color:#4db8ff;margin-bottom:32px;font-weight:500;" id="match-count">$29/month · Join the world's first human connection platform based on mathematics.</p>
+  <button onclick="window.location='/match/compatibility.html'" style="display:inline-block;padding:16px 40px;background:#1a2aff;color:white;border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:Montserrat,sans-serif;text-transform:uppercase;" id="match-btn">Join Occultics Match →</button>
   <div style="display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap;">
     <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m1-label">Love Match</div><div style="font-size:20px;">💎</div></div>
     <div style="text-align:center;"><div style="font-size:11px;color:#8892a4;margin-bottom:4px;" id="match-m2-label">Friend Match</div><div style="font-size:20px;">🤝</div></div>
@@ -289,32 +289,10 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
     <div style="text-align:center;margin-bottom:48px;padding:32px 0;border-top:1px solid rgba(77,184,255,0.08);border-bottom:1px solid rgba(77,184,255,0.08);">
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:500px;margin:0 auto;">"Some people spend their entire lives trying to understand themselves.<br>Your numbers already know."</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:860px;margin:0 auto 40px;">
-      <div style="padding:28px 24px;border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);text-align:center;">
-        <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:10px;">Entry Point</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#fff;margin-bottom:6px;">The Life Code Map</div>
-        <div style="font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;margin-bottom:20px;line-height:1.6;">1 session · 30 minutes<br>Your Mathematical Blueprint</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;margin-bottom:20px;">$297</div>
-        <button onclick="openLCMModal()" style="width:100%;padding:12px;background:transparent;color:#4db8ff;border:1px solid rgba(77,184,255,0.3);border-radius:8px;font-size:9px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.borderColor='#4db8ff'" onmouseout="this.style.borderColor='rgba(77,184,255,0.3)'">Life Code Map · $297</button>
-      </div>
-      <div style="padding:28px 24px;border:1px solid rgba(77,184,255,0.3);border-radius:14px;background:rgba(26,42,255,0.08);text-align:center;position:relative;">
-        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#1a2aff;padding:4px 16px;border-radius:20px;font-size:8px;letter-spacing:1.5px;color:#fff;font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;white-space:nowrap;">Most Popular</div>
-        <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:10px;">Compatibility</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#fff;margin-bottom:6px;">The Compatibility Code</div>
-        <div style="font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;margin-bottom:20px;line-height:1.6;">11 sessions<br>Two codes. One picture.<br><span style="color:#4db8ff;font-size:9px;">+ personal support</span></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;margin-bottom:20px;">$888</div>
-        <button onclick="openCompatModal()" style="width:100%;padding:12px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:9px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Compatibility Code · $888</button>
-      </div>
-      <div style="padding:28px 24px;border:1px solid rgba(77,184,255,0.15);border-radius:14px;background:rgba(255,255,255,0.02);text-align:center;">
-        <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:10px;">Full Program</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#fff;margin-bottom:6px;">The Life Code Alignment</div>
-        <div style="font-size:11px;color:#8892a4;font-weight:300;font-family:'Montserrat',sans-serif;margin-bottom:20px;line-height:1.6;">7 sessions · 14 days<br>Your complete journey<br><span style="color:#4db8ff;font-size:9px;">+ personal support</span></div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#fff;margin-bottom:20px;">$497</div>
-        <button onclick="openLCAModal()" style="width:100%;padding:12px;background:transparent;color:#4db8ff;border:1px solid rgba(77,184,255,0.3);border-radius:8px;font-size:9px;letter-spacing:1.5px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;" onmouseover="this.style.borderColor='#4db8ff'" onmouseout="this.style.borderColor='rgba(77,184,255,0.3)'">Life Code Alignment · $497</button>
-      </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:500px;margin:0 auto 40px;">
+      <a href="/match/compatibility.html" style="display:block;width:100%;padding:16px 32px;background:#1a2aff;color:#fff;border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s;" onmouseover="this.style.background='#2a3aff'" onmouseout="this.style.background='#1a2aff'">Check Your Compatibility Code</a>
+      <a href="/booking.html" style="display:block;width:100%;padding:16px 32px;background:transparent;color:#4db8ff;border:1px solid rgba(77,184,255,0.3);border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s;" onmouseover="this.style.borderColor='#4db8ff'" onmouseout="this.style.borderColor='rgba(77,184,255,0.3)'">Book a Live Session with Adriana — $888</a>
     </div>
-    <p style="text-align:center;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">Secure payment · Private profile within 24hrs · Life Code Map credit applied toward full program</p>
-    <p style="text-align:center;margin-top:12px;"><span onclick="openLCMModal()" style="color:#4db8ff;font-size:12px;font-family:'Montserrat',sans-serif;letter-spacing:1px;cursor:pointer;text-decoration:underline;font-weight:600;">Try Session 1 only — Life Code Map · $297</span></p>
   </div>
 </section>
 
@@ -356,178 +334,19 @@ footer{padding:24px 48px;border-top:1px solid var(--gray-light);display:flex;jus
 <section class="final-cta">
   <h2 class="section-title" id="final-title">Two Birth Dates. One Mathematical Truth.</h2>
   <p class="final-sub" id="final-sub"></p>
-  <button class="hero-cta" onclick="window.location='https://occultics.ai/match/join'" id="final-btn">Join Occultics Match — $29/month</button>
+  <button class="hero-cta" onclick="window.location='/match/compatibility.html'" id="final-btn">Check Your Compatibility Code</button>
   <div class="hero-price" id="final-price">Secure payment · Instant delivery · 100% satisfaction guarantee</div>
 </section>
 
 </div><!-- end main-site -->
 
-<!-- LIFE CODE MAP MODAL -->
-<div id="modal-lcm" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
-    <button onclick="closeLCMModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
-    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Life Code Map</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Your Mathematical Blueprint</div>
-    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">1 session · 30 minutes · Private profile in 24hrs</div>
-    <input id="lcm-name" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lcm-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lcm-dob" type="text" placeholder="Date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lcm-time" type="text" placeholder="Time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <select id="lcm-gender" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;"><option value="">Gender (optional)</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
-    <select id="lcm-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;"><option value="en">English</option><option value="es">Español</option><option value="ja">日本語</option></select>
-    <button onclick="handleLCMPayment()" id="lcm-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Life Code Map — $297</button>
-    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 1 session</div>
-  </div>
 </div>
 
-<!-- LIFE CODE ALIGNMENT MODAL -->
-<div id="modal-lca" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
-    <button onclick="closeLCAModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
-    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Life Code Alignment</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Your Complete Journey</div>
-    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">7 sessions · 14 days · Private profile</div>
-    <input id="lca-name" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lca-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lca-dob" type="text" placeholder="Date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="lca-time" type="text" placeholder="Time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <select id="lca-gender" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;"><option value="">Gender (optional)</option><option value="female">Female</option><option value="male">Male</option><option value="other">Other</option></select>
-    <select id="lca-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;"><option value="en">English</option><option value="es">Español</option><option value="ja">日本語</option></select>
-    <button onclick="handleLCAPayment()" id="lca-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Life Code Alignment — $497</button>
-    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 7 sessions</div>
-  </div>
 </div>
 
-<!-- COMPATIBILITY CODE MODAL -->
-<div id="modal-compat" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:16px;max-width:520px;width:100%;padding:40px 36px;position:relative;max-height:90vh;overflow-y:auto;">
-    <button onclick="closeCompatModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
-    <div style="font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;">The Compatibility Code</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#fff;margin-bottom:4px;">Two codes. One picture.</div>
-    <div style="font-size:11px;color:#8892a4;font-family:'Montserrat',sans-serif;margin-bottom:28px;">Enter both birth dates to begin.</div>
-    <div style="font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:12px;">Your Details</div>
-    <input id="compat-name1" type="text" placeholder="Your name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="compat-email" type="email" placeholder="Your email" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="compat-dob1" type="text" placeholder="Your date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="compat-time1" type="text" placeholder="Your time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:20px;box-sizing:border-box;">
-    <div style="font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:12px;">Person of Interest</div>
-    <input id="compat-name2" type="text" placeholder="Their name" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="compat-dob2" type="text" placeholder="Their date of birth — DD.MM.YYYY" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:10px;box-sizing:border-box;">
-    <input id="compat-time2" type="text" placeholder="Their time of birth — HH:MM (optional)" style="width:100%;padding:11px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:20px;box-sizing:border-box;">
-    <select id="compat-lang" style="width:100%;padding:11px 14px;background:#0d1235;border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:12px;outline:none;margin-bottom:24px;box-sizing:border-box;"><option value="en">English</option><option value="es">Español</option><option value="ja">日本語</option></select>
-    <button onclick="handleCompatPayment()" id="compat-pay-btn" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;">✦ Begin The Compatibility Code — $888</button>
-    <div style="text-align:center;margin-top:12px;font-size:10px;color:#8892a4;font-family:'Montserrat',sans-serif;">🔒 Secure payment · Private profile within 24hrs · 11 sessions</div>
-  </div>
 </div>
 
-<script>
-function openCompatModal(){document.getElementById('modal-compat').style.display='flex';document.body.style.overflow='hidden';}
-function closeCompatModal(){document.getElementById('modal-compat').style.display='none';document.body.style.overflow='';}
 
-function openLCMModal(){document.getElementById('modal-lcm').style.display='flex';document.body.style.overflow='hidden';}
-function closeLCMModal(){document.getElementById('modal-lcm').style.display='none';document.body.style.overflow='';}
-
-function openLCAModal(){document.getElementById('modal-lca').style.display='flex';document.body.style.overflow='hidden';}
-function closeLCAModal(){document.getElementById('modal-lca').style.display='none';document.body.style.overflow='';}
-
-async function handleLCMPayment(){
-  var name=document.getElementById('lcm-name').value.trim();
-  var email=document.getElementById('lcm-email').value.trim();
-  var dob=document.getElementById('lcm-dob').value.trim();
-  var time=document.getElementById('lcm-time').value.trim();
-  var gender=document.getElementById('lcm-gender').value;
-  var lang=document.getElementById('lcm-lang').value;
-  if(!name){alert('Please enter your name.');return;}
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  if(!dob){alert('Please enter your date of birth.');return;}
-  var btn=document.getElementById('lcm-pay-btn');
-  btn.textContent='Preparing your session...';btn.disabled=true;
-  try{
-    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({type:'life_code_map',email:email,name:name,dob:dob,time:time,gender:gender,lang:lang})
-    });
-    var data=await res.json();
-    if(data.url){window.location.href=data.url;}else{throw new Error(data.error||'Payment error');}
-  }catch(err){
-    alert('Something went wrong: '+err.message);
-    btn.textContent='✦ Life Code Map — $297';btn.disabled=false;
-  }
-}
-
-async function handleLCAPayment(){
-  var name=document.getElementById('lca-name').value.trim();
-  var email=document.getElementById('lca-email').value.trim();
-  var dob=document.getElementById('lca-dob').value.trim();
-  var time=document.getElementById('lca-time').value.trim();
-  var gender=document.getElementById('lca-gender').value;
-  var lang=document.getElementById('lca-lang').value;
-  if(!name){alert('Please enter your name.');return;}
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  if(!dob){alert('Please enter your date of birth.');return;}
-  var btn=document.getElementById('lca-pay-btn');
-  btn.textContent='Preparing your session...';btn.disabled=true;
-  try{
-    var res=await fetch('https://occultics-checkout.occultics4.workers.dev/',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({type:'life_code_alignment',email:email,name:name,dob:dob,time:time,gender:gender,lang:lang})
-    });
-    var data=await res.json();
-    if(data.url){window.location.href=data.url;}else{throw new Error(data.error||'Payment error');}
-  }catch(err){
-    alert('Something went wrong: '+err.message);
-    btn.textContent='✦ Life Code Alignment — $497';btn.disabled=false;
-  }
-}
-
-async function handleCompatPayment(){
-  var name1 = document.getElementById('compat-name1').value.trim();
-  var email = document.getElementById('compat-email').value.trim();
-  var dob1 = document.getElementById('compat-dob1').value.trim();
-  var time1 = document.getElementById('compat-time1').value.trim();
-  var name2 = document.getElementById('compat-name2').value.trim();
-  var dob2 = document.getElementById('compat-dob2').value.trim();
-  var time2 = document.getElementById('compat-time2').value.trim();
-  var lang = document.getElementById('compat-lang').value;
-
-  if(!name1){alert('Please enter your name.');return;}
-  if(!email||!email.includes('@')){alert('Please enter a valid email.');return;}
-  if(!dob1){alert('Please enter your date of birth.');return;}
-  if(!dob2){alert('Please enter their date of birth.');return;}
-
-  var btn = document.getElementById('compat-pay-btn');
-  btn.textContent = 'Preparing your session...';
-  btn.disabled = true;
-
-  try {
-    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-        type: 'compatibility_code',
-        email: email,
-        name: name1,
-        dob: dob1,
-        time: time1,
-        name2: name2,
-        dob2: dob2,
-        time2: time2,
-        lang: lang
-      })
-    });
-    var data = await res.json();
-    if(data.url){
-      window.location.href = data.url;
-    } else {
-      throw new Error(data.error || 'Payment error');
-    }
-  } catch(err) {
-    alert('Something went wrong: ' + err.message);
-    btn.textContent = '✦ Begin The Compatibility Code — $888';
-    btn.disabled = false;
-  }
-}
-</script>
 
 <script>
 var translations = {
@@ -539,8 +358,8 @@ var translations = {
     'hero-title': 'Every Relationship Has a<br><em>Mathematical Signature.</em>',
     'hero-sub': 'Two birth dates contain more information about your compatibility than years of conversation. Pythagorean numerology has mapped human connection for 2,500 years. We have digitized 700,000 words of that research into a precise compatibility engine.',
     'hero-anchor': '✦ <strong>81</strong> mathematically distinct compatibility codes ✦ <strong>10</strong> analytical sections ✦ <strong>3</strong> languages',
-    'hero-cta-btn': 'Calculate Your Code — Join Match',
-    'hero-price': '<strong>$29/month</strong> · Founding members · Limited spots',
+    'hero-cta-btn': 'Check Your Compatibility Code',
+    'hero-price': 'Enter two birth dates. See the mathematical code that defines your connection.',
     'sp-1': 'Words of Research',
     'sp-2': 'Compatibility Codes',
     'sp-3': 'Years of Tradition',
@@ -581,14 +400,14 @@ var translations = {
     'match-eyebrow': 'Now Live',
     'match-title': 'Matching Apps Connect on Faces.<br>We Connect on Mathematics.',
     'match-sub': 'Every person carries a unique numerical signature derived from their birth date. Our matching engine identifies the specific codes that complement yours — across love, friendship, and business. This is not astrology. This is pattern recognition applied to human connection.',
-    'match-count': 'Free for the first 100 founding members. Then $29/month.',
+    'match-count': '$29/month · Join the world's first human connection platform based on mathematics.',
     'match-btn': 'Join Occultics Match →',
     'match-m1-label': 'Love Match',
     'match-m2-label': 'Friend Match',
     'match-m3-label': 'Business Match',
     'final-title': 'Two Birth Dates. One Mathematical Truth.',
     'final-sub': 'The most complete numerological experience that exists. Generated from your exact birth date and delivered to your private profile.',
-    'final-btn': 'Begin The Life Code Alignment — $497',
+    'final-btn': 'Check Your Compatibility Code',
     'final-price': 'Secure payment · Instant delivery · 100% satisfaction guarantee',
     disclaimer: 'For informational and entertainment purposes only. Not a substitute for professional advice.'
   },
@@ -602,8 +421,8 @@ var translations = {
     'hero-title': 'Cada Relación Tiene una<br><em>Firma Matemática.</em>',
     'hero-sub': 'Dos fechas de nacimiento contienen más información sobre tu compatibilidad que años de conversación. La numerología pitagórica ha mapeado la conexión humana durante 2,500 años. Hemos digitalizado 700,000 palabras de esa investigación en un motor de compatibilidad preciso.',
     'hero-anchor': '✦ <strong>81</strong> códigos de compatibilidad matemáticamente distintos ✦ <strong>10</strong> secciones analíticas ✦ <strong>3</strong> idiomas',
-    'hero-cta-btn': 'Calcula Tu Código — Únete a Match',
-    'hero-price': '<strong>$29/mes</strong> · Miembros fundadores · Plazas limitadas',
+    'hero-cta-btn': 'Verifica Tu Código de Compatibilidad',
+    'hero-price': 'Ingresa dos fechas de nacimiento. Descubre el código matemático de tu conexión.',
     'sp-1': 'Palabras de Investigación',
     'sp-2': 'Códigos de Compatibilidad',
     'sp-3': 'Años de Tradición',
@@ -644,14 +463,14 @@ var translations = {
     'match-eyebrow': 'En Vivo',
     'match-title': 'Las Apps de Citas Conectan por Caras.<br>Nosotros Conectamos por Matemáticas.',
     'match-sub': 'Cada persona lleva una firma numérica única derivada de su fecha de nacimiento. Nuestro motor de matching identifica los códigos específicos que complementan los tuyos — en amor, amistad y negocios. Esto no es astrología. Es reconocimiento de patrones aplicado a la conexión humana.',
-    'match-count': 'Gratis para los primeros 100 miembros fundadores. Luego $29/mes.',
+    'match-count': '$29/mes · La primera plataforma de conexión humana basada en matemáticas.',
     'match-btn': 'Únete a Occultics Match →',
     'match-m1-label': 'Match de Amor',
     'match-m2-label': 'Match de Amistad',
     'match-m3-label': 'Match de Negocios',
     'final-title': 'Dos Fechas de Nacimiento. Una Verdad Matemática.',
     'final-sub': 'La experiencia numerológica más completa que existe. Generada desde tu fecha exacta de nacimiento y entregada a tu perfil privado.',
-    'final-btn': 'Comienza El Life Code Alignment — $497',
+    'final-btn': 'Verifica Tu Código de Compatibilidad',
     'final-price': 'Pago seguro · Entrega instantánea · 100% garantía de satisfacción',
     disclaimer: 'Solo con fines informativos y de entretenimiento. No sustituye el consejo profesional.'
   },
@@ -665,8 +484,8 @@ var translations = {
     'hero-title': 'すべての関係には<br><em>数学的シグネチャーがある。</em>',
     'hero-sub': '2つの生年月日には、何年もの会話よりも多くの相性情報が含まれています。ピタゴラス数秘術は2,500年間、人間のつながりをマッピングしてきました。私たちはその研究の700,000語を精密な相性エンジンにデジタル化しました。',
     'hero-anchor': '✦ <strong>81</strong>の数学的に異なる相性コード ✦ <strong>10</strong>の分析セクション ✦ <strong>3</strong>言語',
-    'hero-cta-btn': 'あなたのコードを計算 — Matchに参加',
-    'hero-price': '<strong>$29/月</strong> · 創設メンバー · 限定枠',
+    'hero-cta-btn': '相性コードをチェック',
+    'hero-price': '2つの生年月日を入力。あなたのつながりの数学的コードを発見。',
     'sp-1': '研究語数',
     'sp-2': '相性コード',
     'sp-3': '年の伝統',
@@ -707,14 +526,14 @@ var translations = {
     'match-eyebrow': '公開中',
     'match-title': 'マッチングアプリは顔でつなぐ。<br>私たちは数学でつなぐ。',
     'match-sub': 'すべての人は生年月日から導かれるユニークな数的シグネチャーを持っています。私たちのマッチングエンジンは、あなたのコードを補完する特定のコードを特定します — 恋愛、友情、ビジネスにわたって。これは占星術ではありません。人間のつながりに適用されたパターン認識です。',
-    'match-count': '最初の100名の創設メンバーは無料。その後 $29/月。',
+    'match-count': '$29/月 · 数学に基づく世界初の人間接続プラットフォーム。',
     'match-btn': 'Occultics Matchに参加 →',
     'match-m1-label': '恋愛マッチ',
     'match-m2-label': '友情マッチ',
     'match-m3-label': 'ビジネスマッチ',
     'final-title': '2つの生年月日。1つの数学的真実。',
     'final-sub': '存在する最も完全な数秘術エクスペリエンス。あなたの正確な生年月日から生成され、プライベートプロフィールに配信されます。',
-    'final-btn': 'ライフコードアラインメントを始める — $497',
+    'final-btn': '相性コードをチェック',
     'book-eyebrow': '無料ダウンロード',
     'book-title': 'バースコード',
     'book-sub': 'あなたの誕生日がすでに知っている、あなたの人間関係について',
@@ -747,18 +566,18 @@ var lcaTranslations = {
     lca_entry: 'Entry Point',
     lca_lcm_name: 'The Life Code Map',
     lca_lcm_desc: '1 session · 30 minutes<br>Your Mathematical Blueprint',
-    lca_lcm_btn: 'Life Code Map · $297',
+    lca_lcm_btn: 'Book a Live Session · $888',
     lca_popular: 'Most Popular',
     lca_compat_label: 'Compatibility',
     lca_compat_name: 'The Compatibility Code',
     lca_compat_desc: '11 sessions<br>Two codes. One picture.<br>+ personal support',
-    lca_compat_btn: 'Compatibility Code · $888',
+    lca_compat_btn: 'Join Occultics Match',
     lca_full: 'Full Program',
     lca_align_name: 'The Life Code Alignment',
     lca_align_desc: '7 sessions · 14 days<br>Your complete journey<br>+ personal support',
-    lca_align_btn: 'Life Code Alignment · $497',
-    lca_secure: 'Secure payment · Private profile within 24hrs · Life Code Map credit applied toward full program',
-    lca_try: 'Try Session 1 only — Life Code Map · $297',
+    lca_align_btn: 'Check Compatibility — Free',
+    lca_secure: 'The world\'s first human connection platform based on Pythagorean mathematics.',
+    lca_try: 'Check your compatibility code — Free',
     compat_profiles: 'Complete Life Code Map profiles',
     compat_shared: 'Private profile — shared access',
     compat_days: 'Days · 1 private profile',
@@ -770,11 +589,11 @@ var lcaTranslations = {
     book_sub: 'What your birthday already knows about your relationships',
     book_desc: 'Learn how your code is calculated, what your life path number seeks in a partner, and why the year you start a relationship changes everything. Enter your email and receive the book instantly.',
     book_btn: 'Get Free E-Book',
-    lcm_modal_title: 'Your First Reading · $297',
-    lcm_modal_btn: 'Session 1 Only — Life Code Map · $297',
-    lcm_modal_sub: '1 session · 30 minutes · Private profile in 24hrs',
-    lca_modal_title: 'Your Complete Journey · $497',
-    lca_modal_btn: '✦ Begin The Life Code Alignment — $497',
+    lcm_modal_title: '',
+    lcm_modal_btn: '',
+    lcm_modal_sub: '',
+    lca_modal_title: '',
+    lca_modal_btn: '',
     lca_modal_sub: '7 sessions · 14 days · Private profile in 10 minutes · 3 months access'
   },
   es: {
@@ -798,18 +617,18 @@ var lcaTranslations = {
     lca_entry: 'Punto de Entrada',
     lca_lcm_name: 'El Life Code Map',
     lca_lcm_desc: '1 sesión · 30 minutos<br>Tu Plano Matemático',
-    lca_lcm_btn: 'Life Code Map · $297',
+    lca_lcm_btn: 'Book a Live Session · $888',
     lca_popular: 'Más Popular',
     lca_compat_label: 'Compatibilidad',
     lca_compat_name: 'El Código de Compatibilidad',
     lca_compat_desc: '11 sesiones<br>Dos códigos. Una imagen.<br>+ soporte personal',
-    lca_compat_btn: 'Código de Compatibilidad · $888',
+    lca_compat_btn: 'Únete a Occultics Match',
     lca_full: 'Programa Completo',
     lca_align_name: 'El Life Code Alignment',
     lca_align_desc: '7 sesiones · 14 días<br>Tu viaje completo<br>+ soporte personal',
-    lca_align_btn: 'Life Code Alignment · $497',
-    lca_secure: 'Pago seguro · Perfil privado en 24hrs · Crédito del Life Code Map aplicable al programa completo',
-    lca_try: 'Prueba solo la Sesión 1 — Life Code Map · $297',
+    lca_align_btn: 'Check Compatibility — Free',
+    lca_secure: 'La primera plataforma de conexión humana basada en matemáticas pitagóricas.',
+    lca_try: 'Verifica tu código de compatibilidad — Gratis',
     compat_profiles: 'Perfiles completos de Life Code Map',
     compat_shared: 'Perfil privado — acceso compartido',
     compat_days: 'Días · 1 perfil privado',
@@ -821,11 +640,11 @@ var lcaTranslations = {
     book_sub: 'Lo que tu fecha de nacimiento ya sabe sobre tus relaciones',
     book_desc: 'Aprende cómo se calcula tu código, qué busca tu número de camino de vida en una pareja, y por qué el año en que comienzas una relación lo cambia todo. Ingresa tu correo y recibe el libro al instante.',
     book_btn: 'Obtener E-Book Gratis',
-    lcm_modal_title: 'Tu Primera Lectura · $297',
-    lcm_modal_btn: 'Solo Sesión 1 — Life Code Map · $297',
-    lcm_modal_sub: '1 sesión · 30 minutos · Perfil privado en 24hrs',
-    lca_modal_title: 'Tu Viaje Completo · $497',
-    lca_modal_btn: '✦ Comenzar El Life Code Alignment — $497',
+    lcm_modal_title: '',
+    lcm_modal_btn: '',
+    lcm_modal_sub: '',
+    lca_modal_title: '',
+    lca_modal_btn: '',
     lca_modal_sub: '7 sesiones · 14 días · Perfil privado en 10 minutos · 3 meses de acceso'
   },
   ja: {
@@ -849,18 +668,18 @@ var lcaTranslations = {
     lca_entry: 'エントリーポイント',
     lca_lcm_name: 'ライフコードマップ',
     lca_lcm_desc: '1セッション · 30分<br>あなたの数学的ブループリント',
-    lca_lcm_btn: 'ライフコードマップ · $297',
+    lca_lcm_btn: 'ライブセッションを予約 · $888',
     lca_popular: '最も人気',
     lca_compat_label: '相性',
     lca_compat_name: 'コンパティビリティコード',
     lca_compat_desc: '11セッション<br>2つのコード。1つの全体像。<br>+ パーソナルサポート',
-    lca_compat_btn: 'コンパティビリティコード · $888',
+    lca_compat_btn: 'Occultics Matchに参加',
     lca_full: 'フルプログラム',
     lca_align_name: 'ライフコードアラインメント',
     lca_align_desc: '7セッション · 14日間<br>あなたの完全な旅<br>+ パーソナルサポート',
-    lca_align_btn: 'ライフコードアラインメント · $497',
-    lca_secure: '安全な支払い · 24時間以内にプライベートプロフィール · ライフコードマップのクレジットはフルプログラムに適用',
-    lca_try: 'セッション1のみ — ライフコードマップ · $297',
+    lca_align_btn: '相性チェック — 無料',
+    lca_secure: 'ピタゴラス数学に基づく世界初の人間接続プラットフォーム。',
+    lca_try: '相性コードをチェック — 無料',
     compat_profiles: '完全なライフコードマッププロフィール',
     compat_shared: 'プライベートプロフィール — 共有アクセス',
     compat_days: '日間 · プライベートプロフィール1件',
@@ -872,11 +691,11 @@ var lcaTranslations = {
     book_sub: 'あなたの誕生日がすでに知っている、あなたの人間関係について',
     book_desc: 'あなたのコードの計算方法、ライフパスナンバーがパートナーに何を求めるか、そして関係を始める年がなぜすべてを変えるのかを学びましょう。メールアドレスを入力して、すぐに本を受け取りましょう。',
     book_btn: '無料E-Bookを入手',
-    lcm_modal_title: '最初のリーディング · $297',
-    lcm_modal_btn: 'セッション1のみ — ライフコードマップ · $297',
-    lcm_modal_sub: '1セッション · 30分 · 24時間以内にプライベートプロフィール',
-    lca_modal_title: 'あなたの完全な旅 · $497',
-    lca_modal_btn: '✦ ライフコードアラインメントを始める — $497',
+    lcm_modal_title: '',
+    lcm_modal_btn: '',
+    lcm_modal_sub: '',
+    lca_modal_title: '',
+    lca_modal_btn: '',
     lca_modal_sub: '7セッション · 14日間 · 10分でプライベートプロフィール · 3ヶ月アクセス'
   }
 };
