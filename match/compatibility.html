@@ -116,7 +116,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       </div>
 
       <button class="check-btn" onclick="checkCompat()">Reveal Your Compatibility Code</button>
-      <div class="free-note">Free. No email required. No signup needed.</div>
+      
     </div>
   </div>
 
@@ -150,14 +150,14 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     </div>
 
     <div class="cta-section">
-      <div class="cta-title">This is your code. But what does it mean?<br>What patterns are written in these numbers?</div>
+      <div class="cta-title">Your code has been calculated.<br>Want to know what it means?</div>
       <div class="cta-btns">
-        <button onclick="buyReading('app_compatibility_code')" class="cta-btn cta-primary" id="btn-cca">Full Compatibility Analysis — 11 Sessions — $89.99</button>
-        <button onclick="buyReading('app_life_code_map')" class="cta-btn cta-secondary" id="btn-lcm">Your Personal Code Reading — $9.99</button>
-        <button onclick="buyReading('app_life_code_alignment')" class="cta-btn cta-secondary" id="btn-lca">Full 7-Session Journey — $29.99</button>
+        <button onclick="buyReading('app_compatibility_code')" class="cta-btn cta-primary" id="btn-cca">Full Compatibility Profile — 11 Sessions — $89.99 inside the platform</button>
+        <button onclick="buyReading('app_life_code_map')" class="cta-btn cta-secondary" id="btn-lcm">Your Personal Code Profile — $9.99 inside the platform</button>
+        <button onclick="buyReading('app_life_code_alignment')" class="cta-btn cta-secondary" id="btn-lca">Full 7-Session Journey — $29.99 inside the platform</button>
         <a href="/match/join.html" class="cta-btn cta-tertiary">Join Occultics Match — Find Your Code Match</a>
       </div>
-      <div style="text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2)">Secure payment via Stripe · Delivered to your private profile</div>
+      <div style="text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2)">All profiles available inside the Occultics platform</div>
     </div>
 
     <!-- Purchase modal -->
@@ -166,7 +166,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
         <button onclick="closeBuyModal()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#8892a4;font-size:20px;cursor:pointer;">✕</button>
         <div style="font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-family:'Montserrat',sans-serif;margin-bottom:8px;" id="modal-eyebrow">Reading</div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white);margin-bottom:20px;" id="modal-title">Your Reading</div>
-        <div style="font-size:12px;color:var(--gray);margin-bottom:20px;line-height:1.6;" id="modal-desc">Enter your email to receive your reading.</div>
+        <div style="font-size:12px;color:var(--gray);margin-bottom:20px;line-height:1.6;" id="modal-desc">Enter your email to receive your profile.</div>
         <input id="buy-email" type="email" placeholder="your@email.com" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:10px;box-sizing:border-box;">
         <input id="buy-name" type="text" placeholder="Your name" style="width:100%;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;margin-bottom:16px;box-sizing:border-box;">
         <button onclick="processPurchase()" id="modal-btn" style="width:100%;padding:15px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;">Purchase</button>
@@ -310,19 +310,19 @@ var productInfo = {
   'app_compatibility_code': {
     eyebrow: 'Compatibility Code',
     title: 'Full 11-Session Compatibility Analysis',
-    desc: 'Both complete profiles. Your compatibility code decoded. How you met, what you are building, and what the numbers have always known.',
+    desc: 'Both complete profiles decoded. Your compatibility code, what it means, and what the numbers have always known.',
     btn: 'Purchase — $89.99'
   },
   'app_life_code_map': {
     eyebrow: 'Life Code Map',
     title: 'Your Mathematical Blueprint',
-    desc: 'A complete 30-minute reading of your Pythagorean Code. Your biorhythm, generational number, life path, squares, trines, and personal year.',
+    desc: 'Your complete Pythagorean Code profile. Your biorhythm, generational number, life path, squares, trines, and personal year.',
     btn: 'Purchase — $9.99'
   },
   'app_life_code_alignment': {
     eyebrow: 'Life Code Alignment',
     title: '7 Sessions Over 14 Days',
-    desc: 'A private journey through the mathematics of who you are. 7 sessions unlocking over 14 days. Your complete code decoded.',
+    desc: 'A private journey through the mathematics of who you are. 7 sessions unlocking over 14 days inside the platform.',
     btn: 'Purchase — $29.99'
   }
 };
