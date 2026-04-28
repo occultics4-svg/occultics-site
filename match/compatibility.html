@@ -397,5 +397,275 @@ async function processPurchase() {
   }
 }
 </script>
+
+<script>
+var LANG = (navigator.language || 'en').substring(0, 2);
+if (!['en','es','ja'].includes(LANG)) LANG = 'en';
+// Check URL param
+var urlLang = new URLSearchParams(window.location.search).get('lang');
+if (urlLang && ['en','es','ja'].includes(urlLang)) LANG = urlLang;
+
+var T = {
+  en: {
+    title: 'Check Your <em>Compatibility</em>',
+    sub: 'Enter two birth dates. See the mathematical code that defines your connection. 81 possible codes. Each one tells a different story.',
+    person1: 'Person 1',
+    person2: 'Person 2',
+    day: 'Day',
+    month: 'Month',
+    year: 'Year',
+    btn: 'Reveal Your Compatibility Code',
+    result_eyebrow: 'Your Compatibility Code',
+    compat_code: 'Compatibility Code',
+    connection: 'Connection',
+    goal: 'Goal',
+    foundation: 'Foundation',
+    copy: 'Copy Code',
+    share: 'Share',
+    cta_title: 'Your code has been calculated.<br>Want to know what it means?',
+    cta_primary: 'Join Occultics — Unlock Your Full Profile — $29/month',
+    cta_cca: 'Full Compatibility Profile — 11 Sessions — $89.99 inside the platform',
+    cta_lcm: 'Your Personal Code Profile — $9.99 inside the platform',
+    cta_lca: 'Full 7-Session Journey — $29.99 inside the platform',
+    cta_note: 'All profiles available inside the Occultics platform',
+    recalc: 'Check another pair',
+    modal_eyebrow_cca: 'Compatibility Code',
+    modal_title_cca: 'Full 11-Session Compatibility Profile',
+    modal_desc_cca: 'Both complete profiles decoded. Your compatibility code, what it means, and what the numbers have always known.',
+    modal_btn_cca: 'Purchase — $89.99',
+    modal_eyebrow_lcm: 'Life Code Map',
+    modal_title_lcm: 'Your Mathematical Blueprint',
+    modal_desc_lcm: 'Your complete Pythagorean Code profile.',
+    modal_btn_lcm: 'Purchase — $9.99',
+    modal_eyebrow_lca: 'Life Code Alignment',
+    modal_title_lca: '7 Sessions Over 14 Days',
+    modal_desc_lca: 'A private journey through the mathematics of who you are. 7 sessions unlocking over 14 days inside the platform.',
+    modal_btn_lca: 'Purchase — $29.99',
+    modal_email: 'your@email.com',
+    modal_name: 'Your name',
+    modal_secure: 'Secure payment via Stripe',
+    modal_receive: 'Enter your email to receive your profile.',
+    join_match: 'Join Match',
+    months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    alert_p1: 'Please enter Person 1\'s complete birth date.',
+    alert_p2: 'Please enter Person 2\'s complete birth date.',
+    alert_email: 'Please enter a valid email.',
+    alert_name: 'Please enter your name.',
+    redirect: 'Redirecting to checkout...'
+  },
+  es: {
+    title: 'Verifica Tu <em>Compatibilidad</em>',
+    sub: 'Ingresa dos fechas de nacimiento. Descubre el código matemático que define tu conexión. 81 códigos posibles. Cada uno cuenta una historia diferente.',
+    person1: 'Persona 1',
+    person2: 'Persona 2',
+    day: 'Día',
+    month: 'Mes',
+    year: 'Año',
+    btn: 'Revelar Tu Código de Compatibilidad',
+    result_eyebrow: 'Tu Código de Compatibilidad',
+    compat_code: 'Código de Compatibilidad',
+    connection: 'Conexión',
+    goal: 'Meta',
+    foundation: 'Fundación',
+    copy: 'Copiar Código',
+    share: 'Compartir',
+    cta_title: 'Tu código ha sido calculado.<br>¿Quieres saber qué significa?',
+    cta_primary: 'Únete a Occultics — Desbloquea Tu Perfil Completo — $29/mes',
+    cta_cca: 'Perfil de Compatibilidad Completo — 11 Sesiones — $89.99 dentro de la plataforma',
+    cta_lcm: 'Tu Perfil de Código Personal — $9.99 dentro de la plataforma',
+    cta_lca: 'Viaje Completo de 7 Sesiones — $29.99 dentro de la plataforma',
+    cta_note: 'Todos los perfiles disponibles dentro de la plataforma Occultics',
+    recalc: 'Verificar otra pareja',
+    modal_eyebrow_cca: 'Código de Compatibilidad',
+    modal_title_cca: 'Perfil de Compatibilidad Completo — 11 Sesiones',
+    modal_desc_cca: 'Ambos perfiles completos decodificados. Tu código de compatibilidad, qué significa y lo que los números siempre han sabido.',
+    modal_btn_cca: 'Comprar — $89.99',
+    modal_eyebrow_lcm: 'Life Code Map',
+    modal_title_lcm: 'Tu Plano Matemático',
+    modal_desc_lcm: 'Tu perfil completo del Código Pitagórico.',
+    modal_btn_lcm: 'Comprar — $9.99',
+    modal_eyebrow_lca: 'Life Code Alignment',
+    modal_title_lca: '7 Sesiones en 14 Días',
+    modal_desc_lca: 'Un viaje privado a través de las matemáticas de quién eres. 7 sesiones dentro de la plataforma.',
+    modal_btn_lca: 'Comprar — $29.99',
+    modal_email: 'tu@email.com',
+    modal_name: 'Tu nombre',
+    modal_secure: 'Pago seguro vía Stripe',
+    modal_receive: 'Ingresa tu correo para recibir tu perfil.',
+    join_match: 'Únete a Match',
+    months: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+    alert_p1: 'Por favor ingresa la fecha de nacimiento completa de la Persona 1.',
+    alert_p2: 'Por favor ingresa la fecha de nacimiento completa de la Persona 2.',
+    alert_email: 'Por favor ingresa un correo válido.',
+    alert_name: 'Por favor ingresa tu nombre.',
+    redirect: 'Redirigiendo al pago...'
+  },
+  ja: {
+    title: '相性を<em>チェック</em>',
+    sub: '2つの生年月日を入力してください。あなたのつながりを定義する数学的コードを見てください。81の可能なコード。それぞれが異なる物語を語ります。',
+    person1: '人物 1',
+    person2: '人物 2',
+    day: '日',
+    month: '月',
+    year: '年',
+    btn: '相性コードを表示',
+    result_eyebrow: 'あなたの相性コード',
+    compat_code: '相性コード',
+    connection: 'つながり',
+    goal: '目標',
+    foundation: '基盤',
+    copy: 'コードをコピー',
+    share: '共有',
+    cta_title: 'あなたのコードが計算されました。<br>その意味を知りたいですか？',
+    cta_primary: 'Occulticsに参加 — フルプロフィールを解放 — $29/月',
+    cta_cca: '完全な相性プロフィール — 11セッション — $89.99 プラットフォーム内',
+    cta_lcm: 'パーソナルコードプロフィール — $9.99 プラットフォーム内',
+    cta_lca: '7セッションの旅 — $29.99 プラットフォーム内',
+    cta_note: 'すべてのプロフィールはOcculticsプラットフォーム内で利用可能',
+    recalc: '別のペアをチェック',
+    modal_eyebrow_cca: '相性コード',
+    modal_title_cca: '完全な11セッション相性プロフィール',
+    modal_desc_cca: '両方の完全なプロフィールが解読されます。相性コード、その意味、数字が常に知っていたこと。',
+    modal_btn_cca: '購入 — $89.99',
+    modal_eyebrow_lcm: 'ライフコードマップ',
+    modal_title_lcm: 'あなたの数学的ブループリント',
+    modal_desc_lcm: 'あなたの完全なピタゴラスコードプロフィール。',
+    modal_btn_lcm: '購入 — $9.99',
+    modal_eyebrow_lca: 'ライフコードアラインメント',
+    modal_title_lca: '14日間の7セッション',
+    modal_desc_lca: 'あなたが誰であるかの数学を巡るプライベートな旅。プラットフォーム内で7セッション。',
+    modal_btn_lca: '購入 — $29.99',
+    modal_email: 'your@email.com',
+    modal_name: 'あなたの名前',
+    modal_secure: 'Stripeによる安全な支払い',
+    modal_receive: 'プロフィールを受け取るためにメールを入力してください。',
+    join_match: 'Matchに参加',
+    months: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+    alert_p1: '人物1の完全な生年月日を入力してください。',
+    alert_p2: '人物2の完全な生年月日を入力してください。',
+    alert_email: '有効なメールアドレスを入力してください。',
+    alert_name: 'あなたの名前を入力してください。',
+    redirect: 'チェックアウトにリダイレクト中...'
+  }
+};
+
+var t = T[LANG] || T.en;
+
+function applyLang() {
+  // Header
+  var backLink = document.querySelector('.back-link');
+  if (backLink) backLink.textContent = t.join_match + ' \u2192';
+  backLink.href = '/match/join.html';
+
+  // Hero
+  document.querySelector('.hero h1').innerHTML = t.title;
+  document.querySelector('.hero p').textContent = t.sub;
+
+  // Person labels
+  var personLabels = document.querySelectorAll('.person-label');
+  if (personLabels[0]) personLabels[0].innerHTML = t.person1 + '<span style="flex:1;height:1px;background:rgba(77,184,255,0.1);margin-left:8px"></span>';
+  if (personLabels[1]) personLabels[1].innerHTML = t.person2 + '<span style="flex:1;height:1px;background:rgba(77,184,255,0.1);margin-left:8px"></span>';
+
+  // Form labels
+  var labels = document.querySelectorAll('.form-group label');
+  var labelTexts = [t.day, t.month, t.year, t.day, t.month, t.year];
+  labels.forEach(function(l, i) { if (labelTexts[i]) l.textContent = labelTexts[i]; });
+
+  // Month dropdowns
+  ['month1','month2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    var opts = el.querySelectorAll('option');
+    opts.forEach(function(o, i) {
+      if (i > 0 && t.months[i-1]) o.textContent = t.months[i-1];
+    });
+  });
+
+  // Button
+  document.querySelector('.check-btn').textContent = t.btn;
+
+  // Result
+  document.querySelector('.result-eyebrow').textContent = t.result_eyebrow;
+  document.querySelector('.result-compat-label').textContent = t.compat_code;
+  var subLabels = document.querySelectorAll('.result-sub-label');
+  if (subLabels[0]) subLabels[0].textContent = t.connection;
+  if (subLabels[1]) subLabels[1].textContent = t.goal;
+  if (subLabels[2]) subLabels[2].textContent = t.foundation;
+
+  // Share buttons
+  var shareBtns = document.querySelectorAll('.share-btn');
+  if (shareBtns[0]) shareBtns[0].textContent = t.copy;
+  if (shareBtns[1]) shareBtns[1].textContent = t.share;
+
+  // CTA
+  document.querySelector('.cta-title').innerHTML = t.cta_title;
+  document.getElementById('btn-cca').textContent = t.cta_cca;
+  document.getElementById('btn-lcm').textContent = t.cta_lcm;
+  document.getElementById('btn-lca').textContent = t.cta_lca;
+  var joinBtn = document.querySelector('.cta-btn.cta-primary');
+  if (joinBtn) joinBtn.textContent = t.cta_primary;
+  var noteEl = document.querySelector('.cta-btns + div');
+  if (noteEl) noteEl.textContent = t.cta_note;
+
+  // Recalc
+  document.querySelector('.recalc a').textContent = '\u2190 ' + t.recalc;
+
+  // Modal
+  document.getElementById('buy-email').placeholder = t.modal_email;
+  document.getElementById('buy-name').placeholder = t.modal_name;
+
+  // Add lang switcher
+  var header = document.querySelector('.header');
+  var switcherDiv = document.createElement('div');
+  switcherDiv.style.cssText = 'display:flex;gap:4px;';
+  ['en','es','ja'].forEach(function(l) {
+    var btn = document.createElement('button');
+    btn.textContent = l.toUpperCase();
+    btn.style.cssText = 'padding:4px 8px;border-radius:4px;font-size:9px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:Montserrat,sans-serif;border:1.5px solid rgba(77,184,255,0.15);background:' + (l===LANG ? '#1a2aff' : 'transparent') + ';color:' + (l===LANG ? '#fff' : '#8892a4') + ';';
+    btn.onclick = function() {
+      var url = new URL(window.location);
+      url.searchParams.set('lang', l);
+      window.location = url.toString();
+    };
+    switcherDiv.appendChild(btn);
+  });
+  // Insert before back-link
+  var backL = header.querySelector('.back-link');
+  if (backL) header.insertBefore(switcherDiv, backL);
+}
+
+// Override alert messages
+var _origCheckCompat = checkCompat;
+checkCompat = function() {
+  var d1=parseInt(document.getElementById('day1').value);
+  var m1=parseInt(document.getElementById('month1').value);
+  var y1=parseInt(document.getElementById('year1').value);
+  var d2=parseInt(document.getElementById('day2').value);
+  var m2=parseInt(document.getElementById('month2').value);
+  var y2=parseInt(document.getElementById('year2').value);
+  if(!d1||!m1||!y1){alert(t.alert_p1);return;}
+  if(!d2||!m2||!y2){alert(t.alert_p2);return;}
+  _origCheckCompat();
+};
+
+// Override purchase modal
+var _origBuyReading = buyReading;
+buyReading = function(type) {
+  _origBuyReading(type);
+  var info = {
+    'app_compatibility_code': {e: t.modal_eyebrow_cca, ti: t.modal_title_cca, d: t.modal_desc_cca, b: t.modal_btn_cca},
+    'app_life_code_map': {e: t.modal_eyebrow_lcm, ti: t.modal_title_lcm, d: t.modal_desc_lcm, b: t.modal_btn_lcm},
+    'app_life_code_alignment': {e: t.modal_eyebrow_lca, ti: t.modal_title_lca, d: t.modal_desc_lca, b: t.modal_btn_lca}
+  };
+  var i = info[type];
+  if (i) {
+    document.getElementById('modal-eyebrow').textContent = i.e;
+    document.getElementById('modal-title').textContent = i.ti;
+    document.getElementById('modal-desc').textContent = i.d;
+    document.getElementById('modal-btn').textContent = i.b;
+  }
+};
+
+applyLang();
+</script>
 </body>
 </html>
