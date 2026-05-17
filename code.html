@@ -4,133 +4,398 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculate Your Code — Occultics</title>
-<meta name="description" content="Enter your birth date. See your 3-number Pythagorean code. Free. No signup required.">
+<meta name="description" content="Enter your birth date. See your Pythagorean code and pyramid code. Share it.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray:#8892a4;--white:#fff}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
-.page{max-width:580px;margin:0 auto;padding:40px 24px 60px;min-height:100vh;display:flex;flex-direction:column}
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:48px}
-.logo-wrap{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-gem{width:24px;height:28px}
-.logo-name{font-weight:700;font-size:13px;letter-spacing:3px;color:var(--white)}
+.page{max-width:520px;margin:0 auto;padding:32px 20px 60px;min-height:100vh}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+.logo-wrap{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-name{font-weight:700;font-size:12px;letter-spacing:3px;color:var(--white)}
 .lang-switch{display:flex;gap:4px}
-.lang-btn{padding:4px 8px;border-radius:4px;font-size:9px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;border:1.5px solid rgba(77,184,255,0.15);background:transparent;color:var(--gray);transition:all .2s}
+.lang-btn{padding:3px 7px;border-radius:4px;font-size:8px;letter-spacing:1px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;border:1.5px solid rgba(77,184,255,0.15);background:transparent;color:var(--gray);transition:all .2s}
 .lang-btn.active{background:var(--royal);color:#fff;border-color:var(--royal)}
-.lang-btn:hover:not(.active){border-color:var(--royal);color:var(--royal)}
-.hero{text-align:center;margin-bottom:48px}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,42px);font-weight:300;line-height:1.15;margin-bottom:12px}
-.hero h1 em{font-style:italic;color:var(--crystal)}
-.hero p{font-size:13px;color:var(--gray);line-height:1.7;font-weight:300;max-width:420px;margin:0 auto}
-.calc-box{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:20px;padding:36px 32px;margin-bottom:24px}
-.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
-.form-group{display:flex;flex-direction:column;gap:5px}
-.form-group label{font-size:10px;color:var(--gray);font-weight:500}
-.form-group select{padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%234db8ff' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
-.form-group select:focus{border-color:var(--crystal)}
+
+/* CALCULATOR */
+.calc-hero{text-align:center;margin-bottom:36px}
+.calc-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,6vw,38px);font-weight:300;line-height:1.15;margin-bottom:10px}
+.calc-hero h1 em{font-style:italic;color:var(--crystal)}
+.calc-hero p{font-size:12px;color:var(--gray);line-height:1.7;font-weight:300}
+.calc-box{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:16px;padding:28px 24px}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.form-group label{font-size:9px;color:var(--gray);font-weight:500}
+.form-group select{padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;-webkit-appearance:none;appearance:none}
 .form-group select option{background:var(--navy);color:var(--white)}
-.calc-btn{width:100%;padding:16px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
-.calc-btn:hover{background:#2a3aff;transform:translateY(-1px)}
+.time-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.time-row select{padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.15);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;outline:none;-webkit-appearance:none;appearance:none}
+.calc-btn{width:100%;padding:14px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s}
+.calc-btn:hover{background:#1420cc}
+
+/* RESULT - CAROUSEL */
 #result{display:none}
-.result-card{background:rgba(26,42,255,0.06);border:1px solid rgba(77,184,255,0.15);border-radius:20px;padding:40px 32px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
-.result-card::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:300px;height:300px;background:radial-gradient(circle,rgba(26,42,255,0.1) 0%,transparent 70%);pointer-events:none}
-.result-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px;position:relative}
-.result-code{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,12vw,80px);font-weight:300;color:var(--crystal);letter-spacing:16px;margin-bottom:8px;position:relative}
-.result-label{font-size:8px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:28px;position:relative}
-.result-nums{display:flex;justify-content:center;gap:32px;position:relative}
-.result-num{text-align:center}
-.result-num-val{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white)}
-.result-num-label{font-size:8px;letter-spacing:1.5px;color:var(--gray);text-transform:uppercase;margin-top:4px}
-.cta-section{text-align:center;margin-top:24px}
-.cta-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:rgba(255,255,255,0.4);font-style:italic;margin-bottom:20px;line-height:1.5}
-.cta-btns{display:flex;flex-direction:column;gap:10px}
-.cta-btn{display:block;padding:16px 24px;border-radius:10px;font-size:11px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-decoration:none;text-align:center;transition:all .2s}
-.cta-primary{background:var(--royal);color:var(--white);border:none}
-.cta-primary:hover{background:#2a3aff}
-.cta-secondary{background:transparent;color:var(--crystal);border:1px solid rgba(77,184,255,0.3)}
-.cta-secondary:hover{border-color:var(--crystal)}
-.recalc{text-align:center;margin-top:20px}
-.recalc a{font-size:11px;color:var(--crystal);cursor:pointer;text-decoration:none;letter-spacing:1px}
-.footer{text-align:center;margin-top:auto;padding-top:40px}
-.footer a{font-size:11px;color:var(--gray);text-decoration:none;font-weight:300}
-.footer a:hover{color:var(--crystal)}
-.footer-copy{font-size:9px;color:rgba(255,255,255,0.15);margin-top:12px}
-@media(max-width:480px){.form-row{grid-template-columns:1fr}.page{padding:24px 16px 40px}.calc-box{padding:24px 18px}.result-card{padding:32px 20px}}
+.carousel-wrap{position:relative;overflow:hidden;border-radius:16px;margin-bottom:20px;aspect-ratio:9/16;background:#0a0e2e}
+.carousel-track{display:flex;transition:transform .4s ease;height:100%}
+.carousel-slide{min-width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;text-align:center;position:relative;overflow:hidden}
+.carousel-slide::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+
+/* Slide content */
+.s-logo{font-weight:700;font-size:11px;letter-spacing:3px;color:var(--white);margin-bottom:8px;position:relative;z-index:1}
+.s-gem{margin-bottom:16px;position:relative;z-index:1}
+.s-line{width:120px;height:1px;background:rgba(26,42,255,0.5);margin:16px auto;position:relative;z-index:1}
+.s-eyebrow{font-size:10px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;position:relative;z-index:1}
+.s-born-label{font-size:14px;letter-spacing:2px;color:var(--gray);font-weight:500;position:relative;z-index:1}
+.s-born-num{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,16vw,90px);font-weight:300;color:var(--white);line-height:1;position:relative;z-index:1}
+.s-degree{font-size:10px;letter-spacing:2px;color:var(--crystal);font-weight:600;position:relative;z-index:1}
+.s-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4.5vw,24px);line-height:1.7;color:rgba(255,255,255,0.75);font-weight:300;position:relative;z-index:1;max-width:380px}
+.s-code{font-family:'Montserrat',sans-serif;font-size:clamp(40px,12vw,64px);font-weight:700;color:var(--white);letter-spacing:8px;position:relative;z-index:1}
+.s-code-label{font-size:11px;letter-spacing:1.5px;color:var(--crystal);font-weight:600;position:relative;z-index:1}
+.s-num-label{font-size:10px;color:var(--crystal);letter-spacing:1.5px;font-weight:600;margin-bottom:4px;position:relative;z-index:1}
+.s-num-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,3.8vw,19px);line-height:1.7;color:rgba(255,255,255,0.7);font-weight:300;margin-bottom:16px;position:relative;z-index:1;max-width:360px}
+.s-pyramid{display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;z-index:1;margin:12px 0}
+.s-pyr-row{display:flex;gap:8px;justify-content:center}
+.s-pyr-num{width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:rgba(255,255,255,0.25)}
+.s-pyr-num.hl{color:var(--crystal);border:1.5px solid var(--crystal);border-radius:50%}
+.s-question{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,8vw,42px);font-weight:300;color:var(--white);line-height:1.3;position:relative;z-index:1}
+.s-question em{color:var(--crystal)}
+.s-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,3.5vw,18px);color:rgba(255,255,255,0.5);line-height:1.7;position:relative;z-index:1;max-width:340px}
+.s-url{font-size:14px;font-weight:700;letter-spacing:2px;color:var(--crystal);position:relative;z-index:1}
+.s-cta-btn{display:inline-block;padding:12px 32px;background:var(--royal);color:var(--white);border-radius:24px;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;text-decoration:none;position:relative;z-index:1}
+
+/* Dots */
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(77,184,255,0.2);cursor:pointer;transition:all .2s}
+.dot.active{background:var(--crystal);transform:scale(1.2)}
+
+/* Share buttons */
+.share-section{margin-bottom:24px}
+.share-title{font-size:10px;letter-spacing:2px;color:var(--gray);text-transform:uppercase;text-align:center;margin-bottom:12px}
+.share-btns{display:flex;flex-direction:column;gap:8px}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;border-radius:10px;font-size:11px;letter-spacing:1px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;text-decoration:none;border:none}
+.share-btn.ig{background:linear-gradient(135deg,#833AB4,#E1306C,#F77737);color:#fff}
+.share-btn.ig:hover{opacity:0.9}
+.share-btn.reel{background:rgba(255,255,255,0.06);color:var(--crystal);border:1px solid rgba(77,184,255,0.2)}
+.share-btn.reel:hover{background:rgba(77,184,255,0.1)}
+.share-btn.wa{background:#25D366;color:#fff}
+.share-btn.wa:hover{opacity:0.9}
+.share-loading{display:none;text-align:center;padding:12px;font-size:10px;color:var(--crystal);letter-spacing:1px}
+
+/* Recalc */
+.recalc{text-align:center;margin-top:16px}
+.recalc a{font-size:11px;color:var(--crystal);cursor:pointer;text-decoration:none}
+
+.footer{text-align:center;margin-top:auto;padding-top:32px}
+.footer a{font-size:10px;color:var(--gray);text-decoration:none}
+.footer-copy{font-size:8px;color:rgba(255,255,255,0.12);margin-top:8px}
+
+@media(max-width:380px){.form-row{grid-template-columns:1fr}.calc-box{padding:20px 16px}}
 </style>
 </head>
 <body>
 <div class="page">
   <div class="header">
     <a href="/" class="logo-wrap">
-      <svg class="logo-gem" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>
+      <svg width="20" height="24" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
       <div class="logo-name">OCCULTICS</div>
     </a>
     <div class="lang-switch" id="lang-switch"></div>
   </div>
+
+  <!-- CALCULATOR -->
   <div id="calculator">
-    <div class="hero">
+    <div class="calc-hero">
       <h1 id="t-title">Calculate Your <em>Code</em></h1>
-      <p id="t-sub">Enter your birth date. Three numbers hidden in your birthday define who you are, what you need, and where your life is going.</p>
+      <p id="t-sub">Enter your birth date. See the numbers hidden in your birthday.</p>
     </div>
     <div class="calc-box">
       <div class="form-row">
-        <div class="form-group"><label id="t-day">Day</label><select id="day1"><option value="">—</option></select></div>
-        <div class="form-group"><label id="t-month">Month</label><select id="month1"><option value="">—</option></select></div>
-        <div class="form-group"><label id="t-year">Year</label><select id="year1"><option value="">—</option></select></div>
+        <div class="form-group"><label>Day</label><select id="day1"><option value="">—</option></select></div>
+        <div class="form-group"><label>Month</label><select id="month1"><option value="">—</option></select></div>
+        <div class="form-group"><label>Year</label><select id="year1"><option value="">—</option></select></div>
       </div>
-      <button class="calc-btn" id="t-btn" onclick="calcCode()">Calculate Your Code</button>
+      <div class="time-row">
+        <div class="form-group"><label>Time of birth (optional)</label>
+          <select id="tod"><option value="">— select —</option><option value="day">Day (6am - 6pm)</option><option value="night">Night (6pm - 6am)</option></select>
+        </div>
+      </div>
+      <button class="calc-btn" onclick="calcCode()">Calculate Your Code</button>
     </div>
   </div>
+
+  <!-- RESULT -->
   <div id="result">
-    <div class="result-card">
-      <div class="result-eyebrow" id="t-eyebrow">Your Pythagorean Code</div>
-      <div class="result-code" id="r-code">—</div>
-      <div class="result-label" id="t-code-label">Biorhythm · Generational · Life Path</div>
-      <div class="result-nums">
-        <div class="result-num"><div class="result-num-val" id="r-bio">—</div><div class="result-num-label" id="t-bio">Biorhythm</div></div>
-        <div class="result-num"><div class="result-num-val" id="r-gen">—</div><div class="result-num-label" id="t-gen">Generational</div></div>
-        <div class="result-num"><div class="result-num-val" id="r-lp">—</div><div class="result-num-label" id="t-lp">Life Path</div></div>
-      </div>
+    <div class="carousel-wrap" id="carousel">
+      <div class="carousel-track" id="track"></div>
     </div>
-    <div class="cta-section">
-      <div class="cta-title" id="t-cta-title">This is your code. Want to know what it means?</div>
-      <div class="cta-btns">
-        <a href="/match/join.html" class="cta-btn cta-primary" id="t-cta-join">Join Occultics — $29/month</a>
-        <a href="/match/compatibility.html" class="cta-btn cta-secondary" id="t-cta-compat">Check Your Compatibility Code</a>
+    <div class="carousel-dots" id="dots"></div>
+
+    <div class="share-section">
+      <div class="share-title">Share your code</div>
+      <div class="share-btns">
+        <button class="share-btn ig" onclick="shareIG()">📸 Post to Instagram Story</button>
+        <button class="share-btn reel" onclick="downloadReel()">🎬 Download as Reel</button>
+        <button class="share-btn wa" onclick="shareWA()">📱 Share on WhatsApp</button>
       </div>
+      <div class="share-loading" id="share-loading">Generating your reel...</div>
     </div>
-    <div class="recalc"><a onclick="showCalc()" id="t-recalc">← Calculate another code</a></div>
+
+    <div class="recalc"><a onclick="showCalc()">← Calculate another code</a></div>
   </div>
+
   <div class="footer">
-    <a href="/">occultics.ai</a> · <a href="/match/compatibility.html" id="t-foot-compat">Compatibility Check</a> · <a href="/match/join.html" id="t-foot-join">Join Match</a> · <a href="/privacy.html">Privacy</a>
+    <a href="/">occultics.ai</a> · <a href="/match/join.html">Join Match</a> · <a href="/match/compatibility.html">Compatibility</a>
     <div class="footer-copy">&copy; 2026 Occultics Media</div>
   </div>
 </div>
+
 <script>
+// Populate dropdowns
 var dayEl=document.getElementById('day1');
 for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d;dayEl.appendChild(o);}
+var monthEl=document.getElementById('month1');
+var months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+months.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;monthEl.appendChild(o);});
 var yearEl=document.getElementById('year1');
 var now=new Date().getFullYear();
 for(var y=now;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;yearEl.appendChild(o);}
 
+// Math
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n;}
+
+// Birth day descriptions from knowledge base
+var BIRTH_DAYS = {
+  1: {degree:'8 · ARIES', desc:'Very passionate and emotional. Quick to anger. You know what you want from life. A fighting spirit and a somewhat short temper. People in uniform — doctors, police, military.'},
+  2: {degree:'6 · TAURUS', desc:'A great hedonist. You love food, family, money, and indulging yourself. Fantastic cook. Family is your top priority. You spend everything on hedonism and the people you love.'},
+  3: {degree:'5 · GEMINI', desc:'You create something out of nothing. Educated, you can become wealthy. Drawn to foreign countries. Dynamism, constant travel through life. Jobs in communication, marketing, sales.'},
+  4: {degree:'2 · CANCER', desc:'Tied to family. Wherever you go, it is only a matter of time before you return home. Both day and night births are materialistic — plugged into power. Both like to fight.'},
+  5: {degree:'1 · LEO', desc:'A royal degree. Produces many successful people. You love to travel and cannot stay in one place. Predisposition for success in career and building your position.'},
+  6: {degree:'5 · VIRGO', desc:'The focus is on health and work, not love. Major love problems. A lack of luck in emotional life, which you compensate for through work. Health suffers because of these problems.'},
+  7: {degree:'6 · LIBRA', desc:'Indecisive but original and creative. Artistic inclinations and a striving for marriage, accord, and harmony. More creative than those born on the 6th.'},
+  8: {degree:'0 · SCORPIO', desc:'Danger awaits in life. In life, you go for broke — either very poor or very rich. There is no middle ground. You do not know moderation.'},
+  9: {degree:'3 · SAGITTARIUS', desc:'Constant traveling, living abroad. Optimism, a broad worldview. A lifelong commitment to self-improvement and acquiring knowledge. A fortunate circumstance always helps you.'},
+  10: {degree:'4 · CAPRICORN', desc:'In life, everything comes to you later, especially recognition. Everything happens with a delay. Longevity and gradual aging. You look younger than your years.'},
+  11: {degree:'7 · AQUARIUS', desc:'Totally different from others. Your success lies in the unconventional. Nervous, tense, torn, inner restlessness. Revolutionaries and strikers. Face divorce or loss of a partner.'},
+  12: {degree:'9 · PISCES', desc:'Two extremes. Either a victim of family or a master strategist. There are a lot of you in politics. Your success depends entirely on the numbers next to you.'},
+  13: {degree:'8 · ARIES', desc:'Passionate and emotional. Quick temper with a fighting spirit. You know what you want from life. Prone to injuries. Great strength but confrontational.'},
+  14: {degree:'6 · TAURUS', desc:'A great hedonist. You like to enjoy life. Tends to produce a bit of lazy people. Family, money, food — surrounded by beauty in every form.'},
+  15: {degree:'5 · GEMINI', desc:'Original, creative, a genius when it comes to originality. Artistic soul but also a logician. You see patterns others miss.'},
+  16: {degree:'2 · CANCER', desc:'Strongly tied to family — wife and mother. Wherever you go, it is only a matter of time before you return home. Both day and night are materialistic.'},
+  17: {degree:'1 · LEO', desc:'A royal degree. Produces successful people. You love to travel and cannot stay in one place. Great predisposition for career success.'},
+  18: {degree:'5 · VIRGO', desc:"The devil's degree. Ranges from devil's luck to devil's misfortune throughout life. Some experience abnormal luck, others face immense misfortune. Birth month is the key."},
+  19: {degree:'6 · LIBRA', desc:'Indecisive but more original and creative. Artistic inclinations. A striving for marriage, accord, and harmony.'},
+  20: {degree:'0 · SCORPIO', desc:'Danger awaits in life. You go for broke. Either very poor or very rich. Superior stubbornness and strength within. Great capital and potential for total bankruptcy.'},
+  21: {degree:'3 · SAGITTARIUS', desc:'Constant traveling, living abroad. Optimism, broad worldview. Lifelong self-improvement. A fortunate circumstance always awaits and helps you get out of trouble.'},
+  22: {degree:'4 · CAPRICORN', desc:'Degree to kill or be killed — not literally. A signal of what is killing, oppressing, or holding you back. Family? A job? When you break free, everything transforms.'},
+  23: {degree:'7 · AQUARIUS', desc:'Totally different from others. Success lies in the unconventional. Nervous, tense, torn. Inner restlessness. Revolutionaries. Face divorce or loss of partner.'},
+  24: {degree:'9 · PISCES', desc:'Two extremes. Either a victim of family or a master strategist. Depends entirely on the numbers next to you. Can go from extremely rich to extremely poor.'},
+  25: {degree:'1 · LEO', desc:'A royal degree. Very talented in writing. Can be athletes. Many in music. Strong intuition but also respiratory and intestinal sensitivity.'},
+  26: {degree:'6 · TAURUS', desc:'A great hedonist. Love food, family, money. Inclined to get married. Fantastic cook. Family is everything. You spend all your money on the people you love.'},
+  27: {degree:'5 · GEMINI', desc:'Tense and neurotic. Should not be lawyers. Thrive in freelance professions. Expend energy through sports. Medicine. In men — gamblers.'},
+  28: {degree:'2 · CANCER', desc:'Tied to family. Wherever you go, you love to return home. Both day and night births are materialistic — plugged into power. If born during the day, full of adrenaline, constantly in motion, driven to succeed. If born at night, enormous energy, wants to build and create, but emotions run deep. Both like to fight.'},
+  29: {degree:'1 · LEO', desc:'Strong intuition and clairvoyance. A bad aspect for emotional and family life. Intrigues, infidelity, deceptions, plots, false friends. You struggle with these your entire life but your intuition saves you.'},
+  30: {degree:'5 · GEMINI', desc:'You create a lot out of nothing — more than those born on the 3rd. Two extremes. Cooperation with foreigners, education. From extremely rich to extremely poor. Success depends on doing the unconventional.'},
+  31: {degree:'4 · CAPRICORN', desc:'Your position expands easily. You receive help from bosses and people not related by blood. Realistic and practical. A spiritual number that grounds into the material world.'}
+};
+
+// Biorhythm descriptions from knowledge base
+var BIO_DESC = {
+  1: 'A leader. Takes charge immediately. People feel authority before a word is spoken. Passionate, emotional, knows what they want. The Sun energy.',
+  2: 'Emotional, fated energy. People feel something pulling them in. The Moon. Material, cares about money and emotional fulfillment. Blocks and difficulties come first.',
+  3: 'Passion, love, and attraction born immediately. Turbulent but heartfelt. Chemistry is felt on contact. Jupiter energy — expansion and fire.',
+  4: 'A serious presence. People feel they are dealing with someone composed and measured. Takes time to decide. In relationships, keeps you on hold. Karma.',
+  5: 'Neither fated nor karmic. A healthy, quality connection. Recognized something special. Intellectual and communicative. Mercury energy.',
+  6: 'Physical attraction and love born immediately. Entered with the heart. Passionate. Most end in marriage. Family-level karma pulling toward commitment.',
+  7: 'Spirituality. A higher power pulling things together. Nervous, unpredictable energy. Breakdowns possible. Rare matches that last.',
+  8: 'Two stable personalities. Suspicious, need time to open up. Slowly build something of quality, long-term, lasting. Financial support and passion.',
+  9: 'Karmic. The most difficult stories. People live together repaying karma every day. Stubborn, persistent, but disinterested in dominance.'
+};
+
+// Generational descriptions
+var GEN_DESC = {
+  1: 'The goal is a healthy, quality relationship with common motives and thoughts.',
+  2: 'Destiny. The goal is very strong and cannot be fought against.',
+  3: 'Pure love, passion, and attraction define the goal.',
+  4: 'Karma at the goal. Difficult but the relationship carries deep lessons.',
+  5: 'Casual beginning. The goal is freedom, intellect, and exploration.',
+  6: 'Love and family-level karma. A need to get married and have children pulls stronger here.',
+  7: 'Spirituality. A higher power is pulling you to be together.',
+  8: 'Financial support, passion, and material stability define the goal.',
+  9: 'Repaying karma. The most difficult goal — people repay karma every day of their lives.'
+};
+
+// Life path descriptions
+var LP_DESC = {
+  1: 'Independence and leadership define the destiny. The path demands standing alone and leading.',
+  2: 'Partnership and emotional depth. The path requires learning to receive and to trust.',
+  3: 'Expansion, creativity, and joy. Jupiter guides the path. The world opens up.',
+  4: 'Structure, discipline, and karma. Saturn demands hard work. Everything comes later but lasts.',
+  5: 'Freedom, travel, and change. Mercury demands movement. Cannot stay in one place.',
+  6: 'Love, family, and responsibility. Venus demands commitment and sacrifice for those you love.',
+  7: 'The unconventional path. Spirituality, originality, and inner work define the destiny.',
+  8: 'Power, achievement, and material success. Mars demands ambition and resilience.',
+  9: 'Karma, completion, and wisdom. Neptune demands surrender and spiritual growth.'
+};
+
+// Pyramid code descriptions (from knowledge base)
+var PYR_DESC = {
+  '393': 'Over-passionate. Two 3s with a 9 between them create terrifying turbulence and passion. Driven by karma and intense emotion.',
+  '111': 'Triple independence. Ego dominates everything. Learning to let others in is the lifetime lesson.',
+  '222': 'Deep emotional sensitivity. Fated patterns repeat. The mother connection defines everything.',
+  '333': 'Pure passion and fire. Love is everything. Jealousy and possessiveness run deep.',
+  '444': 'Heavy karma from ancestors. Structure and discipline define the inner world. Patient.',
+  '555': 'Restless mind. Cannot stop moving or thinking. Freedom is non-negotiable.',
+  '666': 'Love and beauty obsessed. Hedonistic at the core. Family karma runs deep.',
+  '777': 'Extremely nervous inner world. Spiritual but torn. The unconventional path is mandatory.',
+  '888': 'Power hunger at the core. Material world dominates. Build empires or destroy them.',
+  '999': 'Pure karma. The deepest spiritual lessons. Sacrifice and surrender define the inner life.'
+};
+
+var userData = {};
 
 function calcCode(){
   var d=parseInt(document.getElementById('day1').value);
   var m=parseInt(document.getElementById('month1').value);
   var y=parseInt(document.getElementById('year1').value);
-  if(!d||!m||!y){alert(T[LANG].alert);return;}
+  var tod=document.getElementById('tod').value;
+  if(!d||!m||!y){alert('Please enter your complete birth date.');return;}
+
   var bio=r(d+m);
-  var gen=r(String(y).split('').reduce(function(s,d){return s+parseInt(d)},0));
+  var gen=r(String(y).split('').reduce(function(s,c){return s+parseInt(c)},0));
   var lp=r(bio+gen);
-  document.getElementById('r-code').textContent=bio+' . '+gen+' . '+lp;
-  document.getElementById('r-bio').textContent=bio;
-  document.getElementById('r-gen').textContent=gen;
-  document.getElementById('r-lp').textContent=lp;
+
+  // Calculate pyramid
+  var digits=String(d).padStart(2,'0').split('').concat(String(m).padStart(2,'0').split('')).concat(String(y).split(''));
+  digits=digits.map(Number);
+  var pyramid=[digits];
+  var row=digits;
+  while(row.length>1){
+    var next=[];
+    for(var i=0;i<row.length-1;i++) next.push(r(row[i]+row[i+1]));
+    pyramid.push(next);
+    row=next;
+  }
+  // Pyramid code from last 3 rows (without birth date row)
+  // pyramid[0] is birth date, pyramid[1] is row 2, etc.
+  // Last row = pyramid[pyramid.length-1] (peak)
+  // Second to last = pyramid[pyramid.length-2] (row 7)
+  var peak = pyramid[pyramid.length-1][0];
+  var row7 = pyramid[pyramid.length-2]; // [left, right]
+  var pyrCode = row7[0]+'.'+row7[1]+'.'+peak;
+  // Remove birth date row from display pyramid
+  var displayPyramid = pyramid.slice(1);
+
+  var ordinal = d + (['','st','nd','rd'][d%10>3?0:(d%100-d%10!=10)*d%10]||'th');
+
+  userData = {day:d, month:m, year:y, tod:tod, bio:bio, gen:gen, lp:lp, pyrCode:pyrCode, displayPyramid:displayPyramid, ordinal:ordinal, code:bio+'.'+gen+'.'+lp};
+
+  buildCarousel();
   document.getElementById('calculator').style.display='none';
   document.getElementById('result').style.display='block';
   window.scrollTo(0,0);
+}
+
+function buildCarousel(){
+  var d=userData;
+  var bd = BIRTH_DAYS[d.day] || BIRTH_DAYS[r(d.day)] || {degree:'', desc:''};
+  var track=document.getElementById('track');
+  var dots=document.getElementById('dots');
+
+  // SLIDE 1 - Born on the Xth
+  var s1='<div class="carousel-slide">';
+  s1+='<div class="s-logo">OCCULTICS MEDIA</div>';
+  s1+='<div class="s-line"></div>';
+  s1+='<div class="s-born-label">BORN ON THE</div>';
+  s1+='<div class="s-born-num">'+d.ordinal+'</div>';
+  s1+='<div class="s-degree">'+bd.degree+'</div>';
+  s1+='<div class="s-line"></div>';
+  s1+='<div class="s-desc">'+bd.desc+'</div>';
+  s1+='</div>';
+
+  // SLIDE 2 - Pythagorean Code
+  var s2='<div class="carousel-slide">';
+  s2+='<div class="s-logo">OCCULTICS MEDIA</div>';
+  s2+='<div class="s-line"></div>';
+  s2+='<div class="s-eyebrow">YOUR PYTHAGOREAN CODE</div>';
+  s2+='<div class="s-code" style="margin:12px 0">'+d.bio+' . '+d.gen+' . '+d.lp+'</div>';
+  s2+='<div class="s-line"></div>';
+  s2+='<div class="s-num-label">BIORHYTHM — '+d.bio+'</div>';
+  s2+='<div class="s-num-desc">'+(BIO_DESC[d.bio]||'')+'</div>';
+  s2+='<div class="s-num-label">GENERATIONAL — '+d.gen+'</div>';
+  s2+='<div class="s-num-desc">'+(GEN_DESC[d.gen]||'')+'</div>';
+  s2+='<div class="s-num-label">LIFE PATH — '+d.lp+'</div>';
+  s2+='<div class="s-num-desc">'+(LP_DESC[d.lp]||'')+'</div>';
+  s2+='</div>';
+
+  // SLIDE 3 - Pyramid
+  var s3='<div class="carousel-slide">';
+  s3+='<div class="s-logo">OCCULTICS MEDIA</div>';
+  s3+='<div class="s-line"></div>';
+  s3+='<div class="s-eyebrow">YOUR NUMERICAL PYRAMID</div>';
+  s3+='<div class="s-pyramid">';
+  var dp=d.displayPyramid;
+  var totalRows=dp.length;
+  for(var ri=0;ri<totalRows;ri++){
+    s3+='<div class="s-pyr-row">';
+    for(var ci=0;ci<dp[ri].length;ci++){
+      var isHL=(ri>=totalRows-2);
+      s3+='<div class="s-pyr-num'+(isHL?' hl':'')+'">'+dp[ri][ci]+'</div>';
+    }
+    s3+='</div>';
+  }
+  s3+='</div>';
+  s3+='<div class="s-line"></div>';
+  s3+='<div class="s-eyebrow">PYRAMID CODE</div>';
+  s3+='<div class="s-code" style="margin:12px 0;font-size:clamp(32px,9vw,48px)">'+d.pyrCode+'</div>';
+  var pyrKey=d.pyrCode.replace(/\./g,'');
+  s3+='<div class="s-desc" style="font-size:clamp(14px,3.5vw,18px)">'+(PYR_DESC[pyrKey]||'A unique pyramid code. The combined energies create a pattern worth exploring.')+'</div>';
+  s3+='</div>';
+
+  // SLIDE 4 - CTA
+  var s4='<div class="carousel-slide">';
+  s4+='<div class="s-logo">OCCULTICS MEDIA</div>';
+  s4+='<svg width="60" height="72" viewBox="0 0 80 100" fill="none" style="margin:20px 0;position:relative;z-index:1"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/><polygon points="40,15 65,32 40,48" fill="#fff" opacity="0.18"/></svg>';
+  s4+='<div class="s-line"></div>';
+  s4+='<div class="s-question">What\'s<br><em>YOUR</em><br>code?</div>';
+  s4+='<div class="s-line"></div>';
+  s4+='<div class="s-sub">Your date of birth already knows who you are and who you\'re compatible with.</div>';
+  s4+='<div style="margin:20px 0"><div class="s-sub" style="font-style:italic;color:rgba(255,255,255,0.35)">Self-awareness meets connection.</div></div>';
+  s4+='<div class="s-url">occultics.ai</div>';
+  s4+='<a href="/match/compatibility.html" class="s-cta-btn" style="margin-top:16px">Check your compatibility</a>';
+  s4+='</div>';
+
+  track.innerHTML=s1+s2+s3+s4;
+
+  // Dots
+  dots.innerHTML='';
+  for(var i=0;i<4;i++){
+    var dot=document.createElement('div');
+    dot.className='dot'+(i===0?' active':'');
+    dot.setAttribute('data-i',i);
+    dot.onclick=function(){goToSlide(parseInt(this.getAttribute('data-i')))};
+    dots.appendChild(dot);
+  }
+  currentSlide=0;
+
+  // Swipe support
+  var startX=0;
+  var carousel=document.getElementById('carousel');
+  carousel.addEventListener('touchstart',function(e){startX=e.touches[0].clientX});
+  carousel.addEventListener('touchend',function(e){
+    var diff=startX-e.changedTouches[0].clientX;
+    if(Math.abs(diff)>50){
+      if(diff>0&&currentSlide<3)goToSlide(currentSlide+1);
+      if(diff<0&&currentSlide>0)goToSlide(currentSlide-1);
+    }
+  });
+}
+
+var currentSlide=0;
+function goToSlide(i){
+  currentSlide=i;
+  document.getElementById('track').style.transform='translateX(-'+i*100+'%)';
+  document.querySelectorAll('.dot').forEach(function(d,idx){d.classList.toggle('active',idx===i)});
 }
 
 function showCalc(){
@@ -139,98 +404,60 @@ function showCalc(){
   window.scrollTo(0,0);
 }
 
-var T={
-  en:{
-    title:'Calculate Your <em>Code</em>',
-    sub:'Enter your birth date. Three numbers hidden in your birthday define who you are, what you need, and where your life is going.',
-    day:'Day',month:'Month',year:'Year',
-    btn:'Calculate Your Code',
-    eyebrow:'Your Pythagorean Code',
-    code_label:'Biorhythm · Generational · Life Path',
-    bio:'Biorhythm',gen:'Generational',lp:'Life Path',
-    cta_title:'This is your code. Want to know what it means?',
-    cta_join:'Join Occultics — $29/month',
-    cta_compat:'Check Your Compatibility Code',
-    recalc:'\u2190 Calculate another code',
-    foot_compat:'Compatibility Check',
-    foot_join:'Join Match',
-    alert:'Please enter your complete birth date.',
-    months:['January','February','March','April','May','June','July','August','September','October','November','December']
-  },
-  es:{
-    title:'Calcula Tu <em>C\u00f3digo</em>',
-    sub:'Ingresa tu fecha de nacimiento. Tres n\u00fameros ocultos en tu cumplea\u00f1os definen qui\u00e9n eres, qu\u00e9 necesitas y hacia d\u00f3nde va tu vida.',
-    day:'D\u00eda',month:'Mes',year:'A\u00f1o',
-    btn:'Calcula Tu C\u00f3digo',
-    eyebrow:'Tu C\u00f3digo Pitag\u00f3rico',
-    code_label:'Biorritmo · Generacional · Camino de Vida',
-    bio:'Biorritmo',gen:'Generacional',lp:'Camino de Vida',
-    cta_title:'\u00bfQuieres saber qu\u00e9 significa tu c\u00f3digo?',
-    cta_join:'\u00danete a Occultics — $29/mes',
-    cta_compat:'Verifica Tu C\u00f3digo de Compatibilidad',
-    recalc:'\u2190 Calcular otro c\u00f3digo',
-    foot_compat:'Verificar Compatibilidad',
-    foot_join:'\u00danete a Match',
-    alert:'Por favor ingresa tu fecha de nacimiento completa.',
-    months:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
-  },
-  ja:{
-    title:'\u3042\u306a\u305f\u306e<em>\u30b3\u30fc\u30c9</em>\u3092\u8a08\u7b97',
-    sub:'\u751f\u5e74\u6708\u65e5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002\u8a95\u751f\u65e5\u306b\u96a0\u3055\u308c\u305f3\u3064\u306e\u6570\u5b57\u304c\u3001\u3042\u306a\u305f\u304c\u8ab0\u3067\u3042\u308b\u304b\u3001\u4f55\u3092\u5fc5\u8981\u3068\u3057\u3066\u3044\u308b\u304b\u3001\u4eba\u751f\u304c\u3069\u3053\u3078\u5411\u304b\u3063\u3066\u3044\u308b\u304b\u3092\u5b9a\u7fa9\u3057\u307e\u3059\u3002',
-    day:'\u65e5',month:'\u6708',year:'\u5e74',
-    btn:'\u30b3\u30fc\u30c9\u3092\u8a08\u7b97',
-    eyebrow:'\u3042\u306a\u305f\u306e\u30d4\u30bf\u30b4\u30e9\u30b9\u30b3\u30fc\u30c9',
-    code_label:'\u30d0\u30a4\u30aa\u30ea\u30ba\u30e0 · \u4e16\u4ee3 · \u30e9\u30a4\u30d5\u30d1\u30b9',
-    bio:'\u30d0\u30a4\u30aa\u30ea\u30ba\u30e0',gen:'\u4e16\u4ee3',lp:'\u30e9\u30a4\u30d5\u30d1\u30b9',
-    cta_title:'\u3053\u308c\u304c\u3042\u306a\u305f\u306e\u30b3\u30fc\u30c9\u3067\u3059\u3002\u305d\u306e\u610f\u5473\u3092\u77e5\u308a\u305f\u3044\u3067\u3059\u304b\uff1f',
-    cta_join:'Occultics\u306b\u53c2\u52a0 \u2014 $29/\u6708',
-    cta_compat:'\u76f8\u6027\u30b3\u30fc\u30c9\u3092\u30c1\u30a7\u30c3\u30af',
-    recalc:'\u2190 \u5225\u306e\u30b3\u30fc\u30c9\u3092\u8a08\u7b97',
-    foot_compat:'\u76f8\u6027\u30c1\u30a7\u30c3\u30af',
-    foot_join:'Match\u306b\u53c2\u52a0',
-    alert:'\u5b8c\u5168\u306a\u751f\u5e74\u6708\u65e5\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044\u3002',
-    months:['1\u6708','2\u6708','3\u6708','4\u6708','5\u6708','6\u6708','7\u6708','8\u6708','9\u6708','10\u6708','11\u6708','12\u6708']
+// SHARE FUNCTIONS
+function shareIG(){
+  // Open Instagram Stories on mobile
+  var text='Born on the '+userData.ordinal+'. My code: '+userData.code+'. Pyramid: '+userData.pyrCode+'. Calculate yours at occultics.ai';
+  if(navigator.share){
+    navigator.share({title:'My Occultics Code',text:text,url:'https://occultics.ai/code.html'}).catch(function(){});
+  } else {
+    // Fallback - copy to clipboard
+    navigator.clipboard.writeText(text+' https://occultics.ai/code.html');
+    alert('Copied to clipboard! Paste it in your Instagram Story.');
   }
-};
+}
 
+function shareWA(){
+  var text='Born on the '+userData.ordinal+'. My Pythagorean code is '+userData.code+'. My pyramid code is '+userData.pyrCode+'. What\'s YOUR code? Calculate it free: https://occultics.ai/code.html';
+  window.open('https://wa.me/?text='+encodeURIComponent(text));
+}
+
+function downloadReel(){
+  // Generate a video-like slideshow using canvas
+  var loading=document.getElementById('share-loading');
+  loading.style.display='block';
+  loading.textContent='Generating your reel...';
+
+  // Create canvas for each slide and download as images
+  var slides=document.querySelectorAll('.carousel-slide');
+  var zip=[];
+  var count=0;
+
+  // Use html2canvas approach - but since we can't load external libs,
+  // we'll download the slides as screenshots via a simpler approach
+  // For now, use the native share or prompt to screen record
+
+  // Simplest approach: prompt user
+  loading.textContent='';
+  var msg='To post as a Reel:\n\n1. Screen-record while swiping through your code carousel above\n2. Open Instagram → New Reel → Select the recording\n3. Add music and post!\n\nOr screenshot each slide and create a carousel post.';
+  alert(msg);
+  loading.style.display='none';
+}
+
+// Language
 var LANG=(navigator.language||'en').substring(0,2);
 if(!['en','es','ja'].includes(LANG))LANG='en';
 var urlLang=new URLSearchParams(window.location.search).get('lang');
 if(urlLang&&['en','es','ja'].includes(urlLang))LANG=urlLang;
 
-function applyLang(){
-  var t=T[LANG];
-  document.getElementById('t-title').innerHTML=t.title;
-  document.getElementById('t-sub').textContent=t.sub;
-  document.getElementById('t-day').textContent=t.day;
-  document.getElementById('t-month').textContent=t.month;
-  document.getElementById('t-year').textContent=t.year;
-  document.getElementById('t-btn').textContent=t.btn;
-  document.getElementById('t-eyebrow').textContent=t.eyebrow;
-  document.getElementById('t-code-label').textContent=t.code_label;
-  document.getElementById('t-bio').textContent=t.bio;
-  document.getElementById('t-gen').textContent=t.gen;
-  document.getElementById('t-lp').textContent=t.lp;
-  document.getElementById('t-cta-title').textContent=t.cta_title;
-  document.getElementById('t-cta-join').textContent=t.cta_join;
-  document.getElementById('t-cta-compat').textContent=t.cta_compat;
-  document.getElementById('t-recalc').textContent=t.recalc;
-  document.getElementById('t-foot-compat').textContent=t.foot_compat;
-  document.getElementById('t-foot-join').textContent=t.foot_join;
-  var mEl=document.getElementById('month1');
-  mEl.innerHTML='<option value="">—</option>';
-  t.months.forEach(function(name,i){var o=document.createElement('option');o.value=i+1;o.textContent=name;mEl.appendChild(o);});
-  var sw=document.getElementById('lang-switch');
-  sw.innerHTML='';
-  ['en','es','ja'].forEach(function(l){
-    var btn=document.createElement('button');
-    btn.className='lang-btn'+(l===LANG?' active':'');
-    btn.textContent=l.toUpperCase();
-    btn.onclick=function(){var url=new URL(window.location);url.searchParams.set('lang',l);window.location=url.toString();};
-    sw.appendChild(btn);
-  });
-}
-applyLang();
+var sw=document.getElementById('lang-switch');
+['en','es','ja'].forEach(function(l){
+  var btn=document.createElement('button');
+  btn.className='lang-btn'+(l===LANG?' active':'');
+  btn.textContent=l.toUpperCase();
+  btn.onclick=function(){var url=new URL(window.location);url.searchParams.set('lang',l);window.location=url.toString();};
+  sw.appendChild(btn);
+});
 </script>
 </body>
 </html>
