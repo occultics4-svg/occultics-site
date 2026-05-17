@@ -65,9 +65,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .s-cta-btn{display:inline-block;padding:12px 32px;background:var(--royal);color:var(--white);border-radius:24px;font-size:11px;letter-spacing:1.5px;font-weight:700;text-transform:uppercase;text-decoration:none;position:relative;z-index:1}
 
 /* Dots */
-.carousel-dots{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(77,184,255,0.2);cursor:pointer;transition:all .2s}
-.dot.active{background:var(--crystal);transform:scale(1.2)}
+.carousel-nav{display:flex;justify-content:center;align-items:center;gap:24px;margin-bottom:20px}
+.nav-arrow{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(77,184,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--crystal);font-size:18px}
+.nav-arrow:hover{background:rgba(77,184,255,0.1);border-color:var(--crystal)}
+.nav-arrow.disabled{opacity:0.2;cursor:default}
+.nav-counter{font-size:12px;letter-spacing:2px;color:var(--gray);font-weight:600}
+.nav-counter span{color:var(--crystal)}
 
 /* Share buttons */
 .share-section{margin-bottom:24px}
@@ -129,7 +132,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <div class="carousel-wrap" id="carousel">
       <div class="carousel-track" id="track"></div>
     </div>
-    <div class="carousel-dots" id="dots"></div>
+    <div class="carousel-nav"><div class="nav-arrow" id="nav-prev" onclick="prevSlide()">&#8592;</div><div class="nav-counter"><span id="nav-current">1</span> / 4</div><div class="nav-arrow" id="nav-next" onclick="nextSlide()">&#8594;</div></div>
 
     <div class="share-section">
       <div class="share-title">Share your code</div>
@@ -166,37 +169,37 @@ function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d)
 
 // Birth day descriptions from knowledge base
 var BIRTH_DAYS = {
-  1: {degree:'8 · ARIES', desc:'Very passionate and emotional. Quick to anger. You know what you want from life. A fighting spirit and a somewhat short temper. People in uniform — doctors, police, military.'},
-  2: {degree:'6 · TAURUS', desc:'A great hedonist. You love food, family, money, and indulging yourself. Fantastic cook. Family is your top priority. You spend everything on hedonism and the people you love.'},
-  3: {degree:'5 · GEMINI', desc:'You create something out of nothing. Educated, you can become wealthy. Drawn to foreign countries. Dynamism, constant travel through life. Jobs in communication, marketing, sales.'},
-  4: {degree:'2 · CANCER', desc:'Tied to family. Wherever you go, it is only a matter of time before you return home. Both day and night births are materialistic — plugged into power. Both like to fight.'},
-  5: {degree:'1 · LEO', desc:'A royal degree. Produces many successful people. You love to travel and cannot stay in one place. Predisposition for success in career and building your position.'},
-  6: {degree:'5 · VIRGO', desc:'The focus is on health and work, not love. Major love problems. A lack of luck in emotional life, which you compensate for through work. Health suffers because of these problems.'},
-  7: {degree:'6 · LIBRA', desc:'Indecisive but original and creative. Artistic inclinations and a striving for marriage, accord, and harmony. More creative than those born on the 6th.'},
-  8: {degree:'0 · SCORPIO', desc:'Danger awaits in life. In life, you go for broke — either very poor or very rich. There is no middle ground. You do not know moderation.'},
-  9: {degree:'3 · SAGITTARIUS', desc:'Constant traveling, living abroad. Optimism, a broad worldview. A lifelong commitment to self-improvement and acquiring knowledge. A fortunate circumstance always helps you.'},
-  10: {degree:'4 · CAPRICORN', desc:'In life, everything comes to you later, especially recognition. Everything happens with a delay. Longevity and gradual aging. You look younger than your years.'},
-  11: {degree:'7 · AQUARIUS', desc:'Totally different from others. Your success lies in the unconventional. Nervous, tense, torn, inner restlessness. Revolutionaries and strikers. Face divorce or loss of a partner.'},
-  12: {degree:'9 · PISCES', desc:'Two extremes. Either a victim of family or a master strategist. There are a lot of you in politics. Your success depends entirely on the numbers next to you.'},
-  13: {degree:'8 · ARIES', desc:'Passionate and emotional. Quick temper with a fighting spirit. You know what you want from life. Prone to injuries. Great strength but confrontational.'},
-  14: {degree:'6 · TAURUS', desc:'A great hedonist. You like to enjoy life. Tends to produce a bit of lazy people. Family, money, food — surrounded by beauty in every form.'},
-  15: {degree:'5 · GEMINI', desc:'Original, creative, a genius when it comes to originality. Artistic soul but also a logician. You see patterns others miss.'},
-  16: {degree:'2 · CANCER', desc:'Strongly tied to family — wife and mother. Wherever you go, it is only a matter of time before you return home. Both day and night are materialistic.'},
-  17: {degree:'1 · LEO', desc:'A royal degree. Produces successful people. You love to travel and cannot stay in one place. Great predisposition for career success.'},
-  18: {degree:'5 · VIRGO', desc:"The devil's degree. Ranges from devil's luck to devil's misfortune throughout life. Some experience abnormal luck, others face immense misfortune. Birth month is the key."},
-  19: {degree:'6 · LIBRA', desc:'Indecisive but more original and creative. Artistic inclinations. A striving for marriage, accord, and harmony.'},
-  20: {degree:'0 · SCORPIO', desc:'Danger awaits in life. You go for broke. Either very poor or very rich. Superior stubbornness and strength within. Great capital and potential for total bankruptcy.'},
-  21: {degree:'3 · SAGITTARIUS', desc:'Constant traveling, living abroad. Optimism, broad worldview. Lifelong self-improvement. A fortunate circumstance always awaits and helps you get out of trouble.'},
-  22: {degree:'4 · CAPRICORN', desc:'Degree to kill or be killed — not literally. A signal of what is killing, oppressing, or holding you back. Family? A job? When you break free, everything transforms.'},
-  23: {degree:'7 · AQUARIUS', desc:'Totally different from others. Success lies in the unconventional. Nervous, tense, torn. Inner restlessness. Revolutionaries. Face divorce or loss of partner.'},
-  24: {degree:'9 · PISCES', desc:'Two extremes. Either a victim of family or a master strategist. Depends entirely on the numbers next to you. Can go from extremely rich to extremely poor.'},
-  25: {degree:'1 · LEO', desc:'A royal degree. Very talented in writing. Can be athletes. Many in music. Strong intuition but also respiratory and intestinal sensitivity.'},
-  26: {degree:'6 · TAURUS', desc:'A great hedonist. Love food, family, money. Inclined to get married. Fantastic cook. Family is everything. You spend all your money on the people you love.'},
-  27: {degree:'5 · GEMINI', desc:'Tense and neurotic. Should not be lawyers. Thrive in freelance professions. Expend energy through sports. Medicine. In men — gamblers.'},
-  28: {degree:'2 · CANCER', desc:'Tied to family. Wherever you go, you love to return home. Both day and night births are materialistic — plugged into power. If born during the day, full of adrenaline, constantly in motion, driven to succeed. If born at night, enormous energy, wants to build and create, but emotions run deep. Both like to fight.'},
-  29: {degree:'1 · LEO', desc:'Strong intuition and clairvoyance. A bad aspect for emotional and family life. Intrigues, infidelity, deceptions, plots, false friends. You struggle with these your entire life but your intuition saves you.'},
-  30: {degree:'5 · GEMINI', desc:'You create a lot out of nothing — more than those born on the 3rd. Two extremes. Cooperation with foreigners, education. From extremely rich to extremely poor. Success depends on doing the unconventional.'},
-  31: {degree:'4 · CAPRICORN', desc:'Your position expands easily. You receive help from bosses and people not related by blood. Realistic and practical. A spiritual number that grounds into the material world.'}
+  1: {degree:'DEGREE 8', desc:'Very passionate and emotional. Quick to anger. You know what you want from life. A fighting spirit and a somewhat short temper. People in uniform — doctors, police, military.'},
+  2: {degree:'DEGREE 6', desc:'A great hedonist. You love food, family, money, and indulging yourself. Fantastic cook. Family is your top priority. You spend everything on hedonism and the people you love.'},
+  3: {degree:'DEGREE 5', desc:'You create something out of nothing. Educated, you can become wealthy. Drawn to foreign countries. Dynamism, constant travel through life. Jobs in communication, marketing, sales.'},
+  4: {degree:'DEGREE 2', desc:'Tied to family. Wherever you go, it is only a matter of time before you return home. Both day and night births are materialistic — plugged into power. Both like to fight.'},
+  5: {degree:'DEGREE 1', desc:'A royal degree. Produces many successful people. You love to travel and cannot stay in one place. Predisposition for success in career and building your position.'},
+  6: {degree:'DEGREE 5', desc:'The focus is on health and work, not love. Major love problems. A lack of luck in emotional life, which you compensate for through work. Health suffers because of these problems.'},
+  7: {degree:'DEGREE 6', desc:'Indecisive but original and creative. Artistic inclinations and a striving for marriage, accord, and harmony. More creative than those born on the 6th.'},
+  8: {degree:'DEGREE 0', desc:'Danger awaits in life. In life, you go for broke — either very poor or very rich. There is no middle ground. You do not know moderation.'},
+  9: {degree:'DEGREE 3', desc:'Constant traveling, living abroad. Optimism, a broad worldview. A lifelong commitment to self-improvement and acquiring knowledge. A fortunate circumstance always helps you.'},
+  10: {degree:'DEGREE 4', desc:'In life, everything comes to you later, especially recognition. Everything happens with a delay. Longevity and gradual aging. You look younger than your years.'},
+  11: {degree:'DEGREE 7', desc:'Totally different from others. Your success lies in the unconventional. Nervous, tense, torn, inner restlessness. Revolutionaries and strikers. Face divorce or loss of a partner.'},
+  12: {degree:'DEGREE 9', desc:'Two extremes. Either a victim of family or a master strategist. There are a lot of you in politics. Your success depends entirely on the numbers next to you.'},
+  13: {degree:'DEGREE 8', desc:'Passionate and emotional. Quick temper with a fighting spirit. You know what you want from life. Prone to injuries. Great strength but confrontational.'},
+  14: {degree:'DEGREE 6', desc:'A great hedonist. You like to enjoy life. Tends to produce a bit of lazy people. Family, money, food — surrounded by beauty in every form.'},
+  15: {degree:'DEGREE 5', desc:'Original, creative, a genius when it comes to originality. Artistic soul but also a logician. You see patterns others miss.'},
+  16: {degree:'DEGREE 2', desc:'Strongly tied to family — wife and mother. Wherever you go, it is only a matter of time before you return home. Both day and night are materialistic.'},
+  17: {degree:'DEGREE 1', desc:'A royal degree. Produces successful people. You love to travel and cannot stay in one place. Great predisposition for career success.'},
+  18: {degree:'DEGREE 5', desc:"The devil's degree. Ranges from devil's luck to devil's misfortune throughout life. Some experience abnormal luck, others face immense misfortune. Birth month is the key."},
+  19: {degree:'DEGREE 6', desc:'Indecisive but more original and creative. Artistic inclinations. A striving for marriage, accord, and harmony.'},
+  20: {degree:'DEGREE 0', desc:'Danger awaits in life. You go for broke. Either very poor or very rich. Superior stubbornness and strength within. Great capital and potential for total bankruptcy.'},
+  21: {degree:'DEGREE 3', desc:'Constant traveling, living abroad. Optimism, broad worldview. Lifelong self-improvement. A fortunate circumstance always awaits and helps you get out of trouble.'},
+  22: {degree:'DEGREE 4', desc:'Degree to kill or be killed — not literally. A signal of what is killing, oppressing, or holding you back. Family? A job? When you break free, everything transforms.'},
+  23: {degree:'DEGREE 7', desc:'Totally different from others. Success lies in the unconventional. Nervous, tense, torn. Inner restlessness. Revolutionaries. Face divorce or loss of partner.'},
+  24: {degree:'DEGREE 9', desc:'Two extremes. Either a victim of family or a master strategist. Depends entirely on the numbers next to you. Can go from extremely rich to extremely poor.'},
+  25: {degree:'DEGREE 1', desc:'A royal degree. Very talented in writing. Can be athletes. Many in music. Strong intuition but also respiratory and intestinal sensitivity.'},
+  26: {degree:'DEGREE 6', desc:'A great hedonist. Love food, family, money. Inclined to get married. Fantastic cook. Family is everything. You spend all your money on the people you love.'},
+  27: {degree:'DEGREE 5', desc:'Tense and neurotic. Should not be lawyers. Thrive in freelance professions. Expend energy through sports. Medicine. In men — gamblers.'},
+  28: {degree:'DEGREE 2', desc:'Tied to family. Wherever you go, you love to return home. Both day and night births are materialistic — plugged into power. If born during the day, full of adrenaline, constantly in motion, driven to succeed. If born at night, enormous energy, wants to build and create, but emotions run deep. Both like to fight.'},
+  29: {degree:'DEGREE 1', desc:'Strong intuition and clairvoyance. A bad aspect for emotional and family life. Intrigues, infidelity, deceptions, plots, false friends. You struggle with these your entire life but your intuition saves you.'},
+  30: {degree:'DEGREE 5', desc:'You create a lot out of nothing — more than those born on the 3rd. Two extremes. Cooperation with foreigners, education. From extremely rich to extremely poor. Success depends on doing the unconventional.'},
+  31: {degree:'DEGREE 4', desc:'Your position expands easily. You receive help from bosses and people not related by blood. Realistic and practical. A spiritual number that grounds into the material world.'}
 };
 
 // Biorhythm descriptions from knowledge base
@@ -367,16 +370,8 @@ function buildCarousel(){
 
   track.innerHTML=s1+s2+s3+s4;
 
-  // Dots
-  dots.innerHTML='';
-  for(var i=0;i<4;i++){
-    var dot=document.createElement('div');
-    dot.className='dot'+(i===0?' active':'');
-    dot.setAttribute('data-i',i);
-    dot.onclick=function(){goToSlide(parseInt(this.getAttribute('data-i')))};
-    dots.appendChild(dot);
-  }
   currentSlide=0;
+  updateNav();
 
   // Swipe support
   var startX=0;
@@ -395,8 +390,15 @@ var currentSlide=0;
 function goToSlide(i){
   currentSlide=i;
   document.getElementById('track').style.transform='translateX(-'+i*100+'%)';
-  document.querySelectorAll('.dot').forEach(function(d,idx){d.classList.toggle('active',idx===i)});
+  updateNav();
 }
+function updateNav(){
+  document.getElementById('nav-current').textContent=currentSlide+1;
+  document.getElementById('nav-prev').classList.toggle('disabled',currentSlide===0);
+  document.getElementById('nav-next').classList.toggle('disabled',currentSlide===3);
+}
+function prevSlide(){if(currentSlide>0)goToSlide(currentSlide-1);}
+function nextSlide(){if(currentSlide<3)goToSlide(currentSlide+1);}
 
 function showCalc(){
   document.getElementById('calculator').style.display='block';
@@ -406,14 +408,22 @@ function showCalc(){
 
 // SHARE FUNCTIONS
 function shareIG(){
-  // Open Instagram Stories on mobile
-  var text='Born on the '+userData.ordinal+'. My code: '+userData.code+'. Pyramid: '+userData.pyrCode+'. Calculate yours at occultics.ai';
+  var text='Born on the '+userData.ordinal+'. My code: '+userData.code+'. Pyramid: '+userData.pyrCode+'. Calculate yours at occultics.ai/code.html';
+  // Try native share (works on mobile - lets user pick Instagram, Stories, etc)
   if(navigator.share){
-    navigator.share({title:'My Occultics Code',text:text,url:'https://occultics.ai/code.html'}).catch(function(){});
+    navigator.share({
+      title:'My Occultics Code — '+userData.code,
+      text:text,
+      url:'https://occultics.ai/code.html'
+    }).catch(function(){});
   } else {
-    // Fallback - copy to clipboard
-    navigator.clipboard.writeText(text+' https://occultics.ai/code.html');
-    alert('Copied to clipboard! Paste it in your Instagram Story.');
+    // Desktop fallback - copy text
+    var fullText=text+' https://occultics.ai/code.html';
+    navigator.clipboard.writeText(fullText).then(function(){
+      alert('Copied! Open Instagram and paste in your Story.');
+    }).catch(function(){
+      prompt('Copy this text and paste in your Instagram Story:', fullText);
+    });
   }
 }
 
