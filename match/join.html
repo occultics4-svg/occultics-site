@@ -142,21 +142,20 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     <button class="btn-back" onclick="goStep4()" style="margin-top:6px;font-size:10px">Skip for now →</button>
   </div>
   <div id="step4" class="join-card" style="display:none">
-    <div class="card-eyebrow">Step 4 — Founding Member</div>
-    <div class="card-title">Activate Your Membership</div>
-    <div class="card-sub">Your Pythagorean Code has been calculated. Activate your membership to see who your numbers match with.</div>
-    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:24px;text-align:center"><div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div></div>
-    <div class="payment-features"><div class="payment-feature"><span>✦</span> Unlimited compatibility matches across love, friendship & business</div><div class="payment-feature"><span>✦</span> Full Pythagorean compatibility scores for every match</div><div class="payment-feature"><span>✦</span> Private messaging with your top matches</div><div class="payment-feature"><span>✦</span> Founding member pricing — locked in forever</div></div>
-    <div class="payment-summary"><div class="payment-row"><span class="payment-label">Occultics Match — Founding Member</span><span class="payment-value">Monthly</span></div><div class="payment-row"><span class="payment-label">First 100 members pricing</span><span class="payment-value" style="color:var(--crystal)">Locked in</span></div><div class="payment-total"><span class="payment-label">Total</span><span class="payment-value">$29/mo</span></div></div>
+    <div class="card-eyebrow">Step 4 — Your First Reading</div>
+    <div class="card-title">Your Life Code — Session 1</div>
+    <div class="card-sub">This is a preview of who you are according to your date of birth. Sign up to unlock your full profile and see who matches your code.</div>
+    <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center"><div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s4-code">— · — · —</div></div>
+    <div id="s4-reading" style="background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.1);border-radius:12px;padding:20px;margin-bottom:20px;font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.9;color:rgba(255,255,255,0.7)">Loading your reading...</div>
+    <div style="background:rgba(26,42,255,0.04);border:1px solid rgba(77,184,255,0.08);border-radius:10px;padding:14px;margin-bottom:20px;text-align:center;font-size:10px;color:var(--gray-mid)">✦ This is Session 1 of 7. Complete all 7 sessions inside the platform to unlock your full Life Code Alignment.</div>
     <div class="form-row single"><div class="form-group"><label>Email</label><input type="email" id="s4-email" placeholder="your@email.com"></div></div>
-    <button class="btn-next" onclick="handleMatchPayment()" id="pay-btn">✦ Activate Membership — $29/month</button>
-    <div class="payment-guarantee">🔒 Secure payment via Stripe · Cancel anytime</div>
+    <button class="btn-next" onclick="passEmailToStep5()" id="pay-btn">✦ Sign Up Free — See Your Matches</button>
     <button class="btn-back" onclick="goStep(3)">← Back</button>
   </div>
   <div id="step5" class="join-card" style="display:none">
     <div class="card-eyebrow">Step 5</div>
     <div class="card-title">Create Your Account</div>
-    <div class="card-sub">Payment confirmed. Set your password to access your matches.</div>
+    <div class="card-sub">Set your password to access your profile and matches.</div>
     <div class="form-row single"><div class="form-group"><label>Email</label><input type="email" id="s5-email" placeholder="your@email.com" readonly style="opacity:0.7"></div></div>
     <div class="form-row single"><div class="form-group"><label>Password</label><input type="password" id="s5-pwd" placeholder="Min 8 characters" oninput="checkPwd()"><div class="pwd-strength"><div class="pwd-bar" id="pwd-bar"></div></div></div></div>
     <div style="background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:16px;margin-bottom:20px;text-align:center"><div style="font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;margin-bottom:8px">Your Pythagorean Code</div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--white);letter-spacing:10px" id="s5-code">— · — · —</div></div>
@@ -195,22 +194,75 @@ try {
 function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n}
 function calcCodes(day,month,year){var bio=r(day+month);var gen=r(String(year).split('').reduce(function(s,d){return s+parseInt(d)},0));var lp=r(bio+gen);return{biorhythm:bio,generational:gen,lifePath:lp};}
 var _codes = null;
+// LCA Session 1 descriptions from knowledge base
+var BIO_LCA = {
+  1: 'You carry the energy of the Sun. Leadership, authority, and presence define your biorhythm. People feel your confidence before you speak. You know what you want and you pursue it with passion. In relationships, you need to be seen and respected.',
+  2: 'You carry the energy of the Moon. Emotional, intuitive, and deeply connected to others. You feel everything — sometimes too much. Material security matters to you. In relationships, you need emotional safety and loyalty.',
+  3: 'You carry the energy of Jupiter. Expansion, passion, and fire define you. You enter every room and every relationship with chemistry that is felt immediately. The world opens up around you. In relationships, you need growth and adventure.',
+  4: 'You carry the energy of Saturn. Serious, composed, and measured. People feel structure and stability in your presence. You take your time with everything — especially love. In relationships, you keep people on hold until you are certain.',
+  5: 'You carry the energy of Mercury. Intellectual, communicative, and restless. You need mental stimulation constantly. Routine kills you. In relationships, you need someone who keeps your mind engaged — or you lose interest.',
+  6: 'You carry the energy of Venus. Love, beauty, and harmony define you. You are drawn to commitment and family. Physical attraction hits you hard and fast. In relationships, you are devoted — sometimes to the point of sacrifice.',
+  7: 'You carry the energy of Uranus. Unpredictable, electric, and different from everyone around you. People are intrigued by you but never fully understand you. In relationships, you need freedom and space — or you break.',
+  8: 'You carry the energy of Mars. Power, ambition, and material drive define you. You build things. You are suspicious at first but once you commit, you are unshakable. In relationships, you need a partner who matches your strength.',
+  9: 'You carry the energy of Neptune. Karmic, spiritual, and deeply complex. You carry old patterns and old lessons. You are persistent and stubborn but not interested in domination. In relationships, you are repaying karma — whether you know it or not.'
+};
+
+var GEN_LCA = {
+  1: 'What your soul truly needs is independence and recognition. You need a partner who respects your autonomy and never tries to control you.',
+  2: 'What your soul truly needs is emotional connection and partnership. You need to feel needed. Without that, you wither.',
+  3: 'What your soul truly needs is joy, expansion, and passion. You need a partner who makes life feel bigger, not smaller.',
+  4: 'What your soul truly needs is stability and structure. You need to know the ground won\'t shift. Predictability is not boring to you — it is safety.',
+  5: 'What your soul truly needs is freedom and variety. You need a partner who gives you space to explore, change, and reinvent yourself.',
+  6: 'What your soul truly needs is love, beauty, and family. You need devotion — deep, unconditional, permanent devotion.',
+  7: 'What your soul truly needs is depth and meaning. You need a partner who understands your inner world — the one nobody else sees.',
+  8: 'What your soul truly needs is power and achievement. You need a partner who is equally ambitious and will build an empire beside you.',
+  9: 'What your soul truly needs is spiritual growth and completion. You need a partner who understands that some things are bigger than both of you.'
+};
+
+var LP_LCA = {
+  1: 'Your life path leads to independence. Whether you choose it or not, you will end up standing on your own, leading, and building something that is entirely yours.',
+  2: 'Your life path leads to partnership. Your greatest growth comes through relationships — learning to trust, to receive, and to let someone in completely.',
+  3: 'Your life path leads to expansion. Jupiter opens doors for you throughout life. Travel, creativity, abundance — the world expands around you when you follow your passion.',
+  4: 'Your life path leads to structure and hard work. Saturn does not give easy rewards. Everything comes later — but what comes, lasts forever.',
+  5: 'Your life path leads to change and movement. You will reinvent yourself multiple times. Each version is more free than the last.',
+  6: 'Your life path leads to love and responsibility. Family, commitment, and sacrifice define your journey. The people you love will shape your entire destiny.',
+  7: 'Your life path leads to the unconventional. You will never fit into a normal box. Your success comes from being different — not despite it, but because of it.',
+  8: 'Your life path leads to power and achievement. Mars demands that you build, compete, and win. The material world responds to your ambition.',
+  9: 'Your life path leads to wisdom through sacrifice. Neptune asks you to let go repeatedly. What remains after the letting go is your true self.'
+};
+
+function passEmailToStep5(){
+  var email = document.getElementById('s4-email').value.trim();
+  if(!email || !email.includes('@')){alert('Please enter your email.');return;}
+  document.getElementById('s5-email').value = email;
+  goStep(5);
+}
+
+function showReading(){
+  if(!_codes) return;
+  var html = '';
+  html += '<div style="margin-bottom:16px"><div style="font-size:10px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:Montserrat,sans-serif;font-weight:600">Biorhythm — ' + _codes.biorhythm + '</div>';
+  html += '<div>' + (BIO_LCA[_codes.biorhythm]||'') + '</div></div>';
+  html += '<div style="margin-bottom:16px"><div style="font-size:10px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:Montserrat,sans-serif;font-weight:600">Generational — ' + _codes.generational + '</div>';
+  html += '<div>' + (GEN_LCA[_codes.generational]||'') + '</div></div>';
+  html += '<div><div style="font-size:10px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:6px;font-family:Montserrat,sans-serif;font-weight:600">Life Path — ' + _codes.lifePath + '</div>';
+  html += '<div>' + (LP_LCA[_codes.lifePath]||'') + '</div></div>';
+  document.getElementById('s4-reading').innerHTML = html;
+}
+
 function tryShowCode(){var dob=document.getElementById('s1-dob').value;if(!dob)return;var parts=dob.split('-').map(Number);_codes=calcCodes(parts[2],parts[1],parts[0]);var codeStr=_codes.biorhythm+' · '+_codes.generational+' · '+_codes.lifePath;document.getElementById('code-preview-val').textContent=codeStr;document.getElementById('code-preview').classList.add('show');document.getElementById('s4-code').textContent=codeStr;document.getElementById('s5-code').textContent=codeStr;}
 
 var currentStep=1;var totalSteps=5;var selectedLF=[];
 function goStep(n){document.getElementById('step'+currentStep).style.display='none';document.getElementById('step'+n).style.display='block';currentStep=n;updateProgress(n);window.scrollTo(0,0);clearMsg();}
-function updateProgress(n){for(var i=1;i<=totalSteps;i++){var el=document.getElementById('prog'+i);el.className='prog-step'+(i<n?' done':i===n?' active':'');}var labels=['Step 1 of 5 — Your Numbers','Step 2 of 5 — What You\'re Looking For','Step 3 of 5 — Your Photo','Step 4 of 5 — Membership','Step 5 of 5 — Create Account'];document.getElementById('prog-label').textContent=labels[n-1];}
+function updateProgress(n){for(var i=1;i<=totalSteps;i++){var el=document.getElementById('prog'+i);el.className='prog-step'+(i<n?' done':i===n?' active':'');}var labels=['Step 1 of 5 — Your Numbers','Step 2 of 5 — What You\'re Looking For','Step 3 of 5 — Your Photo','Step 4 of 5 — Your First Reading','Step 5 of 5 — Create Account'];document.getElementById('prog-label').textContent=labels[n-1];}
 function goStep2(){var name=document.getElementById('s1-name').value.trim();var dob=document.getElementById('s1-dob').value;var gender=document.getElementById('s1-gender').value;if(!name){showMsg('Please enter your first name','error');return}if(!dob){showMsg('Please enter your date of birth','error');return}if(!gender){showMsg('Please select your gender','error');return}goStep(2);}
 function goStep3(){if(selectedLF.length===0){showMsg('Please select at least one option','error');return}goStep(3);}
-function goStep4(){goStep(4);}
+function goStep4(){showReading();goStep(4);}
 function toggleLF(type){var card=document.getElementById('lf-'+type);var idx=selectedLF.indexOf(type);if(idx>-1){selectedLF.splice(idx,1);card.classList.remove('selected');}else{selectedLF.push(type);card.classList.add('selected');}}
 function updateCharCount(){var bio=document.getElementById('s2-bio').value;document.getElementById('char-count').textContent=bio.length;}
 function previewPhoto(){var file=document.getElementById('photo-input').files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var preview=document.getElementById('photo-preview');preview.src=e.target.result;preview.style.display='block';};reader.readAsDataURL(file);}
 function checkPwd(){var pwd=document.getElementById('s5-pwd').value;var bar=document.getElementById('pwd-bar');var strength=0;if(pwd.length>=8)strength++;if(pwd.match(/[A-Z]/))strength++;if(pwd.match(/[0-9]/))strength++;if(pwd.match(/[^A-Za-z0-9]/))strength++;var colors=['#ff4d6d','#ffaa00','#4dffb8','#4dffb8'];var widths=['25%','50%','75%','100%'];bar.style.width=strength>0?widths[strength-1]:'0';bar.style.background=strength>0?colors[strength-1]:'transparent';}
 
-async function handleMatchPayment(){
-  var email=document.getElementById('s4-email').value.trim();
-  if(!email||!email.includes('@')){showMsg('Please enter a valid email','error');return}
   if(!_codes){showMsg('Please go back and enter your birth date','error');return}
   var name=document.getElementById('s1-name').value.trim();
   var dob=document.getElementById('s1-dob').value;
@@ -223,7 +275,7 @@ async function handleMatchPayment(){
     var data=await res.json();
     if(data.url){localStorage.setItem('occultics_match_email',email);localStorage.setItem('occultics_match_data',JSON.stringify({name:name,dob:dob,time:time,gender:gender,looking_for:selectedLF,bio:document.getElementById('s2-bio').value.trim(),codes:_codes}));window.location.href=data.url;}
     else{throw new Error(data.error||'Payment error');}
-  }catch(err){showMsg('Something went wrong: '+err.message,'error');btn.textContent='✦ Activate Membership — $29/month';btn.disabled=false;}
+  
 }
 
 (function checkPaymentReturn(){
