@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Readings — Occultics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--gray:#8892a4;--white:#fff}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:32px 20px 60px}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:40px}
+.logo-wrap{display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-name{font-weight:700;font-size:12px;letter-spacing:3px;color:var(--white)}
+.back-link{font-size:11px;color:var(--gray);text-decoration:none}
+.back-link:hover{color:var(--crystal)}
+
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,32px);font-weight:300;margin-bottom:8px}
+.section-sub{font-size:12px;color:var(--gray);margin-bottom:32px}
+
+/* Reading cards */
+.reading-card{background:rgba(255,255,255,0.03);border:1px solid rgba(77,184,255,0.12);border-radius:16px;padding:28px 24px;margin-bottom:16px;cursor:pointer;transition:all .2s}
+.reading-card:hover{border-color:var(--crystal);background:rgba(77,184,255,0.04)}
+.reading-card.locked{opacity:0.5;cursor:default}
+.reading-card.locked:hover{border-color:rgba(77,184,255,0.12);background:rgba(255,255,255,0.03)}
+.rc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.rc-label{font-size:9px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600}
+.rc-status{font-size:9px;letter-spacing:1px;padding:4px 10px;border-radius:20px;font-weight:600}
+.rc-status.unlocked{background:rgba(77,184,255,0.15);color:var(--crystal)}
+.rc-status.locked{background:rgba(255,255,255,0.05);color:var(--gray)}
+.rc-status.coming{background:rgba(255,184,0,0.15);color:#ffb800}
+.rc-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;margin-bottom:4px}
+.rc-desc{font-size:11px;color:var(--gray);line-height:1.6}
+
+/* Session content */
+.session-content{display:none;margin-top:20px;padding:24px;background:rgba(255,255,255,0.02);border:1px solid rgba(77,184,255,0.08);border-radius:12px}
+.session-content.open{display:block}
+.session-text{font-family:'Cormorant Garamond',serif;font-size:17px;line-height:2;color:rgba(255,255,255,0.75)}
+.session-text p{margin-bottom:16px}
+
+/* Buy section */
+.buy-section{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:16px;padding:32px 24px;text-align:center;margin-top:32px}
+.buy-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;margin-bottom:8px}
+.buy-desc{font-size:12px;color:var(--gray);margin-bottom:20px;line-height:1.7}
+.buy-btn{display:inline-block;padding:14px 32px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;text-decoration:none}
+.buy-btn:hover{background:#1420cc}
+.buy-price{font-size:10px;color:var(--gray);margin-top:10px}
+
+/* No purchases */
+.empty-state{text-align:center;padding:60px 20px}
+.empty-state h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:12px}
+.empty-state p{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:24px}
+
+.nav-tabs{display:flex;gap:8px;margin-bottom:32px}
+.nav-tab{padding:10px 20px;border-radius:8px;font-size:10px;letter-spacing:1.5px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;transition:all .2s;border:1px solid rgba(77,184,255,0.15);background:transparent;color:var(--gray)}
+.nav-tab.active{background:var(--royal);color:var(--white);border-color:var(--royal)}
+
+.footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid rgba(77,184,255,0.06)}
+.footer a{font-size:10px;color:var(--gray);text-decoration:none}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <a href="/match/dashboard.html" class="logo-wrap">
+      <svg width="18" height="22" viewBox="0 0 80 100" fill="none"><polygon points="40,2 78,30 40,98 2,30" fill="#1a2aff" opacity="0.12"/><polygon points="40,2 78,30 40,50" fill="#1a2aff" opacity="0.55"/><polygon points="40,2 2,30 40,50" fill="#4db8ff" opacity="0.65"/><polygon points="2,30 40,50 40,98" fill="#1a2aff" opacity="0.35"/><polygon points="78,30 40,50 40,98" fill="#2a7fff" opacity="0.45"/></svg>
+      <div class="logo-name">OCCULTICS</div>
+    </a>
+    <a href="/match/dashboard.html" class="back-link">← Dashboard</a>
+  </div>
+
+  <h1 class="section-title">Your Readings</h1>
+  <p class="section-sub">Sessions unlock over time. Come back every 2 days for your next session.</p>
+
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('lca')">Life Code Alignment</button>
+    <button class="nav-tab" onclick="showTab('compat')">Compatibility Code</button>
+  </div>
+
+  <div id="lca-tab">
+    <div id="lca-sessions"></div>
+    <div id="lca-buy" style="display:none">
+      <div class="buy-section">
+        <div class="buy-title">Unlock Your Full Life Code Alignment</div>
+        <div class="buy-desc">7 sessions over 14 days. A complete journey through who you are — your patterns, your karma, your energy, and your path.</div>
+        <button class="buy-btn" onclick="buyLCA()">Unlock All 7 Sessions — $99.99</button>
+        <div class="buy-price">One-time payment · Sessions unlock every 2 days</div>
+      </div>
+    </div>
+    <div id="lca-empty" class="empty-state" style="display:none">
+      <h2>Your Life Code Alignment</h2>
+      <p>You received Session 1 for free when you signed up. Purchase the full alignment to unlock sessions 2-7.</p>
+      <button class="buy-btn" onclick="buyLCA()">Begin Life Code Alignment — $99.99</button>
+    </div>
+  </div>
+
+  <div id="compat-tab" style="display:none">
+    <div id="compat-sessions"></div>
+    <div id="compat-buy" style="display:none">
+      <div class="buy-section">
+        <div class="buy-title">Unlock Your Full Compatibility Analysis</div>
+        <div class="buy-desc">11 sessions. Both profiles decoded. Your compatibility code analyzed in full mathematical detail.</div>
+        <button class="buy-btn" onclick="buyCompat()">Unlock All 11 Sessions — $199.99</button>
+        <div class="buy-price">One-time payment · Sessions unlock every 2 days</div>
+      </div>
+    </div>
+    <div id="compat-empty" class="empty-state" style="display:none">
+      <h2>Your Compatibility Code</h2>
+      <p>Enter two birthdays. Get the full mathematical story of your relationship. 11 sessions. Every aspect decoded.</p>
+      <button class="buy-btn" onclick="buyCompat()">Begin Compatibility Code — $199.99</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="/match/dashboard.html">Dashboard</a> · <a href="/match/compatibility.html">Compatibility</a> · <a href="/">occultics.ai</a>
+  </div>
+</div>
+
+<script>
+var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// LCA Session titles and content descriptions
+var LCA_SESSIONS = [
+  {title: 'Your Mathematical Blueprint', desc: 'Your 3-number code decoded. Biorhythm, generational number, and life path.'},
+  {title: 'Your Emotional Frequency', desc: 'How you process emotions. What triggers you. What calms you.'},
+  {title: 'Your Core Drivers', desc: 'What motivates you at the deepest level. What your soul needs.'},
+  {title: 'Your Behavioral Code', desc: 'Why you react the way you react. Patterns you repeat.'},
+  {title: 'Your Karmic Blueprint', desc: 'The karma written in your numbers. Lessons you carry.'},
+  {title: 'The Architecture of Your Reality', desc: 'Your pyramid decoded. The structure behind everything.'},
+  {title: 'Your Energetic Patterns', desc: 'Your personal year. Your cycles. What is coming next.'}
+];
+
+var COMPAT_SESSIONS = [
+  {title: 'Your Profile', desc: 'Person 1 — complete Pythagorean profile.'},
+  {title: 'Their Profile', desc: 'Person 2 — complete Pythagorean profile.'},
+  {title: 'The Connection Code', desc: 'Your compatibility code revealed and decoded.'},
+  {title: 'Biorhythm Dynamics', desc: 'How you enter each other\'s energy field.'},
+  {title: 'Generational Compatibility', desc: 'What you truly need vs what they offer.'},
+  {title: 'Life Path Alignment', desc: 'Where your paths converge and diverge.'},
+  {title: 'Emotional Patterns', desc: 'The emotional dynamics between your codes.'},
+  {title: 'Strengths & Challenges', desc: 'What works and what creates tension.'},
+  {title: 'Karmic Aspects', desc: 'The karmic threads between you.'},
+  {title: 'The Year You Are In', desc: 'Both personal years and what they mean for your connection.'},
+  {title: 'Combined Destiny', desc: 'The mathematical destiny of the relationship itself.'}
+];
+
+var currentUser = null;
+var purchases = [];
+
+async function init() {
+  var { data: { session } } = await sb.auth.getSession();
+  if (!session) { window.location.href = '/match/login.html'; return; }
+  currentUser = session.user;
+
+  // Load purchases
+  var { data, error } = await sb.from('purchases').select('*').eq('user_id', currentUser.id);
+  if (data) purchases = data;
+
+  renderLCA();
+  renderCompat();
+}
+
+function renderLCA() {
+  var container = document.getElementById('lca-sessions');
+  var buySection = document.getElementById('lca-buy');
+  var emptySection = document.getElementById('lca-empty');
+  
+  var lcaPurchase = purchases.find(function(p) { return p.product === 'lca'; });
+  
+  if (!lcaPurchase) {
+    // Show session 1 (free) + buy prompt
+    container.innerHTML = '';
+    var card = makeSessionCard(0, LCA_SESSIONS[0], true, 'lca');
+    container.appendChild(card);
+    buySection.style.display = 'block';
+    return;
+  }
+
+  // Has purchase — show all sessions with unlock status
+  container.innerHTML = '';
+  buySection.style.display = 'none';
+  
+  var now = new Date();
+  var purchaseDate = new Date(lcaPurchase.purchased_at);
+  
+  for (var i = 0; i < 7; i++) {
+    var unlockDate = new Date(purchaseDate.getTime() + (i * 2 * 24 * 60 * 60 * 1000)); // Every 2 days
+    var isUnlocked = (i === 0) || (now >= unlockDate);
+    var card = makeSessionCard(i, LCA_SESSIONS[i], isUnlocked, 'lca', unlockDate);
+    container.appendChild(card);
+  }
+}
+
+function renderCompat() {
+  var container = document.getElementById('compat-sessions');
+  var buySection = document.getElementById('compat-buy');
+  var emptySection = document.getElementById('compat-empty');
+  
+  var compatPurchase = purchases.find(function(p) { return p.product === 'compatibility_code'; });
+  
+  if (!compatPurchase) {
+    container.innerHTML = '';
+    emptySection.style.display = 'block';
+    return;
+  }
+
+  // Has purchase
+  container.innerHTML = '';
+  emptySection.style.display = 'none';
+  buySection.style.display = 'none';
+  
+  var now = new Date();
+  var purchaseDate = new Date(compatPurchase.purchased_at);
+  
+  for (var i = 0; i < 11; i++) {
+    var unlockDate = new Date(purchaseDate.getTime() + (i * 2 * 24 * 60 * 60 * 1000));
+    var isUnlocked = now >= unlockDate;
+    var card = makeSessionCard(i, COMPAT_SESSIONS[i], isUnlocked, 'compat', unlockDate);
+    container.appendChild(card);
+  }
+}
+
+function makeSessionCard(index, session, isUnlocked, type, unlockDate) {
+  var card = document.createElement('div');
+  card.className = 'reading-card' + (isUnlocked ? '' : ' locked');
+  
+  var statusText = isUnlocked ? 'UNLOCKED' : (unlockDate ? formatDate(unlockDate) : 'LOCKED');
+  var statusClass = isUnlocked ? 'unlocked' : (unlockDate ? 'coming' : 'locked');
+  
+  card.innerHTML = '<div class="rc-header"><div class="rc-label">SESSION ' + (index + 1) + '</div><div class="rc-status ' + statusClass + '">' + statusText + '</div></div>' +
+    '<div class="rc-title">' + session.title + '</div>' +
+    '<div class="rc-desc">' + session.desc + '</div>' +
+    '<div class="session-content" id="' + type + '-session-' + index + '"><div class="session-text"><p>Your personalized reading for this session will appear here once generated.</p></div></div>';
+  
+  if (isUnlocked) {
+    card.onclick = function() {
+      var content = document.getElementById(type + '-session-' + index);
+      content.classList.toggle('open');
+    };
+  }
+  
+  return card;
+}
+
+function formatDate(date) {
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return 'Unlocks ' + months[date.getMonth()] + ' ' + date.getDate();
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.nav-tab').forEach(function(t) { t.classList.remove('active'); });
+  event.target.classList.add('active');
+  document.getElementById('lca-tab').style.display = tab === 'lca' ? 'block' : 'none';
+  document.getElementById('compat-tab').style.display = tab === 'compat' ? 'block' : 'none';
+}
+
+async function buyLCA() {
+  try {
+    var res = await fetch('https://occultics-checkout.occultics4.workers.dev/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        type: 'life_code_alignment',
+        email: currentUser.email,
+        name: currentUser.user_metadata.name || '',
+        dob: currentUser.user_metadata.dob || ''
+      })
+    });
+    var data = await res.json();
+    if (data.url) window.location.href = data.url;
+    else alert('Error: ' + (data.error || 'Unknown error'));
+  } catch(e) { alert('Error: ' + e.message); }
+}
+
+async function buyCompat() {
+  // Redirect to compatibility page to enter both birthdays first
+  window.location.href = '/match/compatibility.html?buy=true';
+}
+
+init();
+</script>
+</body>
+</html>
