@@ -164,144 +164,60 @@ var yearEl=document.getElementById('year1');
 var now=new Date().getFullYear();
 for(var y=now;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;yearEl.appendChild(o);}
 
-// Math
-function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce(function(s,d){return s+parseInt(d)},0);return n;}
-
-// Birth day descriptions from knowledge base
-var BIRTH_DAYS = {
-  1: {degree:'DEGREE 8', desc:'Very passionate and emotional. Quick to anger. You know what you want from life. A fighting spirit and a somewhat short temper. People in uniform — doctors, police, military.'},
-  2: {degree:'DEGREE 6', desc:'A great hedonist. You love food, family, money, and indulging yourself. Fantastic cook. Family is your top priority. You spend everything on hedonism and the people you love.'},
-  3: {degree:'DEGREE 5', desc:'You create something out of nothing. Educated, you can become wealthy. Drawn to foreign countries. Dynamism, constant travel through life. Jobs in communication, marketing, sales.'},
-  4: {degree:'DEGREE 2', desc:'Tied to family. Wherever you go, it is only a matter of time before you return home. Both day and night births are materialistic — plugged into power. Both like to fight.'},
-  5: {degree:'DEGREE 1', desc:'A royal degree. Produces many successful people. You love to travel and cannot stay in one place. Predisposition for success in career and building your position.'},
-  6: {degree:'DEGREE 5', desc:'The focus is on health and work, not love. Major love problems. A lack of luck in emotional life, which you compensate for through work. Health suffers because of these problems.'},
-  7: {degree:'DEGREE 6', desc:'Indecisive but original and creative. Artistic inclinations and a striving for marriage, accord, and harmony. More creative than those born on the 6th.'},
-  8: {degree:'DEGREE 0', desc:'Danger awaits in life. In life, you go for broke — either very poor or very rich. There is no middle ground. You do not know moderation.'},
-  9: {degree:'DEGREE 3', desc:'Constant traveling, living abroad. Optimism, a broad worldview. A lifelong commitment to self-improvement and acquiring knowledge. A fortunate circumstance always helps you.'},
-  10: {degree:'DEGREE 4', desc:'In life, everything comes to you later, especially recognition. Everything happens with a delay. Longevity and gradual aging. You look younger than your years.'},
-  11: {degree:'DEGREE 7', desc:'Totally different from others. Your success lies in the unconventional. Nervous, tense, torn, inner restlessness. Revolutionaries and strikers. Face divorce or loss of a partner.'},
-  12: {degree:'DEGREE 9', desc:'Two extremes. Either a victim of family or a master strategist. There are a lot of you in politics. Your success depends entirely on the numbers next to you.'},
-  13: {degree:'DEGREE 8', desc:'Passionate and emotional. Quick temper with a fighting spirit. You know what you want from life. Prone to injuries. Great strength but confrontational.'},
-  14: {degree:'DEGREE 6', desc:'A great hedonist. You like to enjoy life. Tends to produce a bit of lazy people. Family, money, food — surrounded by beauty in every form.'},
-  15: {degree:'DEGREE 5', desc:'Original, creative, a genius when it comes to originality. Artistic soul but also a logician. You see patterns others miss.'},
-  16: {degree:'DEGREE 2', desc:'Strongly tied to family — wife and mother. Wherever you go, it is only a matter of time before you return home. Both day and night are materialistic.'},
-  17: {degree:'DEGREE 1', desc:'A royal degree. Produces successful people. You love to travel and cannot stay in one place. Great predisposition for career success.'},
-  18: {degree:'DEGREE 5', desc:"The devil's degree. Ranges from devil's luck to devil's misfortune throughout life. Some experience abnormal luck, others face immense misfortune. Birth month is the key."},
-  19: {degree:'DEGREE 6', desc:'Indecisive but more original and creative. Artistic inclinations. A striving for marriage, accord, and harmony.'},
-  20: {degree:'DEGREE 0', desc:'Danger awaits in life. You go for broke. Either very poor or very rich. Superior stubbornness and strength within. Great capital and potential for total bankruptcy.'},
-  21: {degree:'DEGREE 3', desc:'Constant traveling, living abroad. Optimism, broad worldview. Lifelong self-improvement. A fortunate circumstance always awaits and helps you get out of trouble.'},
-  22: {degree:'DEGREE 4', desc:'Degree to kill or be killed — not literally. A signal of what is killing, oppressing, or holding you back. Family? A job? When you break free, everything transforms.'},
-  23: {degree:'DEGREE 7', desc:'Totally different from others. Success lies in the unconventional. Nervous, tense, torn. Inner restlessness. Revolutionaries. Face divorce or loss of partner.'},
-  24: {degree:'DEGREE 9', desc:'Two extremes. Either a victim of family or a master strategist. Depends entirely on the numbers next to you. Can go from extremely rich to extremely poor.'},
-  25: {degree:'DEGREE 1', desc:'A royal degree. Very talented in writing. Can be athletes. Many in music. Strong intuition but also respiratory and intestinal sensitivity.'},
-  26: {degree:'DEGREE 6', desc:'A great hedonist. Love food, family, money. Inclined to get married. Fantastic cook. Family is everything. You spend all your money on the people you love.'},
-  27: {degree:'DEGREE 5', desc:'Tense and neurotic. Should not be lawyers. Thrive in freelance professions. Expend energy through sports. Medicine. In men — gamblers.'},
-  28: {degree:'DEGREE 2', desc:'Tied to family. Wherever you go, you love to return home. Both day and night births are materialistic — plugged into power. If born during the day, full of adrenaline, constantly in motion, driven to succeed. If born at night, enormous energy, wants to build and create, but emotions run deep. Both like to fight.'},
-  29: {degree:'DEGREE 1', desc:'Strong intuition and clairvoyance. A bad aspect for emotional and family life. Intrigues, infidelity, deceptions, plots, false friends. You struggle with these your entire life but your intuition saves you.'},
-  30: {degree:'DEGREE 5', desc:'You create a lot out of nothing — more than those born on the 3rd. Two extremes. Cooperation with foreigners, education. From extremely rich to extremely poor. Success depends on doing the unconventional.'},
-  31: {degree:'DEGREE 4', desc:'Your position expands easily. You receive help from bosses and people not related by blood. Realistic and practical. A spiritual number that grounds into the material world.'}
-};
-
-// Biorhythm descriptions from knowledge base
-var BIO_DESC = {
-  1: 'A leader. Takes charge immediately. People feel authority before a word is spoken. Passionate, emotional, knows what they want. The Sun energy.',
-  2: 'Emotional, fated energy. People feel something pulling them in. The Moon. Material, cares about money and emotional fulfillment. Blocks and difficulties come first.',
-  3: 'Passion, love, and attraction born immediately. Turbulent but heartfelt. Chemistry is felt on contact. Jupiter energy — expansion and fire.',
-  4: 'A serious presence. People feel they are dealing with someone composed and measured. Takes time to decide. In relationships, keeps you on hold. Karma.',
-  5: 'Neither fated nor karmic. A healthy, quality connection. Recognized something special. Intellectual and communicative. Mercury energy.',
-  6: 'Physical attraction and love born immediately. Entered with the heart. Passionate. Most end in marriage. Family-level karma pulling toward commitment.',
-  7: 'Spirituality. A higher power pulling things together. Nervous, unpredictable energy. Breakdowns possible. Rare matches that last.',
-  8: 'Two stable personalities. Suspicious, need time to open up. Slowly build something of quality, long-term, lasting. Financial support and passion.',
-  9: 'Karmic. The most difficult stories. People live together repaying karma every day. Stubborn, persistent, but disinterested in dominance.'
-};
-
-// Generational descriptions
-var GEN_DESC = {
-  1: 'The goal is a healthy, quality relationship with common motives and thoughts.',
-  2: 'Destiny. The goal is very strong and cannot be fought against.',
-  3: 'Pure love, passion, and attraction define the goal.',
-  4: 'Karma at the goal. Difficult but the relationship carries deep lessons.',
-  5: 'Casual beginning. The goal is freedom, intellect, and exploration.',
-  6: 'Love and family-level karma. A need to get married and have children pulls stronger here.',
-  7: 'Spirituality. A higher power is pulling you to be together.',
-  8: 'Financial support, passion, and material stability define the goal.',
-  9: 'Repaying karma. The most difficult goal — people repay karma every day of their lives.'
-};
-
-// Life path descriptions
-var LP_DESC = {
-  1: 'Independence and leadership define the destiny. The path demands standing alone and leading.',
-  2: 'Partnership and emotional depth. The path requires learning to receive and to trust.',
-  3: 'Expansion, creativity, and joy. Jupiter guides the path. The world opens up.',
-  4: 'Structure, discipline, and karma. Saturn demands hard work. Everything comes later but lasts.',
-  5: 'Freedom, travel, and change. Mercury demands movement. Cannot stay in one place.',
-  6: 'Love, family, and responsibility. Venus demands commitment and sacrifice for those you love.',
-  7: 'The unconventional path. Spirituality, originality, and inner work define the destiny.',
-  8: 'Power, achievement, and material success. Mars demands ambition and resilience.',
-  9: 'Karma, completion, and wisdom. Neptune demands surrender and spiritual growth.'
-};
-
-// Pyramid code descriptions (from knowledge base)
-var PYR_DESC = {
-  '393': 'Over-passionate. Two 3s with a 9 between them create terrifying turbulence and passion. Driven by karma and intense emotion.',
-  '111': 'Triple independence. Ego dominates everything. Learning to let others in is the lifetime lesson.',
-  '222': 'Deep emotional sensitivity. Fated patterns repeat. The mother connection defines everything.',
-  '333': 'Pure passion and fire. Love is everything. Jealousy and possessiveness run deep.',
-  '444': 'Heavy karma from ancestors. Structure and discipline define the inner world. Patient.',
-  '555': 'Restless mind. Cannot stop moving or thinking. Freedom is non-negotiable.',
-  '666': 'Love and beauty obsessed. Hedonistic at the core. Family karma runs deep.',
-  '777': 'Extremely nervous inner world. Spiritual but torn. The unconventional path is mandatory.',
-  '888': 'Power hunger at the core. Material world dominates. Build empires or destroy them.',
-  '999': 'Pure karma. The deepest spiritual lessons. Sacrifice and surrender define the inner life.'
-};
-
+// All calculations happen on backend — no algorithm exposed here
+var DECODE_URL = 'https://occultics-decode.occultics4.workers.dev';
 var userData = {};
 
-function calcCode(){
+async function calcCode(){
   var d=parseInt(document.getElementById('day1').value);
   var m=parseInt(document.getElementById('month1').value);
   var y=parseInt(document.getElementById('year1').value);
   var tod=document.getElementById('tod').value;
   if(!d||!m||!y){alert('Please enter your complete birth date.');return;}
 
-  var bio=r(d+m);
-  var gen=r(String(y).split('').reduce(function(s,c){return s+parseInt(c)},0));
-  var lp=r(bio+gen);
+  var btn=document.querySelector('.calc-btn');
+  btn.textContent='DECODING...';btn.disabled=true;
 
-  // Calculate pyramid
-  var digits=String(d).padStart(2,'0').split('').concat(String(m).padStart(2,'0').split('')).concat(String(y).split(''));
-  digits=digits.map(Number);
-  var pyramid=[digits];
-  var row=digits;
-  while(row.length>1){
-    var next=[];
-    for(var i=0;i<row.length-1;i++) next.push(r(row[i]+row[i+1]));
-    pyramid.push(next);
-    row=next;
+  try {
+    var res = await fetch(DECODE_URL + '/decode', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({day: d, month: m, year: y})
+    });
+    var data = await res.json();
+    if (data.error) { alert('Error: ' + data.error); btn.textContent='CALCULATE YOUR CODE';btn.disabled=false; return; }
+
+    var ordinal = d + (['','st','nd','rd'][d%10>3?0:(d%100-d%10!=10)*d%10]||'th');
+    var pyrRows = data.pyramidRows.slice(1); // remove birth date row
+    var pyrCode = data.pyramid.first+'.'+data.pyramid.second+'.'+data.pyramid.third;
+
+    userData = {
+      day:d, month:m, year:y, tod:tod,
+      bio:data.pyth.biorhythm, gen:data.pyth.generational, lp:data.pyth.lifePath,
+      pyrCode:pyrCode,
+      displayPyramid:pyrRows,
+      ordinal:ordinal,
+      code:data.pyth.biorhythm+'.'+data.pyth.generational+'.'+data.pyth.lifePath,
+      birthDayDesc:data.birthDayDesc,
+      degree:'DEGREE '+data.degree,
+      bioDesc:data.bioDesc,
+      genDesc:data.genDesc,
+      lpDesc:data.lpDesc
+    };
+
+    buildCarousel();
+    document.getElementById('calculator').style.display='none';
+    document.getElementById('result').style.display='block';
+    window.scrollTo(0,0);
+  } catch(e) {
+    alert('Connection error. Please try again.');
   }
-  // Pyramid code from last 3 rows (without birth date row)
-  // pyramid[0] is birth date, pyramid[1] is row 2, etc.
-  // Last row = pyramid[pyramid.length-1] (peak)
-  // Second to last = pyramid[pyramid.length-2] (row 7)
-  var peak = pyramid[pyramid.length-1][0];
-  var row7 = pyramid[pyramid.length-2]; // [left, right]
-  var pyrCode = row7[0]+'.'+row7[1]+'.'+peak;
-  // Remove birth date row from display pyramid
-  var displayPyramid = pyramid.slice(1);
-
-  var ordinal = d + (['','st','nd','rd'][d%10>3?0:(d%100-d%10!=10)*d%10]||'th');
-
-  userData = {day:d, month:m, year:y, tod:tod, bio:bio, gen:gen, lp:lp, pyrCode:pyrCode, displayPyramid:displayPyramid, ordinal:ordinal, code:bio+'.'+gen+'.'+lp};
-
-  buildCarousel();
-  document.getElementById('calculator').style.display='none';
-  document.getElementById('result').style.display='block';
-  window.scrollTo(0,0);
+  btn.textContent='CALCULATE YOUR CODE';btn.disabled=false;
 }
 
 function buildCarousel(){
   var d=userData;
-  var bd = BIRTH_DAYS[d.day] || BIRTH_DAYS[r(d.day)] || {degree:'', desc:''};
+  var bd = {degree: d.degree || '', desc: d.birthDayDesc || ''};
   var track=document.getElementById('track');
   var dots=document.getElementById('dots');
 
@@ -324,11 +240,11 @@ function buildCarousel(){
   s2+='<div class="s-code" style="margin:12px 0">'+d.bio+' . '+d.gen+' . '+d.lp+'</div>';
   s2+='<div class="s-line"></div>';
   s2+='<div class="s-num-label">BIORHYTHM — '+d.bio+'</div>';
-  s2+='<div class="s-num-desc">'+(BIO_DESC[d.bio]||'')+'</div>';
+  s2+='<div class="s-num-desc">'+(d.bioDesc||'')+'</div>';
   s2+='<div class="s-num-label">GENERATIONAL — '+d.gen+'</div>';
-  s2+='<div class="s-num-desc">'+(GEN_DESC[d.gen]||'')+'</div>';
+  s2+='<div class="s-num-desc">'+(d.genDesc||'')+'</div>';
   s2+='<div class="s-num-label">LIFE PATH — '+d.lp+'</div>';
-  s2+='<div class="s-num-desc">'+(LP_DESC[d.lp]||'')+'</div>';
+  s2+='<div class="s-num-desc">'+(d.lpDesc||'')+'</div>';
   s2+='</div>';
 
   // SLIDE 3 - Pyramid
@@ -352,7 +268,7 @@ function buildCarousel(){
   s3+='<div class="s-eyebrow">PYRAMID CODE</div>';
   s3+='<div class="s-code" style="margin:12px 0;font-size:clamp(32px,9vw,48px)">'+d.pyrCode+'</div>';
   var pyrKey=d.pyrCode.replace(/\./g,'');
-  s3+='<div class="s-desc" style="font-size:clamp(14px,3.5vw,18px)">'+(PYR_DESC[pyrKey]||'A unique pyramid code. The combined energies create a pattern worth exploring.')+'</div>';
+  s3+='<div class="s-desc" style="font-size:clamp(14px,3.5vw,18px)">A unique pyramid code. The combined energies create a pattern worth exploring.</div>';
   s3+='</div>';
 
   // SLIDE 4 - CTA
