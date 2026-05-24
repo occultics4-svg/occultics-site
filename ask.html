@@ -326,29 +326,21 @@ async function sendMessage(){
 }
 
 async function getAIResponse(question){
-  var youInfo='User code: '+profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath+'. Biorhythm: '+profile.bioDesc+'. Generational: '+profile.genDesc+'. Life Path: '+profile.lpDesc+'. Born day '+profile.birthDay+': '+profile.birthDayDesc+'. Personal year: '+profile.personalYear+'. Age: '+profile.age+'.';
-  var themInfo='';
-  var compatInfo='';
-  if(partnerProfile){
-    themInfo='Partner code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'. Biorhythm: '+partnerProfile.bioDesc+'. Generational: '+partnerProfile.genDesc+'. Life Path: '+partnerProfile.lpDesc+'.';
-  }
-  if(compatData){
-    compatInfo='Compatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third+'. Combined LP: '+compatData.combinedLP+'. Shared bio: '+compatData.sharedBio+'. Vertical: '+compatData.vertical+'.';
-  }
-
-  var sys='You are the Occultics AI — a mathematical relationship and identity intelligence powered by 439,000 words of proprietary Pythagorean research.\n\n'+youInfo+'\n'+themInfo+'\n'+compatInfo+'\n\nRULES:\n- Reference their SPECIFIC numbers always.\n- Speak directly: "Your biorhythm 4 means..." not "People with 4..."\n- Warm but honest. Name difficult truths.\n- Use "What I see in your numbers..." and "Your code tells me..."\n- 2-3 paragraphs. Concise but deep.\n- No markdown, bullets, headers. Flowing prose.\n- End with something that makes them want to ask more.\n- You ARE the numbers speaking. Never say you are AI.\n- For simulations, use BOTH codes to predict behavior specifically.';
-
-  var historyMsgs=messages.slice(-6).map(function(m){return{role:m.role==='ai'?'assistant':'user',content:m.text};});
-  historyMsgs.push({role:'user',content:question});
-
   try{
-    var res=await fetch('https://api.anthropic.com/v1/messages',{
+    var res=await fetch(DECODE_URL+'/ask',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:historyMsgs})
+      body:JSON.stringify({
+        question:question,
+        profileData:profile,
+        partnerData:partnerProfile||null,
+        compatibilityData:compatData||null,
+        history:messages.slice(-8)
+      })
     });
     var data=await res.json();
-    return data.content&&data.content[0]&&data.content[0].text||fallbackResponse(question);
+    if(data.error) return fallbackResponse(question);
+    return data.response||fallbackResponse(question);
   }catch(e){
     return fallbackResponse(question);
   }
