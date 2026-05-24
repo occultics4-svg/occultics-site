@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Occultics — The AI that already knows you</title>
+<meta name="description" content="Ask anything about yourself and your relationships. The AI knows your mathematical code from your birthday.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--white:#fff;--dim:rgba(255,255,255,0.35)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
+
+/* SETUP */
+.setup{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
+.setup-inner{width:100%;max-width:420px}
+.setup-logo{font-size:10px;letter-spacing:5px;font-weight:700;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:16px}
+.setup-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);text-align:center;margin-bottom:8px;line-height:1.2}
+.setup-title em{color:var(--crystal);font-style:italic}
+.setup-sub{font-size:11px;color:var(--dim);text-align:center;line-height:1.7;max-width:320px;margin:0 auto 24px}
+.setup-box{background:rgba(255,255,255,0.03);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.06);margin-bottom:8px}
+.setup-label{font-size:8px;letter-spacing:2px;color:var(--dim);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.setup-label-right{font-size:9px;color:rgba(255,255,255,0.2);float:right;text-transform:none;letter-spacing:0;font-weight:400}
+.setup-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.sel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--white);font-family:'Montserrat',sans-serif;outline:none;-webkit-appearance:none;cursor:pointer;width:100%}
+.sel:focus{border-color:var(--crystal)}
+.sel option{background:var(--navy);color:var(--white)}
+.inp{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--white);font-family:'Montserrat',sans-serif;outline:none;width:100%}
+.inp:focus{border-color:var(--crystal)}
+.inp::placeholder{color:rgba(255,255,255,0.2)}
+.start-btn{width:100%;padding:16px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:1.5px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;margin-top:16px;transition:all .2s}
+.start-btn:hover{opacity:.9}
+.start-btn:disabled{opacity:.5}
+.start-note{text-align:center;font-size:9px;color:rgba(255,255,255,0.15);margin-top:10px}
+
+/* CHAT */
+.chat{flex:1;display:flex;flex-direction:column;display:none}
+.chat-head{border-bottom:1px solid rgba(255,255,255,0.06);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;background:var(--navy)}
+.chat-logo{font-size:9px;letter-spacing:3px;font-weight:700;color:rgba(255,255,255,0.2)}
+.chat-codes{font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px}
+.chat-codes b{color:var(--crystal)}
+.chat-right{display:flex;gap:8px;align-items:center}
+.chat-credits{font-size:9px}
+.chat-buy{padding:4px 10px;background:var(--royal);color:var(--white);border:none;border-radius:6px;font-size:8px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:1px}
+.pills{padding:10px 16px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.03)}
+.pill-btn{font-size:10px;color:var(--crystal);background:rgba(77,184,255,0.04);border:1px solid rgba(77,184,255,0.1);border-radius:20px;padding:6px 12px;cursor:pointer;font-family:'Montserrat',sans-serif}
+.pill-btn:hover{background:rgba(77,184,255,0.08)}
+.messages{flex:1;overflow-y:auto;padding:16px}
+.msg{display:flex;margin-bottom:12px}
+.msg-r{justify-content:flex-end}
+.msg-l{justify-content:flex-start}
+.bubble{max-width:88%;padding:12px 16px;font-size:12px;line-height:1.75;white-space:pre-line}
+.bubble-ai{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px 16px 16px 4px;color:rgba(255,255,255,0.7);font-family:'Cormorant Garamond',serif;font-size:13px}
+.bubble-user{background:var(--royal);border-radius:16px 16px 4px 16px;color:var(--white)}
+.bubble-label{font-size:7px;letter-spacing:2px;color:var(--crystal);font-weight:700;margin-bottom:6px;opacity:.5;font-family:'Montserrat',sans-serif}
+.typing{display:flex;gap:5px;align-items:center;height:18px;padding:12px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px 16px 16px 4px;display:inline-flex}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--crystal);animation:bounce .6s infinite}
+.dot:nth-child(2){animation-delay:.15s}
+.dot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.chat-input{border-top:1px solid rgba(255,255,255,0.06);padding:12px 16px;position:sticky;bottom:0;background:var(--navy)}
+.chat-input-row{display:flex;gap:8px}
+.chat-input-row input{flex:1;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;font-size:12px;color:var(--white);outline:none;font-family:'Montserrat',sans-serif}
+.chat-input-row input::placeholder{color:rgba(255,255,255,0.15)}
+.chat-input-row button{padding:12px 18px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif}
+.chat-input-row button:disabled{opacity:.3}
+.chat-foot{text-align:center;font-size:8px;color:rgba(255,255,255,0.12);margin-top:6px}
+
+/* PAYWALL */
+.paywall{flex:1;display:flex;align-items:center;justify-content:center;padding:20px;display:none}
+.pay-inner{width:100%;max-width:440px;text-align:center}
+.pay-code{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--crystal);margin-bottom:8px}
+.pay-sub{font-size:13px;color:var(--dim);margin-bottom:28px}
+.pay-option{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;text-align:left}
+.pay-option.featured{background:rgba(77,184,255,0.04);border-color:rgba(77,184,255,0.15)}
+.pay-name{font-size:13px;font-weight:600;color:var(--white)}
+.pay-desc{font-size:10px;color:var(--dim);margin-top:2px}
+.pay-desc2{font-size:9px;color:var(--crystal);margin-top:2px}
+.pay-price{padding:10px 20px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;white-space:nowrap}
+.pay-back{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.2);border:none;font-size:10px;cursor:pointer;font-family:'Montserrat',sans-serif;margin-top:8px}
+.pay-tease{margin-top:20px;padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.05)}
+.pay-tease-text{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;line-height:1.7}
+.pay-tease-from{font-size:8px;color:rgba(255,255,255,0.15);margin-top:8px}
+
+.back-link{display:inline-block;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2);text-decoration:none}
+.back-link:hover{color:var(--crystal)}
+
+@media(max-width:500px){.setup-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- SETUP SCREEN -->
+<div class="setup" id="screen-setup">
+  <div class="setup-inner">
+    <div class="setup-logo">OCCULTICS</div>
+    <h1 class="setup-title">Ask me about yourself<br>and your <em>relationships.</em></h1>
+    <p class="setup-sub">An AI that already knows you — from your birthday. Powered by 439,000 words of proprietary mathematical research.</p>
+
+    <div class="setup-box">
+      <div class="setup-label">Your birthday</div>
+      <div class="setup-row">
+        <select class="sel" id="s-day"><option value="">Day</option></select>
+        <select class="sel" id="s-month"><option value="">Month</option></select>
+        <select class="sel" id="s-year"><option value="">Year</option></select>
+      </div>
+    </div>
+
+    <div class="setup-box">
+      <div class="setup-label">Their birthday <span class="setup-label-right">optional</span></div>
+      <div class="setup-row">
+        <select class="sel" id="s-day2"><option value="">Day</option></select>
+        <select class="sel" id="s-month2"><option value="">Month</option></select>
+        <select class="sel" id="s-year2"><option value="">Year</option></select>
+      </div>
+    </div>
+
+    <div class="setup-box">
+      <div class="setup-label">Your email</div>
+      <input type="email" class="inp" id="s-email" placeholder="your@email.com">
+    </div>
+
+    <button class="start-btn" id="start-btn" onclick="startSession()">Start — First Question Free</button>
+    <div class="start-note">$9.99 per question · $149/month unlimited</div>
+    <div style="text-align:center"><a href="/" class="back-link">← Back to Occultics</a></div>
+  </div>
+</div>
+
+<!-- CHAT SCREEN -->
+<div class="chat" id="screen-chat">
+  <div class="chat-head">
+    <div>
+      <div class="chat-logo">OCCULTICS</div>
+      <div class="chat-codes" id="chat-codes"></div>
+    </div>
+    <div class="chat-right">
+      <div class="chat-credits" id="chat-credits"></div>
+      <button class="chat-buy" id="chat-buy" onclick="showPaywall()">BUY</button>
+    </div>
+  </div>
+
+  <div class="pills" id="pills-row"></div>
+
+  <div class="messages" id="messages"></div>
+
+  <div class="chat-input">
+    <div class="chat-input-row">
+      <input type="text" id="chat-input" placeholder="Ask about yourself or your relationships...">
+      <button id="send-btn" onclick="sendMessage()">ASK</button>
+    </div>
+    <div class="chat-foot">$9.99/question · $149/month unlimited</div>
+  </div>
+</div>
+
+<!-- PAYWALL SCREEN -->
+<div class="paywall" id="screen-paywall">
+  <div class="pay-inner">
+    <div class="setup-logo">OCCULTICS</div>
+    <div class="pay-code" id="pay-code"></div>
+    <div class="pay-sub">Your numbers have more to say.</div>
+
+    <div class="pay-option" onclick="buyOneQuestion()">
+      <div>
+        <div class="pay-name">One Question</div>
+        <div class="pay-desc">Ask anything about yourself or relationships</div>
+      </div>
+      <button class="pay-price">$9.99</button>
+    </div>
+
+    <div class="pay-option featured" onclick="buyMonthly()">
+      <div>
+        <div class="pay-name">Unlimited Monthly</div>
+        <div class="pay-desc">Unlimited questions. Add anyone. 24/7.</div>
+        <div class="pay-desc2">Less than one therapy session</div>
+      </div>
+      <button class="pay-price">$149/mo</button>
+    </div>
+
+    <button class="pay-back" onclick="hidePaywall()">Back to conversation</button>
+
+    <div class="pay-tease">
+      <div class="pay-tease-text" id="pay-tease-text"></div>
+      <div class="pay-tease-from">— Your numbers, waiting</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var DECODE_URL = 'https://occultics-decode.occultics4.workers.dev';
+var SB_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
+var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+
+// State
+var profile = null, partnerProfile = null, compatData = null;
+var messages = [];
+var freeUsed = false;
+var credits = 0; // 0=none, -1=unlimited
+
+// Populate dropdowns
+var mos = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+['s-day','s-day2'].forEach(function(id){var el=document.getElementById(id);for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
+['s-month','s-month2'].forEach(function(id){var el=document.getElementById(id);mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
+['s-year','s-year2'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
+
+// Enter key
+document.getElementById('chat-input').addEventListener('keydown', function(e){if(e.key==='Enter'&&!e.shiftKey)sendMessage();});
+
+async function startSession() {
+  var d=document.getElementById('s-day').value;
+  var m=document.getElementById('s-month').value;
+  var y=document.getElementById('s-year').value;
+  var email=document.getElementById('s-email').value.trim();
+  if(!d||!m||!y){alert('Please enter your birthday.');return;}
+  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+
+  var btn=document.getElementById('start-btn');
+  btn.textContent='DECODING...';btn.disabled=true;
+
+  // Save email
+  try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:email,source:'ask_occultics',created_at:new Date().toISOString()});}catch(e){}
+
+  // Decode
+  try {
+    var res = await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y})});
+    profile = await res.json();
+
+    var d2=document.getElementById('s-day2').value;
+    var m2=document.getElementById('s-month2').value;
+    var y2=document.getElementById('s-year2').value;
+
+    if(d2&&m2&&y2){
+      var res2=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d2,month:+m2,year:+y2})});
+      partnerProfile=await res2.json();
+      var res3=await fetch(DECODE_URL+'/compatibility',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day1:+d,month1:+m,year1:+y,day2:+d2,month2:+m2,year2:+y2})});
+      compatData=await res3.json();
+    }
+
+    showChat();
+  } catch(e) {
+    alert('Connection error. Try again.');
+    btn.textContent='Start — First Question Free';btn.disabled=false;
+  }
+}
+
+function showChat() {
+  document.getElementById('screen-setup').style.display='none';
+  document.getElementById('screen-chat').style.display='flex';
+
+  var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
+  var codesHtml='You: <b>'+code+'</b>';
+  if(partnerProfile)codesHtml+=' · Them: <b>'+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'</b>';
+  document.getElementById('chat-codes').innerHTML=codesHtml;
+  document.getElementById('pay-code').textContent=code;
+  document.getElementById('pay-tease-text').textContent='"The '+profile.pyth.generational+' in your generational number has been driving every relationship choice you\'ve made. There\'s a reason you keep ending up in the same place."';
+
+  // Welcome message
+  var cc=compatData?'\nCompatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third:'';
+  var welcome=partnerProfile
+    ? 'I see both of you.\n\nYour code: '+code+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+cc+'\n\n'+profile.birthDayDesc+'\n\nYour first question is free. Ask me anything.'
+    : 'I see you. Code: '+code+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nYour first question is free. Ask me anything.';
+
+  addMessage('ai',welcome);
+  updateCredits();
+
+  // Pills
+  var pillsEl=document.getElementById('pills-row');
+  var qs=partnerProfile
+    ?['Are we compatible?','Why does my partner shut down?','Simulate: what if I confront them?']
+    :['Why do I keep attracting the same type?','What do I actually need?','What is my biggest blind spot?'];
+  pillsEl.innerHTML='';
+  qs.forEach(function(q){
+    var b=document.createElement('button');b.className='pill-btn';b.textContent=q;
+    b.onclick=function(){document.getElementById('chat-input').value=q;};
+    pillsEl.appendChild(b);
+  });
+}
+
+function updateCredits(){
+  var el=document.getElementById('chat-credits');
+  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Unlimited</span>';
+  else if(!freeUsed)el.innerHTML='<span style="color:var(--crystal)">1 free</span>';
+  else if(credits>0)el.innerHTML='<span style="color:var(--white)">'+credits+' left</span>';
+  else el.innerHTML='<span style="color:#ef4444">No credits</span>';
+
+  document.getElementById('chat-buy').textContent=credits===-1?'PRO':'BUY';
+}
+
+function canAsk(){return !freeUsed||credits>0||credits===-1;}
+
+function useCredit(){
+  if(!freeUsed){freeUsed=true;updateCredits();return true;}
+  if(credits===-1)return true;
+  if(credits>0){credits--;updateCredits();return true;}
+  return false;
+}
+
+async function sendMessage(){
+  var input=document.getElementById('chat-input');
+  var msg=input.value.trim();
+  if(!msg)return;
+
+  if(!canAsk()){showPaywall();return;}
+
+  input.value='';
+  addMessage('user',msg);
+  showTyping();
+
+  var response = await getAIResponse(msg);
+
+  var used=useCredit();
+  hideTyping();
+
+  var tail='';
+  if(freeUsed&&credits===0&&credits!==-1){
+    tail='\n\nThis was your free question. To continue, purchase a question ($9.99) or go unlimited ($149/month).';
+    setTimeout(showPaywall,2000);
+  } else if(credits>0){
+    tail='\n\n'+credits+' question'+(credits===1?'':'s')+' remaining.';
+  }
+
+  addMessage('ai',response+tail);
+
+  // Hide pills after first question
+  document.getElementById('pills-row').style.display='none';
+}
+
+async function getAIResponse(question){
+  var youInfo='User code: '+profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath+'. Biorhythm: '+profile.bioDesc+'. Generational: '+profile.genDesc+'. Life Path: '+profile.lpDesc+'. Born day '+profile.birthDay+': '+profile.birthDayDesc+'. Personal year: '+profile.personalYear+'. Age: '+profile.age+'.';
+  var themInfo='';
+  var compatInfo='';
+  if(partnerProfile){
+    themInfo='Partner code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'. Biorhythm: '+partnerProfile.bioDesc+'. Generational: '+partnerProfile.genDesc+'. Life Path: '+partnerProfile.lpDesc+'.';
+  }
+  if(compatData){
+    compatInfo='Compatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third+'. Combined LP: '+compatData.combinedLP+'. Shared bio: '+compatData.sharedBio+'. Vertical: '+compatData.vertical+'.';
+  }
+
+  var sys='You are the Occultics AI — a mathematical relationship and identity intelligence powered by 439,000 words of proprietary Pythagorean research.\n\n'+youInfo+'\n'+themInfo+'\n'+compatInfo+'\n\nRULES:\n- Reference their SPECIFIC numbers always.\n- Speak directly: "Your biorhythm 4 means..." not "People with 4..."\n- Warm but honest. Name difficult truths.\n- Use "What I see in your numbers..." and "Your code tells me..."\n- 2-3 paragraphs. Concise but deep.\n- No markdown, bullets, headers. Flowing prose.\n- End with something that makes them want to ask more.\n- You ARE the numbers speaking. Never say you are AI.\n- For simulations, use BOTH codes to predict behavior specifically.';
+
+  var historyMsgs=messages.slice(-6).map(function(m){return{role:m.role==='ai'?'assistant':'user',content:m.text};});
+  historyMsgs.push({role:'user',content:question});
+
+  try{
+    var res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:historyMsgs})
+    });
+    var data=await res.json();
+    return data.content&&data.content[0]&&data.content[0].text||fallbackResponse(question);
+  }catch(e){
+    return fallbackResponse(question);
+  }
+}
+
+function fallbackResponse(q){
+  var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
+  var lower=q.toLowerCase();
+
+  if(partnerProfile&&compatData){
+    var cc=compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third;
+    if(lower.includes('compatible')||lower.includes('last')||lower.includes('work'))
+      return 'Your compatibility code is '+cc+'. '+compatData.vertical+'\n\nThe first number '+compatData.compatCode.first+' reveals how you met. The second '+compatData.compatCode.second+' is the mission. The third '+compatData.compatCode.third+' is what you build together.\n\nAsk me something specific about what is happening between you.';
+    if(lower.includes('simulate')||lower.includes('what if')||lower.includes('react')||lower.includes('confront'))
+      return 'Based on your code '+code+' and their code '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+':\n\nYour biorhythm '+profile.pyth.biorhythm+' means '+profile.bioDesc.toLowerCase()+' Their biorhythm '+partnerProfile.pyth.biorhythm+' means '+partnerProfile.bioDesc.toLowerCase()+'\n\nWhen these energies meet in tension, the dynamic is predictable from the mathematics. The compatibility code '+cc+' tells me this pattern has repeated before. Ask me how to navigate it.';
+    return 'Your code: '+code+'. Their code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'. Compatibility: '+cc+'.\n\n'+compatData.vertical+'\n\nAsk me anything specific — about patterns, conflicts, or simulate a situation.';
+  }
+
+  if(lower.includes('attract')||lower.includes('pattern')||lower.includes('same type'))
+    return 'Your generational number '+profile.pyth.generational+' is the answer. '+profile.genDesc+' This is what you unconsciously seek in every partner. Your biorhythm '+profile.pyth.biorhythm+' is what people see first: '+profile.bioDesc.toLowerCase()+' The gap between these two creates the pattern you keep repeating.';
+
+  if(lower.includes('need')||lower.includes('partner')||lower.includes('looking'))
+    return 'Your generational '+profile.pyth.generational+' holds the answer. '+profile.genDesc+' But your biorhythm '+profile.pyth.biorhythm+' creates a surface that attracts people who respond to THAT energy, not what you truly need. The right partner feeds the '+profile.pyth.generational+' underneath, not just the '+profile.pyth.biorhythm+' on the surface.';
+
+  return 'Your code is '+code+'. '+profile.bioDesc+' At your deepest level: '+profile.genDesc.toLowerCase()+' Your life path '+profile.pyth.lifePath+': '+profile.lpDesc.toLowerCase()+'\n\nAsk me about your relationship patterns, what you truly need, or add someone\'s birthday for compatibility analysis.';
+}
+
+function addMessage(role,text){
+  messages.push({role:role,text:text});
+  var el=document.getElementById('messages');
+  var div=document.createElement('div');
+  div.className='msg '+(role==='ai'?'msg-l':'msg-r');
+  var bubble=document.createElement('div');
+  bubble.className='bubble '+(role==='ai'?'bubble-ai':'bubble-user');
+  if(role==='ai')bubble.innerHTML='<div class="bubble-label">OCCULTICS</div>'+text.replace(/\n/g,'<br>');
+  else bubble.textContent=text;
+  div.appendChild(bubble);
+  el.appendChild(div);
+  el.scrollTop=el.scrollHeight;
+}
+
+function showTyping(){
+  var el=document.getElementById('messages');
+  var div=document.createElement('div');div.className='msg msg-l';div.id='typing-indicator';
+  div.innerHTML='<div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  el.appendChild(div);
+  el.scrollTop=el.scrollHeight;
+}
+
+function hideTyping(){var el=document.getElementById('typing-indicator');if(el)el.remove();}
+
+function showPaywall(){
+  document.getElementById('screen-chat').style.display='none';
+  document.getElementById('screen-paywall').style.display='flex';
+}
+
+function hidePaywall(){
+  document.getElementById('screen-paywall').style.display='none';
+  document.getElementById('screen-chat').style.display='flex';
+}
+
+function buyOneQuestion(){
+  // TODO: Connect to Stripe for $9.99
+  // For now simulate purchase
+  credits++;
+  updateCredits();
+  hidePaywall();
+}
+
+function buyMonthly(){
+  // TODO: Connect to Stripe for $149/month
+  // For now simulate purchase
+  credits=-1;
+  updateCredits();
+  hidePaywall();
+}
+</script>
+</body>
+</html>
