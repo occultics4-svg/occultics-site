@@ -257,8 +257,8 @@ function showChat() {
   // Welcome message
   var cc=compatData?'\nCompatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third:'';
   var welcome=partnerProfile
-    ? 'I see both of you.\n\nYour code: '+code+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+cc+'\n\n'+profile.birthDayDesc+'\n\nYour first question is free. Ask me anything.'
-    : 'I see you. Code: '+code+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nYour first question is free. Ask me anything.';
+    ? 'I see both of you.\n\nYour code: '+code+' | Pyramid: '+profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+' | Pyramid: '+partnerProfile.pyramid.first+'.'+partnerProfile.pyramid.second+'.'+partnerProfile.pyramid.third+cc+'\n\n'+profile.birthDayDesc+'\n\nYour first question is free. Ask me anything.'
+    : 'I see you. Code: '+code+'\nPyramid: '+profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third+'\nBorn: '+d+'/'+m+'/'+y+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nYour first question is free. Ask me anything.';
 
   addMessage('ai',welcome);
   updateCredits();
