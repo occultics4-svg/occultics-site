@@ -86,6 +86,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
 .back-link{display:inline-block;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2);text-decoration:none}
 .back-link:hover{color:var(--crystal)}
 
+.gender-btn{flex:1;padding:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:rgba(255,255,255,0.4);font-family:'Montserrat',sans-serif;font-size:11px;cursor:pointer;transition:all .2s;font-weight:500}
+.gender-btn:hover{border-color:rgba(255,255,255,0.15)}
+.gender-btn.active{background:var(--royal);color:#fff;border-color:var(--royal)}
 @media(max-width:500px){.setup-row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -121,8 +124,17 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       <input type="email" class="inp" id="s-email" placeholder="your@email.com">
     </div>
 
+    <div class="setup-box">
+      <div class="setup-label">Gender</div>
+      <div style="display:flex;gap:6px">
+        <button class="gender-btn" id="g-f" onclick="setGender('female')">Female</button>
+        <button class="gender-btn" id="g-m" onclick="setGender('male')">Male</button>
+        <button class="gender-btn" id="g-o" onclick="setGender('other')">Other</button>
+      </div>
+    </div>
+
     <button class="start-btn" id="start-btn" onclick="startSession()">Start — First Question Free</button>
-    <div class="start-note">$9.99 per question · $149/month unlimited</div>
+    <div class="start-note">$9.99 for unlimited questions all day</div>
     <div style="text-align:center"><a href="/" class="back-link">← Back to Occultics</a></div>
   </div>
 </div>
@@ -149,7 +161,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       <input type="text" id="chat-input" placeholder="Ask about yourself or your relationships...">
       <button id="send-btn" onclick="sendMessage()">ASK</button>
     </div>
-    <div class="chat-foot">$9.99/question · $149/month unlimited</div>
+    <div class="chat-foot">$9.99 for unlimited questions all day</div>
   </div>
 </div>
 
@@ -158,23 +170,15 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
   <div class="pay-inner">
     <div class="setup-logo">OCCULTICS</div>
     <div class="pay-code" id="pay-code"></div>
-    <div class="pay-sub">Your numbers have more to say.</div>
+    <div class="pay-sub">Your numbers have more to say. $9.99 unlocks unlimited questions for the rest of the day.</div>
 
-    <div class="pay-option" onclick="buyOneQuestion()">
+    <div class="pay-option featured" onclick="buyDayPass()">
       <div>
-        <div class="pay-name">One Question</div>
-        <div class="pay-desc">Ask anything about yourself or relationships</div>
+        <div class="pay-name">Day Pass — Unlimited Questions</div>
+        <div class="pay-desc">Ask anything about yourself and your relationships. All day. No limits.</div>
+        <div class="pay-desc2">Less than a coffee date. More than a therapy session.</div>
       </div>
       <button class="pay-price">$9.99</button>
-    </div>
-
-    <div class="pay-option featured" onclick="buyMonthly()">
-      <div>
-        <div class="pay-name">Unlimited Monthly</div>
-        <div class="pay-desc">Unlimited questions. Add anyone. 24/7.</div>
-        <div class="pay-desc2">Less than one therapy session</div>
-      </div>
-      <button class="pay-price">$149/mo</button>
     </div>
 
     <button class="pay-back" onclick="hidePaywall()">Back to conversation</button>
@@ -195,7 +199,14 @@ var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 var profile = null, partnerProfile = null, compatData = null;
 var messages = [];
 var freeUsed = false;
-var credits = -1; // TESTING MODE: unlimited. Change to 0 for production
+var credits = 0; // 0=none, -1=unlimited (day pass)
+var userGender = '';
+
+function setGender(g) {
+  userGender = g;
+  document.querySelectorAll('.gender-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('g-' + g.charAt(0)).classList.add('active');
+}
 
 // Populate dropdowns
 var mos = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -278,20 +289,18 @@ function showChat() {
 
 function updateCredits(){
   var el=document.getElementById('chat-credits');
-  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Unlimited</span>';
+  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Day Pass Active</span>';
   else if(!freeUsed)el.innerHTML='<span style="color:var(--crystal)">1 free</span>';
-  else if(credits>0)el.innerHTML='<span style="color:var(--white)">'+credits+' left</span>';
-  else el.innerHTML='<span style="color:#ef4444">No credits</span>';
+  else el.innerHTML='<span style="color:#ef4444">Get Day Pass</span>';
 
-  document.getElementById('chat-buy').textContent=credits===-1?'PRO':'BUY';
+  document.getElementById('chat-buy').textContent=credits===-1?'✦':'$9.99';
 }
 
-function canAsk(){return !freeUsed||credits>0||credits===-1;}
+function canAsk(){return !freeUsed||credits===-1;}
 
 function useCredit(){
   if(!freeUsed){freeUsed=true;updateCredits();return true;}
   if(credits===-1)return true;
-  if(credits>0){credits--;updateCredits();return true;}
   return false;
 }
 
@@ -313,11 +322,9 @@ async function sendMessage(){
 
   var tail='';
   if(freeUsed&&credits===0&&credits!==-1){
-    tail='\n\nThis was your free question. To continue, purchase a question ($9.99) or go unlimited ($149/month).';
+    tail='\n\nThis was your free question. Get a Day Pass for $9.99 — unlimited questions for the rest of the day.';
     setTimeout(showPaywall,2000);
-  } else if(credits>0){
-    tail='\n\n'+credits+' question'+(credits===1?'':'s')+' remaining.';
-  }
+  } 
 
   addMessage('ai',response+tail);
 
@@ -335,7 +342,8 @@ async function getAIResponse(question){
         profileData:profile,
         partnerData:partnerProfile||null,
         compatibilityData:compatData||null,
-        history:messages.slice(-8)
+        history:messages.slice(-8),
+        gender:userGender
       })
     });
     var data=await res.json();
@@ -402,20 +410,19 @@ function hidePaywall(){
   document.getElementById('screen-chat').style.display='flex';
 }
 
-function buyOneQuestion(){
-  // TODO: Connect to Stripe for $9.99
-  // For now simulate purchase
-  credits++;
-  updateCredits();
-  hidePaywall();
-}
-
-function buyMonthly(){
-  // TODO: Connect to Stripe for $149/month
-  // For now simulate purchase
-  credits=-1;
-  updateCredits();
-  hidePaywall();
+function buyDayPass(){
+  // Connect to Stripe for $9.99 day pass
+  var email = document.getElementById('s-email').value.trim();
+  fetch('https://occultics-checkout.occultics4.workers.dev/',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'decode_yourself',email:email})
+  }).then(function(r){return r.json()}).then(function(d){
+    if(d.url) window.location.href=d.url;
+    else { credits=-1; updateCredits(); hidePaywall(); } // fallback: simulate
+  }).catch(function(e){
+    credits=-1; updateCredits(); hidePaywall(); // fallback: simulate
+  });
 }
 </script>
 </body>
