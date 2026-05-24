@@ -195,7 +195,7 @@ var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZ
 var profile = null, partnerProfile = null, compatData = null;
 var messages = [];
 var freeUsed = false;
-var credits = 0; // 0=none, -1=unlimited
+var credits = -1; // TESTING MODE: unlimited. Change to 0 for production
 
 // Populate dropdowns
 var mos = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
