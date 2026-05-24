@@ -35,18 +35,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,46,0.9
 .hsub{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.8;font-weight:300;margin-bottom:48px;max-width:520px;margin-left:auto;margin-right:auto;letter-spacing:.2px}
 
 /* 3 CARDS */
-.cards{display:flex;flex-direction:row !important;gap:12px;justify-content:center;max-width:960px;margin:0 auto;padding:0 16px}
-.crd{background:rgba(255,255,255,0.025);border:1px solid var(--borderd);border-radius:16px;padding:24px 18px;flex:1;min-width:200px;display:flex;flex-direction:column;transition:all .3s;text-decoration:none;color:inherit}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:960px;margin:0 auto;padding:0 16px}
+.crd{background:rgba(255,255,255,0.025);border:1px solid var(--borderd);border-radius:16px;padding:24px 18px;display:flex;flex-direction:column;transition:all .3s;text-decoration:none;color:inherit}
 .crd:hover{border-color:rgba(77,184,255,0.2);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
 .crd.feat{border-color:rgba(77,184,255,0.2);background:rgba(77,184,255,0.03)}
-.crd-badge{font-size:7px;letter-spacing:1.5px;font-weight:700;color:var(--crystal);text-transform:uppercase;margin-bottom:10px;height:14px}
-.crd-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--white);margin-bottom:6px;font-weight:400;min-height:30px;display:flex;align-items:center;justify-content:center}
-.crd-price{font-size:28px;font-weight:700;color:var(--white);margin-bottom:4px;letter-spacing:1px;min-height:36px;display:flex;align-items:center;justify-content:center}
-.crd-price span{font-size:11px;font-weight:300;color:rgba(255,255,255,0.3)}
-.crd-desc{font-size:10px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:18px;min-height:68px}
+.crd-badge{font-size:7px;letter-spacing:1.5px;font-weight:700;color:var(--crystal);text-transform:uppercase;margin-bottom:10px;height:14px;visibility:hidden}
+.crd-name{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);margin-bottom:6px;font-weight:400;height:28px;display:flex;align-items:center;justify-content:center;text-align:center}
+.crd-price{font-size:28px;font-weight:700;color:var(--white);margin-bottom:8px;letter-spacing:1px;height:40px;display:flex;align-items:center;justify-content:center}
+.crd-price span{font-size:11px;font-weight:300;color:rgba(255,255,255,0.3);letter-spacing:0}
+.crd-desc{font-size:10px;color:rgba(255,255,255,0.4);line-height:1.7;margin-bottom:14px;height:70px;overflow:hidden}
 
 /* EMAIL INPUT IN CARD */
-.crd-email{width:100%;padding:10px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;margin-bottom:10px}
+.crd-email{width:100%;padding:11px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:var(--white);font-family:'Montserrat',sans-serif;font-size:11px;outline:none;margin-bottom:8px;height:40px}
 .crd-email:focus{border-color:var(--crystal)}
 .crd-email::placeholder{color:rgba(255,255,255,0.2)}
 
@@ -59,7 +59,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,46,0.9
 .sh-yt{background:#FF0000;color:#fff}
 .sh-wa{background:#25D366;color:#fff}
 
-.crd-btn{display:block;width:100%;padding:12px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:1.5px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-align:center;text-decoration:none;transition:all .2s}
+.crd-btn{display:flex;align-items:center;justify-content:center;width:100%;padding:13px 12px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:1.5px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;text-align:center;text-decoration:none;transition:all .2s;height:44px}
 .crd-btn.primary{background:var(--royal);color:var(--white);border:none}
 .crd-btn.primary:hover{opacity:.9}
 .crd-btn.outline{background:transparent;color:var(--crystal);border:1px solid rgba(77,184,255,0.18)}
@@ -119,14 +119,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,46,0.9
 
 /* BLOG */
 .blg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px;max-width:880px;margin-left:auto;margin-right:auto}
-.bc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s}
+.bc{background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s}
 .bc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.3)}
 .bimg{height:90px;background:var(--navy);display:flex;align-items:center;justify-content:center}
 .bimg span{font-family:'Cormorant Garamond',serif;font-size:24px;color:rgba(255,255,255,0.12)}
 .bbdy{padding:14px}
-.btag{font-size:8px;letter-spacing:1.5px;color:var(--crystal);text-transform:uppercase;font-weight:700;margin-bottom:3px}
-.btt{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--white);margin-bottom:3px;line-height:1.3}
-.bex{font-size:10px;color:var(--dim);line-height:1.5}
+.btag{font-size:8px;letter-spacing:1.5px;color:#1a2aff;text-transform:uppercase;font-weight:700;margin-bottom:3px}
+.btt{font-family:'Cormorant Garamond',serif;font-size:14px;color:#0a0e2e;margin-bottom:3px;line-height:1.3}
+.bex{font-size:10px;color:#7c8298;line-height:1.5}
 
 /* EBOOK */
 .ebr{display:flex;gap:6px;max-width:360px;margin:16px auto 0}
@@ -157,7 +157,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .crd:nth-child(2){animation-delay:.25s}
 .crd:nth-child(3){animation-delay:.35s}
 
-@media(max-width:600px){.cards{flex-direction:column;align-items:center}.crd{width:100%;max-width:360px;flex:none}}
+@media(max-width:600px){.cards{grid-template-columns:1fr}.crd{width:100%;max-width:360px;margin:0 auto}}
 @media(max-width:700px){.n-mid{display:none}.steps{grid-template-columns:1fr 1fr}.feats,.testis,.blg{grid-template-columns:1fr}.stats{gap:20px}.share-row{flex-wrap:wrap}}
 </style>
 </head>
@@ -184,7 +184,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <div class="pill">AI Identity & Compatibility Decoder</div>
   <h1 class="h1">Every Relationship Has a<br><em>Mathematical Signature.</em></h1>
   <div class="tagline">Self-awareness meets connection.</div>
-  <p class="hsub">Your birthday contains more information about who you are than years of self-reflection. Two birthdays reveal more about your compatibility than years of conversation. What a therapist uncovers in months, your numbers already know. 439,000 words of mathematical research. 81 codes. Each one tells a different story.</p>
+  <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:22px 28px;max-width:540px;margin:0 auto 48px"><p class="hsub" style="margin-bottom:0">Your birthday contains more information about who you are than years of self-reflection. Two birthdays reveal more about your compatibility than years of conversation. What a therapist uncovers in months, your numbers already know. 439,000 words of mathematical research. 81 codes. Each one tells a different story.</p></div>
 
   <!-- 3 CARDS -->
   <div class="cards">
@@ -196,33 +196,32 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
       <div class="crd-price">Free</div>
       <div class="crd-desc">Your 3-number code, pyramid code, and your first session reading. Share it on social media to unlock.</div>
       <input type="email" class="crd-email" id="free-email" placeholder="your@email.com">
-      <button class="crd-btn outline" onclick="getFree()">Get Your Free Session & Share It</button>
+      <button class="crd-btn outline" onclick="getFree()">Get Your Code</button>
       <div class="share-row" style="margin-top:8px">
         <button class="sh sh-ig" onclick="shareFree('ig')">Instagram</button>
         <button class="sh sh-tt" onclick="shareFree('tt')">TikTok</button>
         <button class="sh sh-yt" onclick="shareFree('yt')">YouTube</button>
-        <button class="sh sh-wa" onclick="shareFree('wa')">WhatsApp</button>
       </div>
     </div>
 
     <!-- $99 IDENTITY -->
     <div class="crd feat">
       <div class="crd-badge">&nbsp;</div>
-      <div class="crd-name">Decode Yourself</div>
-      <div class="crd-price">$99</div>
-      <div class="crd-desc">The complete mathematical truth about who you are. Identity, career, karma, health, life cycles. 30+ pages.</div>
+      <div class="crd-name">Ask a Question</div>
+      <div class="crd-price">$9.99</div>
+      <div class="crd-desc">Ask anything about yourself or your relationships. The AI knows your code and gives you the mathematical truth.</div>
       <input type="email" class="crd-email" id="id-email" placeholder="your@email.com">
-      <button class="crd-btn primary" onclick="buyIdentity()">Decode Yourself — $99</button>
+      <button class="crd-btn primary" onclick="buyQuestion()">Ask a Question</button>
     </div>
 
     <!-- $199 COMPATIBILITY -->
     <div class="crd">
       <div class="crd-badge">&nbsp;</div>
-      <div class="crd-name">Decode Your Relationship</div>
-      <div class="crd-price">$199</div>
-      <div class="crd-desc">Two people fully decoded. Your compatibility code. Why you met. What you're building. The verdict: does it last?</div>
+      <div class="crd-name">Unlimited Monthly</div>
+      <div class="crd-price">$149<span>/month</span></div>
+      <div class="crd-desc">Unlimited questions about yourself and every relationship. Add anyone by birthday. Cancel anytime. Less than one therapy session.</div>
       <input type="email" class="crd-email" id="compat-email" placeholder="your@email.com">
-      <button class="crd-btn primary" onclick="buyCompat()">Decode Your Relationship — $199</button>
+      <button class="crd-btn primary" onclick="buyMonthly()">Go Unlimited</button>
     </div>
 
   </div>
@@ -280,16 +279,112 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 <!-- WHITE -->
 <div class="w">
 
-<!-- TESTIMONIALS -->
-<section class="sec-full cen">
-  <div class="eye">What people say</div>
-  <h2 class="st">They came for the code. They stayed for the clarity.</h2>
-  <div class="testis">
-    <div class="testi"><div class="tq">"You were able to predict the area where I had surgery two years ago and the medication I was taking — it was a bit scary how accurate it was."</div><div class="tn">Verified Client</div><div class="ti">Life Code Analysis</div></div>
-    <div class="testi"><div class="tq">"I read this and wondered — does this person know me? I was surprised by how many details landed exactly. I had been scared of turning 50, but after this, my feeling suddenly became brighter."</div><div class="tn">Verified Client</div><div class="ti">Life Code Analysis</div></div>
-    <div class="testi"><div class="tq">"It gives me courage to be able to predict something with almost certainty. I am now actually happy that the divorce is clear — the analysis gave me the strength to move forward."</div><div class="tn">Verified Client</div><div class="ti">Life Code Analysis</div></div>
+
+<!-- COMPARISON — WHITE -->
+<div style="background:#ffffff">
+<section class="sec-full cen" style="padding:72px 24px">
+  <div style="max-width:800px;margin:0 auto">
+  <div class="eye" style="color:#1a2aff">Why Occultics</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4.5vw,32px);font-weight:300;color:#0a0e2e;margin-bottom:32px">Pi listens. Replika remembers.<br>Character.AI pretends. <em style="color:#1a2aff;font-style:italic">Occultics already knows.</em></h2>
+  
+  <div style="overflow-x:auto">
+  <table style="width:100%;border-collapse:collapse;font-size:11px;text-align:left">
+    <thead>
+      <tr>
+        <th style="padding:12px 14px;border-bottom:2px solid #0a0e2e;color:#0a0e2e;font-weight:600;font-size:10px;letter-spacing:1px;text-transform:uppercase;width:25%"></th>
+        <th style="padding:12px 14px;border-bottom:2px solid #e8ebf0;color:#8892a4;font-weight:600;font-size:10px;letter-spacing:1px">Pi</th>
+        <th style="padding:12px 14px;border-bottom:2px solid #e8ebf0;color:#8892a4;font-weight:600;font-size:10px;letter-spacing:1px">Replika</th>
+        <th style="padding:12px 14px;border-bottom:2px solid #e8ebf0;color:#8892a4;font-weight:600;font-size:10px;letter-spacing:1px">Character.AI</th>
+        <th style="padding:12px 14px;border-bottom:2px solid #1a2aff;color:#1a2aff;font-weight:700;font-size:10px;letter-spacing:1px">Occultics</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:600">Knows you from</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Your conversation</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">What you teach it</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Nothing — pretends</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:500">8 digits. Instantly.</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:600">Based on</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Generic AI</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Your chat history</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Fiction & roleplay</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:500">439,000 words of research</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:600">First message</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">"How are you?"</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">"Tell me about yourself"</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">"I'm [character name]"</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:500">"Your code is 4.8.3 — here's why your relationships end the same way."</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:600">Accuracy</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Makes things up</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Reflects you back</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#8892a4">Makes things up</td>
+        <td style="padding:10px 14px;border-bottom:1px solid #f0f1f5;color:#0a0e2e;font-weight:500">Mathematically calculated</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 14px;color:#0a0e2e;font-weight:600">Relationships</td>
+        <td style="padding:10px 14px;color:#8892a4">Generic advice</td>
+        <td style="padding:10px 14px;color:#8892a4">AI companion only</td>
+        <td style="padding:10px 14px;color:#8892a4">Fictional characters</td>
+        <td style="padding:10px 14px;color:#0a0e2e;font-weight:500">81 compatibility codes. Real analysis.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
   </div>
 </section>
+</div>
+
+<!-- TRANSFORMATION STORIES — WHITE -->
+<div style="background:#ffffff">
+<section class="sec-full cen" style="padding:80px 24px">
+  <div style="max-width:880px;margin:0 auto">
+  <div class="eye" style="color:#1a2aff">Real stories of transformation</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4.5vw,34px);font-weight:300;color:#0a0e2e;margin-bottom:32px">Real Stories of Transformation</h2>
+  
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;text-align:left">
+    
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Accuracy</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"You were able to predict the area where I had surgery two years ago and the medication I was taking — it was a bit scary how accurate it was."</div>
+    </div>
+
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Self-Discovery</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"I read this and wondered — does this person know me? I was surprised by how many details landed exactly. I had been scared of turning 50, but after this, my feeling suddenly became brighter."</div>
+    </div>
+
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Relationships</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"It gives me courage to be able to predict something with almost certainty. I am now actually happy that the divorce is clear — the analysis gave me the strength to move forward."</div>
+    </div>
+
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Career</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"The analysis described exactly the job I had chosen in the past. It showed my drive toward self-development and psychology, which has always been my starting point."</div>
+    </div>
+
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Health</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"A traffic accident with a taxi actually occurred when I was around 25, exactly as the analysis described. It served as a warning to me to be more careful. How can you understand so much?"</div>
+    </div>
+
+    <div style="background:#ffffff;border-radius:14px;padding:24px 22px;border:1px solid rgba(10,14,46,0.08);box-shadow:0 2px 8px rgba(10,14,46,0.03)">
+      <div style="font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:10px">On Transformation</div>
+      <div style="font-family:'Montserrat',sans-serif;font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300">"There was more volume than I expected, and it was extremely rewarding to read. I was shocked by how familiar the events felt. It was like I was being told not to avoid it, not to turn a blind eye."</div>
+    </div>
+  </div>
+
+  <div style="margin-top:24px;font-size:10px;color:#8892a4">All testimonials from clients in Japan. Names withheld for privacy.</div>
+  </div>
+</section>
+</div>
 
 <!-- BLOG -->
 <section class="sec cen">
@@ -321,7 +416,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <h2 class="fct">Your birthday already knows the <em>answer.</em></h2>
   <div class="fcs">Self-awareness meets connection.</div>
   <a href="/code.html" class="fcb">Decode Yourself</a>
-  <a href="/match/compatibility.html" class="fcb" style="margin-left:12px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2)">Decode Your Relationship</a>
+  <a href="/match/compatibility.html" class="fcb" style="margin-left:12px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,0.2)">Go Unlimited — $149/mo</a>
 </section>
 
 <footer>
@@ -372,18 +467,18 @@ function getFree(){
   window.location.href='/code.html?free=1&email='+encodeURIComponent(email);
 }
 
-function buyIdentity(){
+function buyQuestion(){
   var email=document.getElementById('id-email').value.trim();
   if(!email||!email.includes('@')){document.getElementById('id-email').style.borderColor='#ff4444';return;}
-  saveEmail(email,'identity_decoder');
-  fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'life_code_alignment',email:email,price_id:'price_1TZz1S0mriXVrtOrzo3eeC6i'})}).then(function(r){return r.json()}).then(function(d){if(d.url)window.location.href=d.url;else alert('Error: '+(d.error||'Unknown'));}).catch(function(e){alert('Error: '+e.message);});
+  saveEmail(email,'per_question');
+  fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'decode_yourself',email:email})}).then(function(r){return r.json()}).then(function(d){if(d.url)window.location.href=d.url;else alert('Error: '+(d.error||'Unknown'));}).catch(function(e){alert('Error: '+e.message);});
 }
 
-function buyCompat(){
+function buyMonthly(){
   var email=document.getElementById('compat-email').value.trim();
   if(!email||!email.includes('@')){document.getElementById('compat-email').style.borderColor='#ff4444';return;}
-  saveEmail(email,'compatibility_decoder');
-  window.location.href='/match/compatibility.html?product=compat&email='+encodeURIComponent(email);
+  saveEmail(email,'unlimited_monthly');
+  fetch('https://occultics-checkout.occultics4.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'decode_your_relationship',email:email})}).then(function(r){return r.json()}).then(function(d){if(d.url)window.location.href=d.url;else alert('Error: '+(d.error||'Unknown'));}).catch(function(e){alert('Error: '+e.message);});
 }
 
 function dlBook(){
