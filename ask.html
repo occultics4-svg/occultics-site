@@ -134,7 +134,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
     </div>
 
     <button class="start-btn" id="start-btn" onclick="startSession()">Start — First Question Free</button>
-    <div class="start-note">$9.99 for unlimited questions all day</div>
+    <div class="start-note">$9.99 per question</div>
     <div style="text-align:center"><a href="/" class="back-link">← Back to Occultics</a></div>
   </div>
 </div>
@@ -161,7 +161,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
       <input type="text" id="chat-input" placeholder="Ask about yourself or your relationships...">
       <button id="send-btn" onclick="sendMessage()">ASK</button>
     </div>
-    <div class="chat-foot">$9.99 for unlimited questions all day</div>
+    <div class="chat-foot">$9.99 per question</div>
   </div>
 </div>
 
@@ -170,13 +170,13 @@ body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--whit
   <div class="pay-inner">
     <div class="setup-logo">OCCULTICS</div>
     <div class="pay-code" id="pay-code"></div>
-    <div class="pay-sub">Your numbers have more to say. $9.99 unlocks unlimited questions for the rest of the day.</div>
+    <div class="pay-sub">Your numbers have more to say.</div>
 
     <div class="pay-option featured" onclick="buyDayPass()">
       <div>
-        <div class="pay-name">Day Pass — Unlimited Questions</div>
-        <div class="pay-desc">Ask anything about yourself and your relationships. All day. No limits.</div>
-        <div class="pay-desc2">Less than a coffee date. More than a therapy session.</div>
+        <div class="pay-name">Ask a Question</div>
+        <div class="pay-desc">Ask anything about yourself and your relationships.</div>
+        <div class="pay-desc2">$9.99 per question</div>
       </div>
       <button class="pay-price">$9.99</button>
     </div>
@@ -289,18 +289,20 @@ function showChat() {
 
 function updateCredits(){
   var el=document.getElementById('chat-credits');
-  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Day Pass Active</span>';
+  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Active</span>';
   else if(!freeUsed)el.innerHTML='<span style="color:var(--crystal)">1 free</span>';
-  else el.innerHTML='<span style="color:#ef4444">Get Day Pass</span>';
+  else if(credits>0)el.innerHTML='<span style="color:var(--crystal)">'+credits+' left</span>';
+  else el.innerHTML='<span style="color:#ef4444">$9.99</span>';
 
   document.getElementById('chat-buy').textContent=credits===-1?'✦':'$9.99';
 }
 
-function canAsk(){return !freeUsed||credits===-1;}
+function canAsk(){return !freeUsed||credits>0||credits===-1;}
 
 function useCredit(){
   if(!freeUsed){freeUsed=true;updateCredits();return true;}
   if(credits===-1)return true;
+  if(credits>0){credits--;updateCredits();return true;}
   return false;
 }
 
@@ -322,7 +324,7 @@ async function sendMessage(){
 
   var tail='';
   if(freeUsed&&credits===0&&credits!==-1){
-    tail='\n\nThis was your free question. Get a Day Pass for $9.99 — unlimited questions for the rest of the day.';
+    tail='\n\nThis was your free question. Each additional question is $9.99.';
     setTimeout(showPaywall,2000);
   } 
 
@@ -411,7 +413,7 @@ function hidePaywall(){
 }
 
 function buyDayPass(){
-  // Connect to Stripe for $9.99 day pass
+  // Connect to Stripe for $9.99 per question
   var email = document.getElementById('s-email').value.trim();
   fetch('https://occultics-checkout.occultics4.workers.dev/',{
     method:'POST',
@@ -419,9 +421,9 @@ function buyDayPass(){
     body:JSON.stringify({type:'decode_yourself',email:email})
   }).then(function(r){return r.json()}).then(function(d){
     if(d.url) window.location.href=d.url;
-    else { credits=-1; updateCredits(); hidePaywall(); } // fallback: simulate
+    else { credits=1; updateCredits(); hidePaywall(); }
   }).catch(function(e){
-    credits=-1; updateCredits(); hidePaywall(); // fallback: simulate
+    credits=1; updateCredits(); hidePaywall();
   });
 }
 </script>
