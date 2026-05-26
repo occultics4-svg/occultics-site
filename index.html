@@ -16,9 +16,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
 .n-logo{font-weight:700;font-size:11px;letter-spacing:5px;color:var(--navy);text-decoration:none}
 .n-r{display:flex;gap:16px;align-items:center}
-.n-r a{font-size:10px;color:var(--dim);text-decoration:none;font-weight:500}
+.n-r a{font-size:10px;color:#4a4a5a;text-decoration:none;font-weight:500}
 .n-r a:hover{color:var(--royal)}
-.lng{padding:3px 7px;border:1px solid var(--border);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:var(--light);font-family:inherit}
+.lng{padding:3px 7px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit}
 .lng.on{background:var(--royal);color:#fff;border-color:var(--royal)}
 
 /* HERO */
@@ -64,13 +64,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .how-s{text-align:center;max-width:180px}
 .how-n{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--royal);opacity:.25;margin-bottom:4px}
 .how-t{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:3px}
-.how-d{font-size:11px;color:var(--dim);line-height:1.6}
+.how-d{font-size:11px;color:#4a4a5a;line-height:1.6}
 
 /* CONVO */
 .convo{max-width:480px;margin:28px auto 0;text-align:left}
 .convo-user{background:var(--royal);color:#fff;border-radius:18px 18px 4px 18px;padding:12px 16px;font-size:13px;margin-bottom:10px;max-width:75%;margin-left:auto}
 .convo-ai{background:var(--card);border:1px solid var(--border);border-radius:18px 18px 18px 4px;padding:16px 18px;font-size:15px;line-height:1.75;margin-bottom:10px;max-width:85%;font-family:'Cormorant Garamond',serif;color:var(--text);box-shadow:0 2px 8px rgba(10,14,46,0.03)}
-.convo-label{font-size:7px;letter-spacing:2px;color:var(--royal);font-weight:700;margin-bottom:6px;font-family:'Montserrat',sans-serif;opacity:.6}
+.convo-label{font-size:7px;letter-spacing:2px;color:var(--royal);font-weight:700;margin-bottom:6px;font-family:'Montserrat',sans-serif}
 
 /* COMPARISON */
 .comp{max-width:600px;margin:28px auto 0;overflow-x:auto;background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(10,14,46,0.03)}
@@ -84,7 +84,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 /* STATS */
 .stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-top:28px}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--royal)}
-.stat-l{font-size:9px;color:var(--light);margin-top:2px}
+.stat-l{font-size:9px;color:#5c6370;margin-top:2px}
 
 /* STORIES */
 .stories-sec{background:var(--card);padding:72px 24px;text-align:center}
@@ -92,7 +92,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .story{background:var(--bg);border-radius:12px;padding:20px 18px}
 .story-tag{font-size:8px;letter-spacing:2px;color:var(--royal);font-weight:700;text-transform:uppercase;margin-bottom:8px}
 .story-text{font-size:12px;color:var(--text);line-height:1.8;font-style:italic;font-weight:300}
-.stories-note{margin-top:14px;font-size:10px;color:var(--light);text-align:center}
+.stories-note{margin-top:14px;font-size:10px;color:#5c6370;text-align:center}
 
 /* BLOG */
 .blog{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:700px;margin:28px auto 0}
@@ -109,16 +109,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .fcta{text-align:center;padding:72px 24px;background:var(--navy)}
 .fct{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,38px);font-weight:300;color:#fff;margin-bottom:10px}
 .fct em{font-style:italic;color:var(--crystal)}
-.fcs{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:24px}
+.fcs{font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:24px}
 .fcb{display:inline-block;padding:15px 36px;background:var(--royal);color:#fff;border-radius:12px;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;transition:all .2s}
 .fcb:hover{opacity:.9;transform:translateY(-1px)}
 
 footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px solid rgba(255,255,255,0.04)}
-.flogo{font-weight:700;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.25);margin-bottom:8px}
+.flogo{font-weight:700;font-size:9px;letter-spacing:4px;color:rgba(255,255,255,0.6);margin-bottom:8px}
 .flinks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:8px}
-.flinks a{font-size:9px;color:rgba(255,255,255,0.18);text-decoration:none}
+.flinks a{font-size:9px;color:rgba(255,255,255,0.55);text-decoration:none}
 .flinks a:hover{color:var(--crystal)}
-.fcopy{font-size:8px;color:rgba(255,255,255,0.07)}
+.fcopy{font-size:8px;color:rgba(255,255,255,0.4)}
 
 .ob-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px}
 .ob-label{font-size:9px;letter-spacing:1.5px;color:var(--light);text-transform:uppercase;font-weight:500;margin-bottom:6px}
@@ -131,7 +131,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .input-box{animation:fu .5s ease-out .1s backwards}
 .starters{animation:fu .5s ease-out .2s backwards}
 
-@media(max-width:600px){.input-row{grid-template-columns:1fr}.how{flex-direction:column;align-items:center}.stories{grid-template-columns:1fr}.blog{grid-template-columns:1fr}.n-r a{display:none}}
+@media(max-width:600px){.ob-row{grid-template-columns:1fr}.how{flex-direction:column;align-items:center}.stories{grid-template-columns:1fr}.blog{grid-template-columns:1fr}.n-r a{display:none}.ob-inner{padding-left:4px;padding-right:4px}.comp table{font-size:10px}.stats{gap:20px}}
 
 /* ASK ONBOARDING STYLES */
 .onboard{display:flex;align-items:flex-start;justify-content:center;padding:12px;position:relative;overflow-y:auto;background:#f5f0e8}
@@ -140,11 +140,11 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .ob-logo span{font-family:'Cormorant Garamond',serif;font-size:20px;color:#1a1a2e;letter-spacing:2px}
 .ob-logo small{display:block;font-size:10px;color:#4a4a5a;letter-spacing:3px;margin-top:4px;text-transform:uppercase;font-weight:500}
 .ob-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,30px);color:#1a1a2e;text-align:center;line-height:1.2;margin-bottom:6px}
-.ob-title em{font-style:italic;color:#4db8ff}
-.ob-sub{font-size:12px;color:#4a4a5a;text-align:center;line-height:1.5;margin-bottom:16px}
+.ob-title em{font-style:italic;color:#1a6bcc}
+.ob-sub{font-size:12px;color:#3d3d4a;text-align:center;line-height:1.5;margin-bottom:16px}
 .ob-card{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:12px;padding:14px 16px;margin-bottom:8px}
-.ob-label{font-size:9px;letter-spacing:1.5px;color:#9ca3af;text-transform:uppercase;font-weight:500;margin-bottom:6px}
-.ob-label-r{float:right;font-size:9px;color:#9ca3af;letter-spacing:0;text-transform:none;font-weight:400;opacity:.5}
+.ob-label{font-size:9px;letter-spacing:1.5px;color:#5c6370;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.ob-label-r{float:right;font-size:9px;color:#6b7280;letter-spacing:0;text-transform:none;font-weight:400}
 .ob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
 .ob-sel{padding:10px 10px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%;transition:border-color .2s}
 .ob-sel:focus{border-color:#1a2aff}
@@ -153,14 +153,14 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .ob-input:focus{border-color:#1a2aff}
 .ob-input::placeholder{color:#9ca3af;opacity:.5}
 .ob-gender{display:flex;gap:6px}
-.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#9ca3af;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
+.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#5c6370;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
 .ob-g:hover{border-color:rgba(10,14,46,0.15)}
 .ob-g.on{background:#1a2aff;color:#fff;border-color:#1a2aff}
 .ob-go{width:100%;padding:14px;background:#1a2aff;color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.3px}
 .ob-go:hover{opacity:.9}
 .ob-go:disabled{opacity:.4}
-.ob-foot{text-align:center;font-size:11px;color:#4a4a5a;margin-top:12px}
-.ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#6b7280;text-decoration:none}
+.ob-foot{text-align:center;font-size:11px;color:#3d3d4a;margin-top:12px}
+.ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#4a4a5a;text-decoration:none}
 .ob-back:hover{opacity:.7}
 .lng-btn{padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:'Montserrat',sans-serif}
 .lng-btn.on{background:#1a2aff!important;color:#fff!important;border-color:#1a2aff!important}
@@ -183,6 +183,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 </nav>
 
 <!-- ONBOARDING -->
+<main>
 <section class="onboard" id="screen-onboard" style="min-height:auto;padding-top:80px;padding-bottom:40px">
 <div class="ob-inner">
   <div class="ob-logo"><span>Occultics</span><small>The AI that already knows you</small></div>
@@ -195,31 +196,31 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <div class="ob-card">
     <div class="ob-label">Your birthday</div>
     <div class="ob-row">
-      <select class="ob-sel" id="s-day"><option value="">Day</option></select>
-      <select class="ob-sel" id="s-month"><option value="">Month</option></select>
-      <select class="ob-sel" id="s-year"><option value="">Year</option></select>
+      <select class="ob-sel" id="s-day" aria-label="Day of birth"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month" aria-label="Month of birth"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year" aria-label="Year of birth"><option value="">Year</option></select>
     </div>
     <div style="display:flex;gap:6px;margin-top:6px">
       <select class="ob-sel" id="s-hour" style="flex:1"><option value="">Hour</option></select>
       <select class="ob-sel" id="s-min" style="flex:1"><option value="">Min</option></select>
       <select class="ob-sel" id="s-ampm" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
     </div>
-    <div style="font-size:9px;color:#9ca3af;margin-top:3px" data-timenote="2">Birth time is optional</div>
+    <div style="font-size:9px;color:#6b7280;margin-top:3px" data-timenote="2">Birth time is optional</div>
   </div>
 
   <div class="ob-card">
     <div class="ob-label">Their birthday <span class="ob-label-r">optional</span></div>
     <div class="ob-row">
-      <select class="ob-sel" id="s-day2"><option value="">Day</option></select>
-      <select class="ob-sel" id="s-month2"><option value="">Month</option></select>
-      <select class="ob-sel" id="s-year2"><option value="">Year</option></select>
+      <select class="ob-sel" id="s-day2" aria-label="Partner day of birth"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month2" aria-label="Partner month of birth"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year2" aria-label="Partner year of birth"><option value="">Year</option></select>
     </div>
     <div style="display:flex;gap:6px;margin-top:6px">
       <select class="ob-sel" id="s-hour2" style="flex:1"><option value="">Hour</option></select>
       <select class="ob-sel" id="s-min2" style="flex:1"><option value="">Min</option></select>
       <select class="ob-sel" id="s-ampm2" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
     </div>
-    <div style="font-size:9px;color:#9ca3af;margin-top:3px">Birth time is optional</div>
+    <div style="font-size:9px;color:#6b7280;margin-top:3px">Birth time is optional</div>
   </div>
 
   <div class="ob-card">
@@ -240,10 +241,10 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <div class="ob-foot">$9.99 per question</div>
   <a href="/" class="ob-back">← Back to occultics.ai</a>
     <div style="display:flex;gap:4px;justify-content:center;margin-top:10px">
-      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">EN</button>
-      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">ES</button>
-      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">PT</button>
-      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">JA</button>
+      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">EN</button>
+      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">ES</button>
+      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">PT</button>
+      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">JA</button>
     </div>
 </section>
 </div>
@@ -321,6 +322,8 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
+
+
 <section class="sec sec-line">
   <div class="eye">From the blog</div>
   <h2 class="st">Insights from the numbers.</h2>
@@ -329,8 +332,10 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
     <a href="/blog/born-at-night-vs-day.html" class="bc"><div class="bc-top"><span>☉</span></div><div class="bc-body"><div class="bc-tag">Advanced · 3 min</div><div class="bc-t">Born at Night vs Day</div><div class="bc-e">Same date, very different lives.</div></div></a>
     <a href="/blog/life-path-1-shakira.html" class="bc"><div class="bc-top"><span>1</span></div><div class="bc-body"><div class="bc-tag">Life Path · 3 min</div><div class="bc-t">Shakira's Birth Date Decoded</div><div class="bc-e">The math predicted everything.</div></div></a>
   </div>
+  </div>
 </section>
 
+</main>
 <section class="fcta">
   <h2 class="fct">Your birthday already knows the <em>answer.</em></h2>
   <p class="fcs">$9.99 per question.</p>
