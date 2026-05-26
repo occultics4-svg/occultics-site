@@ -4,109 +4,108 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Occultics — The AI that already knows you</title>
-<meta name="description" content="Enter your birthday. Ask anything about yourself or your relationships. The AI already knows you. $9.99/day unlimited.">
+<meta name="description" content="Enter your birthday. Ask anything about yourself or your relationships. The AI already knows you. $9.99 per question.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-:root{--warm:#0a0e2e;--card:rgba(255,255,255,0.04);--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:rgba(255,255,255,0.7);--dim:rgba(255,255,255,0.35);--border:rgba(255,255,255,0.07)}
+:root{--bg:#f5f0e8;--card:#ffffff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#2d3142;--dim:#6b7280;--light:#9ca3af;--border:rgba(10,14,46,0.06)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:'Montserrat',sans-serif;background:var(--warm);color:var(--text);-webkit-font-smoothing:antialiased}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,14,46,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
-.n-logo{font-weight:700;font-size:11px;letter-spacing:5px;color:#fff;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.n-logo{font-weight:700;font-size:11px;letter-spacing:5px;color:var(--navy);text-decoration:none}
 .n-r{display:flex;gap:16px;align-items:center}
-.n-r a{font-size:10px;color:var(--dim);text-decoration:none;font-weight:500;transition:color .2s}
+.n-r a{font-size:10px;color:var(--dim);text-decoration:none;font-weight:500}
 .n-r a:hover{color:var(--royal)}
-.lng{padding:3px 7px;border:1px solid var(--border);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:var(--dim);font-family:inherit;transition:all .2s}
+.lng{padding:3px 7px;border:1px solid var(--border);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:var(--light);font-family:inherit}
 .lng.on{background:var(--royal);color:#fff;border-color:var(--royal)}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 24px 60px;text-align:center}
-
-.h-logo-mark{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--crystal);opacity:.15;margin-bottom:20px}
-
-.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,56px);font-weight:300;line-height:1.12;color:#fff;margin-bottom:14px}
+.h-badge{font-size:14px;letter-spacing:4px;font-weight:700;color:var(--royal);text-transform:uppercase;margin-bottom:12px}
+.h-tag{font-size:10px;letter-spacing:3px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:24px}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,56px);font-weight:300;line-height:1.12;color:var(--navy);margin-bottom:16px}
 .h-title em{font-style:italic;color:var(--royal)}
+.h-sub{font-size:14px;color:var(--dim);line-height:1.8;font-weight:300;margin-bottom:40px;max-width:500px}
 
-.h-sub{font-size:15px;color:var(--dim);line-height:1.8;font-weight:300;margin-bottom:40px;max-width:460px}
 
-/* INPUT */
-.input-area{max-width:440px;width:100%;margin-bottom:20px}
-.input-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:24px 22px}
-.input-label{font-size:9px;letter-spacing:2px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:8px;text-align:left}
-.input-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px}
-.sel{padding:11px 10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#fff;font-family:inherit;font-size:13px;outline:none;-webkit-appearance:none;cursor:pointer}
+
+
+
+
 .sel:focus{border-color:var(--royal)}
-.inp{width:100%;padding:11px 12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;color:#fff;font-family:inherit;font-size:13px;outline:none;margin-bottom:12px}
+
 .inp:focus{border-color:var(--royal)}
-.inp::placeholder{color:rgba(255,255,255,0.2)}
-.go-btn{width:100%;padding:15px;background:var(--royal);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;letter-spacing:.5px;cursor:pointer;font-family:inherit;transition:all .2s}
+.inp::placeholder{color:var(--light)}
+
 .go-btn:hover{opacity:.9;transform:translateY(-1px)}
 
-.price-note{font-size:11px;color:var(--dim);margin-top:14px;opacity:.6}
-.price-note b{color:var(--royal);opacity:1}
+.price-note b{color:var(--royal)}
 
-/* STARTERS */
 .starters{max-width:500px;width:100%;margin-top:32px}
-.starters-label{font-size:9px;letter-spacing:2px;color:var(--dim);font-weight:600;text-transform:uppercase;margin-bottom:12px}
+.starters-label{font-size:9px;letter-spacing:2px;color:var(--light);font-weight:600;text-transform:uppercase;margin-bottom:12px}
 .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.pill{font-size:12px;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:24px;padding:10px 18px;cursor:default;transition:all .2s;font-weight:400}
+.pill{font-size:12px;color:var(--dim);background:var(--card);border:1px solid var(--border);border-radius:24px;padding:10px 18px;cursor:default;box-shadow:0 1px 4px rgba(10,14,46,0.02)}
 
-/* SCROLL INDICATOR */
-.scroll-hint{margin-top:48px;opacity:.3;font-size:11px;color:rgba(255,255,255,0.3)}
-.scroll-hint span{display:block;margin-top:4px;font-size:18px;animation:bobble 2s infinite}
-@keyframes bobble{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.scroll-hint{margin-top:48px;font-size:11px;color:var(--light);opacity:.4}
+.scroll-hint span{display:block;margin-top:4px;font-size:18px;animation:bob 2s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
 
-/* BELOW FOLD */
-.section{padding:72px 24px;max-width:700px;margin:0 auto;text-align:center}
-.sec-border{border-top:1px solid rgba(255,255,255,0.06)}
+/* SECTIONS */
+.sec{padding:72px 24px;max-width:700px;margin:0 auto;text-align:center}
+.sec-line{border-top:1px solid var(--border)}
 .eye{font-size:9px;letter-spacing:3px;font-weight:600;color:var(--royal);text-transform:uppercase;margin-bottom:10px}
-.st{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,32px);font-weight:300;color:#fff;line-height:1.25;margin-bottom:14px}
+.st{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,32px);font-weight:300;color:var(--navy);line-height:1.25;margin-bottom:14px}
 .ss{font-size:12px;color:var(--dim);line-height:1.8;max-width:480px;margin:0 auto}
 
 /* HOW */
 .how{display:flex;gap:32px;justify-content:center;margin-top:28px;flex-wrap:wrap}
 .how-s{text-align:center;max-width:180px}
-.how-n{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--royal);opacity:.2;margin-bottom:4px}
-.how-t{font-size:12px;font-weight:600;color:#fff;margin-bottom:3px}
+.how-n{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--royal);opacity:.25;margin-bottom:4px}
+.how-t{font-size:12px;font-weight:600;color:var(--navy);margin-bottom:3px}
 .how-d{font-size:11px;color:var(--dim);line-height:1.6}
 
-/* EXAMPLE CONVO */
+/* CONVO */
 .convo{max-width:480px;margin:28px auto 0;text-align:left}
 .convo-user{background:var(--royal);color:#fff;border-radius:18px 18px 4px 18px;padding:12px 16px;font-size:13px;margin-bottom:10px;max-width:75%;margin-left:auto}
-.convo-ai{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:18px 18px 18px 4px;padding:14px 16px;font-size:13px;line-height:1.7;margin-bottom:10px;max-width:85%;font-family:'Cormorant Garamond',serif;color:rgba(255,255,255,0.7)}
-.convo-label{font-size:7px;letter-spacing:2px;color:var(--royal);font-weight:700;margin-bottom:6px;font-family:'Montserrat',sans-serif;opacity:.5}
+.convo-ai{background:var(--card);border:1px solid var(--border);border-radius:18px 18px 18px 4px;padding:16px 18px;font-size:15px;line-height:1.75;margin-bottom:10px;max-width:85%;font-family:'Cormorant Garamond',serif;color:var(--text);box-shadow:0 2px 8px rgba(10,14,46,0.03)}
+.convo-label{font-size:7px;letter-spacing:2px;color:var(--royal);font-weight:700;margin-bottom:6px;font-family:'Montserrat',sans-serif;opacity:.6}
 
 /* COMPARISON */
-.comp{max-width:600px;margin:28px auto 0;overflow-x:auto}
+.comp{max-width:600px;margin:28px auto 0;overflow-x:auto;background:var(--card);border-radius:12px;padding:8px;border:1px solid var(--border);box-shadow:0 2px 8px rgba(10,14,46,0.03)}
 .comp table{width:100%;border-collapse:collapse;font-size:11px;text-align:left}
-.comp th{padding:9px 10px;border-bottom:2px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.3);font-weight:600;font-size:9px;letter-spacing:1px}
-.comp th:last-child{color:var(--royal);border-bottom-color:var(--royal)}
-.comp td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.04);color:rgba(255,255,255,0.3)}
-.comp td:first-child{color:#fff;font-weight:500}
-.comp td:last-child{color:#fff;font-weight:500}
+.comp th{padding:10px 12px;border-bottom:2px solid rgba(10,14,46,0.12);color:#4a4a5a;font-weight:700;font-size:10px;letter-spacing:1px}
+.comp th:last-child{color:var(--royal);border-bottom-color:var(--royal);font-weight:700}
+.comp td{padding:10px 12px;border-bottom:1px solid rgba(10,14,46,0.06);color:#6b7280;font-size:12px}
+.comp td:first-child{color:var(--navy);font-weight:600}
+.comp td:last-child{color:var(--royal);font-weight:700}
+
+/* STATS */
+.stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--royal)}
+.stat-l{font-size:9px;color:var(--light);margin-top:2px}
 
 /* STORIES */
+.stories-sec{background:var(--card);padding:72px 24px;text-align:center}
 .stories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:600px;margin:28px auto 0;text-align:left}
-.story{background:#ffffff;border-radius:12px;padding:20px 18px;border:1px solid rgba(10,14,46,0.06);box-shadow:0 2px 8px rgba(10,14,46,0.03)}
-.story-tag{font-size:8px;letter-spacing:2px;color:#1a2aff;font-weight:700;text-transform:uppercase;margin-bottom:8px}
-.story-text{font-size:12px;color:#2d3142;line-height:1.8;font-style:italic;font-weight:300}
-.stories-note{margin-top:14px;font-size:10px;color:#8892a4;text-align:center}
+.story{background:var(--bg);border-radius:12px;padding:20px 18px}
+.story-tag{font-size:8px;letter-spacing:2px;color:var(--royal);font-weight:700;text-transform:uppercase;margin-bottom:8px}
+.story-text{font-size:12px;color:var(--text);line-height:1.8;font-style:italic;font-weight:300}
+.stories-note{margin-top:14px;font-size:10px;color:var(--light);text-align:center}
 
 /* BLOG */
 .blog{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:700px;margin:28px auto 0}
-.bc{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s}
-.bc:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(10,14,46,0.05)}
+.bc{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s}
+.bc:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(10,14,46,0.06)}
 .bc-top{height:70px;background:var(--navy);display:flex;align-items:center;justify-content:center}
-.bc-top span{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(255,255,255,0.12)}
+.bc-top span{font-family:'Cormorant Garamond',serif;font-size:20px;color:rgba(255,255,255,0.15)}
 .bc-body{padding:12px}
-.bc-tag{font-size:8px;letter-spacing:1px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:2px}
-.bc-t{font-family:'Cormorant Garamond',serif;font-size:13px;color:#fff;margin-bottom:2px;line-height:1.3}
+.bc-tag{font-size:8px;letter-spacing:1px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:2px}
+.bc-t{font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--navy);margin-bottom:2px;line-height:1.3}
 .bc-e{font-size:9px;color:var(--dim);line-height:1.5}
 
-/* FINAL CTA */
+/* CTA */
 .fcta{text-align:center;padding:72px 24px;background:var(--navy)}
 .fct{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,38px);font-weight:300;color:#fff;margin-bottom:10px}
 .fct em{font-style:italic;color:var(--crystal)}
@@ -121,12 +120,51 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .flinks a:hover{color:var(--crystal)}
 .fcopy{font-size:8px;color:rgba(255,255,255,0.07)}
 
+.ob-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.ob-label{font-size:9px;letter-spacing:1.5px;color:var(--light);text-transform:uppercase;font-weight:500;margin-bottom:6px}
+
+.g-btn:hover{border-color:rgba(10,14,46,0.12)}
+.g-btn.on{background:var(--royal);color:#fff;border-color:var(--royal)}
+
 @keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .h-title{animation:fu .5s ease-out}
 .input-box{animation:fu .5s ease-out .1s backwards}
 .starters{animation:fu .5s ease-out .2s backwards}
 
 @media(max-width:600px){.input-row{grid-template-columns:1fr}.how{flex-direction:column;align-items:center}.stories{grid-template-columns:1fr}.blog{grid-template-columns:1fr}.n-r a{display:none}}
+
+/* ASK ONBOARDING STYLES */
+.onboard{display:flex;align-items:flex-start;justify-content:center;padding:12px;position:relative;overflow-y:auto;background:#f5f0e8}
+.ob-inner{max-width:400px;width:100%;position:relative;z-index:1;padding-top:8px}
+.ob-logo{text-align:center;margin-bottom:16px}
+.ob-logo span{font-family:'Cormorant Garamond',serif;font-size:20px;color:#1a1a2e;letter-spacing:2px}
+.ob-logo small{display:block;font-size:10px;color:#4a4a5a;letter-spacing:3px;margin-top:4px;text-transform:uppercase;font-weight:500}
+.ob-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,30px);color:#1a1a2e;text-align:center;line-height:1.2;margin-bottom:6px}
+.ob-title em{font-style:italic;color:#4db8ff}
+.ob-sub{font-size:12px;color:#4a4a5a;text-align:center;line-height:1.5;margin-bottom:16px}
+.ob-card{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.ob-label{font-size:9px;letter-spacing:1.5px;color:#9ca3af;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.ob-label-r{float:right;font-size:9px;color:#9ca3af;letter-spacing:0;text-transform:none;font-weight:400;opacity:.5}
+.ob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.ob-sel{padding:10px 10px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%;transition:border-color .2s}
+.ob-sel:focus{border-color:#1a2aff}
+.ob-sel option{background:#ffffff;color:#2d3142}
+.ob-input{width:100%;padding:10px 14px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.ob-input:focus{border-color:#1a2aff}
+.ob-input::placeholder{color:#9ca3af;opacity:.5}
+.ob-gender{display:flex;gap:6px}
+.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#9ca3af;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
+.ob-g:hover{border-color:rgba(10,14,46,0.15)}
+.ob-g.on{background:#1a2aff;color:#fff;border-color:#1a2aff}
+.ob-go{width:100%;padding:14px;background:#1a2aff;color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.3px}
+.ob-go:hover{opacity:.9}
+.ob-go:disabled{opacity:.4}
+.ob-foot{text-align:center;font-size:11px;color:#4a4a5a;margin-top:12px}
+.ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#6b7280;text-decoration:none}
+.ob-back:hover{opacity:.7}
+.lng-btn{padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:'Montserrat',sans-serif}
+.lng-btn.on{background:#1a2aff!important;color:#fff!important;border-color:#1a2aff!important}
+
 </style>
 </head>
 <body>
@@ -144,43 +182,73 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="h-logo-mark">◈</div>
-  <h1 class="h-title">The AI that already <em>knows you.</em></h1>
-  <div style="font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:16px">Self-awareness meets connection</div>
-  <p class="h-sub">Your birthday contains more information about who you are than years of self-reflection. Two birthdays reveal more about your compatibility than years of conversation. What a therapist uncovers in months, your numbers already know. 439,000 words of mathematical research. 81 codes. Each one tells a different story.</p>
+<!-- ONBOARDING -->
+<section class="onboard" id="screen-onboard" style="min-height:auto;padding-top:80px;padding-bottom:40px">
+<div class="ob-inner">
+  <div class="ob-logo"><span>Occultics</span><small>The AI that already knows you</small></div>
 
-  <div class="input-area">
-    <div class="input-box">
-      <div class="input-label">Your birthday</div>
-      <div class="input-row">
-        <select class="sel" id="day"><option value="">Day</option></select>
-        <select class="sel" id="month"><option value="">Month</option></select>
-        <select class="sel" id="year"><option value="">Year</option></select>
-      </div>
-      <input type="email" class="inp" id="email" placeholder="your@email.com">
-      <button class="go-btn" onclick="startAsk()">Ask Occultics</button>
+  <h1 class="ob-title">What do you want to <em>know?</em></h1>
+  <p class="ob-sub">Enter your birthday. Ask anything about yourself or your relationships. The AI knows your mathematical code.</p>
+
+  
+
+  <div class="ob-card">
+    <div class="ob-label">Your birthday</div>
+    <div class="ob-row">
+      <select class="ob-sel" id="s-day"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year"><option value="">Year</option></select>
     </div>
-    <div class="price-note">First question free. Then <b>$9.99</b> for unlimited all day.</div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <select class="ob-sel" id="s-hour" style="flex:1"><option value="">Hour</option></select>
+      <select class="ob-sel" id="s-min" style="flex:1"><option value="">Min</option></select>
+      <select class="ob-sel" id="s-ampm" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+    </div>
+    <div style="font-size:9px;color:#9ca3af;margin-top:3px" data-timenote="2">Birth time is optional</div>
   </div>
 
-  <div class="starters">
-    <div class="starters-label">People ask things like</div>
-    <div class="pills">
-      <div class="pill">Why do my relationships keep failing?</div>
-      <div class="pill">Are we compatible?</div>
-      <div class="pill">What career fits my code?</div>
-      <div class="pill">Should I stay or leave?</div>
-      <div class="pill">Why do I attract the same type?</div>
+  <div class="ob-card">
+    <div class="ob-label">Their birthday <span class="ob-label-r">optional</span></div>
+    <div class="ob-row">
+      <select class="ob-sel" id="s-day2"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month2"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year2"><option value="">Year</option></select>
+    </div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <select class="ob-sel" id="s-hour2" style="flex:1"><option value="">Hour</option></select>
+      <select class="ob-sel" id="s-min2" style="flex:1"><option value="">Min</option></select>
+      <select class="ob-sel" id="s-ampm2" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+    </div>
+    <div style="font-size:9px;color:#9ca3af;margin-top:3px">Birth time is optional</div>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-label">Gender</div>
+    <div class="ob-gender">
+      <button class="ob-g" id="g-f" onclick="pickGender('female')">Female</button>
+      <button class="ob-g" id="g-m" onclick="pickGender('male')">Male</button>
+      <button class="ob-g" id="g-o" onclick="pickGender('other')">Other</button>
     </div>
   </div>
 
-  <div class="scroll-hint">Learn more<span>↓</span></div>
+  <div class="ob-card">
+    <div class="ob-label">Email</div>
+    <input type="email" class="ob-input" id="s-email" placeholder="your@email.com">
+  </div>
+
+  <button class="ob-go" id="ob-go" onclick="startSession()">Ask Occultics</button>
+  <div class="ob-foot">$9.99 per question</div>
+  <a href="/" class="ob-back">← Back to occultics.ai</a>
+    <div style="display:flex;gap:4px;justify-content:center;margin-top:10px">
+      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">EN</button>
+      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">ES</button>
+      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">PT</button>
+      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">JA</button>
+    </div>
 </section>
+</div>
 
-<!-- HOW IT WORKS -->
-<section class="section sec-border" id="how">
+<section class="sec sec-line" id="how">
   <div class="eye">How it works</div>
   <h2 class="st">One birthday. One question. The mathematical truth.</h2>
   <div class="how">
@@ -190,15 +258,20 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
-<!-- EXAMPLE CONVO -->
-<section class="section">
+<section class="sec">
+  <div class="eye">The mathematical truth</div>
+  <h2 class="st">Self-awareness meets connection.</h2>
+  <p style="font-size:15px;color:#2d3142;line-height:1.8;max-width:520px;margin:0 auto;font-weight:300">Your birthday contains more information about who you are than years of self-reflection. Two birthdays reveal more about your compatibility than years of conversation. What a therapist uncovers in months, your numbers already know. 81 codes. Each one tells a different story.</p>
+</section>
+
+<section class="sec">
   <div class="eye">What it feels like</div>
   <h2 class="st">A conversation — not a report.</h2>
   <div class="convo">
     <div class="convo-user">Why do I keep attracting the same type of person?</div>
     <div class="convo-ai">
       <div class="convo-label">OCCULTICS</div>
-      Your generational number is 8. This is the deepest layer of what you seek — and it's been driving every relationship choice you've made, even the ones you thought were different. The 8 craves authority, strength, and protection. You're unconsciously drawn to people who project power — because that's the energy that was missing in your early years. Your biorhythm 2 complicates this further — it makes you feel everything intensely, which means when you find that authority figure, you attach fast and deep. The pattern breaks when you become conscious of the 8 pulling you. Does this resonate with what you're experiencing?
+      Your generational number is 8. This is the deepest layer of what you seek — and it's been driving every relationship choice you've made, even the ones you thought were different. The 8 craves authority, strength, and protection. You're unconsciously drawn to people who project power — because that's the energy that was missing in your early years. Your biorhythm 2 complicates this further — it makes you feel everything intensely, which means when you find that authority figure, you attach fast and deep. The pattern breaks when you become conscious of the 8 pulling you.
     </div>
     <div class="convo-user">Yes... that's exactly what happens. Is this fixable?</div>
     <div class="convo-ai">
@@ -208,8 +281,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
-<!-- COMPARISON -->
-<section class="section sec-border">
+<section class="sec sec-line">
   <div class="eye">Why Occultics</div>
   <h2 class="st">Other AIs wait for you to explain yourself.<br><em style="color:var(--royal)">This one already knows.</em></h2>
   <div class="comp">
@@ -218,7 +290,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
     <tbody>
       <tr><td>Knows you from</td><td>Conversation</td><td>What you teach it</td><td>Birth chart</td><td>8 digits. Instantly.</td></tr>
       <tr><td>Based on</td><td>Generic AI</td><td>Chat history</td><td>Zodiac signs</td><td>439,000 words of research</td></tr>
-      <tr><td>Cost</td><td>Free</td><td>$19.99/mo</td><td>€50+/question</td><td>$9.99/question</td></tr>
+      <tr><td>Cost</td><td>Free</td><td>$19.99/mo</td><td>$100+/question</td><td>$9.99/question</td></tr>
       <tr><td>Accuracy</td><td>Makes things up</td><td>Reflects you back</td><td>Varies by person</td><td>Mathematically calculated</td></tr>
       <tr><td>Available</td><td>24/7</td><td>24/7</td><td>By appointment</td><td>24/7</td></tr>
     </tbody>
@@ -226,21 +298,30 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
-<!-- STORIES -->
-<section class="section sec-border" id="stories" style="background:#ffffff;margin:0;max-width:100%;padding:72px 24px">
-  <div style="max-width:700px;margin:0 auto"><div class="eye" style="color:#1a2aff">Real stories of transformation</div>
-  <h2 class="st" style="color:#0a0e2e">What happens when the math confirms what you already feel.</h2>
+<section class="sec" style="padding-top:0">
+  <div class="stats">
+    <div><div class="stat-n">81</div><div class="stat-l">Compatibility codes</div></div>
+    <div><div class="stat-n">439K</div><div class="stat-l">Words of research</div></div>
+    <div><div class="stat-n">$9.99</div><div class="stat-l">Per question</div></div>
+    <div><div class="stat-n">8</div><div class="stat-l">Digits needed</div></div>
+  </div>
+</section>
+
+<section class="stories-sec" id="stories">
+  <div style="max-width:700px;margin:0 auto">
+  <div class="eye">Real stories of transformation</div>
+  <h2 class="st">What happens when the math confirms what you already feel.</h2>
   <div class="stories">
     <div class="story"><div class="story-tag">On Accuracy</div><div class="story-text">"You were able to predict the area where I had surgery two years ago and the medication I was taking — it was a bit scary how accurate it was."</div></div>
     <div class="story"><div class="story-tag">On Self-Discovery</div><div class="story-text">"I read this and wondered — does this person know me? I had been scared of turning 50, but after this, my feeling suddenly became brighter."</div></div>
     <div class="story"><div class="story-tag">On Relationships</div><div class="story-text">"It gives me courage to be able to predict something with almost certainty. The analysis gave me the strength to move forward with the divorce."</div></div>
     <div class="story"><div class="story-tag">On Transformation</div><div class="story-text">"I was shocked by how familiar the events felt. It was like being told not to avoid it, not to turn a blind eye."</div></div>
   </div>
-  <div class="stories-note" style="color:#8892a4">All testimonials from clients in Japan. Names withheld for privacy.</div></div>
+  <div class="stories-note">All testimonials from clients in Japan. Names withheld for privacy.</div>
+  </div>
 </section>
 
-<!-- BLOG -->
-<section class="section sec-border">
+<section class="sec sec-line">
   <div class="eye">From the blog</div>
   <h2 class="st">Insights from the numbers.</h2>
   <div class="blog">
@@ -250,11 +331,10 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
-<!-- FINAL CTA -->
 <section class="fcta">
   <h2 class="fct">Your birthday already knows the <em>answer.</em></h2>
-  <p class="fcs">First question free. $9.99/day unlimited after.</p>
-  <a href="#" onclick="document.querySelector('.input-box').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="fcb">Ask Your First Question</a>
+  <p class="fcs">$9.99 per question.</p>
+  <a href="#" onclick="document.getElementById('screen-onboard').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="fcb">Ask Occultics</a>
 </section>
 
 <footer>
@@ -265,7 +345,6 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
     <a href="/about.html">About</a>
     <a href="/terms.html">Terms</a>
     <a href="/privacy.html">Privacy</a>
-    <a href="mailto:contact@occultics.ai">Contact</a>
   </div>
   <div class="fcopy">© 2026 Occultics Media · occultics.ai · Self-awareness meets connection.</div>
 </footer>
@@ -274,20 +353,36 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 var SB_URL='https://dtquqaridqyjdgirjczr.supabase.co';
 var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
-var dE=document.getElementById('day'),mE=document.getElementById('month'),yE=document.getElementById('year');
-for(var d=1;d<=31;d++){var o=document.createElement('option');o.value=d;o.textContent=d;dE.appendChild(o);}
-['January','February','March','April','May','June','July','August','September','October','November','December'].forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;mE.appendChild(o);});
-for(var y=2026;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y;yE.appendChild(o);}
+// Populate dropdowns - using ask.html IDs
+var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+['s-day','s-day2'].forEach(function(id){var el=document.getElementById(id);if(!el)return;for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
+['s-month','s-month2'].forEach(function(id){var el=document.getElementById(id);if(!el)return;mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
+['s-year','s-year2'].forEach(function(id){var el=document.getElementById(id);if(!el)return;for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
 
-function startAsk(){
-  var d=document.getElementById('day').value;
-  var m=document.getElementById('month').value;
-  var y=document.getElementById('year').value;
-  var email=document.getElementById('email').value.trim();
-  if(!d||!m||!y){return;}
-  if(!email||!email.includes('@')){return;}
+// Hours and minutes
+['s-hour','s-hour2'].forEach(function(id){var el=document.getElementById(id);if(!el)return;for(var h=1;h<=12;h++){var o=document.createElement('option');o.value=h;o.textContent=h;el.appendChild(o);}});
+['s-min','s-min2'].forEach(function(id){var el=document.getElementById(id);if(!el)return;for(var m=0;m<60;m+=5){var o=document.createElement('option');o.value=m;o.textContent=String(m).padStart(2,'0');el.appendChild(o);}});
+
+var userGender='';
+function pickGender(g){
+  userGender=g;
+  document.querySelectorAll('.ob-g').forEach(function(b){b.classList.remove('on');});
+  var el=document.getElementById('g-'+g.charAt(0));
+  if(el)el.classList.add('on');
+}
+
+function startSession(){
+  var d=document.getElementById('s-day').value;
+  var m=document.getElementById('s-month').value;
+  var y=document.getElementById('s-year').value;
+  var email=document.getElementById('s-email').value.trim();
+  if(!d||!m||!y)return;
+  if(!email||!email.includes('@'))return;
   try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:email,source:'homepage_ask',created_at:new Date().toISOString()});}catch(e){}
-  window.location.href='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(email);
+  var url='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(email);
+  var d2=document.getElementById('s-day2').value,m2=document.getElementById('s-month2').value,y2=document.getElementById('s-year2').value;
+  if(d2&&m2&&y2)url+='&d2='+d2+'&m2='+m2+'&y2='+y2;
+  window.location.href=url;
 }
 
 function setLang(l){document.querySelectorAll('.lng').forEach(function(b){b.classList.toggle('on',b.textContent.trim().toLowerCase()===l);});}
