@@ -11,8 +11,7 @@
 <meta http-equiv="Cache-Control" content="public, max-age=31536000">
 <meta name="theme-color" content="#f5f0e8">
 <meta name="description" content="Enter your birthday. Ask anything about yourself or your relationships. The AI already knows you. $9.99 per question.">
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet"></noscript>
+
 
 <style>
 :root{--bg:#f5f0e8;--card:#ffffff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#2d3142;--dim:#6b7280;--light:#9ca3af;--border:rgba(10,14,46,0.06)}
@@ -23,9 +22,9 @@ body{font-family:'Montserrat',system-ui,-apple-system,sans-serif;background:var(
 nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
 .n-logo{font-weight:700;font-size:11px;letter-spacing:5px;color:var(--navy);text-decoration:none}
 .n-r{display:flex;gap:16px;align-items:center}
-.n-r a{font-size:10px;color:#4a4a5a;text-decoration:none;font-weight:500}
+.n-r a{font-size:12px;color:#4a4a5a;text-decoration:none;font-weight:500}
 .n-r a:hover{color:var(--royal)}
-.lng{padding:3px 7px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit}
+.lng{padding:3px 7px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:8px;font-weight:700;letter-spacing:1px;cursor:pointer;background:transparent;color:#4a4a5a;font-family:inherit}
 .lng.on{background:var(--royal);color:#fff;border-color:var(--royal)}
 
 /* HERO */
@@ -158,9 +157,9 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .ob-sel option{background:#ffffff;color:#2d3142}
 .ob-input{width:100%;padding:10px 14px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#2d3142;font-family:'Montserrat',system-ui,-apple-system,sans-serif;font-size:14px;outline:none;transition:border-color .2s}
 .ob-input:focus{border-color:#1a2aff}
-.ob-input::placeholder{color:#9ca3af;opacity:.5}
+.ob-input::placeholder{color:#706860;opacity:.5}
 .ob-gender{display:flex;gap:6px}
-.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#4a4f59;font-family:'Montserrat',system-ui,-apple-system,sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
+.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:10px;color:#3d3d4a;font-family:'Montserrat',system-ui,-apple-system,sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
 .ob-g:hover{border-color:rgba(10,14,46,0.15)}
 .ob-g.on{background:#1a2aff;color:#fff;border-color:#1a2aff}
 .ob-go{width:100%;padding:14px;background:#1a2aff;color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',system-ui,-apple-system,sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.3px}
@@ -169,9 +168,10 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 .ob-foot{text-align:center;font-size:11px;color:#3d3d4a;margin-top:12px}
 .ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#4a4a5a;text-decoration:none}
 .ob-back:hover{opacity:.7}
-.lng-btn{padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:'Montserrat',system-ui,-apple-system,sans-serif}
+.lng-btn{padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#706860;font-family:'Montserrat',system-ui,-apple-system,sans-serif}
 .lng-btn.on{background:#1a2aff!important;color:#fff!important;border-color:#1a2aff!important}
 
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Occultics","url":"https://occultics.ai","description":"AI Identity and Compatibility Decoder. Ask anything about yourself or your relationships.","applicationCategory":"Lifestyle","offers":{"@type":"Offer","price":"9.99","priceCurrency":"USD"}}
@@ -206,14 +206,14 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <div class="ob-card">
     <div class="ob-label">Your birthday</div>
     <div class="ob-row">
-      <select class="ob-sel" id="s-day" aria-label="Day of birth"><option value="">Day</option></select>
-      <select class="ob-sel" id="s-month" aria-label="Month of birth"><option value="">Month</option></select>
-      <select class="ob-sel" id="s-year" aria-label="Year of birth"><option value="">Year</option></select>
+      <label for="s-day" class="sr-only">Day of birth</label><select class="ob-sel" id="s-day" aria-label="Day of birth"><option value="">Day</option></select>
+      <label for="s-month" class="sr-only">Month of birth</label><select class="ob-sel" id="s-month" aria-label="Month of birth"><option value="">Month</option></select>
+      <label for="s-year" class="sr-only">Year of birth</label><select class="ob-sel" id="s-year" aria-label="Year of birth"><option value="">Year</option></select>
     </div>
     <div style="display:flex;gap:6px;margin-top:6px">
-      <select class="ob-sel" id="s-hour" aria-label="Hour of birth" style="flex:1"><option value="">Hour</option></select>
-      <select class="ob-sel" id="s-min" aria-label="Minute of birth" style="flex:1"><option value="">Min</option></select>
-      <select class="ob-sel" id="s-ampm" aria-label="AM or PM" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+      <label for="s-hour" class="sr-only">Hour of birth</label><select class="ob-sel" id="s-hour" aria-label="Hour of birth" style="flex:1"><option value="">Hour</option></select>
+      <label for="s-min" class="sr-only">Minute of birth</label><select class="ob-sel" id="s-min" aria-label="Minute of birth" style="flex:1"><option value="">Min</option></select>
+      <label for="s-ampm" class="sr-only">AM or PM</label><select class="ob-sel" id="s-ampm" aria-label="AM or PM" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
     </div>
     <div style="font-size:9px;color:#545b66;margin-top:3px" data-timenote="2">Birth time is optional</div>
   </div>
@@ -221,14 +221,14 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   <div class="ob-card">
     <div class="ob-label">Their birthday <span class="ob-label-r">optional</span></div>
     <div class="ob-row">
-      <select class="ob-sel" id="s-day2" aria-label="Partner day of birth"><option value="">Day</option></select>
-      <select class="ob-sel" id="s-month2" aria-label="Partner month of birth"><option value="">Month</option></select>
-      <select class="ob-sel" id="s-year2" aria-label="Partner year of birth"><option value="">Year</option></select>
+      <label for="s-day2" class="sr-only">Partner day of birth</label><select class="ob-sel" id="s-day2" aria-label="Partner day of birth"><option value="">Day</option></select>
+      <label for="s-month2" class="sr-only">Partner month of birth</label><select class="ob-sel" id="s-month2" aria-label="Partner month of birth"><option value="">Month</option></select>
+      <label for="s-year2" class="sr-only">Partner year of birth</label><select class="ob-sel" id="s-year2" aria-label="Partner year of birth"><option value="">Year</option></select>
     </div>
     <div style="display:flex;gap:6px;margin-top:6px">
-      <select class="ob-sel" id="s-hour2" aria-label="Partner hour of birth" style="flex:1"><option value="">Hour</option></select>
-      <select class="ob-sel" id="s-min2" aria-label="Partner minute of birth" style="flex:1"><option value="">Min</option></select>
-      <select class="ob-sel" id="s-ampm2" aria-label="Partner AM or PM" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+      <label for="s-hour2" class="sr-only">Partner hour of birth</label><select class="ob-sel" id="s-hour2" aria-label="Partner hour of birth" style="flex:1"><option value="">Hour</option></select>
+      <label for="s-min2" class="sr-only">Partner minute of birth</label><select class="ob-sel" id="s-min2" aria-label="Partner minute of birth" style="flex:1"><option value="">Min</option></select>
+      <label for="s-ampm2" class="sr-only">Partner AM or PM</label><select class="ob-sel" id="s-ampm2" aria-label="Partner AM or PM" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
     </div>
     <div style="font-size:9px;color:#545b66;margin-top:3px">Birth time is optional</div>
   </div>
@@ -244,17 +244,17 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
 
   <div class="ob-card">
     <div class="ob-label">Email</div>
-    <input type="email" class="ob-input" id="s-email" placeholder="your@email.com">
+    <label for="s-email" class="sr-only">Email address</label><input type="email" class="ob-input" id="s-email" placeholder="your@email.com">
   </div>
 
   <button class="ob-go" id="ob-go" onclick="startSession()">Ask Occultics</button>
   <div class="ob-foot">$9.99 per question</div>
   <a href="/" class="ob-back">← Back to occultics.ai</a>
     <div style="display:flex;gap:4px;justify-content:center;margin-top:10px">
-      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">EN</button>
-      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">ES</button>
-      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">PT</button>
-      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#5a5a6a;font-family:inherit">JA</button>
+      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#4a4a5a;font-family:inherit">EN</button>
+      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#4a4a5a;font-family:inherit">ES</button>
+      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#4a4a5a;font-family:inherit">PT</button>
+      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.12);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#4a4a5a;font-family:inherit">JA</button>
     </div>
 </section>
 </div>
@@ -392,7 +392,7 @@ function startSession(){
   var email=document.getElementById('s-email').value.trim();
   if(!d||!m||!y)return;
   if(!email||!email.includes('@'))return;
-  loadSB(function(){try{var sb=supabase.createClient('https://dtquqaridqyjdgirjczr.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k');sb.from('book_leads').insert({email:email,source:'homepage_ask',created_at:new Date().toISOString()});}catch(e){}});
+  fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/book_leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k'},body:JSON.stringify({email:email,source:'homepage_ask',created_at:new Date().toISOString()})}).catch(function(){});
   var url='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(email);
   var d2=document.getElementById('s-day2').value,m2=document.getElementById('s-month2').value,y2=document.getElementById('s-year2').value;
   if(d2&&m2&&y2)url+='&d2='+d2+'&m2='+m2+'&y2='+y2;
@@ -401,16 +401,9 @@ function startSession(){
 
 function setLang(l){document.querySelectorAll('.lng').forEach(function(b){b.classList.toggle('on',b.textContent.trim().toLowerCase()===l);});}
 </script>
+
 <script>
-// Load Supabase only when needed
-var sbLoaded=false;
-function loadSB(cb){
-  if(sbLoaded){if(cb)cb();return;}
-  var s=document.createElement('script');
-  s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
-  s.onload=function(){sbLoaded=true;if(cb)cb();};
-  document.body.appendChild(s);
-}
+var fl=document.createElement('link');fl.rel='stylesheet';fl.href='https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;600;700&display=swap';document.head.appendChild(fl);
 </script>
 </body>
 </html>
