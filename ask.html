@@ -6,7 +6,186 @@
 <title>Ask Occultics — The AI that already knows you</title>
 <meta name="description" content="Ask anything about yourself and your relationships. The AI already knows you from your birthday. $9.99 per question.">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
+// LANGUAGE SYSTEM
+var LANG = {
+  en: {
+    logo_sub: 'The AI that already knows you',
+    title: 'What do you want to <em>know?</em>',
+    sub: 'Enter your birthday. Ask anything about yourself or your relationships. The AI knows your mathematical code.',
+    your_bday: 'Your birthday',
+    their_bday: 'Their birthday',
+    optional: 'optional',
+    gender: 'Gender',
+    female: 'Female', male: 'Male', other: 'Other',
+    email: 'Email',
+    email_ph: 'your@email.com',
+    time_note: 'Birth time is optional',
+    time_note_long: 'Birth time is optional — it makes your reading more precise',
+    go: 'Ask Occultics',
+    price: '$9.99 per question',
+    back: '← Back to occultics.ai',
+    loading: 'Reading your numbers...',
+    placeholder: 'Ask about yourself or your relationships...',
+    foot: '$9.99 per question',
+    pw_sub: 'Your numbers have more to say.',
+    pw_name: 'Ask a Question',
+    pw_desc: 'Ask anything about yourself or your relationships',
+    pw_back: '← Back to conversation',
+    pw_tease_from: '— Your numbers, waiting',
+    s1: 'Why do I keep attracting the same type?',
+    s2: 'What do I actually need in a partner?',
+    s3: 'What career fits my code?',
+    s4: 'What is my biggest blind spot?',
+    s1p: 'Are we compatible?',
+    s2p: 'Why does my partner shut down?',
+    s3p: 'Simulate a confrontation'
+  },
+  es: {
+    logo_sub: 'La IA que ya te conoce',
+    title: '¿Qué quieres <em>saber?</em>',
+    sub: 'Ingresa tu fecha de nacimiento. Pregunta lo que quieras sobre ti o tus relaciones. La IA conoce tu código matemático.',
+    your_bday: 'Tu fecha de nacimiento',
+    their_bday: 'Su fecha de nacimiento',
+    optional: 'opcional',
+    gender: 'Género',
+    female: 'Mujer', male: 'Hombre', other: 'Otro',
+    email: 'Correo electrónico',
+    email_ph: 'tu@email.com',
+    time_note: 'La hora de nacimiento es opcional',
+    time_note_long: 'La hora de nacimiento es opcional — hace tu lectura más precisa',
+    go: 'Pregunta a Occultics',
+    price: '$9.99 por pregunta',
+    back: '← Volver a occultics.ai',
+    loading: 'Leyendo tus números...',
+    placeholder: 'Pregunta sobre ti o tus relaciones...',
+    foot: '$9.99 por pregunta',
+    pw_sub: 'Tus números tienen más que decir.',
+    pw_name: 'Hacer una Pregunta',
+    pw_desc: 'Pregunta lo que quieras sobre ti o tus relaciones',
+    pw_back: '← Volver a la conversación',
+    pw_tease_from: '— Tus números, esperando',
+    s1: '¿Por qué sigo atrayendo al mismo tipo?',
+    s2: '¿Qué necesito realmente en una pareja?',
+    s3: '¿Qué carrera encaja con mi código?',
+    s4: '¿Cuál es mi mayor punto ciego?',
+    s1p: '¿Somos compatibles?',
+    s2p: '¿Por qué mi pareja se cierra?',
+    s3p: 'Simula una confrontación'
+  },
+  pt: {
+    logo_sub: 'A IA que já te conhece',
+    title: 'O que você quer <em>saber?</em>',
+    sub: 'Digite sua data de nascimento. Pergunte qualquer coisa sobre você ou seus relacionamentos. A IA conhece seu código matemático.',
+    your_bday: 'Sua data de nascimento',
+    their_bday: 'Data de nascimento dele(a)',
+    optional: 'opcional',
+    gender: 'Gênero',
+    female: 'Feminino', male: 'Masculino', other: 'Outro',
+    email: 'E-mail',
+    email_ph: 'seu@email.com',
+    time_note: 'Horário de nascimento é opcional',
+    time_note_long: 'Horário de nascimento é opcional — torna sua leitura mais precisa',
+    go: 'Pergunte ao Occultics',
+    price: '$9.99 por pergunta',
+    back: '← Voltar para occultics.ai',
+    loading: 'Lendo seus números...',
+    placeholder: 'Pergunte sobre você ou seus relacionamentos...',
+    foot: '$9.99 por pergunta',
+    pw_sub: 'Seus números têm mais a dizer.',
+    pw_name: 'Fazer uma Pergunta',
+    pw_desc: 'Pergunte qualquer coisa sobre você ou seus relacionamentos',
+    pw_back: '← Voltar à conversa',
+    pw_tease_from: '— Seus números, esperando',
+    s1: 'Por que eu continuo atraindo o mesmo tipo?',
+    s2: 'O que eu realmente preciso em um parceiro?',
+    s3: 'Qual carreira combina com meu código?',
+    s4: 'Qual é meu maior ponto cego?',
+    s1p: 'Somos compatíveis?',
+    s2p: 'Por que meu parceiro se fecha?',
+    s3p: 'Simule um confronto'
+  },
+  ja: {
+    logo_sub: 'あなたをすでに知っているAI',
+    title: '何を<em>知りたい？</em>',
+    sub: '生年月日を入力してください。自分自身や人間関係について何でも聞いてください。AIはあなたの数学的コードを知っています。',
+    your_bday: 'あなたの生年月日',
+    their_bday: '相手の生年月日',
+    optional: '任意',
+    gender: '性別',
+    female: '女性', male: '男性', other: 'その他',
+    email: 'メール',
+    email_ph: 'your@email.com',
+    time_note: '出生時刻は任意です',
+    time_note_long: '出生時刻は任意です — より正確な鑑定になります',
+    go: 'Occulticsに聞く',
+    price: '1質問 $9.99',
+    back: '← occultics.aiに戻る',
+    loading: 'あなたの数字を読んでいます...',
+    placeholder: '自分自身や人間関係について聞いてください...',
+    foot: '1質問 $9.99',
+    pw_sub: 'あなたの数字にはもっと伝えたいことがあります。',
+    pw_name: '質問する',
+    pw_desc: '自分自身や人間関係について何でも聞けます',
+    pw_back: '← 会話に戻る',
+    pw_tease_from: '— あなたの数字が、待っています',
+    s1: 'なぜ同じタイプの人を引き寄せるの？',
+    s2: 'パートナーに本当に必要なものは？',
+    s3: '私のコードに合うキャリアは？',
+    s4: '私の最大の盲点は？',
+    s1p: '私たちは相性がいい？',
+    s2p: 'なぜパートナーは心を閉ざすの？',
+    s3p: '対立をシミュレーション'
+  }
+};
+
+var curLang = 'en';
+
+function detectLang() {
+  var bl = (navigator.language || 'en').substring(0,2);
+  if (LANG[bl]) return bl;
+  return 'en';
+}
+
+function setInterfaceLang(l) {
+  curLang = l;
+  var t = LANG[l];
+  // Update all language buttons
+  document.querySelectorAll('.lng-btn').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l);});
+  // Update onboarding
+  document.querySelector('.ob-logo small').textContent = t.logo_sub;
+  document.querySelector('.ob-title').innerHTML = t.title;
+  document.querySelector('.ob-sub').textContent = t.sub;
+  document.querySelectorAll('.ob-label')[0].innerHTML = t.your_bday;
+  document.querySelectorAll('.ob-label')[1].innerHTML = t.their_bday + ' <span class="ob-label-r">' + t.optional + '</span>';
+  document.querySelectorAll('.ob-label')[2].textContent = t.gender;
+  document.getElementById('g-f').textContent = t.female;
+  document.getElementById('g-m').textContent = t.male;
+  document.getElementById('g-o').textContent = t.other;
+  document.querySelectorAll('.ob-label')[3].textContent = t.email;
+  document.getElementById('s-email').placeholder = t.email_ph;
+  document.getElementById('ob-go').textContent = t.go;
+  document.querySelector('.ob-foot').textContent = t.price;
+  document.querySelector('.ob-back').textContent = t.back;
+  // Time notes
+  var notes = document.querySelectorAll('[data-timenote]');
+  if(notes[0]) notes[0].textContent = t.time_note_long;
+  if(notes[1]) notes[1].textContent = t.time_note;
+  // Chat
+  document.getElementById('ch-input').placeholder = t.placeholder;
+  document.querySelector('.ch-foot').textContent = t.foot;
+  // Paywall
+  document.querySelector('.pw-sub').textContent = t.pw_sub;
+  document.querySelector('.pw-name').textContent = t.pw_name;
+  document.querySelector('.pw-desc').textContent = t.pw_desc;
+  document.querySelector('.pw-back').textContent = t.pw_back;
+  document.querySelector('.pw-tease-from').textContent = t.pw_tease_from;
+}
+
+// Auto-detect on load
+curLang = detectLang();
+
+</script>
 <style>
 :root{--bg:#f5f0e8;--surface:#ffffff;--surface2:#ede8df;--border:rgba(10,14,46,0.08);--text:#2d3142;--text2:#6b7280;--text3:#9ca3af;--accent:#4db8ff;--accent2:#1a2aff;--white:#fafafa}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -43,6 +222,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
 .ob-foot{text-align:center;font-size:11px;color:#4a4a5a;margin-top:12px}
 .ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#6b7280;text-decoration:none}
 .ob-back:hover{opacity:.7}
+.lng-btn.on{background:var(--accent2)!important;color:#fff!important;border-color:var(--accent2)!important}
 
 /* ===== CHAT ===== */
 .chat-wrap{height:100%;display:none;flex-direction:column}
@@ -154,7 +334,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
       <select class="ob-sel" id="s-min" style="flex:1"><option value="">Min</option></select>
       <select class="ob-sel" id="s-ampm" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
     </div>
-    <div style="font-size:9px;color:#9ca3af;margin-top:3px">Birth time is optional</div>
+    <div style="font-size:9px;color:#9ca3af;margin-top:3px" data-timenote="2">Birth time is optional</div>
   </div>
 
   <div class="ob-card">
@@ -189,6 +369,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
   <button class="ob-go" id="ob-go" onclick="startSession()">Ask Occultics</button>
   <div class="ob-foot">$9.99 per question</div>
   <a href="/" class="ob-back">← Back to occultics.ai</a>
+    <div style="display:flex;gap:4px;justify-content:center;margin-top:10px">
+      <button class="lng-btn on" data-lang="en" onclick="setInterfaceLang('en')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">EN</button>
+      <button class="lng-btn" data-lang="es" onclick="setInterfaceLang('es')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">ES</button>
+      <button class="lng-btn" data-lang="pt" onclick="setInterfaceLang('pt')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">PT</button>
+      <button class="lng-btn" data-lang="ja" onclick="setInterfaceLang('ja')" style="padding:3px 8px;border:1px solid rgba(10,14,46,0.08);border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;background:transparent;color:#9ca3af;font-family:inherit">JA</button>
+    </div>
 </div>
 </div>
 
@@ -337,9 +523,10 @@ function showChat(){
 
   // Suggestions
   var sugEl=document.getElementById('ch-suggest');
+  var t=LANG[curLang];
   var qs=partnerProfile
-    ?['Are we compatible?','Why does my partner shut down?','Simulate a confrontation']
-    :['Why do I keep attracting the same type?','What do I actually need in a partner?','What career fits my code?','What is my biggest blind spot?'];
+    ?[t.s1p,t.s2p,t.s3p]
+    :[t.s1,t.s2,t.s3,t.s4];
   sugEl.innerHTML='';
   qs.forEach(function(q){
     var b=document.createElement('button');b.className='ch-pill';b.textContent=q;
@@ -476,6 +663,185 @@ function buyQuestion(){
     else{credits=1;updateCredits();hidePaywall();}
   }).catch(function(){credits=1;updateCredits();hidePaywall();});
 }
+
+// LANGUAGE SYSTEM
+var LANG = {
+  en: {
+    logo_sub: 'The AI that already knows you',
+    title: 'What do you want to <em>know?</em>',
+    sub: 'Enter your birthday. Ask anything about yourself or your relationships. The AI knows your mathematical code.',
+    your_bday: 'Your birthday',
+    their_bday: 'Their birthday',
+    optional: 'optional',
+    gender: 'Gender',
+    female: 'Female', male: 'Male', other: 'Other',
+    email: 'Email',
+    email_ph: 'your@email.com',
+    time_note: 'Birth time is optional',
+    time_note_long: 'Birth time is optional — it makes your reading more precise',
+    go: 'Ask Occultics',
+    price: '$9.99 per question',
+    back: '← Back to occultics.ai',
+    loading: 'Reading your numbers...',
+    placeholder: 'Ask about yourself or your relationships...',
+    foot: '$9.99 per question',
+    pw_sub: 'Your numbers have more to say.',
+    pw_name: 'Ask a Question',
+    pw_desc: 'Ask anything about yourself or your relationships',
+    pw_back: '← Back to conversation',
+    pw_tease_from: '— Your numbers, waiting',
+    s1: 'Why do I keep attracting the same type?',
+    s2: 'What do I actually need in a partner?',
+    s3: 'What career fits my code?',
+    s4: 'What is my biggest blind spot?',
+    s1p: 'Are we compatible?',
+    s2p: 'Why does my partner shut down?',
+    s3p: 'Simulate a confrontation'
+  },
+  es: {
+    logo_sub: 'La IA que ya te conoce',
+    title: '¿Qué quieres <em>saber?</em>',
+    sub: 'Ingresa tu fecha de nacimiento. Pregunta lo que quieras sobre ti o tus relaciones. La IA conoce tu código matemático.',
+    your_bday: 'Tu fecha de nacimiento',
+    their_bday: 'Su fecha de nacimiento',
+    optional: 'opcional',
+    gender: 'Género',
+    female: 'Mujer', male: 'Hombre', other: 'Otro',
+    email: 'Correo electrónico',
+    email_ph: 'tu@email.com',
+    time_note: 'La hora de nacimiento es opcional',
+    time_note_long: 'La hora de nacimiento es opcional — hace tu lectura más precisa',
+    go: 'Pregunta a Occultics',
+    price: '$9.99 por pregunta',
+    back: '← Volver a occultics.ai',
+    loading: 'Leyendo tus números...',
+    placeholder: 'Pregunta sobre ti o tus relaciones...',
+    foot: '$9.99 por pregunta',
+    pw_sub: 'Tus números tienen más que decir.',
+    pw_name: 'Hacer una Pregunta',
+    pw_desc: 'Pregunta lo que quieras sobre ti o tus relaciones',
+    pw_back: '← Volver a la conversación',
+    pw_tease_from: '— Tus números, esperando',
+    s1: '¿Por qué sigo atrayendo al mismo tipo?',
+    s2: '¿Qué necesito realmente en una pareja?',
+    s3: '¿Qué carrera encaja con mi código?',
+    s4: '¿Cuál es mi mayor punto ciego?',
+    s1p: '¿Somos compatibles?',
+    s2p: '¿Por qué mi pareja se cierra?',
+    s3p: 'Simula una confrontación'
+  },
+  pt: {
+    logo_sub: 'A IA que já te conhece',
+    title: 'O que você quer <em>saber?</em>',
+    sub: 'Digite sua data de nascimento. Pergunte qualquer coisa sobre você ou seus relacionamentos. A IA conhece seu código matemático.',
+    your_bday: 'Sua data de nascimento',
+    their_bday: 'Data de nascimento dele(a)',
+    optional: 'opcional',
+    gender: 'Gênero',
+    female: 'Feminino', male: 'Masculino', other: 'Outro',
+    email: 'E-mail',
+    email_ph: 'seu@email.com',
+    time_note: 'Horário de nascimento é opcional',
+    time_note_long: 'Horário de nascimento é opcional — torna sua leitura mais precisa',
+    go: 'Pergunte ao Occultics',
+    price: '$9.99 por pergunta',
+    back: '← Voltar para occultics.ai',
+    loading: 'Lendo seus números...',
+    placeholder: 'Pergunte sobre você ou seus relacionamentos...',
+    foot: '$9.99 por pergunta',
+    pw_sub: 'Seus números têm mais a dizer.',
+    pw_name: 'Fazer uma Pergunta',
+    pw_desc: 'Pergunte qualquer coisa sobre você ou seus relacionamentos',
+    pw_back: '← Voltar à conversa',
+    pw_tease_from: '— Seus números, esperando',
+    s1: 'Por que eu continuo atraindo o mesmo tipo?',
+    s2: 'O que eu realmente preciso em um parceiro?',
+    s3: 'Qual carreira combina com meu código?',
+    s4: 'Qual é meu maior ponto cego?',
+    s1p: 'Somos compatíveis?',
+    s2p: 'Por que meu parceiro se fecha?',
+    s3p: 'Simule um confronto'
+  },
+  ja: {
+    logo_sub: 'あなたをすでに知っているAI',
+    title: '何を<em>知りたい？</em>',
+    sub: '生年月日を入力してください。自分自身や人間関係について何でも聞いてください。AIはあなたの数学的コードを知っています。',
+    your_bday: 'あなたの生年月日',
+    their_bday: '相手の生年月日',
+    optional: '任意',
+    gender: '性別',
+    female: '女性', male: '男性', other: 'その他',
+    email: 'メール',
+    email_ph: 'your@email.com',
+    time_note: '出生時刻は任意です',
+    time_note_long: '出生時刻は任意です — より正確な鑑定になります',
+    go: 'Occulticsに聞く',
+    price: '1質問 $9.99',
+    back: '← occultics.aiに戻る',
+    loading: 'あなたの数字を読んでいます...',
+    placeholder: '自分自身や人間関係について聞いてください...',
+    foot: '1質問 $9.99',
+    pw_sub: 'あなたの数字にはもっと伝えたいことがあります。',
+    pw_name: '質問する',
+    pw_desc: '自分自身や人間関係について何でも聞けます',
+    pw_back: '← 会話に戻る',
+    pw_tease_from: '— あなたの数字が、待っています',
+    s1: 'なぜ同じタイプの人を引き寄せるの？',
+    s2: 'パートナーに本当に必要なものは？',
+    s3: '私のコードに合うキャリアは？',
+    s4: '私の最大の盲点は？',
+    s1p: '私たちは相性がいい？',
+    s2p: 'なぜパートナーは心を閉ざすの？',
+    s3p: '対立をシミュレーション'
+  }
+};
+
+var curLang = 'en';
+
+function detectLang() {
+  var bl = (navigator.language || 'en').substring(0,2);
+  if (LANG[bl]) return bl;
+  return 'en';
+}
+
+function setInterfaceLang(l) {
+  curLang = l;
+  var t = LANG[l];
+  // Update all language buttons
+  document.querySelectorAll('.lng-btn').forEach(function(b){b.classList.toggle('on',b.dataset.lang===l);});
+  // Update onboarding
+  document.querySelector('.ob-logo small').textContent = t.logo_sub;
+  document.querySelector('.ob-title').innerHTML = t.title;
+  document.querySelector('.ob-sub').textContent = t.sub;
+  document.querySelectorAll('.ob-label')[0].innerHTML = t.your_bday;
+  document.querySelectorAll('.ob-label')[1].innerHTML = t.their_bday + ' <span class="ob-label-r">' + t.optional + '</span>';
+  document.querySelectorAll('.ob-label')[2].textContent = t.gender;
+  document.getElementById('g-f').textContent = t.female;
+  document.getElementById('g-m').textContent = t.male;
+  document.getElementById('g-o').textContent = t.other;
+  document.querySelectorAll('.ob-label')[3].textContent = t.email;
+  document.getElementById('s-email').placeholder = t.email_ph;
+  document.getElementById('ob-go').textContent = t.go;
+  document.querySelector('.ob-foot').textContent = t.price;
+  document.querySelector('.ob-back').textContent = t.back;
+  // Time notes
+  var notes = document.querySelectorAll('[data-timenote]');
+  if(notes[0]) notes[0].textContent = t.time_note_long;
+  if(notes[1]) notes[1].textContent = t.time_note;
+  // Chat
+  document.getElementById('ch-input').placeholder = t.placeholder;
+  document.querySelector('.ch-foot').textContent = t.foot;
+  // Paywall
+  document.querySelector('.pw-sub').textContent = t.pw_sub;
+  document.querySelector('.pw-name').textContent = t.pw_name;
+  document.querySelector('.pw-desc').textContent = t.pw_desc;
+  document.querySelector('.pw-back').textContent = t.pw_back;
+  document.querySelector('.pw-tease-from').textContent = t.pw_tease_from;
+}
+
+// Auto-detect on load
+curLang = detectLang();
+
 </script>
 </body>
 </html>
