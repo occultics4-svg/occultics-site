@@ -284,8 +284,8 @@ function startAsk(){
   var m=document.getElementById('month').value;
   var y=document.getElementById('year').value;
   var email=document.getElementById('email').value.trim();
-  if(!d||!m||!y){alert('Please enter your birthday.');return;}
-  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+  if(!d||!m||!y){return;}
+  if(!email||!email.includes('@')){return;}
   try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:email,source:'homepage_ask',created_at:new Date().toISOString()});}catch(e){}
   window.location.href='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(email);
 }
