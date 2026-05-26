@@ -2,299 +2,347 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Ask Occultics — The AI that already knows you</title>
-<meta name="description" content="Ask anything about yourself and your relationships. The AI knows your mathematical code from your birthday.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="Ask anything about yourself and your relationships. The AI already knows you from your birthday. $9.99 per question.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
-:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--white:#fff;--dim:rgba(255,255,255,0.35)}
+:root{--bg:#f5f0e8;--surface:#ffffff;--surface2:#ede8df;--border:rgba(10,14,46,0.08);--text:#2d3142;--text2:#6b7280;--text3:#9ca3af;--accent:#4db8ff;--accent2:#1a2aff;--white:#fafafa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:var(--navy);color:var(--white);min-height:100vh;display:flex;flex-direction:column}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 
-/* SETUP */
-.setup{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
-.setup-inner{width:100%;max-width:420px}
-.setup-logo{font-size:10px;letter-spacing:5px;font-weight:700;color:rgba(255,255,255,0.25);text-align:center;margin-bottom:16px}
-.setup-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--white);text-align:center;margin-bottom:8px;line-height:1.2}
-.setup-title em{color:var(--crystal);font-style:italic}
-.setup-sub{font-size:11px;color:var(--dim);text-align:center;line-height:1.7;max-width:320px;margin:0 auto 24px}
-.setup-box{background:rgba(255,255,255,0.03);border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.06);margin-bottom:8px}
-.setup-label{font-size:8px;letter-spacing:2px;color:var(--dim);font-weight:700;text-transform:uppercase;margin-bottom:8px}
-.setup-label-right{font-size:9px;color:rgba(255,255,255,0.2);float:right;text-transform:none;letter-spacing:0;font-weight:400}
-.setup-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.sel{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--white);font-family:'Montserrat',sans-serif;outline:none;-webkit-appearance:none;cursor:pointer;width:100%}
-.sel:focus{border-color:var(--crystal)}
-.sel option{background:var(--navy);color:var(--white)}
-.inp{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--white);font-family:'Montserrat',sans-serif;outline:none;width:100%}
-.inp:focus{border-color:var(--crystal)}
-.inp::placeholder{color:rgba(255,255,255,0.2)}
-.start-btn{width:100%;padding:16px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:12px;font-weight:700;letter-spacing:1.5px;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;margin-top:16px;transition:all .2s}
-.start-btn:hover{opacity:.9}
-.start-btn:disabled{opacity:.5}
-.start-note{text-align:center;font-size:9px;color:rgba(255,255,255,0.15);margin-top:10px}
+/* ===== ONBOARDING ===== */
+.onboard{height:100%;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-y:auto}
+.onboard::before{content:'';position:fixed;width:500px;height:500px;background:radial-gradient(circle,rgba(26,42,255,0.03),transparent 70%);top:30%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.ob-inner{max-width:400px;width:100%;position:relative;z-index:1}
+.ob-logo{text-align:center;margin-bottom:32px}
+.ob-logo span{font-family:'Cormorant Garamond',serif;font-size:20px;color:#1a1a2e;letter-spacing:2px}
+.ob-logo small{display:block;font-size:10px;color:#4a4a5a;letter-spacing:3px;margin-top:4px;text-transform:uppercase;font-weight:500}
+.ob-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,36px);color:#1a1a2e;text-align:center;line-height:1.2;margin-bottom:8px}
+.ob-title em{font-style:italic;color:var(--accent)}
+.ob-sub{font-size:14px;color:#4a4a5a;text-align:center;line-height:1.6;margin-bottom:32px}
+.ob-card{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:16px;padding:24px 20px;margin-bottom:10px}
+.ob-label{font-size:10px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.ob-label-r{float:right;font-size:9px;color:var(--text3);letter-spacing:0;text-transform:none;font-weight:400;opacity:.5}
+.ob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.ob-sel{padding:12px 10px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%;transition:border-color .2s}
+.ob-sel:focus{border-color:var(--accent)}
+.ob-sel option{background:#ffffff;color:#2d3142}
+.ob-input{width:100%;padding:12px 14px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.ob-input:focus{border-color:var(--accent)}
+.ob-input::placeholder{color:var(--text3);opacity:.5}
+.ob-gender{display:flex;gap:6px}
+.ob-g{flex:1;padding:11px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#9ca3af;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
+.ob-g:hover{border-color:rgba(255,255,255,0.1)}
+.ob-g.on{background:var(--accent2);color:#fff;border-color:var(--accent)}
+.ob-go{width:100%;padding:16px;background:var(--accent2);color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;margin-top:16px;letter-spacing:.3px}
+.ob-go:hover{opacity:.9;transform:translateY(-1px)}
+.ob-go:disabled{opacity:.4}
+.ob-foot{text-align:center;font-size:11px;color:#4a4a5a;margin-top:12px}
+.ob-back{display:block;text-align:center;margin-top:10px;font-size:11px;color:#6b7280;text-decoration:none}
+.ob-back:hover{opacity:.7}
 
-/* CHAT */
-.chat{flex:1;display:flex;flex-direction:column;display:none}
-.chat-head{border-bottom:1px solid rgba(255,255,255,0.06);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;background:var(--navy)}
-.chat-logo{font-size:9px;letter-spacing:3px;font-weight:700;color:rgba(255,255,255,0.2)}
-.chat-codes{font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px}
-.chat-codes b{color:var(--crystal)}
-.chat-right{display:flex;gap:8px;align-items:center}
-.chat-credits{font-size:9px}
-.chat-buy{padding:4px 10px;background:var(--royal);color:var(--white);border:none;border-radius:6px;font-size:8px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:1px}
-.pills{padding:10px 16px;display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.03)}
-.pill-btn{font-size:10px;color:var(--crystal);background:rgba(77,184,255,0.04);border:1px solid rgba(77,184,255,0.1);border-radius:20px;padding:6px 12px;cursor:pointer;font-family:'Montserrat',sans-serif}
-.pill-btn:hover{background:rgba(77,184,255,0.08)}
-.messages{flex:1;overflow-y:auto;padding:16px}
-.msg{display:flex;margin-bottom:12px}
-.msg-r{justify-content:flex-end}
-.msg-l{justify-content:flex-start}
-.bubble{max-width:88%;padding:12px 16px;font-size:12px;line-height:1.75;white-space:pre-line}
-.bubble-ai{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px 16px 16px 4px;color:rgba(255,255,255,0.7);font-family:'Cormorant Garamond',serif;font-size:13px}
-.bubble-user{background:var(--royal);border-radius:16px 16px 4px 16px;color:var(--white)}
-.bubble-label{font-size:7px;letter-spacing:2px;color:var(--crystal);font-weight:700;margin-bottom:6px;opacity:.5;font-family:'Montserrat',sans-serif}
-.typing{display:flex;gap:5px;align-items:center;height:18px;padding:12px 20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:16px 16px 16px 4px;display:inline-flex}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--crystal);animation:bounce .6s infinite}
-.dot:nth-child(2){animation-delay:.15s}
-.dot:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.chat-input{border-top:1px solid rgba(255,255,255,0.06);padding:12px 16px;position:sticky;bottom:0;background:var(--navy)}
-.chat-input-row{display:flex;gap:8px}
-.chat-input-row input{flex:1;padding:12px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:10px;font-size:12px;color:var(--white);outline:none;font-family:'Montserrat',sans-serif}
-.chat-input-row input::placeholder{color:rgba(255,255,255,0.15)}
-.chat-input-row button{padding:12px 18px;background:var(--royal);color:var(--white);border:none;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;font-family:'Montserrat',sans-serif}
-.chat-input-row button:disabled{opacity:.3}
-.chat-foot{text-align:center;font-size:8px;color:rgba(255,255,255,0.12);margin-top:6px}
+/* ===== CHAT ===== */
+.chat-wrap{height:100%;display:none;flex-direction:column}
 
-/* PAYWALL */
-.paywall{flex:1;display:flex;align-items:center;justify-content:center;padding:20px;display:none}
-.pay-inner{width:100%;max-width:440px;text-align:center}
-.pay-code{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--crystal);margin-bottom:8px}
-.pay-sub{font-size:13px;color:var(--dim);margin-bottom:28px}
-.pay-option{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;text-align:left}
-.pay-option.featured{background:rgba(77,184,255,0.04);border-color:rgba(77,184,255,0.15)}
-.pay-name{font-size:13px;font-weight:600;color:var(--white)}
-.pay-desc{font-size:10px;color:var(--dim);margin-top:2px}
-.pay-desc2{font-size:9px;color:var(--crystal);margin-top:2px}
-.pay-price{padding:10px 20px;background:var(--royal);color:var(--white);border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;white-space:nowrap}
-.pay-back{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.2);border:none;font-size:10px;cursor:pointer;font-family:'Montserrat',sans-serif;margin-top:8px}
-.pay-tease{margin-top:20px;padding:16px;background:rgba(255,255,255,0.02);border-radius:10px;border:1px solid rgba(255,255,255,0.05)}
-.pay-tease-text{font-family:'Cormorant Garamond',serif;font-size:13px;color:rgba(255,255,255,0.4);font-style:italic;line-height:1.7}
-.pay-tease-from{font-size:8px;color:rgba(255,255,255,0.15);margin-top:8px}
+/* Header */
+.ch-head{padding:12px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:#f5f0e8;flex-shrink:0}
+.ch-left{display:flex;align-items:center;gap:10px}
+.ch-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--bg);font-weight:700}
+.ch-name{font-size:13px;font-weight:500;color:#1a1a2e}
+.ch-code{font-size:10px;color:var(--text3);margin-top:1px}
+.ch-code b{color:var(--accent)}
+.ch-right{display:flex;align-items:center;gap:8px}
+.ch-credits{font-size:10px;color:var(--text3)}
+.ch-btn{padding:6px 14px;background:var(--accent2);color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;letter-spacing:.5px}
 
-.back-link{display:inline-block;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.2);text-decoration:none}
-.back-link:hover{color:var(--crystal)}
+/* Messages */
+.ch-messages{flex:1;overflow-y:auto;padding:20px 20px 10px;scroll-behavior:smooth}
+.ch-messages::-webkit-scrollbar{width:4px}
+.ch-messages::-webkit-scrollbar-track{background:transparent}
+.ch-messages::-webkit-scrollbar-thumb{background:rgba(10,14,46,0.1);border-radius:4px}
+.msg{margin-bottom:20px;display:flex;gap:10px;max-width:720px;margin-left:auto;margin-right:auto}
+.msg-ai{flex-direction:row}
+.msg-user{flex-direction:row-reverse}
+.msg-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:2px}
+.msg-ai .msg-avatar{background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--bg);font-family:'Cormorant Garamond',serif;font-weight:700}
+.msg-user .msg-avatar{background:#ede8df;color:#6b7280;display:flex;align-items:center;justify-content:center}
+.msg-body{flex:1}
+.msg-ai .msg-bubble{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:2px 16px 16px 16px;padding:14px 18px;color:#2d3142;font-size:14px;line-height:1.8;white-space:pre-line}
+.msg-user .msg-bubble{background:var(--accent2);color:#fff;border-radius:16px 2px 16px 16px;padding:12px 16px;font-size:14px;line-height:1.6;margin-left:auto;max-width:85%}
+.msg-time{font-size:9px;color:var(--text3);margin-top:4px;opacity:.5}
+.msg-ai .msg-time{text-align:left}
+.msg-user .msg-time{text-align:right}
 
-.gender-btn{flex:1;padding:10px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:rgba(255,255,255,0.4);font-family:'Montserrat',sans-serif;font-size:11px;cursor:pointer;transition:all .2s;font-weight:500}
-.gender-btn:hover{border-color:rgba(255,255,255,0.15)}
-.gender-btn.active{background:var(--royal);color:#fff;border-color:var(--royal)}
-@media(max-width:500px){.setup-row{grid-template-columns:1fr}}
+/* Typing */
+.typing-wrap{margin-bottom:20px;display:flex;gap:10px;max-width:720px;margin-left:auto;margin-right:auto}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:14px 18px;background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:2px 16px 16px 16px}
+.typing-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.4;animation:pulse .8s infinite}
+.typing-dot:nth-child(2){animation-delay:.15s}
+.typing-dot:nth-child(3){animation-delay:.3s}
+@keyframes pulse{0%,100%{opacity:.2;transform:scale(.8)}50%{opacity:.6;transform:scale(1)}}
+
+/* Suggestions */
+.ch-suggest{padding:8px 20px 12px;display:flex;gap:6px;flex-wrap:wrap;max-width:760px;margin:0 auto;flex-shrink:0}
+.ch-pill{font-size:12px;color:#6b7280;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:20px;padding:8px 14px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .15s}
+.ch-pill:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Input */
+.ch-input{padding:12px 20px 20px;flex-shrink:0;background:#f5f0e8}
+.ch-input-inner{max-width:720px;margin:0 auto;display:flex;gap:8px;background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:14px;padding:4px 4px 4px 16px;align-items:center;transition:border-color .2s}
+.ch-input-inner:focus-within{border-color:rgba(26,42,255,0.3)}
+.ch-input-inner input{flex:1;background:transparent;border:none;color:#2d3142;font-size:14px;font-family:'Montserrat',sans-serif;outline:none;padding:12px 0}
+.ch-input-inner input::placeholder{color:var(--text3);opacity:.5}
+.ch-send{width:40px;height:40px;border-radius:10px;background:var(--accent);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+.ch-send:hover{opacity:.9}
+.ch-send:disabled{opacity:.2}
+.ch-send svg{width:18px;height:18px;fill:#fff}
+.ch-foot{text-align:center;font-size:9px;color:var(--text3);opacity:.3;margin-top:6px}
+
+/* ===== PAYWALL ===== */
+.paywall{height:100%;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.pw-inner{max-width:380px;width:100%;text-align:center}
+.pw-code{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--accent2);letter-spacing:6px;margin:16px 0}
+.pw-sub{font-size:14px;color:var(--text3);margin-bottom:28px;line-height:1.6}
+.pw-card{background:#ffffff;border:1px solid rgba(10,14,46,0.08);border-radius:16px;padding:20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;text-align:left;cursor:pointer;transition:all .15s}
+.pw-card:hover{border-color:var(--accent)}
+.pw-card.feat{border-color:rgba(26,42,255,0.15);background:rgba(26,42,255,0.03)}
+.pw-name{font-size:14px;font-weight:500;color:#1a1a2e}
+.pw-desc{font-size:11px;color:var(--text3);margin-top:2px}
+.pw-price{padding:10px 20px;background:var(--accent2);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;font-family:'Montserrat',sans-serif;cursor:pointer;white-space:nowrap}
+.pw-back{display:block;margin-top:16px;font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;opacity:.4}
+.pw-back:hover{opacity:.7}
+.pw-tease{margin-top:24px;padding:18px;background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:12px}
+.pw-tease-text{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--text2);font-style:italic;line-height:1.7}
+.pw-tease-from{font-size:9px;color:var(--text3);margin-top:8px;opacity:.4}
+
+@media(max-width:500px){
+  .ob-row{grid-template-columns:1fr}
+  .ch-head{padding:10px 14px}
+  .ch-messages{padding:14px}
+  .ch-input{padding:8px 14px 14px}
+  .ch-suggest{padding:6px 14px}
+  .msg{max-width:100%}
+  .ch-input-inner{max-width:100%}
+}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.ob-inner{animation:fadeIn .4s ease-out}
 </style>
 </head>
 <body>
 
-<!-- SETUP SCREEN -->
-<div class="setup" id="screen-setup">
-  <div class="setup-inner">
-    <div class="setup-logo">OCCULTICS</div>
-    <h1 class="setup-title">Ask me about yourself<br>and your <em>relationships.</em></h1>
-    <p class="setup-sub">An AI that already knows you — from your birthday. Powered by 439,000 words of proprietary mathematical research.</p>
+<!-- ONBOARDING -->
+<div class="onboard" id="screen-onboard">
+<div class="ob-inner">
+  <div class="ob-logo"><span>Occultics</span><small>The AI that already knows you</small></div>
 
-    <div class="setup-box">
-      <div class="setup-label">Your birthday</div>
-      <div class="setup-row">
-        <select class="sel" id="s-day"><option value="">Day</option></select>
-        <select class="sel" id="s-month"><option value="">Month</option></select>
-        <select class="sel" id="s-year"><option value="">Year</option></select>
-      </div>
+  <h1 class="ob-title">What do you want to <em>know?</em></h1>
+  <p class="ob-sub">Enter your birthday. Ask anything about yourself or your relationships. The AI knows your mathematical code.</p>
+
+  <div class="ob-card">
+    <div class="ob-label">Your birthday</div>
+    <div class="ob-row">
+      <select class="ob-sel" id="s-day"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year"><option value="">Year</option></select>
     </div>
-
-    <div class="setup-box">
-      <div class="setup-label">Their birthday <span class="setup-label-right">optional</span></div>
-      <div class="setup-row">
-        <select class="sel" id="s-day2"><option value="">Day</option></select>
-        <select class="sel" id="s-month2"><option value="">Month</option></select>
-        <select class="sel" id="s-year2"><option value="">Year</option></select>
-      </div>
-    </div>
-
-    <div class="setup-box">
-      <div class="setup-label">Your email</div>
-      <input type="email" class="inp" id="s-email" placeholder="your@email.com">
-    </div>
-
-    <div class="setup-box">
-      <div class="setup-label">Gender</div>
-      <div style="display:flex;gap:6px">
-        <button class="gender-btn" id="g-f" onclick="setGender('female')">Female</button>
-        <button class="gender-btn" id="g-m" onclick="setGender('male')">Male</button>
-        <button class="gender-btn" id="g-o" onclick="setGender('other')">Other</button>
-      </div>
-    </div>
-
-    <button class="start-btn" id="start-btn" onclick="startSession()">Start — First Question Free</button>
-    <div class="start-note">$9.99 per question</div>
-    <div style="text-align:center"><a href="/" class="back-link">← Back to Occultics</a></div>
+    <input type="time" class="ob-input" id="s-time" style="margin-top:8px;color:#9ca3af" onfocus="this.style.color='#2d3142'" placeholder="Birth time">
+    <div style="font-size:9px;color:#9ca3af;margin-top:4px">Birth time is optional — it makes your reading more precise</div>
   </div>
+
+  <div class="ob-card">
+    <div class="ob-label">Their birthday <span class="ob-label-r">optional</span></div>
+    <div class="ob-row">
+      <select class="ob-sel" id="s-day2"><option value="">Day</option></select>
+      <select class="ob-sel" id="s-month2"><option value="">Month</option></select>
+      <select class="ob-sel" id="s-year2"><option value="">Year</option></select>
+    </div>
+    <input type="time" class="ob-input" id="s-time2" style="margin-top:8px;color:#9ca3af" onfocus="this.style.color='#2d3142'">
+    <div style="font-size:9px;color:#9ca3af;margin-top:4px">Birth time is optional</div>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-label">Gender</div>
+    <div class="ob-gender">
+      <button class="ob-g" id="g-f" onclick="pickGender('female')">Female</button>
+      <button class="ob-g" id="g-m" onclick="pickGender('male')">Male</button>
+      <button class="ob-g" id="g-o" onclick="pickGender('other')">Other</button>
+    </div>
+  </div>
+
+  <div class="ob-card">
+    <div class="ob-label">Email</div>
+    <input type="email" class="ob-input" id="s-email" placeholder="your@email.com">
+  </div>
+
+  <button class="ob-go" id="ob-go" onclick="startSession()">Ask Occultics</button>
+  <div class="ob-foot">$9.99 per question</div>
+  <a href="/" class="ob-back">← Back to occultics.ai</a>
+</div>
 </div>
 
-<!-- CHAT SCREEN -->
-<div class="chat" id="screen-chat">
-  <div class="chat-head">
-    <div>
-      <div class="chat-logo">OCCULTICS</div>
-      <div class="chat-codes" id="chat-codes"></div>
-    </div>
-    <div class="chat-right">
-      <div class="chat-credits" id="chat-credits"></div>
-      <button class="chat-buy" id="chat-buy" onclick="showPaywall()">BUY</button>
-    </div>
-  </div>
-
-  <div class="pills" id="pills-row"></div>
-
-  <div class="messages" id="messages"></div>
-
-  <div class="chat-input">
-    <div class="chat-input-row">
-      <input type="text" id="chat-input" placeholder="Ask about yourself or your relationships...">
-      <button id="send-btn" onclick="sendMessage()">ASK</button>
-    </div>
-    <div class="chat-foot">$9.99 per question</div>
-  </div>
-</div>
-
-<!-- PAYWALL SCREEN -->
-<div class="paywall" id="screen-paywall">
-  <div class="pay-inner">
-    <div class="setup-logo">OCCULTICS</div>
-    <div class="pay-code" id="pay-code"></div>
-    <div class="pay-sub">Your numbers have more to say.</div>
-
-    <div class="pay-option featured" onclick="buyDayPass()">
+<!-- CHAT -->
+<div class="chat-wrap" id="screen-chat">
+  <div class="ch-head">
+    <div class="ch-left">
+      <div class="ch-avatar">O</div>
       <div>
-        <div class="pay-name">Ask a Question</div>
-        <div class="pay-desc">Ask anything about yourself and your relationships.</div>
-        <div class="pay-desc2">$9.99 per question</div>
+        <div class="ch-name">Occultics</div>
+        <div class="ch-code" id="ch-code"></div>
       </div>
-      <button class="pay-price">$9.99</button>
     </div>
-
-    <button class="pay-back" onclick="hidePaywall()">Back to conversation</button>
-
-    <div class="pay-tease">
-      <div class="pay-tease-text" id="pay-tease-text"></div>
-      <div class="pay-tease-from">— Your numbers, waiting</div>
+    <div class="ch-right">
+      <div class="ch-credits" id="ch-credits"></div>
+      <button class="ch-btn" id="ch-buy" onclick="showPaywall()">$9.99</button>
     </div>
   </div>
+
+  <div class="ch-messages" id="ch-messages"></div>
+
+  <div class="ch-suggest" id="ch-suggest"></div>
+
+  <div class="ch-input">
+    <div class="ch-input-inner">
+      <input type="text" id="ch-input" placeholder="Ask about yourself or your relationships...">
+      <button class="ch-send" id="ch-send" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="ch-foot">$9.99 per question · Powered by 439,000 words of research</div>
+  </div>
+</div>
+
+<!-- PAYWALL -->
+<div class="paywall" id="screen-paywall">
+<div class="pw-inner">
+  <div class="ob-logo"><span>Occultics</span></div>
+  <div class="pw-code" id="pw-code"></div>
+  <div class="pw-sub">Your numbers have more to say.</div>
+
+  <div class="pw-card feat" onclick="buyQuestion()">
+    <div>
+      <div class="pw-name">Ask a Question</div>
+      <div class="pw-desc">Ask anything about yourself or your relationships</div>
+    </div>
+    <button class="pw-price">$9.99</button>
+  </div>
+
+  <button class="pw-back" onclick="hidePaywall()">← Back to conversation</button>
+
+  <div class="pw-tease">
+    <div class="pw-tease-text" id="pw-tease"></div>
+    <div class="pw-tease-from">— Your numbers, waiting</div>
+  </div>
+</div>
 </div>
 
 <script>
-var DECODE_URL = 'https://occultics-decode.occultics4.workers.dev';
-var SB_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
-var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
+var DECODE_URL='https://occultics-decode.occultics4.workers.dev';
+var SB_URL='https://dtquqaridqyjdgirjczr.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
-// State
-var profile = null, partnerProfile = null, compatData = null;
-var messages = [];
-var freeUsed = false;
-var credits = 0; // 0=none, -1=unlimited (day pass)
-var userGender = '';
-
-function setGender(g) {
-  userGender = g;
-  document.querySelectorAll('.gender-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('g-' + g.charAt(0)).classList.add('active');
-}
+var profile=null,partnerProfile=null,compatData=null;
+var messages=[];
+var freeUsed=false,credits=0;
+var userGender='';
+var userEmail='';
 
 // Populate dropdowns
-var mos = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 ['s-day','s-day2'].forEach(function(id){var el=document.getElementById(id);for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
 ['s-month','s-month2'].forEach(function(id){var el=document.getElementById(id);mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
-['s-year','s-year2'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1940;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
+['s-year','s-year2'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
 
-// Enter key
-document.getElementById('chat-input').addEventListener('keydown', function(e){if(e.key==='Enter'&&!e.shiftKey)sendMessage();});
+// Auto-fill from URL params
+var params=new URLSearchParams(window.location.search);
+if(params.get('d'))document.getElementById('s-day').value=params.get('d');
+if(params.get('m'))document.getElementById('s-month').value=params.get('m');
+if(params.get('y'))document.getElementById('s-year').value=params.get('y');
+if(params.get('email'))document.getElementById('s-email').value=decodeURIComponent(params.get('email'));
 
-async function startSession() {
+document.getElementById('ch-input').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey)sendMessage();});
+
+function pickGender(g){
+  userGender=g;
+  document.querySelectorAll('.ob-g').forEach(function(b){b.classList.remove('on');});
+  document.getElementById('g-'+g.charAt(0)).classList.add('on');
+}
+
+async function startSession(){
   var d=document.getElementById('s-day').value;
   var m=document.getElementById('s-month').value;
   var y=document.getElementById('s-year').value;
-  var email=document.getElementById('s-email').value.trim();
-  if(!d||!m||!y){alert('Please enter your birthday.');return;}
-  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+  userEmail=document.getElementById('s-email').value.trim();
+  if(!d||!m||!y)return;
+  if(!userEmail||!userEmail.includes('@'))return;
 
-  var btn=document.getElementById('start-btn');
-  btn.textContent='DECODING...';btn.disabled=true;
+  var btn=document.getElementById('ob-go');
+  btn.textContent='Reading your numbers...';btn.disabled=true;
 
-  // Save email
-  try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:email,source:'ask_occultics',created_at:new Date().toISOString()});}catch(e){}
+  try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:userEmail,source:'ask_occultics',created_at:new Date().toISOString()});}catch(e){}
 
-  // Decode
-  try {
-    var res = await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y})});
-    profile = await res.json();
+  try{
+    var res=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y,hour:+(document.getElementById('s-time').value?document.getElementById('s-time').value.split(':')[0]:0),minute:+(document.getElementById('s-time').value?document.getElementById('s-time').value.split(':')[1]:0)})});
+    profile=await res.json();
 
     var d2=document.getElementById('s-day2').value;
     var m2=document.getElementById('s-month2').value;
     var y2=document.getElementById('s-year2').value;
-
     if(d2&&m2&&y2){
       var res2=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d2,month:+m2,year:+y2})});
       partnerProfile=await res2.json();
       var res3=await fetch(DECODE_URL+'/compatibility',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day1:+d,month1:+m,year1:+y,day2:+d2,month2:+m2,year2:+y2})});
       compatData=await res3.json();
     }
-
     showChat();
-  } catch(e) {
-    alert('Connection error. Try again.');
-    btn.textContent='Start — First Question Free';btn.disabled=false;
+  }catch(e){
+    btn.textContent='Ask Occultics';btn.disabled=false;
   }
 }
 
-function showChat() {
-  document.getElementById('screen-setup').style.display='none';
+function showChat(){
+  document.getElementById('screen-onboard').style.display='none';
   document.getElementById('screen-chat').style.display='flex';
 
   var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
-  var codesHtml='You: <b>'+code+'</b>';
+  var pyr=profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third;
+  var codesHtml='Code: <b>'+code+'</b> · Pyramid: <b>'+pyr+'</b>';
   if(partnerProfile)codesHtml+=' · Them: <b>'+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'</b>';
-  document.getElementById('chat-codes').innerHTML=codesHtml;
-  document.getElementById('pay-code').textContent=code;
-  document.getElementById('pay-tease-text').textContent='"The '+profile.pyth.generational+' in your generational number has been driving every relationship choice you\'ve made. There\'s a reason you keep ending up in the same place."';
+  document.getElementById('ch-code').innerHTML=codesHtml;
+  document.getElementById('pw-code').textContent=code;
+  document.getElementById('pw-tease').textContent='"The '+profile.pyth.generational+' in your generational number has been driving every relationship choice you\'ve made. There\'s a reason you keep ending up in the same place."';
 
-  // Welcome message
   var cc=compatData?'\nCompatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third:'';
   var welcome=partnerProfile
-    ? 'I see both of you.\n\nYour code: '+code+' | Pyramid: '+profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+' | Pyramid: '+partnerProfile.pyramid.first+'.'+partnerProfile.pyramid.second+'.'+partnerProfile.pyramid.third+cc+'\n\n'+profile.birthDayDesc+'\n\nYour first question is free. Ask me anything.'
-    : 'I see you. Code: '+code+'\nPyramid: '+profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third+'\nBorn: '+d+'/'+m+'/'+y+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nYour first question is free. Ask me anything.';
+    ?'I see both of you.\n\nYour code: '+code+' · Pyramid: '+pyr+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+cc+'\n\n'+profile.birthDayDesc+'\n\nAsk me anything about yourself, this relationship, or what the numbers predict.'
+    :'I see you. Code: '+code+' · Pyramid: '+pyr+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nAsk me anything.';
 
   addMessage('ai',welcome);
   updateCredits();
 
-  // Pills
-  var pillsEl=document.getElementById('pills-row');
+  // Suggestions
+  var sugEl=document.getElementById('ch-suggest');
   var qs=partnerProfile
-    ?['Are we compatible?','Why does my partner shut down?','Simulate: what if I confront them?']
-    :['Why do I keep attracting the same type?','What do I actually need?','What is my biggest blind spot?'];
-  pillsEl.innerHTML='';
+    ?['Are we compatible?','Why does my partner shut down?','Simulate a confrontation']
+    :['Why do I keep attracting the same type?','What do I actually need in a partner?','What career fits my code?','What is my biggest blind spot?'];
+  sugEl.innerHTML='';
   qs.forEach(function(q){
-    var b=document.createElement('button');b.className='pill-btn';b.textContent=q;
-    b.onclick=function(){document.getElementById('chat-input').value=q;};
-    pillsEl.appendChild(b);
+    var b=document.createElement('button');b.className='ch-pill';b.textContent=q;
+    b.onclick=function(){document.getElementById('ch-input').value=q;document.getElementById('ch-input').focus();};
+    sugEl.appendChild(b);
   });
 }
 
 function updateCredits(){
-  var el=document.getElementById('chat-credits');
-  if(credits===-1)el.innerHTML='<span style="color:var(--crystal)">Active</span>';
-  else if(!freeUsed)el.innerHTML='<span style="color:var(--crystal)">1 free</span>';
-  else if(credits>0)el.innerHTML='<span style="color:var(--crystal)">'+credits+' left</span>';
-  else el.innerHTML='<span style="color:#ef4444">$9.99</span>';
-
-  document.getElementById('chat-buy').textContent=credits===-1?'✦':'$9.99';
+  var el=document.getElementById('ch-credits');
+  if(credits===-1)el.innerHTML='<span style="color:var(--accent)">Active</span>';
+  else if(!freeUsed)el.innerHTML='';
+  else if(credits>0)el.innerHTML=credits+' left';
+  else el.innerHTML='';
+  document.getElementById('ch-buy').textContent=credits===-1?'✦':'$9.99';
 }
 
 function canAsk(){return !freeUsed||credits>0||credits===-1;}
@@ -307,124 +355,114 @@ function useCredit(){
 }
 
 async function sendMessage(){
-  var input=document.getElementById('chat-input');
+  var input=document.getElementById('ch-input');
   var msg=input.value.trim();
   if(!msg)return;
-
   if(!canAsk()){showPaywall();return;}
 
   input.value='';
   addMessage('user',msg);
   showTyping();
+  document.getElementById('ch-suggest').style.display='none';
 
-  var response = await getAIResponse(msg);
-
+  var response=await getAIResponse(msg);
   var used=useCredit();
   hideTyping();
 
   var tail='';
   if(freeUsed&&credits===0&&credits!==-1){
     tail='\n\nThis was your free question. Each additional question is $9.99.';
-    setTimeout(showPaywall,2000);
-  } 
+    setTimeout(showPaywall,2500);
+  }else if(credits>0){
+    tail='\n\n'+credits+' question'+(credits===1?'':'s')+' remaining.';
+  }
 
   addMessage('ai',response+tail);
-
-  // Hide pills after first question
-  document.getElementById('pills-row').style.display='none';
 }
 
 async function getAIResponse(question){
   try{
     var res=await fetch(DECODE_URL+'/ask',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        question:question,
-        profileData:profile,
-        partnerData:partnerProfile||null,
-        compatibilityData:compatData||null,
-        history:messages.slice(-8),
-        gender:userGender
-      })
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({question:question,profileData:profile,partnerData:partnerProfile||null,compatibilityData:compatData||null,history:messages.slice(-8),gender:userGender})
     });
     var data=await res.json();
-    if(data.error) return fallbackResponse(question);
-    return data.response||fallbackResponse(question);
-  }catch(e){
-    return fallbackResponse(question);
-  }
+    if(data.error)return fallback(question);
+    return data.response||fallback(question);
+  }catch(e){return fallback(question);}
 }
 
-function fallbackResponse(q){
+function fallback(q){
   var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
-  var lower=q.toLowerCase();
-
   if(partnerProfile&&compatData){
     var cc=compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third;
-    if(lower.includes('compatible')||lower.includes('last')||lower.includes('work'))
-      return 'Your compatibility code is '+cc+'. '+compatData.vertical+'\n\nThe first number '+compatData.compatCode.first+' reveals how you met. The second '+compatData.compatCode.second+' is the mission. The third '+compatData.compatCode.third+' is what you build together.\n\nAsk me something specific about what is happening between you.';
-    if(lower.includes('simulate')||lower.includes('what if')||lower.includes('react')||lower.includes('confront'))
-      return 'Based on your code '+code+' and their code '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+':\n\nYour biorhythm '+profile.pyth.biorhythm+' means '+profile.bioDesc.toLowerCase()+' Their biorhythm '+partnerProfile.pyth.biorhythm+' means '+partnerProfile.bioDesc.toLowerCase()+'\n\nWhen these energies meet in tension, the dynamic is predictable from the mathematics. The compatibility code '+cc+' tells me this pattern has repeated before. Ask me how to navigate it.';
-    return 'Your code: '+code+'. Their code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+'. Compatibility: '+cc+'.\n\n'+compatData.vertical+'\n\nAsk me anything specific — about patterns, conflicts, or simulate a situation.';
+    return 'Your compatibility code is '+cc+'. '+compatData.vertical+'\n\nThe first number reveals how you met. The second is the mission. The third is what you build.\n\nAsk me something more specific about what is happening between you.';
   }
-
-  if(lower.includes('attract')||lower.includes('pattern')||lower.includes('same type'))
-    return 'Your generational number '+profile.pyth.generational+' is the answer. '+profile.genDesc+' This is what you unconsciously seek in every partner. Your biorhythm '+profile.pyth.biorhythm+' is what people see first: '+profile.bioDesc.toLowerCase()+' The gap between these two creates the pattern you keep repeating.';
-
-  if(lower.includes('need')||lower.includes('partner')||lower.includes('looking'))
-    return 'Your generational '+profile.pyth.generational+' holds the answer. '+profile.genDesc+' But your biorhythm '+profile.pyth.biorhythm+' creates a surface that attracts people who respond to THAT energy, not what you truly need. The right partner feeds the '+profile.pyth.generational+' underneath, not just the '+profile.pyth.biorhythm+' on the surface.';
-
-  return 'Your code is '+code+'. '+profile.bioDesc+' At your deepest level: '+profile.genDesc.toLowerCase()+' Your life path '+profile.pyth.lifePath+': '+profile.lpDesc.toLowerCase()+'\n\nAsk me about your relationship patterns, what you truly need, or add someone\'s birthday for compatibility analysis.';
+  return 'Your code is '+code+'. '+profile.bioDesc+' At your deepest level: '+profile.genDesc.toLowerCase()+' Your life path '+profile.pyth.lifePath+': '+profile.lpDesc.toLowerCase()+'\n\nAsk me about your relationship patterns, what you truly need, or add someone\'s birthday for compatibility.';
 }
 
 function addMessage(role,text){
   messages.push({role:role,text:text});
-  var el=document.getElementById('messages');
+  var el=document.getElementById('ch-messages');
   var div=document.createElement('div');
-  div.className='msg '+(role==='ai'?'msg-l':'msg-r');
+  div.className='msg msg-'+role;
+
+  var avatar=document.createElement('div');
+  avatar.className='msg-avatar';
+  if(role==='ai'){avatar.textContent='O';}else{avatar.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/></svg>';}
+
+  var body=document.createElement('div');
+  body.className='msg-body';
+
   var bubble=document.createElement('div');
-  bubble.className='bubble '+(role==='ai'?'bubble-ai':'bubble-user');
-  if(role==='ai')bubble.innerHTML='<div class="bubble-label">OCCULTICS</div>'+text.replace(/\n/g,'<br>');
+  bubble.className='msg-bubble';
+  if(role==='ai')bubble.innerHTML=text.replace(/\n/g,'<br>');
   else bubble.textContent=text;
-  div.appendChild(bubble);
+
+  var time=document.createElement('div');
+  time.className='msg-time';
+  var now=new Date();
+  time.textContent=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0');
+
+  body.appendChild(bubble);
+  body.appendChild(time);
+  div.appendChild(avatar);
+  div.appendChild(body);
   el.appendChild(div);
+
+  div.style.animation='fadeIn .3s ease-out';
   el.scrollTop=el.scrollHeight;
 }
 
 function showTyping(){
-  var el=document.getElementById('messages');
-  var div=document.createElement('div');div.className='msg msg-l';div.id='typing-indicator';
-  div.innerHTML='<div class="typing"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  var el=document.getElementById('ch-messages');
+  var div=document.createElement('div');div.className='typing-wrap';div.id='typing';
+  var ava=document.createElement('div');ava.className='msg-avatar';ava.style.background='linear-gradient(135deg,var(--accent),var(--accent2))';ava.style.color='#fff';ava.style.fontFamily="'Cormorant Garamond',serif";ava.style.fontSize='10px';ava.textContent='O';
+  var dots=document.createElement('div');dots.className='typing-dots';
+  dots.innerHTML='<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  div.appendChild(ava);div.appendChild(dots);
   el.appendChild(div);
   el.scrollTop=el.scrollHeight;
 }
-
-function hideTyping(){var el=document.getElementById('typing-indicator');if(el)el.remove();}
+function hideTyping(){var el=document.getElementById('typing');if(el)el.remove();}
 
 function showPaywall(){
   document.getElementById('screen-chat').style.display='none';
   document.getElementById('screen-paywall').style.display='flex';
 }
-
 function hidePaywall(){
   document.getElementById('screen-paywall').style.display='none';
   document.getElementById('screen-chat').style.display='flex';
 }
 
-function buyDayPass(){
-  // Connect to Stripe for $9.99 per question
-  var email = document.getElementById('s-email').value.trim();
+function buyQuestion(){
   fetch('https://occultics-checkout.occultics4.workers.dev/',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({type:'decode_yourself',email:email})
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'decode_yourself',email:userEmail})
   }).then(function(r){return r.json()}).then(function(d){
-    if(d.url) window.location.href=d.url;
-    else { credits=1; updateCredits(); hidePaywall(); }
-  }).catch(function(e){
-    credits=1; updateCredits(); hidePaywall();
-  });
+    if(d.url)window.location.href=d.url;
+    else{credits=1;updateCredits();hidePaywall();}
+  }).catch(function(){credits=1;updateCredits();hidePaywall();});
 }
 </script>
 </body>
