@@ -14,30 +14,30 @@ html,body{height:100%;overflow:hidden}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
 
 /* ===== ONBOARDING ===== */
-.onboard{height:100%;display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow-y:auto}
+.onboard{height:100%;display:flex;align-items:flex-start;justify-content:center;padding:12px;position:relative;overflow-y:auto}
 .onboard::before{content:'';position:fixed;width:500px;height:500px;background:radial-gradient(circle,rgba(26,42,255,0.03),transparent 70%);top:30%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-.ob-inner{max-width:400px;width:100%;position:relative;z-index:1}
-.ob-logo{text-align:center;margin-bottom:32px}
+.ob-inner{max-width:400px;width:100%;position:relative;z-index:1;padding-top:8px}
+.ob-logo{text-align:center;margin-bottom:16px}
 .ob-logo span{font-family:'Cormorant Garamond',serif;font-size:20px;color:#1a1a2e;letter-spacing:2px}
 .ob-logo small{display:block;font-size:10px;color:#4a4a5a;letter-spacing:3px;margin-top:4px;text-transform:uppercase;font-weight:500}
-.ob-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,6vw,36px);color:#1a1a2e;text-align:center;line-height:1.2;margin-bottom:8px}
+.ob-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,30px);color:#1a1a2e;text-align:center;line-height:1.2;margin-bottom:6px}
 .ob-title em{font-style:italic;color:var(--accent)}
-.ob-sub{font-size:14px;color:#4a4a5a;text-align:center;line-height:1.6;margin-bottom:32px}
-.ob-card{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:16px;padding:24px 20px;margin-bottom:10px}
-.ob-label{font-size:10px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;font-weight:500;margin-bottom:8px}
+.ob-sub{font-size:12px;color:#4a4a5a;text-align:center;line-height:1.5;margin-bottom:16px}
+.ob-card{background:#ffffff;border:1px solid rgba(10,14,46,0.06);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.ob-label{font-size:9px;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;font-weight:500;margin-bottom:6px}
 .ob-label-r{float:right;font-size:9px;color:var(--text3);letter-spacing:0;text-transform:none;font-weight:400;opacity:.5}
 .ob-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
-.ob-sel{padding:12px 10px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%;transition:border-color .2s}
+.ob-sel{padding:10px 10px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%;transition:border-color .2s}
 .ob-sel:focus{border-color:var(--accent)}
 .ob-sel option{background:#ffffff;color:#2d3142}
-.ob-input{width:100%;padding:12px 14px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.ob-input{width:100%;padding:10px 14px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#2d3142;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
 .ob-input:focus{border-color:var(--accent)}
 .ob-input::placeholder{color:var(--text3);opacity:.5}
 .ob-gender{display:flex;gap:6px}
-.ob-g{flex:1;padding:11px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#9ca3af;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
+.ob-g{flex:1;padding:9px;background:#ffffff;border:1px solid var(--border);border-radius:10px;color:#9ca3af;font-family:'Montserrat',sans-serif;font-size:12px;cursor:pointer;text-align:center;transition:all .15s;font-weight:500}
 .ob-g:hover{border-color:rgba(255,255,255,0.1)}
 .ob-g.on{background:var(--accent2);color:#fff;border-color:var(--accent)}
-.ob-go{width:100%;padding:16px;background:var(--accent2);color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;margin-top:16px;letter-spacing:.3px}
+.ob-go{width:100%;padding:14px;background:var(--accent2);color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Montserrat',sans-serif;transition:all .2s;margin-top:10px;letter-spacing:.3px}
 .ob-go:hover{opacity:.9;transform:translateY(-1px)}
 .ob-go:disabled{opacity:.4}
 .ob-foot{text-align:center;font-size:11px;color:#4a4a5a;margin-top:12px}
@@ -149,8 +149,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
       <select class="ob-sel" id="s-month"><option value="">Month</option></select>
       <select class="ob-sel" id="s-year"><option value="">Year</option></select>
     </div>
-    <input type="time" class="ob-input" id="s-time" style="margin-top:8px;color:#9ca3af" onfocus="this.style.color='#2d3142'" placeholder="Birth time">
-    <div style="font-size:9px;color:#9ca3af;margin-top:4px">Birth time is optional — it makes your reading more precise</div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <select class="ob-sel" id="s-hour" style="flex:1"><option value="">Hour</option></select>
+      <select class="ob-sel" id="s-min" style="flex:1"><option value="">Min</option></select>
+      <select class="ob-sel" id="s-ampm" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+    </div>
+    <div style="font-size:9px;color:#9ca3af;margin-top:3px">Birth time is optional</div>
   </div>
 
   <div class="ob-card">
@@ -160,8 +164,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
       <select class="ob-sel" id="s-month2"><option value="">Month</option></select>
       <select class="ob-sel" id="s-year2"><option value="">Year</option></select>
     </div>
-    <input type="time" class="ob-input" id="s-time2" style="margin-top:8px;color:#9ca3af" onfocus="this.style.color='#2d3142'">
-    <div style="font-size:9px;color:#9ca3af;margin-top:4px">Birth time is optional</div>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <select class="ob-sel" id="s-hour2" style="flex:1"><option value="">Hour</option></select>
+      <select class="ob-sel" id="s-min2" style="flex:1"><option value="">Min</option></select>
+      <select class="ob-sel" id="s-ampm2" style="flex:0.7"><option value="am">AM</option><option value="pm">PM</option></select>
+    </div>
+    <div style="font-size:9px;color:#9ca3af;margin-top:3px">Birth time is optional</div>
   </div>
 
   <div class="ob-card">
@@ -211,7 +219,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
-    <div class="ch-foot">$9.99 per question · Powered by 439,000 words of research</div>
+    <div class="ch-foot">$9.99 per question</div>
   </div>
 </div>
 
@@ -252,6 +260,10 @@ var userEmail='';
 
 // Populate dropdowns
 var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// Hours 1-12 and minutes
+['s-hour','s-hour2'].forEach(function(id){var el=document.getElementById(id);for(var h=1;h<=12;h++){var o=document.createElement('option');o.value=h;o.textContent=h;el.appendChild(o);}});
+['s-min','s-min2'].forEach(function(id){var el=document.getElementById(id);for(var m=0;m<60;m+=5){var o=document.createElement('option');o.value=m;o.textContent=String(m).padStart(2,'0');el.appendChild(o);}});
+
 ['s-day','s-day2'].forEach(function(id){var el=document.getElementById(id);for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
 ['s-month','s-month2'].forEach(function(id){var el=document.getElementById(id);mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
 ['s-year','s-year2'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
@@ -285,7 +297,7 @@ async function startSession(){
   try{var sb=supabase.createClient(SB_URL,SB_KEY);sb.from('book_leads').insert({email:userEmail,source:'ask_occultics',created_at:new Date().toISOString()});}catch(e){}
 
   try{
-    var res=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y,hour:+(document.getElementById('s-time').value?document.getElementById('s-time').value.split(':')[0]:0),minute:+(document.getElementById('s-time').value?document.getElementById('s-time').value.split(':')[1]:0)})});
+    var res=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y,hour:(function(){var h=+(document.getElementById('s-hour').value||0);var ap=document.getElementById('s-ampm').value;if(!h)return 0;if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;return h;})(),minute:+(document.getElementById('s-min').value||0)})});
     profile=await res.json();
 
     var d2=document.getElementById('s-day2').value;
@@ -372,7 +384,7 @@ async function sendMessage(){
   var tail='';
   if(freeUsed&&credits===0&&credits!==-1){
     tail='\n\nThis was your free question. Each additional question is $9.99.';
-    setTimeout(showPaywall,2500);
+    // Paywall shows when they try to ask next question, not automatically
   }else if(credits>0){
     tail='\n\n'+credits+' question'+(credits===1?'':'s')+' remaining.';
   }
