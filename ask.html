@@ -254,7 +254,7 @@ var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI
 
 var profile=null,partnerProfile=null,compatData=null;
 var messages=[];
-var freeUsed=false,credits=0;
+var freeUsed=false,credits=-1; // TESTING MODE: change to 0 for production
 var userGender='';
 var userEmail='';
 
@@ -329,7 +329,7 @@ function showChat(){
 
   var cc=compatData?'\nCompatibility code: '+compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third:'';
   var welcome=partnerProfile
-    ?'I see both of you.\n\nYour code: '+code+' · Pyramid: '+pyr+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+cc+'\n\n'+profile.birthDayDesc+'\n\nAsk me anything about yourself, this relationship, or what the numbers predict.'
+    ?'I see both of you.\n\nYour code: '+code+' · Pyramid: '+pyr+'\nTheir code: '+partnerProfile.pyth.biorhythm+'.'+partnerProfile.pyth.generational+'.'+partnerProfile.pyth.lifePath+' · Pyramid: '+partnerProfile.pyramid.first+'.'+partnerProfile.pyramid.second+'.'+partnerProfile.pyramid.third+cc+'\n\n'+profile.birthDayDesc+'\n\nAsk me anything about yourself, this relationship, or what the numbers predict.'
     :'I see you. Code: '+code+' · Pyramid: '+pyr+'\n\n'+profile.birthDayDesc+'\n\n'+profile.bioDesc+' '+profile.genDesc+'\n\nAsk me anything.';
 
   addMessage('ai',welcome);
