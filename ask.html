@@ -380,12 +380,12 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
 
 
 <!-- CODE CARD SCREEN -->
-<div id="screen-codecard" style="display:none;height:100%;background:#f5f0e8;padding:20px;align-items:center;justify-content:center;overflow-y:auto">
+<div id="screen-codecard" style="display:none;height:100%;background:#0a0e2e;padding:20px;align-items:center;justify-content:center;overflow-y:auto">
 <div style="max-width:400px;width:100%;margin:0 auto">
   
   <div style="text-align:center;margin-bottom:16px">
-    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#1a1a2e;letter-spacing:2px">Occultics</div>
-    <div style="font-size:9px;color:#545b66;margin-top:2px">Your free code card</div>
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#fff;letter-spacing:2px">Occultics</div>
+    <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px">Your free code card</div>
   </div>
 
   <div style="background:linear-gradient(145deg,#0a0e2e,#141845);border-radius:20px;padding:28px 22px;text-align:center;color:#fff;box-shadow:0 8px 32px rgba(10,14,46,0.2);margin-bottom:14px">
@@ -414,20 +414,20 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
     <div style="margin-top:10px;font-size:8px;color:rgba(255,255,255,0.15);letter-spacing:2px">OCCULTICS.AI</div>
   </div>
 
-  <div style="background:#fff;border:1px solid rgba(10,14,46,0.06);border-radius:10px;padding:12px 14px;margin-bottom:12px">
-    <div style="font-size:9px;letter-spacing:1.5px;color:#4a4f59;text-transform:uppercase;font-weight:500;margin-bottom:6px">Share your code</div>
-    <textarea id="cc-share-text" style="width:100%;height:44px;background:#f5f0e8;border:1px solid rgba(10,14,46,0.06);border-radius:8px;padding:8px;font-family:'Montserrat',system-ui,sans-serif;font-size:10px;color:#2d3142;resize:none;outline:none"></textarea>
+  <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;margin-bottom:12px">
+    <div style="font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,0.4);text-transform:uppercase;font-weight:500;margin-bottom:6px">Share your code</div>
+    <textarea id="cc-share-text" style="width:100%;height:44px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px;font-family:'Montserrat',system-ui,sans-serif;font-size:10px;color:#fff;resize:none;outline:none"></textarea>
     <div style="display:flex;gap:5px;margin-top:6px;flex-wrap:wrap">
       <button onclick="ccShare('whatsapp')" style="flex:1;min-width:60px;padding:8px;background:#25D366;color:#fff;border:none;border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">WhatsApp</button>
       <button onclick="ccShare('twitter')" style="flex:1;min-width:60px;padding:8px;background:#0a0e2e;color:#fff;border:none;border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">X</button>
       <button onclick="ccShare('instagram')" style="flex:1;min-width:60px;padding:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">Insta</button>
       <button onclick="ccShare('tiktok')" style="flex:1;min-width:60px;padding:8px;background:#010101;color:#fff;border:none;border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">TikTok</button>
-      <button id="cc-copy-btn" onclick="ccShare('copy')" style="flex:1;min-width:60px;padding:8px;background:#f5f0e8;color:#2d3142;border:1px solid rgba(10,14,46,0.08);border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">Copy</button>
+      <button id="cc-copy-btn" onclick="ccShare('copy')" style="flex:1;min-width:60px;padding:8px;background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.08);border-radius:6px;font-size:9px;font-weight:600;cursor:pointer;font-family:inherit">Copy</button>
     </div>
   </div>
 
   <button onclick="goToChat()" style="width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;letter-spacing:.3px">Ask Occultics — $9.99 per question</button>
-  <div style="text-align:center;font-size:11px;color:#545b66;margin-top:8px">Want to know why your relationships feel the way they feel?</div>
+  <div style="text-align:center;font-size:11px;color:rgba(255,255,255,0.35);margin-top:8px">Want to know why your relationships feel the way they feel?</div>
 </div>
 </div>
 
@@ -560,7 +560,7 @@ function showCodeCard(){
   var pyr=profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third;
   
   document.getElementById('screen-onboard').style.display='none';
-  document.getElementById('screen-codecard').style.display='flex';
+  var ccEl=document.getElementById('screen-codecard');ccEl.style.display='flex';ccEl.style.flexDirection='column';ccEl.style.alignItems='center';ccEl.style.justifyContent='center';
   
   document.getElementById('cc-code').textContent=code;
   document.getElementById('cc-pyr').textContent='Pyramid: '+pyr;
