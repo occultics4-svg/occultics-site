@@ -577,7 +577,8 @@ function ccShare(platform){
   var text=document.getElementById('cc-share-text').value;
   if(platform==='whatsapp')window.open('https://wa.me/?text='+encodeURIComponent(text));
   else if(platform==='twitter')window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text));
-  else if(platform==='instagram'||platform==='tiktok'){navigator.clipboard.writeText(text);document.getElementById('cc-copy-btn').textContent='Copied!';}
+  else if(platform==='instagram'){navigator.clipboard.writeText(text).then(function(){window.open('https://www.instagram.com/','_blank');});}
+  else if(platform==='tiktok'){navigator.clipboard.writeText(text).then(function(){window.open('https://www.tiktok.com/','_blank');});}
   else if(platform==='copy'){navigator.clipboard.writeText(text);document.getElementById('cc-copy-btn').textContent='Copied!';}
 }
 
