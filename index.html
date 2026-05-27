@@ -257,6 +257,7 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 
   <button class="ob-go" id="ob-go" onclick="startSession()">Ask Occultics</button>
+    <div style="text-align:center;font-size:11px;color:#545b66;margin-top:8px">Free profile & code card</div>
   <div class="ob-foot">$9.99 per question</div>
   <a href="/" class="ob-back">← Back to occultics.ai</a>
     <div style="display:flex;gap:4px;justify-content:center;margin-top:10px">
@@ -354,6 +355,66 @@ footer{padding:28px 24px;text-align:center;background:var(--navy);border-top:1px
   </div>
 </section>
 
+
+<!-- CODE CARD SCREEN -->
+<div id="screen-card" style="display:none;min-height:100vh;background:#f5f0e8;padding:20px;align-items:center;justify-content:center;flex-direction:column">
+  <div style="max-width:400px;width:100%;margin:0 auto">
+    
+    <div style="text-align:center;margin-bottom:20px">
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#1a1a2e;letter-spacing:2px">Occultics</div>
+    </div>
+
+    <!-- THE CARD -->
+    <div style="background:linear-gradient(145deg,#0a0e2e,#141845);border-radius:20px;padding:32px 24px;text-align:center;color:#fff;box-shadow:0 8px 32px rgba(10,14,46,0.2);margin-bottom:16px">
+      <div style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:4px">Your code</div>
+      <div id="card-code" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:52px;letter-spacing:8px;color:#4db8ff;margin-bottom:4px"></div>
+      <div id="card-pyr" style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:16px"></div>
+      <div id="card-date" style="font-size:9px;color:rgba(255,255,255,0.2);margin-bottom:16px"></div>
+      
+      <div style="text-align:left;border-top:1px solid rgba(255,255,255,0.06);padding-top:16px">
+        <div style="margin-bottom:12px">
+          <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:3px">Biorhythm — how people see you</div>
+          <div id="card-bio" style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6"></div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:3px">Generational — what you truly need</div>
+          <div id="card-gen" style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6"></div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div style="font-size:8px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;margin-bottom:3px">Life Path — your destiny</div>
+          <div id="card-lp" style="font-size:13px;color:rgba(255,255,255,0.7);line-height:1.6"></div>
+        </div>
+      </div>
+      
+      <div style="border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;margin-top:4px">
+        <div style="font-size:8px;letter-spacing:2px;color:rgba(255,255,255,0.25);text-transform:uppercase;margin-bottom:4px">Born on this day</div>
+        <div id="card-day" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;font-style:italic"></div>
+      </div>
+      
+      <div style="margin-top:14px;font-size:8px;color:rgba(255,255,255,0.15);letter-spacing:2px">OCCULTICS.AI</div>
+    </div>
+
+    <!-- SHARE -->
+    <div style="background:#fff;border:1px solid rgba(10,14,46,0.06);border-radius:12px;padding:14px 16px;margin-bottom:12px">
+      <div style="font-size:9px;letter-spacing:1.5px;color:#4a4f59;text-transform:uppercase;font-weight:500;margin-bottom:8px">Share your code</div>
+      <textarea id="share-text" style="width:100%;height:50px;background:#f5f0e8;border:1px solid rgba(10,14,46,0.06);border-radius:8px;padding:8px;font-family:'Montserrat',system-ui,sans-serif;font-size:11px;color:#2d3142;resize:none;outline:none"></textarea>
+      <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+        <button onclick="shareCard('whatsapp')" style="flex:1;min-width:70px;padding:9px;background:#25D366;color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">WhatsApp</button>
+        <button onclick="shareCard('twitter')" style="flex:1;min-width:70px;padding:9px;background:#0a0e2e;color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">X</button>
+        <button onclick="shareCard('instagram')" style="flex:1;min-width:70px;padding:9px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">Instagram</button>
+        <button onclick="shareCard('tiktok')" style="flex:1;min-width:70px;padding:9px;background:#010101;color:#fff;border:none;border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">TikTok</button>
+        <button id="copy-btn" onclick="shareCard('copy')" style="flex:1;min-width:70px;padding:9px;background:#f5f0e8;color:#2d3142;border:1px solid rgba(10,14,46,0.08);border-radius:8px;font-size:10px;font-weight:600;cursor:pointer;font-family:inherit">Copy</button>
+      </div>
+    </div>
+
+    <!-- CTA TO ASK -->
+    <button onclick="goToAsk()" style="width:100%;padding:16px;background:#1a2aff;color:#fff;border:none;border-radius:14px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Montserrat',system-ui,sans-serif;letter-spacing:.3px;margin-bottom:8px">Ask Occultics — $9.99 per question</button>
+    <div style="text-align:center;font-size:11px;color:#4a4a5a">Want to know why your relationships feel the way they feel?</div>
+    
+    <button onclick="document.getElementById('screen-card').style.display='none';document.getElementById('screen-onboard').style.display='flex';" style="display:block;margin:12px auto 0;background:none;border:none;font-size:11px;color:#6b7280;cursor:pointer;font-family:inherit">← Try another birthday</button>
+  </div>
+</div>
+
 </main>
 <section class="fcta">
   <h2 class="fct">Your birthday already knows the <em>answer.</em></h2>
@@ -394,18 +455,69 @@ function pickGender(g){
   if(el)el.classList.add('on');
 }
 
-function startSession(){
+var userData=null;
+var userEmail='';
+
+async function startSession(){
   var d=document.getElementById('s-day').value;
   var m=document.getElementById('s-month').value;
   var y=document.getElementById('s-year').value;
-  var email=document.getElementById('s-email').value.trim();
+  userEmail=document.getElementById('s-email').value.trim();
   if(!d||!m||!y)return;
-  if(!email||!email.includes('@'))return;
-  fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/book_leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k'},body:JSON.stringify({email:email,source:'homepage_ask',created_at:new Date().toISOString()})}).catch(function(){});
-  var url='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(email);
+  if(!userEmail||!userEmail.includes('@'))return;
+
+  var btn=document.getElementById('ob-go');
+  btn.textContent='Reading your numbers...';btn.disabled=true;
+
+  fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/book_leads',{method:'POST',headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k'},body:JSON.stringify({email:userEmail,source:'homepage_code',created_at:new Date().toISOString()})}).catch(function(){});
+
+  try{
+    var res=await fetch('https://occultics-decode.occultics4.workers.dev/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y})});
+    userData=await res.json();
+    showCodeCard(d,m,y);
+  }catch(e){
+    btn.textContent='Ask Occultics';btn.disabled=false;
+  }
+}
+
+function showCodeCard(d,m,y){
+  var code=userData.pyth.biorhythm+'.'+userData.pyth.generational+'.'+userData.pyth.lifePath;
+  var pyr=userData.pyramid.first+'.'+userData.pyramid.second+'.'+userData.pyramid.third;
+  
+  document.getElementById('screen-onboard').style.display='none';
+  document.getElementById('screen-card').style.display='flex';
+  
+  document.getElementById('card-code').textContent=code;
+  document.getElementById('card-pyr').textContent='Pyramid: '+pyr;
+  document.getElementById('card-bio').textContent=userData.bioDesc;
+  document.getElementById('card-gen').textContent=userData.genDesc;
+  document.getElementById('card-lp').textContent=userData.lpDesc;
+  document.getElementById('card-day').textContent=userData.birthDayDesc;
+  document.getElementById('card-date').textContent=d+'/'+m+'/'+y;
+  
+  // Build share text
+  var shareText='My Occultics code is '+code+'. '+userData.birthDayDesc+' What\'s yours? occultics.ai';
+  document.getElementById('share-text').value=shareText;
+}
+
+function goToAsk(){
+  var d=document.getElementById('s-day').value;
+  var m=document.getElementById('s-month').value;
+  var y=document.getElementById('s-year').value;
+  var url='/ask.html?d='+d+'&m='+m+'&y='+y+'&email='+encodeURIComponent(userEmail);
   var d2=document.getElementById('s-day2').value,m2=document.getElementById('s-month2').value,y2=document.getElementById('s-year2').value;
   if(d2&&m2&&y2)url+='&d2='+d2+'&m2='+m2+'&y2='+y2;
   window.location.href=url;
+}
+
+function shareCard(platform){
+  var text=document.getElementById('share-text').value;
+  var url='https://occultics.ai';
+  if(platform==='whatsapp')window.open('https://wa.me/?text='+encodeURIComponent(text));
+  else if(platform==='twitter')window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text));
+  else if(platform==='instagram'){navigator.clipboard.writeText(text);alert('Copied! Paste it in your Instagram story or bio.');}
+  else if(platform==='tiktok'){navigator.clipboard.writeText(text);alert('Copied! Paste it in your TikTok bio or comment.');}
+  else if(platform==='copy'){navigator.clipboard.writeText(text);document.getElementById('copy-btn').textContent='Copied!';}
 }
 
 function setLang(l){document.querySelectorAll('.lng').forEach(function(b){b.classList.toggle('on',b.textContent.trim().toLowerCase()===l);});}
