@@ -37,6 +37,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .story p{font-family:'Newsreader',serif;font-size:19px;font-weight:300;line-height:1.85;color:var(--text);margin-bottom:28px}
 .story p:first-child{font-size:22px;color:#1a1a2e}
 .story em{font-style:italic;color:var(--crystal)}
+
+/* PORTRAIT ROW (photo left, text right) */
+.portrait-row{display:flex;gap:36px;align-items:flex-start;margin-bottom:8px}
+.portrait{flex-shrink:0;width:200px;height:240px;border-radius:16px;object-fit:cover;border:1px solid var(--border);box-shadow:0 20px 50px rgba(10,14,46,0.1)}
+.portrait-row .ptext p:first-child{font-size:22px;color:#1a1a2e;margin-top:-4px}
+@media(max-width:640px){.portrait-row{flex-direction:column;align-items:center;text-align:center;gap:24px}.portrait{width:170px;height:204px}}
 .pull{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(24px,4vw,32px);font-weight:300;line-height:1.4;color:#1a1a2e;text-align:center;margin:48px 0;padding:0 12px;position:relative}
 .pull span{color:var(--crystal)}
 
@@ -94,9 +100,14 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 
 <!-- STORY -->
 <section class="story">
+<div class="portrait-row">
+<!-- PHOTO: file is adriana.jpg in the repo root. If you move it to a folder, update this path (e.g. images/adriana.jpg) -->
+<img src="adriana.jpg" alt="Adriana, founder of Occultics" class="portrait">
+<div class="ptext">
 <p>My background is in pedagogy and language. I spent years studying how patterns work — in communication, in behaviour, in the way humans form and repeat connections.</p>
-
 <p>In 2022, I began studying the Pythagorean system in depth — alongside somatic practices and various modalities of self-awareness. That work led me to a system that maps who you are and the trajectory of any relationship from two birth dates alone.</p>
+</div>
+</div>
 
 <div class="pull">81 distinct compatibility codes.<br><span>Each one telling a different story.</span></div>
 
