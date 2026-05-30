@@ -27,7 +27,6 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .code-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:#4db8ff;}
 .code-dot{font-size:24px;color:rgba(77,184,255,0.3);}
 .code-label{font-size:8px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;text-align:center;}
-/* Compatibility dual codes */
 .compat-codes{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:24px;}
 .compat-person{background:rgba(26,42,255,0.1);border:1px solid rgba(77,184,255,0.15);border-radius:14px;padding:16px 24px;text-align:center;min-width:180px;}
 .compat-person-name{font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-bottom:6px;}
@@ -52,10 +51,6 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .session-lock{font-size:10px;color:#8892a4;letter-spacing:1px;}
 .footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
 .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
-.audio-player{background:rgba(26,42,255,0.08);border:1px solid rgba(77,184,255,0.15);border-radius:12px;padding:16px;margin-bottom:20px;}
-.audio-label{font-size:9px;letter-spacing:2px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:10px;}
-audio{filter:sepia(20%) saturate(70%) grayscale(1) contrast(99%) invert(12%);height:36px;}
-audio::-webkit-media-controls-panel{background:rgba(26,42,255,0.15);}
 .footer-copy{font-size:9px;color:rgba(255,255,255,0.1);}
 .generating-banner{background:rgba(26,42,255,0.12);border:1px solid rgba(77,184,255,0.2);border-radius:12px;padding:16px 20px;margin:0 auto 24px;max-width:720px;display:none;text-align:center;}
 .generating-banner.show{display:block;}
@@ -88,7 +83,6 @@ audio::-webkit-media-controls-panel{background:rgba(26,42,255,0.15);}
     <div class="eyebrow" id="eyebrow-text">The Life Code Alignment</div>
     <h1 class="hero-name" id="pname">—</h1>
     <p class="hero-sub" id="psub">—</p>
-    <!-- Standard single-person code display -->
     <div class="code-box" id="single-code">
       <div><div class="code-num" id="pbio">—</div><div class="code-label">Biorhythm</div></div>
       <div class="code-dot">·</div>
@@ -96,7 +90,6 @@ audio::-webkit-media-controls-panel{background:rgba(26,42,255,0.15);}
       <div class="code-dot">·</div>
       <div><div class="code-num" id="plp">—</div><div class="code-label">Life Path</div></div>
     </div>
-    <!-- Compatibility dual code display -->
     <div id="compat-display" style="display:none;">
       <div class="compat-codes">
         <div class="compat-person">
@@ -116,7 +109,7 @@ audio::-webkit-media-controls-panel{background:rgba(26,42,255,0.15);}
   </div>
   <div class="generating-banner" id="generating-banner">
     <div class="generating-banner-title"><span class="generating-dot"></span>Your sessions are being generated</div>
-    <div class="generating-banner-sub">This usually takes 10-15 minutes. This page will refresh automatically — no need to do anything.</div>
+    <div class="generating-banner-sub">This usually takes a few minutes. This page will refresh automatically — no need to do anything.</div>
   </div>
   <div class="sessions" id="sessions"></div>
   <div class="footer">
@@ -130,27 +123,27 @@ var SUPABASE_URL = 'https://dtquqaridqyjdgirjczr.supabase.co';
 var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3ODYzMjIsImV4cCI6MjA5MDM2MjMyMn0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k';
 
 var LCA_DEFS = [
-  {key:'session1', num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
-  {key:'session2', num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
-  {key:'session3', num:'03', day:'Day 5',  title:'Your Core Drivers'},
-  {key:'session4', num:'04', day:'Day 7',  title:'Your Behavioral Code'},
-  {key:'session5', num:'05', day:'Day 9',  title:'Your Karmic Blueprint'},
-  {key:'session6', num:'06', day:'Day 11', title:'The Architecture of Your Reality'},
-  {key:'session7', num:'07', day:'Day 13', title:'Your Energetic Patterns'},
+  {key:'session1', num:'01', title:'Your Mathematical Blueprint'},
+  {key:'session2', num:'02', title:'Your Emotional Frequency'},
+  {key:'session3', num:'03', title:'Your Core Drivers'},
+  {key:'session4', num:'04', title:'Your Behavioral Code'},
+  {key:'session5', num:'05', title:'Your Karmic Blueprint'},
+  {key:'session6', num:'06', title:'The Architecture of Your Reality'},
+  {key:'session7', num:'07', title:'Your Energetic Patterns'},
 ];
 
 var COMPAT_DEFS = [
-  {key:'session1',  num:'01', day:'Day 1',  title:'Your Mathematical Blueprint'},
-  {key:'session2',  num:'02', day:'Day 3',  title:'Your Emotional Frequency'},
-  {key:'session3',  num:'03', day:'Day 5',  title:'Your Core Drivers'},
-  {key:'session4',  num:'04', day:'Day 7',  title:'Your Karmic Blueprint'},
-  {key:'session5',  num:'05', day:'Day 10', title:'Their Mathematical Blueprint'},
-  {key:'session6',  num:'06', day:'Day 12', title:'Their Emotional Frequency'},
-  {key:'session7',  num:'07', day:'Day 14', title:'Their Core Drivers'},
-  {key:'session8',  num:'08', day:'Day 16', title:'Their Karmic Blueprint'},
-  {key:'session9',  num:'09', day:'Day 19', title:'How You Met — What You Are Building'},
-  {key:'session10', num:'10', day:'Day 22', title:'The Mission — The Karmic Connection'},
-  {key:'session11', num:'11', day:'Day 25', title:'Your Combined Life Path — The Complete Picture'},
+  {key:'session1',  num:'01', title:'Your Mathematical Blueprint'},
+  {key:'session2',  num:'02', title:'Your Emotional Frequency'},
+  {key:'session3',  num:'03', title:'Your Core Drivers'},
+  {key:'session4',  num:'04', title:'Your Karmic Blueprint'},
+  {key:'session5',  num:'05', title:'Their Mathematical Blueprint'},
+  {key:'session6',  num:'06', title:'Their Emotional Frequency'},
+  {key:'session7',  num:'07', title:'Their Core Drivers'},
+  {key:'session8',  num:'08', title:'Their Karmic Blueprint'},
+  {key:'session9',  num:'09', title:'How You Met — What You Are Building'},
+  {key:'session10', num:'10', title:'The Mission — The Karmic Connection'},
+  {key:'session11', num:'11', title:'Your Combined Life Path — The Complete Picture'},
 ];
 
 var SESSION_DEFS = LCA_DEFS;
@@ -179,27 +172,20 @@ function toggleSession(idx) {
   }
 }
 
-function renderSessions(sections, audioUrls) {
+function renderSessions(sections) {
   var html = '';
   SESSION_DEFS.forEach(function(def, idx) {
     var s = sections[def.key] || {};
     var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
-    var audioUrl = audioUrls ? audioUrls[idx + 1] : null;
 
     html += '<div class="session-card unlocked">';
     html += '<div class="session-hdr" onclick="toggleSession('+idx+')">';
     html += '<div class="session-num">'+def.num+'</div>';
-    html += '<div class="session-meta"><div class="session-ey">Session '+def.num+' · '+def.day+'</div><div class="session-ti">'+def.title+'</div></div>';
+    html += '<div class="session-meta"><div class="session-ey">Session '+def.num+'</div><div class="session-ti">'+def.title+'</div></div>';
     html += '<div class="session-arr" id="sa'+idx+'">↓</div>';
     html += '</div>';
     if(hasText) {
       html += '<div class="session-body'+(idx===0?' open':'')+'" id="sb'+idx+'">';
-      if(audioUrl) {
-        html += '<div class="audio-player">';
-        html += '<div class="audio-label">Listen to this session</div>';
-        html += '<audio controls preload="none" style="width:100%;margin-bottom:16px;border-radius:8px;"><source src="'+audioUrl+'" type="audio/mpeg">Your browser does not support audio.</audio>';
-        html += '</div>';
-      }
       html += textToHTML(s.text);
       html += '</div>';
     } else {
@@ -219,8 +205,10 @@ function loadProfile() {
     return;
   }
 
-  fetch(SUPABASE_URL+'/rest/v1/transformational_profiles?profile_id=eq.'+encodeURIComponent(id)+'&select=*', {
-    headers: {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer '+SUPABASE_KEY}
+  fetch(SUPABASE_URL+'/rest/v1/rpc/get_profile', {
+    method: 'POST',
+    headers: {'apikey': SUPABASE_KEY, 'Authorization': 'Bearer '+SUPABASE_KEY, 'Content-Type': 'application/json'},
+    body: JSON.stringify({ p_id: id })
   })
   .then(function(r){ return r.json(); })
   .then(function(data) {
@@ -233,17 +221,13 @@ function loadProfile() {
     var rt = p.report_type || '';
     var isCompat = rt === 'compatibility_code';
 
-    // ---- SET NAME ----
     document.getElementById('pname').textContent = p.name || p.customer_name || '—';
     document.getElementById('expiry').textContent = formatDate(p.expires_at);
 
-    // ---- SET CODES ----
     if (isCompat) {
-      // Hide single code, show compatibility display
       document.getElementById('single-code').style.display = 'none';
       document.getElementById('compat-display').style.display = 'block';
 
-      // Parse pyth codes
       var code1 = (p.pyth_code || '').split('.');
       var code2 = (p.pyth_code_2 || '').split('.');
       var synCode = (p.synastry_code || '').split('.');
@@ -258,11 +242,9 @@ function loadProfile() {
       document.getElementById('eyebrow-text').textContent = 'The Compatibility Code';
       document.title = (p.name || 'Your') + ' Compatibility Code — Occultics';
     } else {
-      // Standard single-person display
       document.getElementById('single-code').style.display = 'flex';
       document.getElementById('compat-display').style.display = 'none';
 
-      // Try direct columns first, then parse from pyth_code
       var bio = p.biorhythm;
       var gen = p.generational;
       var lp = p.life_path;
@@ -284,26 +266,23 @@ function loadProfile() {
         document.getElementById('eyebrow-text').textContent = 'The Life Code Map';
         document.title = (p.name || 'Your') + ' Life Code Map — Occultics';
       } else {
-        document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 7 Sessions · 14 Days';
+        document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 7 Sessions';
         document.getElementById('eyebrow-text').textContent = 'The Life Code Alignment';
         document.title = (p.name || 'Your') + ' Life Code — Occultics';
       }
     }
 
-    // ---- SET SESSION DEFINITIONS ----
     if (isCompat) {
       SESSION_DEFS = COMPAT_DEFS;
     } else if (rt === 'life_code_map') {
-      SESSION_DEFS = [{key:'session1', num:'01', day:'Day 1', title:'Your Mathematical Blueprint'}];
+      SESSION_DEFS = [{key:'session1', num:'01', title:'Your Mathematical Blueprint'}];
     } else {
       SESSION_DEFS = LCA_DEFS;
     }
 
-    // ---- BUILD SESSIONS ----
     var sections = {};
 
     if (isCompat) {
-      // Compatibility code stores sessions as separate columns: session_1, session_2, etc.
       for (var i = 1; i <= 11; i++) {
         var colName = 'session_' + i;
         var keyName = 'session' + i;
@@ -312,22 +291,14 @@ function loadProfile() {
         }
       }
     } else {
-      // LCA/LCM stores sessions inside a sections JSON object
       sections = p.sections || {};
       if (typeof sections === 'string') {
         try { sections = JSON.parse(sections); } catch(e) { sections = {}; }
       }
     }
 
-    // ---- EXTRACT AUDIO URLs ----
-    var audioUrls = {};
-    for (var a = 1; a <= 11; a++) {
-      if (p['audio_' + a]) audioUrls[a] = p['audio_' + a];
-    }
+    renderSessions(sections);
 
-    renderSessions(sections, audioUrls);
-    
-    // Check if any sessions are still generating
     var totalSessions = SESSION_DEFS.length;
     var readySessions = 0;
     SESSION_DEFS.forEach(function(def) {
@@ -336,16 +307,14 @@ function loadProfile() {
         readySessions++;
       }
     });
-    
+
     if (readySessions < totalSessions) {
-      // Show generating banner
       document.getElementById('generating-banner').classList.add('show');
-      // Auto-refresh every 30 seconds
       setTimeout(function() { window.location.reload(); }, 30000);
     } else {
       document.getElementById('generating-banner').classList.remove('show');
     }
-    
+
     document.getElementById('main').style.display = 'block';
   })
   .catch(function(err) {
