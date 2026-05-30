@@ -118,7 +118,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 .hero .h-sub{animation:fadeUp .5s ease-out .2s backwards}
 .hero .h-cta{animation:fadeUp .5s ease-out .3s backwards}
 
-@media(max-width:768px){.app-grid{grid-template-columns:1fr}.stories-grid{grid-template-columns:1fr}.how-row{flex-direction:column;align-items:center}.n-r a{display:none}.n-tag{display:none}}
+@media(max-width:768px){.app-grid{grid-template-columns:1fr}.stories-grid{grid-template-columns:1fr}.how-row{flex-direction:column;align-items:center}.n-r a{display:none}.n-r a.keep{display:inline}.n-tag{display:none}}
 @media(min-width:769px) and (max-width:1024px){.app-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
@@ -133,6 +133,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
     <a href="#apps">Apps</a>
     <a href="#how">How It Works</a>
     <a href="#stories">Stories</a>
+    <a href="/blog/" class="keep">Blog</a>
     <a href="/ask.html">Ask Occultics</a>
     <a href="/about.html">About</a>
   </div>
@@ -219,7 +220,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
   <div class="f-tagline">Transformation, not information.</div>
   <div class="f-links">
     <a href="/ask.html">Ask Occultics</a>
-    <a href="/blog">Blog</a>
+    <a href="/blog/">Blog</a>
     <a href="/about.html">About</a>
     <a href="/terms.html">Terms</a>
     <a href="/privacy.html">Privacy</a>
@@ -231,14 +232,16 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 (function(){
   var launch=new Date('2026-05-30T08:00:00Z');
   function update(){
+    var el=document.getElementById('countdown-timer');
+    if(!el)return;
     var now=new Date();
     var diff=launch-now;
-    if(diff<=0){document.getElementById('countdown-timer').textContent='LIVE NOW';return;}
+    if(diff<=0){el.textContent='LIVE NOW';return;}
     var d=Math.floor(diff/86400000);
     var h=Math.floor((diff%86400000)/3600000);
     var m=Math.floor((diff%3600000)/60000);
     var s=Math.floor((diff%60000)/1000);
-    document.getElementById('countdown-timer').textContent=d+'d '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+    el.textContent=d+'d '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
   }
   update();
   setInterval(update,1000);
