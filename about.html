@@ -1,154 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>About — Occultics Media</title>
-<meta name="description" content="Meet Adriana — researcher and founder of Occultics Media. Self-awareness meets connection.">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Occultics</title>
+<meta name="description" content="Occultics decodes who you are and the trajectory of every relationship from your date of birth. Self-awareness meets connection.">
+<meta property="og:title" content="About — Occultics">
+<meta property="og:description" content="I decode people from their date of birth. Self-awareness meets connection.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://occultics.ai/about.html">
+<meta name="theme-color" content="#0a0e2e">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#1a1a2e;--gray:#8892a4;--bg:#fafbff;--light:#f0f2f8}
+:root{--bg:#f5f0e8;--card:#ffffff;--card2:#ede8df;--border:rgba(10,14,46,0.06);--text:#2d3142;--dim:#6b7280;--muted:#9ca3af;--crystal:#4db8ff;--accent2:#3b82f6;--purple:#a78bfa;--warm:#f59e0b;--rose:#f472b6;--white:#f8f9fa}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text)}
-header{padding:20px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(10,14,46,0.06)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
-.logo-name{font-size:14px;letter-spacing:4px;font-weight:700}
-nav a{font-size:11px;letter-spacing:1px;color:var(--gray);text-decoration:none;margin-left:24px;font-weight:500}
-nav a:hover{color:var(--royal)}
-.about-layout{max-width:900px;margin:0 auto;padding:80px 24px 60px;display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start}
-.about-photo{width:100%;border-radius:12px;object-fit:cover;aspect-ratio:3/4}
-.about-eyebrow{font-size:10px;letter-spacing:3px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
-.about-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,42px);font-weight:400;color:var(--navy);margin-bottom:6px}
-.about-title{font-size:12px;color:var(--gray);letter-spacing:0.5px;margin-bottom:32px}
-.about-body{font-size:14px;line-height:2;color:#3a3a4e}
-.about-body p{margin-bottom:18px}
-.podcast-box{margin-top:32px;padding:28px 24px;background:var(--navy);border-radius:12px;text-align:center}
-.podcast-box .pod-eyebrow{font-size:9px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
-.podcast-box .pod-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:#fff;margin-bottom:4px}
-.podcast-box .pod-sub{font-size:11px;color:var(--gray)}
-.cta-strip{max-width:900px;margin:0 auto;padding:0 24px 80px}
-.cta-strip-inner{text-align:center;padding:48px 32px;background:var(--navy);border-radius:12px}
-.cta-strip-inner h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:300;margin-bottom:12px}
-.cta-strip-inner p{font-size:13px;color:var(--gray);margin-bottom:20px}
-.cta-strip-inner a{display:inline-block;padding:14px 32px;background:var(--royal);color:#fff;text-decoration:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:0 8px 8px}
-.cta-strip-inner a:hover{background:#2a3aff}
-.cta-strip-inner a.outline{background:transparent;border:1px solid rgba(77,184,255,0.3);color:var(--crystal)}
-footer{padding:32px 48px;text-align:center;border-top:1px solid rgba(10,14,46,0.06);font-size:10px;color:var(--gray)}
-footer a{color:var(--royal);text-decoration:none}
-@media(max-width:768px){
-  header{padding:16px 20px}
-  .about-layout{grid-template-columns:1fr;gap:32px;padding:48px 20px 40px}
-  .about-photo{max-width:240px;margin:0 auto}
-  .cta-strip{padding:0 20px 60px}
-  footer{padding:24px 20px}
-}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.15}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.n-logo{font-weight:700;font-size:13px;letter-spacing:4px;color:#1a1a2e;text-decoration:none;text-transform:uppercase}
+.n-r{display:flex;gap:20px;align-items:center}
+.n-r a{font-size:11px;color:var(--dim);text-decoration:none;font-weight:500;transition:color .2s}
+.n-r a:hover{color:var(--crystal)}
+
+/* HERO */
+.hero{padding:150px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(26,42,255,0.03),transparent 70%);top:0;left:50%;transform:translate(-50%,-30%);pointer-events:none}
+.hero::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(167,139,250,0.04),transparent 70%);bottom:-10%;right:6%;pointer-events:none}
+.h-eyebrow{font-size:11px;letter-spacing:4px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:20px;position:relative;animation:fadeUp .5s ease-out}
+.h-title{font-family:'Newsreader',serif;font-size:clamp(34px,6vw,56px);font-weight:300;line-height:1.1;color:#1a1a2e;max-width:760px;margin:0 auto 20px;position:relative;animation:fadeUp .5s ease-out .1s backwards}
+.h-title em{font-style:italic;color:var(--crystal)}
+.h-sub{font-size:16px;color:var(--dim);line-height:1.8;font-weight:300;max-width:540px;margin:0 auto;position:relative;animation:fadeUp .5s ease-out .2s backwards}
+
+/* STORY */
+.story{max-width:680px;margin:0 auto;padding:40px 24px 60px}
+.story p{font-family:'Newsreader',serif;font-size:19px;font-weight:300;line-height:1.85;color:var(--text);margin-bottom:28px}
+.story p:first-child{font-size:22px;color:#1a1a2e}
+.story em{font-style:italic;color:var(--crystal)}
+.pull{font-family:'Newsreader',serif;font-style:italic;font-size:clamp(24px,4vw,32px);font-weight:300;line-height:1.4;color:#1a1a2e;text-align:center;margin:48px 0;padding:0 12px;position:relative}
+.pull span{color:var(--crystal)}
+
+/* STAT STRIP */
+.stat{background:#0a0e2e;border-radius:24px;max-width:680px;margin:0 auto 60px;padding:48px 32px;text-align:center;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(77,184,255,0.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.stat-num{font-family:'Newsreader',serif;font-size:clamp(48px,9vw,72px);font-weight:300;color:var(--crystal);line-height:1;margin-bottom:10px;position:relative}
+.stat-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:500;position:relative}
+.stat-sub{font-family:'Newsreader',serif;font-style:italic;font-size:15px;color:rgba(255,255,255,0.4);margin-top:14px;position:relative}
+
+/* CLOSING TAGLINE */
+.closing{text-align:center;padding:20px 24px 90px;max-width:600px;margin:0 auto}
+.closing-line{font-family:'Newsreader',serif;font-size:clamp(22px,4vw,30px);font-weight:300;color:#1a1a2e;line-height:1.4}
+.closing-line em{font-style:italic;color:var(--crystal)}
+
+/* CTA */
+.cta-sec{text-align:center;padding:90px 24px;position:relative;background:#0a0e2e}
+.cta-sec::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(26,42,255,0.04),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-title{font-family:'Newsreader',serif;font-size:clamp(28px,5vw,40px);font-weight:300;color:#fff;margin-bottom:12px;position:relative}
+.cta-title em{font-style:italic;color:var(--crystal)}
+.cta-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:28px;position:relative}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;padding:16px 40px;background:#1a2aff;color:#fff;border:none;border-radius:100px;text-decoration:none;font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;transition:all .2s;position:relative}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(26,42,255,0.3)}
+.cta-btn svg{width:16px;height:16px}
+
+footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px solid rgba(255,255,255,0.04)}
+.f-logo{font-weight:700;font-size:10px;letter-spacing:4px;color:rgba(255,255,255,0.4);margin-bottom:10px}
+.f-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
+.f-links a{font-size:10px;color:rgba(255,255,255,0.3);text-decoration:none}
+.f-links a:hover{color:var(--crystal)}
+.f-copy{font-size:9px;color:rgba(255,255,255,0.15)}
+.f-tagline{font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:8px;font-style:italic}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.n-r a{display:none}.n-r a.keep{display:inline}.story p{font-size:17px}.story p:first-child{font-size:19px}}
 </style>
 </head>
 <body>
-
-<header>
-  <a href="/" class="logo"><div class="logo-name">OCCULTICS MEDIA</div></a>
-  <nav>
-    <a href="/">Home</a>
-    <a href="/blog/">Blog</a>
-    <a href="/about.html">About</a>
-    <span style="margin-left:16px;">
-      <button onclick="setLang('en')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">EN</button>
-      <button onclick="setLang('es')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">ES</button>
-      <button onclick="setLang('ja')" class="lang-btn" style="padding:4px 10px;font-size:9px;letter-spacing:1px;border:1px solid rgba(10,14,46,0.1);background:none;color:var(--gray);border-radius:4px;cursor:pointer;font-family:'Montserrat',sans-serif;">JA</button>
-    </span>
-  </nav>
-</header>
-
-<div class="about-layout">
-  <img src="/adriana.jpg" alt="Adriana — Founder of Occultics Media" class="about-photo">
-  <div>
-    <div class="about-eyebrow" id="t-eyebrow">Founder</div>
-    <h1 class="about-name">Adriana</h1>
-    <p class="about-title" id="t-title">Researcher · Founder of Occultics Media</p>
-    
-    <div class="about-body">
-      <p id="t-p1">I decode people from their date of birth. Occultics Media is built on a single idea: to give you the tools to understand yourself and every relationship in your life.</p>
-
-      <p id="t-p2">My background is in pedagogy and language. I spent years studying how patterns work — in communication, in behaviour, in the way humans form and repeat connections. In 2022, I began studying the Pythagorean system in depth — alongside somatic practices and various modalities of self-awareness. That work led me to a system that maps who you are and the trajectory of any relationship from two birth dates alone. 81 distinct compatibility codes. Each one telling a different story.</p>
-
-      <p id="t-p3">Pythagorean numerology changed everything. It changed the way I look at myself and the way I understand relationships. Everything that happens to us is written in our date of birth. I built the system, digitized the research, and created Occultics — an AI-powered identity and compatibility decoder. What a therapist uncovers in months, your numbers already know.</p>
-
-      <p id="t-p4">Self-awareness meets connection.</p>
-    </div>
-
-  </div>
+<nav>
+<div style="display:flex;align-items:center"><a href="/" class="n-logo">Occultics</a></div>
+<div class="n-r">
+<a href="/#apps">Apps</a>
+<a href="/#how">How It Works</a>
+<a href="/ask.html">Ask Occultics</a>
+<a href="/about.html" class="keep">About</a>
 </div>
+</nav>
 
-<div class="cta-strip">
-  <div class="cta-strip-inner">
-    <h3 id="t-cta-title">The system is live. The math is waiting.</h3>
-    <p id="t-cta-sub">Decode yourself. Decode your relationship.</p>
-    <a href="/" id="t-cta-btn">Decode Yourself</a>
-    <a href="/blog/" class="outline" id="t-cta-blog">Read the Blog</a>
-  </div>
-</div>
+<!-- HERO -->
+<section class="hero">
+<div class="h-eyebrow">About Occultics</div>
+<h1 class="h-title">I decode people from their <em>date of birth.</em></h1>
+<p class="h-sub">Occultics Media is built on a single idea: to give you the tools to understand yourself and every relationship in your life.</p>
+</section>
+
+<!-- STORY -->
+<section class="story">
+<p>My background is in pedagogy and language. I spent years studying how patterns work — in communication, in behaviour, in the way humans form and repeat connections.</p>
+
+<p>In 2022, I began studying the Pythagorean system in depth — alongside somatic practices and various modalities of self-awareness. That work led me to a system that maps who you are and the trajectory of any relationship from two birth dates alone.</p>
+
+<div class="pull">81 distinct compatibility codes.<br><span>Each one telling a different story.</span></div>
+
+<p>Pythagorean numerology changed everything. It changed the way I look at myself and the way I understand relationships. Everything that happens to us is written in our date of birth.</p>
+
+<p>I built the system, digitized the research, and created Occultics — so anyone can read their own code, and the codes of the people they love.</p>
+
+<!--
+  THERAPIST LINE — two options. The page currently shows the SOFTENED version.
+  To use your original instead, replace the <p> below with:
+  <p><em>What a therapist uncovers in months, your numbers already know.</em></p>
+-->
+<p><em>What might take months to put into words, your numbers can help you see.</em></p>
+</section>
+
+<!-- STAT -->
+<section class="stat">
+<div class="stat-num">81</div>
+<div class="stat-label">Distinct Compatibility Codes</div>
+<div class="stat-sub">Each one telling a different story.</div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+<div class="closing-line">Self-awareness meets <em>connection.</em></div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+<h2 class="cta-title">Your birthday holds the <em>key.</em></h2>
+<p class="cta-sub">Not information — a shift you can feel.</p>
+<a href="/ask.html" class="cta-btn">Begin your alignment
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+</a>
+</section>
 
 <footer>
-  © 2026 Occultics Media · <a href="/">occultics.ai</a>
+<div class="f-logo">OCCULTICS</div>
+<div class="f-tagline">Transformation, not information.</div>
+<div class="f-links">
+<a href="/ask.html">Ask Occultics</a>
+<a href="/blog">Blog</a>
+<a href="/about.html">About</a>
+<a href="/terms.html">Terms</a>
+<a href="/privacy.html">Privacy</a>
+</div>
+<div class="f-copy">&copy; 2026 Occultics Media · occultics.ai</div>
 </footer>
-
-<script>
-var translations = {
-  en: {
-    't-eyebrow': 'Founder',
-    't-title': 'Researcher · Founder of Occultics Media',
-    't-p1': 'I connect people based on their date of birth. Occultics Media is built on a single idea: to give you tools to transform your reality.',
-    't-p2': "My background is in pedagogy and language. I spent years studying how patterns work — in communication, in behaviour, in the way humans form and repeat connections. In 2022, I began studying the Pythagorean system in depth — alongside astrology, somatic practices, and various modalities of self-awareness. That work led me to research over 700,000 words of original Pythagorean material — and to a system that maps the trajectory of a relationship from two birth dates alone. 81 distinct compatibility codes. Each one telling a different story.",
-    't-p3': "Pythagorean numerology changed everything. It changed the way I look at myself and the way I understand relationships. Everything that happens to us is written in our date of birth. I built the system, digitized the research, and created Occultics Match — the world\u2019s first platform that connects people based on their date of birth.",
-    't-p4': 'Self-awareness meets connection.',
-    't-pod-name': 'What Transformed You',
-    't-pod-sub': 'By Occultics Media',
-    't-cta-title': 'The system is live. The math is waiting.',
-    't-cta-sub': 'Decode yourself. Decode your relationship.',
-    't-cta-btn': 'Decode Yourself \u2014 Free',
-    't-cta-blog': 'Read the Blog'
-  },
-  es: {
-    't-eyebrow': 'Fundadora',
-    't-title': 'Investigadora · Fundadora de Occultics Media',
-    't-p1': 'Conecto personas bas\u00e1ndome en su fecha de nacimiento. Occultics Media est\u00e1 construida sobre una sola idea: darte herramientas para transformar tu realidad.',
-    't-p2': 'Mi formaci\u00f3n es en pedagog\u00eda y lengua. Pas\u00e9 a\u00f1os estudiando c\u00f3mo funcionan los patrones — en la comunicaci\u00f3n, en el comportamiento, en la forma en que los humanos forman y repiten conexiones. En 2022, comenc\u00e9 a estudiar el sistema pitag\u00f3rico en profundidad — junto con astrolog\u00eda, pr\u00e1cticas som\u00e1ticas y diversas modalidades de autoconciencia. Ese trabajo me llev\u00f3 a investigar m\u00e1s de 700.000 palabras de material pitag\u00f3rico original — y a un sistema que mapea la trayectoria de una relaci\u00f3n a partir de dos fechas de nacimiento. 81 c\u00f3digos de compatibilidad distintos. Cada uno contando una historia diferente.',
-    't-p3': 'La numerolog\u00eda pitag\u00f3rica lo cambi\u00f3 todo. Cambi\u00f3 la forma en que me veo a m\u00ed misma y la forma en que entiendo las relaciones. Todo lo que nos sucede est\u00e1 escrito en nuestra fecha de nacimiento. Constru\u00ed el sistema, digitalic\u00e9 la investigaci\u00f3n y cre\u00e9 Occultics Match — la primera plataforma del mundo que conecta personas bas\u00e1ndose en su fecha de nacimiento.',
-    't-p4': 'La autoconciencia se encuentra con la conexi\u00f3n.',
-    't-pod-name': 'What Transformed You',
-    't-pod-sub': 'Por Occultics Media',
-    't-cta-title': 'El sistema est\u00e1 activo. Las matem\u00e1ticas esperan.',
-    't-cta-sub': 'Calcula tu c\u00f3digo y descubre con qui\u00e9n conectas.',
-    't-cta-btn': 'Descifra Tu C\u00f3digo \u2014 Gratis',
-    't-cta-blog': 'Leer el Blog'
-  },
-  ja: {
-    't-eyebrow': '創設者',
-    't-title': '研究者 · Occultics Media 創設者',
-    't-p1': '私は生年月日に基づいて人々をつなぎます。Occultics Mediaは一つのアイデアの上に構築されています：あなたの現実を変えるツールを提供すること。',
-    't-p2': '私のバックグラウンドは教育学と言語です。長年にわたり、パターンがどのように機能するかを研究してきました。2022年、ピタゴラスのシステムを深く学び始めました — 占星術、身体的実践、そして様々な自己認識の方法とともに。この研究により、70万語以上のオリジナルのピタゴラス資料を調査し、二つの生年月日だけから関係の軌跡をマッピングできるシステムを発見しました。81の異なる相性コード。それぞれが異なる物語を語ります。',
-    't-p3': 'ピタゴラス数秘術がすべてを変えました。自分自身を見る方法と人間関係を理解する方法が変わりました。私たちに起こるすべてのことは、生年月日に書かれています。私はシステムを構築し、研究をデジタル化し、Occulticsを作りました — あなたが誰であるか、そしてあなたの人生のすべての関係の真実を伝えるAIアイデンティティ＆互換性デコーダー。',
-    't-p4': '自己認識がつながりと出会う。',
-    't-pod-name': 'What Transformed You',
-    't-pod-sub': 'By Occultics Media',
-    't-cta-title': 'システムは稼働中。数学が待っています。',
-    't-cta-sub': 'あなたのコードを計算し、誰とつながるか確認しましょう。',
-    't-cta-btn': 'あなたのコードを解読 — 無料',
-    't-cta-blog': 'ブログを読む'
-  }
-};
-
-function setLang(lang) {
-  var t = translations[lang];
-  if (!t) return;
-  Object.keys(t).forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.textContent = t[id];
-  });
-  document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'es' ? 'es' : 'en';
-}
-</script>
-
 </body>
 </html>
