@@ -40,6 +40,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .h-title em{font-style:italic;color:var(--crystal)}
 .h-sub{font-size:16px;color:var(--dim);line-height:1.7;font-weight:300;margin-bottom:20px;max-width:480px;position:relative}
 .h-tagline{font-size:12px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;position:relative}
+
+/* COUNTDOWN */
+.countdown{position:relative;margin-bottom:36px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cd-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--crystal);font-weight:600}
+.cd-timer{display:flex;gap:14px}
+.cd-unit{display:flex;flex-direction:column;align-items:center;min-width:62px;background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px 10px;box-shadow:0 8px 24px rgba(10,14,46,0.05)}
+.cd-num{font-family:'Newsreader',serif;font-size:34px;font-weight:300;color:#1a1a2e;line-height:1}
+.cd-u{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:6px;font-weight:600}
+.cd-live{font-family:'Newsreader',serif;font-size:28px;font-style:italic;color:var(--crystal)}
+@media(max-width:768px){.cd-unit{min-width:54px;padding:12px 8px}.cd-num{font-size:28px}}
 .h-cta{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:#1a2aff;color:#fff;border-radius:100px;text-decoration:none;font-size:14px;font-weight:600;transition:all .2s;position:relative}
 .h-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,42,255,0.2)}
 .h-cta svg{width:16px;height:16px}
@@ -145,6 +155,14 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
   <h1 class="h-title">Transformation,<br>not <em>information.</em></h1>
   <p class="h-sub">We help overwhelmed, burnt-out individuals experience alignment again. Interactive apps built from NLP, Gestalt, Deep PEAT, numerology, and astrology - personalized to your date of birth. Stop consuming information. Start shifting.</p>
   <div class="h-tagline">Self-awareness meets connection</div>
+  <div class="countdown">
+    <div class="cd-label">Date of Birth Alignment launches in</div>
+    <div class="cd-timer" id="countdown-timer">
+      <div class="cd-unit"><span class="cd-num" id="cd-h">00</span><span class="cd-u">Hours</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">00</span><span class="cd-u">Minutes</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">00</span><span class="cd-u">Seconds</span></div>
+    </div>
+  </div>
   <a href="#apps" class="h-cta">
     Explore Apps
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
@@ -230,18 +248,20 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 
 <script>
 (function(){
-  var launch=new Date('2026-05-30T08:00:00Z');
+  var launch=new Date('2026-05-31T15:00:00Z'); // May 31, 2026, 17:00 Zagreb time
+  var wrap=document.getElementById('countdown-timer');
   function update(){
-    var el=document.getElementById('countdown-timer');
-    if(!el)return;
+    if(!wrap)return;
     var now=new Date();
     var diff=launch-now;
-    if(diff<=0){el.textContent='LIVE NOW';return;}
-    var d=Math.floor(diff/86400000);
-    var h=Math.floor((diff%86400000)/3600000);
+    if(diff<=0){wrap.innerHTML='<span class="cd-live">Live now</span>';return;}
+    var h=Math.floor(diff/3600000);
     var m=Math.floor((diff%3600000)/60000);
     var s=Math.floor((diff%60000)/1000);
-    el.textContent=d+'d '+String(h).padStart(2,'0')+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+    var eh=document.getElementById('cd-h'),em=document.getElementById('cd-m'),es=document.getElementById('cd-s');
+    if(eh)eh.textContent=String(h).padStart(2,'0');
+    if(em)em.textContent=String(m).padStart(2,'0');
+    if(es)es.textContent=String(s).padStart(2,'0');
   }
   update();
   setInterval(update,1000);
