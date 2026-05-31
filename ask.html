@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Date of Birth Alignment — Occultics</title>
-<meta name="description" content="Enter your date of birth and receive your complete Life Code Alignment — all seven sessions, generated from your mathematical blueprint, available instantly.">
+<meta name="description" content="Enter your date of birth and receive your complete Date of Birth Alignment — all seven sessions, generated from your mathematical blueprint, available instantly.">
 <meta property="og:title" content="Date of Birth Alignment — Occultics">
-<meta property="og:description" content="Your complete Life Code Alignment — seven guided sessions built from your date of birth. Not a reading. A realignment.">
+<meta property="og:description" content="Your complete Date of Birth Alignment — seven guided sessions built from your date of birth. Not a reading. A realignment.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://occultics.ai/ask.html">
 <meta name="theme-color" content="#0a0e2e">
@@ -115,7 +115,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 <section class="hero">
 <div class="h-eyebrow">Date of Birth Alignment</div>
 <h1 class="h-title">Your birthday is a <em>code.</em><br>Let's decode it.</h1>
-<p class="h-sub">Enter your details to receive your complete Life Code Alignment — all seven sessions, built from your mathematical blueprint, available the moment it's ready.</p>
+<p class="h-sub">Enter your details to receive your complete Date of Birth Alignment — all seven sessions, built from your mathematical blueprint, available the moment it's ready.</p>
 <div class="bday-card">
 <div class="bc-field"><div class="bc-label">Your details</div><label for="fname">Full name</label><input type="text" id="fname" placeholder="Your name" autocomplete="name"></div>
 <div class="bc-field"><label for="email">Email (where we send your profile link)</label><input type="email" id="email" placeholder="you@example.com" autocomplete="email"></div>
@@ -132,6 +132,11 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 <div class="gender-opt"><input type="radio" name="gender" id="gf" value="female"><label for="gf">Female</label></div>
 <div class="gender-opt"><input type="radio" name="gender" id="gm" value="male"><label for="gm">Male</label></div>
 <div class="gender-opt"><input type="radio" name="gender" id="go" value="other"><label for="go">Other</label></div>
+</div></div>
+<div class="bc-field"><label>Language of your reading</label><div class="gender-row">
+<div class="gender-opt"><input type="radio" name="lang" id="lang-en" value="en" checked><label for="lang-en">English</label></div>
+<div class="gender-opt"><input type="radio" name="lang" id="lang-es" value="es"><label for="lang-es">Español</label></div>
+<div class="gender-opt"><input type="radio" name="lang" id="lang-ja" value="ja"><label for="lang-ja">日本語</label></div>
 </div></div>
 <div class="bc-err" id="err"></div>
 <button class="bc-cta" id="beginBtn" disabled>Begin my alignment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></button>
@@ -179,7 +184,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 <div class="f-copy">&copy; 2026 Occultics Media · occultics.ai</div>
 </footer>
 <script>
-var STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJe00b1Pl3mCcqdaQ10co03";
+var CHECKOUT_ENDPOINT = "https://occultics-checkout.occultics4.workers.dev/";
 var fname=document.getElementById('fname'),email=document.getElementById('email');
 var dd=document.getElementById('dd'),mm=document.getElementById('mm'),yyyy=document.getElementById('yyyy');
 var hh=document.getElementById('hh'),min=document.getElementById('min');
@@ -216,20 +221,32 @@ function showPreview(){
 }
 [fname,email,dd,mm,yyyy,hh,min].forEach(function(el){el.addEventListener('input',function(){validate();if(dd.value&&mm.value&&yyyy.value)showPreview();});});
 [document.getElementById('gf'),document.getElementById('gm'),document.getElementById('go')].forEach(function(el){el.addEventListener('change',validate);});
+function getLang(){var l=document.querySelector('input[name=lang]:checked');return l?l.value:'en';}
 btn.addEventListener('click',function(){
   var v=validate();if(!v)return;
   var iso=v.y+'-'+String(v.m).padStart(2,'0')+'-'+String(v.d).padStart(2,'0');
   var time=(hh.value!==''?String(+hh.value).padStart(2,'0')+':'+String(min.value!==''?+min.value:0).padStart(2,'0'):'');
-  var params=new URLSearchParams();
-  params.set('client_reference_id',iso);
-  params.set('customer_name',v.name);
-  params.set('prefilled_email',v.email);
-  params.set('dob',iso);
-  if(time)params.set('time_of_birth',time);
-  params.set('gender',v.gender);
-  params.set('report_type','life_code_alignment');
-  var sep=STRIPE_CHECKOUT_URL.indexOf('?')>-1?'&':'?';
-  window.location.href=STRIPE_CHECKOUT_URL+sep+params.toString();
+  btn.disabled=true;
+  var original=btn.innerHTML;
+  btn.textContent='Preparing your checkout...';
+  fetch(CHECKOUT_ENDPOINT,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      customer_name:v.name,
+      email:v.email,
+      date_of_birth:iso,
+      time_of_birth:time,
+      gender:v.gender,
+      lang:getLang()
+    })
+  })
+  .then(function(r){return r.json();})
+  .then(function(data){
+    if(data && data.url){ window.location.href=data.url; }
+    else { err.textContent=(data&&data.error)||'Something went wrong. Please try again.'; btn.disabled=false; btn.innerHTML=original; }
+  })
+  .catch(function(){ err.textContent='Could not reach checkout. Please try again.'; btn.disabled=false; btn.innerHTML=original; });
 });
 document.getElementById('scrollBtn').addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){fname.focus()},500);});
 </script>
