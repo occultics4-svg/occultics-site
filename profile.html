@@ -362,35 +362,39 @@ function downloadPDF() {
               : rt === 'life_code_map' ? 'The Life Code Map'
               : 'Date of Birth Alignment';
 
-  // Build a clean, paper-styled document (white bg, dark text)
+  // Build a clean, paper-styled document (white bg, dark text).
+  // Title block is its own page; each session starts on a fresh page.
   var html = '' +
-    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#1a1a2e;padding:48px 40px;max-width:760px;">' +
-    '<div style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:24px;margin-bottom:32px;">' +
-      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:4px;color:#1a2aff;text-transform:uppercase;font-weight:bold;margin-bottom:10px;">OCCULTICS</div>' +
-      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2px;color:#888;text-transform:uppercase;margin-bottom:14px;">' + escapeHtml(heading) + '</div>' +
-      '<h1 style="font-size:34px;font-weight:normal;margin:0 0 8px;">' + escapeHtml(name) + '</h1>' +
-      '<div style="font-size:13px;color:#888;">Born ' + escapeHtml(formatDate(p.date_of_birth)) + '</div>' +
+    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#1a1a2e;">' +
+    '<div style="text-align:center;padding:120px 56px 0;">' +
+      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:5px;color:#1a2aff;text-transform:uppercase;font-weight:bold;margin-bottom:14px;">OCCULTICS</div>' +
+      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;margin-bottom:28px;">' + escapeHtml(heading) + '</div>' +
+      '<h1 style="font-size:46px;font-weight:normal;margin:0 0 14px;">' + escapeHtml(name) + '</h1>' +
+      '<div style="font-size:15px;color:#888;">Born ' + escapeHtml(formatDate(p.date_of_birth)) + '</div>' +
     '</div>';
 
   var any = false;
-  SESSION_DEFS.forEach(function(def) {
+  SESSION_DEFS.forEach(function(def, idx) {
     var s = sections[def.key] || {};
     var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
     if (!hasText) return;             // skip sessions not yet generated
     any = true;
     var paras = s.text.split('\n\n').filter(function(x){return x.trim();})
-      .map(function(x){ return '<p style="font-size:14px;line-height:1.85;margin:0 0 16px;">' + escapeHtml(x.trim()) + '</p>'; })
+      .map(function(x){ return '<p style="font-size:17px;line-height:1.95;margin:0 0 22px;page-break-inside:avoid;">' + escapeHtml(x.trim()) + '</p>'; })
       .join('');
+    // every session begins on a new page
     html += '' +
-      '<div style="margin-bottom:36px;page-break-inside:auto;">' +
-        '<div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2px;color:#1a2aff;text-transform:uppercase;margin-bottom:4px;">Session ' + def.num + '</div>' +
-        '<h2 style="font-size:22px;font-weight:normal;margin:0 0 16px;border-bottom:1px solid #eee;padding-bottom:8px;">' + escapeHtml(def.title) + '</h2>' +
+      '<div class="page-break-before" style="page-break-before:always;padding:64px 56px 40px;">' +
+        '<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:3px;color:#1a2aff;text-transform:uppercase;margin-bottom:8px;">Session ' + def.num + '</div>' +
+        '<h2 style="font-size:30px;font-weight:normal;margin:0 0 30px;border-bottom:1px solid #e2e2e2;padding-bottom:16px;page-break-after:avoid;">' + escapeHtml(def.title) + '</h2>' +
         paras +
       '</div>';
   });
 
-  html += '<div style="text-align:center;border-top:1px solid #ccc;padding-top:20px;margin-top:24px;font-family:Helvetica,Arial,sans-serif;font-size:10px;color:#aaa;">' +
-            '© 2026 Occultics Publishing · occultics.ai · For informational and entertainment purposes only.' +
+  // footer on its own final page
+  html += '<div class="page-break-before" style="page-break-before:always;text-align:center;padding:120px 56px 0;font-family:Helvetica,Arial,sans-serif;font-size:11px;color:#aaa;line-height:1.8;">' +
+            '<div style="font-size:18px;color:#1a1a2e;font-family:Georgia,serif;font-style:italic;margin-bottom:24px;">"Your numbers have always known the way."</div>' +
+            '© 2026 Occultics Publishing · occultics.ai<br>For informational and entertainment purposes only.' +
           '</div></div>';
 
   if (!any) {
@@ -405,12 +409,12 @@ function downloadPDF() {
 
   var safeName = (name + '').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'') || 'profile';
   var opt = {
-    margin:       [10, 8, 12, 8],
+    margin:       [12, 0, 16, 0],
     filename:     'occultics-' + safeName + '.pdf',
     image:        { type:'jpeg', quality:0.98 },
     html2canvas:  { scale:2, backgroundColor:'#ffffff', useCORS:true },
     jsPDF:        { unit:'mm', format:'a4', orientation:'portrait' },
-    pagebreak:    { mode:['css','legacy'] }
+    pagebreak:    { mode:['css'], before:'.page-break-before', avoid:'p' }
   };
 
   html2pdf().set(opt).from(holder).save()
