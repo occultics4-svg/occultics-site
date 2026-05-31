@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Life Code — Occultics</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-height:100vh;}
@@ -19,6 +20,10 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .hdr{background:rgba(10,14,46,0.97);border-bottom:1px solid rgba(77,184,255,0.1);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
 .hdr a{font-weight:700;font-size:12px;letter-spacing:4px;color:#fff;text-decoration:none;}
 .hdr span{font-size:10px;color:#8892a4;}
+.hdr-right{display:flex;align-items:center;gap:18px;}
+.dl-btn{display:none;align-items:center;gap:7px;background:#4db8ff;color:#0a0e2e;border:none;border-radius:8px;padding:8px 16px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+.dl-btn:hover{background:#7accff;transform:translateY(-1px);}
+.dl-btn:disabled{opacity:0.5;cursor:wait;transform:none;}
 .hero{padding:60px 32px 44px;text-align:center;border-bottom:1px solid rgba(77,184,255,0.08);background:radial-gradient(ellipse at 50% 0%,rgba(26,42,255,0.08) 0%,transparent 70%);}
 .eyebrow{font-size:9px;letter-spacing:3px;color:#4db8ff;text-transform:uppercase;font-weight:600;margin-bottom:16px;}
 .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;margin-bottom:8px;}
@@ -77,7 +82,10 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 <div id="main">
   <div class="hdr">
     <a href="/">OCCULTICS</a>
-    <span>Expires <span id="expiry">—</span></span>
+    <div class="hdr-right">
+      <button class="dl-btn" id="dl-btn" onclick="downloadPDF()">⬇ Download PDF</button>
+      <span>Yours to keep</span>
+    </div>
   </div>
   <div class="hero">
     <div class="eyebrow" id="eyebrow-text">The Life Code Alignment</div>
@@ -222,7 +230,6 @@ function loadProfile() {
     var isCompat = rt === 'compatibility_code';
 
     document.getElementById('pname').textContent = p.name || p.customer_name || '—';
-    document.getElementById('expiry').textContent = formatDate(p.expires_at);
 
     if (isCompat) {
       document.getElementById('single-code').style.display = 'none';
@@ -299,6 +306,11 @@ function loadProfile() {
 
     renderSessions(sections);
 
+    // make data available to the PDF generator
+    window.__profile = p;
+    window.__sections = sections;
+    window.__isCompat = isCompat;
+
     var totalSessions = SESSION_DEFS.length;
     var readySessions = 0;
     SESSION_DEFS.forEach(function(def) {
@@ -307,6 +319,11 @@ function loadProfile() {
         readySessions++;
       }
     });
+
+    // show the Download button once at least one session is ready to read
+    if (readySessions > 0) {
+      document.getElementById('dl-btn').style.display = 'inline-flex';
+    }
 
     if (readySessions < totalSessions) {
       document.getElementById('generating-banner').classList.add('show');
@@ -322,6 +339,87 @@ function loadProfile() {
     document.getElementById('loading').style.display='none';
     document.getElementById('notfound').style.display='flex';
   });
+}
+
+function escapeHtml(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function downloadPDF() {
+  var p = window.__profile;
+  var sections = window.__sections || {};
+  if (!p) return;
+
+  var btn = document.getElementById('dl-btn');
+  btn.disabled = true;
+  var oldLabel = btn.textContent;
+  btn.textContent = 'Preparing…';
+
+  var name = p.name || p.customer_name || 'Your';
+  var rt = p.report_type || '';
+  var heading = rt === 'compatibility_code' ? 'The Compatibility Code'
+              : rt === 'life_code_map' ? 'The Life Code Map'
+              : 'Date of Birth Alignment';
+
+  // Build a clean, paper-styled document (white bg, dark text)
+  var html = '' +
+    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#1a1a2e;padding:48px 40px;max-width:760px;">' +
+    '<div style="text-align:center;border-bottom:1px solid #ccc;padding-bottom:24px;margin-bottom:32px;">' +
+      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:4px;color:#1a2aff;text-transform:uppercase;font-weight:bold;margin-bottom:10px;">OCCULTICS</div>' +
+      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2px;color:#888;text-transform:uppercase;margin-bottom:14px;">' + escapeHtml(heading) + '</div>' +
+      '<h1 style="font-size:34px;font-weight:normal;margin:0 0 8px;">' + escapeHtml(name) + '</h1>' +
+      '<div style="font-size:13px;color:#888;">Born ' + escapeHtml(formatDate(p.date_of_birth)) + '</div>' +
+    '</div>';
+
+  var any = false;
+  SESSION_DEFS.forEach(function(def) {
+    var s = sections[def.key] || {};
+    var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
+    if (!hasText) return;             // skip sessions not yet generated
+    any = true;
+    var paras = s.text.split('\n\n').filter(function(x){return x.trim();})
+      .map(function(x){ return '<p style="font-size:14px;line-height:1.85;margin:0 0 16px;">' + escapeHtml(x.trim()) + '</p>'; })
+      .join('');
+    html += '' +
+      '<div style="margin-bottom:36px;page-break-inside:auto;">' +
+        '<div style="font-family:Helvetica,Arial,sans-serif;font-size:10px;letter-spacing:2px;color:#1a2aff;text-transform:uppercase;margin-bottom:4px;">Session ' + def.num + '</div>' +
+        '<h2 style="font-size:22px;font-weight:normal;margin:0 0 16px;border-bottom:1px solid #eee;padding-bottom:8px;">' + escapeHtml(def.title) + '</h2>' +
+        paras +
+      '</div>';
+  });
+
+  html += '<div style="text-align:center;border-top:1px solid #ccc;padding-top:20px;margin-top:24px;font-family:Helvetica,Arial,sans-serif;font-size:10px;color:#aaa;">' +
+            '© 2026 Occultics Publishing · occultics.ai · For informational and entertainment purposes only.' +
+          '</div></div>';
+
+  if (!any) {
+    btn.disabled = false; btn.textContent = oldLabel;
+    alert('Your sessions are still being prepared. Please try again in a few minutes.');
+    return;
+  }
+
+  var holder = document.createElement('div');
+  holder.style.background = '#ffffff';
+  holder.innerHTML = html;
+
+  var safeName = (name + '').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'') || 'profile';
+  var opt = {
+    margin:       [10, 8, 12, 8],
+    filename:     'occultics-' + safeName + '.pdf',
+    image:        { type:'jpeg', quality:0.98 },
+    html2canvas:  { scale:2, backgroundColor:'#ffffff', useCORS:true },
+    jsPDF:        { unit:'mm', format:'a4', orientation:'portrait' },
+    pagebreak:    { mode:['css','legacy'] }
+  };
+
+  html2pdf().set(opt).from(holder).save()
+    .then(function(){ btn.disabled = false; btn.textContent = oldLabel; })
+    .catch(function(e){
+      console.error('PDF error', e);
+      btn.disabled = false; btn.textContent = oldLabel;
+      alert('Sorry — something went wrong creating the PDF. Please try again.');
+    });
 }
 
 loadProfile();
