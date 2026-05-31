@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Your Date of Birth Alignment — Occultics</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-height:100vh;}
@@ -48,11 +48,11 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
 .session-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#4db8ff;min-width:48px;}
 .session-meta{flex:1;}
 .session-ey{font-size:9px;letter-spacing:2px;color:#8892a4;text-transform:uppercase;margin-bottom:4px;}
-.session-ti{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;}
+.session-ti{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;}
 .session-arr{color:#4db8ff;font-size:18px;transition:transform 0.2s;}
 .session-body{display:none;padding:0 24px 24px;}
 .session-body.open{display:block;}
-.session-body p{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.85);margin-bottom:20px;}
+.session-body p{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;line-height:1.9;color:rgba(255,255,255,0.85);margin-bottom:22px;}
 .session-lock{font-size:10px;color:#8892a4;letter-spacing:1px;}
 .footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(77,184,255,0.06);}
 .footer-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:rgba(255,255,255,0.2);margin-bottom:8px;}
@@ -347,11 +347,43 @@ function escapeHtml(s){
 }
 
 function getJsPDF() {
-  // html2pdf bundle exposes jsPDF in different ways depending on version
+  // standalone jsPDF UMD exposes window.jspdf.jsPDF; cover other shapes too
   if (window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
   if (window.jsPDF) return window.jsPDF;
   if (typeof jsPDF !== 'undefined') return jsPDF;
   return null;
+}
+
+// Load a script tag and resolve when ready (used as a fallback if the CDN in <head> failed)
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    var sc = document.createElement('script');
+    sc.src = src;
+    sc.onload = function(){ resolve(true); };
+    sc.onerror = function(){ reject(new Error('load failed: ' + src)); };
+    document.head.appendChild(sc);
+  });
+}
+
+// Ensure jsPDF is available, trying fallback CDNs if needed
+function ensureJsPDF() {
+  if (getJsPDF()) return Promise.resolve(getJsPDF());
+  var cdns = [
+    'https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
+  ];
+  var chain = Promise.reject();
+  cdns.forEach(function(url){
+    chain = chain.catch(function(){
+      if (getJsPDF()) return getJsPDF();
+      return loadScript(url).then(function(){ return getJsPDF(); });
+    });
+  });
+  return chain.then(function(lib){
+    if (lib) return lib;
+    throw new Error('jsPDF unavailable');
+  });
 }
 
 function downloadPDF() {
@@ -359,17 +391,21 @@ function downloadPDF() {
   var sections = window.__sections || {};
   if (!p) return;
 
-  var JsPDF = getJsPDF();
-  if (!JsPDF) {
-    alert('Sorry — the PDF tool did not load. Please refresh the page and try again.');
-    return;
-  }
-
   var btn = document.getElementById('dl-btn');
   btn.disabled = true;
   var oldLabel = btn.textContent;
   btn.textContent = 'Preparing…';
 
+  ensureJsPDF().then(function(JsPDF){
+    buildPDF(JsPDF, p, sections, btn, oldLabel);
+  }).catch(function(e){
+    console.error('jsPDF load error', e);
+    btn.disabled = false; btn.textContent = oldLabel;
+    alert('Sorry — the PDF tool could not load. Please check your connection and try again.');
+  });
+}
+
+function buildPDF(JsPDF, p, sections, btn, oldLabel) {
   try {
     var name = p.name || p.customer_name || 'Your';
     var rt = p.report_type || '';
