@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Your Life Code — Occultics</title>
+<title>Your Date of Birth Alignment — Occultics</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
@@ -88,7 +88,7 @@ body{background:#0a0e2e;color:#fff;font-family:'Montserrat',sans-serif;min-heigh
     </div>
   </div>
   <div class="hero">
-    <div class="eyebrow" id="eyebrow-text">The Life Code Alignment</div>
+    <div class="eyebrow" id="eyebrow-text">Date of Birth Alignment</div>
     <h1 class="hero-name" id="pname">—</h1>
     <p class="hero-sub" id="psub">—</p>
     <div class="code-box" id="single-code">
@@ -274,8 +274,8 @@ function loadProfile() {
         document.title = (p.name || 'Your') + ' Life Code Map — Occultics';
       } else {
         document.getElementById('psub').textContent = 'Born ' + formatDate(p.date_of_birth) + ' · 7 Sessions';
-        document.getElementById('eyebrow-text').textContent = 'The Life Code Alignment';
-        document.title = (p.name || 'Your') + ' Life Code — Occultics';
+        document.getElementById('eyebrow-text').textContent = 'Date of Birth Alignment';
+        document.title = (p.name || 'Your') + ' Date of Birth Alignment — Occultics';
       }
     }
 
