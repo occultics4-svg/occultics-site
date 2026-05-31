@@ -346,87 +346,158 @@ function escapeHtml(s){
     .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
+function getJsPDF() {
+  // html2pdf bundle exposes jsPDF in different ways depending on version
+  if (window.jspdf && window.jspdf.jsPDF) return window.jspdf.jsPDF;
+  if (window.jsPDF) return window.jsPDF;
+  if (typeof jsPDF !== 'undefined') return jsPDF;
+  return null;
+}
+
 function downloadPDF() {
   var p = window.__profile;
   var sections = window.__sections || {};
   if (!p) return;
+
+  var JsPDF = getJsPDF();
+  if (!JsPDF) {
+    alert('Sorry — the PDF tool did not load. Please refresh the page and try again.');
+    return;
+  }
 
   var btn = document.getElementById('dl-btn');
   btn.disabled = true;
   var oldLabel = btn.textContent;
   btn.textContent = 'Preparing…';
 
-  var name = p.name || p.customer_name || 'Your';
-  var rt = p.report_type || '';
-  var heading = rt === 'compatibility_code' ? 'The Compatibility Code'
-              : rt === 'life_code_map' ? 'The Life Code Map'
-              : 'Date of Birth Alignment';
+  try {
+    var name = p.name || p.customer_name || 'Your';
+    var rt = p.report_type || '';
+    var heading = rt === 'compatibility_code' ? 'The Compatibility Code'
+                : rt === 'life_code_map' ? 'The Life Code Map'
+                : 'Date of Birth Alignment';
 
-  // Build a clean, paper-styled document (white bg, dark text).
-  // Title block is its own page; each session starts on a fresh page.
-  var html = '' +
-    '<div style="font-family:Georgia,\'Times New Roman\',serif;color:#1a1a2e;">' +
-    '<div style="text-align:center;padding:120px 56px 0;">' +
-      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:12px;letter-spacing:5px;color:#1a2aff;text-transform:uppercase;font-weight:bold;margin-bottom:14px;">OCCULTICS</div>' +
-      '<div style="font-family:Helvetica,Arial,sans-serif;font-size:11px;letter-spacing:3px;color:#888;text-transform:uppercase;margin-bottom:28px;">' + escapeHtml(heading) + '</div>' +
-      '<h1 style="font-size:46px;font-weight:normal;margin:0 0 14px;">' + escapeHtml(name) + '</h1>' +
-      '<div style="font-size:15px;color:#888;">Born ' + escapeHtml(formatDate(p.date_of_birth)) + '</div>' +
-    '</div>';
+    var doc = new JsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
 
-  var any = false;
-  SESSION_DEFS.forEach(function(def, idx) {
-    var s = sections[def.key] || {};
-    var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
-    if (!hasText) return;             // skip sessions not yet generated
-    any = true;
-    var paras = s.text.split('\n\n').filter(function(x){return x.trim();})
-      .map(function(x){ return '<p style="font-size:17px;line-height:1.95;margin:0 0 22px;page-break-inside:avoid;">' + escapeHtml(x.trim()) + '</p>'; })
-      .join('');
-    // every session begins on a new page
-    html += '' +
-      '<div class="page-break-before" style="page-break-before:always;padding:64px 56px 40px;">' +
-        '<div style="font-family:Helvetica,Arial,sans-serif;font-size:13px;letter-spacing:3px;color:#1a2aff;text-transform:uppercase;margin-bottom:8px;">Session ' + def.num + '</div>' +
-        '<h2 style="font-size:30px;font-weight:normal;margin:0 0 30px;border-bottom:1px solid #e2e2e2;padding-bottom:16px;page-break-after:avoid;">' + escapeHtml(def.title) + '</h2>' +
-        paras +
-      '</div>';
-  });
+    var PW = 210, PH = 297;          // A4 mm
+    var ML = 22, MR = 22, MT = 26, MB = 24;   // margins
+    var CW = PW - ML - MR;           // content width
+    var BOTTOM = PH - MB;            // y past which we must page-break
 
-  // footer on its own final page
-  html += '<div class="page-break-before" style="page-break-before:always;text-align:center;padding:120px 56px 0;font-family:Helvetica,Arial,sans-serif;font-size:11px;color:#aaa;line-height:1.8;">' +
-            '<div style="font-size:18px;color:#1a1a2e;font-family:Georgia,serif;font-style:italic;margin-bottom:24px;">"Your numbers have always known the way."</div>' +
-            '© 2026 Occultics Publishing · occultics.ai<br>For informational and entertainment purposes only.' +
-          '</div></div>';
+    var INK = [26, 26, 46];          // body text color
+    var BLUE = [26, 42, 255];
+    var GRAY = [136, 136, 136];
 
-  if (!any) {
-    btn.disabled = false; btn.textContent = oldLabel;
-    alert('Your sessions are still being prepared. Please try again in a few minutes.');
-    return;
-  }
+    var y = MT;
 
-  var holder = document.createElement('div');
-  holder.style.background = '#ffffff';
-  holder.innerHTML = html;
+    function newPage() { doc.addPage(); y = MT; }
+    function need(h) { if (y + h > BOTTOM) newPage(); }
 
-  var safeName = (name + '').replace(/[^a-z0-9]+/gi,'-').replace(/^-+|-+$/g,'') || 'profile';
-  var opt = {
-    margin:       [12, 0, 16, 0],
-    filename:     'occultics-' + safeName + '.pdf',
-    image:        { type:'jpeg', quality:0.98 },
-    html2canvas:  { scale:2, backgroundColor:'#ffffff', useCORS:true },
-    jsPDF:        { unit:'mm', format:'a4', orientation:'portrait' },
-    pagebreak:    { mode:['css'], before:'.page-break-before', avoid:'p' }
-  };
+    // draw a wrapped paragraph, line by line, breaking pages cleanly between lines
+    function paragraph(text, size, lh, color, gapAfter, fontStyle) {
+      doc.setFont('times', fontStyle || 'normal');
+      doc.setFontSize(size);
+      doc.setTextColor(color[0], color[1], color[2]);
+      var lines = doc.splitTextToSize(text, CW);
+      for (var i = 0; i < lines.length; i++) {
+        need(lh);                    // ensure this line fits; else new page
+        doc.text(lines[i], ML, y);
+        y += lh;
+      }
+      y += (gapAfter || 0);
+    }
 
-  html2pdf().set(opt).from(holder).save()
-    .then(function(){ btn.disabled = false; btn.textContent = oldLabel; })
-    .catch(function(e){
-      console.error('PDF error', e);
-      btn.disabled = false; btn.textContent = oldLabel;
-      alert('Sorry — something went wrong creating the PDF. Please try again.');
+    // ---------- TITLE PAGE ----------
+    y = 110;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(13);
+    doc.setTextColor(BLUE[0], BLUE[1], BLUE[2]);
+    doc.text('O C C U L T I C S', PW / 2, y, { align: 'center' });
+    y += 12;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
+    doc.text(heading.toUpperCase(), PW / 2, y, { align: 'center' });
+    y += 22;
+    doc.setFont('times', 'normal');
+    doc.setFontSize(34);
+    doc.setTextColor(INK[0], INK[1], INK[2]);
+    doc.text(name, PW / 2, y, { align: 'center' });
+    y += 12;
+    doc.setFontSize(13);
+    doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
+    doc.text('Born ' + formatDate(p.date_of_birth), PW / 2, y, { align: 'center' });
+
+    // ---------- SESSIONS ----------
+    var any = false;
+    SESSION_DEFS.forEach(function(def) {
+      var s = sections[def.key] || {};
+      var hasText = s.text && s.text !== 'Generating...' && s.text !== 'Session 1 generating — please refresh in a moment.';
+      if (!hasText) return;
+      any = true;
+
+      newPage();   // each session starts on its own page
+
+      // session label
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(10);
+      doc.setTextColor(BLUE[0], BLUE[1], BLUE[2]);
+      doc.text('SESSION ' + def.num, ML, y);
+      y += 8;
+
+      // session title
+      doc.setFont('times', 'normal');
+      doc.setFontSize(22);
+      doc.setTextColor(INK[0], INK[1], INK[2]);
+      var titleLines = doc.splitTextToSize(def.title, CW);
+      for (var t = 0; t < titleLines.length; t++) { need(9); doc.text(titleLines[t], ML, y); y += 9; }
+      // rule under title
+      y += 2;
+      doc.setDrawColor(225, 225, 225);
+      doc.line(ML, y, ML + CW, y);
+      y += 9;
+
+      // body paragraphs
+      var paras = s.text.split('\n\n').filter(function(x){ return x.trim(); });
+      for (var i = 0; i < paras.length; i++) {
+        paragraph(paras[i].trim(), 12, 6.4, INK, 5);   // 12pt, 6.4mm line height, 5mm gap
+      }
     });
+
+    if (!any) {
+      btn.disabled = false; btn.textContent = oldLabel;
+      alert('Your sessions are still being prepared. Please try again in a few minutes.');
+      return;
+    }
+
+    // ---------- CLOSING PAGE ----------
+    newPage();
+    y = 120;
+    doc.setFont('times', 'italic');
+    doc.setFontSize(16);
+    doc.setTextColor(INK[0], INK[1], INK[2]);
+    doc.text('"Your numbers have always known the way."', PW / 2, y, { align: 'center' });
+    y += 16;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
+    doc.text('© 2026 Occultics Publishing · occultics.ai', PW / 2, y, { align: 'center' });
+    y += 6;
+    doc.text('For informational and entertainment purposes only.', PW / 2, y, { align: 'center' });
+
+    var safeName = (name + '').replace(/[^a-z0-9]+/gi, '-').replace(/^-+|-+$/g, '') || 'profile';
+    doc.save('occultics-' + safeName + '.pdf');
+
+    btn.disabled = false; btn.textContent = oldLabel;
+  } catch (e) {
+    console.error('PDF error', e);
+    btn.disabled = false; btn.textContent = oldLabel;
+    alert('Sorry — something went wrong creating the PDF. Please try again.');
+  }
 }
 
 loadProfile();
+
 </script>
 </body>
 </html>
