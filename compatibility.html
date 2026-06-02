@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compatibility Alignment — Occultics</title>
+<meta name="description" content="Two birthdays. One truth. A guided compatibility session that decodes your relationship.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0e8;--card:#fff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--rose:#1a2aff;--text:#2d3142;--dim:#6b7280;--light:#9ca3af;--border:rgba(10,14,46,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+.entry{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.entry-inner{max-width:440px;width:100%;text-align:center}
+.e-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);letter-spacing:2px;margin-bottom:24px}
+.e-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,42px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:12px}
+.e-title em{font-style:italic;color:#1a2aff}
+.e-sub{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:28px}
+.e-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:10px;text-align:left}
+.e-label{font-size:9px;letter-spacing:1.5px;color:var(--light);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.e-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.e-sel{padding:11px 10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%}
+.e-inp{width:100%;padding:11px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none}
+.e-inp::placeholder{color:var(--light)}
+.e-go{width:100%;padding:15px;background:#1a2aff;color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:12px}
+.e-go:disabled{opacity:.4}
+.e-note{font-size:10px;color:var(--light);margin-top:10px}
+.journey{display:none;min-height:100vh}
+.j-nav{position:fixed;top:0;left:0;right:0;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.j-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--navy);letter-spacing:2px;text-decoration:none}
+.j-progress{display:flex;gap:3px}
+.j-dot{width:6px;height:6px;border-radius:50%;background:var(--border)}
+.j-dot.active{background:#1a2aff;width:16px;border-radius:3px}
+.j-dot.done{background:var(--crystal)}
+.j-step-label{font-size:9px;color:var(--light);margin-left:8px}
+.step{display:none;padding:80px 24px 60px;max-width:640px;margin:0 auto;min-height:100vh}
+.step.active{display:block;animation:fadeIn .4s ease-out}
+.s-eyebrow{font-size:9px;letter-spacing:3px;color:#1a2aff;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,36px);font-weight:300;color:var(--navy);line-height:1.15;margin-bottom:16px}
+.s-body{font-size:14px;color:var(--text);line-height:1.85;margin-bottom:24px}
+.s-body p{margin-bottom:16px}
+.s-codes{display:flex;gap:12px;margin:24px 0;flex-wrap:wrap}
+.s-code-person{flex:1;min-width:160px;background:linear-gradient(145deg,var(--navy),#141845);border-radius:14px;padding:20px;text-align:center}
+.s-code-name{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,0.35);text-transform:uppercase;margin-bottom:4px}
+.s-code-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--crystal);letter-spacing:6px}
+.s-code-compat{background:linear-gradient(145deg,#0a0e2e,#141845);border-radius:14px;padding:20px;text-align:center;margin:12px 0}
+.s-code-compat-label{font-size:8px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:4px}
+.s-code-compat-num{font-family:'Cormorant Garamond',serif;font-size:44px;color:#4db8ff;letter-spacing:8px}
+.s-reflection{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin:24px 0}
+.s-reflection-label{font-size:9px;letter-spacing:1.5px;color:#1a2aff;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.s-reflection textarea{width:100%;height:80px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:inherit;font-size:13px;color:var(--text);resize:none;outline:none}
+.s-next{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:#1a2aff;color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:16px}
+.s-loading{display:none;padding:40px;text-align:center}
+.s-loading.show{display:block}
+.s-loading p{font-size:12px;color:var(--light);margin-top:12px}
+.spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:#1a2aff;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.s-final{text-align:center;padding-top:100px}
+.s-final-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--navy);margin-bottom:12px}
+.s-final-sub{font-size:13px;color:var(--dim);line-height:1.7;max-width:400px;margin:0 auto 32px}
+@media(max-width:600px){.e-row{grid-template-columns:1fr}.s-codes{flex-direction:column}}
+</style>
+</head>
+<body>
+<section class="entry" id="screen-entry">
+<div class="entry-inner">
+  <div class="e-logo">Occultics</div>
+  <h1 class="e-title">Compatibility <em>Alignment</em></h1>
+  <p class="e-sub">Two birthdays. One truth. Get a short analysis of both characters, then walk through a guided session that decodes your relationship - why you met, what you are building, and whether it lasts.</p>
+  <div class="e-card">
+    <div class="e-label">Your name & birthday</div>
+    <input type="text" class="e-inp" id="e-name1" placeholder="Your first name" style="margin-bottom:8px">
+    <div class="e-row">
+      <select class="e-sel" id="e-day1"><option value="">Day</option></select>
+      <select class="e-sel" id="e-month1"><option value="">Month</option></select>
+      <select class="e-sel" id="e-year1"><option value="">Year</option></select>
+    </div>
+  </div>
+  <div class="e-card">
+    <div class="e-label">Their name & birthday</div>
+    <input type="text" class="e-inp" id="e-name2" placeholder="Their first name" style="margin-bottom:8px">
+    <div class="e-row">
+      <select class="e-sel" id="e-day2"><option value="">Day</option></select>
+      <select class="e-sel" id="e-month2"><option value="">Month</option></select>
+      <select class="e-sel" id="e-year2"><option value="">Year</option></select>
+    </div>
+  </div>
+  <button class="e-go" id="e-go" onclick="startCompat()">Begin Compatibility Alignment</button>
+  <div class="e-note">Takes 15-20 minutes. 11 guided steps.</div>
+</div>
+</section>
+<section class="journey" id="screen-journey">
+  <nav class="j-nav">
+    <a href="/" class="j-logo">Occultics</a>
+    <div style="display:flex;align-items:center"><div class="j-progress" id="j-progress"></div><div class="j-step-label" id="j-step-label"></div></div>
+  </nav>
+  <div class="step" id="step-0"><div class="s-eyebrow">Step 1 of 11</div><h2 class="s-title" id="s0-title">Your Codes</h2><div class="s-codes"><div class="s-code-person"><div class="s-code-name" id="disp-name1"></div><div class="s-code-num" id="disp-code1"></div></div><div class="s-code-person"><div class="s-code-name" id="disp-name2"></div><div class="s-code-num" id="disp-code2"></div></div></div><div class="s-code-compat"><div class="s-code-compat-label">Compatibility Code</div><div class="s-code-compat-num" id="disp-compat"></div></div><div class="s-body" id="step0-body"><div class="s-loading show" id="load-0"><div class="spinner"></div><p>Decoding both profiles...</p></div></div><div class="s-reflection"><div class="s-reflection-label">First impression</div><textarea placeholder="What do you feel looking at these two codes?"></textarea></div><button class="s-next" onclick="goStep(1)">Continue &rarr;</button></div>
+  <div class="step" id="step-1"><div class="s-eyebrow">Step 2 of 11</div><h2 class="s-title"><span id="s1-name">You</span> - Emotional Frequency</h2><div class="s-body" id="step1-body"><div class="s-loading show" id="load-1"><div class="spinner"></div><p>Reading emotional patterns...</p></div></div><div class="s-reflection"><div class="s-reflection-label">Recognition</div><textarea placeholder="Does this match how you experience emotions?"></textarea></div><button class="s-next" onclick="goStep(2)">Continue &rarr;</button></div>
+  <div class="step" id="step-2"><div class="s-eyebrow">Step 3 of 11</div><h2 class="s-title"><span id="s2-name">You</span> - Core Drivers</h2><div class="s-body" id="step2-body"><div class="s-loading show" id="load-2"><div class="spinner"></div><p>Decoding what drives you...</p></div></div><div class="s-reflection"><div class="s-reflection-label">Honesty check</div><textarea placeholder="What are you really chasing in this relationship?"></textarea></div><button class="s-next" onclick="goStep(3)">Continue &rarr;</button></div>
+  <div class="step" id="step-3"><div class="s-eyebrow">Step 4 of 11</div><h2 class="s-title"><span id="s3-name">You</span> - Karmic Blueprint</h2><div class="s-body" id="step3-body"><div class="s-loading show" id="load-3"><div class="spinner"></div><p>Reading your karmic imprint...</p></div></div><div class="s-reflection"><div class="s-reflection-label">What you carry</div><textarea placeholder="What patterns from your family show up in this relationship?"></textarea></div><button class="s-next" onclick="goStep(4)">Continue &rarr;</button></div>
+  <div class="step" id="step-4"><div class="s-eyebrow">Step 5 of 11</div><h2 class="s-title"><span id="s4-name">Them</span> - Mathematical Blueprint</h2><div class="s-body" id="step4-body"><div class="s-loading show" id="load-4"><div class="spinner"></div><p>Decoding their identity...</p></div></div><div class="s-reflection"><div class="s-reflection-label">Do you see them?</div><textarea placeholder="Does this match who they really are?"></textarea></div><button class="s-next" onclick="goStep(5)">Continue &rarr;</button></div>
+  <div class="step" id="step-5"><div class="s-eyebrow">Step 6 of 11</div><h2 class="s-title"><span id="s5-name">Them</span> - Emotional Frequency</h2><div class="s-body" id="step5-body"><div class="s-loading show" id="load-5"><div class="spinner"></div><p>Reading their emotional patterns...</p></div></div><div class="s-reflection"><div class="s-reflection-label">The gap</div><textarea placeholder="How do their emotional patterns clash or harmonize with yours?"></textarea></div><button class="s-next" onclick="goStep(6)">Continue &rarr;</button></div>
+  <div class="step" id="step-6"><div class="s-eyebrow">Step 7 of 11</div><h2 class="s-title"><span id="s6-name">Them</span> - Karmic Blueprint</h2><div class="s-body" id="step6-body"><div class="s-loading show" id="load-6"><div class="spinner"></div><p>Reading their karmic imprint...</p></div></div><div class="s-reflection"><div class="s-reflection-label">Their weight</div><textarea placeholder="What are they carrying that affects your relationship?"></textarea></div><button class="s-next" onclick="goStep(7)">Continue &rarr;</button></div>
+  <div class="step" id="step-7"><div class="s-eyebrow">Step 8 of 11</div><h2 class="s-title">How You Met</h2><div class="s-body" id="step7-body"><div class="s-loading show" id="load-7"><div class="spinner"></div><p>Decoding the first number...</p></div></div><div class="s-reflection"><div class="s-reflection-label">The beginning</div><textarea placeholder="Does this match how you actually met?"></textarea></div><button class="s-next" onclick="goStep(8)">Continue &rarr;</button></div>
+  <div class="step" id="step-8"><div class="s-eyebrow">Step 9 of 11</div><h2 class="s-title">The Mission</h2><div class="s-body" id="step8-body"><div class="s-loading show" id="load-8"><div class="spinner"></div><p>Decoding the second number...</p></div></div><div class="s-reflection"><div class="s-reflection-label">The purpose</div><textarea placeholder="What are you building together?"></textarea></div><button class="s-next" onclick="goStep(9)">Continue &rarr;</button></div>
+  <div class="step" id="step-9"><div class="s-eyebrow">Step 10 of 11</div><h2 class="s-title">The Karmic Connection</h2><div class="s-body" id="step9-body"><div class="s-loading show" id="load-9"><div class="spinner"></div><p>Decoding the third number...</p></div></div><div class="s-reflection"><div class="s-reflection-label">The deeper truth</div><textarea placeholder="Why were you meant to meet this person?"></textarea></div><button class="s-next" onclick="goStep(10)">Continue &rarr;</button></div>
+  <div class="step" id="step-10"><div class="s-eyebrow">Step 11 of 11</div><h2 class="s-title">The Complete Picture</h2><div class="s-body" id="step10-body"><div class="s-loading show" id="load-10"><div class="spinner"></div><p>Synthesizing your compatibility...</p></div></div><div class="s-reflection"><div class="s-reflection-label">The shift</div><textarea placeholder="What will you do differently now?"></textarea></div><button class="s-next" onclick="goStep(11)">Complete Your Alignment &rarr;</button></div>
+  <div class="step" id="step-11"><div class="s-final"><div style="font-size:48px;opacity:.3;margin-bottom:16px">&#10022;</div><h2 class="s-final-title">Your compatibility alignment is complete.</h2><p class="s-final-sub">You now see the mathematics beneath this relationship. Not opinions. Not guesses. The code that has been running beneath every conversation, every argument, every moment of connection.</p><div class="s-code-compat" style="max-width:280px;margin:24px auto"><div class="s-code-compat-label">Your compatibility code</div><div class="s-code-compat-num" id="final-compat"></div></div><a href="/" style="display:inline-block;padding:14px 32px;background:#1a2aff;color:#fff;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;margin-top:16px">Explore More Apps</a></div></div>
+</section>
+<script>
+var DECODE_URL='https://occultics-decode.occultics4.workers.dev';
+var profile1=null,profile2=null,compatData=null,name1='',name2='';
+var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+['e-day1','e-day2'].forEach(function(id){var el=document.getElementById(id);for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
+['e-month1','e-month2'].forEach(function(id){var el=document.getElementById(id);mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
+['e-year1','e-year2'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
+var PROMPTS=[
+  "Decode two people. {name1} code {code1}, pyramid {pyr1}, born on the {day1}. {name2} code {code2}, pyramid {pyr2}, born on the {day2}. Compatibility code {compat}. Write 3-4 paragraphs introducing both profiles and what their compatibility code reveals at first glance. Use both names. English only.",
+  "{name1} biorhythm {bio1}, generational {gen1}. Write 3-4 paragraphs about {name1}'s emotional frequency - how they process feelings, triggers, how they express love and pain.",
+  "{name1} life path {lp1}, pyramid {pyr1}. Write 3-4 paragraphs about what drives {name1} - ambitions, fears, what they chase and avoid in relationships.",
+  "{name1} code {code1}, pyramid {pyr1}. Write 3-4 paragraphs about {name1}'s karmic blueprint - inherited patterns, family dynamics they repeat, what to release.",
+  "{name2} code {code2}, pyramid {pyr2}, born on the {day2}. Write 3-4 paragraphs giving {name2}'s full mathematical blueprint - who they are, how they operate.",
+  "{name2} biorhythm {bio2}, generational {gen2}. Write 3-4 paragraphs about {name2}'s emotional frequency and how it interacts with {name1}'s patterns.",
+  "{name2} code {code2}, pyramid {pyr2}. Write 3-4 paragraphs about {name2}'s karmic blueprint and how their karma interacts with {name1}'s.",
+  "Compatibility code {compat} between {name1} and {name2}. The FIRST number ({compatFirst}) reveals how and why they met. Write 3-4 paragraphs decoding this.",
+  "The SECOND number ({compatSecond}) of compatibility code {compat} reveals the mission - what {name1} and {name2} are building together. Write 3-4 paragraphs.",
+  "The THIRD number ({compatThird}) of compatibility code {compat} reveals the karmic connection between {name1} and {name2}. Write 3-4 paragraphs about the deeper purpose.",
+  "Synthesize the COMPLETE compatibility between {name1} ({code1}) and {name2} ({code2}). Code: {compat}. Bring everything together. Write 4-5 paragraphs. End with a powerful statement. No questions."
+];
+async function startCompat(){
+  var d1=document.getElementById('e-day1').value,m1=document.getElementById('e-month1').value,y1=document.getElementById('e-year1').value;
+  var d2=document.getElementById('e-day2').value,m2=document.getElementById('e-month2').value,y2=document.getElementById('e-year2').value;
+  name1=document.getElementById('e-name1').value.trim()||'Person 1';
+  name2=document.getElementById('e-name2').value.trim()||'Person 2';
+  if(!d1||!m1||!y1||!d2||!m2||!y2)return;
+  var btn=document.getElementById('e-go');btn.textContent='Calculating both codes...';btn.disabled=true;
+  try{
+    var r1=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d1,month:+m1,year:+y1})});
+    profile1=await r1.json();
+    var r2=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d2,month:+m2,year:+y2})});
+    profile2=await r2.json();
+    var r3=await fetch(DECODE_URL+'/compatibility',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day1:+d1,month1:+m1,year1:+y1,day2:+d2,month2:+m2,year2:+y2})});
+    compatData=await r3.json();
+    showJourney();
+  }catch(e){btn.textContent='Begin Compatibility Alignment';btn.disabled=false;}
+}
+function showJourney(){
+  document.getElementById('screen-entry').style.display='none';
+  document.getElementById('screen-journey').style.display='block';
+  var code1=profile1.pyth.biorhythm+'.'+profile1.pyth.generational+'.'+profile1.pyth.lifePath;
+  var code2=profile2.pyth.biorhythm+'.'+profile2.pyth.generational+'.'+profile2.pyth.lifePath;
+  var cc=compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third;
+  document.getElementById('disp-name1').textContent=name1;
+  document.getElementById('disp-name2').textContent=name2;
+  document.getElementById('disp-code1').textContent=code1;
+  document.getElementById('disp-code2').textContent=code2;
+  document.getElementById('disp-compat').textContent=cc;
+  document.getElementById('final-compat').textContent=cc;
+  document.getElementById('s0-title').textContent=name1+' & '+name2;
+  [1,2,3].forEach(function(i){var el=document.getElementById('s'+i+'-name');if(el)el.textContent=name1;});
+  [4,5,6].forEach(function(i){var el=document.getElementById('s'+i+'-name');if(el)el.textContent=name2;});
+  var progHtml='';for(var i=0;i<11;i++)progHtml+='<div class="j-dot'+(i===0?' active':'')+'" id="jd-'+i+'"></div>';
+  document.getElementById('j-progress').innerHTML=progHtml;
+  goStep(0);
+  for(var s=0;s<11;s++)generateSession(s,code1,code2,cc);
+}
+async function generateSession(idx,code1,code2,cc){
+  var pyr1=profile1.pyramid.first+'.'+profile1.pyramid.second+'.'+profile1.pyramid.third;
+  var pyr2=profile2.pyramid.first+'.'+profile2.pyramid.second+'.'+profile2.pyramid.third;
+  var p=PROMPTS[idx].replace(/\{name1\}/g,name1).replace(/\{name2\}/g,name2).replace(/\{code1\}/g,code1).replace(/\{code2\}/g,code2).replace(/\{pyr1\}/g,pyr1).replace(/\{pyr2\}/g,pyr2).replace(/\{bio1\}/g,String(profile1.pyth.biorhythm)).replace(/\{bio2\}/g,String(profile2.pyth.biorhythm)).replace(/\{gen1\}/g,String(profile1.pyth.generational)).replace(/\{gen2\}/g,String(profile2.pyth.generational)).replace(/\{lp1\}/g,String(profile1.pyth.lifePath)).replace(/\{lp2\}/g,String(profile2.pyth.lifePath)).replace(/\{day1\}/g,profile1.birthDayDesc||'').replace(/\{day2\}/g,profile2.birthDayDesc||'').replace(/\{compat\}/g,cc).replace(/\{compatFirst\}/g,String(compatData.compatCode.first)).replace(/\{compatSecond\}/g,String(compatData.compatCode.second)).replace(/\{compatThird\}/g,String(compatData.compatCode.third));
+  try{
+    var res=await fetch(DECODE_URL+'/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:p,profileData:profile1,partnerData:profile2,compatibilityData:compatData,history:[],gender:'other'})});
+    var data=await res.json();
+    var text=data.response||'Session could not be generated.';
+    var html=text.split('\n\n').filter(function(t){return t.trim();}).map(function(t){return '<p>'+t.trim()+'</p>';}).join('');
+    var loadEl=document.getElementById('load-'+idx);if(loadEl)loadEl.style.display='none';
+    document.getElementById('step'+idx+'-body').innerHTML=html;
+  }catch(e){
+    var loadEl=document.getElementById('load-'+idx);if(loadEl)loadEl.style.display='none';
+    document.getElementById('step'+idx+'-body').innerHTML='<p>Could not generate. Please try again.</p>';
+  }
+}
+function goStep(idx){
+  for(var i=0;i<12;i++){var el=document.getElementById('step-'+i);if(el)el.classList.remove('active');}
+  var c=document.getElementById('step-'+idx);if(c)c.classList.add('active');
+  for(var i=0;i<11;i++){var d=document.getElementById('jd-'+i);if(!d)continue;d.className='j-dot';if(i<idx)d.classList.add('done');else if(i===idx)d.classList.add('active');}
+  var labels=['Codes','Emotions','Drivers','Karma','Blueprint','Emotions','Karma','How Met','Mission','Karmic','Complete'];
+  var l=document.getElementById('j-step-label');
+  if(idx<11)l.textContent=(idx+1)+'/11 '+labels[idx];else l.textContent='Complete';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
