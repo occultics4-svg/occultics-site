@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book a Personal Reading — Occultics</title>
+<meta name="description" content="Book a personal reading with the Astronumerologist. 30 minutes. $300. I decode your identity, relationships, and life path from your date of birth.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0e8;--card:#ffffff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#0969da;--text:#2d3142;--dim:#3d4148;--muted:#4a4540;--border:rgba(10,14,46,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.n-logo{font-weight:700;font-size:13px;letter-spacing:4px;color:#1a1a2e;text-decoration:none;text-transform:uppercase}
+.n-r a{font-size:14px;color:var(--dim);text-decoration:none;font-weight:600}
+
+.page{max-width:560px;margin:0 auto;padding:100px 24px 60px}
+
+.hero{text-align:center;margin-bottom:40px}
+.h-eye{font-size:12px;letter-spacing:3px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.h-title{font-family:'Newsreader',Georgia,serif;font-size:clamp(30px,6vw,42px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:14px}
+.h-title em{font-style:italic;color:var(--crystal)}
+.h-sub{font-size:15px;color:var(--dim);line-height:1.7;max-width:440px;margin:0 auto}
+
+.what{margin-bottom:36px}
+.what-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.what-list{display:flex;flex-direction:column;gap:10px}
+.what-item{display:flex;gap:12px;align-items:flex-start}
+.what-check{color:var(--crystal);font-size:16px;margin-top:2px;flex-shrink:0}
+.what-text{font-size:14px;color:var(--dim);line-height:1.6}
+
+.details{display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap}
+.detail{flex:1;min-width:120px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.detail-label{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.detail-value{font-family:'Newsreader',Georgia,serif;font-size:24px;color:var(--navy)}
+
+.form{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px}
+.form-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:14px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--royal)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field textarea{height:80px;resize:none}
+.field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+.book-btn{width:100%;padding:16px;background:var(--royal);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:16px;transition:all .2s}
+.book-btn:hover{opacity:.9;transform:translateY(-1px)}
+.book-btn:disabled{opacity:.4}
+.book-note{text-align:center;font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+.trust{text-align:center;margin-top:32px}
+.trust-quote{font-family:'Newsreader',Georgia,serif;font-size:16px;font-style:italic;color:var(--dim);line-height:1.7;max-width:400px;margin:0 auto 8px}
+.trust-from{font-size:11px;color:var(--muted)}
+
+.success{display:none;text-align:center;padding:60px 20px}
+.success-icon{font-size:48px;margin-bottom:16px;opacity:.3}
+.success-title{font-family:'Newsreader',Georgia,serif;font-size:28px;font-weight:300;color:var(--navy);margin-bottom:10px}
+.success-sub{font-size:14px;color:var(--dim);line-height:1.7}
+
+footer{padding:28px 24px;text-align:center;margin-top:40px}
+.f-back{font-size:12px;color:var(--muted);text-decoration:none}
+.f-back:hover{color:var(--crystal)}
+
+@media(max-width:600px){.field-row{grid-template-columns:1fr}.details{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="n-logo">Occultics</a>
+  <div class="n-r"><a href="/">Home</a></div>
+</nav>
+
+<div class="page">
+
+  <div class="hero" id="hero">
+    <div class="h-eye">Personal Reading</div>
+    <h1 class="h-title">Get decoded by the <em>Astronumerologist.</em></h1>
+    <p class="h-sub">A 30-minute live session where I decode your identity, relationships, and life path from your date of birth. Not generic. Not AI. Me, your numbers, and the truth.</p>
+  </div>
+
+  <div class="what" id="what">
+    <div class="what-title">What you get:</div>
+    <div class="what-list">
+      <div class="what-item"><span class="what-check">&#10003;</span><span class="what-text">Your complete mathematical code decoded and explained</span></div>
+      <div class="what-item"><span class="what-check">&#10003;</span><span class="what-text">Your relationship patterns — why you attract who you attract</span></div>
+      <div class="what-item"><span class="what-check">&#10003;</span><span class="what-text">Your karmic blueprint — what you carry and what to release</span></div>
+      <div class="what-item"><span class="what-check">&#10003;</span><span class="what-text">Your life cycles — where you are now and what is coming</span></div>
+      <div class="what-item"><span class="what-check">&#10003;</span><span class="what-text">Partner compatibility analysis (if you bring a second birthday)</span></div>
+      
+    </div>
+  </div>
+
+  <div class="details" id="details">
+    <div class="detail"><div class="detail-label">Duration</div><div class="detail-value">30 min</div></div>
+    <div class="detail"><div class="detail-label">Format</div><div class="detail-value">Live</div></div>
+    <div class="detail"><div class="detail-label">Price</div><div class="detail-value">$300</div></div>
+  </div>
+
+  <div class="form" id="form">
+    <div class="form-title">Book your session</div>
+    <div class="field">
+      <label>Your name</label>
+      <input type="text" id="b-name" placeholder="First and last name">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="b-email" placeholder="your@email.com">
+    </div>
+    <div class="field">
+      <label>Your date of birth</label>
+      <div class="field-row">
+        <select id="b-day"><option value="">Day</option></select>
+        <select id="b-month"><option value="">Month</option></select>
+        <select id="b-year"><option value="">Year</option></select>
+      </div>
+    </div>
+    
+    <div class="field">
+      <label>What do you want decoded?</label>
+      <textarea id="b-question" placeholder="Tell me what you are struggling with or what you want to understand..."></textarea>
+    </div>
+    <button class="book-btn" id="book-btn" onclick="bookSession()">Book & Pay $300</button>
+    <div class="book-note">You will be redirected to secure checkout. Session will be scheduled within 48 hours of payment. </div>
+  </div>
+
+  <div class="trust">
+    <div class="trust-quote">"I read this and wondered — does this person know me? My feeling suddenly became brighter."</div>
+    <div class="trust-from">— Client, Japan</div>
+  </div>
+
+  <div class="success" id="success">
+    <div class="success-icon">&#10022;</div>
+    <div class="success-title">Booking received.</div>
+    <div class="success-sub">You will receive an email within 48 hours with your session date and time. Prepare your questions. The numbers are waiting.</div>
+  </div>
+
+</div>
+
+<footer>
+  <a href="/" class="f-back">&larr; Back to occultics.ai</a>
+</footer>
+
+<script>
+var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+['b-day'].forEach(function(id){var el=document.getElementById(id);for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;el.appendChild(o);}});
+['b-month'].forEach(function(id){var el=document.getElementById(id);mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;el.appendChild(o);});});
+['b-year'].forEach(function(id){var el=document.getElementById(id);for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;el.appendChild(o);}});
+
+function bookSession(){
+  var name=document.getElementById('b-name').value.trim();
+  var email=document.getElementById('b-email').value.trim();
+  var day=document.getElementById('b-day').value;
+  var month=document.getElementById('b-month').value;
+  var year=document.getElementById('b-year').value;
+  if(!name||!email||!day||!month||!year)return;
+
+  var btn=document.getElementById('book-btn');
+  btn.textContent='Redirecting to checkout...';btn.disabled=true;
+
+  // Save lead
+  fetch('https://dtquqaridqyjdgirjczr.supabase.co/rest/v1/book_leads',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','apikey':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0cXVxYXJpZHF5amRnaXJqY3pyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQwNTcxNjQsImV4cCI6MjA1OTYzMzE2NH0.dp8Xp2mpGZLAr9S-_ZwxYMfUrYKCQLDqcoTwGu3Rp8k'},
+    body:JSON.stringify({
+      email:email,
+      source:'personal_reading_booking',
+      created_at:new Date().toISOString()
+    })
+  }).catch(function(){});
+
+  window.location.href='https://buy.stripe.com/fZu5kvfGb0aq1Lz9LX0co04';
+}
+
+function showSuccess(){
+  document.getElementById('hero').style.display='none';
+  document.getElementById('what').style.display='none';
+  document.getElementById('details').style.display='none';
+  document.getElementById('form').style.display='none';
+  document.getElementById('success').style.display='block';
+}
+</script>
+</body>
+</html>
