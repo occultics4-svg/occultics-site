@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date of Birth Alignment — Occultics</title>
+<meta name="description" content="A guided alignment session personalized to your date of birth. Decode who you really are. Release what holds you back. Realign with your life code.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0e8;--card:#fff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#2d3142;--dim:#6b7280;--light:#9ca3af;--border:rgba(10,14,46,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+/* ENTRY SCREEN */
+.entry{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;flex-direction:column}
+.entry-inner{max-width:440px;width:100%;text-align:center}
+.e-logo{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--navy);letter-spacing:2px;margin-bottom:24px}
+.e-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,44px);font-weight:300;color:var(--navy);line-height:1.12;margin-bottom:12px}
+.e-title em{font-style:italic;color:var(--royal)}
+.e-sub{font-size:13px;color:var(--dim);line-height:1.7;margin-bottom:32px;max-width:380px;margin-left:auto;margin-right:auto}
+.e-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:10px;text-align:left}
+.e-label{font-size:9px;letter-spacing:1.5px;color:var(--light);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.e-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.e-sel{padding:11px 10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none;-webkit-appearance:none;cursor:pointer;width:100%}
+.e-sel:focus{border-color:var(--royal)}
+.e-inp{width:100%;padding:11px 12px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none}
+.e-inp:focus{border-color:var(--royal)}
+.e-inp::placeholder{color:var(--light)}
+.e-go{width:100%;padding:15px;background:var(--royal);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:12px}
+.e-go:hover{opacity:.9}
+.e-go:disabled{opacity:.4}
+.e-note{font-size:10px;color:var(--light);margin-top:10px}
+
+/* JOURNEY SCREEN */
+.journey{display:none;min-height:100vh}
+.j-nav{position:fixed;top:0;left:0;right:0;background:rgba(245,240,232,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.j-logo{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--navy);letter-spacing:2px;text-decoration:none}
+.j-progress{display:flex;gap:4px;align-items:center}
+.j-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}
+.j-dot.active{background:var(--royal);width:20px;border-radius:4px}
+.j-dot.done{background:var(--crystal)}
+.j-step-label{font-size:9px;color:var(--light);letter-spacing:1px;margin-left:8px}
+
+/* STEP */
+.step{display:none;padding:80px 24px 60px;max-width:640px;margin:0 auto;min-height:100vh}
+.step.active{display:block}
+.s-eyebrow{font-size:9px;letter-spacing:3px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,38px);font-weight:300;color:var(--navy);line-height:1.15;margin-bottom:16px}
+.s-body{font-size:14px;color:var(--text);line-height:1.85;margin-bottom:24px}
+.s-body p{margin-bottom:16px}
+.s-highlight{background:var(--card);border-left:3px solid var(--royal);padding:16px 20px;border-radius:0 10px 10px 0;margin:20px 0;font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.7;color:var(--text);font-style:italic}
+.s-code-display{background:linear-gradient(145deg,var(--navy),#141845);border-radius:16px;padding:28px;text-align:center;margin:24px 0}
+.s-code-label{font-size:8px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:6px}
+.s-code-num{font-family:'Cormorant Garamond',serif;font-size:48px;color:var(--crystal);letter-spacing:8px}
+.s-code-sub{font-size:11px;color:rgba(255,255,255,0.35);margin-top:6px}
+.s-reflection{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;margin:24px 0}
+.s-reflection-label{font-size:9px;letter-spacing:1.5px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.s-reflection textarea{width:100%;height:80px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:inherit;font-size:13px;color:var(--text);resize:none;outline:none}
+.s-reflection textarea:focus{border-color:var(--royal)}
+
+.s-next{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:var(--royal);color:#fff;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;margin-top:16px}
+.s-next:hover{opacity:.9;transform:translateY(-1px)}
+.s-next svg{width:16px;height:16px}
+
+/* LOADING */
+.s-loading{display:none;padding:40px;text-align:center}
+.s-loading.show{display:block}
+.s-loading p{font-size:12px;color:var(--light);margin-top:12px;letter-spacing:1px}
+.spinner{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--royal);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FINAL STEP */
+.s-final{text-align:center;padding-top:100px}
+.s-final-icon{font-size:48px;margin-bottom:16px;opacity:.3}
+.s-final-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--navy);margin-bottom:12px}
+.s-final-sub{font-size:13px;color:var(--dim);line-height:1.7;max-width:400px;margin:0 auto 32px}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.step.active{animation:fadeIn .4s ease-out}
+
+@media(max-width:600px){.e-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ENTRY -->
+<section class="entry" id="screen-entry">
+<div class="entry-inner">
+  <div class="e-logo">Occultics</div>
+  <h1 class="e-title">Date of Birth <em>Alignment</em></h1>
+  <p class="e-sub">A guided session personalized to your exact date of birth. Walk through your identity, your patterns, and your life cycles. Not information - a shift you can feel.</p>
+  
+  <div class="e-card">
+    <div class="e-label">Your date of birth</div>
+    <div class="e-row">
+      <select class="e-sel" id="e-day"><option value="">Day</option></select>
+      <select class="e-sel" id="e-month"><option value="">Month</option></select>
+      <select class="e-sel" id="e-year"><option value="">Year</option></select>
+    </div>
+  </div>
+
+  <div class="e-card">
+    <div class="e-label">Your name</div>
+    <input type="text" class="e-inp" id="e-name" placeholder="First name">
+  </div>
+
+  <button class="e-go" id="e-go" onclick="startAlignment()">Begin Your Alignment</button>
+  <div class="e-note">Takes 10-15 minutes. Best experienced alone, without distractions.</div>
+</div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey" id="screen-journey">
+  <nav class="j-nav">
+    <a href="/" class="j-logo">Occultics</a>
+    <div style="display:flex;align-items:center">
+      <div class="j-progress" id="j-progress"></div>
+      <div class="j-step-label" id="j-step-label"></div>
+    </div>
+  </nav>
+
+  <!-- STEP 0: YOUR CODE -->
+  <div class="step" id="step-0">
+    <div class="s-eyebrow">Step 1 of 7</div>
+    <h2 class="s-title">Your Mathematical Blueprint</h2>
+    <div class="s-code-display">
+      <div class="s-code-label">Your code</div>
+      <div class="s-code-num" id="disp-code"></div>
+      <div class="s-code-sub" id="disp-pyr"></div>
+    </div>
+    <div class="s-body" id="step0-body">
+      <div class="s-loading show" id="load-0"><div class="spinner"></div><p>Generating your blueprint...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">Pause and reflect</div>
+      <textarea placeholder="What stood out to you? What felt familiar?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(1)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 1: EMOTIONAL FREQUENCY -->
+  <div class="step" id="step-1">
+    <div class="s-eyebrow">Step 2 of 7</div>
+    <h2 class="s-title">Your Emotional Frequency</h2>
+    <div class="s-body" id="step1-body">
+      <div class="s-loading show" id="load-1"><div class="spinner"></div><p>Reading your emotional patterns...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">What resonates?</div>
+      <textarea placeholder="How does this show up in your daily life?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(2)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 2: CORE DRIVERS -->
+  <div class="step" id="step-2">
+    <div class="s-eyebrow">Step 3 of 7</div>
+    <h2 class="s-title">Your Core Drivers</h2>
+    <div class="s-body" id="step2-body">
+      <div class="s-loading show" id="load-2"><div class="spinner"></div><p>Decoding what drives you...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">Recognition check</div>
+      <textarea placeholder="What are you doing when you feel most alive?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(3)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 3: BEHAVIORAL CODE -->
+  <div class="step" id="step-3">
+    <div class="s-eyebrow">Step 4 of 7</div>
+    <h2 class="s-title">Your Relationship Patterns</h2>
+    <div class="s-body" id="step3-body">
+      <div class="s-loading show" id="load-3"><div class="spinner"></div><p>Mapping your relationship patterns...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">Be honest with yourself</div>
+      <textarea placeholder="What pattern keeps repeating in your relationships?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(4)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 4: KARMIC BLUEPRINT -->
+  <div class="step" id="step-4">
+    <div class="s-eyebrow">Step 5 of 7</div>
+    <h2 class="s-title">Your Karmic Blueprint</h2>
+    <div class="s-body" id="step4-body">
+      <div class="s-loading show" id="load-4"><div class="spinner"></div><p>Reading your karmic imprint...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">Let this land</div>
+      <textarea placeholder="What weight have you been carrying that is not yours?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(5)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 5: LIFE CYCLES -->
+  <div class="step" id="step-5">
+    <div class="s-eyebrow">Step 6 of 7</div>
+    <h2 class="s-title">Where You Are Right Now</h2>
+    <div class="s-body" id="step5-body">
+      <div class="s-loading show" id="load-5"><div class="spinner"></div><p>Calculating your current cycle...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">Your current reality</div>
+      <textarea placeholder="Does this match where you feel you are in life?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(6)">Continue <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- STEP 6: ALIGNMENT -->
+  <div class="step" id="step-6">
+    <div class="s-eyebrow">Step 7 of 7</div>
+    <h2 class="s-title">Your Alignment</h2>
+    <div class="s-body" id="step6-body">
+      <div class="s-loading show" id="load-6"><div class="spinner"></div><p>Synthesizing your alignment...</p></div>
+    </div>
+    <div class="s-reflection">
+      <div class="s-reflection-label">The shift</div>
+      <textarea placeholder="What is one thing you will do differently starting today?"></textarea>
+    </div>
+    <button class="s-next" onclick="goStep(7)">Complete Your Alignment <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <!-- FINAL -->
+  <div class="step" id="step-7">
+    <div class="s-final">
+      <div class="s-final-icon">&#10022;</div>
+      <h2 class="s-final-title">Your alignment is complete.</h2>
+      <p class="s-final-sub" id="final-msg">You now carry something most people never receive - the mathematical truth of who you are. Not someone's opinion. Not a guess. The code that has been running beneath every decision, every relationship, every feeling you have ever had.</p>
+      <div class="s-code-display" style="max-width:300px;margin:24px auto">
+        <div class="s-code-label">Your code</div>
+        <div class="s-code-num" id="final-code"></div>
+      </div>
+      <a href="/" style="display:inline-block;padding:14px 32px;background:var(--royal);color:#fff;border-radius:12px;text-decoration:none;font-size:13px;font-weight:600;margin-top:16px">Explore More Apps</a>
+      <div style="margin-top:12px"><a href="/ask.html" style="font-size:11px;color:var(--dim);text-decoration:none">Have a question? Ask Occultics</a></div>
+    </div>
+  </div>
+</section>
+
+<script>
+var DECODE_URL='https://occultics-decode.occultics4.workers.dev';
+var profile=null;
+var userName='';
+var totalSteps=8;
+var currentStep=0;
+
+// Populate dropdowns
+var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var dE=document.getElementById('e-day');
+for(var i=1;i<=31;i++){var o=document.createElement('option');o.value=i;o.textContent=i;dE.appendChild(o);}
+var mE=document.getElementById('e-month');
+mos.forEach(function(m,i){var o=document.createElement('option');o.value=i+1;o.textContent=m;mE.appendChild(o);});
+var yE=document.getElementById('e-year');
+for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.textContent=y;yE.appendChild(o);}
+
+// Session prompts - what to ask Claude for each step
+var SESSION_PROMPTS=[
+  "Generate a deep, personal mathematical blueprint for {name}. Their code is {code}, pyramid is {pyr}. Birth day description: {dayDesc}. Biorhythm: {bioDesc}. Generational: {genDesc}. Life Path: {lpDesc}. Write 3-4 paragraphs explaining what these numbers mean for them specifically. Be direct, personal, and use their name. Do not use Croatian words.",
+  "Generate an emotional frequency reading for {name}. Their biorhythm is {bio}, which governs how people perceive them and their emotional energy. Their generational number is {gen}, which reveals what they truly need at the deepest level. Write 3-4 paragraphs about their emotional patterns, how they process feelings, and why certain emotions keep surfacing. Be specific to their numbers.",
+  "Generate a core drivers analysis for {name}. Their life path is {lp} and their pyramid code is {pyr}. Write 3-4 paragraphs about what fundamentally drives them - their ambitions, their fears, what they chase, and what they avoid. Reference specific number meanings. Be direct and personal.",
+  "Generate a relationship pattern analysis for {name}. Their code is {code}. Their biorhythm {bio} determines attraction patterns. Their generational {gen} determines what they seek in a partner. Write 3-4 paragraphs about why their relationships follow certain patterns, what type of person they attract, and what they actually need vs what they think they need.",
+  "Generate a karmic blueprint for {name}. Their pyramid code is {pyr} and life path is {lp}. Write 3-4 paragraphs about karmic debts they carry - inherited patterns from family, lessons they keep being forced to learn, and what they need to release. Reference their specific numbers.",
+  "Generate a current life cycle reading for {name}. Born {dob}. Their personal year in 2026 is calculated from their numbers. Their life path is {lp}. Write 3-4 paragraphs about where they are right now in their life cycle - what this period demands, what opportunities are present, and what to watch out for. Be specific and practical.",
+  "Generate a final alignment synthesis for {name}. Their complete code is {code}, pyramid {pyr}. Bring everything together - identity, emotions, drivers, relationships, karma, and current cycle. Write 3-4 paragraphs that give them a clear sense of direction. End with a powerful statement about who they are and what they are built for. Make it memorable."
+];
+
+async function startAlignment(){
+  var d=document.getElementById('e-day').value;
+  var m=document.getElementById('e-month').value;
+  var y=document.getElementById('e-year').value;
+  userName=document.getElementById('e-name').value.trim()||'You';
+  if(!d||!m||!y)return;
+
+  var btn=document.getElementById('e-go');
+  btn.textContent='Calculating your code...';btn.disabled=true;
+
+  try{
+    var res=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y})});
+    profile=await res.json();
+    showJourney(d,m,y);
+  }catch(e){
+    btn.textContent='Begin Your Alignment';btn.disabled=false;
+  }
+}
+
+function showJourney(d,m,y){
+  document.getElementById('screen-entry').style.display='none';
+  document.getElementById('screen-journey').style.display='block';
+
+  var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
+  var pyr=profile.pyramid.first+'.'+profile.pyramid.second+'.'+profile.pyramid.third;
+
+  document.getElementById('disp-code').textContent=code;
+  document.getElementById('disp-pyr').textContent='Pyramid: '+pyr;
+  document.getElementById('final-code').textContent=code;
+
+  // Build progress dots
+  var progHtml='';
+  for(var i=0;i<7;i++) progHtml+='<div class="j-dot'+(i===0?' active':'')+'" id="jd-'+i+'"></div>';
+  document.getElementById('j-progress').innerHTML=progHtml;
+
+  goStep(0);
+
+  // Generate all sessions in background
+  var dob=d+'.'+m+'.'+y;
+  for(var s=0;s<7;s++){
+    generateSession(s, code, pyr, dob);
+  }
+}
+
+async function generateSession(idx, code, pyr, dob){
+  var prompt=SESSION_PROMPTS[idx];
+  prompt=prompt.replace(/\{name\}/g, userName);
+  prompt=prompt.replace(/\{code\}/g, code);
+  prompt=prompt.replace(/\{pyr\}/g, pyr);
+  prompt=prompt.replace(/\{bio\}/g, String(profile.pyth.biorhythm));
+  prompt=prompt.replace(/\{gen\}/g, String(profile.pyth.generational));
+  prompt=prompt.replace(/\{lp\}/g, String(profile.pyth.lifePath));
+  prompt=prompt.replace(/\{dob\}/g, dob);
+  prompt=prompt.replace(/\{dayDesc\}/g, profile.birthDayDesc||'');
+  prompt=prompt.replace(/\{bioDesc\}/g, profile.bioDesc||'');
+  prompt=prompt.replace(/\{genDesc\}/g, profile.genDesc||'');
+  prompt=prompt.replace(/\{lpDesc\}/g, profile.lpDesc||'');
+
+  try{
+    var res=await fetch(DECODE_URL+'/ask',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        question:prompt,
+        profileData:profile,
+        partnerData:null,
+        compatibilityData:null,
+        history:[],
+        gender:'other'
+      })
+    });
+    var data=await res.json();
+    var text=data.response||data.error||'Session could not be generated.';
+    
+    // Render the text
+    var html=text.split('\n\n').filter(function(p){return p.trim();}).map(function(p){
+      return '<p>'+p.trim()+'</p>';
+    }).join('');
+
+    var bodyEl=document.getElementById('step'+idx+'-body');
+    var loadEl=document.getElementById('load-'+idx);
+    if(loadEl)loadEl.style.display='none';
+    bodyEl.innerHTML=html;
+  }catch(e){
+    var bodyEl=document.getElementById('step'+idx+'-body');
+    var loadEl=document.getElementById('load-'+idx);
+    if(loadEl)loadEl.style.display='none';
+    bodyEl.innerHTML='<p>This session could not be generated. Please try again.</p>';
+  }
+}
+
+function goStep(idx){
+  currentStep=idx;
+  // Hide all steps
+  for(var i=0;i<totalSteps;i++){
+    var el=document.getElementById('step-'+i);
+    if(el)el.classList.remove('active');
+  }
+  // Show current step
+  var current=document.getElementById('step-'+idx);
+  if(current)current.classList.add('active');
+
+  // Update progress dots
+  for(var i=0;i<7;i++){
+    var dot=document.getElementById('jd-'+i);
+    if(!dot)continue;
+    dot.className='j-dot';
+    if(i<idx)dot.classList.add('done');
+    else if(i===idx)dot.classList.add('active');
+  }
+
+  // Update label
+  var labels=['Blueprint','Emotions','Drivers','Relationships','Karma','Cycles','Alignment'];
+  var labelEl=document.getElementById('j-step-label');
+  if(idx<7)labelEl.textContent=(idx+1)+'/7 '+labels[idx];
+  else labelEl.textContent='Complete';
+
+  // Scroll to top
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
