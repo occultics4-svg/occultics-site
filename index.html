@@ -67,7 +67,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 .sec-sub{font-size:16px;color:var(--dim);max-width:500px;margin:0 auto;line-height:1.7}
 
 /* APP GRID */
-.app-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .app-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px 24px;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit;position:relative;overflow:hidden}
 .app-card:hover{border-color:rgba(10,14,46,0.1);transform:translateY(-4px);box-shadow:0 12px 40px rgba(10,14,46,0.08)}
 .app-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--crystal),transparent);opacity:0;transition:opacity .3s}
@@ -104,7 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,
 
 /* STORIES */
 .stories-wrap{background:#ffffff;border-radius:20px;padding:48px 32px;border:1px solid rgba(10,14,46,0.06)}
-.stories-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
 .story{background:#f5f0e8;border-radius:12px;padding:20px}
 .story-tag{font-size:12px;letter-spacing:2px;color:#0969da;text-transform:uppercase;font-weight:600;margin-bottom:6px}
 .story-text{font-family:'Newsreader',Georgia,serif;font-size:18px;color:var(--dim);line-height:1.7;font-style:italic}
@@ -131,7 +131,7 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 .hero .h-cta{animation:fadeUp .5s ease-out .3s backwards}
 
 @media(max-width:768px){.app-grid{grid-template-columns:1fr}.stories-grid{grid-template-columns:1fr}.how-row{flex-direction:column;align-items:center}.n-r a{display:none}.n-r a.keep{display:inline}.n-tag{display:none}}
-@media(min-width:769px) and (max-width:1024px){.app-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:769px) and (max-width:1024px){.app-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
@@ -193,10 +193,10 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
     <div class="sec-eye">Guided Experiences</div>
     <h2 class="sec-title">Our guided experiences</h2>
   </div>
-  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
     <a href="/alignment.html" class="app-card" style="display:block;text-decoration:none;color:inherit">
       <div class="app-icon" style="background:rgba(77,184,255,0.08);color:#4db8ff">&#9670;</div>
-      <div class="app-tag" style="color:#0969da">Guided Experience</div>
+      <div class="app-tag" style="color:#0969da">AI Guided Experience</div>
       <div class="app-name">Date of Birth Alignment</div>
       <div class="app-desc">A guided, interactive session personalized to your date of birth. Walk through a 7-step experience that decodes your identity, your patterns, your relationships, and your life cycles. Not a report you read. A session that realigns you with who you actually are.</div>
       <div class="app-transform" style="color:#0969da">"I stopped fighting myself and started working with my code."</div>
@@ -205,14 +205,20 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
     
     <a href="/compatibility.html" class="app-card" style="display:block;text-decoration:none;color:inherit">
       <div class="app-icon" style="background:rgba(26,42,255,0.08);color:#1a2aff">&#11041;</div>
-      <div class="app-tag" style="color:#1a2aff">Guided Experience</div>
+      <div class="app-tag" style="color:#1a2aff">AI Guided Experience</div>
       <div class="app-name">Compatibility Alignment</div>
-      <div class="app-desc">Two birthdays. One truth. Get a short analysis of both characters, then walk through a guided 11-step session that decodes your relationship - why you met, what you are building, and whether it lasts.</div>
+      <div class="app-desc">AI trained on my own astronumerology system. Two birthdays. One truth. Get a short analysis of both characters, then walk through a guided 11-step session that decodes your relationship - why you met, what you are building, and whether it lasts.</div>
       <div class="app-transform" style="color:#1a2aff">"Now I understand why we clash - and how to stop."</div>
       <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-top:12px">$199</div>
     </a>
+    <a href="/book" class="app-card" style="display:block;text-decoration:none;color:inherit">
+      <div class="app-icon" style="background:rgba(26,42,255,0.08);color:#1a2aff">&#9733;</div>
+      <div class="app-tag" style="color:#1a2aff">Live Session</div>
+      <div class="app-name">Personal Session</div>
+      <div class="app-desc">30 minutes live with me. I decode your identity, relationships, and life path from your date of birth. Not AI. Me, your numbers, and the truth.</div>
+      <div class="app-transform" style="color:#1a2aff">Book now</div>
+    </a>
   </div>
-  <div style="text-align:center;font-size:13px;color:#3d4148;margin-top:24px">For personal consultations: hello@occultics.ai</div>
 </section>
 
 <!-- STORIES -->
@@ -276,3 +282,4 @@ footer{padding:32px 24px;text-align:center;background:#0a0e2e;border-top:1px sol
 </script>
 </body>
 </html>
+
