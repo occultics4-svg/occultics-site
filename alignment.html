@@ -110,6 +110,23 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);
 </div>
 </section>
 
+
+<!-- PAYWALL -->
+<section class="entry" id="screen-paywall" style="display:none">
+<div class="entry-inner">
+  <div class="e-logo">Occultics</div>
+  <h2 style="font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:300;color:var(--navy);margin-bottom:8px">Your code is ready.</h2>
+  <div style="background:linear-gradient(145deg,var(--navy),#141845);border-radius:16px;padding:24px;text-align:center;margin:20px 0">
+    <div style="font-size:8px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:4px">Your code</div>
+    <div id="pw-code" style="font-family:'Cormorant Garamond',Georgia,serif;font-size:42px;color:var(--crystal);letter-spacing:8px"></div>
+  </div>
+  <p style="font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:24px">Your 7-step alignment session is personalized and waiting. Unlock it now to walk through your identity, patterns, relationships, and life cycles.</p>
+  <button class="e-go" onclick="handlePayment()">Unlock Your Alignment — $99</button>
+  <div class="e-note" style="margin-top:10px">Secure payment via Stripe. Instant access after payment.</div>
+  <a href="/" style="display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--dim);text-decoration:none">← Back to occultics.ai</a>
+</div>
+</section>
+
 <!-- JOURNEY -->
 <section class="journey" id="screen-journey">
   <nav class="j-nav">
@@ -257,13 +274,13 @@ for(var y=2026;y>=1920;y--){var o=document.createElement('option');o.value=y;o.t
 
 // Session prompts - what to ask Claude for each step
 var SESSION_PROMPTS=[
-  "Generate a deep, personal mathematical blueprint for {name}. Their code is {code}, pyramid is {pyr}. Birth day description: {dayDesc}. Biorhythm: {bioDesc}. Generational: {genDesc}. Life Path: {lpDesc}. Write 3-4 paragraphs explaining what these numbers mean for them specifically. Be direct, personal, and use their name. Do not use Croatian words.",
-  "Generate an emotional frequency reading for {name}. Their biorhythm is {bio}, which governs how people perceive them and their emotional energy. Their generational number is {gen}, which reveals what they truly need at the deepest level. Write 3-4 paragraphs about their emotional patterns, how they process feelings, and why certain emotions keep surfacing. Be specific to their numbers.",
-  "Generate a core drivers analysis for {name}. Their life path is {lp} and their pyramid code is {pyr}. Write 3-4 paragraphs about what fundamentally drives them - their ambitions, their fears, what they chase, and what they avoid. Reference specific number meanings. Be direct and personal.",
-  "Generate a relationship pattern analysis for {name}. Their code is {code}. Their biorhythm {bio} determines attraction patterns. Their generational {gen} determines what they seek in a partner. Write 3-4 paragraphs about why their relationships follow certain patterns, what type of person they attract, and what they actually need vs what they think they need.",
-  "Generate a karmic blueprint for {name}. Their pyramid code is {pyr} and life path is {lp}. Write 3-4 paragraphs about karmic debts they carry - inherited patterns from family, lessons they keep being forced to learn, and what they need to release. Reference their specific numbers.",
-  "Generate a current life cycle reading for {name}. Born {dob}. Their personal year in 2026 is calculated from their numbers. Their life path is {lp}. Write 3-4 paragraphs about where they are right now in their life cycle - what this period demands, what opportunities are present, and what to watch out for. Be specific and practical.",
-  "Generate a final alignment synthesis for {name}. Their complete code is {code}, pyramid {pyr}. Bring everything together - identity, emotions, drivers, relationships, karma, and current cycle. Write 3-4 paragraphs that give them a clear sense of direction. End with a powerful statement about who they are and what they are built for. Make it memorable."
+  "Based on {name}'s date of birth, their code is {code} and pyramid is {pyr}. Using the knowledge base, give a complete mathematical blueprint. Explain what each number means for this specific person - biorhythm {bio}, generational {gen}, life path {lp}. Birth day description: {dayDesc}. Reference the degree, the step, and what the pyramid reveals. Be specific to their numbers. Use their name. Respond in English only.",
+  "Based on {name}'s biorhythm number {bio} and generational number {gen}, explain their emotional frequency. How do they process feelings? What triggers them? How do they express love and pain? Use the knowledge base descriptions for these specific numbers. Be direct and personal. Use their name.",
+  "Based on {name}'s life path {lp} and pyramid {pyr}, explain what fundamentally drives them. What careers fit their code according to the PROFESIJE data? What are they built for? What should they avoid? Reference their specific degree and step. Use their name.",
+  "Based on {name}'s code {code}, explain their relationship patterns. What does their biorhythm {bio} attract? What does their generational {gen} truly need in a partner? What patterns repeat? Use the compatibility knowledge and birth day description: {dayDesc}. Use their name.",
+  "Based on {name}'s pyramid code {pyr} and life path {lp}, explain their karmic blueprint from the KARMICKA NUMEROLOGIJA knowledge. What karmic debts do they carry? What inherited patterns from family? What do they need to release? Be specific to their numbers.",
+  "Based on {name}'s date of birth {dob}, calculate their personal year for 2026 using the CIKLUSI ZIVOTA knowledge. Where are they in their life cycle? What does this period demand? What opportunities are present? What should they watch for? Be specific.",
+  "Bring everything together for {name} with code {code} and pyramid {pyr}. Synthesize their identity, emotions, drivers, relationships, karma, and current cycle into one powerful alignment statement. Tell them who they are and what they are built for. End with something they will remember. Do not ask questions."
 ];
 
 async function startAlignment(){
@@ -279,10 +296,43 @@ async function startAlignment(){
   try{
     var res=await fetch(DECODE_URL+'/decode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({day:+d,month:+m,year:+y})});
     profile=await res.json();
-    showJourney(d,m,y);
+    showPaywall(d,m,y);
   }catch(e){
     btn.textContent='Begin Your Alignment';btn.disabled=false;
   }
+}
+
+var savedD,savedM,savedY;
+
+function showPaywall(d,m,y){
+  savedD=d;savedM=m;savedY=y;
+  var code=profile.pyth.biorhythm+'.'+profile.pyth.generational+'.'+profile.pyth.lifePath;
+  document.getElementById('pw-code').textContent=code;
+  document.getElementById('screen-entry').style.display='none';
+  document.getElementById('screen-paywall').style.display='flex';
+}
+
+function handlePayment(){
+  // Check if already paid (URL param)
+  fetch('https://occultics-checkout.occultics4.workers.dev/',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({type:'life_code_alignment',email:userName+'@occultics.ai'})
+  }).then(function(r){return r.json()}).then(function(d){
+    if(d.url)window.location.href=d.url;
+    else startJourney();
+  }).catch(function(){startJourney();});
+}
+
+function startJourney(){
+  document.getElementById('screen-paywall').style.display='none';
+  showJourney(savedD,savedM,savedY);
+}
+
+// Check if returning from payment
+var urlParams=new URLSearchParams(window.location.search);
+if(urlParams.get('paid')==='true'){
+  // Auto-start if paid
 }
 
 function showJourney(d,m,y){
