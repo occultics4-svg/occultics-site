@@ -313,15 +313,7 @@ function showPaywall(d,m,y){
 }
 
 function handlePayment(){
-  // Check if already paid (URL param)
-  fetch('https://occultics-checkout.occultics4.workers.dev/',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({type:'life_code_alignment',email:userName+'@occultics.ai'})
-  }).then(function(r){return r.json()}).then(function(d){
-    if(d.url)window.location.href=d.url;
-    else startJourney();
-  }).catch(function(){startJourney();});
+  window.location.href='https://buy.stripe.com/9B6cMXalR6yOduh5vH0co05';
 }
 
 function startJourney(){
