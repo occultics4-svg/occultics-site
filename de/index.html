@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Occultics — Bedeutungsvolle Verbindungen, gewählt von deinen Zahlen</title>
+<meta name="description" content="Occultics stellt dir die Menschen vor, von denen deine Zahlen sagen, dass du sie lieben wirst — für eine Freundschaft oder für mehr — und gibt euch einen Ort, an den ihr gemeinsam gehen könnt.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f0e8; --card:#ffffff; --card2:#ede8df; --border:rgba(10,14,46,0.07);
+    --ink:#1a1a2e; --text:#2d3142; --dim:#4a4e5a; --muted:#8b8578;
+    --crystal:#4db8ff; --deep:#1a2aff; --gold:#b08d4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+  .serif{font-family:'Newsreader',Georgia,serif}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  a{text-decoration:none;color:inherit}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-in{max-width:1040px;margin:0 auto;padding:15px 24px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-weight:700;font-size:13px;letter-spacing:4px;color:var(--ink);text-transform:uppercase}
+  .logo small{display:block;font-size:8px;letter-spacing:1.5px;color:var(--muted);font-weight:400;margin-top:2px}
+  .nav-r{display:flex;gap:22px;align-items:center}
+  .nav-r a{font-size:14px;color:var(--dim);font-weight:500;transition:color .2s}
+  .nav-r a:hover{color:var(--crystal)}
+  .nav-cta{background:var(--ink);color:#fff!important;padding:9px 18px;border-radius:100px;font-size:13px;font-weight:600}
+  .nav-cta:hover{background:var(--deep)}
+  .lang{position:relative}
+  .lang summary{list-style:none;cursor:pointer;font-size:14px;font-weight:500;color:var(--dim);display:flex;align-items:center;gap:4px;transition:color .2s}
+  .lang summary::-webkit-details-marker{display:none}
+  .lang summary::after{content:'\25BE';font-size:10px}
+  .lang[open] summary,.lang summary:hover{color:var(--crystal)}
+  .lang-menu{position:absolute;top:160%;right:0;background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px;min-width:140px;box-shadow:0 12px 30px rgba(10,14,46,.1);z-index:120}
+  .lang-menu a{display:block;padding:8px 12px;font-size:14px;color:var(--text);border-radius:8px}
+  .lang-menu a:hover{background:var(--bg);color:var(--crystal)}
+  .stories-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:820px;margin:0 auto}
+  @media(max-width:680px){.stories-grid{grid-template-columns:1fr}}
+  .story{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px}
+  .story-tag{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--crystal);font-weight:600;margin-bottom:10px}
+  .story p{font-family:'Newsreader',Georgia,serif;font-size:18px;font-style:italic;color:var(--ink);line-height:1.55}
+  .stories-note{text-align:center;font-size:13px;color:var(--muted);margin-top:22px}
+  @media(max-width:680px){.nav-r .hide{display:none}}
+  .hero{padding:150px 24px 70px;text-align:center;position:relative;overflow:hidden}
+  .eyebrow{font-size:11px;letter-spacing:4px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:22px}
+  .hero h1{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(40px,7.5vw,72px);line-height:1.04;color:var(--ink);max-width:760px;margin:0 auto 24px}
+  .hero h1 em{font-style:italic;color:var(--crystal)}
+  .hero .sub{font-size:19px;color:var(--dim);max-width:540px;margin:0 auto 38px;line-height:1.65}
+  .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:100px;font-size:15px;font-weight:600;transition:all .2s;cursor:pointer;border:none;font-family:inherit}
+  .btn-primary{background:var(--deep);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(26,42,255,.22)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--crystal);color:var(--crystal)}
+  .hero-note{font-size:13px;color:var(--muted);margin-top:22px;letter-spacing:1px}
+  section{padding:70px 0}
+  .sec-head{text-align:center;margin-bottom:42px}
+  .sec-eye{font-size:12px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .sec-title{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(28px,4.5vw,42px);color:var(--ink);line-height:1.15;max-width:640px;margin:0 auto 12px}
+  .sec-sub{font-size:16px;color:var(--dim);max-width:520px;margin:0 auto;line-height:1.7}
+  .tool{background:var(--card);border:1px solid var(--border);border-radius:22px;max-width:560px;margin:0 auto;padding:38px 32px;box-shadow:0 18px 50px rgba(10,14,46,.05)}
+  .field{display:flex;gap:10px;max-width:400px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+  input[type=date],input[type=email]{flex:1;min-width:180px;font-family:inherit;font-size:16px;padding:14px 15px;border:1px solid var(--border);border-radius:12px;background:#fdfbf7;color:var(--text)}
+  input:focus{outline:none;border-color:var(--crystal)}
+  #reading{display:none;margin-top:30px;text-align:center}
+  .code-row{display:flex;gap:14px;justify-content:center;margin:8px 0 22px}
+  .num{width:78px;height:78px;border-radius:50%;border:1.5px solid var(--crystal);display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff}
+  .num b{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:36px;color:var(--crystal);line-height:1}
+  .num span{font-size:8px;letter-spacing:1.5px;color:var(--gold);margin-top:4px}
+  .arch{font-family:'Newsreader',Georgia,serif;font-size:28px;color:var(--ink);margin-bottom:8px}
+  .desc{color:var(--dim);font-size:16px;max-width:440px;margin:0 auto 20px;line-height:1.7}
+  .do{background:#eef7ff;border:1px solid #d4ecff;border-radius:14px;padding:15px 17px;max-width:440px;margin:0 auto 18px;text-align:left}
+  .do .k{font-size:10px;letter-spacing:2px;color:var(--gold);margin-bottom:5px;font-weight:600}
+  .do .v{font-family:'Newsreader',Georgia,serif;font-size:19px;color:var(--ink);line-height:1.35}
+  .tease{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto}
+  .how{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:10px}
+  @media(max-width:760px){.how{grid-template-columns:1fr;max-width:380px;margin:10px auto 0}}
+  .step{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 24px;text-align:center}
+  .step .n{font-family:'Newsreader',Georgia,serif;font-size:46px;color:var(--crystal);opacity:.5;line-height:1;margin-bottom:10px}
+  .step h4{font-size:19px;font-weight:600;color:var(--ink);margin-bottom:8px}
+  .step p{font-size:15px;color:var(--dim);line-height:1.6}
+  .diff{background:var(--ink);color:#f3ead7;border-radius:26px;padding:60px 40px;margin:0 24px;max-width:992px;margin-left:auto;margin-right:auto}
+  .diff .sec-eye{color:var(--gold)}
+  .diff .sec-title{color:#fff}
+  .diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:42px}
+  @media(max-width:760px){.diff-grid{grid-template-columns:1fr;max-width:380px;margin:42px auto 0}}
+  .diff-item .di-ic{font-size:22px;color:var(--crystal);margin-bottom:12px}
+  .diff-item h4{font-family:'Newsreader',Georgia,serif;font-weight:400;font-size:22px;color:#fff;margin-bottom:8px}
+  .diff-item p{font-size:14.5px;color:#c9bda3;line-height:1.65}
+  .books-band{display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px 40px;max-width:880px;margin:0 auto}
+  .books-cover{width:150px;height:225px;border-radius:8px;background:linear-gradient(135deg,#efe7d6,#e2d6bd);display:flex;align-items:center;justify-content:center;flex-direction:column;color:var(--gold);box-shadow:0 14px 36px rgba(10,14,46,.12);flex:0 0 auto}
+  .books-cover .serif{font-size:22px;color:#7a6536;text-align:center;padding:0 14px;line-height:1.2}
+  .books-txt{flex:1;min-width:260px}
+  .books-txt h3{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:30px;color:var(--ink);margin-bottom:12px;line-height:1.2}
+  .books-txt p{font-size:16px;color:var(--dim);line-height:1.7;margin-bottom:20px}
+  .wait{text-align:center;background:linear-gradient(180deg,#fbf8f2,#f5f0e8);border:1px solid var(--border);border-radius:26px;padding:56px 36px;max-width:680px;margin:0 auto}
+  .wait h3{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(30px,5vw,44px);color:var(--ink);margin:12px 0 12px}
+  .wait p{font-size:17px;color:var(--dim);max-width:440px;margin:0 auto 26px;line-height:1.6}
+  #waitMsg{margin-top:14px;color:var(--crystal);font-size:14px;min-height:18px;font-weight:500}
+  footer{border-top:1px solid var(--border);margin-top:50px;padding:40px 24px}
+  .foot-in{max-width:1040px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center}
+  .foot-l .logo{margin-bottom:6px}
+  .foot-l p{font-size:13px;color:var(--muted)}
+  .foot-r{display:flex;gap:22px;flex-wrap:wrap}
+  .foot-r a{font-size:14px;color:var(--dim)}
+  .foot-r a:hover{color:var(--crystal)}
+  .copy{text-align:center;font-size:12px;color:var(--muted);margin-top:28px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-in">
+    <a href="/de/" class="logo">Occultics<small>gewählt von deinen Zahlen</small></a>
+    <div class="nav-r">
+      <a href="#how" class="hide">So funktioniert es</a>
+      <a href="#stories" class="hide">Geschichten</a>
+      <a href="/books" class="hide">Bücher</a>
+      <a href="/blog" class="hide">Blog</a>
+      <a href="/de/about" class="hide">Über mich</a>
+      <details class="lang hide"><summary>DE</summary><div class="lang-menu"><a href="/">English</a><a href="/es">Español</a><a href="/it">Italiano</a><a href="/de">Deutsch</a><a href="/ja">日本語</a></div></details>
+      <a href="#code" class="nav-cta">Dein Code</a>
+    </div>
+  </div>
+</nav>
+<header class="hero">
+  <div class="eyebrow">Bedeutungsvolle Verbindungen, gewählt von deinen Zahlen</div>
+  <h1 class="serif">Die richtigen Menschen sind kein Zufall. <em>Deine Zahlen kennen sie bereits.</em></h1>
+  <p class="sub">Occultics stellt dir die eine Person vor, mit der es laut deinem Geburtsdatum wirklich funkt — für eine Freundschaft oder für mehr — und gibt euch einen Ort, an den ihr gemeinsam gehen könnt.</p>
+  <div class="btn-row">
+    <a href="#code" class="btn btn-primary">Hol dir deinen Code — kostenlos</a>
+    <a href="#wait" class="btn btn-ghost">Auf die Warteliste</a>
+  </div>
+  <p class="hero-note">Kein Swipen. Kein Zufall. Eine bedeutungsvolle Vorstellung nach der anderen.</p>
+</header>
+<section id="code">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eye">Hier beginnen</div>
+      <h2 class="sec-title serif">Dein Geburtsdatum ist ein Code. Sieh, was er über dich sagt.</h2>
+      <p class="sec-sub">Zehn Sekunden, kostenlos. Es ist derselbe Code, mit dem wir die Menschen finden, die du lieben würdest.</p>
+    </div>
+    <div class="tool">
+      <div class="field">
+        <input type="date" id="dob" min="1925-01-01" max="2012-12-31" aria-label="Hier beginnen">
+        <button class="btn btn-primary" onclick="reveal()">Meinen Code lesen</button>
+      </div>
+      <div id="reading">
+        <div class="code-row" id="codeRow"></div>
+        <div class="arch serif" id="arch"></div>
+        <div class="desc" id="desc"></div>
+        <div class="do"><div class="k">DIESE WOCHE: TU DAS</div><div class="v serif" id="doline"></div></div>
+        <p class="tease">Das ist nur die Oberfläche. Dein vollständiger Code — und die Menschen, von denen deine Zahlen sagen, dass du sie lieben würdest — dafür gibt es Occultics. Trag dich unten in die Warteliste ein.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-eye">So funktioniert es</div><h2 class="sec-title serif">Vorgestellt. Verbunden. Ein Ort, an den ihr geht.</h2></div>
+    <div class="how">
+      <div class="step"><div class="n serif">1</div><h4>Du wirst vorgestellt</h4><p>Deine Zahlen finden die eine Person, mit der es wirklich funkt — und sagen dir <em>warum</em> ihr zusammenpasst, noch bevor ein Wort fällt.</p></div>
+      <div class="step"><div class="n serif">2</div><h4>Ihr verbindet euch</h4><p>Wenn ihr beide Ja sagt, lernt ihr euch kennen — für eine verwandte Freundschaft oder für mehr. Eine nach der anderen. Niemals ein Feed.</p></div>
+      <div class="step"><div class="n serif">3</div><h4>Ihr unternehmt etwas</h4><p>Nehmt es mit in die echte Welt — ein Erlebnis zum Teilen, damit aus einem Match eine Erinnerung wird.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="diff">
+    <div class="sec-head"><div class="sec-eye">Warum es anders ist</div><h2 class="sec-title serif">Du triffst keine Fremden und hoffst.<br>Du triffst Menschen, die du schon verstehst.</h2></div>
+    <div class="diff-grid">
+      <div class="diff-item"><div class="di-ic">✦</div><h4>Vorab erklärt</h4><p>Alle anderen setzen Fremde zusammen und hoffen auf den Funken. Wir geben dir zuerst den Sinn füreinander — sofortige, erklärte Nähe.</p></div>
+      <div class="diff-item"><div class="di-ic">☾</div><h4>Gewählt von deinen Zahlen</h4><p>Kein Test, kein Horoskop-Wissen. Nur dein Geburtsdatum — eine universelle Sprache, die in jeder Sprache der Welt funktioniert.</p></div>
+      <div class="diff-item"><div class="di-ic">❝</div><h4>Du gehst verstanden</h4><p>Nicht nur 'das war nett'. Du gehst und sagst: Ich fühlte mich verstanden — und ich verstand sie — schneller als je zuvor.</p></div>
+    </div>
+  </div>
+</section>
+<section id="stories">
+  <div class="wrap">
+    <div class="sec-head"><div class="sec-eye">Geschichten</div><h2 class="sec-title serif">Was passiert, wenn die Mathematik bestätigt, was du längst fühlst.</h2></div>
+    <div class="stories-grid">
+      <div class="story"><div class="story-tag">Genauigkeit</div><p>„Es beschrieb meinen beruflichen Weg und das genaue Alter, in dem ich meine größte Lebensentscheidung traf. Ich hatte es nie jemandem erzählt — aber die Zahlen wussten es schon.“</p></div>
+      <div class="story"><div class="story-tag">Selbsterkenntnis</div><p>„Ich las es und fragte mich: Kennt mich dieser Mensch? Ich hatte Angst, 50 zu werden, aber danach wurde mein Gefühl plötzlich heller.“</p></div>
+      <div class="story"><div class="story-tag">Beziehungen</div><p>„Es gibt mir den Mut, etwas mit fast völliger Sicherheit vorherzusagen. Die Analyse gab mir die Kraft, weiterzugehen.“</p></div>
+      <div class="story"><div class="story-tag">Verwandlung</div><p>„Ich war erschüttert, wie vertraut sich die Ereignisse anfühlten. Es war, als würde mir gesagt, ihm nicht auszuweichen, nicht wegzusehen.“</p></div>
+    </div>
+    <p class="stories-note">Stimmen von Klientinnen und Klienten in Japan. Namen aus Datenschutzgründen weggelassen.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <div class="books-band">
+      <div class="books-cover"><span class="serif">Die Code-Reihe</span></div>
+      <div class="books-txt">
+        <div class="sec-eye">Die Bücher</div>
+        <h3 class="serif">Lerne, den Code selbst zu lesen.</h3>
+        <p>Der Persönlichkeitscode und Der Beziehungscode — das System hinter Occultics, aufgeschrieben. Entschlüssle dich selbst und die Menschen, die du liebst, in fünf Sprachen.</p>
+        <a href="/books" class="btn btn-primary">Die Bücher entdecken</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="wait">
+  <div class="wrap">
+    <div class="wait">
+      <div class="sec-eye">Sei unter den Ersten</div>
+      <h3 class="serif">Lass deine Zahlen dich vorstellen.</h3>
+      <p>Wir öffnen gerade die ersten Vorstellungen — in deiner Sprache, kostenlos auf die Liste. Hinterlasse deine E-Mail und wir finden deinen Menschen.</p>
+      <form class="field" id="waitForm" onsubmit="return joinWait(event)">
+        <input type="email" id="email" placeholder="you@email.com" required>
+        <button class="btn btn-primary" type="submit">Meinen Platz sichern</button>
+      </form>
+      <div id="waitMsg"></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="foot-in">
+    <div class="foot-l"><div class="logo">Occultics</div><p>Bedeutungsvolle Verbindungen, gewählt von deinen Zahlen.</p></div>
+    <div class="foot-r">
+      <a href="#how">So funktioniert es</a>
+      <a href="#stories">Geschichten</a>
+      <a href="/books">Bücher</a>
+      <a href="/blog">Blog</a>
+      <a href="/de/about">Über mich</a>
+      <a href="#wait">Sei unter den Ersten</a>
+    </div>
+  </div>
+  <p class="copy">© 2026 Occultics · occultics.ai</p>
+</footer>
+<script>
+  function digitSum(n){return String(n).split('').reduce(function(a,x){return a+(+x);},0);}
+  function reduce(n){while(n>9){n=digitSum(n);}return n;}
+  function codeFromDob(d,m,y){var bio=reduce(digitSum(d)+digitSum(m));var gen=reduce(digitSum(y));return {bio:bio,gen:gen,lp:reduce(bio+gen)};}
+  var L={everyday:"ALLTAG",roots:"WURZELN",lifepath:"LEBENSWEG"};
+  var BOOK={"1": {"a": "Der Initiator", "d": "Unabhängig und entschlossen, gemacht, um zu beginnen, was sonst niemand wagt. Deine Aufgabe ist, Menschen hereinzulassen, ohne dein Feuer zu verlieren.", "do": "Beginne das Eine, wofür du auf Erlaubnis gewartet hast. Du bist die Erlaubnis."}, "2": {"a": "Der Verbinder", "d": "Feinfühlig und diplomatisch, du spürst den Raum, bevor ein Wort fällt. Deine Gabe ist Harmonie — dein Schatten, zu verschwinden, um den Frieden zu wahren.", "do": "Sag das Ehrliche, das du abgemildert hast. Die richtigen Menschen halten es aus."}, "3": {"a": "Der Ausdrucksstarke", "d": "Kreativ und weit, hier, um zu kommunizieren, zu inspirieren und jeden Raum zu erhellen, den du betrittst. Deine Aufgabe ist, gesehen zu werden, nicht nur gemocht.", "do": "Teile die Idee, die du für dich behältst. Sie ist dafür gemacht, ausgesprochen zu werden."}, "4": {"a": "Der Erbauer", "d": "Bodenständig und treu, der, der Dinge baut, die bleiben. Du liebst durch Beständigkeit — und brauchst Raum, keinen Druck, um dich zu öffnen.", "do": "Schütze diese Woche eine Sache, die du aufbaust, vor den Meinungen aller."}, "5": {"a": "Der Freigeist", "d": "Ruhelos und abenteuerlustig, allergisch gegen Käfige. Du bringst Bewegung und Leben — und gibst denen Halt, die das Glück haben, mit dir Schritt zu halten.", "do": "Ändere bewusst eine Gewohnheit. Deine Seele braucht das Neue, nicht das Sichere."}, "6": {"a": "Der Fürsorgliche", "d": "Hingebungsvoll und verantwortungsbewusst, du trägst die Menschen, die du liebst. Deine Lektion ist, dich auch tragen zu lassen — und zu wählen, wer deine Fürsorge verdient.", "do": "Lass jemanden etwas für dich tun. Annehmen ist keine Schwäche."}, "7": {"a": "Der Suchende", "d": "Nach innen gewandt und scharfsinnig, du lebst für die Wahrheit unter der Oberfläche. Du brauchst Einsamkeit zum Denken — und die wenigen Richtigen, um laut zu denken.", "do": "Stell laut, einer Person, die Frage, die du wirklich beantwortet haben willst."}, "8": {"a": "Die Kraft", "d": "Ehrgeizig und fähig, hier, um die materielle Welt und die Menschen darin zu meistern. Deine Macht wächst, wenn du sie für mehr als dich selbst nutzt.", "do": "Stell die kühne Forderung — die Rolle, den Preis, den Raum. Du verkaufst dich unter Wert."}, "9": {"a": "Die Alte Seele", "d": "Mitfühlend und weise über deine Jahre hinaus, hier, um zu geben und loszulassen. Deine Aufgabe ist, loszulassen, was nie deine Last war.", "do": "Vergib diese Woche eine Sache — für deine Freiheit, nicht für ihre."}};
+  function reveal(){
+    var v=document.getElementById('dob').value; if(!v){document.getElementById('dob').focus();return;}
+    var p=v.split('-'),y=+p[0],m=+p[1],d=+p[2];
+    var c=codeFromDob(d,m,y),b=BOOK[c.lp];
+    document.getElementById('codeRow').innerHTML=
+      '<div class="num"><b>'+c.bio+'</b><span>'+L.everyday+'</span></div>'+
+      '<div class="num"><b>'+c.gen+'</b><span>'+L.roots+'</span></div>'+
+      '<div class="num" style="border-width:2.5px"><b>'+c.lp+'</b><span>'+L.lifepath+'</span></div>';
+    document.getElementById('arch').textContent=b.a;
+    document.getElementById('desc').textContent=b.d;
+    document.getElementById('doline').textContent=b.do;
+    var r=document.getElementById('reading');r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  var FORM_ENDPOINT="https://formspree.io/f/mlgkazjq";
+  function joinWait(e){
+    e.preventDefault();
+    var email=document.getElementById('email').value,msg=document.getElementById('waitMsg');
+    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({email:email})})
+      .then(function(){msg.textContent="Du bist auf der Liste. Wir finden deinen Menschen. ✦";})
+      .catch(function(){msg.textContent="Du bist auf der Liste. Wir finden deinen Menschen. ✦";});
+    document.getElementById('waitForm').reset();return false;
+  }
+</script>
+</body>
+</html>
