@@ -1,41 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://occultics.ai/</loc><priority>1.0</priority></url>
-  <url><loc>https://occultics.ai/ask.html</loc><priority>0.9</priority></url>
-  <url><loc>https://occultics.ai/about.html</loc><priority>0.7</priority></url>
+
+  <!-- Core pages (new connection site) -->
+  <url><loc>https://occultics.ai/</loc><lastmod>2026-06-15</lastmod><priority>1.0</priority></url>
+  <url><loc>https://occultics.ai/about</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://occultics.ai/books</loc><lastmod>2026-06-15</lastmod><priority>0.9</priority></url>
+
+  <!-- Language homes -->
+  <url><loc>https://occultics.ai/es</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://occultics.ai/it</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://occultics.ai/de</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority></url>
+  <url><loc>https://occultics.ai/ja</loc><lastmod>2026-06-15</lastmod><priority>0.8</priority></url>
+
+  <!-- Language About pages -->
+  <url><loc>https://occultics.ai/es/about</loc><lastmod>2026-06-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://occultics.ai/it/about</loc><lastmod>2026-06-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://occultics.ai/de/about</loc><lastmod>2026-06-15</lastmod><priority>0.6</priority></url>
+  <url><loc>https://occultics.ai/ja/about</loc><lastmod>2026-06-15</lastmod><priority>0.6</priority></url>
+
+  <!-- Other live pages -->
+  <url><loc>https://occultics.ai/ask.html</loc><priority>0.6</priority></url>
   <url><loc>https://occultics.ai/terms.html</loc><priority>0.3</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-1.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-2.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-3.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-4.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-5.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-6.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-7.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-8.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-9.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-10.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-11.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-12.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-13.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-14.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-15.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-16.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-17.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-18.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-19.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-20.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-21.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-22.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-23.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-24.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-25.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-26.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-27.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-28.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-29.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-30.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/born-on-the-31.html</loc><priority>0.8</priority></url>
-  <url><loc>https://occultics.ai/blog/three-types-of-karma.html</loc><priority>0.7</priority></url>
-  <url><loc>https://occultics.ai/blog/born-at-night-vs-day.html</loc><priority>0.7</priority></url>
-  <url><loc>https://occultics.ai/blog/life-path-1-shakira.html</loc><priority>0.7</priority></url>
+
+  <!-- Blog -->
+  <url><loc>https://occultics.ai/blog/three-types-of-karma.html</loc><priority>0.6</priority></url>
+  <url><loc>https://occultics.ai/blog/born-at-night-vs-day.html</loc><priority>0.6</priority></url>
+  <url><loc>https://occultics.ai/blog/life-path-1-shakira.html</loc><priority>0.6</priority></url>
+
+  <!-- Born-on-the-day pages -->
+  <url><loc>https://occultics.ai/born-on-the-1.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-2.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-3.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-4.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-5.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-6.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-7.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-8.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-9.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-10.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-11.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-12.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-13.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-14.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-15.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-16.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-17.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-18.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-19.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-20.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-21.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-22.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-23.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-24.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-25.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-26.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-27.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-28.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-29.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-30.html</loc><priority>0.5</priority></url>
+  <url><loc>https://occultics.ai/born-on-the-31.html</loc><priority>0.5</priority></url>
+
 </urlset>
