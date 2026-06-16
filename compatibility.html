@@ -1,133 +1,72 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Compatibility Alignment — Occultics</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Compatibility Code — Occultics</title>
+<meta name="description" content="Two birthdays, one complete reading. The full 11-session Compatibility Code decodes why you met, what you're building, and whether it lasts.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f0e8;--card:#fff;--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#2d3142;--dim:#6b7280;--light:#9ca3af;--border:rgba(10,14,46,0.07)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:#f5f0e8;color:#2d3142;-webkit-font-smoothing:antialiased;font-weight:300;line-height:1.6}
-.serif{font-family:'Cormorant Garamond',serif}
-.wrap{max-width:680px;margin:0 auto;padding:0 22px 70px}
-header{text-align:center;padding:52px 0 6px}
-.wm{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:#0a0e2e}
-h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:46px;color:#0a0e2e;margin:16px 0 12px;line-height:1.05}
-h1 em{font-style:italic;color:#1a2aff}
-.sub{color:#6b7280;font-size:15px;max-width:470px;margin:0 auto;line-height:1.65}
-.card{background:#fff;border-radius:18px;padding:22px;margin-top:26px;box-shadow:0 10px 40px rgba(10,14,46,.06)}
-.lbl{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#9ca3af;font-weight:600;margin-bottom:10px}
-input{width:100%;font-family:'Montserrat';font-size:15px;padding:13px 14px;border:1px solid #e7e0d2;border-radius:11px;background:#fbfaf7;margin-bottom:9px;outline:none;color:#2d3142}
-input:focus{border-color:#4db8ff}
-.dob{display:flex;gap:8px}.dob input{margin:0;text-align:center}
-.btn{width:100%;font-family:'Montserrat';font-weight:600;font-size:15px;letter-spacing:.4px;color:#fff;background:#1a2aff;border:none;border-radius:13px;padding:16px;margin-top:18px;cursor:pointer}
-.btn.ghost{background:transparent;color:#1a2aff;border:1px solid #1a2aff;margin-top:16px}
-.note{text-align:center;font-size:12px;color:#9ca3af;margin-top:14px}
-.hero{background:#0a0e2e;border-radius:20px;padding:34px 24px;text-align:center;color:#fff;margin-top:6px}
-.hero .hl{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:#4db8ff}
-.ring{width:132px;height:132px;border-radius:50%;border:1.5px solid rgba(77,184,255,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:16px auto 12px}
-.ring .num{font-family:'Cormorant Garamond',serif;font-size:54px;line-height:1;color:#fff}
-.ring .of{font-size:10px;color:#4db8ff;letter-spacing:2px;margin-top:2px}
-.triad{font-family:'Cormorant Garamond',serif;font-size:30px;letter-spacing:10px;color:#4db8ff}
-.band{display:inline-block;margin-top:12px;font-size:12px;letter-spacing:1px;padding:6px 16px;border-radius:20px;background:rgba(77,184,255,.14);color:#9fd4ff}
-.samebio{color:#4db8ff;font-size:12.5px;margin-top:12px}
-.verdict{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.45;color:#0a0e2e;text-align:center;margin:30px 8px 6px}
-.codes{display:flex;justify-content:center;gap:12px;align-items:center;color:#6b7280;font-size:13.5px;margin-top:18px}
-.codes b{color:#0a0e2e}.codes .x{color:#1a2aff}
-.sec{margin-top:36px}
-.sec .eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:6px;text-align:center}
-.sec h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:27px;color:#0a0e2e;text-align:center;margin-bottom:18px}
-.sec p{font-size:15px;line-height:1.7;color:#2d3142;margin-bottom:12px}
-.sec p b{color:#0a0e2e;font-weight:500}
-.row{display:flex;gap:14px;margin:12px 0;align-items:flex-start}
-.row .n{flex:none;width:44px;height:44px;border-radius:50%;background:#eef1ff;color:#1a2aff;font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;display:flex;align-items:center;justify-content:center}
-.row .t{flex:1}.row .t .h{font-weight:600;font-size:13.5px;color:#0a0e2e;margin-bottom:3px}.row .t .x{font-size:14.5px;color:#4a4a55;line-height:1.6}
-.lens{display:flex;gap:14px;padding:12px 0;border-top:1px solid #e7e0d2}
-.lens .l{flex:none;width:74px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;padding-top:2px}
-.lens .lx{flex:1;font-size:14.5px;color:#4a4a55;line-height:1.55}
-.divider{text-align:center;color:#4db8ff;letter-spacing:7px;margin:34px 0 10px}
-.closing{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#0a0e2e}
-.foot{text-align:center;margin-top:30px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
-</style></head><body><div class="wrap"><header><div class="wm">Occultics</div><h1 class="serif">Compatibility <em>Alignment</em></h1><p class="sub">Two birthdays. One truth. Enter both and see your whole reading at once — why you met, what you&rsquo;re building, and whether it lasts.</p></header><div class="card" id="form"><div class="lbl">Your name &amp; birthday</div><input id="n1" placeholder="Your first name" autocomplete="off"><div class="dob"><input id="d1" placeholder="Day" inputmode="numeric" maxlength="2"><input id="m1" placeholder="Month" inputmode="numeric" maxlength="2"><input id="y1" placeholder="Year" inputmode="numeric" maxlength="4"></div><div class="lbl" style="margin-top:18px">Their name &amp; birthday</div><input id="n2" placeholder="Their first name" autocomplete="off"><div class="dob"><input id="d2" placeholder="Day" inputmode="numeric" maxlength="2"><input id="m2" placeholder="Month" inputmode="numeric" maxlength="2"><input id="y2" placeholder="Year" inputmode="numeric" maxlength="4"></div><button class="btn" onclick="run()">Reveal your alignment</button><div class="note">Instant — your whole reading, all at once.</div></div><div id="result" style="display:none"></div><div class="foot">Occultics &middot; Numerology of connection</div></div><script>/* ===== Occultics Compatibility Engine (shared by web app + PDF generator) ===== */
-(function(root){
-function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce((s,d)=>s+parseInt(d),0);return n;}
-function calcCodes(d,m,y){const bio=r(d+m);const gen=r(String(y).split('').reduce((s,x)=>s+parseInt(x),0));const lp=r(bio+gen);return {biorhythm:bio,generational:gen,life_path:lp};}
-const SAME_BIO_ADJ={1:-8,2:-10,3:8,4:12,5:5,6:8,7:-15,8:-12,9:-8};
-const BIO_DIFF_ADJ={'1-9':2,'2-8':3,'3-7':-2,'4-6':5,'2-9':-8,'3-8':-6,'4-7':-10,'5-6':-5,'1-2':8,'3-9':6,'4-8':10,'5-7':8,'1-3':10,'4-9':-12,'5-8':-8,'6-7':-6,'1-4':5,'2-3':-4,'5-9':-2,'6-8':6,'1-5':4,'2-4':7,'6-9':10,'7-8':3,'1-6':-5,'2-5':-12,'3-4':-10,'7-9':-12};
-const LP_ADJ={'1-1':-10,'1-2':6,'1-3':10,'1-4':-5,'1-5':-4,'1-6':-6,'1-7':12,'1-8':-12,'1-9':8,'2-2':-12,'2-3':-5,'2-4':8,'2-5':-12,'2-6':10,'2-7':-12,'2-8':-3,'2-9':15,'3-3':7,'3-4':-10,'3-5':5,'3-6':4,'3-7':3,'3-8':2,'3-9':12,'4-4':3,'4-5':-12,'4-6':-3,'4-7':-12,'4-8':10,'4-9':-10,'5-5':6,'5-6':-4,'5-7':8,'5-8':-8,'5-9':6,'6-6':7,'6-7':-8,'6-8':5,'6-9':8,'7-7':-15,'7-8':3,'7-9':-10,'8-8':-8,'8-9':-5,'9-9':-3};
-const COMPAT_CODES={'191':{score:40,desc:'A karmic goal weighed down by ego — two strong selves who often work better as friends than lovers.'},'281':{score:58,desc:'A fated meeting with emotional friction — real destiny, but a tug-of-war creates tension.'},'371':{score:72,desc:'Strong emotional potential with passion at the foundation — turbulent, but deeply heartfelt.'},'461':{score:65,desc:'Develops slowly through karmic obstacles; over time passion ripens into wisdom and can grow stable.'},'551':{score:45,desc:'A mostly intellectual connection — a healthy start, but missing strong passion or deep emotional pull.'},'641':{score:80,desc:'Passionate and emotionally rich — love, commitment and depth. One of the higher-quality codes.'},'731':{score:62,desc:'Emotionally powerful but turbulent, with power struggles; it asks both of you to loosen control.'},'821':{score:72,desc:'Very high quality — destiny infused with powerful emotion, the kind that leads to lasting commitment.'},'911':{score:30,desc:'Little future here — you compete more than you love; often the shortest-lived of the karmic ties.'},'112':{score:35,desc:'A near-constant push and pull, built on a goal rather than love — in time, one tends to walk away.'},'292':{score:82,desc:'Deeply bound by destiny and karma — you think alike and can build a lifelong partnership.'},'382':{score:60,desc:'Sparked by strong emotion and attraction; jealousy causes friction, but you share a desire for family.'},'472':{score:70,desc:'A fated, karmic connection — you often feel you’ve known each other forever. Marriage is very possible.'},'562':{score:78,desc:'Grows out of long friendship — love and a shared life develop naturally. A long-lasting match.'},'652':{score:55,desc:'Love is present, but impulsiveness rules; one of you may hold back from fully committing.'},'742':{score:63,desc:'Works when you’re both mature and build slowly — a strong intellectual bond underneath.'},'832':{score:52,desc:'Complicated and fated — passion, money and turbulence; it needs an exceptionally calm everyday rhythm.'},'922':{score:38,desc:'Hard to keep stable — insecurity, doubt and outside interference undermine the bond.'},'123':{score:85,desc:'A fated connection where destiny and emotion converge naturally — one of the strongest codes there is.'},'213':{score:48,desc:'Challenging and conflict-prone — a fated start without a strong shared purpose; it hardens with age.'},'393':{score:50,desc:'Genuine feeling, but far too turbulent — exaggerated passion, jealousy and possessiveness.'},'483':{score:75,desc:'A harmonious bond, solid as rock — the 4 and 8 are best friends in synastry.'},'573':{score:76,desc:'Grounded in the natural friendship of 5 and 7 — passionate, sincere, supportive. Often leads to marriage.'},'663':{score:60,desc:'Strong emotional and physical desire — two 6s, intense but turbulent through possessiveness.'},'753':{score:74,desc:'5 and 7 as best friends — daily spark and real passion. Family, children, something extraordinary.'},'843':{score:78,desc:'A very harmonious union carrying karmic weight — you grow stronger together; the 4-8 bond holds.'},'933':{score:48,desc:'Volcanic passion, genuine but exaggerated — it tends to come apart turbulently after many years.'},'134':{score:82,desc:'In most cases a quality, lasting love — affection without calculation. Very high quality.'},'224':{score:68,desc:'Fated and karmic, almost unavoidable — commitment is likely and can last for decades.'},'314':{score:70,desc:'Communication generally flows; the shared goal lends quality and staying power.'},'494':{score:50,desc:'Begins and ends in karma — it can last decades, but serious disappointments surface along the way.'},'584':{score:80,desc:'One of the strongest codes — the 8-4 opposition forms a constant, protective bond.'},'674':{score:55,desc:'Begins as love but reveals attraction more than true love; distance can grow over time.'},'764':{score:35,desc:'Love cools because it was never quite love — entered without thought, with little future.'},'854':{score:80,desc:'The 8-4 opposition gives a protective bond — compatible, harmonious and stable.'},'944':{score:55,desc:'Pure karma start to finish — it can endure, but only harmoniously with a calm everyday life.'},'145':{score:62,desc:'The strongest karmic goal — most marry; karma hits hardest in the first eight years, then eases.'},'235':{score:52,desc:'Fated and passionate, yet family interference threatens stability — the love itself is real.'},'325':{score:42,desc:'Fated but notably unstable — outside interference keeps unsettling it.'},'415':{score:58,desc:'Begins casually on a solid foundation — the 1 and 4 understand each other well.'},'595':{score:35,desc:'Two opposing 5s — restless and unstable; it can drift into roommates with an expiry date.'},'685':{score:68,desc:'Love at first sight, children, a family — turbulence is inevitable, but family renews the bond.'},'775':{score:28,desc:'Around ten years at most — little deep love and a huge need for freedom; once broken, it’s over.'},'865':{score:76,desc:'Falling in love at first sight — marriage, family, children. Strong when daily life is steady.'},'955':{score:32,desc:'Hard to make work emotionally — dishonesty creeps in and partners drift into roommates.'},'156':{score:72,desc:'Begins as light flirtation, then love blossoms toward commitment and family.'},'246':{score:85,desc:'A fated, karmic connection that almost always leads to marriage — strongly family-oriented.'},'336':{score:60,desc:'Passion and strong feeling — two 3s, prone to impulsive jealousy and ego clashes.'},'426':{score:58,desc:'Karmic and fated, love present yet challenges abound — much of the weight falls on the woman.'},'516':{score:73,desc:'Quality communication — a casual start that grows into something real. Marriage and children likely.'},'696':{score:70,desc:'Karmic on a family level — after early obstacles, a sweet and lasting marriage.'},'786':{score:42,desc:'Mostly passion and adventure — beautiful chemistry, but little long-term quality.'},'876':{score:38,desc:'Even greater turbulence — excessive intensity; you can exhaust one another.'},'966':{score:72,desc:'Family karma with early obstacles; once the first trials pass, very harmonious.'},'167':{score:45,desc:'Rose-coloured glasses — when the illusion fades, instability follows. It can end abruptly.'},'257':{score:38,desc:'Fated but surface-level — often better as friends; limited long-term quality.'},'347':{score:42,desc:'Strong emotions, but the 3 takes losses and the 7 brings a sudden ending.'},'437':{score:40,desc:'The 4 works tirelessly to save it while the 3 stays impulsive — communication eventually collapses.'},'527':{score:48,desc:'Rests on willingness to adapt — it can survive with sacrifice, though quality stays limited.'},'617':{score:42,desc:'A family-karma goal, but instability is built in — endings here arrive suddenly.'},'797':{score:25,desc:'Karma repaid through the nerves — a tense, draining bond people rarely leave unchanged.'},'887':{score:35,desc:'A volcano waiting to erupt — passion through sharp words. Little future.'},'977':{score:45,desc:'A spiritual tie, but very tense with outside interference — only rare cases endure.'},'178':{score:52,desc:'A spiritual goal with a strong pull — yet constant provoking, arguing and making up. Exhausting.'},'268':{score:88,desc:'Fated, rich in emotion, attraction and stability — very high quality, with lifelong potential.'},'358':{score:75,desc:'Deep feeling and strong communication — each of you respects the other’s freedom.'},'448':{score:97,desc:'The strongest code in all of numerology — wisdom, maturity, devotion. A bond for a lifetime.'},'538':{score:50,desc:'Good communication, but surface-level — frequent breakups and reconciliations.'},'628':{score:78,desc:'Love and a shared wish for family — a strong foundation and genuine emotion.'},'718':{score:60,desc:'Stubbornness and a contest for the lead — a material bond, with breakups and returns.'},'898':{score:28,desc:'One of you is in it for gain — heavy imbalance; it lasts only as long as the benefit does.'},'988':{score:35,desc:'Passion and money more than love — it tends to end in conflict and disappointment.'},'189':{score:28,desc:'You both believe a story that isn’t quite true — the illusion is hard to see past.'},'279':{score:65,desc:'A specific soulmate tie that asks for energy and adaptability — with real spiritual protection.'},'369':{score:94,desc:'Rare and harmonious — love, commitment and mutual sacrifice. One of the very highest matches.'},'459':{score:68,desc:'A strong karmic bond that develops gradually — the 4 provides stability; it can become solid.'},'549':{score:50,desc:'Karmic with challenges — the communication gap tends to widen over time.'},'639':{score:55,desc:'Strong emotion and passion, shadowed by secrecy and jealousy — intense, but complicated.'},'729':{score:60,desc:'Karmic-fated, built to teach you about yourselves — spiritual, though nervy.'},'819':{score:78,desc:'Very high quality — a healthy goal with spiritual protection that withstands every karmic test.'},'999':{score:45,desc:'Pure karma — the greatest disappointment or the greatest love. A genuine gamble.'}};
-const NUM={0:'the deep well — old lessons and a sight others lack',1:'the will — a leader who needs to feel free, not bossed',2:'the moon — feeling and instinct, sensing a room before a word is said',3:'expression — made to talk, create and lift the mood',4:'the builder — craves stability and can hold a life together like stone',5:'freedom and the senses — magnetic, restless, two-sided',6:'love and responsibility — relationships are the whole point, but the grip can be too tight',7:'the mind — a seeker whose gift is depth and whose wound is overthinking',8:'Mars — a quiet volcano: calm for a long time, then it erupts',9:'the old soul — vision, compassion, dreaming further than they admit'};
-const POS_BEGIN={1:'You met as equals — or as rivals. A spark of will between you from the start.',2:'You felt each other before words — an instinctive, emotional recognition.',3:'It began with talk, laughter and attraction — words and chemistry pulled you in.',4:'It started slowly and steadily, built on something solid rather than a sudden flash.',5:'It began with excitement and freedom — magnetic, restless, a little unpredictable.',6:'It began around care and closeness — love and responsibility were there early.',7:'It began with curiosity and depth — you intrigued each other, mind first.',8:'It began with intensity — powerful attraction, strong wills, high stakes.',9:'It began as if you already knew each other — old, fated, familiar.'};
-const POS_BOND={1:'Your bond is about becoming yourselves — independence held inside togetherness.',2:'Your bond is emotional union — partnership, sensitivity, being truly a pair.',3:'Your bond is growth and joy — you’re meant to expand and lighten each other.',4:'Your bond is building a life — home, security, something that lasts.',5:'Your bond is freedom and experience — here to keep each other alive, not caged.',6:'Your bond is family and devotion — a love built to care for and commit to.',7:'Your bond is understanding — meant to truly see and know each other.',8:'Your bond is power and endurance — a karmic tie that tests you, then strengthens you.',9:'Your bond is completion — a soul-level connection asking for compassion and release.'};
-const POS_DAILY={1:'Day to day you push each other — drive and leadership both need room.',2:'Day to day it’s tender and sensitive — moods matter, gentleness keeps the peace.',3:'Day to day it’s lively and expressive — talk and play, but mind your tone.',4:'Day to day it’s steady and reliable — routine is your friend, rigidity your risk.',5:'Day to day it’s dynamic and changing — keep it fresh; boredom is the enemy.',6:'Day to day it’s warm and caring — just don’t smother or over-give.',7:'Day to day it’s thoughtful, sometimes quiet — give each other space to think.',8:'Day to day it’s intense — passion and friction; aim the fire, don’t spill it.',9:'Day to day it runs deep and emotional — beautiful, but mind the drama and the past.'};
-const STRENGTH={1:'You energise each other — together you start the things most people only talk about.',2:'You’re emotionally attuned, reading each other without words. That tenderness is rare.',3:'You bring lightness — laughter, talk and creativity that keep the bond young.',4:'You’re solid. You can actually build a life — this is the kind of bond that becomes a home.',5:'You keep each other alive — adventure and change mean you rarely go stale.',6:'You genuinely care for each other — warmth, loyalty and devotion come naturally.',7:'You go deep — you reach the things most people never talk about. Real understanding lives here.',8:'You’re powerful together — aligned, you can move mountains and protect each other fiercely.',9:'You love widely and wisely — compassion and an old-soul depth make the bond meaningful.'};
-const TESTS={1:'Two wills. Watch the who-leads battles — take turns being in charge.',2:'Over-sensitivity — moods and silences can spiral. Name what you feel instead of withdrawing.',3:'Words can cut. The expressiveness that delights you can also wound — guard your tone.',4:'Rigidity. Don’t let the life you build harden into a rut; leave room to breathe.',5:'Restlessness — freedom is your fuel and your risk. Boredom or escape is the danger.',6:'Over-giving and control. Caring can tip into smothering; love without gripping.',7:'Distance and overthinking — one of you retreats into the head. Keep finding your way back.',8:'Intensity and power struggles — your fire builds or burns. Aim it, never spill it on each other.',9:'Drama and the past — old wounds can flood the present. Keep releasing.'};
-const WORKING={1:'Take turns leading — decide who owns what, and let the other fully have it.',2:'Say the feeling out loud before it becomes a mood. Don’t make each other guess.',3:'Keep talking, but mind your tone — repair quickly when words land wrong.',4:'Protect the routine, but plan one thing that breaks it regularly.',5:'Build in freedom on purpose — space keeps you wanting each other.',6:'Care, but don’t keep score. Give from fullness, not obligation.',7:'Give each other quiet without reading it as rejection.',8:'Spend the intensity on shared goals, not on winning against each other.',9:'Let the past be the past — keep choosing the present version of each other.'};
-const HEADING=['A hard match. There’s a real lesson here — sometimes love, sometimes a teacher. Go in honest about what it is.','Real and workable. It won’t run on autopilot, but with effort and honesty it can grow into something lasting.','The kind of bond people build a life around. Time tends to deepen it rather than wear it down.'];
-const LENS={love:['As lovers it runs hot and difficult — passion without ease.','As lovers it asks for effort, but the spark is real when you tend it.','As lovers this is one of your strongest expressions — attraction and depth align.'],friends:['As friends you’re better with space — closeness can strain you.','As friends you balance each other once you accept your differences.','As friends you’re effortless — loyal and easy, the kind that lasts decades.'],family:['As family the tie is karmic — meaningful, but not always easy.','As family love is there, and so are old patterns to work through.','As family there’s deep loyalty and a real sense of belonging.'],work:['In business friction is high — proceed carefully, or keep it brief.','In business you can succeed if roles are clear and egos in check.','In business you complement each other — a genuinely productive partnership.']};
-const PY_MEAN={1:'a year of beginnings — new starts and stepping into the lead',2:'a year of patience and partnership — slow growth and relationships',3:'a year of expression and joy — creativity and social life',4:'a year of building — work, foundations and discipline',5:'a year of change and freedom — movement and the unexpected',6:'a year of love and responsibility — home, family and commitment',7:'a year of reflection — rest, study and depth over doing',8:'a year of power and reward — ambition, results and recognition',9:'a year of endings — release and clearing space for what’s next'};
-function digitSum(n){return String(Math.abs(n)).split('').reduce((s,d)=>s+(+d),0);}
-function personalYear(d,m,year){return r(digitSum(d)+digitSum(m)+digitSum(year));}
-function band(s){return s>=85?'A rare, exceptional code':s>=70?'A strong, high-quality match':s>=55?'Workable — real, with effort':s>=40?'Challenging — handle with care':'Difficult — go in clear-eyed';}
-function tier(s){return s>=70?2:(s>=40?1:0);}
-function calcFullScore(me,them){
-  const synBio=r(me.biorhythm+them.biorhythm),synGen=r(me.generational+them.generational),synLP=r(me.life_path+them.life_path);
-  const code=''+synBio+synGen+synLP, sameBio=me.biorhythm===them.biorhythm;
-  const cd=COMPAT_CODES[code]; let score,desc;
-  if(cd){score=cd.score;desc=cd.desc;}else{score=55;desc='A unique combination — the energies of '+synBio+', '+synGen+' and '+synLP+' create a connection worth exploring closely.';}
-  const lpKey=Math.min(me.life_path,them.life_path)+'-'+Math.max(me.life_path,them.life_path);
-  score+=Math.round((LP_ADJ[lpKey]||0)*0.3);
-  if(sameBio){score+=Math.round((SAME_BIO_ADJ[me.biorhythm]||0)*0.25);}else{const bk=Math.min(me.biorhythm,them.biorhythm)+'-'+Math.max(me.biorhythm,them.biorhythm);score+=Math.round((BIO_DIFF_ADJ[bk]||0)*0.2);}
-  score=Math.min(99,Math.max(15,score));
-  return {score,code,synBio,synGen,synLP,sameBio,desc};
-}
-/* Full structured reading used by both UI and PDF */
-function buildReading(n1,d1,m1,y1,n2,d2,m2,y2,year){
-  year=year||new Date().getFullYear();
-  const me=calcCodes(d1,m1,y1), them=calcCodes(d2,m2,y2), res=calcFullScore(me,them), t=tier(res.score);
-  const py1=personalYear(d1,m1,year), py2=personalYear(d2,m2,year);
-  const pyNote=(py1===py2)
-    ? 'You’re moving through the same season this year — naturally in step, which makes '+year+' a year you can build on together.'
-    : 'Right now you’re in different seasons: '+n1+' is in '+PY_MEAN[py1]+', while '+n2+' is in '+PY_MEAN[py2]+'. Knowing this keeps you patient with each other’s pace instead of taking it personally.';
-  return {n1,n2,me,them,res,band:band(res.score),year,
-    brings1:NUM[me.life_path], brings2:NUM[them.life_path],
-    begin:POS_BEGIN[res.synBio], bond:POS_BOND[res.synGen], daily:POS_DAILY[res.synLP],
-    strength:STRENGTH[res.synLP], tests:TESTS[res.synLP], heading:HEADING[t], working:WORKING[res.synLP],
-    py1,py2,pyMean1:PY_MEAN[py1],pyMean2:PY_MEAN[py2],pyNote,
-    lens:{love:LENS.love[t],friends:LENS.friends[t],family:LENS.family[t],work:LENS.work[t]}};
-}
-const API={r,calcCodes,calcFullScore,buildReading,band,tier,personalYear,COMPAT_CODES,NUM,PY_MEAN,POS_BEGIN,POS_BOND,POS_DAILY,STRENGTH,TESTS,WORKING,HEADING,LENS};
-root.OCCULTICS=API;
-if(typeof module!=='undefined'&&module.exports){module.exports=API;}
-})(typeof window!=='undefined'?window:this);
-</script><script>var renderResult=function renderResult(R){
-  var me=R.me, them=R.them, res=R.res;
-  return ''
-  + '<div class="hero">'
-  +   '<div class="hl">Your Compatibility Code</div>'
-  +   '<div class="triad" style="margin-top:18px">'+res.code+'</div>'
-  +   '<div class="band">'+R.band+'</div>'
-  +   (res.sameBio?'<div class="samebio">&#10022; Same biorhythm — an instant, wordless recognition</div>':'')
-  + '</div>'
-  + '<div class="verdict">&ldquo;'+res.desc+'&rdquo;</div>'
-  + '<div class="codes"><span>'+R.n1+' &nbsp;<b>'+me.biorhythm+' &middot; '+me.generational+' &middot; '+me.life_path+'</b></span><span class="x">&#10005;</span><span><b>'+them.biorhythm+' &middot; '+them.generational+' &middot; '+them.life_path+'</b>&nbsp; '+R.n2+'</span></div>'
-  + '<div class="sec"><div class="eyebrow">One</div><h2 class="serif">What each of you brings</h2>'
-  +   '<p><b>'+R.n1+'</b> — a Life Path '+me.life_path+': '+R.brings1+'.</p>'
-  +   '<p><b>'+R.n2+'</b> — a Life Path '+them.life_path+': '+R.brings2+'.</p></div>'
-  + '<div class="sec"><div class="eyebrow">Two</div><h2 class="serif">The shape of your bond</h2>'
-  +   '<div class="row"><div class="n">'+res.synBio+'</div><div class="t"><div class="h">How it began</div><div class="x">'+R.begin+'</div></div></div>'
-  +   '<div class="row"><div class="n">'+res.synGen+'</div><div class="t"><div class="h">What binds you</div><div class="x">'+R.bond+'</div></div></div>'
-  +   '<div class="row"><div class="n">'+res.synLP+'</div><div class="t"><div class="h">Daily life together</div><div class="x">'+R.daily+'</div></div></div></div>'
-  + '<div class="sec"><div class="eyebrow">Three</div><h2 class="serif">Strength &amp; friction</h2>'
-  +   '<p><b>Where you&rsquo;re strong.</b> '+R.strength+'</p>'
-  +   '<p><b>What will test you.</b> '+R.tests+'</p></div>'
-  + '<div class="sec"><div class="eyebrow">Four</div><h2 class="serif">Your timing together</h2>'
-  +   '<p><b>'+R.n1+'</b> is in '+R.pyMean1+'.</p>'
-  +   '<p><b>'+R.n2+'</b> is in '+R.pyMean2+'.</p>'
-  +   '<p>'+R.pyNote+'</p></div>'
-  + '<div class="sec"><div class="eyebrow">Five</div><h2 class="serif">The road ahead</h2>'
-  +   '<p>'+R.heading+'</p>'
-  +   '<div class="lens"><div class="l">Lovers</div><div class="lx">'+R.lens.love+'</div></div>'
-  +   '<div class="lens"><div class="l">Friends</div><div class="lx">'+R.lens.friends+'</div></div>'
-  +   '<div class="lens"><div class="l">Family</div><div class="lx">'+R.lens.family+'</div></div>'
-  +   '<div class="lens"><div class="l">Work</div><div class="lx">'+R.lens.work+'</div></div>'
-  +   '<p style="margin-top:14px"><b>Making your code work.</b> '+R.working+'</p></div>'
-  + '<div class="divider">&mdash; &middot; &mdash;</div>'
-  + '<p class="closing">'+R.n1+' &amp; '+R.n2+'</p>'
-  + '<p class="note" style="margin-top:6px">A mirror for reflection — never a verdict. Every bond can be worked with.</p>'
-  + '<button class="btn ghost" onclick="reset()">Read another pair</button>';
-};function getv(id){return parseInt(document.getElementById(id).value,10);}function valid(d,m,y){return d&&m&&y&&d>=1&&d<=31&&m>=1&&m<=12&&y>=1900&&y<=2025;}function run(){var d1=getv("d1"),m1=getv("m1"),y1=getv("y1"),d2=getv("d2"),m2=getv("m2"),y2=getv("y2");if(!valid(d1,m1,y1)||!valid(d2,m2,y2)){alert("Please enter both full dates of birth (day, month, year).");return;}var n1=document.getElementById("n1").value.trim()||"You",n2=document.getElementById("n2").value.trim()||"Them";var R=OCCULTICS.buildReading(n1,d1,m1,y1,n2,d2,m2,y2);document.getElementById("form").style.display="none";var out=document.getElementById("result");out.innerHTML=renderResult(R);out.style.display="block";window.scrollTo({top:0,behavior:"smooth"});}function reset(){document.getElementById("result").style.display="none";document.getElementById("form").style.display="block";window.scrollTo({top:0,behavior:"smooth"});}</script></body></html>
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(245,240,232,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-in{max-width:1040px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Cormorant Garamond',serif;font-size:18px;letter-spacing:2px;color:var(--navy);text-decoration:none}
+.nav a.home{font-size:13px;color:var(--dim);text-decoration:none}
+.wrap{max-width:680px;margin:0 auto;padding:120px 24px 80px}
+.eyebrow{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--royal);font-weight:600;text-align:center;margin-bottom:14px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,7vw,52px);color:var(--navy);text-align:center;line-height:1.08;margin-bottom:18px}
+h1 em{font-style:italic;color:var(--royal)}
+.lede{text-align:center;font-size:16px;color:var(--dim);max-width:520px;margin:0 auto 36px;line-height:1.7}
+.cta{display:block;width:100%;max-width:420px;margin:0 auto;text-align:center;padding:18px;background:var(--royal);color:#fff;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;letter-spacing:.3px}
+.cta:hover{background:var(--navy)}
+.price-note{text-align:center;font-size:12px;color:var(--light);margin-top:12px}
+.divider{text-align:center;color:var(--crystal);letter-spacing:8px;margin:56px 0 24px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:26px;color:var(--navy);text-align:center;margin-bottom:28px}
+.sessions{display:flex;flex-direction:column;gap:2px}
+.session{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--border)}
+.session .n{flex:none;width:40px;height:40px;border-radius:50%;background:#eef1ff;color:var(--royal);font-family:'Cormorant Garamond',serif;font-size:19px;display:flex;align-items:center;justify-content:center}
+.session .t .h{font-weight:600;font-size:14px;color:var(--navy);margin-bottom:2px}
+.session .t .x{font-size:13.5px;color:var(--dim);line-height:1.55}
+.card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:30px 26px;margin-top:48px;text-align:center;box-shadow:0 12px 40px rgba(10,14,46,.05)}
+.card .p{font-family:'Cormorant Garamond',serif;font-size:46px;color:var(--navy);line-height:1}
+.card .ps{font-size:13px;color:var(--dim);margin:8px 0 22px}
+.foot{text-align:center;margin-top:48px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--light)}
+</style>
+</head>
+<body>
+<div class="nav"><div class="nav-in"><a href="/" class="logo">OCCULTICS</a><a href="/" class="home">&larr; Home</a></div></div>
+<div class="wrap">
+  <div class="eyebrow">The Compatibility Code</div>
+  <h1>Two birthdays. <em>One complete reading.</em></h1>
+  <p class="lede">Eleven guided sessions that decode your relationship from the inside out &mdash; why you were drawn together, what you're quietly building, the lessons you're here to teach each other, and whether it's built to last.</p>
+  <a class="cta" href="https://buy.stripe.com/4gM6oz0Lh4qGduh0bn0co01">Get your full reading &mdash; $99.99</a>
+  <p class="price-note">Delivered as your complete 11-session reading.</p>
+
+  <div class="divider">&#10022;</div>
+  <div class="sec-title">What your reading reveals</div>
+  <div class="sessions">
+    <div class="session"><div class="n">1</div><div class="t"><div class="h">Your two codes, side by side</div><div class="x">The numbers behind each of you &mdash; and the single code your union forms together.</div></div></div>
+    <div class="session"><div class="n">2</div><div class="t"><div class="h">The emotional current</div><div class="x">How each of you feels, needs, and loves &mdash; where you meet and where you miss.</div></div></div>
+    <div class="session"><div class="n">3</div><div class="t"><div class="h">What drives you both</div><div class="x">The hidden motivations pulling each of you forward, and how they pull on each other.</div></div></div>
+    <div class="session"><div class="n">4</div><div class="t"><div class="h">The karmic thread</div><div class="x">The lessons you carried in &mdash; and the ones you're here to learn through one another.</div></div></div>
+    <div class="session"><div class="n">5</div><div class="t"><div class="h">The blueprint of the bond</div><div class="x">The deeper architecture of the relationship &mdash; what it's structurally built to become.</div></div></div>
+    <div class="session"><div class="n">6</div><div class="t"><div class="h">Their inner world</div><div class="x">A full read of your partner's emotional landscape, in their own numbers.</div></div></div>
+    <div class="session"><div class="n">7</div><div class="t"><div class="h">Their karmic lessons</div><div class="x">What they came here to resolve &mdash; and how you fit into that story.</div></div></div>
+    <div class="session"><div class="n">8</div><div class="t"><div class="h">How you met</div><div class="x">The numeric reason your paths crossed exactly when and how they did.</div></div></div>
+    <div class="session"><div class="n">9</div><div class="t"><div class="h">Your shared mission</div><div class="x">What the two of you are meant to do, build, or become &mdash; together.</div></div></div>
+    <div class="session"><div class="n">10</div><div class="t"><div class="h">The karmic verdict</div><div class="x">The honest reading of the work, the friction, and the gift this bond carries.</div></div></div>
+    <div class="session"><div class="n">11</div><div class="t"><div class="h">The whole truth, in one place</div><div class="x">Everything woven together into a single, clear picture of you two.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="p">$99.99</div>
+    <div class="ps">The complete 11-session Compatibility Code</div>
+    <a class="cta" href="https://buy.stripe.com/4gM6oz0Lh4qGduh0bn0co01">Get your reading</a>
+  </div>
+
+  <div class="foot">Occultics &middot; Numerology of connection</div>
+</div>
+</body>
+</html>
