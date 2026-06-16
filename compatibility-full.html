@@ -57,12 +57,12 @@ input:focus{border-color:#4db8ff}
   document.addEventListener('DOMContentLoaded',function(){
     var f=document.getElementById('form'); if(f) f.style.display='none';
     var r=document.getElementById('result');
-    if(r) r.innerHTML='<div class="card" style="text-align:center;padding:34px 26px">'
+    if(r){ r.style.display='block'; r.innerHTML='<div class="card" style="text-align:center;padding:34px 26px">'
       +'<div class="wm" style="margin-bottom:14px">Occultics</div>'
       +'<h3 class="serif" style="font-size:26px;color:#0a0e2e;margin-bottom:12px">This reading unlocks after purchase</h3>'
       +'<p style="color:#6b7280;font-size:14px;line-height:1.7;margin-bottom:22px">Your full 11-session Compatibility Code is ready. Complete your purchase and you\'ll be brought right back here to enter both birthdays and receive all eleven sessions.</p>'
       +'<a class="btn" style="display:inline-block;text-decoration:none;max-width:340px;margin:0 auto" href="/compatibility.html">Get your reading — $99.99</a>'
-      +'</div>';
+      +'</div>'; }
   });
 })();
 </script>
