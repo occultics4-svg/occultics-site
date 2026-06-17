@@ -36,12 +36,12 @@ input:focus{border-color:#4db8ff}
 .codes b{color:#fff}.codes .x{color:#4db8ff}
 .allat{text-align:center;background:#eef1ff;color:#1a2aff;font-size:12px;letter-spacing:1px;padding:10px;border-radius:10px;margin-top:18px;font-weight:500}
 .status{text-align:center;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin:18px 0}
-.sess{margin-top:34px;padding-top:30px;border-top:1px solid #e7e0d2}
+.sess{margin-top:34px;padding-top:30px;border-top:1px solid #e7e0d2;break-inside:avoid;page-break-inside:avoid}
 .sh{display:flex;gap:14px;align-items:center;margin-bottom:14px}
 .sn{flex:none;width:42px;height:42px;border-radius:50%;background:#0a0e2e;color:#fff;font-family:'Cormorant Garamond',serif;font-size:19px;display:flex;align-items:center;justify-content:center}
 .se{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a2aff;font-weight:600}
 .st{font-family:'Cormorant Garamond',serif;font-size:23px;color:#0a0e2e;font-weight:500;line-height:1.12}
-.sb p{font-size:15px;line-height:1.8;color:#2d3142;margin-bottom:14px}
+.sb p{font-size:15.5px;line-height:1.85;color:#15171f;font-weight:400;margin-bottom:15px}
 .spin{width:22px;height:22px;border:2px solid #e7e0d2;border-top-color:#1a2aff;border-radius:50%;animation:sp 0.8s linear infinite;margin:6px 0}
 @keyframes sp{to{transform:rotate(360deg)}}
 .pending{opacity:.5}
@@ -102,6 +102,7 @@ input:focus{border-color:#4db8ff}
 
 <script>
 var DECODE='https://occultics-decode.occultics4.workers.dev';
+var GUARD=" CRITICAL RULES: Work ONLY from the numerology provided. Do NOT invent or state any biographical facts whatsoever — never mention ages, an age difference, how many years apart they are, birth years, calendar dates, places, jobs, or life events. If you do not have a fact, do not guess it. Speak only about character, energy, patterns and dynamics revealed by the numbers.";
 var profile1=null,profile2=null,compatData=null,name1='',name2='';
 var PROMPTS=[
   "Decode two people. {name1} code {code1}, pyramid {pyr1}, born on the {day1}. {name2} code {code2}, pyramid {pyr2}, born on the {day2}. Compatibility code {compat}. Write 3-4 paragraphs introducing both profiles and what their compatibility code reveals at first glance. Use both names. English only.",
@@ -138,7 +139,7 @@ function renderShell(){
   var code1=profile1.pyth.biorhythm+'·'+profile1.pyth.generational+'·'+profile1.pyth.lifePath;
   var code2=profile2.pyth.biorhythm+'·'+profile2.pyth.generational+'·'+profile2.pyth.lifePath;
   var cc=compatData.compatCode.first+' '+compatData.compatCode.second+' '+compatData.compatCode.third;
-  var T=titles(), html='';
+  var T=titles(), html='<div id="reading">';
   html+='<div class="hero"><div class="hl">Your Compatibility Code</div><div class="triad">'+cc+'</div>'
     +'<div class="codes"><span>'+name1+' <b>'+code1+'</b></span><span class="x">✕</span><span><b>'+code2+'</b> '+name2+'</span></div>'
     +'<div class="allat">All 11 sessions · written live from your numbers · all on one page</div></div>';
@@ -146,6 +147,8 @@ function renderShell(){
   for(var i=0;i<11;i++){
     html+='<div class="sess pending" id="sess-'+i+'"><div class="sh"><span class="sn">'+(i+1)+'</span><div><div class="se">Session '+(i+1)+' of 11</div><div class="st serif">'+T[i]+'</div></div></div><div class="sb" id="body-'+i+'"><div class="spin"></div></div></div>';
   }
+  html+='</div>';
+  html+='<button class="btn" id="pdfbtn" onclick="downloadPDF()" style="display:none">\u2193  Download your reading as a PDF</button>';
   html+='<button class="btn ghost" onclick="location.reload()">Read another pair</button>';
   document.getElementById('form').style.display='none';
   var out=document.getElementById('result'); out.innerHTML=html; out.style.display='block';
@@ -157,7 +160,8 @@ function buildPrompt(idx){
   var pyr1=profile1.pyramid.first+'.'+profile1.pyramid.second+'.'+profile1.pyramid.third;
   var pyr2=profile2.pyramid.first+'.'+profile2.pyramid.second+'.'+profile2.pyramid.third;
   var cc=compatData.compatCode.first+'.'+compatData.compatCode.second+'.'+compatData.compatCode.third;
-  return PROMPTS[idx].replace(/\{name1\}/g,name1).replace(/\{name2\}/g,name2).replace(/\{code1\}/g,code1).replace(/\{code2\}/g,code2).replace(/\{pyr1\}/g,pyr1).replace(/\{pyr2\}/g,pyr2).replace(/\{bio1\}/g,String(profile1.pyth.biorhythm)).replace(/\{bio2\}/g,String(profile2.pyth.biorhythm)).replace(/\{gen1\}/g,String(profile1.pyth.generational)).replace(/\{gen2\}/g,String(profile2.pyth.generational)).replace(/\{lp1\}/g,String(profile1.pyth.lifePath)).replace(/\{lp2\}/g,String(profile2.pyth.lifePath)).replace(/\{day1\}/g,profile1.birthDayDesc||'').replace(/\{day2\}/g,profile2.birthDayDesc||'').replace(/\{compat\}/g,cc).replace(/\{compatFirst\}/g,String(compatData.compatCode.first)).replace(/\{compatSecond\}/g,String(compatData.compatCode.second)).replace(/\{compatThird\}/g,String(compatData.compatCode.third));
+  var ctx=" --- FACTS YOU ALREADY HAVE (never ask for any of this): "+name1+" code "+code1+" (biorhythm "+profile1.pyth.biorhythm+", generational "+profile1.pyth.generational+", life path "+profile1.pyth.lifePath+", pyramid "+pyr1+"). "+name2+" code "+code2+" (biorhythm "+profile2.pyth.biorhythm+", generational "+profile2.pyth.generational+", life path "+profile2.pyth.lifePath+", pyramid "+pyr2+"). Compatibility code "+cc+". RULES: Use ONLY these numbers. NEVER invent biographical facts of any kind — no ages, no age difference, no 'years apart', no birth years, no calendar dates or years, no places, jobs, or life events. NEVER say you need to see someone's code, and never ask the reader for more information — you already have everything for both people. Write the passage directly, warm, in second person, English only.";
+  return PROMPTS[idx].replace(/\{name1\}/g,name1).replace(/\{name2\}/g,name2).replace(/\{code1\}/g,code1).replace(/\{code2\}/g,code2).replace(/\{pyr1\}/g,pyr1).replace(/\{pyr2\}/g,pyr2).replace(/\{bio1\}/g,String(profile1.pyth.biorhythm)).replace(/\{bio2\}/g,String(profile2.pyth.biorhythm)).replace(/\{gen1\}/g,String(profile1.pyth.generational)).replace(/\{gen2\}/g,String(profile2.pyth.generational)).replace(/\{lp1\}/g,String(profile1.pyth.lifePath)).replace(/\{lp2\}/g,String(profile2.pyth.lifePath)).replace(/\{day1\}/g,profile1.birthDayDesc||'').replace(/\{day2\}/g,profile2.birthDayDesc||'').replace(/\{compat\}/g,cc).replace(/\{compatFirst\}/g,String(compatData.compatCode.first)).replace(/\{compatSecond\}/g,String(compatData.compatCode.second)).replace(/\{compatThird\}/g,String(compatData.compatCode.third)) + GUARD + ctx;
 }
 async function genOne(idx){
   var p=buildPrompt(idx);
@@ -180,12 +184,31 @@ async function genOne(idx){
   return false;
 }
 async function generateAll(){
-  for(var i=0;i<11;i++){
-    var s=document.getElementById('status'); if(s)s.textContent='Writing session '+(i+1)+' of 11…';
-    await genOne(i);
-  }
-  var s=document.getElementById('status'); if(s)s.style.display='none';
+  var CONC=3, idx=0, active=0, completed=0;
+  return new Promise(function(resolve){
+    function done(){
+      completed++;
+      var s=document.getElementById('status'); if(s)s.textContent='Writing your reading\u2026 '+completed+' of 11 complete';
+      if(completed>=11){ if(s)s.style.display='none'; var b=document.getElementById('pdfbtn'); if(b)b.style.display='block'; resolve(); }
+      else pump();
+    }
+    function pump(){
+      while(active<CONC && idx<11){
+        var i=idx++; active++;
+        genOne(i).then(function(){ active--; done(); });
+      }
+    }
+    pump();
+  });
+}
+function downloadPDF(){
+  var el=document.getElementById('reading');
+  if(!el||typeof html2pdf==='undefined'){alert('The PDF tool is still loading \u2014 give it a few seconds and tap again.');return;}
+  var fn='Occultics Compatibility - '+name1+' & '+name2+'.pdf';
+  var opt={margin:[12,10,14,10],filename:fn,image:{type:'jpeg',quality:0.96},html2canvas:{scale:2,backgroundColor:'#f5f0e8',useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}};
+  html2pdf().set(opt).from(el).save();
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
