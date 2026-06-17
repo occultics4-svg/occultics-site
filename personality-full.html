@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Personality Code — Occultics</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#f5f0e8;color:#2d3142;-webkit-font-smoothing:antialiased;font-weight:300;line-height:1.6}
+.serif{font-family:'Cormorant Garamond',serif}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px 80px}
+header{text-align:center;padding:52px 0 6px}
+.wm{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:6px;text-transform:uppercase;color:#0a0e2e}
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:46px;color:#0a0e2e;margin:16px 0 12px;line-height:1.05}
+h1 em{font-style:italic;color:#1a2aff}
+.sub{color:#6b7280;font-size:15px;max-width:470px;margin:0 auto;line-height:1.65}
+.card{background:#fff;border-radius:18px;padding:22px;margin-top:26px;box-shadow:0 10px 40px rgba(10,14,46,.06)}
+.person{border:1px solid #ece4d4;border-radius:14px;padding:16px;background:#fbfaf7}
+.person h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:19px;color:#0a0e2e;margin-bottom:10px}
+.lbl{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9ca3af;font-weight:600;margin:8px 0}
+input{width:100%;font-family:'Montserrat';font-size:15px;padding:11px 12px;border:1px solid #e7e0d2;border-radius:10px;background:#fff;color:#2d3142;margin-bottom:9px;outline:none}
+input:focus{border-color:#4db8ff}
+.dob{display:flex;gap:7px}.dob input{margin-bottom:0;text-align:center;padding:11px 4px}
+.btn{width:100%;font-family:'Montserrat';font-weight:600;font-size:15px;letter-spacing:.3px;color:#fff;background:#1a2aff;border:none;border-radius:13px;padding:16px;margin-top:16px;cursor:pointer}
+.btn:disabled{opacity:.6}
+.btn.ghost{background:transparent;color:#1a2aff;border:1px solid #1a2aff;margin-top:18px}
+.note{text-align:center;font-size:12px;color:#9ca3af;margin-top:14px}
+#result{margin-top:24px;display:none}
+.hero{background:#0a0e2e;border-radius:20px;padding:32px 24px;text-align:center;color:#fff}
+.hero .hl{font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;color:#4db8ff}
+.triad{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:10px;color:#4db8ff;margin-top:16px}
+.codes{display:flex;justify-content:center;gap:12px;align-items:center;color:#9aa3c0;font-size:13.5px;margin-top:16px}
+.codes b{color:#fff}
+.allat{text-align:center;background:#eef1ff;color:#1a2aff;font-size:12px;letter-spacing:1px;padding:10px;border-radius:10px;margin-top:18px;font-weight:500}
+.status{text-align:center;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin:18px 0}
+.sess{margin-top:34px;padding-top:30px;border-top:1px solid #e7e0d2;break-inside:avoid;page-break-inside:avoid}
+.sh{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.sn{flex:none;width:42px;height:42px;border-radius:50%;background:#0a0e2e;color:#fff;font-family:'Cormorant Garamond',serif;font-size:19px;display:flex;align-items:center;justify-content:center}
+.se{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a2aff;font-weight:600}
+.st{font-family:'Cormorant Garamond',serif;font-size:23px;color:#0a0e2e;font-weight:500;line-height:1.12}
+.sb p{font-size:15.5px;line-height:1.85;color:#15171f;font-weight:400;margin-bottom:15px}
+.spin{width:22px;height:22px;border:2px solid #e7e0d2;border-top-color:#1a2aff;border-radius:50%;animation:sp 0.8s linear infinite;margin:6px 0}
+@keyframes sp{to{transform:rotate(360deg)}}
+.pending{opacity:.5}
+.foot{text-align:center;margin-top:34px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  var qs=new URLSearchParams(location.search);
+  var paid=qs.get('session_id')||qs.get('paid');
+  if(paid)return;
+  document.addEventListener('DOMContentLoaded',function(){
+    var f=document.getElementById('form'); if(f) f.style.display='none';
+    var r=document.getElementById('result');
+    if(r){ r.style.display='block'; r.innerHTML='<div class="card" style="text-align:center;padding:34px 26px">'
+      +'<div class="wm" style="margin-bottom:14px">Occultics</div>'
+      +'<h3 class="serif" style="font-size:26px;color:#0a0e2e;margin-bottom:12px">This reading unlocks after purchase</h3>'
+      +'<p style="color:#6b7280;font-size:14px;line-height:1.7;margin-bottom:22px">Your full Personality Code is ready. Complete your purchase and you\'ll be brought right back here to enter your birthday and receive your complete reading.</p>'
+      +'<a class="btn" style="display:inline-block;text-decoration:none;max-width:340px;margin:0 auto" href="/personality.html">Get your reading — $49.99</a>'
+      +'</div>'; }
+  });
+})();
+</script>
+<div class="wrap">
+  <header>
+    <div class="wm">Occultics</div>
+    <h1 class="serif">The Personality <em>Code</em></h1>
+    <p class="sub">Your full numeric portrait — eight sessions, written from your numbers, all on one page.</p>
+  </header>
+
+  <div class="card" id="form">
+    <div class="person">
+      <h3 class="serif">You</h3>
+      <input id="n1" placeholder="Your first name" autocomplete="off">
+      <span class="lbl">Date of birth</span>
+      <div class="dob"><input id="d1" placeholder="Day" inputmode="numeric" maxlength="2"><input id="m1" placeholder="Month" inputmode="numeric" maxlength="2"><input id="y1" placeholder="Year" inputmode="numeric" maxlength="4"></div>
+      <span class="lbl">Time of birth (optional)</span>
+      <input id="t1" placeholder="e.g. 14:30" autocomplete="off">
+    </div>
+    <button class="btn" id="go" onclick="startReading()">Reveal your Personality Code</button>
+    <div class="note">Your eight sessions are written live from your numbers — please allow a minute.</div>
+  </div>
+
+  <div id="result"></div>
+  <div class="foot">Occultics · Numerology of personality</div>
+</div>
+
+<script>
+var DECODE='https://occultics-decode.occultics4.workers.dev';
+var profile1=null,name1='';
+var N=8;
+var PROMPTS=[
+  "Decode {name}. Code {code}, pyramid {pyr}, born on the {day}. Write 3-4 paragraphs introducing {name}'s full numeric blueprint and what their code reveals at first glance — who they are at their core. Use the name. English only.",
+  "{name} biorhythm {bio}. Write 3-4 paragraphs about {name}'s emotional frequency — how they process feelings, what triggers them, how they express love and pain.",
+  "{name} life path {lp}, pyramid {pyr}. Write 3-4 paragraphs about what drives {name} — their ambitions, their fears, what they chase and what they avoid.",
+  "{name} code {code}, pyramid {pyr}. Write 3-4 paragraphs about {name}'s karmic blueprint — inherited patterns, family dynamics they repeat, and what they are here to release.",
+  "{name} pyramid {pyr}. Write 3-4 paragraphs decoding {name}'s pyramid as the architecture of their life — the energy at the entry point, the energy in the middle, and the energy at the culmination.",
+  "{name} generational {gen}, life path {lp}. Write 3-4 paragraphs about {name} in love and relationships — what they truly need from a partner, how they show up, and their patterns.",
+  "{name} life path {lp}, code {code}. Write 3-4 paragraphs about {name}'s natural gifts and talents, and the kind of work and path their numbers point toward.",
+  "Synthesize the COMPLETE portrait of {name} (code {code}). Bring everything together into a powerful 4-5 paragraph portrait of who they are. End with a powerful statement. No questions."
+];
+function titles(){return [name1+' — First Glance', 'Emotional Frequency', 'Core Drivers', 'Karmic Blueprint', 'The Pyramid — Your Architecture', 'In Love & Relationships', 'Your Gifts & Path', 'The Complete Picture'];}
+function gv(id){return document.getElementById(id).value;}
+function valid(d,m,y){d=+d;m=+m;y=+y;return d&&m&&y&&d>=1&&d<=31&&m>=1&&m<=12&&y>=1900&&y<=2025;}
+async function startReading(){
+  var d1=gv('d1'),m1=gv('m1'),y1=gv('y1');
+  if(!valid(d1,m1,y1)){alert('Please enter your full date of birth (day, month, year).');return;}
+  name1=gv('n1').trim()||'You';
+  var t1=gv('t1').trim();
+  var btn=document.getElementById('go'); btn.textContent='Calculating your code…'; btn.disabled=true;
+  try{
+    var P=function(u,b){return fetch(DECODE+u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});};
+    profile1=await P('/decode',{day:+d1,month:+m1,year:+y1,time:t1});
+    renderShell();
+    await generateAll();
+  }catch(e){ btn.textContent='Reveal your Personality Code'; btn.disabled=false; alert('Something interrupted the reading. Please try again.'); }
+}
+function renderShell(){
+  var code1=profile1.pyth.biorhythm+' '+profile1.pyth.generational+' '+profile1.pyth.lifePath;
+  var T=titles(), html='<div id="reading">';
+  html+='<div class="hero"><div class="hl">Your Personality Code</div><div class="triad">'+code1+'</div>'
+    +'<div class="codes"><span><b>'+name1+'</b></span></div>'
+    +'<div class="allat">All '+N+' sessions · written live from your numbers · all on one page</div></div>';
+  html+='<div class="status" id="status">Writing your reading…</div>';
+  for(var i=0;i<N;i++){
+    html+='<div class="sess pending" id="sess-'+i+'"><div class="sh"><span class="sn">'+(i+1)+'</span><div><div class="se">Session '+(i+1)+' of '+N+'</div><div class="st serif">'+T[i]+'</div></div></div><div class="sb" id="body-'+i+'"><div class="spin"></div></div></div>';
+  }
+  html+='</div>';
+  html+='<button class="btn" id="pdfbtn" onclick="downloadPDF()" style="display:none">↓  Download your reading as a PDF</button>';
+  html+='<button class="btn ghost" onclick="location.reload()">Read another</button>';
+  document.getElementById('form').style.display='none';
+  var out=document.getElementById('result'); out.innerHTML=html; out.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function buildPrompt(idx){
+  var code1=profile1.pyth.biorhythm+'.'+profile1.pyth.generational+'.'+profile1.pyth.lifePath;
+  var pyr1=profile1.pyramid.first+'.'+profile1.pyramid.second+'.'+profile1.pyramid.third;
+  var base=PROMPTS[idx].replace(/\{name\}/g,name1).replace(/\{code\}/g,code1).replace(/\{pyr\}/g,pyr1).replace(/\{bio\}/g,String(profile1.pyth.biorhythm)).replace(/\{gen\}/g,String(profile1.pyth.generational)).replace(/\{lp\}/g,String(profile1.pyth.lifePath)).replace(/\{day\}/g,profile1.birthDayDesc||'');
+  var GUARD=" CRITICAL RULES: Base every interpretation EXCLUSIVELY on the Occultics knowledge base provided in your system instructions plus the numbers given here. Do NOT use any general, public, internet, or outside numerology, astrology, tarot, or pop-psychology — only the Occultics method. If the Occultics knowledge base does not cover something, write less rather than filling the gap with outside ideas. NEVER invent or state any biographical facts — never mention age, birth year, calendar dates or years, places, jobs, or life events. Speak only about character, energy, drives and patterns revealed by the numbers, in warm second person, English only.";
+  var ctx=" --- FACTS YOU ALREADY HAVE (never ask for any of this): "+name1+" code "+code1+" (biorhythm "+profile1.pyth.biorhythm+", generational "+profile1.pyth.generational+", life path "+profile1.pyth.lifePath+", pyramid "+pyr1+"). Write the passage directly.";
+  return base + GUARD + ctx;
+}
+async function genOne(idx){
+  var p=buildPrompt(idx);
+  for(var attempt=0;attempt<3;attempt++){
+    try{
+      var res=await fetch(DECODE+'/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:p,profileData:profile1,history:[],gender:'other'})});
+      var data=await res.json();
+      var text=(data&&data.response)||'';
+      if(text && text.length>120 && text.toLowerCase().indexOf('need a moment')<0){
+        var html=text.split('\n\n').filter(function(t){return t.trim();}).map(function(t){return '<p>'+t.trim()+'</p>';}).join('');
+        document.getElementById('body-'+idx).innerHTML=html;
+        document.getElementById('sess-'+idx).classList.remove('pending');
+        return true;
+      }
+    }catch(e){}
+    await new Promise(function(r){setTimeout(r,2500*(attempt+1));});
+  }
+  document.getElementById('body-'+idx).innerHTML='<p style="color:#9ca3af">This session is taking a moment — reload the page and it will complete.</p>';
+  document.getElementById('sess-'+idx).classList.remove('pending');
+  return false;
+}
+async function generateAll(){
+  var CONC=3, idx=0, active=0, completed=0;
+  return new Promise(function(resolve){
+    function done(){
+      completed++;
+      var s=document.getElementById('status'); if(s)s.textContent='Writing your reading… '+completed+' of '+N+' complete';
+      if(completed>=N){ if(s)s.style.display='none'; var b=document.getElementById('pdfbtn'); if(b)b.style.display='block'; resolve(); }
+      else pump();
+    }
+    function pump(){
+      while(active<CONC && idx<N){
+        var i=idx++; active++;
+        genOne(i).then(function(){ active--; done(); });
+      }
+    }
+    pump();
+  });
+}
+function downloadPDF(){
+  var el=document.getElementById('reading');
+  if(!el||typeof html2pdf==='undefined'){alert('The PDF tool is still loading — give it a few seconds and tap again.');return;}
+  var fn='Occultics Personality Code - '+name1+'.pdf';
+  var opt={margin:[12,10,14,10],filename:fn,image:{type:'jpeg',quality:0.96},html2canvas:{scale:2,backgroundColor:'#f5f0e8',useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}};
+  html2pdf().set(opt).from(el).save();
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</body>
+</html>
