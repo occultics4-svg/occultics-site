@@ -52,7 +52,7 @@ input:focus{border-color:#4db8ff}
 <script>
 (function(){
   var qs=new URLSearchParams(location.search);
-  var paid=qs.get('session_id');
+  var paid=qs.get('session_id')||qs.get('paid');
   if(paid)return;
   document.addEventListener('DOMContentLoaded',function(){
     var f=document.getElementById('form'); if(f) f.style.display='none';
