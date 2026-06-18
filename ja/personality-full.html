@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パーソナリティ・コード — Occultics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Noto Serif JP',sans-serif;background:#f5f0e8;color:#15171f;-webkit-font-smoothing:antialiased;line-height:1.75}
+.wrap{max-width:760px;margin:0 auto;padding:24px 20px 80px}
+.hero{background:#0a0e2e;color:#fff;border-radius:16px;padding:40px 32px;text-align:center;margin-bottom:8px}
+.wm{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#4db8ff;margin-bottom:16px}
+.htitle{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:400;font-size:clamp(28px,7vw,44px);line-height:1.05;margin-bottom:8px}
+.htitle em{font-style:italic;color:#4db8ff}
+.hsub{font-size:11px;color:#aab3d6;letter-spacing:1px;margin-bottom:22px}
+.triad{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,11vw,62px);letter-spacing:.12em;color:#4db8ff;line-height:1}
+.pyr{font-size:13px;color:#aab3d6;letter-spacing:2px;margin-top:10px}
+.pyr b{color:#fff;font-weight:500}
+.name{font-size:15px;color:#fff;letter-spacing:1px;margin-top:12px}
+.sess{margin-top:30px;padding-top:24px;border-top:1px solid #e0d8c8}
+.se{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:4px}
+.st{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:24px;color:#0a0e2e;margin-bottom:12px;line-height:1.2}
+.sb p{margin-bottom:12px}
+.prow{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;background:#fff;border-radius:12px;padding:14px 16px}
+.prow .pn{flex:none;width:40px;height:40px;border-radius:50%;background:#0a0e2e;color:#4db8ff;font-family:'Cormorant Garamond',serif;font-size:22px;display:flex;align-items:center;justify-content:center}
+.prow .pt{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:3px}
+.prow p{font-size:14px;margin:0}
+.cta{background:#0a0e2e;color:#fff;border-radius:14px;padding:26px;margin-top:30px;text-align:center}
+.cta .h{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-size:22px;color:#4db8ff;margin-bottom:8px}
+.cta p{color:rgba(255,255,255,.82);font-size:14px;margin-bottom:16px}
+.cta a{display:inline-block;font-size:14px;font-weight:600;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:13px 30px;border-radius:100px}
+.actions{text-align:center;margin-top:34px}
+.btn{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.3px;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:15px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit}
+.foot{margin-top:40px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
+.form{max-width:520px;margin:40px auto;background:#fff;border-radius:16px;padding:28px}
+.form h2{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:23px;color:#0a0e2e;margin-bottom:18px;text-align:center}
+.row{display:flex;gap:12px;margin-bottom:14px}
+.row input{flex:1;padding:12px 14px;border:1px solid #d8cfbf;border-radius:10px;font-family:inherit;font-size:14px;background:#faf7f1}
+.form label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;display:block;margin:6px 0 4px}
+.form .btn{width:100%;margin-top:10px}
+.hidden{display:none}
+@media print{body{background:#fff}.wrap{max-width:100%;padding:0}.actions,.form,.cta{display:none!important}.hero{background:#0a0e2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.sess{page-break-inside:avoid}}
+</style></head>
+<body>
+<div class="wrap">
+  <div id="form" class="form">
+    <h2>あなたのパーソナリティ・コード — 無料</h2>
+    <label>お名前</label>
+    <div class="row"><input id="nm" placeholder="名前"></div>
+    <label>生年月日</label>
+    <div class="row"><input id="bd" placeholder="日/月/西暦(DD/MM/YYYY)"></div>
+    <button class="btn" onclick="fromForm()">コードを開く →</button>
+  </div>
+  <div id="reading" class="hidden"></div>
+  <div id="actions" class="actions hidden">
+    <button class="btn" onclick="window.print()">&#8595; PDFで保存</button>
+  </div>
+  <div class="foot">Occultics · パーソナリティの数秘術</div>
+</div>
+<script>
+var KB={"BIO": {"1": "リーダーのエネルギー。{N}はほとんど即座に主導権を握り、人々は一言も交わす前にその存在感を感じ取ります。", "2": "感情的で宿命的なエネルギー。人々は{N}に引き寄せられる何かを感じます——物質的な安定と感情的な充足の両方を大切にする、深く感じ取る性質です。", "3": "情熱と愛、そして惹かれ合いが一瞬で生まれます。{N}とは触れ合った瞬間に相性が感じられます——時に激しくも、つねに心からのものです。", "4": "真剣で落ち着いた存在感。人々は、思慮深く自制のきいた相手だと感じ取ります。{N}は決める前に時間をかけます。", "5": "宿命的でもカルマ的でもない——健やかで質の高いつながり。{N}は知性と対話で導きます。", "6": "肉体的な惹かれ合いと愛が一瞬で生まれます。{N}は情熱的で、このようなつながりは多くの場合結婚に至ります。", "7": "霊的な引力——より高い力が物事を引き寄せている感覚。{N}は繊細で予測しがたいエネルギーを帯びています。", "8": "安定した自立した人柄。{N}は慎重で心を開くのに時間を要しますが、信頼が築かれれば長く続くものを育てます。", "9": "カルマ的なエネルギー——もっとも深く、もっとも多くを求める物語。{N}は多くを求め、多くを与える愛し方をします。"}, "GEN": {"1": "{N}はパートナーに知性と弁舌を求め、狭量さに耐えられません。", "2": "{N}は感情の表現と目に見える思いやりを求め、冷たさに耐えられません。", "3": "{N}は無条件の愛と、できるかぎり広い寛容を夢見ます。", "4": "{N}は何よりも安定、価値観の共有、そして誠実さを求めます。", "5": "{N}は知的で対話のできるパートナーを愛し——自由を神聖なものとします。", "6": "{N}は美と調和と洗練を愛し、愛と物質的な豊かさを切り離しません。", "7": "{N}は知的な深さと誠実さを求め、浅はかなものや不誠実なものからは身を引きます。", "8": "{N}は強さと権威に惹かれ、安心するために守ってくれる存在を必要とします。", "9": "{N}は共感そのものであり、心から信頼できる相手を必要とします。"}, "LP": {"1": "独立とリーダーシップが{N}の運命を定めます。", "2": "パートナーシップと感情の深さ——{N}は関係を通して成長します。", "3": "拡大、創造性、そして喜びが{N}の道を貫きます。", "4": "構造、規律、そしてカルマ——{N}にとって物事は後から訪れますが、長く続きます。", "5": "自由、旅、そして変化——{N}は幾度も自らを作り直します。", "6": "愛、家族、そして責任が{N}の道の中心にあります。", "7": "型にはまらない道——{N}の成功は、人と違うことから生まれます。", "8": "力、達成、そして物質的な成功が{N}の運命を形づくります。", "9": "カルマ、完成、そして叡智——{N}は、他の者が成しえなかったことを完遂するためにここにいます。"}};
+var ESS={"0": "深い泉——古い教え、直感、そして多くの人が持たない視点", "1": "意志とリーダーシップ——命じられるのではなく、自由でありたいという欲求", "2": "感覚と直感——一言も交わす前に場を感じ取ること", "3": "表現——語り、創り、その場の空気を明るくするために生まれた力", "4": "建てる者——安定への渇望、一つの人生を支えきる力", "5": "自由と感覚——魅力的で、落ち着かず、多面的", "6": "愛と責任——たとえ握る手が強すぎても、関係こそが核心", "7": "知性——その賜物は深さ、その傷は考えすぎること、探求する者", "8": "静かな力——長く穏やかで、やがて本物の勢いで動き出す", "9": "古い魂——認める以上に遠くを夢見る、洞察と慈しみ"};
+var S={"lang": "ja", "title": "パーソナリティ・コード — Occultics", "htitle_a": "パーソナリティ・", "htitle_em": "コード", "hsub": "Occulticsの知識ベースから読み解く、数の肖像", "pyramid": "ピラミッド", "name_def": "あなた", "form_h": "あなたのパーソナリティ・コード — 無料", "f_name": "お名前", "f_dob": "生年月日", "f_name_ph": "名前", "f_dob_ph": "日/月/西暦(DD/MM/YYYY)", "f_btn": "コードを開く →", "alert": "生年月日を 日/月/西暦(DD/MM/YYYY)の形式で入力してください", "save": "PDFで保存", "foot": "Occultics · パーソナリティの数秘術", "fg_eye": "はじめに", "fg_t": "あなたのコード ", "fg_body": "あなたの三つの数は、生年月日からそのまま導かれます。<b>バイオリズム</b>({bio})は人々があなたから感じ取るエネルギーであり、世界の中でのあなたの動き方です。<b>ジェネレーション</b>の数({gen})は、もっとも近しい人々に求めるものです。<b>ライフパス</b>({lp})は、あなたの人生が築かれてゆく方向です。三つを合わせて読めば、それがあなたのパーソナリティ・コード——{bio}·{gen}·{lp}です。", "bio_eye": "バイオリズム ", "bio_t": "あなたが帯びるエネルギー", "gen_eye": "ジェネレーション ", "gen_t": "あなたが必要とするもの", "lp_eye": "ライフパス ", "lp_t": "あなたの方向", "pyr_eye": "あなたのピラミッド ", "pyr_t": "あなたの人生の構造", "pyr_intro": "ピラミッドは、あなたの生年月日のすべてを三つの点に集約します——どこから始まったか、中心にある営み、そしてどこへ向かっているか。", "pyr_p1": "始まりの地点", "pyr_p1b": "あなたはこのエネルギーを携えて生まれました——{ess}。", "pyr_p2": "人生の営み", "pyr_p2b": "ピラミッドの中心は{ess}——あなたが何度も立ち返る課題です。", "pyr_p3": "向かう先", "pyr_p3b": "あなたは{ess}へと築いています。", "cp_eye": "全体像", "cp_t": "すべてを、ひとつに", "cp_body": "あなたはバイオリズム{bio}として世界を歩み、{gen}のような愛を必要とし、人生は{lp}の道を軸に築かれています——始まりの地点({p1})から、中心の課題({p2})を経て、向かう先({p3})へと運ばれていきます。これがあなたのコードのすべてです。", "cta_h": "次は、つながりを読み解く", "cta_p": "パーソナリティ・コードは始まりにすぎません。コンパティビリティ・コードは二つの生年月日をともに読み解きます——どう出会い、何を築き、続くのかどうかを。", "cta_btn": "コンパティビリティ・コードを開く →"};
+var COMPAT_URL="/ja/compatibility.html";
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce((s,d)=>s+(+d),0);return n;}
+function codes(d,m,y){var bio=r(d+m);var gen=r(String(y).split('').reduce((s,x)=>s+(+x),0));var lp=r(bio+gen);return{bio,gen,lp};}
+function pyramid(d,m,y){var base=(String(d).padStart(2,'0')+String(m).padStart(2,'0')+String(y)).split('').map(Number);var rows=[base],cur=base;while(cur.length>1){var nx=[];for(var i=0;i<cur.length-1;i++)nx.push(r(cur[i]+cur[i+1]));rows.push(nx);cur=nx;}var two=rows.find(x=>x.length===2);return{first:two?two[0]:cur[0],second:two?two[1]:cur[0],third:rows[rows.length-1][0]};}
+function fill(t,name){return t.replace(/\{N\}/g,name);}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function T(k){return S[k];}
+function render(name,d,m,y){
+  var c=codes(d,m,y),py=pyramid(d,m,y),N=esc(name);
+  var h='';
+  h+='<div class="hero"><div class="wm">Occultics</div>'
+   +'<div class="htitle">'+S.htitle_a+'<em>'+S.htitle_em+'</em></div>'
+   +'<div class="hsub">'+S.hsub+'</div>'
+   +'<div class="triad">'+c.bio+' &middot; '+c.gen+' &middot; '+c.lp+'</div>'
+   +'<div class="pyr">'+S.pyramid+' <b>'+py.first+' &middot; '+py.second+' &middot; '+py.third+'</b></div>'
+   +'<div class="name">'+N+'</div></div>';
+  h+='<div class="sess"><div class="se">'+S.fg_eye+'</div><div class="st">'+S.fg_t+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</div><div class="sb"><p>'
+     +S.fg_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.bio_eye+c.bio+'</div><div class="st">'+S.bio_t+'</div><div class="sb"><p>'+fill(KB.BIO[c.bio],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.gen_eye+c.gen+'</div><div class="st">'+S.gen_t+'</div><div class="sb"><p>'+fill(KB.GEN[c.gen],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.lp_eye+c.lp+'</div><div class="st">'+S.lp_t+'</div><div class="sb"><p>'+fill(KB.LP[c.lp],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.pyr_eye+py.first+'&middot;'+py.second+'&middot;'+py.third+'</div><div class="st">'+S.pyr_t+'</div><div class="sb"><p>'+S.pyr_intro+'</p>'
+     +'<div class="prow"><div class="pn">'+py.first+'</div><div><div class="pt">'+S.pyr_p1+'</div><p>'+S.pyr_p1b.replace(/\{ess\}/g,ESS[py.first])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.second+'</div><div><div class="pt">'+S.pyr_p2+'</div><p>'+S.pyr_p2b.replace(/\{ess\}/g,ESS[py.second])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.third+'</div><div><div class="pt">'+S.pyr_p3+'</div><p>'+S.pyr_p3b.replace(/\{ess\}/g,ESS[py.third])+'</p></div></div></div></div>';
+  h+='<div class="sess"><div class="se">'+S.cp_eye+'</div><div class="st">'+S.cp_t+'</div><div class="sb"><p>'
+     +S.cp_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp).replace(/\{p1\}/g,py.first).replace(/\{p2\}/g,py.second).replace(/\{p3\}/g,py.third)+'</p></div></div>';
+  h+='<div class="cta"><div class="h">'+S.cta_h+'</div><p>'+S.cta_p+'</p><a href="'+COMPAT_URL+'">'+S.cta_btn+'</a></div>';
+  document.getElementById('reading').innerHTML=h;
+  document.getElementById('reading').classList.remove('hidden');
+  document.getElementById('actions').classList.remove('hidden');
+  document.getElementById('form').classList.add('hidden');
+}
+function fromForm(){var name=document.getElementById('nm').value||S.name_def;var b=parseDob(document.getElementById('bd').value);if(!b){alert(S.alert);return;}render(name,b.d,b.mo,b.y);}
+(function(){var p=new URLSearchParams(location.search);if(p.get('d')&&p.get('m')&&p.get('y')){render(p.get('n')||S.name_def,+p.get('d'),+p.get('m'),+p.get('y'));}})();
+</script>
+</body></html>
