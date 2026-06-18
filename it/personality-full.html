@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il Codice della Personalità — Occultics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Noto Serif JP',sans-serif;background:#f5f0e8;color:#15171f;-webkit-font-smoothing:antialiased;line-height:1.75}
+.wrap{max-width:760px;margin:0 auto;padding:24px 20px 80px}
+.hero{background:#0a0e2e;color:#fff;border-radius:16px;padding:40px 32px;text-align:center;margin-bottom:8px}
+.wm{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#4db8ff;margin-bottom:16px}
+.htitle{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:400;font-size:clamp(28px,7vw,44px);line-height:1.05;margin-bottom:8px}
+.htitle em{font-style:italic;color:#4db8ff}
+.hsub{font-size:11px;color:#aab3d6;letter-spacing:1px;margin-bottom:22px}
+.triad{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,11vw,62px);letter-spacing:.12em;color:#4db8ff;line-height:1}
+.pyr{font-size:13px;color:#aab3d6;letter-spacing:2px;margin-top:10px}
+.pyr b{color:#fff;font-weight:500}
+.name{font-size:15px;color:#fff;letter-spacing:1px;margin-top:12px}
+.sess{margin-top:30px;padding-top:24px;border-top:1px solid #e0d8c8}
+.se{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:4px}
+.st{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:24px;color:#0a0e2e;margin-bottom:12px;line-height:1.2}
+.sb p{margin-bottom:12px}
+.prow{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;background:#fff;border-radius:12px;padding:14px 16px}
+.prow .pn{flex:none;width:40px;height:40px;border-radius:50%;background:#0a0e2e;color:#4db8ff;font-family:'Cormorant Garamond',serif;font-size:22px;display:flex;align-items:center;justify-content:center}
+.prow .pt{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:3px}
+.prow p{font-size:14px;margin:0}
+.cta{background:#0a0e2e;color:#fff;border-radius:14px;padding:26px;margin-top:30px;text-align:center}
+.cta .h{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-size:22px;color:#4db8ff;margin-bottom:8px}
+.cta p{color:rgba(255,255,255,.82);font-size:14px;margin-bottom:16px}
+.cta a{display:inline-block;font-size:14px;font-weight:600;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:13px 30px;border-radius:100px}
+.actions{text-align:center;margin-top:34px}
+.btn{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.3px;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:15px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit}
+.foot{margin-top:40px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
+.form{max-width:520px;margin:40px auto;background:#fff;border-radius:16px;padding:28px}
+.form h2{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:23px;color:#0a0e2e;margin-bottom:18px;text-align:center}
+.row{display:flex;gap:12px;margin-bottom:14px}
+.row input{flex:1;padding:12px 14px;border:1px solid #d8cfbf;border-radius:10px;font-family:inherit;font-size:14px;background:#faf7f1}
+.form label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;display:block;margin:6px 0 4px}
+.form .btn{width:100%;margin-top:10px}
+.hidden{display:none}
+@media print{body{background:#fff}.wrap{max-width:100%;padding:0}.actions,.form,.cta{display:none!important}.hero{background:#0a0e2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.sess{page-break-inside:avoid}}
+</style></head>
+<body>
+<div class="wrap">
+  <div id="form" class="form">
+    <h2>Il tuo Codice della Personalità — gratuito</h2>
+    <label>Il tuo nome</label>
+    <div class="row"><input id="nm" placeholder="Nome"></div>
+    <label>La tua data di nascita</label>
+    <div class="row"><input id="bd" placeholder="GG/MM/AAAA"></div>
+    <button class="btn" onclick="fromForm()">Rivela il mio codice →</button>
+  </div>
+  <div id="reading" class="hidden"></div>
+  <div id="actions" class="actions hidden">
+    <button class="btn" onclick="window.print()">&#8595; Salva come PDF</button>
+  </div>
+  <div class="foot">Occultics · Numerologia della personalità</div>
+</div>
+<script>
+var KB={"BIO": {"1": "Energia da leader. {N} prende in mano la situazione quasi subito, e le persone percepiscono quell'autorità prima ancora che venga detta una parola.", "2": "Energia emotiva e predestinata. Le persone sentono qualcosa che le attira verso {N} — una natura profondamente sensibile a cui stanno a cuore sia la sicurezza materiale sia l'appagamento emotivo.", "3": "Passione, amore e attrazione che nascono all'istante. Con {N} la chimica si sente al primo contatto — a volte turbolenta, ma sempre sincera.", "4": "Una presenza seria e composta. Le persone percepiscono di avere a che fare con qualcuno misurato e padrone di sé; {N} si prende tempo prima di decidere.", "5": "Né predestinata né karmica — una connessione sana e di qualità. {N} guida con l'intelletto e la comunicazione.", "6": "Attrazione fisica e amore che nascono all'istante. {N} è appassionata, e le connessioni come questa finiscono il più delle volte in matrimonio.", "7": "Un'attrazione spirituale — la sensazione che una forza superiore stia unendo le cose. {N} porta con sé un'energia sensibile e imprevedibile.", "8": "Una personalità stabile e indipendente. {N} è cauta e ha bisogno di tempo per aprirsi, ma costruisce qualcosa di duraturo una volta conquistata la fiducia.", "9": "Energia karmica — la più profonda e impegnativa delle storie. {N} ama in un modo che chiede molto e dà molto."}, "GEN": {"1": "{N} ha bisogno di intelligenza ed eloquenza in un partner, e non tollera la ristrettezza mentale.", "2": "{N} ha bisogno di espressione emotiva e cura visibile, e non tollera la freddezza.", "3": "{N} sogna un amore incondizionato e la più ampia tolleranza possibile.", "4": "{N} cerca soprattutto stabilità, valori condivisi e onestà.", "5": "{N} ama un partner intelligente e comunicativo — e considera sacra la libertà.", "6": "{N} adora la bellezza, l'armonia e la raffinatezza, e non separa l'amore dal benessere materiale.", "7": "{N} vuole profondità intellettuale e sincerità, e si ritrae da tutto ciò che è superficiale o disonesto.", "8": "{N} è attratta dalla forza e dall'autorità, e ha bisogno di una figura protettiva per sentirsi al sicuro.", "9": "{N} è l'essenza dell'empatia, e ha bisogno di qualcuno di cui potersi fidare completamente."}, "LP": {"1": "Indipendenza e leadership definiscono il destino di {N}.", "2": "Unione e profondità emotiva — {N} cresce attraverso le relazioni.", "3": "Espansione, creatività e gioia attraversano il cammino di {N}.", "4": "Struttura, disciplina e karma — per {N} le cose arrivano più tardi, ma durano.", "5": "Libertà, viaggi e cambiamento — {N} si reinventa più di una volta.", "6": "Amore, famiglia e responsabilità sono il cuore del cammino di {N}.", "7": "Il cammino non convenzionale — il successo di {N} nasce dall'essere diverso.", "8": "Potere, realizzazione e successo materiale plasmano il destino di {N}.", "9": "Karma, completamento e saggezza — {N} è qui per portare a termine ciò che altri non hanno potuto."}};
+var ESS={"0": "il pozzo profondo — vecchie lezioni, istinto e uno sguardo che ai più manca", "1": "volontà e guida — il bisogno di sentirsi liberi anziché comandati", "2": "sentimento e istinto — percepire una stanza prima che venga detta una parola", "3": "espressione — fatta per parlare, creare e risollevare l'umore", "4": "il costruttore — un desiderio di stabilità, capace di tenere insieme una vita", "5": "libertà e i sensi — magnetica, irrequieta, dalle molte facce", "6": "amore e responsabilità — le relazioni sono il senso, anche se la presa può essere troppo stretta", "7": "la mente — un cercatore il cui dono è la profondità e la cui ferita è il rimuginare", "8": "potere silenzioso — calmo a lungo, poi si muove con vera forza", "9": "l'anima antica — visione e compassione, che sogna più lontano di quanto ammetta"};
+var S={"lang": "it", "title": "Il Codice della Personalità — Occultics", "htitle_a": "Il Codice della ", "htitle_em": "Personalità", "hsub": "Un ritratto numerico, letto dalla base di conoscenza di Occultics", "pyramid": "Piramide", "name_def": "Tu", "form_h": "Il tuo Codice della Personalità — gratuito", "f_name": "Il tuo nome", "f_dob": "La tua data di nascita", "f_name_ph": "Nome", "f_dob_ph": "GG/MM/AAAA", "f_btn": "Rivela il mio codice →", "alert": "Inserisci la tua data di nascita come GG/MM/AAAA", "save": "Salva come PDF", "foot": "Occultics · Numerologia della personalità", "fg_eye": "Primo sguardo", "fg_t": "Il tuo codice, ", "fg_body": "I tuoi tre numeri vengono direttamente dalla tua data di nascita. Il tuo <b>biorritmo</b> ({bio}) è l'energia che le persone percepiscono da te e il modo in cui ti muovi nel mondo; il tuo numero <b>generazionale</b> ({gen}) è ciò di cui hai bisogno dalle persone a te più vicine; il tuo <b>cammino di vita</b> ({lp}) è la direzione verso cui è costruita la tua vita. Letti insieme sono il tuo Codice della Personalità — {bio}·{gen}·{lp}.", "bio_eye": "Biorritmo ", "bio_t": "L'energia che porti", "gen_eye": "Generazionale ", "gen_t": "Ciò di cui hai bisogno", "lp_eye": "Cammino di vita ", "lp_t": "La tua direzione", "pyr_eye": "La tua piramide ", "pyr_t": "L'architettura della tua vita", "pyr_intro": "La tua piramide riduce l'intera data di nascita a tre punti — da dove hai cominciato, il lavoro al centro e verso dove sei diretto.", "pyr_p1": "Da dove hai cominciato", "pyr_p1b": "Sei arrivato con questa energia: {ess}.", "pyr_p2": "Il lavoro della tua vita", "pyr_p2b": "Il centro della tua piramide è {ess} — la lezione a cui torni.", "pyr_p3": "Verso dove sei diretto", "pyr_p3b": "Stai costruendo verso {ess}.", "cp_eye": "Il quadro completo", "cp_t": "Tutto, insieme", "cp_body": "Ti muovi nel mondo come un biorritmo {bio}, hai bisogno di un amore del tipo {gen}, e la tua vita è costruita attorno al cammino {lp} — portato da dove hai cominciato ({p1}), attraverso la lezione del tuo centro ({p2}), verso dove sei diretto ({p3}). Questo è il tuo codice completo.", "cta_h": "Ora decifra una connessione", "cta_p": "Il tuo Codice della Personalità è l'inizio. Il Codice di Compatibilità legge due date di nascita insieme — come vi siete incontrati, cosa costruite e se dura.", "cta_btn": "Rivela un Codice di Compatibilità →"};
+var COMPAT_URL="/it/compatibility.html";
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce((s,d)=>s+(+d),0);return n;}
+function codes(d,m,y){var bio=r(d+m);var gen=r(String(y).split('').reduce((s,x)=>s+(+x),0));var lp=r(bio+gen);return{bio,gen,lp};}
+function pyramid(d,m,y){var base=(String(d).padStart(2,'0')+String(m).padStart(2,'0')+String(y)).split('').map(Number);var rows=[base],cur=base;while(cur.length>1){var nx=[];for(var i=0;i<cur.length-1;i++)nx.push(r(cur[i]+cur[i+1]));rows.push(nx);cur=nx;}var two=rows.find(x=>x.length===2);return{first:two?two[0]:cur[0],second:two?two[1]:cur[0],third:rows[rows.length-1][0]};}
+function fill(t,name){return t.replace(/\{N\}/g,name);}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function T(k){return S[k];}
+function render(name,d,m,y){
+  var c=codes(d,m,y),py=pyramid(d,m,y),N=esc(name);
+  var h='';
+  h+='<div class="hero"><div class="wm">Occultics</div>'
+   +'<div class="htitle">'+S.htitle_a+'<em>'+S.htitle_em+'</em></div>'
+   +'<div class="hsub">'+S.hsub+'</div>'
+   +'<div class="triad">'+c.bio+' &middot; '+c.gen+' &middot; '+c.lp+'</div>'
+   +'<div class="pyr">'+S.pyramid+' <b>'+py.first+' &middot; '+py.second+' &middot; '+py.third+'</b></div>'
+   +'<div class="name">'+N+'</div></div>';
+  h+='<div class="sess"><div class="se">'+S.fg_eye+'</div><div class="st">'+S.fg_t+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</div><div class="sb"><p>'
+     +S.fg_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.bio_eye+c.bio+'</div><div class="st">'+S.bio_t+'</div><div class="sb"><p>'+fill(KB.BIO[c.bio],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.gen_eye+c.gen+'</div><div class="st">'+S.gen_t+'</div><div class="sb"><p>'+fill(KB.GEN[c.gen],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.lp_eye+c.lp+'</div><div class="st">'+S.lp_t+'</div><div class="sb"><p>'+fill(KB.LP[c.lp],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.pyr_eye+py.first+'&middot;'+py.second+'&middot;'+py.third+'</div><div class="st">'+S.pyr_t+'</div><div class="sb"><p>'+S.pyr_intro+'</p>'
+     +'<div class="prow"><div class="pn">'+py.first+'</div><div><div class="pt">'+S.pyr_p1+'</div><p>'+S.pyr_p1b.replace(/\{ess\}/g,ESS[py.first])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.second+'</div><div><div class="pt">'+S.pyr_p2+'</div><p>'+S.pyr_p2b.replace(/\{ess\}/g,ESS[py.second])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.third+'</div><div><div class="pt">'+S.pyr_p3+'</div><p>'+S.pyr_p3b.replace(/\{ess\}/g,ESS[py.third])+'</p></div></div></div></div>';
+  h+='<div class="sess"><div class="se">'+S.cp_eye+'</div><div class="st">'+S.cp_t+'</div><div class="sb"><p>'
+     +S.cp_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp).replace(/\{p1\}/g,py.first).replace(/\{p2\}/g,py.second).replace(/\{p3\}/g,py.third)+'</p></div></div>';
+  h+='<div class="cta"><div class="h">'+S.cta_h+'</div><p>'+S.cta_p+'</p><a href="'+COMPAT_URL+'">'+S.cta_btn+'</a></div>';
+  document.getElementById('reading').innerHTML=h;
+  document.getElementById('reading').classList.remove('hidden');
+  document.getElementById('actions').classList.remove('hidden');
+  document.getElementById('form').classList.add('hidden');
+}
+function fromForm(){var name=document.getElementById('nm').value||S.name_def;var b=parseDob(document.getElementById('bd').value);if(!b){alert(S.alert);return;}render(name,b.d,b.mo,b.y);}
+(function(){var p=new URLSearchParams(location.search);if(p.get('d')&&p.get('m')&&p.get('y')){render(p.get('n')||S.name_def,+p.get('d'),+p.get('m'),+p.get('y'));}})();
+</script>
+</body></html>
