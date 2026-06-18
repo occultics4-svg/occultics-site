@@ -139,7 +139,7 @@ function buildPrompt(idx){
   var code1=profile1.pyth.biorhythm+'.'+profile1.pyth.generational+'.'+profile1.pyth.lifePath;
   var pyr1=profile1.pyramid.first+'.'+profile1.pyramid.second+'.'+profile1.pyramid.third;
   var base=PROMPTS[idx].replace(/\{name\}/g,name1).replace(/\{code\}/g,code1).replace(/\{pyr\}/g,pyr1).replace(/\{bio\}/g,String(profile1.pyth.biorhythm)).replace(/\{gen\}/g,String(profile1.pyth.generational)).replace(/\{lp\}/g,String(profile1.pyth.lifePath)).replace(/\{day\}/g,profile1.birthDayDesc||'');
-  var GUARD=" CRITICAL RULES: Base every interpretation EXCLUSIVELY on the Occultics knowledge base provided in your system instructions plus the numbers given here. Do NOT use any general, public, internet, or outside numerology, astrology, tarot, or pop-psychology — only the Occultics method. If the Occultics knowledge base does not cover something, write less rather than filling the gap with outside ideas. NEVER invent or state any biographical facts — never mention age, birth year, calendar dates or years, places, jobs, or life events. Speak only about character, energy, drives and patterns revealed by the numbers, in warm second person, English only.";
+  var GUARD=" CRITICAL RULES: Base every interpretation EXCLUSIVELY on the Occultics knowledge base provided in your system instructions plus the numbers given here. Do NOT use any general, public, internet, or outside numerology, astrology, tarot, or pop-psychology — only the Occultics method. If the Occultics knowledge base does not cover something, write less rather than filling the gap with outside ideas. Use the Occultics meaning of every number EXACTLY as defined in your knowledge — for example life path 9 = karma, completion and wisdom; biorhythm 2 = emotional, fated, lunar energy. Do NOT relabel or summarize any number with generic numerology archetypes or buzzwords such as 'transformation', 'master number', 'manifestation', 'spiritual awakening', 'old soul', 'higher self', 'ascension', 'life purpose number', or 'energy of abundance'. Use only Occultics terms. NEVER invent or state any biographical facts — never mention age, birth year, calendar dates or years, places, jobs, or life events. Speak only about character, energy, drives and patterns revealed by the numbers, in warm second person, English only.";
   var ctx=" --- FACTS YOU ALREADY HAVE (never ask for any of this): "+name1+" code "+code1+" (biorhythm "+profile1.pyth.biorhythm+", generational "+profile1.pyth.generational+", life path "+profile1.pyth.lifePath+", pyramid "+pyr1+"). Write the passage directly.";
   return base + GUARD + ctx;
 }
@@ -190,6 +190,5 @@ function downloadPDF(){
 }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4084315af7874ee0ad30475d541319fe"}'></script>
 </body>
 </html>
