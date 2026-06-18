@@ -47,7 +47,7 @@ body{font-family:'Montserrat','Noto Serif JP',sans-serif;background:#f5f0e8;colo
     <label>Il tuo nome</label>
     <div class="row"><input id="nm" placeholder="Nome"></div>
     <label>La tua data di nascita</label>
-    <div class="row"><input id="bd" placeholder="GG/MM/AAAA"></div>
+    <div class="row"><input id="bd" type="date" max="2025-12-31" placeholder="GG/MM/AAAA"></div>
     <button class="btn" onclick="fromForm()">Rivela il mio codice →</button>
   </div>
   <div id="reading" class="hidden"></div>
@@ -66,7 +66,7 @@ function codes(d,m,y){var bio=r(d+m);var gen=r(String(y).split('').reduce((s,x)=
 function pyramid(d,m,y){var base=(String(d).padStart(2,'0')+String(m).padStart(2,'0')+String(y)).split('').map(Number);var rows=[base],cur=base;while(cur.length>1){var nx=[];for(var i=0;i<cur.length-1;i++)nx.push(r(cur[i]+cur[i+1]));rows.push(nx);cur=nx;}var two=rows.find(x=>x.length===2);return{first:two?two[0]:cur[0],second:two?two[1]:cur[0],third:rows[rows.length-1][0]};}
 function fill(t,name){return t.replace(/\{N\}/g,name);}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function parseDob(s){s=(s||'').trim();var iso=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(iso)return{d:+iso[3],mo:+iso[2],y:+iso[1]};var m=s.match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
 function T(k){return S[k];}
 function render(name,d,m,y){
   var c=codes(d,m,y),py=pyramid(d,m,y),N=esc(name);
