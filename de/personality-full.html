@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Der Persönlichkeitscode — Occultics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+JP:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Noto Serif JP',sans-serif;background:#f5f0e8;color:#15171f;-webkit-font-smoothing:antialiased;line-height:1.75}
+.wrap{max-width:760px;margin:0 auto;padding:24px 20px 80px}
+.hero{background:#0a0e2e;color:#fff;border-radius:16px;padding:40px 32px;text-align:center;margin-bottom:8px}
+.wm{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:6px;text-transform:uppercase;color:#4db8ff;margin-bottom:16px}
+.htitle{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:400;font-size:clamp(28px,7vw,44px);line-height:1.05;margin-bottom:8px}
+.htitle em{font-style:italic;color:#4db8ff}
+.hsub{font-size:11px;color:#aab3d6;letter-spacing:1px;margin-bottom:22px}
+.triad{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,11vw,62px);letter-spacing:.12em;color:#4db8ff;line-height:1}
+.pyr{font-size:13px;color:#aab3d6;letter-spacing:2px;margin-top:10px}
+.pyr b{color:#fff;font-weight:500}
+.name{font-size:15px;color:#fff;letter-spacing:1px;margin-top:12px}
+.sess{margin-top:30px;padding-top:24px;border-top:1px solid #e0d8c8}
+.se{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:4px}
+.st{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:24px;color:#0a0e2e;margin-bottom:12px;line-height:1.2}
+.sb p{margin-bottom:12px}
+.prow{display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;background:#fff;border-radius:12px;padding:14px 16px}
+.prow .pn{flex:none;width:40px;height:40px;border-radius:50%;background:#0a0e2e;color:#4db8ff;font-family:'Cormorant Garamond',serif;font-size:22px;display:flex;align-items:center;justify-content:center}
+.prow .pt{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;margin-bottom:3px}
+.prow p{font-size:14px;margin:0}
+.cta{background:#0a0e2e;color:#fff;border-radius:14px;padding:26px;margin-top:30px;text-align:center}
+.cta .h{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-size:22px;color:#4db8ff;margin-bottom:8px}
+.cta p{color:rgba(255,255,255,.82);font-size:14px;margin-bottom:16px}
+.cta a{display:inline-block;font-size:14px;font-weight:600;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:13px 30px;border-radius:100px}
+.actions{text-align:center;margin-top:34px}
+.btn{display:inline-block;font-size:14px;font-weight:600;letter-spacing:.3px;color:#0a0e2e;background:#4db8ff;text-decoration:none;padding:15px 34px;border-radius:100px;border:none;cursor:pointer;font-family:inherit}
+.foot{margin-top:40px;text-align:center;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
+.form{max-width:520px;margin:40px auto;background:#fff;border-radius:16px;padding:28px}
+.form h2{font-family:'Cormorant Garamond','Noto Serif JP',serif;font-weight:500;font-size:23px;color:#0a0e2e;margin-bottom:18px;text-align:center}
+.row{display:flex;gap:12px;margin-bottom:14px}
+.row input{flex:1;padding:12px 14px;border:1px solid #d8cfbf;border-radius:10px;font-family:inherit;font-size:14px;background:#faf7f1}
+.form label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#1a2aff;font-weight:600;display:block;margin:6px 0 4px}
+.form .btn{width:100%;margin-top:10px}
+.hidden{display:none}
+@media print{body{background:#fff}.wrap{max-width:100%;padding:0}.actions,.form,.cta{display:none!important}.hero{background:#0a0e2e!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.sess{page-break-inside:avoid}}
+</style></head>
+<body>
+<div class="wrap">
+  <div id="form" class="form">
+    <h2>Dein Persönlichkeitscode — kostenlos</h2>
+    <label>Dein Name</label>
+    <div class="row"><input id="nm" placeholder="Name"></div>
+    <label>Dein Geburtsdatum</label>
+    <div class="row"><input id="bd" placeholder="TT/MM/JJJJ"></div>
+    <button class="btn" onclick="fromForm()">Meinen Code enthüllen →</button>
+  </div>
+  <div id="reading" class="hidden"></div>
+  <div id="actions" class="actions hidden">
+    <button class="btn" onclick="window.print()">&#8595; Als PDF speichern</button>
+  </div>
+  <div class="foot">Occultics · Numerologie der Persönlichkeit</div>
+</div>
+<script>
+var KB={"BIO": {"1": "Anführer-Energie. {N} übernimmt fast sofort die Führung, und Menschen spüren diese Autorität, noch bevor ein Wort fällt.", "2": "Emotionale, schicksalhafte Energie. Menschen fühlen sich zu {N} hingezogen — eine tief fühlende Natur, der sowohl materielle Sicherheit als auch emotionale Erfüllung wichtig sind.", "3": "Leidenschaft, Liebe und Anziehung entstehen sofort. Mit {N} wird die Chemie auf den ersten Kontakt spürbar — zuweilen stürmisch, aber immer aufrichtig.", "4": "Eine ernste, gefasste Präsenz. Menschen spüren, dass sie es mit jemandem Besonnenem und Selbstbeherrschtem zu tun haben; {N} lässt sich Zeit, bevor entschieden wird.", "5": "Weder schicksalhaft noch karmisch — eine gesunde, hochwertige Verbindung. {N} führt mit Intellekt und Kommunikation.", "6": "Körperliche Anziehung und Liebe entstehen sofort. {N} ist leidenschaftlich, und Verbindungen wie diese enden meist in einer Ehe.", "7": "Eine spirituelle Anziehung — das Gefühl, dass eine höhere Kraft die Dinge zusammenführt. {N} trägt eine sensible, unberechenbare Energie.", "8": "Eine stabile, in sich ruhende Persönlichkeit. {N} ist vorsichtig und braucht Zeit, um sich zu öffnen, baut aber etwas Dauerhaftes auf, sobald Vertrauen entstanden ist.", "9": "Karmische Energie — die tiefste und anspruchsvollste der Geschichten. {N} liebt auf eine Weise, die viel fordert und viel gibt."}, "GEN": {"1": "{N} braucht Intelligenz und Eloquenz in einem Partner und kann Engstirnigkeit nicht ertragen.", "2": "{N} braucht emotionalen Ausdruck und sichtbare Fürsorge und kann Kälte nicht ertragen.", "3": "{N} träumt von bedingungsloser Liebe und größtmöglicher Toleranz.", "4": "{N} sucht vor allem Stabilität, gemeinsame Werte und Ehrlichkeit.", "5": "{N} liebt einen intelligenten, kommunikativen Partner — und hält Freiheit für heilig.", "6": "{N} liebt Schönheit, Harmonie und Feinheit und trennt Liebe nicht vom materiellen Komfort.", "7": "{N} will intellektuelle Tiefe und Aufrichtigkeit und zieht sich von allem Oberflächlichen oder Unaufrichtigen zurück.", "8": "{N} fühlt sich zu Stärke und Autorität hingezogen und braucht eine beschützende Gestalt, um sich sicher zu fühlen.", "9": "{N} ist die Essenz der Empathie und braucht jemanden, dem vollkommen vertraut werden kann."}, "LP": {"1": "Unabhängigkeit und Führung bestimmen {N}s Bestimmung.", "2": "Partnerschaft und emotionale Tiefe — {N} wächst durch Beziehungen.", "3": "Entfaltung, Kreativität und Freude durchziehen {N}s Weg.", "4": "Struktur, Disziplin und Karma — bei {N} kommt vieles später, aber es bleibt.", "5": "Freiheit, Reisen und Wandel — {N} erfindet sich mehr als einmal neu.", "6": "Liebe, Familie und Verantwortung sind das Herz von {N}s Weg.", "7": "Der unkonventionelle Weg — {N}s Erfolg entspringt dem Anderssein.", "8": "Macht, Erfolg und materielle Fülle prägen {N}s Bestimmung.", "9": "Karma, Vollendung und Weisheit — {N} ist hier, um zu vollenden, was andere nicht konnten."}};
+var ESS={"0": "dem tiefen Brunnen — alte Lektionen, Instinkt und ein Blick, den die meisten nicht haben", "1": "Wille und Führung — dem Bedürfnis, frei zu sein statt befehligt", "2": "Gefühl und Instinkt — einen Raum zu spüren, bevor ein Wort fällt", "3": "Ausdruck — gemacht, um zu sprechen, zu erschaffen und die Stimmung zu heben", "4": "dem Erbauer — einem Verlangen nach Stabilität, fähig, ein Leben zusammenzuhalten", "5": "Freiheit und den Sinnen — magnetisch, ruhelos, vielseitig", "6": "Liebe und Verantwortung — Beziehungen sind der Sinn, auch wenn der Griff zu fest sein kann", "7": "dem Geist — einem Suchenden, dessen Gabe Tiefe und dessen Wunde das Grübeln ist", "8": "stiller Kraft — lange ruhig, dann bewegt sie sich mit echter Wucht", "9": "der alten Seele — Vision und Mitgefühl, die weiter träumt, als sie zugibt"};
+var S={"lang": "de", "title": "Der Persönlichkeitscode — Occultics", "htitle_a": "Der Persönlichkeits", "htitle_em": "code", "hsub": "Ein numerisches Porträt, gelesen aus der Occultics-Wissensbasis", "pyramid": "Pyramide", "name_def": "Du", "form_h": "Dein Persönlichkeitscode — kostenlos", "f_name": "Dein Name", "f_dob": "Dein Geburtsdatum", "f_name_ph": "Name", "f_dob_ph": "TT/MM/JJJJ", "f_btn": "Meinen Code enthüllen →", "alert": "Bitte gib dein Geburtsdatum als TT/MM/JJJJ ein", "save": "Als PDF speichern", "foot": "Occultics · Numerologie der Persönlichkeit", "fg_eye": "Erster Blick", "fg_t": "Dein Code, ", "fg_body": "Deine drei Zahlen stammen direkt aus deinem Geburtsdatum. Dein <b>Biorhythmus</b> ({bio}) ist die Energie, die Menschen von dir spüren, und wie du durch die Welt gehst; deine <b>Generationszahl</b> ({gen}) ist das, was du von den Menschen brauchst, die dir am nächsten stehen; dein <b>Lebensweg</b> ({lp}) ist die Richtung, in die dein Leben gebaut ist. Zusammen gelesen sind sie dein Persönlichkeitscode — {bio}·{gen}·{lp}.", "bio_eye": "Biorhythmus ", "bio_t": "Die Energie, die du trägst", "gen_eye": "Generationszahl ", "gen_t": "Was du brauchst", "lp_eye": "Lebensweg ", "lp_t": "Deine Richtung", "pyr_eye": "Deine Pyramide ", "pyr_t": "Die Architektur deines Lebens", "pyr_intro": "Deine Pyramide bringt dein ganzes Geburtsdatum auf drei Punkte — wo du begonnen hast, die Arbeit in der Mitte und wohin du unterwegs bist.", "pyr_p1": "Wo du begonnen hast", "pyr_p1b": "Du kamst mit dieser Energie: {ess}.", "pyr_p2": "Die Arbeit deines Lebens", "pyr_p2b": "Die Mitte deiner Pyramide ist {ess} — die Lektion, zu der du immer wieder zurückkehrst.", "pyr_p3": "Wohin du unterwegs bist", "pyr_p3b": "Du baust hin auf {ess}.", "cp_eye": "Das vollständige Bild", "cp_t": "Alles zusammen", "cp_body": "Du gehst durch die Welt als Biorhythmus {bio}, du brauchst eine Liebe der Art {gen}, und dein Leben ist um den Weg {lp} herum gebaut — getragen von dort, wo du begonnen hast ({p1}), durch die Lektion in deiner Mitte ({p2}), hin zu dem, wohin du unterwegs bist ({p3}). Das ist dein Code, ganz und gar.", "cta_h": "Jetzt eine Verbindung entschlüsseln", "cta_p": "Dein Persönlichkeitscode ist der Anfang. Der Kompatibilitätscode liest zwei Geburtsdaten zusammen — wie ihr euch begegnet seid, was ihr aufbaut und ob es Bestand hat.", "cta_btn": "Einen Kompatibilitätscode enthüllen →"};
+var COMPAT_URL="/de/compatibility.html";
+function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce((s,d)=>s+(+d),0);return n;}
+function codes(d,m,y){var bio=r(d+m);var gen=r(String(y).split('').reduce((s,x)=>s+(+x),0));var lp=r(bio+gen);return{bio,gen,lp};}
+function pyramid(d,m,y){var base=(String(d).padStart(2,'0')+String(m).padStart(2,'0')+String(y)).split('').map(Number);var rows=[base],cur=base;while(cur.length>1){var nx=[];for(var i=0;i<cur.length-1;i++)nx.push(r(cur[i]+cur[i+1]));rows.push(nx);cur=nx;}var two=rows.find(x=>x.length===2);return{first:two?two[0]:cur[0],second:two?two[1]:cur[0],third:rows[rows.length-1][0]};}
+function fill(t,name){return t.replace(/\{N\}/g,name);}
+function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function T(k){return S[k];}
+function render(name,d,m,y){
+  var c=codes(d,m,y),py=pyramid(d,m,y),N=esc(name);
+  var h='';
+  h+='<div class="hero"><div class="wm">Occultics</div>'
+   +'<div class="htitle">'+S.htitle_a+'<em>'+S.htitle_em+'</em></div>'
+   +'<div class="hsub">'+S.hsub+'</div>'
+   +'<div class="triad">'+c.bio+' &middot; '+c.gen+' &middot; '+c.lp+'</div>'
+   +'<div class="pyr">'+S.pyramid+' <b>'+py.first+' &middot; '+py.second+' &middot; '+py.third+'</b></div>'
+   +'<div class="name">'+N+'</div></div>';
+  h+='<div class="sess"><div class="se">'+S.fg_eye+'</div><div class="st">'+S.fg_t+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</div><div class="sb"><p>'
+     +S.fg_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.bio_eye+c.bio+'</div><div class="st">'+S.bio_t+'</div><div class="sb"><p>'+fill(KB.BIO[c.bio],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.gen_eye+c.gen+'</div><div class="st">'+S.gen_t+'</div><div class="sb"><p>'+fill(KB.GEN[c.gen],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.lp_eye+c.lp+'</div><div class="st">'+S.lp_t+'</div><div class="sb"><p>'+fill(KB.LP[c.lp],N)+'</p></div></div>';
+  h+='<div class="sess"><div class="se">'+S.pyr_eye+py.first+'&middot;'+py.second+'&middot;'+py.third+'</div><div class="st">'+S.pyr_t+'</div><div class="sb"><p>'+S.pyr_intro+'</p>'
+     +'<div class="prow"><div class="pn">'+py.first+'</div><div><div class="pt">'+S.pyr_p1+'</div><p>'+S.pyr_p1b.replace(/\{ess\}/g,ESS[py.first])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.second+'</div><div><div class="pt">'+S.pyr_p2+'</div><p>'+S.pyr_p2b.replace(/\{ess\}/g,ESS[py.second])+'</p></div></div>'
+     +'<div class="prow"><div class="pn">'+py.third+'</div><div><div class="pt">'+S.pyr_p3+'</div><p>'+S.pyr_p3b.replace(/\{ess\}/g,ESS[py.third])+'</p></div></div></div></div>';
+  h+='<div class="sess"><div class="se">'+S.cp_eye+'</div><div class="st">'+S.cp_t+'</div><div class="sb"><p>'
+     +S.cp_body.replace(/\{bio\}/g,c.bio).replace(/\{gen\}/g,c.gen).replace(/\{lp\}/g,c.lp).replace(/\{p1\}/g,py.first).replace(/\{p2\}/g,py.second).replace(/\{p3\}/g,py.third)+'</p></div></div>';
+  h+='<div class="cta"><div class="h">'+S.cta_h+'</div><p>'+S.cta_p+'</p><a href="'+COMPAT_URL+'">'+S.cta_btn+'</a></div>';
+  document.getElementById('reading').innerHTML=h;
+  document.getElementById('reading').classList.remove('hidden');
+  document.getElementById('actions').classList.remove('hidden');
+  document.getElementById('form').classList.add('hidden');
+}
+function fromForm(){var name=document.getElementById('nm').value||S.name_def;var b=parseDob(document.getElementById('bd').value);if(!b){alert(S.alert);return;}render(name,b.d,b.mo,b.y);}
+(function(){var p=new URLSearchParams(location.search);if(p.get('d')&&p.get('m')&&p.get('y')){render(p.get('n')||S.name_def,+p.get('d'),+p.get('m'),+p.get('y'));}})();
+</script>
+</body></html>
