@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Life Cycles — and the Big Events That Mark Them — Occultics</title>
+<meta name="description" content="Numerology divides your life into four cycles, each with its own peak and challenge. Learn how to calculate yours, how long each lasts, and why the transitions so often coincide with the biggest events of your life.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a0e2e;--royal:#1a2aff;--crystal:#4db8ff;--text:#1a1a2e;--gray:#8892a4;--bg:#fafbff;--light:#f0f2f8}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text)}
+header{padding:20px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(10,14,46,0.06)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy)}
+.logo-name{font-size:14px;letter-spacing:4px;font-weight:700}
+nav a{font-size:11px;letter-spacing:1px;color:var(--gray);text-decoration:none;margin-left:24px;font-weight:500}
+nav a:hover{color:var(--royal)}
+.article-hero{padding:80px 48px 40px;text-align:center;max-width:720px;margin:0 auto}
+.article-hero .tag{font-size:9px;letter-spacing:2px;color:var(--royal);text-transform:uppercase;font-weight:600;background:rgba(26,42,255,0.06);padding:5px 14px;border-radius:20px;display:inline-block;margin-bottom:20px}
+.article-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:16px}
+.article-hero .meta{font-size:11px;color:var(--gray);letter-spacing:0.5px}
+.article-body{max-width:640px;margin:0 auto;padding:40px 24px 80px;font-size:15px;line-height:1.9;color:#2a2a3e}
+.article-body p{margin-bottom:20px}
+.article-body h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--navy);margin:48px 0 16px}
+.article-body strong{color:var(--navy);font-weight:600}
+.cycle-card{background:linear-gradient(135deg,#0a1a2e 0%,#0a2a40 100%);color:#fff;padding:24px 28px;border-radius:12px;margin:18px 0;border:1px solid rgba(77,184,255,0.1)}
+.cycle-card .cy-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--crystal);margin-bottom:8px}
+.cycle-card .cy-age{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;margin-bottom:4px}
+.cycle-card .cy-dur{font-size:11px;color:var(--gray)}
+.cycle-card strong{color:#fff}
+.insight-box{background:var(--light);border-left:3px solid var(--royal);padding:20px 24px;margin:28px 0;border-radius:0 8px 8px 0;font-size:14px;line-height:1.8}
+.insight-box .insight-label{font-size:10px;letter-spacing:2px;color:var(--royal);text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.calc-box{background:var(--navy);color:#fff;padding:32px;border-radius:12px;margin:32px 0;font-size:14px;line-height:2}
+.calc-box .label{font-size:10px;letter-spacing:2px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.calc-box .code-result{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#fff;margin:8px 0;letter-spacing:5px}
+.map-line{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:3px;color:var(--crystal);margin:10px 0}
+.cy-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.cy-pill{flex:1;min-width:130px;background:rgba(255,255,255,0.05);border:1px solid rgba(77,184,255,0.15);border-radius:10px;padding:14px}
+.cy-pill .pl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--crystal);font-weight:600;margin-bottom:4px}
+.cy-pill .pv{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff}
+.cy-pill .pa{font-size:11px;color:var(--gray);margin-top:2px}
+.cy-pill .pm{font-size:12px;color:#c8cde0;line-height:1.5;margin-top:6px}
+.cta-box{text-align:center;padding:48px 32px;background:var(--navy);border-radius:12px;margin:48px 0 0}
+.cta-box h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-weight:300;margin-bottom:12px}
+.cta-box p{font-size:13px;color:var(--gray);margin-bottom:20px}
+.cta-box a{display:inline-block;padding:14px 32px;background:var(--royal);color:#fff;text-decoration:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;text-transform:uppercase;margin:0 8px 8px}
+.cta-box a:hover{background:#2a3aff}
+.cta-box a.outline{background:transparent;border:1px solid rgba(77,184,255,0.3);color:var(--crystal)}
+footer{padding:32px 48px;text-align:center;border-top:1px solid rgba(10,14,46,0.06);font-size:10px;color:var(--gray);margin-top:40px}
+footer a{color:var(--royal);text-decoration:none}
+@media(max-width:768px){header{padding:16px 20px}.article-hero{padding:48px 20px 24px}.article-body{padding:24px 20px 60px}.calc-box{padding:24px 20px}footer{padding:24px 20px}}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo"><div class="logo-name">OCCULTICS</div></a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/personality-full.html">Free Reading</a>
+    <a href="/blog/">Blog</a>
+  </nav>
+</header>
+
+<div class="article-hero">
+  <span class="tag">Life Cycles · 5 min read</span>
+  <h1>Your Life Cycles — and the Big Events That Mark Them</h1>
+  <p class="meta">Published by Occultics · 2026</p>
+</div>
+
+<div class="article-body">
+
+<p>Your life does not move at one steady pace. It unfolds in <strong>four great cycles</strong>, each with its own character, its own high point, and its own lesson. And when one cycle ends and the next begins, you usually feel it — these transitions tend to coincide with the biggest events of a life: a move, a marriage, a loss, a reinvention, the start of the work you were really born to do.</p>
+
+<p>The numbers will not tell you exactly what will happen. But they will tell you <strong>when the ground is most likely to shift</strong>, and what each season is asking of you.</p>
+
+<h2>The four cycles — and how long each one lasts</h2>
+
+<p>The first cycle and the last cycle are the longest. The two in the middle are nine years each.</p>
+
+<p>To find where your first cycle ends, you take <strong>36 minus your life path number</strong>. So if your life path is 1, your first cycle runs from birth to age 35 (36 − 1). From there, each of the next two cycles lasts nine years, and the fourth runs to the end of your journey.</p>
+
+<div class="cycle-card">
+<div class="cy-label">First cycle</div>
+<div class="cy-age">Birth → 36 − life path</div>
+<div class="cy-dur">The longest opening season — who you are formed into.</div>
+</div>
+<div class="cycle-card">
+<div class="cy-label">Second cycle · 9 years</div>
+<div class="cy-age">The next nine years</div>
+<div class="cy-dur">For a life path 1: ages 36 to 44.</div>
+</div>
+<div class="cycle-card">
+<div class="cy-label">Third cycle · 9 years</div>
+<div class="cy-age">The following nine years</div>
+<div class="cy-dur">For a life path 1: ages 45 to 53.</div>
+</div>
+<div class="cycle-card">
+<div class="cy-label">Fourth cycle</div>
+<div class="cy-age">From there until you complete your journey</div>
+<div class="cy-dur">For a life path 1: from age 54 onward.</div>
+</div>
+
+<h2>How to calculate your cycles</h2>
+
+<p>Reduce your <strong>birth day</strong>, your <strong>birth month</strong>, and your <strong>birth year</strong> each down to a single digit — keep adding the digits until you land on 1–9.</p>
+
+<p>Take someone born <strong>16 February 1971</strong>:</p>
+
+<div class="insight-box">
+<div class="insight-label">The three reduced numbers</div>
+<strong>Day:</strong> 1 + 6 = 7<br>
+<strong>Month:</strong> 2<br>
+<strong>Year:</strong> 1 + 9 + 7 + 1 = 18 → 1 + 8 = 9
+</div>
+
+<p>Now build the four cycles. Each cycle has a <strong>peak (its pinnacle — you add)</strong> and a <strong>challenge (its lesson — you subtract, always the smaller from the bigger)</strong>.</p>
+
+<div class="insight-box">
+<div class="insight-label">Building the four cycles</div>
+<strong>Cycle 1 → Day + Month.</strong> Peak: 7 + 2 = 9 · Challenge: 7 − 2 = 5<br>
+<strong>Cycle 2 → Day + Year.</strong> Peak: 7 + 9 = 16 → 7 · Challenge: 9 − 7 = 2<br>
+<strong>Cycle 3 → add the two peaks above.</strong> Peak: 9 + 7 = 16 → 7 · Challenge: 5 − 2 = 3<br>
+<strong>Cycle 4 → Month + Year.</strong> Peak: 2 + 9 = 11 → 2 · Challenge: 9 − 2 = 7
+</div>
+
+<div class="calc-box" style="text-align:center">
+<div class="label">Their map</div>
+<div class="map-line">9-5 → 7-2 → 7-3 → 2-7</div>
+<div class="code-sub" style="font-size:11px;color:var(--gray)">peak-challenge, cycle by cycle</div>
+</div>
+
+<p>The <strong>peak shows where you shine</strong> in that season — the energy that carries you to your high point. The <strong>challenge shows the lesson</strong> you are there to master before the cycle can release you into the next one.</p>
+
+<h2>Why the transitions feel like turning points</h2>
+
+<p>Each time one cycle hands over to the next, the dominant number in your life changes — and with it, what life asks of you. A season ruled by the 4 (building, structure, responsibility) giving way to a season ruled by the 5 (freedom, movement, change) is rarely quiet. This is why people so often marry, move, change careers, or rebuild themselves right at these thresholds. The cycle was turning. The numbers simply name the season you were already stepping into.</p>
+
+<h2>Calculate your own life cycles</h2>
+
+<p>Enter your birthday below to see your four cycles — the ages they cover, and the peak and challenge of each.</p>
+
+<div class="calc-box">
+<div style="display:flex;gap:12px;flex-wrap:wrap;align-items:end;margin-bottom:8px;">
+  <div>
+    <div class="label" style="margin-bottom:6px">Date of Birth</div>
+    <input type="date" id="lc-dob" style="padding:12px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(77,184,255,0.2);border-radius:8px;color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;outline:none;" onfocus="this.style.borderColor='#4db8ff'" onblur="this.style.borderColor='rgba(77,184,255,0.2)'">
+  </div>
+  <button onclick="calcCycles()" style="padding:12px 24px;background:#1a2aff;color:#fff;border:none;border-radius:8px;font-size:11px;letter-spacing:2px;font-weight:700;cursor:pointer;font-family:'Montserrat',sans-serif;text-transform:uppercase;">Reveal my cycles</button>
+</div>
+<div id="lc-result" style="display:none;margin-top:18px">
+  <div class="map-line" id="lc-map" style="text-align:center"></div>
+  <div class="cy-row" id="lc-cards"></div>
+</div>
+</div>
+
+<script>
+function r(n){n=Math.abs(n);while(n>9){n=String(n).split('').reduce(function(s,d){return s+parseInt(d);},0);}return n;}
+var PEAK={1:"leadership, drive and new beginnings",2:"feeling, partnership and intuition",3:"expression, creativity and visibility",4:"building, structure and steady work",5:"freedom, movement and change",6:"love, family and responsibility",7:"depth, study and inner knowing",8:"power, ambition and material success",9:"completion, compassion and release"};
+var CHAL={0:"wholeness — there is no lesson to subtract here; the season runs clear",1:"learning to stand on your own without losing others",2:"oversensitivity and waiting too long to act",3:"scattering your energy and guarding your words",4:"rigidity, overwork, and resistance to change",5:"restlessness and the pull to escape",6:"over-giving and carrying what isn't yours",7:"isolation and overthinking",8:"control, and tying your worth to results",9:"holding on when it is time to let go"};
+function calcCycles(){
+  var v=document.getElementById('lc-dob').value; if(!v)return;
+  var p=v.split('-'),y=parseInt(p[0]),m=parseInt(p[1]),d=parseInt(p[2]);
+  var D=r(d),M=r(m),Y=r(y),lp=r(D+M+Y);
+  var peaks=[r(D+M),r(D+Y),0,r(M+Y)]; peaks[2]=r(peaks[0]+peaks[1]);
+  var chs=[Math.abs(D-M),Math.abs(D-Y),0,Math.abs(M-Y)]; chs[2]=Math.abs(chs[0]-chs[1]);
+  var ages=["0 – "+(36-lp),(37-lp)+" – "+(45-lp),(46-lp)+" – "+(54-lp),(55-lp)+" onward"];
+  var names=["First cycle","Second cycle","Third cycle","Fourth cycle"];
+  document.getElementById('lc-map').textContent=peaks[0]+'-'+chs[0]+' → '+peaks[1]+'-'+chs[1]+' → '+peaks[2]+'-'+chs[2]+' → '+peaks[3]+'-'+chs[3];
+  var html='';
+  for(var i=0;i<4;i++){
+    html+='<div class="cy-pill"><div class="pl">'+names[i]+'</div>'
+      +'<div class="pv">'+peaks[i]+' - '+chs[i]+'</div>'
+      +'<div class="pa">Ages '+ages[i]+'</div>'
+      +'<div class="pm"><strong style="color:#fff">Peak '+peaks[i]+':</strong> '+PEAK[peaks[i]]+'. <strong style="color:#fff">Challenge '+chs[i]+':</strong> '+CHAL[chs[i]]+'.</div></div>';
+  }
+  document.getElementById('lc-cards').innerHTML=html;
+  document.getElementById('lc-result').style.display='block';
+}
+</script>
+
+<div class="cta-box">
+<h3>See your full code, free.</h3>
+<p>Your life cycles are one layer. Get your complete Personality Code — biorhythm, generational, life path and pyramid — read straight from the Occultics system, free and instant.</p>
+<a href="/personality-full.html">Get your free reading</a>
+<a href="/blog/" class="outline">More articles</a>
+</div>
+
+</div>
+
+<footer>
+  © 2026 Occultics · <a href="/">occultics.ai</a> · <a href="/blog/">More articles</a>
+</footer>
+
+</body>
+</html>
