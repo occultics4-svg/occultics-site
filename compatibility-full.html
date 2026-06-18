@@ -46,6 +46,14 @@ input:focus{border-color:#4db8ff}
 @keyframes sp{to{transform:rotate(360deg)}}
 .pending{opacity:.5}
 .foot{text-align:center;margin-top:34px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#9ca3af}
+@media print{@page{margin:14mm 12mm}
+body{background:#fff!important}
+.wrap{padding:0!important;max-width:100%!important}
+header,#form,.note,.status,#pdfbtn,.foot{display:none!important}
+#result .btn,#result .ghost{display:none!important}
+#result{display:block!important;margin:0!important}
+.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.sess{break-inside:avoid;page-break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -201,15 +209,8 @@ async function generateAll(){
     pump();
   });
 }
-function downloadPDF(){
-  var el=document.getElementById('reading');
-  if(!el||typeof html2pdf==='undefined'){alert('The PDF tool is still loading \u2014 give it a few seconds and tap again.');return;}
-  var fn='Occultics Compatibility - '+name1+' & '+name2+'.pdf';
-  var opt={margin:[12,10,14,10],filename:fn,image:{type:'jpeg',quality:0.96},html2canvas:{scale:2,backgroundColor:'#f5f0e8',useCORS:true},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}};
-  html2pdf().set(opt).from(el).save();
-}
+function downloadPDF(){ window.print(); }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4084315af7874ee0ad30475d541319fe"}'></script>
 </body>
 </html>
