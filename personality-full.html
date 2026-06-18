@@ -47,7 +47,7 @@ body{font-family:'Montserrat',sans-serif;background:#f5f0e8;color:#15171f;-webki
     <label>Your name</label>
     <div class="row"><input id="nm" placeholder="Name"></div>
     <label>Your date of birth</label>
-    <div class="row"><input id="bd" placeholder="DD/MM/YYYY"></div>
+    <div class="row"><input id="bd" type="date" max="2025-12-31" placeholder="DD/MM/YYYY"></div>
     <button class="btn" onclick="fromForm()">Reveal my code &rarr;</button>
   </div>
   <div id="reading" class="hidden"></div>
@@ -82,7 +82,7 @@ function pyramid(d,m,y){
 }
 function fill(t,name){return t.replace(/\{N\}/g,name);}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function parseDob(s){s=(s||'').trim();var iso=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(iso)return{d:+iso[3],mo:+iso[2],y:+iso[1]};var m=s.match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
 
 function render(name,d,m,y){
   var c=codes(d,m,y), py=pyramid(d,m,y), N=esc(name);

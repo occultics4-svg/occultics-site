@@ -54,10 +54,10 @@ body{font-family:'Montserrat',sans-serif;background:#f5f0e8;color:#15171f;-webki
     <h2>Your Compatibility Code</h2>
     <label>First person</label>
     <div class="row"><input id="n1" placeholder="Name"></div>
-    <div class="row"><input id="b1" placeholder="DD/MM/YYYY"></div>
+    <div class="row"><input id="b1" type="date" max="2025-12-31" placeholder="DD/MM/YYYY"></div>
     <label>Second person</label>
     <div class="row"><input id="n2" placeholder="Name"></div>
-    <div class="row"><input id="b2" placeholder="DD/MM/YYYY"></div>
+    <div class="row"><input id="b2" type="date" max="2025-12-31" placeholder="DD/MM/YYYY"></div>
     <button class="btn" onclick="fromForm()">Reveal the reading &rarr;</button>
   </div>
 
@@ -75,7 +75,7 @@ function r(n){n=Math.abs(n);while(n>9)n=String(n).split('').reduce((s,d)=>s+(+d)
 function codes(d,m,y){var bio=r(d+m);var gen=r(String(y).split('').reduce((s,x)=>s+(+x),0));var lp=r(bio+gen);return{bio:bio,gen:gen,lp:lp};}
 function fill(t,name){return t.replace(/\{N\}/g,name);}
 function esc(s){return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-function parseDob(s){var m=(s||'').match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
+function parseDob(s){s=(s||'').trim();var iso=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);if(iso)return{d:+iso[3],mo:+iso[2],y:+iso[1]};var m=s.match(/(\d{1,2})\D+(\d{1,2})\D+(\d{4})/);if(!m)return null;return{d:+m[1],mo:+m[2],y:+m[3]};}
 
 function band(code){
   // light verdict from the triad's own first sentence + a quality read of the goal number
