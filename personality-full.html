@@ -64,27 +64,9 @@ function render(name,d,m,y){
   h+='<div class="hero"><div class="wm">Occultics</div><div class="htitle">The Personality <em>Code</em></div>'
    +'<div class="hsub">Read word-for-word from the Occultics knowledge base</div>'
    +'<div class="triad">'+c.bio+' &middot; '+c.gen+' &middot; '+c.lp+'</div>'
-   +'<div class="pyr">Pyramid <b>'+py.first+' &middot; '+py.second+' &middot; '+py.third+'</b></div>'
    +'<div class="name">'+N+'</div></div>';
-  // First glance (factual scaffold)
-  h+='<div class="sess"><div class="se">First Glance</div><div class="st">Your code, '+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</div><div class="sb"><p>Your three numbers come straight from your birth date. Your <b>biorhythm</b> is '+c.bio+' (from your day and month), your <b>generational</b> number is '+c.gen+' (from your year), and your <b>life path</b> is '+c.lp+'. Your pyramid &mdash; '+py.first+'&middot;'+py.second+'&middot;'+py.third+' &mdash; reduces your whole date to three points. Everything below is read directly from the Occultics teachings for these numbers.</p></div></div>';
-  // Day of birth (verbatim, proprietary)
-  if(V.BIRTH[d]) h+='<div class="sess"><div class="se">Born on the '+d+'</div><div class="st">Your day of birth</div><div class="sb"><p>'+esc(V.BIRTH[d])+'</p></div></div>';
-  // Biorhythm character (verbatim)
-  if(V.BIO_CHAR[c.bio]) h+='<div class="sess"><div class="se">Biorhythm '+c.bio+'</div><div class="st">The energy you carry</div><div class="sb"><p>'+esc(V.BIO_CHAR[c.bio])+'</p></div></div>';
-  // Numbers up close — psychology verbatim per number
-  var psy='';
-  nums.forEach(function(n){ if(V.PSY[n]) psy+='<div class="numlead">Your '+labelOf[n]+' &mdash; the number '+n+'</div><p>'+esc(V.PSY[n])+'</p>'; });
-  if(psy) h+='<div class="sess"><div class="se">Your Numbers Up Close</div><div class="st">The psychology of your code</div><div class="sb">'+psy+'</div></div>';
-  
-  // Gifts & path — professions verbatim per number
-  var gifts='';
-  nums.forEach(function(n){ if(V.PROF[n]) gifts+='<div class="numlead">The number '+n+' ('+labelOf[n]+')</div><p>'+esc(V.PROF[n])+'</p>'; });
-  if(gifts) h+='<div class="sess"><div class="se">Your Gifts &amp; Path</div><div class="st">Where your numbers point</div><div class="sb"><p>In the Occultics system, the work and talents a person is suited to are read from the numbers in their date. Yours point here:</p>'+gifts+'</div></div>';
-  // Pyramid (factual only — no invented meanings)
-  h+='<div class="sess"><div class="se">Your Pyramid '+py.first+'&middot;'+py.second+'&middot;'+py.third+'</div><div class="st">The three points of your date</div><div class="sb"><p>Collapsing your whole birth date step by step leaves three numbers: <b>'+py.first+'</b>, <b>'+py.second+'</b> and <b>'+py.third+'</b>. Each is read with the same number meanings used throughout this report.</p></div></div>';
-  // Complete picture (factual recap only)
-  h+='<div class="sess"><div class="se">The Complete Picture</div><div class="st">Your full code</div><div class="sb"><p>Your Personality Code is <b>'+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</b>, with a pyramid of <b>'+py.first+'&middot;'+py.second+'&middot;'+py.third+'</b> &mdash; the complete numeric picture of your birth date.</p></div></div>';
+  // Code only — biorhythm, generational, life path (clean)
+  h+='<div class="sess"><div class="se">Your Code</div><div class="st">'+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'</div><div class="sb"><p>Your three numbers come straight from your birth date. Your <b>biorhythm</b> is '+c.bio+', from the day and month you were born. Your <b>generational</b> number is '+c.gen+', from your year. And your <b>life path</b> is '+c.lp+' &mdash; your biorhythm and generational numbers added together and reduced. Together they form your Personality Code, '+c.bio+'&middot;'+c.gen+'&middot;'+c.lp+'.</p></div></div>';
   h+='<div class="cta"><div class="h">Now decode a connection</div><p>Your Personality Code is the start. The Compatibility Code reads two birthdays together &mdash; how you met, what you build, and whether it lasts.</p><a href="/compatibility.html">Reveal a Compatibility Code &rarr;</a></div>';
   document.getElementById('reading').innerHTML=h;
   document.getElementById('reading').classList.remove('hidden');
