@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life Code Alignment — Occultics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f5f0e8;--card:#fff;--card2:#ede8df;--border:rgba(10,14,46,.08);--ink:#1a1a2e;--text:#2d3142;--dim:#4a4e5a;--muted:#8b8578;--crystal:#4db8ff;--deep:#1a2aff;--gold:#b08d4f}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6}
+  .serif{font-family:'Newsreader',Georgia,serif}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+  nav{position:sticky;top:0;z-index:50;background:rgba(245,240,232,.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-in{max-width:760px;margin:0 auto;padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-weight:700;font-size:13px;letter-spacing:4px;color:var(--ink);text-transform:uppercase}
+  .logo small{display:block;font-size:8px;letter-spacing:1.5px;color:var(--muted);font-weight:400}
+  .nav-in a.back{font-size:13px;color:var(--dim)}
+  .vtag{background:var(--gold);color:#fff;font-size:10px;letter-spacing:1px;padding:3px 8px;border-radius:6px;font-weight:600}
+  .entry{padding:60px 0 40px;text-align:center}
+  .eyebrow{font-size:11px;letter-spacing:4px;color:var(--crystal);text-transform:uppercase;font-weight:600;margin-bottom:18px}
+  .entry h1{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:clamp(34px,6vw,52px);color:var(--ink);line-height:1.08;margin-bottom:16px}
+  .entry h1 em{font-style:italic;color:var(--crystal)}
+  .entry .sub{font-size:17px;color:var(--dim);max-width:500px;margin:0 auto 34px;line-height:1.6}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:26px;max-width:440px;margin:0 auto;text-align:left;box-shadow:0 18px 50px rgba(10,14,46,.05)}
+  .lbl{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;font-weight:600;margin-bottom:8px;display:block}
+  .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+  select,input{width:100%;padding:12px 11px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-family:inherit;font-size:15px;color:var(--text);outline:none}
+  select:focus,input:focus{border-color:var(--crystal)}
+  .go{width:100%;padding:15px;background:var(--deep);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:6px;transition:.2s}
+  .go:hover{transform:translateY(-1px);box-shadow:0 10px 28px rgba(26,42,255,.22)}
+  .note{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+  #report{display:none;padding:46px 0 40px}
+  .codebar{background:linear-gradient(145deg,#0a0e2e,#141845);border-radius:18px;padding:30px;text-align:center;margin-bottom:38px}
+  .codebar .who{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:1px;margin-bottom:14px}
+  .codenums{display:flex;gap:16px;justify-content:center;margin-bottom:8px}
+  .cn{width:74px;height:74px;border-radius:50%;border:1.5px solid var(--crystal);display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .cn b{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:34px;color:var(--crystal);line-height:1}
+  .cn span{font-size:8px;letter-spacing:1px;color:var(--gold);margin-top:3px;text-transform:uppercase}
+  .codebar .dest{font-size:12px;color:rgba(255,255,255,.55);margin-top:10px;letter-spacing:1px}
+  .sec{margin-bottom:34px}
+  .sec .tag{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:6px}
+  .sec h2{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:27px;color:var(--ink);margin-bottom:14px;line-height:1.2}
+  .sec p{font-size:16px;color:var(--text);line-height:1.8;margin-bottom:12px}
+  .sec p b{color:var(--ink);font-weight:600}
+  .pull{background:var(--card);border-left:3px solid var(--crystal);padding:16px 20px;border-radius:0 10px 10px 0;font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:18px;color:var(--ink);line-height:1.6;margin:8px 0 4px}
+  .cta{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:34px 28px;text-align:center;margin-top:40px}
+  .cta h3{font-family:'Newsreader',Georgia,serif;font-weight:300;font-size:26px;color:var(--ink);margin-bottom:10px}
+  .cta p{font-size:15px;color:var(--dim);max-width:440px;margin:0 auto 20px;line-height:1.6}
+  .btn{display:inline-block;padding:14px 30px;border-radius:100px;font-size:15px;font-weight:600;background:var(--deep);color:#fff}
+  footer{text-align:center;font-size:12px;color:var(--muted);padding:30px 0}
+</style>
+</head>
+<body>
+<nav><div class="nav-in"><a href="/" class="logo">Occultics<small>chosen by your numbers</small></a><a href="/" class="back">← occultics.ai</a></div></nav>
+<div class="wrap">
+  <section class="entry" id="entry">
+    <div class="eyebrow">Free · Life Code Alignment</div>
+    <h1 class="serif">Who you are, <em>written in your birthday.</em></h1>
+    <p class="sub">Your code, your pyramid, your karma — read through the Occultics system, in the system's own words.</p>
+    <div class="card">
+      <span class="lbl">Your date of birth</span>
+      <div class="row3"><select id="d"></select><select id="m"></select><select id="y"></select></div>
+      <span class="lbl">Your first name (optional)</span>
+      <input id="name" placeholder="Name" autocomplete="off">
+      <button class="go" onclick="run()">Reveal my alignment →</button>
+      <div class="note">Instant · free · nothing to install</div>
+    </div>
+  </section>
+  <section id="report"></section>
+</div>
+<footer>© 2026 Occultics · occultics.ai</footer>
+<script>
+var DEG={Aries:8,Taurus:6,Gemini:5,Cancer:2,Leo:1,Virgo:5,Libra:6,Scorpio:0,Sagittarius:3,Capricorn:4,Aquarius:7,Pisces:9};
+var SIGNS=["Aries","Taurus","Gemini","Cancer","Leo","Virgo","Libra","Scorpio","Sagittarius","Capricorn","Aquarius","Pisces"];
+function dsum(n){return String(n).split("").reduce(function(a,x){return a+(+x);},0);}
+function red(n){while(n>9)n=dsum(n);return n;}
+function code(d,m,y){var bio=red(dsum(d)+dsum(m));var gen=red(dsum(y));return{bio:bio,gen:gen,lp:red(bio+gen)};}
+function pyramid(d,m,y){var s=(""+d).padStart(2,"0")+(""+m).padStart(2,"0")+(""+y).padStart(4,"0");var cur=s.split("").map(Number),rows=[];while(cur.length>1){var nx=[];for(var i=0;i<cur.length-1;i++)nx.push(red(cur[i]+cur[i+1]));rows.push(nx);cur=nx;}return rows;}
+var DAYS={1:"Very passionate and emotional. Quick to anger. You know what you want from life. A fighting spirit and a somewhat short temper.",2:"A great hedonist. You love food, family, money, and indulging yourself. A fantastic cook. Family is your top priority.",3:"You create something out of nothing. Educated, you can become wealthy. Drawn to foreign countries. Dynamism, constant travel.",4:"Tied to family. Wherever you go, it is only a matter of time before you return home. Materialistic by nature.",5:"A royal degree. It produces many successful people. You love to travel and cannot stay in one place.",6:"The focus is on health and work, not love. Major love lessons. You compensate through work.",7:"Indecisive but original and creative. Artistic inclinations and a striving for marriage, accord, and harmony.",8:"Danger and intensity in life. You go for broke — either very poor or very rich. No middle ground.",9:"Constant travelling, living abroad. Optimism, a broad worldview. A lifelong commitment to self-improvement.",10:"Everything comes to you later, especially recognition. Things happen with a delay. You look younger than your years.",11:"Totally different from others. Your success lies in the unconventional. Nervous, tense, with inner restlessness.",12:"Two extremes. Either a victim of family or a master strategist. Your success depends on the numbers beside you.",13:"Passionate and emotional. A quick temper with a fighting spirit. You know what you want from life.",14:"A great hedonist. You like to enjoy life — family, money, food, surrounded by beauty in every form.",15:"Original, creative, a genius for originality. An artistic soul, but also a logician.",16:"Strongly tied to family. Wherever you go, it is only a matter of time before you return home.",17:"A royal degree. It produces successful people. You love to travel, with a great predisposition for career success.",18:"The devil's degree. Ranges from devil's luck to devil's misfortune throughout life.",19:"Indecisive but more original and creative. Artistic inclinations and a striving for marriage and harmony.",20:"Danger awaits in life. You go for broke — either very poor or very rich. Superior stubbornness and strength within.",21:"Constant travelling, living abroad. Optimism, a broad worldview. A fortunate circumstance always awaits you.",22:"A degree to kill or be killed — never literally. A signal of what is holding you back. When you break free, everything transforms.",23:"Totally different from others. Success lies in the unconventional. Nervous, tense, with inner restlessness.",24:"Two extremes. Either a victim of family or a master strategist. You can go from extremely rich to extremely poor.",25:"A royal degree. Very talented in writing. Often athletes, often in music. Strong intuition.",26:"A great hedonist. You love food, family, money. Inclined to marry. Family is everything.",27:"Tense and neurotic. Not suited to law. You thrive in freelance professions.",28:"Tied to family, and you love to return home. Materialistic and plugged into power. Born by day, you are full of adrenaline.",29:"Strong intuition and clairvoyance. A delicate aspect for emotional and family life — guard against intrigue and deception.",30:"You create a lot out of nothing. Two extremes — from extremely rich to extremely poor. Your success depends on doing the unconventional.",31:"Your position expands easily. You receive help from bosses and people not related to you by blood. Realistic and practical."};
+/* VERBATIM excerpts drawn from nine_numbers.json (lightly trimmed, not reworded) */
+var N={
+0:{tag:"extremes & power",essence:"Zero is an extreme; it gives extremes in behaviour — stubbornness, strength, and incredible power of transformation and regeneration. It is compared to the phoenix: people who have fallen a hundred times and always got up.",emotion:"It brings drama and life crises up to the age of 30; a life can change quickly — in 6–7 months a person goes from nothing to extreme wealth.",driver:"It rules over both extreme poverty and immense wealth; among those with a 0 destiny there are extremely powerful people.",love:"Zero is magnetic and absolute — it does nothing by halves.",karma:"0 is newly created karma; it cannot be erased in this life — instead it passes to the children as a hindrance in procreating, so live consciously.",kday:"daily awareness"},
+1:{tag:"authority",essence:"People of the One know exactly what they want — extremely mentally stable, ambitious, with a strong sense of self and proper bearing. They are authoritative: leaders, managers, directors, heads of state, kings. They do not tolerate being subordinate.",emotion:"They like to be seen; they love to be the centre of attention. Dignity is their virtue — vanity, ego and excessive pride their flaws.",driver:"When young they try to become managers; if they don't succeed, they turn to private business. The majority of entrepreneurs and business owners are Ones.",love:"Their pride and ego can be as big as a mountain, which can cost them opportunities — and closeness — if left unchecked.",karma:"1 has the smallest, mildest karma and no personal debt from a past life. In a past life 1 was a ruler, king or prince — and so strives to accomplish in this one. The work is the bond with the father.",kday:"Sunday"},
+2:{tag:"sensitivity",essence:"Always subjective — vulnerable, melancholic people who don't know what they want, lack decisiveness, doubt themselves, and are constantly balancing. They need a leader and someone to push them.",emotion:"Born with a sixth sense and strong premonitions, but doubt and indecision prevent them from listening to themselves, which is why they make mistakes.",driver:"2 is the number of destiny, so Twos are susceptible to destiny's influence; they need structure and someone to lean on.",love:"Many things repeat for them twice until they learn the lesson — which is why, of all, they suffer the most.",karma:"Twos were explorers or engaged in magic in a past life — witches, sorcerers — always a woman karmically connected to this incarnation. They heal through caring for the mother and older women.",kday:"Monday"},
+3:{tag:"fortune & word",essence:"One of the most beautiful numbers — it brings luck and happy circumstances in everything. Threes are cheerful, optimistic; they follow their hearts and are sincere, open, honest, heartfelt people.",emotion:"They react to life's injustices with a quick tongue — a summer downpour of words, slamming doors — but half an hour later they calm down and regret what they said.",driver:"Truthfulness, honesty and morality, the law and legislation are governed by the Three. They have fortunate circumstances related to money — inheritance, lottery.",love:"Heartfelt and overly enthusiastic with people; they give warmth easily.",karma:"The 3 carries the greatest personal karma. In a past life they were conspirators — politicians, judges — or lovers and concubines. They clear it by giving with both hands, especially on Thursdays.",kday:"Thursday"},
+4:{tag:"time & patience",essence:"Symbol of time, waiting, the past, blockages and life's limitations. Hardworking, diligent, responsible — many things come to them later (after 30, and after 43.5 for the more difficult). Life teaches them patience.",emotion:"They have difficulty showing emotion, are reserved, fear betrayal, and are obsessed with dark thoughts — pessimism, bitterness, a darker outlook on life.",driver:"The Four is experience — earth, a wall, traditional and patriarchal. In youth almost nothing materialises; but later there is marriage and a position.",love:"Reserved and slow to open; they fear betrayal, and need safety before they let anyone in. Four women are suspicious; Four men hide their unfaithfulness skilfully.",karma:"The 4 has two karmic burdens — personal and inherited from ancestors. The personal karma was created by living immorally and unfaithfully, without honesty; it clears through radical integrity and care for the old and ill, on Saturdays.",kday:"Saturday"},
+5:{tag:"change & voice",essence:"They rule over children and childhood, so Fives are childlike, curious, and love socialising and travelling. They don't like stillness or monotony, and stay much younger in spirit than their generation.",emotion:"Great logicians who need constant mental stimulation, information and play; without it they grow restless.",driver:"Associated with the tongue and the hands — communication first of all. Good tour guides, translators, journalists, salespeople; they often think about a second source of income.",love:"Flirting, especially through messages and texting, is very important to them; they learn foreign languages easily.",karma:"At the end of their past life, whatever they did, the 5 ended up a wanderer with no one — which is why this life brings such a great urge for change, and a call to build a family. Wednesday is the day to settle it; give to children.",kday:"Wednesday"},
+6:{tag:"love & beauty",essence:"Mature, healthy love. The Six rules personal pleasures — great hedonists, excellent cooks — and is born to find fulfillment through family and emotional relationships.",emotion:"Sixes carry the greatest personal karma; many divorce because they are not emotionally fulfilled. They are very humane people.",driver:"The Six rules beauty, ethics, aesthetics, good taste, and the details that add a special touch.",love:"Love is their top priority; they sacrifice themselves for those they love and help so much that they forget about themselves.",karma:"The 6, like the 3, carries serious personal karma — codes like 369 or 336 look lucky but belong to someone carrying a heavy debt. They clear it by living by the law, never scheming for money, and bringing children into the world; Fridays.",kday:"Friday"},
+7:{tag:"the unexpected",essence:"The Seven is everything different — what happens suddenly, unplanned, chaotically; something new, the future. Sevens are rebels and revolutionaries; they despise the rural, templates and obligation.",emotion:"The Seven means loneliness — calm and withdrawn on the outside while bursting inside. Ultra-human, always on the side of the underdog.",driver:"The Five is logic, the Seven is intelligence — the greatest minds, with a bit of madness in them. Risk, air, space, robotics, originality.",love:"Betrayed and deceived by friends; the Seven means intrigue and betrayal. They shouldn't lend money — it won't come back.",karma:"The 7 has lived in a tribe in all incarnations, giving and sacrificing for others, always engaged in some form of spirituality. They serve others through the esoteric — on solid ground.",kday:"daily practice"},
+8:{tag:"force & reward",essence:"If zero is charisma, the Eight is magnetic attraction. Most Eights are born with a mark or a mole, and with a guardian angel — live righteously and reward and promotion follow.",emotion:"Stray from the path and the angel abandons them, and great life dramas and misfortunes ensue.",driver:"Struggle, power, victory, competitive spirit — the primary number of sport. Combative, enterprising and dynamic; success comes through hard work and effort.",love:"Protective and forceful; money arrives when they need it, but the temper must be mastered.",karma:"Every 8 in the connected past life was incarnated as a man — aggressive people, warriors, chiefs — who left a serious mark. The work now is to contain aggression and rage, especially on Tuesdays.",kday:"Tuesday"},
+9:{tag:"completion & art",essence:"Completion and endings — the higher octave of the Six, and the most sublime, unconditional love. Opera singers, high fashion, sculptors, painters, photographers, actors.",emotion:"The most mystical and hard to figure out; they idealise a great deal and dream in pictures, difficult to interpret correctly.",driver:"Faith, temples, psychology, the invisible and the intangible; they reach for the ideal and the unseen.",love:"It is the ideal of love, idealised greatly — sublime and unconditional.",karma:"Nines were people whose emotions ran wild in past lives — the 9 has cried the most of all the numbers. The work is to never show aggression or rage, and to turn deep feeling into compassion.",kday:"compassion"}
+};
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function fill(){var d=document.getElementById("d"),m=document.getElementById("m"),y=document.getElementById("y");var months=["January","February","March","April","May","June","July","August","September","October","November","December"];d.innerHTML='<option value="">Day</option>';for(var i=1;i<=31;i++)d.innerHTML+='<option>'+i+'</option>';m.innerHTML='<option value="">Month</option>';months.forEach(function(mm,i){m.innerHTML+='<option value="'+(i+1)+'">'+mm+'</option>';});y.innerHTML='<option value="">Year</option>';for(var yr=2025;yr>=1930;yr--)y.innerHTML+='<option>'+yr+'</option>';}
+fill();
+function pad(n){return (""+n).padStart(2,"0");}
+function run(){
+  var d=+document.getElementById("d").value,m=+document.getElementById("m").value,y=+document.getElementById("y").value;
+  if(!d||!m||!y){alert("Please choose your full date of birth.");return;}
+  var nm=document.getElementById("name").value.trim();
+  var c=code(d,m,y);var b=c.bio,g=c.gen,l=c.lp;
+  var rows=pyramid(d,m,y);var dest=rows[rows.length-1][0];var fy=rows[rows.length-2];
+  var hi=Math.max(b,l),lo=Math.min(b,l);
+  var deg;if(d===30||d===31)deg="You were born on the "+d+"th — one of the two days that carry no separate degree of their own. Here, the code carries you cleanly, without a competing voice.";else{var sign=SIGNS[(d-1)%12];deg="Your day of birth sits at the degree of "+sign+" ("+DEG[sign]+") — a quiet undertone beneath your code.";}
+  var P=function(t){return "<p>"+t+"</p>";};
+  var H="";
+  H+='<div class="codebar"><div class="who">'+(nm?nm+" · ":"")+pad(d)+"."+pad(m)+"."+y+'</div><div class="codenums"><div class="cn"><b>'+b+'</b><span>Biorhythm</span></div><div class="cn"><b>'+g+'</b><span>Generational</span></div><div class="cn"><b>'+l+'</b><span>Life Path</span></div></div><div class="dest">Pyramid destiny — '+dest+'</div></div>';
+  H+='<div class="sec"><div class="tag">1 · Blueprint</div><h2>Your mathematical self</h2>'+
+     P("Your code is <b>"+b+" · "+g+" · "+l+"</b>.")+
+     P("<b>Biorhythm "+b+" — your everyday self.</b> "+N[b].essence)+
+     P("<b>Generational "+g+" — your generation.</b> Everyone born in your generation shares this number; it's the collective energy you carry in common. "+N[g].essence)+
+     P("<b>Life path "+l+" — your road.</b> "+N[l].essence)+
+     P("<b>Your day, the "+d+"th:</b> "+DAYS[d])+
+     P(deg)+
+     P("<b>Your pyramid destiny is "+dest+".</b> "+N[dest].essence)+'</div>';
+  H+='<div class="sec"><div class="tag">2 · Emotions</div><h2>How you feel and guard</h2>'+
+     P("<b>From your everyday "+b+":</b> "+N[b].emotion)+
+     (l!==b?P("<b>And from your road, the "+l+":</b> "+N[l].emotion):"")+'</div>';
+  H+='<div class="sec"><div class="tag">3 · Drivers</div><h2>What moves you</h2>'+
+     P("<b>Your generation, the "+g+":</b> "+N[g].driver)+
+     P("<b>Your everyday "+b+":</b> "+N[b].driver)+
+     (l!==b&&l!==g?P("<b>Your road, the "+l+":</b> "+N[l].driver):"")+
+     (b!==l?P("The friction you feel most is your <b>"+hi+" against your "+lo+"</b> — "+N[hi].tag+" versus "+N[lo].tag+"."):"")+'</div>';
+  H+='<div class="sec"><div class="tag">4 · Relationships</div><h2>Your pattern in love</h2>'+
+     P("<b>Your everyday "+b+":</b> "+N[b].love)+
+     (g!==b?P("<b>Your generation, the "+g+":</b> "+N[g].love):"")+'</div>';
+  var kdays=[];[l,b,g].forEach(function(x){if(N[x].kday&&kdays.indexOf(N[x].kday)<0)kdays.push(N[x].kday);});
+  H+='<div class="sec"><div class="tag">5 · Karma</div><h2>What your soul carried in</h2>'+
+     P("<b>Your life-path karma, the "+l+":</b> "+N[l].karma)+
+     (b!==l?P("<b>Your everyday "+b+":</b> "+N[b].karma):"")+
+     (g!==l&&g!==b?P("<b>Your generation, the "+g+":</b> "+N[g].karma):"")+
+     P("<b>Days to clear it:</b> "+kdays.join(", ")+".")+'</div>';
+  H+='<div class="sec"><div class="tag">6 · Cycles</div><h2>Where the years turn</h2>'+
+     P("Your pyramid carries a fateful-year axis of <b>"+fy.join(" – ")+"</b> beneath your destiny of <b>"+dest+"</b>. When those numbers come active, life can turn sharply — for better or worse — so timing matters more for you than for most.")+
+     P("The precise year-by-year map is the work of the full pyramid and a live reading.")+'</div>';
+  H+='<div class="sec"><div class="tag">7 · Alignment</div><h2>Who you are, in one piece</h2>'+
+     '<div class="pull">You are '+N[l].tag+' on the road, '+N[b].tag+' in everyday life, and '+N[g].tag+' in your generation — built, in the end, for '+N[dest].tag+'.</div>'+'</div>';
+  H+='<div class="cta"><h3 class="serif">This is the surface of your code.</h3><p>The deeper layers — your full pyramid, your year-by-year timing, and a live decoding of your blockages and talents — open in the Occultics course and a private reading.</p><a href="/course.html" class="btn">See the course</a></div>';
+  document.getElementById("entry").style.display="none";var r=document.getElementById("report");r.innerHTML=H;r.style.display="block";window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
